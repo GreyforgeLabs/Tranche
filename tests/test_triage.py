@@ -258,6 +258,41 @@ class WorkflowTests(unittest.TestCase):
                 self.assertEqual(summary["ready_prs"], 0)
                 self.assertIn(field, (self.out / "tranches.md").read_text())
 
+    def test_contradictory_pair_is_visible_standalone_and_inside_groups(self):
+        prs = self.inputs([pr(1), pr(2), pr(3)])
+        self.judgments(prs)
+        for verdict, probability, classification in (
+            ("unrelated", 0.9, "contradictory"),
+            ("related_but_different", 0.65, "contradictory"),
+            ("same_change", 0.1, "contradictory"),
+            ("same_change", 0.35, "uncertain"),
+            ("unrelated", 0.64, "uncertain"),
+            ("invalid", 0.9, "malformed"),
+            ("same_change", None, "malformed"),
+        ):
+            with self.subTest(verdict=verdict, probability=probability):
+                self.pairs(prs, [(1, 3, verdict, probability)])
+                _, dupes = self.cluster()
+                self.assertEqual(len(dupes["uncertain_pairs"]), 1)
+                diagnostic = dupes["uncertain_pairs"][0]
+                self.assertEqual(diagnostic["classification"], classification)
+                self.assertEqual(diagnostic["p_same"], probability)
+                self.assertIn(classification, (self.out / "tranches.md").read_text())
+                result = self.render()
+                self.assertEqual(result.returncode, 0, result.stderr)
+                self.assertIn(classification, (self.root / "docs" / "index.html").read_text())
+                self.pairs(prs, [(1, 2, "same_change", 0.9),
+                    (2, 3, "same_change", 0.9), (1, 3, verdict, probability)])
+                _, dupes = self.cluster()
+                self.assertEqual(dupes["confirmed_groups"], [])
+                group = dupes["review_groups"][0]
+                field = "conflicting_pairs" if classification == "contradictory" else "uncertain_pairs"
+                self.assertEqual(group[field][0]["classification"], classification)
+        self.pairs(prs, [(1, 2, "unrelated", 0.1)])
+        _, dupes = self.cluster()
+        self.assertEqual(dupes["uncertain_pairs"], [])
+        self.assertEqual(dupes["review_groups"], [])
+
     def test_consistent_group_does_not_choose_oldest_survivor(self):
         prs = self.inputs([pr(1), pr(2), pr(3)])
         self.judgments(prs)

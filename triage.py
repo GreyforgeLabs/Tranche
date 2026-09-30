@@ -711,9 +711,19 @@ def p_same(pair):
     return value if type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 1 else None
 
 
-def accepted_pair(pair):
+def pair_classification(pair):
+    """Separate genuine contradictions from the human-review threshold band."""
     probability = p_same(pair)
-    return pair.get("verdict") == "same_change" and probability is not None and probability >= 0.65
+    verdict = pair.get("verdict")
+    if probability is None or verdict not in ("same_change", "related_but_different", "unrelated"):
+        return "malformed"
+    if verdict == "same_change":
+        return "same" if probability >= 0.65 else ("contradictory" if probability < 0.35 else "uncertain")
+    return "different" if probability < 0.35 else ("contradictory" if probability >= 0.65 else "uncertain")
+
+
+def accepted_pair(pair):
+    return pair_classification(pair) == "same"
 
 
 def duplicate_groups(verdicts):
@@ -740,10 +750,12 @@ def duplicate_groups(verdicts):
             unbound |= pair.get("freshness") != "current"
             if accepted_pair(pair):
                 continue
-            probability = p_same(pair)
-            diagnostic = {"a": a, "b": b, "verdict": pair.get("verdict"), "p_same": probability}
-            # A confident different-change judgment contradicts equivalence.
-            if pair.get("verdict") in ("related_but_different", "unrelated") and probability is not None and probability < 0.35:
+            classification = pair_classification(pair)
+            diagnostic = {"a": a, "b": b, "verdict": pair.get("verdict"),
+                          "p_same": p_same(pair), "classification": classification}
+            # Strong difference evidence conflicts with the proposed group;
+            # a self-contradictory model response also requires relationship review.
+            if classification in ("different", "contradictory"):
                 conflicts.append(diagnostic)
             else:
                 uncertain.append(diagnostic)
@@ -788,9 +800,10 @@ def cmd_cluster(args) -> None:
     dupe_groups, review_groups = duplicate_groups(verdicts)
     in_group = {n for g in dupe_groups for n in g} | {n for g in review_groups for n in g["members"]}
     uncertain_pairs = [{"a": v["a"], "b": v["b"], "p_same": p_same(v),
-                        "similarity": v.get("similarity"), "verdict": v.get("verdict")}
-                       for v in verdicts if not accepted_pair(v)
-                       and (p_same(v) is None or 0.35 <= p_same(v) < 0.65)]
+                        "similarity": v.get("similarity"), "verdict": v.get("verdict"),
+                        "classification": pair_classification(v)}
+                       for v in verdicts if pair_classification(v) in
+                       ("uncertain", "contradictory", "malformed")]
     uncertain_pairs.sort(key=lambda v: -(v["p_same"] if v["p_same"] is not None else -1))
 
     clusters = {}
@@ -882,7 +895,8 @@ def cmd_cluster(args) -> None:
     if uncertain_pairs:
         lines += ["## Uncertain pairs — human comparison needed", ""]
         for pair in uncertain_pairs:
-            lines.append(f"- #{pair['a']} ↔ #{pair['b']}: P(same)={pair['p_same']}")
+            lines.append(f"- #{pair['a']} ↔ #{pair['b']}: P(same)={pair['p_same']}; "
+                         f"verdict={pair['verdict']}; {pair['classification']}")
         lines.append("")
     for label, numbers in (("Escalate for risk/security review", escalate),
                            ("Possible author follow-up — verify before requesting changes", follow_up)):

@@ -66,7 +66,14 @@ Title similarity (SequenceMatcher ≥ 0.72 or Jaccard ≥ 0.62) within a model c
 plus body references, proposes pairs. `same_change` with P(same) ≥ 0.65 proposes a
 connection. A connected group is only model-consistent when **all** its internal
 pairs were tested and agree. Contradictory, uncertain, untested or unbound internal
-relationships go to `review_groups` with their diagnostics. Even a consistent
+relationships go to `review_groups` with their diagnostics. The shared pair classifier
+also exposes standalone contradictory or malformed responses in `uncertain_pairs`,
+Markdown and HTML: a different-change verdict with P(same) ≥ 0.65, or a same-change
+verdict with P(same) < 0.35, contradicts its probability. The middle band remains
+uncertain, not contradictory. A valid different-change verdict with P(same) < 0.35
+remains strong difference evidence (and a conflict inside a connected group), not
+an undecided standalone pair. Invalid verdicts or probabilities are malformed.
+Even a consistent
 model group still needs source comparison. PR age does not select a survivor;
 no member is automatically marked superseded.
 

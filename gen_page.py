@@ -172,11 +172,12 @@ for group in dupes["review_groups"]:
     parts.append("</div></details>")
 
 # --- uncertain ---
-parts.append(f"<h2>Jev is undecided <span class='muted'>({len(dupes['uncertain_pairs'])} pairs — uncertain or unavailable probability; human comparison needed)</span></h2>")
+parts.append(f"<h2>Jev is undecided <span class='muted'>({len(dupes['uncertain_pairs'])} pairs — uncertain, contradictory or malformed evidence; human comparison needed)</span></h2>")
 for p in dupes["uncertain_pairs"][:60]:
     parts.append(
         f"<div class='inner'>⚖️ {pr_link(p['a'], prs.get(p['a'], {}).get('title', '')[:60])} ↔ "
-        f"{pr_link(p['b'], prs.get(p['b'], {}).get('title', '')[:60])} <span class='muted'>P(same)={p['p_same']}</span></div>"
+        f"{pr_link(p['b'], prs.get(p['b'], {}).get('title', '')[:60])} <span class='muted'>P(same)={p['p_same']}; "
+        f"verdict={e(str(p['verdict']))}; {e(p['classification'])}</span></div>"
     )
 if len(dupes["uncertain_pairs"]) > 60:
     parts.append(f"<div class='inner muted'>…and {len(dupes['uncertain_pairs']) - 60} more in the repo's <code>out/dupes.json</code></div>")
