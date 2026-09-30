@@ -93,8 +93,8 @@ no member is automatically marked superseded.
   (`low`, `core`, `danger`, `unknown`); includes source digest, head SHA and URL.
 - `out/dupes.json` — `confirmed_groups` (model-consistent candidates, **not verified
   duplicates**), `review_groups` and `uncertain_pairs`.
-- `out/batches.json` — suggested cumulative pre-release batches per category
-  (issue #4), bound to the `clusters.json` digest recorded in `summary.json`.
+- `out/batches.json` — suggested merge batches per category of work
+  (issue #4), bound to the `dupes.json` digest recorded in `summary.json`.
 - `out/summary.json` — counts, token usage for selected records, input binding and
   output digests. Historical `ready_*` keys now count **review candidates**;
   `superseded` is zero and `superseded_by` is null. `security_priority` counts
@@ -109,29 +109,32 @@ must not be a draft. Missing judgment fields cannot qualify an item.
 
 ## Security meta-category (top priority)
 
-Security is a meta-category, not a place in the category list: every PR whose
-`security_flag` probability reaches 0.5 forms a cross-cutting `security-review`
-set that outranks every category. It is the first section of `tranches.md`
-(probability-first order), the `security-review` key of `clusters.json`, and the
-leading **Security first** queue of the workbench — where flagged rows carry a
-red tag and a **Security probability: high first** sort is available. Membership
-never replaces a PR's own category; an unknown security probability is never
-flagged. Review these before any category batch.
+Security is a meta-classification over **all** captured PRs, not a category
+slot: every PR whose `security_flag` probability reaches 0.5 joins a
+cross-cutting `security-review` set that outranks every category. It is the
+first section of `tranches.md` (probability-first order), the `security-review`
+key of `clusters.json`, the leading **Security first** queue of the workbench,
+and a **Security (meta)** entry at the top of the category sidebar — the
+answer to "which of all PRs are security related?". Flagged rows carry a red
+tag and the inspector shows the probability. Membership never replaces a PR's
+own category; an unknown security probability is never flagged. Review these
+before any batch.
 
 ## Suggested pre-release batches
 
-Within each category, review candidates are further classified into
-**cumulative pre-release batches** (`tranche.py batches`, issue #4): the
-security meta-category first, then the low/core/danger/unknown model-risk
-bands, chunked into size tiers — S (≤ 8), M (≤ 24), L (≤ 48) — ranked lowest
-model risk first. Each batch records its members plus the cumulative set (the
-batch and every earlier one of its category), which is the source for the
-cumulative PRs that are the final deliverable. Batches are a deterministic
-classification of already-judged evidence — model-suggested ordering, never a
-merge approval. Output: `out/batches.json` (bound to the cluster digest;
-`gen_page.py` refuses a stale file), the batch plan appended to
-`out/tranches.md`, and the **Batched** queue with batch chips and per-PR batch
-detail in the workbench.
+A **batch is a Jev-determined group of PRs to merge into ONE pull request**
+(`tranche.py batches`, issue #4): exactly the model-consistent `same_change`
+groups from the dupe pipeline. Batches are **disjoint** — every PR belongs to
+at most one batch — and groups with contradictory or untested internal
+evidence (review groups) plus uncertain pairs are excluded on purpose.
+Batches are ordered security-first (batches containing security-related PRs
+merge first), then by average model risk, then age; each batch becomes one
+cumulative PR of the final deliverable. Batches are a model-suggested
+plan, never verified safe to merge. Output: `out/batches.json` (bound to the
+dupes digest; `gen_page.py` refuses a stale file), the batch plan appended to
+`out/tranches.md`, and the **Batched** queue with merge chips and per-PR batch
+detail in the workbench. PRs outside a confirmed group are intentionally
+unbatched.
 
 ## Freshness and migration
 
