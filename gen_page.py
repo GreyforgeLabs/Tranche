@@ -2,7 +2,7 @@
 """Generate the GitHub Pages site (docs/index.html) from real out/ data.
 
 Every number and row on the page comes from the pipeline outputs; nothing is
-a substitute for source verification. Re-run `python3 triage.py cluster` then
+a substitute for source verification. Re-run `python3 tranche.py cluster` then
 this script to refresh.
 """
 
@@ -12,7 +12,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-import triage
+import tranche
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "out"
@@ -21,17 +21,17 @@ DOCS = ROOT / "docs"
 summary = json.loads((OUT / "summary.json").read_text())
 dupes = json.loads((OUT / "dupes.json").read_text())
 clusters = json.loads((OUT / "clusters.json").read_text())
-prs = triage.load_prs()
+prs = tranche.load_prs()
 allow_unbound = summary.get("allow_unbound", False)
-judgments = triage.current_judgments(prs, allow_unbound=allow_unbound)
-verdicts = triage.current_pairs(prs, judgments, allow_unbound=allow_unbound)
+judgments = tranche.current_judgments(prs, allow_unbound=allow_unbound)
+verdicts = tranche.current_pairs(prs, judgments, allow_unbound=allow_unbound)
 if (summary.get("format_version") != 2
-        or summary.get("repo") != triage.REPO
-        or summary.get("report_binding") != triage.report_binding(prs, judgments, verdicts)
-        or summary.get("output_digests") != {"clusters.json": triage.digest(clusters),
-                                              "dupes.json": triage.digest(dupes)}):
-    raise triage.TriageFatal("Report inputs changed or are legacy/mixed; rerun cluster before rendering")
-snapshot = triage.PAGES_DIR / "snapshot.json"
+        or summary.get("repo") != tranche.REPO
+        or summary.get("report_binding") != tranche.report_binding(prs, judgments, verdicts)
+        or summary.get("output_digests") != {"clusters.json": tranche.digest(clusters),
+                                              "dupes.json": tranche.digest(dupes)}):
+    raise tranche.TrancheFatal("Report inputs changed or are legacy/mixed; rerun cluster before rendering")
+snapshot = tranche.PAGES_DIR / "snapshot.json"
 SNAPSHOT_LABEL = json.loads(snapshot.read_text()).get("observed_at", "not recorded") if snapshot.exists() else "not recorded (legacy pages)"
 MODEL_LABEL = ", ".join(sorted({str(j.get("resolved_model")) for j in judgments.values() if j.get("resolved_model")})) or "resolved model not recorded"
 
@@ -58,20 +58,20 @@ def pr_link(n, title=None):
 
 # Use the same eligibility and grouping policy as the CLI report.
 in_dupe = {n for g in dupes["confirmed_groups"] for n in g} | {n for g in dupes["review_groups"] for n in g["members"]}
-escalate = [n for n, j in judgments.items() if triage.escalated(j)]
-followup = [n for n, j in judgments.items() if triage.metric(j, "finished_form") is not None
-            and triage.metric(j, "finished_form") <= 1 and n not in in_dupe]
+escalate = [n for n, j in judgments.items() if tranche.escalated(j)]
+followup = [n for n, j in judgments.items() if tranche.metric(j, "finished_form") is not None
+            and tranche.metric(j, "finished_form") <= 1 and n not in in_dupe]
 
 # Category distribution
 cat_counts = Counter(
-    triage.category(j) for j in judgments.values()
+    tranche.category(j) for j in judgments.values()
 )
 
 parts = []
 parts.append(f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Omarchy PR Triage — Jev</title>
+<title>Tranche — PR review candidates</title>
 <style>
 :root{{--bg:#16161e;--bg2:#1a1b26;--fg:#c0caf5;--dim:#565f89;--acc:#7aa2f7;--pur:#bb9af7;--grn:#9ece6a;--red:#f7768e;--yel:#e0af68;--line:#24253a}}
 *{{box-sizing:border-box}}
@@ -108,7 +108,7 @@ tr:last-child td{{border-bottom:none}}
 footer{{margin-top:60px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:.88em}}
 </style></head><body><main>
 <header>
-<img src="assets/omarchy-triage.gif" alt="OMARCHY TRIAGE x Jev" title="OMARCHY TRIAGE × Jev — the triage report" style="width:min(1560px,100%);height:auto;display:block;margin:2px 0 12px">
+<img src="assets/tranche.gif" alt="TRANCHE x Jev" title="TRANCHE × Jev — the review report" style="width:min(1560px,100%);height:auto;display:block;margin:2px 0 12px">
 <div class="sub">{summary['prs_in_corpus']} observed open pull requests of <a href="https://github.com/omacom/omarchy" target="_blank">omacom/omarchy</a>, judged by TypeSafe's <a href="https://docs.typesafe.ai" target="_blank">System One model Jev</a> and arranged into model-suggested review candidates. Built by <a href="https://github.com/blackopsrepl" target="_blank">@blackopsrepl</a> for the Omarchy triage team.</div>
 <blockquote>“We're 2,200 PRs deep on GH now and getting nearly a hundred new ones every day. I'll never be able to catch up. Agents will help, but we need humans too. If you have DEEP Linux experience, is agent-forward, and want to join the new Omarchy triage team, write triage@omarchy.org.”<br><span class="who">— DHH, 12 Sep 2026 · <a href="https://x.com/dhh/status/2098755120540393908" target="_blank">x.com/dhh/…</a></span></blockquote>
 <div class="stats">
@@ -118,7 +118,7 @@ footer{{margin-top:60px;border-top:1px solid var(--line);padding-top:18px;color:
 <div class="stat y"><div class="n">{summary['uncertain_pairs']}</div><div class="l">pairs needing a human call</div></div>
 <div class="stat r"><div class="n">{len(escalate)}</div><div class="l">escalate: high risk / security</div></div>
 </div>
-<div class="muted">Observation: {e(SNAPSHOT_LABEL)} · requested {e(triage.MODEL)} · {e(MODEL_LABEL)} · fresh runs: <code>fetch → judge --resume → dupes → cluster</code></div>
+<div class="muted">Observation: {e(SNAPSHOT_LABEL)} · requested {e(tranche.MODEL)} · {e(MODEL_LABEL)} · fresh runs: <code>fetch → judge --resume → dupes → cluster</code></div>
 <p>Titles and shortened descriptions only; patches, CI, reproductions, fix coverage and security have not been verified. These are model suggestions, not merge/closure approvals. API pagination is an observation, not a point-in-time snapshot.</p>
 <p>{summary['unjudged_or_stale']} PRs unjudged or stale; {summary['unbound_judgments']} unbound legacy judgments; {summary['unknown_risk_or_security']} with unknown risk/security values; {summary['review_groups']} groups needing relationship review. Unbound legacy judgments cannot enter review-candidate tranches.</p>
 </header>""")
@@ -141,7 +141,7 @@ parts.append(f"<h2>Model-suggested review candidates <span class='muted'>({summa
 tranche_cats = []
 for cat, bands in clusters.items():
     ready = [it for it in bands.get("low", [])
-             if triage.review_candidate(prs[it["number"]], judgments[it["number"]], in_dupe)]
+             if tranche.review_candidate(prs[it["number"]], judgments[it["number"]], in_dupe)]
     if ready:
         tranche_cats.append((cat, ready))
 tranche_cats.sort(key=lambda t: -len(t[1]))
@@ -187,8 +187,8 @@ parts.append(f"<h2>Escalate to senior review <span class='muted'>({len(escalate)
 for n in sorted(escalate):
     a = judgments[n]["answers"]
     tags = []
-    risk = triage.metric(judgments[n], "risk")
-    security = triage.metric(judgments[n], "security_flag", "noul")
+    risk = tranche.metric(judgments[n], "risk")
+    security = tranche.metric(judgments[n], "security_flag", "noul")
     if risk is not None and risk >= 3:
         tags.append(f"<span style='color:var(--red)'>risk {a['risk']['score']:.1f}</span>")
     if security is not None and security >= 0.5:
@@ -201,7 +201,7 @@ for n in sorted(followup):
     parts.append(f"<div class='inner'>✏️ {pr_link(n)} {e(prs[n]['title'][:90])}</div>")
 
 parts.append(f"""<footer>
-<p><b>Method.</b> Code owns the workflow; Jev supplies judgments about the provided descriptions. One batched call per PR asks seven typed questions. The projection contains a title and at most 1200 body characters; pair comparisons use at most 400 body characters each. Missing diffstat is unknown. Title similarity and references propose pairs; connectivity proposes groups. Conflicting, uncertain, missing or unbound internal relationships require review. Scores and probabilities are not independently calibrated. Model risk/security scores do not constitute security review. Full pipeline and data: <a href="https://github.com/blackopsrepl/omarchy-pr-jev-triage" target="_blank">github.com/blackopsrepl/omarchy-pr-jev-triage</a>.</p>
+<p><b>Method.</b> Code owns the workflow; Jev supplies judgments about the provided descriptions. One batched call per PR asks seven typed questions. The projection contains a title and at most 1200 body characters; pair comparisons use at most 400 body characters each. Missing diffstat is unknown. Title similarity and references propose pairs; connectivity proposes groups. Conflicting, uncertain, missing or unbound internal relationships require review. Scores and probabilities are not independently calibrated. Model risk/security scores do not constitute security review. Full pipeline and data: <a href="https://github.com/blackopsrepl/Tranche" target="_blank">github.com/blackopsrepl/Tranche</a>.</p>
 <p class="muted">Every merge and closure decision belongs to a maintainer. Generated {datetime.now(timezone.utc).strftime('%d %b %Y %H:%M UTC')}.</p>
 </footer>
 <script>document.querySelectorAll('details').forEach(d=>{{if(!d.open&&d.querySelector('table'))d.open=false}})</script>

@@ -1,4 +1,4 @@
-# Omarchy PR Triage Makefile v1.0
+# Tranche Makefile
 # Jev-powered triage pipeline with colorized output
 
 # ============== Colors & Symbols ==============
@@ -20,8 +20,8 @@ PEOPLE := 👥
 SCALE := ⚖️
 
 # ============== Project Metadata ==============
-REPO := blackopsrepl/omarchy-pr-jev-triage
-LIVE_URL := https://vdistefano.studio/omarchy-pr-jev-triage/
+REPO := blackopsrepl/Tranche
+LIVE_URL := https://vdistefano.studio/Tranche/
 JUDGED := $(shell test -f out/judgments.jsonl && wc -l < out/judgments.jsonl || echo 0)
 PAIRED := $(shell test -f out/pair_verdicts.jsonl && wc -l < out/pair_verdicts.jsonl || echo 0)
 
@@ -33,11 +33,10 @@ PAIRED := $(shell test -f out/pair_verdicts.jsonl && wc -l < out/pair_verdicts.j
 
 # ============== Banner ==============
 banner:
-	@printf "$(EMERALD)$(BOLD)  ___  ___  _   _ _   _  _  _  _____ _   _ _   _  _____ _   _ __   __\n"
-	@printf " / _ \\ / _ \\| | | | | | |( \\/ )( _   ) ( ) ( ) ( ) (_   _) ( ) ( )\\ \\ / /\n"
-	@printf "( (_) ) (_) ) |_| | |_| | \\  /  ) ( ) | |\\ V V V V V | |  | |_| |\\ V V /\n"
-	@printf " \\___/ \\___/ \\___/ \\___/  (__)  (_) (_)_)  \\_/\\_/\\_/\\_/  (_)  (_____) \\_/  $(RESET)"
-	@printf "$(GRAY)  x Jev$(RESET)\n"
+	@printf "$(EMERALD)$(BOLD)╔══════════════════════════════════════╗$(RESET)\n"
+	@printf "$(EMERALD)$(BOLD)║               TRANCHE                ║$(RESET)\n"
+	@printf "$(EMERALD)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n"
+	@printf "$(GRAY)  Model-assisted PR review · x Jev$(RESET)\n"
 	@printf "  $(GRAY)judged: $(CYAN)$(JUDGED)$(GRAY) PRs, $(CYAN)$(PAIRED)$(GRAY) pair verdicts$(RESET)\n"
 	@printf "  $(GRAY)$(LIVE_URL)$(RESET)\n\n"
 
@@ -47,7 +46,7 @@ fetch: banner
 	@printf "$(CYAN)$(BOLD)╔══════════════════════════════════════╗$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)║        Fetching Open PRs             ║$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n\n"
-	@python3 triage.py fetch --transport curl
+	@python3 tranche.py fetch --transport curl
 
 # ============== Jev Pipeline ==============
 
@@ -56,7 +55,7 @@ judge: banner
 	@printf "$(CYAN)$(BOLD)║        Jev Judgment Pass             ║$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n\n"
 	@printf "$(ARROW) $(BOLD)Judging PRs (7 typed questions, one batched call each)...$(RESET)\n"
-	@python3 triage.py judge --resume && \
+	@python3 tranche.py judge --resume && \
 		printf "$(GREEN)$(CHECK) Judgments saved to out/judgments.jsonl$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) Judge pass failed$(RESET)\n\n" && exit 1)
 
@@ -64,17 +63,17 @@ judge-full: banner
 	@printf "$(RED)$(BOLD)WARNING: fresh pass over all PRs — ~5M input tokens on Jev$(RESET)\n"
 	@printf "$(YELLOW)Press Ctrl+C to abort, or Enter to continue...$(RESET)\n"
 	@read dummy
-	@python3 triage.py judge
+	@python3 tranche.py judge
 
 dupes: banner
 	@printf "$(ARROW) $(BOLD)Comparing candidate pairs with Jev sameness judgments...$(RESET)\n"
-	@python3 triage.py dupes && \
+	@python3 tranche.py dupes && \
 		printf "$(GREEN)$(CHECK) Pair verdicts in out/pair_verdicts.jsonl$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) Dupe pass failed$(RESET)\n\n" && exit 1)
 
 cluster: banner
 	@printf "$(ARROW) $(BOLD)Clustering tranches, dupes, escalation lists...$(RESET)\n"
-	@python3 triage.py cluster
+	@python3 tranche.py cluster
 
 # ============== Output ==============
 
@@ -87,7 +86,7 @@ page: banner
 gif: banner
 	@printf "$(ARROW) $(BOLD)Rendering title GIF with glyphfx (capture → rasterize)...$(RESET)\n"
 	@python3 tools/make_title_gif.py && \
-		printf "$(GREEN)$(CHECK) docs/assets/omarchy-triage.gif written$(RESET)\n\n" || \
+		printf "$(GREEN)$(CHECK) docs/assets/tranche.gif written$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) GIF generation failed$(RESET)\n\n" && exit 1)
 
 # ============== Composite Targets ==============
@@ -118,7 +117,7 @@ verify: banner
 	@printf "$(ARROW) $(BOLD)Proving the release is live...$(RESET)\n"
 	@gh api repos/$(REPO)/pages --jq '"  status: " + .status + "  (https enforced: " + (.https_enforced|tostring) + ")"'
 	@code=$$(curl -s -o /tmp/verify.html -w "%{http_code}" -L "$(LIVE_URL)") ; \
-		[ "$$code" = "200" ] && grep -q "OMARCHY TRIAGE" /tmp/verify.html && \
+		[ "$$code" = "200" ] && grep -q "TRANCHE" /tmp/verify.html && \
 		printf "$(GREEN)$(CHECK) 200 + content at $(LIVE_URL)$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) Live check failed (HTTP $$code)$(RESET)\n\n" && exit 1)
 

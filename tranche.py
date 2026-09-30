@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Omarchy PR triage via TypeSafe Jev.
+"""Tranche — model-assisted PR discovery via TypeSafe Jev.
 
 Groups observed open PRs of omacom/omarchy into review candidates, proposes
 related groups, and flags items that may need follow-up — supporting the roll-up work DHH
@@ -9,12 +9,12 @@ Judgments come from TypeSafe's System One API (Jev). Code owns the workflow:
 fetch -> judge (one batched call per PR) -> compare candidate pairs -> cluster.
 
 Usage:
-  python3 triage.py fetch              # refresh data/pages/snapshot.json
-  python3 triage.py judge [--limit N] [--resume]
-  python3 triage.py dupes [--max-pairs N]
-  python3 triage.py cluster            # writes out/clusters.json, out/dupes.json,
+  python3 tranche.py fetch              # refresh data/pages/snapshot.json
+  python3 tranche.py judge [--limit N] [--resume]
+  python3 tranche.py dupes [--max-pairs N]
+  python3 tranche.py cluster            # writes out/clusters.json, out/dupes.json,
                                        #            out/tranches.md, out/summary.json
-  python3 triage.py all [--limit N]
+  python3 tranche.py all [--limit N]
 """
 
 from __future__ import annotations
@@ -193,7 +193,7 @@ def pair_questions() -> dict:
 # TypeSafe HTTP
 # ---------------------------------------------------------------------------
 
-class TriageFatal(RuntimeError):
+class TrancheFatal(RuntimeError):
     pass
 
 
@@ -203,7 +203,7 @@ def read_key() -> str:
         return key.strip()
     if KEY_FILE.exists():
         return KEY_FILE.read_text().strip()
-    raise TriageFatal(f"No API key: set TYPESAFE_API_KEY or create {KEY_FILE}")
+    raise TrancheFatal(f"No API key: set TYPESAFE_API_KEY or create {KEY_FILE}")
 
 
 def ask(state, questions: dict, key: str, timeout: int = 90) -> dict:
@@ -223,19 +223,19 @@ def ask(state, questions: dict, key: str, timeout: int = 90) -> dict:
         except urllib.error.HTTPError as e:
             last = f"HTTP {e.code}: {e.read().decode(errors='replace')[:300]}"
             if e.code == 401:
-                raise TriageFatal(f"Auth rejected (401). Check the key. {last}") from e
+                raise TrancheFatal(f"Auth rejected (401). Check the key. {last}") from e
             if e.code == 422:
-                raise TriageFatal(f"Request rejected (422) — question shape bug. {last}") from e
+                raise TrancheFatal(f"Request rejected (422) — question shape bug. {last}") from e
             if e.code in (429, 529) or e.code >= 500:
                 time.sleep(backoff + random.random())
                 backoff = min(backoff * 2, 60)
                 continue
-            raise TriageFatal(last) from e
+            raise TrancheFatal(last) from e
         except urllib.error.URLError as e:
             last = f"network: {e}"
             time.sleep(backoff + random.random())
             backoff = min(backoff * 2, 60)
-    raise TriageFatal(f"Retries exhausted. Last error: {last}")
+    raise TrancheFatal(f"Retries exhausted. Last error: {last}")
 
 
 # ---------------------------------------------------------------------------
@@ -246,13 +246,13 @@ def validate_pr(item):
     if (not isinstance(item, dict) or type(item.get("number")) is not int
             or item["number"] <= 0 or not isinstance(item.get("title"), str)
             or item.get("body") is not None and not isinstance(item["body"], str)):
-        raise TriageFatal("Invalid captured PR shape; fetch again")
+        raise TrancheFatal("Invalid captured PR shape; fetch again")
     for field in ("head", "user", "author"):
         if item.get(field) is not None and not isinstance(item[field], dict):
-            raise TriageFatal(f"Invalid captured PR {field}; fetch again")
+            raise TrancheFatal(f"Invalid captured PR {field}; fetch again")
     labels = item.get("labels", [])
     if not isinstance(labels, list) or any(not isinstance(label, dict) or not isinstance(label.get("name"), str) for label in labels):
-        raise TriageFatal("Invalid captured PR labels; fetch again")
+        raise TrancheFatal("Invalid captured PR labels; fetch again")
 
 
 def load_prs() -> dict[int, dict]:
@@ -263,18 +263,18 @@ def load_prs() -> dict[int, dict]:
         if (not isinstance(value, dict) or type(value.get("version")) is not int
                 or value.get("version") != 1 or value.get("repo") != REPO
                 or value.get("digest") != digest(value.get("items"))):
-            raise TriageFatal("Fetched snapshot identity or checksum differs; fetch again")
+            raise TrancheFatal("Fetched snapshot identity or checksum differs; fetch again")
         pages = [value["items"]]
     else:
         # Existing/enriched page caches remain readable until the next fetch.
         pages = [json.loads(path.read_text()) for path in sorted(PAGES_DIR.glob("page_*.json"))]
     for page in pages:
         if not isinstance(page, list):
-            raise TriageFatal("Captured PR membership must be a list; fetch again")
+            raise TrancheFatal("Captured PR membership must be a list; fetch again")
         for p in page:
             validate_pr(p)
             if p["number"] in prs:
-                raise TriageFatal("Repeated PR in captured membership; fetch again")
+                raise TrancheFatal("Repeated PR in captured membership; fetch again")
             raw_body = p.get("body") or ""
             refs = sorted({int(x) for x in re.findall(r"#(\d{2,6})", raw_body)})
             body = re.sub(r"<!--.*?-->", "", raw_body, flags=re.S)
@@ -335,19 +335,19 @@ def cmd_fetch(args) -> None:
             result = subprocess.run(["curl", "--fail", "--silent", "--show-error",
                                      "--max-time", "60", url], capture_output=True, text=True)
             if result.returncode:
-                raise TriageFatal("curl fetch failed; previous snapshot retained")
+                raise TrancheFatal("curl fetch failed; previous snapshot retained")
             arr = json.loads(result.stdout)
         else:
             with urllib.request.urlopen(url, timeout=60) as r:
                 arr = json.load(r)
         if not isinstance(arr, list):
-            raise TriageFatal("GitHub did not return a PR list; previous snapshot retained")
+            raise TrancheFatal("GitHub did not return a PR list; previous snapshot retained")
         if not arr:
             break
         for item in arr:
             validate_pr(item)
             if item["number"] in seen:
-                raise TriageFatal("Invalid or repeated PR during pagination; previous snapshot retained")
+                raise TrancheFatal("Invalid or repeated PR during pagination; previous snapshot retained")
             seen.add(item["number"])
         captured.extend(arr)
         total += len(arr)
@@ -539,7 +539,7 @@ def cmd_judge(args) -> None:
                    "updated_at": pr["updated"], "requested_model": MODEL,
                    "judged_at": datetime.now(timezone.utc).isoformat(),
                    "resolved_model": resp.get("model"), "request_id": resp.get("request_id")}
-        except TriageFatal as e:
+        except TrancheFatal as e:
             with lock:
                 errors.append(f"#{number}: {e}")
             if "401" in str(e):
@@ -561,7 +561,7 @@ def cmd_judge(args) -> None:
             futures = [ex.submit(work, n) for n in todo]
             for f in as_completed(futures):
                 f.result()
-    except TriageFatal as e:
+    except TrancheFatal as e:
         print(f"FATAL: {e}", file=sys.stderr)
         print("partial progress is saved; re-run with --resume", file=sys.stderr)
         sys.exit(2)
@@ -856,7 +856,7 @@ def cmd_cluster(args) -> None:
     atomic_json(OUT_DIR / "clusters.json", clusters)
     atomic_json(OUT_DIR / "dupes.json", dupes)
     lines = [
-        "# Omarchy PR review candidates — Jev triage", "",
+        "# Tranche — PR review candidates", "",
         f"Corpus: {len(prs)} observed open PRs; {len(judgments)} matching judgments; "
         f"{summary['unjudged_or_stale']} unjudged/stale; {summary['unbound_judgments']} unbound legacy judgments.",
         f"Review candidates: {summary['ready_prs']}. Model-consistent groups: {len(dupe_groups)}. "

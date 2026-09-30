@@ -14,7 +14,7 @@ from contextlib import redirect_stdout
 from pathlib import Path
 from unittest.mock import patch
 
-import triage
+import tranche
 
 
 def pr(number, **changes):
@@ -60,7 +60,7 @@ class WorkflowTests(unittest.TestCase):
             "JUDGMENTS_PATH": self.out / "judgments.jsonl",
             "PAIRS_PATH": self.out / "pair_verdicts.jsonl",
         }.items():
-            context = patch.object(triage, name, value)
+            context = patch.object(tranche, name, value)
             context.start()
             self.addCleanup(context.stop)
         self.stdout = redirect_stdout(io.StringIO())
@@ -68,28 +68,28 @@ class WorkflowTests(unittest.TestCase):
         self.addCleanup(self.stdout.__exit__, None, None, None)
         # An unexpected key read/network call must fail the test, never contact a service.
         self.key = patch.object(
-            triage, "read_key", side_effect=AssertionError("unexpected key read")
+            tranche, "read_key", side_effect=AssertionError("unexpected key read")
         ).start()
         self.network = patch.object(
-            triage.urllib.request, "urlopen", side_effect=AssertionError("unexpected network")
+            tranche.urllib.request, "urlopen", side_effect=AssertionError("unexpected network")
         ).start()
         self.model = patch.object(
-            triage, "ask", side_effect=AssertionError("unexpected model call")
+            tranche, "ask", side_effect=AssertionError("unexpected model call")
         ).start()
         self.addCleanup(patch.stopall)
 
     def inputs(self, items):
-        triage.atomic_json(
+        tranche.atomic_json(
             self.pages / "snapshot.json",
             {
                 "version": 1,
-                "repo": triage.REPO,
+                "repo": tranche.REPO,
                 "items": items,
-                "digest": triage.digest(items),
+                "digest": tranche.digest(items),
                 "observed_at": "2026-01-02T00:00:00Z",
             },
         )
-        return triage.load_prs()
+        return tranche.load_prs()
 
     def judgments(self, prs, *, legacy=False, custom=None):
         records = [
@@ -97,9 +97,9 @@ class WorkflowTests(unittest.TestCase):
         ]
         for record in records:
             if not legacy:
-                record["binding"] = triage.judgment_binding(prs[record["number"]])
-        triage.JUDGMENTS_PATH.write_text("".join(json.dumps(r) + "\n" for r in records))
-        return triage.current_judgments(prs, allow_unbound=legacy)
+                record["binding"] = tranche.judgment_binding(prs[record["number"]])
+        tranche.JUDGMENTS_PATH.write_text("".join(json.dumps(r) + "\n" for r in records))
+        return tranche.current_judgments(prs, allow_unbound=legacy)
 
     def pairs(self, prs, relationships, *, legacy=False):
         records = []
@@ -112,19 +112,19 @@ class WorkflowTests(unittest.TestCase):
                 "probabilities": {"same_change": probability},
             }
             if not legacy:
-                record["binding"] = triage.pair_binding(prs, a, b)
+                record["binding"] = tranche.pair_binding(prs, a, b)
             records.append(record)
-        triage.PAIRS_PATH.write_text("".join(json.dumps(r) + "\n" for r in records))
+        tranche.PAIRS_PATH.write_text("".join(json.dumps(r) + "\n" for r in records))
 
     def cluster(self, *, allow_unbound=False):
-        triage.cmd_cluster(argparse.Namespace(allow_unbound=allow_unbound))
+        tranche.cmd_cluster(argparse.Namespace(allow_unbound=allow_unbound))
         return json.loads((self.out / "summary.json").read_text()), json.loads(
             (self.out / "dupes.json").read_text()
         )
 
     def render(self):
-        for name in ("triage.py", "gen_page.py"):
-            shutil.copy(Path(triage.__file__).parent / name, self.root / name)
+        for name in ("tranche.py", "gen_page.py"):
+            shutil.copy(Path(tranche.__file__).parent / name, self.root / name)
         return subprocess.run(
             [sys.executable, str(self.root / "gen_page.py")],
             cwd=self.root,
@@ -135,14 +135,14 @@ class WorkflowTests(unittest.TestCase):
 
     def test_unknown_diffstat_is_distinct_from_true_zero(self):
         prs = self.inputs([pr(1), pr(2, changed_files=0, additions=0, deletions=0)])
-        state = triage.pr_state(prs[1])["pr"]
+        state = tranche.pr_state(prs[1])["pr"]
         self.assertFalse(state["diffstat_available"])
         self.assertIn("unknown", state["diffstat"])
         self.assertNotIn("0 files", state["diffstat"])
-        self.assertEqual(triage.pr_state(prs[2])["pr"]["diffstat"], "0 files changed, +0/-0")
+        self.assertEqual(tranche.pr_state(prs[2])["pr"]["diffstat"], "0 files changed, +0/-0")
         for count in (-1, True, "0", None):
             prs = self.inputs([pr(1, changed_files=count, additions=0, deletions=0)])
-            self.assertFalse(triage.pr_state(prs[1])["pr"]["diffstat_available"])
+            self.assertFalse(tranche.pr_state(prs[1])["pr"]["diffstat_available"])
 
     def test_binding_tracks_full_source_even_outside_body_projection(self):
         original = pr(1, body="x" * 1500)
@@ -158,20 +158,20 @@ class WorkflowTests(unittest.TestCase):
         ):
             with self.subTest(change=change):
                 updated = dict(original, **change)
-                self.assertEqual(triage.current_judgments(self.inputs([updated])), {})
+                self.assertEqual(tranche.current_judgments(self.inputs([updated])), {})
         prs = self.inputs([original])
-        with patch.object(triage, "MODEL", "different-model"):
-            self.assertEqual(triage.current_judgments(prs), {})
-        questions = triage.judge_questions()
+        with patch.object(tranche, "MODEL", "different-model"):
+            self.assertEqual(tranche.current_judgments(prs), {})
+        questions = tranche.judge_questions()
         questions["risk"]["instructions"]["question"] += " New policy."
-        with patch.object(triage, "judge_questions", return_value=questions):
-            self.assertEqual(triage.current_judgments(prs), {})
+        with patch.object(tranche, "judge_questions", return_value=questions):
+            self.assertEqual(tranche.current_judgments(prs), {})
 
     def test_resume_reuses_only_matching_records_and_saves_projection(self):
         prs = self.inputs([pr(1)])
         self.judgments(prs)
         args = argparse.Namespace(resume=True, limit=None)
-        triage.cmd_judge(args)  # No key read or model call.
+        tranche.cmd_judge(args)  # No key read or model call.
         self.inputs([pr(1, head={"sha": "updated"})])
         self.key.side_effect = None
         self.key.return_value = "synthetic-key"
@@ -181,14 +181,14 @@ class WorkflowTests(unittest.TestCase):
             "model": "fixture-model",
             "request_id": "fixture",
         }
-        triage.cmd_judge(args)
+        tranche.cmd_judge(args)
         self.model.assert_called_once()
-        record = triage.load_done()[1]
+        record = tranche.load_done()[1]
         self.assertEqual(record["head_sha"], "updated")
-        self.assertEqual(record["input"], triage.pr_state(triage.load_prs()[1]))
+        self.assertEqual(record["input"], tranche.pr_state(tranche.load_prs()[1]))
         self.assertEqual(record["resolved_model"], "fixture-model")
         self.assertIn("judged_at", record)
-        self.assertEqual(len(triage.current_judgments(triage.load_prs())), 1)
+        self.assertEqual(len(tranche.current_judgments(tranche.load_prs())), 1)
 
     def test_legacy_judgment_is_not_resume_hit(self):
         prs = self.inputs([pr(1)])
@@ -197,23 +197,23 @@ class WorkflowTests(unittest.TestCase):
         self.key.return_value = "synthetic-key"
         self.model.side_effect = None
         self.model.return_value = {"answers": answers()}
-        triage.cmd_judge(argparse.Namespace(resume=True, limit=1))
+        tranche.cmd_judge(argparse.Namespace(resume=True, limit=1))
         self.model.assert_called_once()
-        self.assertIn("binding", triage.load_done()[1])
+        self.assertIn("binding", tranche.load_done()[1])
 
     def test_pair_reuse_is_bound_to_both_sources_questions_and_model(self):
         prs = self.inputs([pr(1), pr(2)])
         judgments = self.judgments(prs)
         self.pairs(prs, [(1, 2, "same_change", 0.9)])
-        self.assertEqual(len(triage.current_pairs(prs, judgments)), 1)
-        triage.cmd_dupes(argparse.Namespace(max_pairs=10))  # No key/model calls.
+        self.assertEqual(len(tranche.current_pairs(prs, judgments)), 1)
+        tranche.cmd_dupes(argparse.Namespace(max_pairs=10))  # No key/model calls.
         changed = self.inputs([pr(1), pr(2, head={"sha": "new"})])
         new_judgments = self.judgments(changed)
-        self.assertEqual(triage.current_pairs(changed, new_judgments), [])
-        with patch.object(triage, "pair_questions", return_value={"new": "policy"}):
-            self.assertEqual(triage.current_pairs(prs, judgments), [])
-        with patch.object(triage, "MODEL", "new-model"):
-            self.assertEqual(triage.current_pairs(prs, judgments), [])
+        self.assertEqual(tranche.current_pairs(changed, new_judgments), [])
+        with patch.object(tranche, "pair_questions", return_value={"new": "policy"}):
+            self.assertEqual(tranche.current_pairs(prs, judgments), [])
+        with patch.object(tranche, "MODEL", "new-model"):
+            self.assertEqual(tranche.current_pairs(prs, judgments), [])
         self.key.side_effect = None
         self.key.return_value = "synthetic-key"
         self.model.side_effect = None
@@ -222,19 +222,19 @@ class WorkflowTests(unittest.TestCase):
                 "sameness": {"choice": "same_change", "probabilities": {"same_change": 0.9}}
             }
         }
-        triage.cmd_dupes(argparse.Namespace(max_pairs=10))
+        tranche.cmd_dupes(argparse.Namespace(max_pairs=10))
         self.model.assert_called_once()
-        self.assertEqual(len(triage.current_pairs(changed, new_judgments)), 1)
+        self.assertEqual(len(tranche.current_pairs(changed, new_judgments)), 1)
 
     def test_closed_members_do_not_reenter_pairs_or_reports(self):
         prs = self.inputs([pr(1), pr(2)])
         self.judgments(prs)
         self.pairs(prs, [(1, 2, "same_change", 0.9)])
         current = self.inputs([pr(1)])
-        judgments = triage.current_judgments(current)
-        self.assertEqual(triage.lexical_pairs(current, judgments), [])
-        self.assertEqual(triage.current_pairs(current, judgments), [])
-        triage.cmd_dupes(argparse.Namespace(max_pairs=10))
+        judgments = tranche.current_judgments(current)
+        self.assertEqual(tranche.lexical_pairs(current, judgments), [])
+        self.assertEqual(tranche.current_pairs(current, judgments), [])
+        tranche.cmd_dupes(argparse.Namespace(max_pairs=10))
         summary, dupes = self.cluster()
         self.assertEqual(summary["judged"], 1)
         self.assertEqual(dupes["confirmed_groups"], [])
@@ -344,8 +344,8 @@ class WorkflowTests(unittest.TestCase):
                     summary, _ = self.cluster()
                     self.assertEqual(summary["ready_prs"], 0)
         for value in (float("nan"), float("inf"), "0", True):
-            self.assertIsNone(triage.metric({"answers": {"risk": {"score": value}}}, "risk"))
-        self.assertIsNone(triage.p_same({"probabilities": {"same_change": float("nan")}}))
+            self.assertIsNone(tranche.metric({"answers": {"risk": {"score": value}}}, "risk"))
+        self.assertIsNone(tranche.p_same({"probabilities": {"same_change": float("nan")}}))
 
     def test_model_judgments_normalize_before_save_and_retry_unknown_metrics(self):
         self.inputs([pr(1)])
@@ -361,9 +361,9 @@ class WorkflowTests(unittest.TestCase):
                 data["risk"]["score"] = value
                 self.model.return_value = {"answers": data, "usage": usage}
                 before = self.model.call_count
-                triage.cmd_judge(args)
+                tranche.cmd_judge(args)
                 self.assertEqual(self.model.call_count, before + 1)
-                record = triage.load_done()[1]
+                record = tranche.load_done()[1]
                 self.assertIsNone(record["answers"]["risk"]["score"])
                 self.assertEqual(record["answers"]["finished_form"]["score"], 2)
                 self.assertEqual(record["usage"], {"input_tokens": 0, "output_tokens": 0})
@@ -373,9 +373,9 @@ class WorkflowTests(unittest.TestCase):
                 result = self.render()
                 self.assertEqual(result.returncode, 0, result.stderr)
         self.model.return_value = {"answers": answers(), "usage": {"input_tokens": 7}}
-        triage.cmd_judge(args)
+        tranche.cmd_judge(args)
         before = self.model.call_count
-        triage.cmd_judge(args)
+        tranche.cmd_judge(args)
         self.assertEqual(self.model.call_count, before)
         self.assertEqual(self.cluster()[0]["tokens"], {"input": 7, "output": 0})
 
@@ -383,14 +383,14 @@ class WorkflowTests(unittest.TestCase):
         prs = self.inputs([pr(1), pr(2)])
         self.judgments(prs)
         self.pairs(prs, [(1, 2, "same_change", float("nan"))])
-        path = triage.JUDGMENTS_PATH
+        path = tranche.JUDGMENTS_PATH
         rows = [json.loads(line) for line in path.read_text().splitlines()]
         rows[0]["answers"]["risk"]["score"] = float("inf")
         rows[0]["usage"] = None
         junk = [None, [], 7, {}, {"number": []}, {"number": True}]
         path.write_text("broken\n" + "".join(json.dumps(r) + "\n" for r in junk + rows))
-        triage.PAIRS_PATH.write_text("broken\n" + "".join(json.dumps(r) + "\n" for r in
-            [None, [], {}, {"a": [], "b": 2}, {"a": True, "b": 2}]) + triage.PAIRS_PATH.read_text())
+        tranche.PAIRS_PATH.write_text("broken\n" + "".join(json.dumps(r) + "\n" for r in
+            [None, [], {}, {"a": [], "b": 2}, {"a": True, "b": 2}]) + tranche.PAIRS_PATH.read_text())
         before = path.read_bytes()
         self.assertEqual(self.cluster()[0]["ready_prs"], 1)
         self.assertEqual(self.render().returncode, 0)
@@ -399,7 +399,7 @@ class WorkflowTests(unittest.TestCase):
         self.key.return_value = "synthetic-key"
         self.model.side_effect = None
         self.model.return_value = {"answers": answers()}
-        triage.cmd_judge(argparse.Namespace(resume=True, limit=None))
+        tranche.cmd_judge(argparse.Namespace(resume=True, limit=None))
         self.model.assert_called_once()
         for response in (None, {"answers": []}, {"answers": {"sameness": []}},
                          {"answers": {"sameness": {"choice": [], "probabilities": []}}},
@@ -409,21 +409,21 @@ class WorkflowTests(unittest.TestCase):
             with self.subTest(response=response):
                 self.model.return_value = response
                 calls = self.model.call_count
-                triage.cmd_dupes(argparse.Namespace(max_pairs=10))
+                tranche.cmd_dupes(argparse.Namespace(max_pairs=10))
                 self.assertEqual(self.model.call_count, calls + 1)
-                records = triage.current_pairs(prs, triage.current_judgments(prs))
+                records = tranche.current_pairs(prs, tranche.current_judgments(prs))
                 self.assertEqual(len(records), 1)
-                self.assertIsNone(triage.p_same(records[0]))
+                self.assertIsNone(tranche.p_same(records[0]))
                 self.assertTrue(records[0]["normalization_errors"])
-                for line in triage.PAIRS_PATH.read_text().splitlines()[7:]:
+                for line in tranche.PAIRS_PATH.read_text().splitlines()[7:]:
                     json.loads(line, parse_constant=lambda token: self.fail(token))
                 self.assertEqual(self.cluster()[1]["confirmed_groups"], [])
                 self.assertEqual(self.render().returncode, 0)
         self.model.return_value = {"answers": {"sameness": {"choice": "same_change",
             "probabilities": {"same_change": 0.9}}}, "usage": {"input_tokens": 3}}
-        triage.cmd_dupes(argparse.Namespace(max_pairs=10))
+        tranche.cmd_dupes(argparse.Namespace(max_pairs=10))
         calls = self.model.call_count
-        triage.cmd_dupes(argparse.Namespace(max_pairs=10))
+        tranche.cmd_dupes(argparse.Namespace(max_pairs=10))
         self.assertEqual(self.model.call_count, calls)
         self.assertEqual(self.cluster()[1]["confirmed_groups"], [[1, 2]])
         self.assertEqual(self.render().returncode, 0)
@@ -436,19 +436,19 @@ class WorkflowTests(unittest.TestCase):
         args = argparse.Namespace(resume=True, limit=None)
         for shape in (dict(answers(), category={"choice": []}), None, [], "bad"):
             with self.subTest(shape=shape):
-                triage.JUDGMENTS_PATH.write_text(json.dumps({"number": 1,
-                    "answers": shape, "binding": triage.judgment_binding(prs[1])}) + "\n")
+                tranche.JUDGMENTS_PATH.write_text(json.dumps({"number": 1,
+                    "answers": shape, "binding": tranche.judgment_binding(prs[1])}) + "\n")
                 self.assertEqual(self.cluster()[0]["ready_prs"], 0)
                 self.assertEqual(self.render().returncode, 0)
                 self.model.return_value = {"answers": shape}
                 calls = self.model.call_count
-                triage.cmd_judge(args)
-                triage.cmd_judge(args)
+                tranche.cmd_judge(args)
+                tranche.cmd_judge(args)
                 self.assertEqual(self.model.call_count, calls + 2)
                 self.assertEqual(self.cluster()[0]["ready_prs"], 0)
         for response in (None, [], {}):
             self.model.return_value = response
-            triage.cmd_judge(args)
+            tranche.cmd_judge(args)
             self.assertEqual(self.cluster()[0]["ready_prs"], 0)
 
     def test_drafts_cannot_enter_review_candidates(self):
@@ -473,17 +473,17 @@ class WorkflowTests(unittest.TestCase):
     def test_empty_fetch_removes_legacy_tail_membership(self):
         (self.pages / "page_1.json").write_text(json.dumps([pr(99)]))
         self.network.side_effect = [io.BytesIO(b"[]")]
-        triage.cmd_fetch(argparse.Namespace(transport="urllib"))
-        self.assertEqual(triage.load_prs(), {})
+        tranche.cmd_fetch(argparse.Namespace(transport="urllib"))
+        self.assertEqual(tranche.load_prs(), {})
         self.assertTrue((self.pages / "page_1.json").exists())  # Ignored legacy input.
 
     def test_exact_page_boundary_ends_with_empty_page_and_replaces_membership(self):
         self.inputs([pr(999)])
         items = [pr(n) for n in range(1, 101)]
         self.network.side_effect = [io.BytesIO(json.dumps(items).encode()), io.BytesIO(b"[]")]
-        with patch.object(triage.time, "sleep"):
-            triage.cmd_fetch(argparse.Namespace(transport="urllib"))
-        self.assertEqual(set(triage.load_prs()), set(range(1, 101)))
+        with patch.object(tranche.time, "sleep"):
+            tranche.cmd_fetch(argparse.Namespace(transport="urllib"))
+        self.assertEqual(set(tranche.load_prs()), set(range(1, 101)))
         self.assertEqual(self.network.call_count, 2)
 
     def test_failed_or_duplicate_pagination_retains_committed_snapshot(self):
@@ -496,10 +496,10 @@ class WorkflowTests(unittest.TestCase):
         ):
             self.network.side_effect = [io.BytesIO(json.dumps(items).encode()), second]
             with (
-                patch.object(triage.time, "sleep"),
-                self.assertRaises((urllib.error.URLError, triage.TriageFatal)),
+                patch.object(tranche.time, "sleep"),
+                self.assertRaises((urllib.error.URLError, tranche.TrancheFatal)),
             ):
-                triage.cmd_fetch(argparse.Namespace(transport="urllib"))
+                tranche.cmd_fetch(argparse.Namespace(transport="urllib"))
             self.assertEqual((self.pages / "snapshot.json").read_bytes(), before)
 
     def test_malformed_fetch_does_not_replace_usable_snapshot(self):
@@ -507,25 +507,25 @@ class WorkflowTests(unittest.TestCase):
         before = (self.pages / "snapshot.json").read_bytes()
         for item in ({"number": 1}, pr(1, body={"invalid": "type"}), pr(1, labels=None)):
             self.network.side_effect = [io.BytesIO(json.dumps([item]).encode())]
-            with self.assertRaises(triage.TriageFatal):
-                triage.cmd_fetch(argparse.Namespace(transport="urllib"))
+            with self.assertRaises(tranche.TrancheFatal):
+                tranche.cmd_fetch(argparse.Namespace(transport="urllib"))
             self.assertEqual((self.pages / "snapshot.json").read_bytes(), before)
 
     def test_curl_transport_uses_same_atomic_membership_commit(self):
         self.inputs([pr(999)])
         result = subprocess.CompletedProcess([], 0, json.dumps([pr(1)]), "")
-        with patch.object(triage.subprocess, "run", return_value=result) as run:
-            triage.cmd_fetch(argparse.Namespace(transport="curl"))
-        self.assertEqual(set(triage.load_prs()), {1})
+        with patch.object(tranche.subprocess, "run", return_value=result) as run:
+            tranche.cmd_fetch(argparse.Namespace(transport="curl"))
+        self.assertEqual(set(tranche.load_prs()), {1})
         self.assertIn("--max-time", run.call_args.args[0])
         before = (self.pages / "snapshot.json").read_bytes()
         with patch.object(
-            triage.subprocess,
+            tranche.subprocess,
             "run",
             return_value=subprocess.CompletedProcess([], 22, "", "fixture"),
         ):
-            with self.assertRaises(triage.TriageFatal):
-                triage.cmd_fetch(argparse.Namespace(transport="curl"))
+            with self.assertRaises(tranche.TrancheFatal):
+                tranche.cmd_fetch(argparse.Namespace(transport="curl"))
         self.assertEqual((self.pages / "snapshot.json").read_bytes(), before)
 
     def test_snapshot_repository_and_content_integrity_are_checked(self):
@@ -536,8 +536,8 @@ class WorkflowTests(unittest.TestCase):
             value = json.loads(path.read_text())
             value[field] = replacement
             path.write_text(json.dumps(value))
-            with self.assertRaises(triage.TriageFatal):
-                triage.load_prs()
+            with self.assertRaises(tranche.TrancheFatal):
+                tranche.load_prs()
 
     def test_html_render_matches_cli_coverage_and_escapes_source_text(self):
         prs = self.inputs([pr(1, title="Fix <script>alert(1)</script>"), pr(2)])
@@ -591,13 +591,13 @@ class WorkflowTests(unittest.TestCase):
     def test_all_supports_documented_resume_and_pair_budget(self):
         with (
             patch.object(
-                sys, "argv", ["triage.py", "all", "--resume", "--limit", "2", "--max-pairs", "0"]
+                sys, "argv", ["tranche.py", "all", "--resume", "--limit", "2", "--max-pairs", "0"]
             ),
-            patch.object(triage, "cmd_judge") as judge,
-            patch.object(triage, "cmd_dupes") as dupes,
-            patch.object(triage, "cmd_cluster") as cluster,
+            patch.object(tranche, "cmd_judge") as judge,
+            patch.object(tranche, "cmd_dupes") as dupes,
+            patch.object(tranche, "cmd_cluster") as cluster,
         ):
-            triage.main()
+            tranche.main()
         self.assertTrue(judge.call_args.args[0].resume)
         self.assertEqual(dupes.call_args.args[0].max_pairs, 0)
         self.assertEqual(cluster.call_count, 1)

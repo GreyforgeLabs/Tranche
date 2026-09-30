@@ -1,6 +1,6 @@
-# omarchy-pr-jev-triage
+# Tranche
 
-Triage tooling for the Omarchy PR backlog, built for the triage team DHH stood up
+Model-assisted discovery and review prioritization for the Omarchy PR backlog, built for the triage team DHH stood up
 on 2026-09-12 ([x.com/dhh/status/2098755120540393908](https://x.com/dhh/status/2098755120540393908)):
 
 > "We're 2,200 PRs deep on GH now and getting nearly a hundred new ones every day. I'll never
@@ -29,12 +29,12 @@ echo "apikey_..." > ~/Documents/jevapi.txt     # or: export TYPESAFE_API_KEY=...
 ## Usage
 
 ```bash
-python3 triage.py fetch            # atomically replace data/pages/snapshot.json (open PRs, unauthenticated GH)
-python3 triage.py judge            # Jev pass over all PRs  (~7 questions, one call per PR)
-python3 triage.py judge --resume   # reuse only matching input/question/model bindings
-python3 triage.py dupes            # compare candidate pairs using shortened descriptions
-python3 triage.py cluster          # build out/{clusters.json,dupes.json,tranches.md,summary.json}
-python3 triage.py all --resume     # judge --resume + dupes + cluster
+python3 tranche.py fetch            # atomically replace data/pages/snapshot.json (open PRs, unauthenticated GH)
+python3 tranche.py judge            # Jev pass over all PRs  (~7 questions, one call per PR)
+python3 tranche.py judge --resume   # reuse only matching input/question/model bindings
+python3 tranche.py dupes            # compare candidate pairs using shortened descriptions
+python3 tranche.py cluster          # build out/{clusters.json,dupes.json,tranches.md,summary.json}
+python3 tranche.py all --resume     # judge --resume + dupes + cluster
 ```
 
 ## What Jev is asked (one batched call per PR)
