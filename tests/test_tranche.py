@@ -660,11 +660,35 @@ class WorkflowTests(unittest.TestCase):
             r'<script id="workbench-data" type="application/json">(.*?)</script>',
             page, re.S).group(1))
         self.assertTrue(payload["prs"][0]["security_priority"])
+        self.assertEqual(payload["batches_available"], False)
         for text in ('Observation:', 'requested jev', 'fresh runs:', '<blockquote>',
                      '<b>Method.</b>', 'fetch → judge', '<img src=x onerror=alert(1)>'):
             self.assertNotIn(text, page)
         self.assertIn(r'\u003c/script\u003e', page)
         self.assertIn(r'\u0026', page)
+
+    def test_render_embeds_batches_and_refuses_stale_batch_file(self):
+        self.batch_setup()
+        tranche.cmd_batches(argparse.Namespace())
+        result = self.render()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        page = (self.root / "docs" / "index.html").read_text()
+        payload = json.loads(re.search(
+            r'<script id="workbench-data" type="application/json">(.*?)</script>',
+            page, re.S).group(1))
+        self.assertTrue(payload["batches_available"])
+        batched = [row for row in payload["prs"] if row["batches"]]
+        self.assertEqual(len(batched), 8, "every candidate is a member of some batch")
+        by_number = {row["number"]: row["batches"] for row in payload["prs"]}
+        self.assertEqual([b["id"] for b in by_number[8]], ["fix-misc-B1", "fix-misc-B3"],
+                         "a PR can serve in several groups; tags list each")
+        self.assertEqual([b["id"] for b in by_number[1]], ["fix-misc-B2"])
+        self.assertIn("fix-misc-B3", page)
+        # A batches file bound to a different cluster run must never render.
+        clusters = json.loads((self.out / "clusters.json").read_text())
+        clusters["fix-misc"]["low"][0]["title"] = "mutated"
+        (self.out / "clusters.json").write_text(json.dumps(clusters))
+        self.assertNotEqual(self.render().returncode, 0)
 
     def test_empty_corpus_renders_without_credentials(self):
         self.inputs([])

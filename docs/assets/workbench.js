@@ -42,12 +42,13 @@
     });
   }
   // Issue #3: security is the top-priority meta-category; its queue leads the nav.
-  const queues = {security: 'security_priority', all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', related: 'related'};
+  // Issue #4: 'batched' shows every PR assigned to a pre-release batch.
+  const queues = {security: 'security_priority', all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', related: 'related', batched: 'batched'};
   const PAGE_SIZE = 30;
   function select(rows, state = {}, indexes) {
     const field = queues[state.queue || 'all'];
     const wordCache = new Map(); // Repeated corpus vocabulary pays edit distance only once.
-    const filtered = rows.filter(pr => (!field || pr[field]) &&
+    const filtered = rows.filter(pr => (!field || pr[field] || (field === 'batched' && pr.batches?.length)) &&
       (!state.category || state.category === 'all' || pr.category === state.category) &&
       matches(pr, state.q || '', indexes?.get(pr.number), wordCache));
     filtered.sort((a, b) => {
@@ -210,6 +211,18 @@
       content.append(properties, node('h3', 'Description snippet'));
       content.append(node('p', pr.body || 'No description supplied.', 'body-snippet'));
       if (pr.body_truncated) content.append(node('p', 'Captured snippet is shortened. Read the full description on GitHub.', 'small'));
+      if (pr.batches?.length) {
+        content.append(node('h3', 'Pre-release batches'));
+        const list = node('ul', undefined, 'diagnostics');
+        for (const batch of pr.batches) {
+          const item = node('li', undefined, 'pair-diagnostic');
+          item.append(node('span', `${batch.id} — ${batch.group} group, ${batch.tier} tier`, 'batch-name'));
+          item.append(node('p', `Batch of ${batch.count}; ${batch.cumulative_count} PRs when merged cumulatively (this batch plus every earlier one).`, 'small'));
+          list.append(item);
+        }
+        content.append(list);
+        content.append(node('p', 'Model-suggested batching for the final cumulative PRs; ordering is not a merge approval.', 'small'));
+      }
       relationships(pr, content);
     }
     function render() {
@@ -245,6 +258,9 @@
           if (pr.draft) meta.append(node('span', 'Draft', 'tag draft'));
           if (pr.security_priority) meta.append(node('span', 'Security first', 'tag security'));
           if (pr.related) meta.append(node('span', 'Related', 'tag'));
+          for (const batch of pr.batches || []) {
+            meta.append(node('span', `${batch.id} · ${batch.group}/${batch.tier} (+${batch.count})`, 'tag batch'));
+          }
           if (pr.freshness !== 'current') meta.append(node('span', pr.freshness === 'unbound' ? 'Unbound evidence' : 'Unjudged / stale', 'tag'));
           const info = node('span', undefined, 'pr-info'); info.append(heading, meta);
           const risk = node('span', metric(pr.risk, 4), `risk ${pr.risk == null ? 'unknown' : pr.risk >= 3 ? 'high' : 'known'}`);

@@ -25,6 +25,23 @@ if (summary.get("format_version") != 2
                                               "dupes.json": tranche.digest(dupes)}):
     raise tranche.TrancheFatal("Report inputs changed or are legacy/mixed; rerun cluster before rendering")
 
+# Issue #4: pre-release batches ship with the workbench when present; a stale
+# or foreign batches file must never be shown against a newer cluster run.
+batches_path = OUT / "batches.json"
+batches = None
+if batches_path.exists():
+    batches = json.loads(batches_path.read_text())
+    if (batches.get("format_version") != 1 or batches.get("repo") != tranche.REPO
+            or batches.get("clusters_digest") != summary["output_digests"]["clusters.json"]):
+        raise tranche.TrancheFatal("batches.json is stale or foreign; rerun 'tranche.py batches' before rendering")
+batch_of = {}
+for category in (batches or {}).get("categories", {}).values():
+    for batch in category["batches"]:
+        tag = {"id": batch["id"], "group": batch["group"], "tier": batch["tier"],
+               "count": batch["count"], "cumulative_count": batch["cumulative_count"]}
+        for number in batch["members"]:
+            batch_of.setdefault(number, []).append(tag)
+
 CAT_LABELS = {
     "install-setup": "Install & Setup", "desktop-config": "Desktop Config",
     "shell-cli": "Shell & CLI", "apps-integrations": "Apps & Integrations",
@@ -56,9 +73,11 @@ for n, pr in sorted(prs.items()):
         "senior": tranche.escalated(judgment),
         "followup": finished is not None and finished <= 1 and n not in in_dupe,
         "related": n in related,
+        "batches": batch_of.get(n, []),
     })
 # JSON remains data, never HTML: escape HTML delimiters and JS separators.
-payload = json.dumps({"prs": rows, "categories": CAT_LABELS, "groups": dupes},
+payload = json.dumps({"prs": rows, "categories": CAT_LABELS, "groups": dupes,
+                      "batches_available": batches is not None},
                      ensure_ascii=True, allow_nan=False, separators=(",", ":"))
 payload = payload.replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
 options = ''.join(f'<option value="{cat}">{html.escape(label)}</option>' for cat, label in CAT_LABELS.items())
@@ -97,6 +116,7 @@ page = f"""<!doctype html>
 <button type="button" data-queue="senior" aria-pressed="false">Senior review <span></span></button>
 <button type="button" data-queue="followup" aria-pressed="false">Author follow-up <span></span></button>
 <button type="button" data-queue="related" aria-pressed="false">Related PRs <span></span></button>
+<button type="button" data-queue="batched" aria-pressed="false">Batched <span></span></button>
 </nav>
 <div class="toolbar">
 <div class="search-field"><label for="search" class="sr-only">Search PR title, number, author or description</label><input type="search" id="search" placeholder="Search title, #number, @author, description…" autocomplete="off" spellcheck="false" aria-describedby="search-help"><kbd aria-hidden="true">/</kbd></div>

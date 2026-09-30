@@ -81,6 +81,7 @@ select {background: var(--surface); border: 1px solid var(--line); padding: 10px
 .pr-author {color: #b9c4e6; max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 .tag {font: 9px/1.6 var(--mono); color: var(--sage); border: 1px solid #b0c9a333; padding: 0 4px;}
 .tag.security {color: var(--red); border-color: #f7768e55; font-weight: 700;}
+.tag.batch {color: var(--blue); border-color: #7aa2f755;}
 .draft {color: #e0af68; border-color: #e0af6833;}
 .risk {font: 11px var(--mono); text-align: right; white-space: nowrap;}
 .risk.known {color: var(--sage);}
