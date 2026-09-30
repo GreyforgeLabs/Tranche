@@ -16,8 +16,8 @@ test('browser workbench renders safe text, inspects PRs, restores focus and URL 
   try {
     const pagePath = path.join(directory, 'probe.html');
     const page = fs.readFileSync(path.join(__dirname, '../docs/index.html'), 'utf8');
-    const data = {prs: [{number: 1234, title: 'Fix <img src=x onerror="window.pwned=1"> suspend', body: '</script><b>bluetooth</b>', author: 'river', category: 'docs', created: '2026-01-01', risk: null, security: null, finished: null, draft: false, freshness: 'unjudged or stale', related: true, candidate: false, senior: false, followup: false}], categories: {docs: 'Docs', unknown: 'Unknown'}, groups: {confirmed_groups: [], review_groups: [], uncertain_pairs: [{a: 1234, b: 4321, verdict: 'unrelated', p_same: 0.9, classification: 'contradictory'}]}};
-    data.prs.push({number:4321, title:'Add screensaver timer', body:'', author:'stone', category:'docs', created:'2025-01-01', risk:0, security:0, finished:0, draft:true, freshness:'current', related:true});
+    const data = {prs: [{number: 1234, title: 'Fix <img src=x onerror="window.pwned=1"> suspend', body: '</script><b>bluetooth</b>', author: 'river', category: 'docs', created: '2026-01-01', risk: null, security: 0.8, security_priority: true, finished: null, draft: false, freshness: 'unjudged or stale', related: true, candidate: false, senior: false, followup: false}], categories: {docs: 'Docs', unknown: 'Unknown'}, groups: {confirmed_groups: [], review_groups: [], uncertain_pairs: [{a: 1234, b: 4321, verdict: 'unrelated', p_same: 0.9, classification: 'contradictory'}]}};
+    data.prs.push({number:4321, title:'Add screensaver timer', body:'', author:'stone', category:'docs', created:'2025-01-01', risk:0, security:0, security_priority:false, finished:0, draft:true, freshness:'current', related:true});
     data.groups.review_groups.push({members:[1234,4321], conflicting_pairs:[{a:1234,b:4321,verdict:'unrelated',p_same:0.1,classification:'different'}], uncertain_pairs:[], missing_pairs:[[1234,9999]], unbound_evidence:true});
     const payload = JSON.stringify(data).replace(/</g, '\\u003c');
     const probe = `<script>window.addEventListener('DOMContentLoaded', async () => {
@@ -36,10 +36,14 @@ test('browser workbench renders safe text, inspects PRs, restores focus and URL 
         check(document.activeElement.id === 'search', 'Ctrl K shortcut');
         check(document.querySelectorAll('.pr-row').length === 2, 'all captured PRs rendered');
         check(!window.pwned && !document.querySelector('#results img'), 'title stays inert');
+        check(document.querySelector('[data-queue="security"]').textContent.includes('Security first'), 'security queue leads the nav');
+        check([...document.querySelectorAll('[data-queue]')][0].dataset.queue === 'security', 'security is the first queue button');
+        check(document.querySelector('#sort option[value=security]')?.textContent.includes('Security'), 'security sort option');
         const row = document.querySelector('.pr-open'); row.focus(); row.click();
         check(document.querySelector('dialog').open, 'native dialog opens');
         check(document.querySelector('#detail-title').textContent === ${JSON.stringify(data.prs[0].title)}, 'full title');
         check(document.querySelector('#detail-content').textContent.includes('Unknown'), 'unknown not zero');
+        check(document.querySelector('.pr-meta .tag.security')?.textContent === 'Security first', 'security priority tag');
         check(!document.querySelector('#detail-content b'), 'body stays text');
         check(document.querySelector('#detail-content a').href === 'https://github.com/omacom/omarchy/pull/1234', 'safe github link');
         check(location.search.includes('pr=1234'), 'selection deep link');
@@ -106,7 +110,7 @@ test('search matches real typos, title, number, author, and description terms', 
 
 test('queues and categories filter independently; page totals include all results', () => {
   assert.equal(typeof api.select, 'function', 'queue selection is implemented');
-  const rows = Array.from({length: 61}, (_, i) => ({number: i + 1, title: 'Suspend fix', body: '', author: 'river', category: i % 2 ? 'docs' : 'hardware-drivers', candidate: i < 10, senior: i === 60, followup: i === 20, related: i > 55}));
+  const rows = Array.from({length: 61}, (_, i) => ({number: i + 1, title: 'Suspend fix', body: '', author: 'river', category: i % 2 ? 'docs' : 'hardware-drivers', candidate: i < 10, senior: i === 60, followup: i === 20, related: i > 55, security_priority: i < 3}));
   assert.equal(api.select(rows, {queue: 'all', page: 2}).total, 61);
   assert.equal(api.select(rows, {queue: 'all', page: 2}).items.length, 30);
   assert.equal(api.select(rows, {queue: 'all', page: 3}).items.length, 1);
@@ -115,10 +119,28 @@ test('queues and categories filter independently; page totals include all result
   assert.equal(api.select(rows, {queue: 'senior'}).total, 1);
   assert.equal(api.select(rows, {queue: 'followup'}).total, 1);
   assert.equal(api.select(rows, {queue: 'related'}).total, 5);
+  assert.equal(api.select(rows, {queue: 'security'}).total, 3, 'security meta-category queue');
   const empty = api.select(rows, {q: 'nothinghere', page: 9});
   assert.equal(empty.total, 0);
   assert.equal(empty.page, 1);
   assert.deepEqual(empty.items, []);
+});
+
+test('security meta-category outranks every chosen sort; security sort orders by probability', () => {
+  const rows = [
+    {number: 1, created: '2026-01-01', risk: 0, security: 0.2, security_priority: false},
+    {number: 2, created: '2026-01-04', risk: 4, security: 0.9, security_priority: true},
+    {number: 3, created: '2026-01-03', risk: 1, security: 0.5, security_priority: true},
+    {number: 4, created: '2026-01-02', risk: 2, security: null, security_priority: false},
+  ];
+  const ids = sort => api.select(rows, {sort}).items.map(pr => pr.number);
+  assert.deepEqual(ids('newest'), [2, 3, 4, 1], 'priority leads, then newest first');
+  assert.deepEqual(ids('oldest'), [3, 2, 1, 4], 'priority leads, then oldest first');
+  assert.deepEqual(ids('risk'), [2, 3, 4, 1], 'priority leads, then risk high first');
+  assert.deepEqual(ids('security'), [2, 3, 1, 4], 'probability order inside each group');
+  const rowsWithUnknown = [...rows, {number: 5, created: '2026-01-05', risk: 0, security: null, security_priority: false}];
+  const securityOrder = api.select(rowsWithUnknown, {sort: 'security'}).items.map(pr => pr.number);
+  assert.deepEqual(securityOrder, [2, 3, 1, 4, 5], 'unknown security probability last');
 });
 
 test('date and model risk sorts are deterministic with unknown values last', () => {

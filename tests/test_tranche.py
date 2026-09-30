@@ -4,6 +4,7 @@ import argparse
 import copy
 import io
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -638,17 +639,27 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(target.read_bytes(), before)
 
     def test_workbench_has_native_controls_and_no_process_commentary(self):
-        prs = self.inputs([pr(1, body='Snippet </script><img src=x onerror=alert(1)> & text')])
-        self.judgments(prs)
+        self.inputs([pr(1, body='Snippet </script><img src=x onerror=alert(1)> & text')])
+        self.key.side_effect = None
+        self.key.return_value = "synthetic-key"
+        self.model.side_effect = None
+        self.model.return_value = {"answers": dict(answers(), security_flag={"noul": 0.8})}
+        tranche.cmd_judge(argparse.Namespace(resume=True, limit=None))
         self.cluster()
         self.assertEqual(self.render().returncode, 0)
         page = (self.root / "docs" / "index.html").read_text()
         for text in ('assets/workbench.css', 'assets/workbench.js', '<dialog',
                      'id="search"', 'id="sort"', 'id="category"', 'aria-live="polite"',
+                     'data-queue="security"', 'Security first', 'Security probability',
                      'Review candidates', 'Senior review', 'Author follow-up', 'Related PRs',
                      'assets/tranche.gif', 'assets/tranche-title.png', 'assets/omarchy.gif',
                      'assets/omarchy-title.png', 'assets/tranche-mascot.png'):
             self.assertIn(text, page)
+        self.assertLess(page.index('data-queue="security"'), page.index('data-queue="all"'))
+        payload = json.loads(re.search(
+            r'<script id="workbench-data" type="application/json">(.*?)</script>',
+            page, re.S).group(1))
+        self.assertTrue(payload["prs"][0]["security_priority"])
         for text in ('Observation:', 'requested jev', 'fresh runs:', '<blockquote>',
                      '<b>Method.</b>', 'fetch → judge', '<img src=x onerror=alert(1)>'):
             self.assertNotIn(text, page)

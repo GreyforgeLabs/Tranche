@@ -48,6 +48,7 @@ for n, pr in sorted(prs.items()):
         "freshness": judgment.get("freshness", "unjudged or stale"),
         "risk": tranche.metric(judgment, "risk"),
         "security": tranche.metric(judgment, "security_flag", "noul"),
+        "security_priority": bool(judgment) and tranche.security_priority(judgment),
         "finished": finished, "effort": tranche.metric(judgment, "review_effort"),
         "is_fix": tranche.metric(judgment, "is_fix", "noul"),
         "diffstat": tranche.pr_state(pr)["pr"]["diffstat"],
@@ -90,6 +91,7 @@ page = f"""<!doctype html>
 <div class="queue-heading"><h2>Pull requests</h2><span class="small">FIND · INSPECT · REVIEW</span></div>
 <p class="product-note">AI-assisted priorities; review code and tests before merging.</p>
 <nav id="queues" class="queues" aria-label="Review queues">
+<button type="button" data-queue="security" aria-pressed="false">Security first <span></span></button>
 <button type="button" data-queue="all" aria-pressed="true">All <span></span></button>
 <button type="button" data-queue="candidates" aria-pressed="false">Review candidates <span></span></button>
 <button type="button" data-queue="senior" aria-pressed="false">Senior review <span></span></button>
@@ -98,7 +100,7 @@ page = f"""<!doctype html>
 </nav>
 <div class="toolbar">
 <div class="search-field"><label for="search" class="sr-only">Search PR title, number, author or description</label><input type="search" id="search" placeholder="Search title, #number, @author, description…" autocomplete="off" spellcheck="false" aria-describedby="search-help"><kbd aria-hidden="true">/</kbd></div>
-<label class="sort-field" for="sort">Sort<select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="risk">Model risk: high first</option></select></label>
+<label class="sort-field" for="sort">Sort<select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="risk">Model risk: high first</option><option value="security">Security probability: high first</option></select></label>
 </div>
 <div class="result-summary"><p id="result-count" role="status" aria-live="polite" aria-atomic="true"></p><button id="reset" type="button">Reset filters</button></div>
 <p id="search-help" class="search-help">Typo-tolerant search · combine terms · exact #number / @author <span>Ctrl+K to search</span></p>

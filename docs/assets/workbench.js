@@ -41,7 +41,8 @@
       });
     });
   }
-  const queues = {all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', related: 'related'};
+  // Issue #3: security is the top-priority meta-category; its queue leads the nav.
+  const queues = {security: 'security_priority', all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', related: 'related'};
   const PAGE_SIZE = 30;
   function select(rows, state = {}, indexes) {
     const field = queues[state.queue || 'all'];
@@ -50,6 +51,14 @@
       (!state.category || state.category === 'all' || pr.category === state.category) &&
       matches(pr, state.q || '', indexes?.get(pr.number), wordCache));
     filtered.sort((a, b) => {
+      // Issue #3: top priority first — the security meta-category outranks every chosen order.
+      if (a.security_priority !== b.security_priority) return a.security_priority ? -1 : 1;
+      if (state.sort === 'security') {
+        // Inside each group: descending security probability, unknown last.
+        const av = typeof a.security === 'number' && Number.isFinite(a.security) ? a.security : -1;
+        const bv = typeof b.security === 'number' && Number.isFinite(b.security) ? b.security : -1;
+        return (bv - av) || a.number - b.number;
+      }
       const riskSort = state.sort === 'risk';
       const av = riskSort ? a.risk : Date.parse(a.created);
       const bv = riskSort ? b.risk : Date.parse(b.created);
@@ -73,7 +82,7 @@
     const sort = params.get('sort');
     return {q: params.get('q') || '', queue: Object.hasOwn(queues, queue) ? queue : 'all',
       category: categories.includes(category) ? category : 'all',
-      sort: ['newest', 'oldest', 'risk'].includes(sort) ? sort : 'newest',
+      sort: ['newest', 'oldest', 'risk', 'security'].includes(sort) ? sort : 'newest',
       page: positiveInteger(params.get('page')) || 1, pr: positiveInteger(params.get('pr'))};
   }
   function serializeState(state) {
@@ -234,6 +243,7 @@
           meta.append(node('span', `@${pr.author}`, 'pr-author'), node('span', categoryLabel(pr.category)),
             node('span', pr.created ? pr.created.slice(0, 10) : 'Date unknown'));
           if (pr.draft) meta.append(node('span', 'Draft', 'tag draft'));
+          if (pr.security_priority) meta.append(node('span', 'Security first', 'tag security'));
           if (pr.related) meta.append(node('span', 'Related', 'tag'));
           if (pr.freshness !== 'current') meta.append(node('span', pr.freshness === 'unbound' ? 'Unbound evidence' : 'Unjudged / stale', 'tag'));
           const info = node('span', undefined, 'pr-info'); info.append(heading, meta);
