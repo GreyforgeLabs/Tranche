@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Render the official OMARCHY wordmark as a glyphfx-gradient GIF title.
+"""Render the Tranche wordmark as a glyphfx-gradient GIF title.
 
-The official logo (omarchy.org/brand/omarchy-wordmark.svg, pixel-rect SVG) is
-rasterized to a bitmap mask. glyphfx's colorshift effect is probed on a solid
-line in its native terminal habitat and the captured per-column color sequence
-is painted across the logo mask per animation frame, with an "x Jev" tagline
-beneath. Output: docs/assets/omarchy-triage.gif.
+The TRANCHE wordmark is drawn as a font mask. glyphfx's colorshift effect is
+probed on a solid line in its native terminal habitat and the captured
+per-column color sequence is painted across the mask per animation frame,
+with an "x Jev" tagline beneath. Output: docs/assets/tranche.gif.
 
 Usage: python3 tools/make_title_gif.py
 """
@@ -19,20 +18,20 @@ import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT_GIF = ROOT / "docs" / "assets" / "omarchy-triage.gif"
-WORDMARK_SVG = Path(__file__).resolve().parent / "omarchy-wordmark.svg"
+OUT_GIF = ROOT / "docs" / "assets" / "tranche.gif"
+WORDMARK = "TRANCHE"
 
 EFFECT = "colorshift"
 PROBE_W = 54  # probe line width (glyphfx-native habitat)
 FRAME_RATE = 24
 MAX_FRAMES = 60
-TAGLINE = "TRIAGE x Jev"
+TAGLINE = "x Jev"
 BG = (0x16, 0x16, 0x1E)
 DEFAULT_FG = (0xC0, 0xCA, 0xF5)
 
 FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
 TAG_FONT_SIZE = 46
-LOGO_W_PX = 1500  # logo render width; height follows the 4131:950 aspect
+LOGO_W_PX = 1500  # wordmark width; height follows the font aspect
 PAD_X, PAD_Y, TAG_GAP = 30, 26, 30
 
 
@@ -188,7 +187,8 @@ def probe_gradient():
             continue
         seen.add(key)
         frames.append([fg for _, fg in snap[0]])
-    blank = lambda row: all(fg is None for fg in row)
+    def blank(row):
+        return all(fg is None for fg in row)
     while frames and blank(frames[0]):
         frames.pop(0)
     while frames and blank(frames[-1]):
@@ -201,13 +201,13 @@ def probe_gradient():
 # ---------------------------------------------------------------------------
 
 def logo_mask():
-    subprocess.run(
-        ["rsvg-convert", "-w", str(LOGO_W_PX), "-o", "/tmp/wordmark.png", str(WORDMARK_SVG)],
-        check=True,
-    )
-    im = Image.open("/tmp/wordmark.png").convert("RGBA")
-    alpha = np.asarray(im)[:, :, 3]
-    return alpha > 32  # HxW bool mask of the wordmark
+    font = ImageFont.truetype(FONT_PATH, 300)
+    left, top, right, bottom = font.getbbox(WORDMARK)
+    mask = Image.new("L", (right - left, bottom - top))
+    ImageDraw.Draw(mask).text((-left, -top), WORDMARK, font=font, fill=255)
+    height = round(mask.height * LOGO_W_PX / mask.width)
+    mask = mask.resize((LOGO_W_PX, height), Image.Resampling.LANCZOS)
+    return np.asarray(mask) > 32
 
 
 def compose(frames):

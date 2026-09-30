@@ -1,4 +1,6 @@
-# Omarchy PR tranches — Jev triage
+# Tranche — historical Omarchy PR report
+
+> Historical, unbound model-only output. The rows and scores below are retained from the original run, not reevaluated. Descriptions were judged; patches, tests, security and supersedence were not verified. Treat historical readiness and survivor labels as discovery leads, not merge or closure approvals.
 
 Corpus: 2832 open PRs, 2832 judged. Duplicate groups: 101 (225 PRs). Ready-to-roll candidates: 802. Needs author follow-up: 113. Escalate: 324.
 

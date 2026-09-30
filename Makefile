@@ -1,4 +1,4 @@
-# Omarchy PR Triage Makefile v1.0
+# Tranche Makefile
 # Jev-powered triage pipeline with colorized output
 
 # ============== Colors & Symbols ==============
@@ -20,24 +20,23 @@ PEOPLE := 👥
 SCALE := ⚖️
 
 # ============== Project Metadata ==============
-REPO := blackopsrepl/omarchy-pr-jev-triage
-LIVE_URL := https://vdistefano.studio/omarchy-pr-jev-triage/
+REPO := blackopsrepl/Tranche
+LIVE_URL := https://vdistefano.studio/Tranche/
 JUDGED := $(shell test -f out/judgments.jsonl && wc -l < out/judgments.jsonl || echo 0)
 PAIRED := $(shell test -f out/pair_verdicts.jsonl && wc -l < out/pair_verdicts.jsonl || echo 0)
 
 # ============== Phony Targets ==============
-.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments
+.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments test
 
 # ============== Default Target ==============
 .DEFAULT_GOAL := help
 
 # ============== Banner ==============
 banner:
-	@printf "$(EMERALD)$(BOLD)  ___  ___  _   _ _   _  _  _  _____ _   _ _   _  _____ _   _ __   __\n"
-	@printf " / _ \\ / _ \\| | | | | | |( \\/ )( _   ) ( ) ( ) ( ) (_   _) ( ) ( )\\ \\ / /\n"
-	@printf "( (_) ) (_) ) |_| | |_| | \\  /  ) ( ) | |\\ V V V V V | |  | |_| |\\ V V /\n"
-	@printf " \\___/ \\___/ \\___/ \\___/  (__)  (_) (_)_)  \\_/\\_/\\_/\\_/  (_)  (_____) \\_/  $(RESET)"
-	@printf "$(GRAY)  x Jev$(RESET)\n"
+	@printf "$(EMERALD)$(BOLD)╔══════════════════════════════════════╗$(RESET)\n"
+	@printf "$(EMERALD)$(BOLD)║               TRANCHE                ║$(RESET)\n"
+	@printf "$(EMERALD)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n"
+	@printf "$(GRAY)  Model-assisted PR review · x Jev$(RESET)\n"
 	@printf "  $(GRAY)judged: $(CYAN)$(JUDGED)$(GRAY) PRs, $(CYAN)$(PAIRED)$(GRAY) pair verdicts$(RESET)\n"
 	@printf "  $(GRAY)$(LIVE_URL)$(RESET)\n\n"
 
@@ -47,15 +46,7 @@ fetch: banner
 	@printf "$(CYAN)$(BOLD)╔══════════════════════════════════════╗$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)║        Fetching Open PRs             ║$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n\n"
-	@printf "$(ARROW) $(BOLD)Paging omacom/omarchy pulls API (curl; python urllib is IPv6-broken here)...$(RESET)\n"
-	@mkdir -p data/pages && rm -f data/pages/page_*.json && \
-		ok=1; for i in $$(seq 1 30); do \
-			curl -sf "https://api.github.com/repos/omacom/omarchy/pulls?state=open&per_page=100&page=$$i" > data/pages/page_$$i.json || { ok=0; break; }; \
-			n=$$(python3 -c "import json;print(len(json.load(open('data/pages/page_$$i.json'))))" 2>/dev/null || echo 0); \
-			printf "$(PROGRESS) page $$i: $$n PRs\n"; \
-			[ "$$n" = "0" ] && break; sleep 0.3; done; \
-		[ $$ok -eq 1 ] && printf "$(GREEN)$(CHECK) Fetch complete$(RESET)\n\n" || \
-		(printf "$(RED)$(CROSS) Fetch failed$(RESET)\n\n" && exit 1)
+	@python3 tranche.py fetch --transport curl
 
 # ============== Jev Pipeline ==============
 
@@ -64,7 +55,7 @@ judge: banner
 	@printf "$(CYAN)$(BOLD)║        Jev Judgment Pass             ║$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n\n"
 	@printf "$(ARROW) $(BOLD)Judging PRs (7 typed questions, one batched call each)...$(RESET)\n"
-	@python3 triage.py judge --resume && \
+	@python3 tranche.py judge --resume && \
 		printf "$(GREEN)$(CHECK) Judgments saved to out/judgments.jsonl$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) Judge pass failed$(RESET)\n\n" && exit 1)
 
@@ -72,17 +63,17 @@ judge-full: banner
 	@printf "$(RED)$(BOLD)WARNING: fresh pass over all PRs — ~5M input tokens on Jev$(RESET)\n"
 	@printf "$(YELLOW)Press Ctrl+C to abort, or Enter to continue...$(RESET)\n"
 	@read dummy
-	@python3 triage.py judge
+	@python3 tranche.py judge
 
 dupes: banner
-	@printf "$(ARROW) $(BOLD)Confirming duplicate pairs with Jev sameness judgments...$(RESET)\n"
-	@python3 triage.py dupes && \
+	@printf "$(ARROW) $(BOLD)Comparing candidate pairs with Jev sameness judgments...$(RESET)\n"
+	@python3 tranche.py dupes && \
 		printf "$(GREEN)$(CHECK) Pair verdicts in out/pair_verdicts.jsonl$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) Dupe pass failed$(RESET)\n\n" && exit 1)
 
 cluster: banner
 	@printf "$(ARROW) $(BOLD)Clustering tranches, dupes, escalation lists...$(RESET)\n"
-	@python3 triage.py cluster
+	@python3 tranche.py cluster
 
 # ============== Output ==============
 
@@ -95,12 +86,17 @@ page: banner
 gif: banner
 	@printf "$(ARROW) $(BOLD)Rendering title GIF with glyphfx (capture → rasterize)...$(RESET)\n"
 	@python3 tools/make_title_gif.py && \
-		printf "$(GREEN)$(CHECK) docs/assets/omarchy-triage.gif written$(RESET)\n\n" || \
+		printf "$(GREEN)$(CHECK) docs/assets/tranche.gif written$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) GIF generation failed$(RESET)\n\n" && exit 1)
 
 # ============== Composite Targets ==============
 
-all: fetch judge dupes cluster page
+all:
+	@$(MAKE) fetch
+	@$(MAKE) judge
+	@$(MAKE) dupes
+	@$(MAKE) cluster
+	@$(MAKE) page
 	@printf "$(GREEN)$(BOLD)╔══════════════════════════════════════╗$(RESET)\n"
 	@printf "$(GREEN)$(BOLD)║        $(CHECK) PIPELINE COMPLETE              ║$(RESET)\n"
 	@printf "$(GREEN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n"
@@ -121,7 +117,7 @@ verify: banner
 	@printf "$(ARROW) $(BOLD)Proving the release is live...$(RESET)\n"
 	@gh api repos/$(REPO)/pages --jq '"  status: " + .status + "  (https enforced: " + (.https_enforced|tostring) + ")"'
 	@code=$$(curl -s -o /tmp/verify.html -w "%{http_code}" -L "$(LIVE_URL)") ; \
-		[ "$$code" = "200" ] && grep -q "OMARCHY TRIAGE" /tmp/verify.html && \
+		[ "$$code" = "200" ] && grep -q "TRANCHE" /tmp/verify.html && \
 		printf "$(GREEN)$(CHECK) 200 + content at $(LIVE_URL)$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) Live check failed (HTTP $$code)$(RESET)\n\n" && exit 1)
 
@@ -138,13 +134,16 @@ clean-judgments: banner
 	@rm -fv out/judgments.jsonl out/pair_verdicts.jsonl && \
 		printf "$(GREEN)$(CHECK) Judgment cache cleared$(RESET)\n\n"
 
+test:
+	@python3 -m unittest discover -s tests -v
+
 # ============== Help ==============
 
 help: banner
 	@/bin/echo -e "$(CYAN)$(BOLD)Pipeline:$(RESET)"
 	@/bin/echo -e "  $(GREEN)make fetch$(RESET)         - Refresh open-PR snapshot (curl-paged REST)"
 	@/bin/echo -e "  $(GREEN)make judge$(RESET)         - Jev pass over unjudged PRs (resume-safe)"
-	@/bin/echo -e "  $(GREEN)make dupes$(RESET)         - Confirm duplicate pairs with Jev"
+	@/bin/echo -e "  $(GREEN)make dupes$(RESET)         - Compare candidate pairs with Jev"
 	@/bin/echo -e "  $(GREEN)make cluster$(RESET)       - Build tranches, dupe groups, escalation lists"
 	@/bin/echo -e ""
 	@/bin/echo -e "$(CYAN)$(BOLD)Output:$(RESET)"
@@ -162,5 +161,5 @@ help: banner
 	@/bin/echo -e "  $(GREEN)make clean-judgments$(RESET) - $(RED)Delete the judgment cache$(RESET)"
 	@/bin/echo -e "  $(GREEN)make help$(RESET)          - Show this help message"
 	@/bin/echo -e ""
-	@/bin/echo -e "$(GRAY)API key: ~/Documents/jevapi.txt  ·  Model: jev-latest (jev-1.13.x)$(RESET)"
+	@/bin/echo -e "$(GRAY)API key: ~/Documents/jevapi.txt  ·  Model: jev-latest (alias; resolved version recorded when returned)$(RESET)"
 	@/bin/echo -e ""
