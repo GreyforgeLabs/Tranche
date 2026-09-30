@@ -71,7 +71,7 @@ parts = []
 parts.append(f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tranche — PR review candidates</title>
+<title>OMARCHY — TRIAGE with Tranche (powered by Jev)</title>
 <style>
 :root{{--bg:#16161e;--bg2:#1a1b26;--fg:#c0caf5;--dim:#565f89;--acc:#7aa2f7;--pur:#bb9af7;--grn:#9ece6a;--red:#f7768e;--yel:#e0af68;--line:#24253a}}
 *{{box-sizing:border-box}}
@@ -80,6 +80,15 @@ main{{max-width:1060px;margin:0 auto;padding:32px 20px 80px}}
 a{{color:var(--acc);text-decoration:none}} a:hover{{text-decoration:underline}}
 code{{background:var(--bg2);border:1px solid var(--line);border-radius:0;padding:1px 6px;font-size:.9em}}
 header{{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:28px}}
+.report-brand{{display:grid;grid-template-columns:minmax(0,1fr) 150px;align-items:center;gap:32px;padding:16px 0 24px}}
+.wordmark img{{display:block;width:100%;height:auto}}
+.keeper{{margin:0;padding:0 0 0 18px;border-left:1px solid #9ece6a55}}
+.keeper img{{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 18px #0005)}}
+.keeper figcaption{{color:var(--grn);font:10px/1.4 ui-monospace,monospace;letter-spacing:.13em;margin-top:10px;text-align:center}}
+.mobile-signoff{{display:none}}
+@keyframes tranche-colors{{to{{background-position:200% center}}}}
+@media(max-width:600px){{.report-brand{{grid-template-columns:minmax(0,1fr) 72px;gap:12px;padding:12px 0 20px}}.wordmark{{grid-column:1/-1}}.mobile-signoff{{display:block;font:700 18px/1.4 ui-monospace,monospace}}.mobile-signoff small{{display:block;font-size:12px;font-weight:400;margin-top:4px}}.tranche-motion{{background:linear-gradient(90deg,#ff8a00,#ed1c24,#613b9c,#4a8ec7,#86bd20,#ffcd19,#ff8a00);background-size:200% auto;background-clip:text;color:transparent;animation:tranche-colors 2.5s linear infinite}}.keeper{{padding-left:10px}}.keeper figcaption{{font-size:8px;letter-spacing:0}}main{{padding:20px 14px 60px}}}}
+@media(prefers-reduced-motion:reduce){{.tranche-motion{{animation:none;background:none;color:var(--grn)}}}}
 h1{{font-size:1.9em;margin:0 0 6px}} h1 .jev{{color:var(--pur)}}
 .sub{{color:var(--dim)}}
 blockquote{{margin:18px 0;padding:10px 18px;border-left:3px solid var(--pur);color:var(--fg);background:var(--bg2);border-radius:0}}
@@ -108,7 +117,11 @@ tr:last-child td{{border-bottom:none}}
 footer{{margin-top:60px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:.88em}}
 </style></head><body><main>
 <header>
-<img src="assets/tranche.gif" alt="TRANCHE x Jev" title="TRANCHE × Jev — the review report" style="width:min(1560px,100%);height:auto;display:block;margin:2px 0 12px">
+<div class="report-brand">
+<picture class="wordmark"><source media="(max-width:600px) and (prefers-reduced-motion: reduce)" srcset="assets/omarchy-title.png"><source media="(max-width:600px)" srcset="assets/omarchy.gif"><source media="(prefers-reduced-motion: reduce)" srcset="assets/tranche-title.png"><img src="assets/tranche.gif" alt="OMARCHY — TRIAGE with Tranche (powered by Jev)" width="1560" height="473"></picture>
+<div class="mobile-signoff">TRIAGE with <span class="tranche-motion">Tranche</span> <small>(powered by Jev)</small></div>
+<figure class="keeper"><img src="assets/tranche-mascot.png" alt="Tranche, the backlog keeper, holding three pull-request cards" width="564" height="800"><figcaption>THE BACKLOG KEEPER</figcaption></figure>
+</div>
 <div class="sub">{summary['prs_in_corpus']} observed open pull requests of <a href="https://github.com/omacom/omarchy" target="_blank">omacom/omarchy</a>, judged by TypeSafe's <a href="https://docs.typesafe.ai" target="_blank">System One model Jev</a> and arranged into model-suggested review candidates. Built by <a href="https://github.com/blackopsrepl" target="_blank">@blackopsrepl</a> for the Omarchy triage team.</div>
 <blockquote>“We're 2,200 PRs deep on GH now and getting nearly a hundred new ones every day. I'll never be able to catch up. Agents will help, but we need humans too. If you have DEEP Linux experience, is agent-forward, and want to join the new Omarchy triage team, write triage@omarchy.org.”<br><span class="who">— DHH, 12 Sep 2026 · <a href="https://x.com/dhh/status/2098755120540393908" target="_blank">x.com/dhh/…</a></span></blockquote>
 <div class="stats">

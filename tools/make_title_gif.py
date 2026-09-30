@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
-"""Render the Tranche wordmark as a glyphfx-gradient GIF title.
+"""Render the official OMARCHY wordmark as a glyphfx-gradient GIF title.
 
-The TRANCHE wordmark is drawn as a font mask. glyphfx's colorshift effect is
+The official OMARCHY SVG is rasterized as a mask. glyphfx's colorshift effect is
 probed on a solid line in its native terminal habitat and the captured
 per-column color sequence is painted across the mask per animation frame,
-with an "x Jev" tagline beneath. Output: docs/assets/tranche.gif.
+with "TRIAGE with Tranche (powered by Jev)" beneath; Tranche also carries the gradient. Output: docs/assets/tranche.gif.
 
 Usage: python3 tools/make_title_gif.py
 """
 
+import io
 import os
 import subprocess
 import sys
@@ -19,13 +20,13 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT_GIF = ROOT / "docs" / "assets" / "tranche.gif"
-WORDMARK = "TRANCHE"
+WORDMARK_SVG = ROOT / "tools" / "omarchy-wordmark.svg"
 
 EFFECT = "colorshift"
 PROBE_W = 54  # probe line width (glyphfx-native habitat)
 FRAME_RATE = 24
 MAX_FRAMES = 60
-TAGLINE = "x Jev"
+TAGLINE = "TRIAGE with Tranche (powered by Jev)"
 BG = (0x16, 0x16, 0x1E)
 DEFAULT_FG = (0xC0, 0xCA, 0xF5)
 
@@ -201,13 +202,10 @@ def probe_gradient():
 # ---------------------------------------------------------------------------
 
 def logo_mask():
-    font = ImageFont.truetype(FONT_PATH, 300)
-    left, top, right, bottom = font.getbbox(WORDMARK)
-    mask = Image.new("L", (right - left, bottom - top))
-    ImageDraw.Draw(mask).text((-left, -top), WORDMARK, font=font, fill=255)
-    height = round(mask.height * LOGO_W_PX / mask.width)
-    mask = mask.resize((LOGO_W_PX, height), Image.Resampling.LANCZOS)
-    return np.asarray(mask) > 32
+    raster = subprocess.run(["rsvg-convert", "-w", str(LOGO_W_PX), str(WORDMARK_SVG)],
+                            check=True, capture_output=True)
+    mask = Image.open(io.BytesIO(raster.stdout)).convert("RGBA")
+    return np.asarray(mask)[:, :, 3] > 32
 
 
 def compose(frames):
@@ -231,11 +229,21 @@ def compose(frames):
         ys, xs = np.nonzero(mask)
         arr[ys + PAD_Y, xs + ox] = color_cols[xs]
         img = Image.fromarray(arr)
-        # tagline: centered under the logo, probe's mid color
+        # Keep the explanatory copy steady; animate only the Tranche name.
         d = ImageDraw.Draw(img)
-        mid = col_colors[PROBE_W // 2] or DEFAULT_FG
-        d.text(((W - tag_w) // 2 - tag_box[0], PAD_Y + mh + TAG_GAP),
-               TAGLINE, font=tag_font, fill=tuple(mid))
+        tag_x, tag_y = (W - tag_w) // 2 - tag_box[0], PAD_Y + mh + TAG_GAP
+        d.text((tag_x, tag_y), TAGLINE, font=tag_font, fill=DEFAULT_FG)
+        name_x = round(tag_x + tag_font.getlength("TRIAGE with "))
+        name_w = round(tag_font.getlength("Tranche"))
+        name_mask = Image.new("L", (W, H))
+        ImageDraw.Draw(name_mask).text((name_x, tag_y), "Tranche", font=tag_font, fill=255)
+        ys, xs = np.nonzero(np.asarray(name_mask))
+        arr = np.asarray(img).copy()
+        for x in range(name_x, name_x + name_w):
+            fg = col_colors[min(PROBE_W - 1, int((x - name_x) * PROBE_W / name_w))] or DEFAULT_FG
+            selected = xs == x
+            arr[ys[selected], xs[selected]] = fg
+        img = Image.fromarray(arr)
         out.append(img)
     while len(out) > 8 and out[-1].tobytes() == out[-2].tobytes():
         out.pop()
@@ -254,6 +262,13 @@ def main():
         OUT_GIF, save_all=True, append_images=imgs[1:],
         duration=int(1000 / FRAME_RATE), loop=0, optimize=True,
     )
+    logo_bottom = PAD_Y + logo_mask().shape[0] + PAD_Y
+    logo_frames = [im.crop((0, 0, im.width, logo_bottom)) for im in imgs]
+    logo_frames[0].save(OUT_GIF.with_name("omarchy.gif"), save_all=True,
+                        append_images=logo_frames[1:], duration=int(1000 / FRAME_RATE),
+                        loop=0, optimize=True)
+    logo_frames[len(logo_frames) // 2].save(OUT_GIF.with_name("omarchy-title.png"))
+    imgs[len(imgs) // 2].save(OUT_GIF.with_name("tranche-title.png"))
     print(f"frames kept: {len(imgs)} | size: {imgs[0].width}x{imgs[0].height} | "
           f"file: {OUT_GIF.stat().st_size // 1024} KB")
 
