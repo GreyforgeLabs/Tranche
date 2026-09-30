@@ -220,7 +220,9 @@ def load_prs() -> dict[int, dict]:
     prs: dict[int, dict] = {}
     for path in sorted(PAGES_DIR.glob("page_*.json")):
         for p in json.loads(path.read_text()):
-            body = re.sub(r"<!--.*?-->", "", p.get("body") or "", flags=re.S)
+            raw_body = p.get("body") or ""
+            refs = sorted({int(x) for x in re.findall(r"#(\d{2,6})", raw_body)})
+            body = re.sub(r"<!--.*?-->", "", raw_body, flags=re.S)
             body = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", body)  # images
             body = re.sub(r"https?://\S+", "", body)          # bare links
             body = re.sub(r"\s+", " ", body).strip()[:BODY_CHARS]
@@ -236,6 +238,7 @@ def load_prs() -> dict[int, dict]:
                 "additions": p.get("additions", 0),
                 "deletions": p.get("deletions", 0),
                 "labels": [l["name"] for l in p.get("labels", [])],
+                "refs": refs,
             }
     return prs
 
@@ -385,6 +388,18 @@ def lexical_pairs(prs, judgments, threshold=0.72, jaccard_threshold=0.62) -> lis
                     if jac >= jaccard_threshold:
                         pairs.append((jac, a, b))
     pairs.sort(reverse=True)
+    seen = {(a, b) for _, a, b in pairs}
+    # Cross-referenced PRs (body cites each other) are candidate duplicates even
+    # when titles differ — e.g. fixes to the same bug split across files.
+    for n, pr in prs.items():
+        if n not in judgments:
+            continue
+        for r in pr.get("refs", []):
+            a, b = min(n, r), max(n, r)
+            if b in prs and b in judgments and (a, b) not in seen:
+                seen.add((a, b))
+                pairs.append((1.0, a, b))
+    pairs.sort(key=lambda t: -t[0])
     return pairs
 
 
