@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.2.1](https://github.com/blackopsrepl/Tranche/compare/v0.2.0...v0.2.1) (2026-09-30)
+
+
+### Bug Fixes
+
+* **workbench:** batch wording matches the five-per-tranche model ([18bab3b](https://github.com/blackopsrepl/Tranche/commit/18bab3be840c89d01055d325f6b2c3f31f3920b0))
+* **workbench:** drop the redundant Batched queue ([739d373](https://github.com/blackopsrepl/Tranche/commit/739d37379f5376d0f43f44641e1f43ee75ed8d36))
+
 ## [0.2.0](https://github.com/blackopsrepl/Tranche/compare/v0.1.1...v0.2.0) (2026-09-30)
 
 
