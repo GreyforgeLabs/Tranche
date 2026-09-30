@@ -1,2 +1,3 @@
 data/pages/
-out/judge_run.log
+*.log
+__pycache__/
