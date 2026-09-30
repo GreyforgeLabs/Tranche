@@ -18,6 +18,8 @@ on 2026-09-12 ([x.com/dhh/status/2098755120540393908](https://x.com/dhh/status/2
 > "Omarchy Triage can help consolidate PRs, remove dupes, and ensure that everything is ready
 > for consideration in a finished form."
 
+**Live report:** <https://vdistefano.studio/Tranche/>
+
 This tool uses [TypeSafe](https://docs.typesafe.ai)'s System One model **Jev**
 to suggest review candidates and related PR groups. Code owns the workflow;
 Jev supplies judgments about the descriptions it receives. This is a discovery
