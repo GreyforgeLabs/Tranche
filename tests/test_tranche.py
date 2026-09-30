@@ -201,6 +201,23 @@ class WorkflowTests(unittest.TestCase):
         self.model.assert_called_once()
         self.assertIn("binding", tranche.load_done()[1])
 
+    def test_enormous_json_integers_are_unknown_without_poisoning_caches(self):
+        huge = 10**400
+        for value in (huge, -huge):
+            with self.subTest(value_sign=value > 0):
+                self.assertIsNone(tranche.metric({"answers": {"risk": {"score": value}}}, "risk"))
+                self.assertIsNone(tranche.p_same({"probabilities": {"same_change": value}}))
+                pair = tranche.normalize_pair({"verdict": "same_change",
+                    "probabilities": {"same_change": 0.9, "unrelated": value}})
+                self.assertEqual(pair["probabilities"]["same_change"], 0.9)
+                self.assertIsNone(pair["probabilities"]["unrelated"])
+                tranche.JUDGMENTS_PATH.write_text(json.dumps({"number": 999,
+                    "binding": "stale", "answers": {"risk": {"score": value}}}) + "\n")
+                self.assertEqual(tranche.current_judgments({}), {})
+        self.inputs([])
+        summary, _ = self.cluster()
+        self.assertEqual(summary["judged"], 0)
+
     def test_pair_reuse_is_bound_to_both_sources_questions_and_model(self):
         prs = self.inputs([pr(1), pr(2)])
         judgments = self.judgments(prs)

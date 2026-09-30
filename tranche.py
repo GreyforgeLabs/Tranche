@@ -395,7 +395,7 @@ def normalize_pair(record):
     probabilities = record.get("probabilities")
     probabilities = dict(probabilities) if isinstance(probabilities, dict) else {}
     for key, value in probabilities.items():
-        if type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= 1:
+        if type(value) not in (int, float) or not 0 <= value <= 1 or not math.isfinite(value):
             probabilities[key] = None
     record["probabilities"] = probabilities
     probabilities["same_change"] = p_same(record)
@@ -694,7 +694,7 @@ def metric(judgment, name, field="score"):
     answer = (judgment.get("answers") or {}).get(name)
     value = answer.get(field) if isinstance(answer, dict) else None
     ceiling = 1 if field == "noul" else (4 if name == "risk" else 3)
-    if type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= ceiling:
+    if type(value) not in (int, float) or not 0 <= value <= ceiling or not math.isfinite(value):
         return None
     return value
 
@@ -708,7 +708,7 @@ def category(judgment):
 def p_same(pair):
     probabilities = pair.get("probabilities")
     value = probabilities.get("same_change") if isinstance(probabilities, dict) else None
-    return value if type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 1 else None
+    return value if type(value) in (int, float) and 0 <= value <= 1 and math.isfinite(value) else None
 
 
 def pair_classification(pair):
