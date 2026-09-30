@@ -854,37 +854,6 @@ def category_batches(category, candidates, digest_of_clusters):
     return {"batches": batches, "binding": digest_of_clusters}
 
 
-def cmd_batches(args) -> None:
-    """Write out/batches.json from the committed cluster observation."""
-    summary = json.loads((OUT_DIR / "summary.json").read_text())
-    clusters = json.loads((OUT_DIR / "clusters.json").read_text())
-    if summary.get("format_version") != 2 or summary.get("repo") != REPO:
-        raise TrancheFatal("Unrecognized cluster observation; run cluster first")
-    binding = summary.get("output_digests", {}).get("clusters.json")
-    if binding != digest(clusters):
-        raise TrancheFatal("clusters.json does not match the recorded digest; run cluster first")
-    batches = {"format_version": 1, "repo": REPO, "clusters_digest": binding,
-               "meaning": "Deterministic pre-release batches per category (issue #4). Cumulative: "
-                          "each batch contains every earlier batch of the same group. Model-suggested, "
-                          "not verified safe to merge.",
-               "categories": {}}
-    total = 0
-    for category, bands in sorted(clusters.items()):
-        if category == "security-review" or not isinstance(bands, dict):
-            continue  # The security meta-category already leads every batch set.
-        candidates = [item for band in ("low", "core", "danger", "unknown")
-                      for item in (bands.get(band) or [])]
-        if not candidates:
-            continue
-        built = category_batches(category, candidates, binding)
-        batches["categories"][category] = built
-        total += len(built["batches"])
-        print(f"{category}: {len(built['batches'])} batches, "
-              f"final cumulative {built['batches'][-1]['cumulative_count'] if built['batches'] else 0}")
-    atomic_json(OUT_DIR / "batches.json", batches)
-    print(f"wrote {OUT_DIR}/batches.json: {total} batches across {len(batches['categories'])} categories")
-
-
 def report_binding(prs, judgments, verdicts):
     return digest({"version": BINDING_VERSION, "repo": REPO,
                    "sources": {n: pr["source_digest"] for n, pr in prs.items()},
@@ -1027,6 +996,64 @@ def cmd_cluster(args) -> None:
     atomic_json(OUT_DIR / "summary.json", summary)
     print(json.dumps(summary, indent=1))
     print(f"\nwrote {OUT_DIR}/clusters.json dupes.json tranches.md summary.json")
+
+
+def cmd_batches(args) -> None:
+    """Write out/batches.json and the tranches.md batch plan (issue #4)."""
+    summary = json.loads((OUT_DIR / "summary.json").read_text())
+    clusters = json.loads((OUT_DIR / "clusters.json").read_text())
+    if summary.get("format_version") != 2 or summary.get("repo") != REPO:
+        raise TrancheFatal("Unrecognized cluster observation; run cluster first")
+    binding = summary.get("output_digests", {}).get("clusters.json")
+    if binding != digest(clusters):
+        raise TrancheFatal("clusters.json does not match the recorded digest; run cluster first")
+    batches = {"format_version": 1, "repo": REPO, "clusters_digest": binding,
+               "meaning": "Deterministic pre-release batches per category (issue #4). Cumulative: "
+                          "each batch contains every earlier batch of the same group. Model-suggested, "
+                          "not verified safe to merge.",
+               "categories": {}}
+    total = 0
+    for category, bands in sorted(clusters.items()):
+        if category == "security-review" or not isinstance(bands, dict):
+            continue  # The security meta-category already leads every batch set.
+        candidates = [item for band in ("low", "core", "danger", "unknown")
+                      for item in (bands.get(band) or [])]
+        if not candidates:
+            continue
+        built = category_batches(category, candidates, binding)
+        batches["categories"][category] = built
+        total += len(built["batches"])
+        print(f"{category}: {len(built['batches'])} batches, "
+              f"final cumulative {built['batches'][-1]['cumulative_count'] if built['batches'] else 0}")
+    atomic_json(OUT_DIR / "batches.json", batches)
+    append_batch_plan(batches)
+    print(f"wrote {OUT_DIR}/batches.json: {total} batches across {len(batches['categories'])} categories")
+
+
+def append_batch_plan(batches) -> None:
+    """Append the suggested pre-release batch plan to the published tranches.md."""
+    path = OUT_DIR / "tranches.md"
+    if not path.exists():
+        return  # cluster owns the report; batches only append its plan section.
+    lines = ["", "# Suggested pre-release batches (issue #4)", "",
+             "Deterministic classification of the review candidates above: security first, then",
+             f"low/core/danger/unknown model-risk bands, chunked into "
+             f"{', '.join(f'{name} (≤ {size})' for name, size in BATCH_TIERS)} tiers ranked lowest",
+             "risk first. Cumulative: each batch contains every earlier batch of its group. These",
+             "are the source for the cumulative PRs that are the final deliverable — model-suggested,",
+             "not verified safe to merge.", ""]
+    for category, built in batches["categories"].items():
+        lines.append(f"## {category}")
+        lines.append("")
+        lines.append("| Batch | Group | Tier | Size | Cumulative | Members |")
+        lines.append("|---|---|---|---|---|---|")
+        for batch in built["batches"]:
+            members = " ".join(f"#{n}" for n in batch["members"])
+            lines.append(f"| {batch['id']} | {batch['group']} | {batch['tier']} | "
+                         f"{batch['count']} | {batch['cumulative_count']} | {members} |")
+        lines.append("")
+    with path.open("a", encoding="utf-8") as stream:
+        stream.write("\n".join(lines))
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
