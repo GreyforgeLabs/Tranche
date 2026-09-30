@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.1](https://github.com/blackopsrepl/Tranche/compare/v0.1.0...v0.1.1) (2026-09-30)
+
+
+### Features
+
+* **workbench:** per-batch browsing and deep inspection ([de33722](https://github.com/blackopsrepl/Tranche/commit/de337221c0a490017a6ac9e8c135e38bab1924c4))
+
 ## [0.1.0](https://github.com/blackopsrepl/Tranche/compare/v0.0.2...v0.1.0) (2026-09-30)
 
 
