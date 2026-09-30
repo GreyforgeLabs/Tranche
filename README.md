@@ -1,4 +1,4 @@
-# omarchy-pr-jev-triage
+# Tranche
 
 <img src="docs/assets/tranche-mascot.png" alt="Tranche, a watchful geometric owl holding a bundle of three pull-request cards" width="200">
 
