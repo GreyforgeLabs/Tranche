@@ -1,0 +1,45 @@
+2566 candidate pairs to confirm (skipping 309 already done)
+Traceback (most recent call last):
+  File "/srv/lab/hack/omarchy-pr-jev-triage/triage.py", line 673, in <module>
+    main()
+    ~~~~^^
+  File "/srv/lab/hack/omarchy-pr-jev-triage/triage.py", line 662, in main
+    cmd_dupes(args)
+    ~~~~~~~~~^^^^^^
+  File "/srv/lab/hack/omarchy-pr-jev-triage/triage.py", line 446, in cmd_dupes
+    f.result()
+    ~~~~~~~~^^
+  File "/usr/lib64/python3.13/concurrent/futures/_base.py", line 453, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib64/python3.13/concurrent/futures/_base.py", line 402, in __get_result
+    raise self._exception
+  File "/usr/lib64/python3.13/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/srv/lab/hack/omarchy-pr-jev-triage/triage.py", line 432, in work
+    resp = ask({"pr_a": brief(a), "pr_b": brief(b)}, pair_questions(), key)
+                        ~~~~~^^^
+  File "/srv/lab/hack/omarchy-pr-jev-triage/triage.py", line 427, in brief
+    p = prs[n]
+        ~~~^^^
+KeyError: 9623
+dupes exit=1
+{
+ "repo": "omacom/omarchy",
+ "prs_in_corpus": 2832,
+ "judged": 2832,
+ "dupe_groups": 101,
+ "prs_in_dupe_groups": 225,
+ "superseded": 124,
+ "ready_tranches": 9,
+ "ready_prs": 802,
+ "needs_author_followup": 113,
+ "escalate_review": 324,
+ "tokens": {
+  "input": 4828000,
+  "output": 605002
+ }
+}
+
+wrote /srv/lab/hack/omarchy-pr-jev-triage/out/clusters.json dupes.json tranches.md summary.json
+cluster exit=0

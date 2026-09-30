@@ -396,7 +396,7 @@ def lexical_pairs(prs, judgments, threshold=0.72, jaccard_threshold=0.62) -> lis
             continue
         for r in pr.get("refs", []):
             a, b = min(n, r), max(n, r)
-            if b in prs and b in judgments and (a, b) not in seen:
+            if a in prs and b in prs and a in judgments and b in judgments and (a, b) not in seen:
                 seen.add((a, b))
                 pairs.append((1.0, a, b))
     pairs.sort(key=lambda t: -t[0])
@@ -429,6 +429,8 @@ def cmd_dupes(args) -> None:
 
     def work(item):
         s, a, b = item
+        if a not in prs or b not in prs:
+            return  # candidate became stale (PR closed and refetched mid-run)
         resp = ask({"pr_a": brief(a), "pr_b": brief(b)}, pair_questions(), key)
         rec = {
             "a": a, "b": b, "similarity": round(s, 3),
@@ -491,6 +493,11 @@ def cmd_cluster(args) -> None:
         [sorted(members) for members in groups.values() if len(members) >= 2],
         key=lambda g: -len(g),
     )
+    # Coin-flip pairs: neither auto-union nor discarded — a human decides.
+    uncertain_pairs = sorted(
+        [v for v in verdicts if 0.35 <= v["probabilities"].get("same_change", 0) < 0.65],
+        key=lambda v: -v["probabilities"]["same_change"],
+    )
     superseded: dict[int, int] = {}
     for members in dupe_groups:
         keep = min(members)  # lowest number = oldest = canonical candidate
@@ -527,7 +534,21 @@ def cmd_cluster(args) -> None:
         for cat, bands in clusters.items()
     }
     (OUT_DIR / "clusters.json").write_text(json.dumps(cluster_out, indent=1))
-    (OUT_DIR / "dupes.json").write_text(json.dumps(dupe_groups, indent=1))
+    (OUT_DIR / "dupes.json").write_text(json.dumps(
+        {
+            "confirmed_groups": dupe_groups,
+            "uncertain_pairs": [
+                {
+                    "a": v["a"], "b": v["b"],
+                    "p_same": v["probabilities"].get("same_change", 0),
+                    "similarity": v.get("similarity"),
+                    "verdict": v["verdict"],
+                }
+                for v in uncertain_pairs
+            ],
+        },
+        indent=1,
+    ))
 
     # --- tranches ---
     def band_of(n):
@@ -577,6 +598,7 @@ def cmd_cluster(args) -> None:
         "prs_in_corpus": len(prs),
         "judged": len(judgments),
         "dupe_groups": len(dupe_groups),
+        "uncertain_pairs": len(uncertain_pairs),
         "prs_in_dupe_groups": len(in_dupe_group),
         "superseded": len(superseded),
         "ready_tranches": len(tranches),
@@ -618,6 +640,16 @@ def cmd_cluster(args) -> None:
             )
             first = prs[g[0]]["title"][:70]
             lines.append(f"- {members} — e.g. “{first}”")
+        lines.append("")
+    if uncertain_pairs:
+        lines += ["## Uncertain pairs — Jev is undecided, human decides", ""]
+        for v in uncertain_pairs[:60]:
+            lines.append(
+                f"- #{v['a']} ↔ #{v['b']} (P(same)={v['probabilities']['same_change']:.2f}): "
+                f"“{prs[v['a']]['title'][:55]}” / “{prs[v['b']]['title'][:55]}”"
+            )
+        if len(uncertain_pairs) > 60:
+            lines.append(f"- …and {len(uncertain_pairs) - 60} more in out/dupes.json")
         lines.append("")
     if escalate:
         lines += ["## Escalate to senior review (high risk or security-relevant)", ""]

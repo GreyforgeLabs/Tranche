@@ -2,15 +2,16 @@
  "repo": "omacom/omarchy",
  "prs_in_corpus": 2832,
  "judged": 2832,
- "dupe_groups": 59,
- "prs_in_dupe_groups": 127,
- "superseded": 68,
+ "dupe_groups": 101,
+ "uncertain_pairs": 61,
+ "prs_in_dupe_groups": 225,
+ "superseded": 124,
  "ready_tranches": 9,
- "ready_prs": 838,
- "needs_author_followup": 117,
+ "ready_prs": 802,
+ "needs_author_followup": 113,
  "escalate_review": 324,
  "tokens": {
-  "input": 4447829,
-  "output": 575370
+  "input": 4828000,
+  "output": 605002
  }
 }

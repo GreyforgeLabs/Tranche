@@ -1,10 +1,10 @@
 # Omarchy PR tranches — Jev triage
 
-Corpus: 2832 open PRs, 2832 judged. Duplicate groups: 59 (127 PRs). Ready-to-roll candidates: 838. Needs author follow-up: 117. Escalate: 324.
+Corpus: 2832 open PRs, 2832 judged. Duplicate groups: 101 (225 PRs). Ready-to-roll candidates: 802. Needs author follow-up: 113. Escalate: 324.
 
 Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / finished_form / review_effort / security_flag); duplicate candidates found by title similarity within a category, confirmed by a Jev pair judgment; groups via union-find.
 
-## Tranche: desktop-config — 325 PRs recommended as a merge-ready roll-up
+## Tranche: desktop-config — 306 PRs recommended as a merge-ready roll-up
 
 | PR | title | author | finished | effort | fix |
 |---|---|---|---|---|---|
@@ -40,7 +40,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #7495 | Keep the monitor layout when changing scale | Piemme99 | 2.9 | 1.2 | 0.97 |
 | #6896 | Apply the system keyboard layout to the SDDM greeter | g-desoutter | 2.9 | 1.6 | 0.95 |
 | #11858 | Clear and swallow the lock-screen wake key so it is not typed as a password char | h14h | 2.9 | 1.1 | 0.96 |
-| #11021 | Skip tray grab until the SNI menu has children | kvnloo | 2.9 | 1.1 | 0.97 |
 | #10468 | Name keycode bindings after the layout the keyboard is using | seletz | 2.9 | 1.9 | 0.89 |
 | #13709 | fix(hyprland): reload guard skips instances whose getoption has no bool | kvnloo | 2.9 | 1.0 | 0.98 |
 | #13503 | Keep Foot's font size when changing the font | ashuttl | 2.9 | 1.0 | 0.98 |
@@ -80,7 +79,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #10564 | Skip opening an empty scratchpad on Super+S | fresh3nough | 2.7 | 1.2 | 0.96 |
 | #9984 | Render bar tooltips as StyledText for rich plugin markup | fresh3nough | 2.7 | 0.8 | 0.96 |
 | #9408 | Follow the icon theme inheritance chain when building the app icon index | VykosMolt | 2.7 | 2.3 | 0.88 |
-| #12851 | Prevent Super+J errors outside dwindle layouts | Ginkbel | 2.7 | 1.1 | 0.97 |
 | #11080 | Fix PluginBarApi hover-reveal writes so cloned panels can close | SomeoneWithOptions | 2.7 | 1.8 | 0.97 |
 | #8411 | Fix out-of-range group window shortcuts | wxasacoder | 2.7 | 1.3 | 0.98 |
 | #7240 | Fix invisible VS Code list hover state | yacobmole | 2.7 | 0.4 | 0.96 |
@@ -138,7 +136,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #9882 | Tag Chromium --app web apps as chromium-based browsers | fresh3nough | 2.5 | 1.0 | 0.96 |
 | #13103 | Refocus the origin window before pasting a picked clipboard entry | surim0n | 2.5 | 2.0 | 0.97 |
 | #11441 | Include windows from all visible displays in screenshot picker | Tunahanyrd | 2.5 | 2.2 | 0.88 |
-| #11008 | Toggle the layout of an open scratchpad, not the workspace under it | jaderfeijo | 2.5 | 1.1 | 0.97 |
 | #8876 | Stop keybinding scans from looping on mocked APIs | yashranaway | 2.5 | 1.9 | 0.97 |
 | #8259 | Keep notification contents out of process arguments | llirik0 | 2.5 | 2.9 | 0.74 |
 | #7536 | Treat Ctrl+[ as panel escape | NorthernReach | 2.5 | 1.1 | 0.83 |
@@ -165,9 +162,7 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #9967 | Resolve a live Hyprland signature before restarting the shell | fresh3nough | 2.4 | 1.8 | 0.97 |
 | #9133 | Resolve keycodes with the active keyboard layout | yashranaway | 2.4 | 1.8 | 0.95 |
 | #9015 | Make scrolling columns resizable at workspace edge | hancengiz | 2.4 | 1.5 | 0.87 |
-| #8955 | Keep the screensaver off while Firefox-family browsers play media | michielvandermeer | 2.4 | 2.2 | 0.93 |
 | #7954 | Remember menu selection when navigating back | mauhaa | 2.4 | 1.7 | 0.67 |
-| #13137 | Read every numeric [bar] key from shell.toml | cristian-fleischer | 2.4 | 1.7 | 0.88 |
 | #8437 | Hide Obsidian's window buttons in the Omarchy theme | ecomodeller | 2.4 | 0.9 | 0.69 |
 | #7738 | Notifications: clicking a toast focuses the exact sending window when focus_on_a | nixfred | 2.4 | 1.1 | 0.96 |
 | #12991 | fix(clipboard): paste into the window that opened the manager (#12987) | kvnloo | 2.4 | 1.6 | 0.98 |
@@ -192,10 +187,7 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #8307 | Stop re-sampling the wallpaper for the transparent bar on unrelated state writes | ryanyogan | 2.3 | 1.6 | 0.95 |
 | #12606 | Inhibit idle and screensaver when browsers or video web apps are fullscreen | murdawkmedia | 2.3 | 1.2 | 0.78 |
 | #12360 | Toggle a touchpad's mouse-emulation sibling with it | z23 | 2.3 | 1.7 | 0.95 |
-| #12255 | Merge menu extensions before filling unspecified fields | z23 | 2.3 | 1.7 | 0.97 |
 | #13473 | Reserve only revealed tray drawer width when collapsed | AnPod | 2.3 | 1.1 | 0.96 |
-| #9189 | Keep the backlight off while the laptop panel is disabled | lewapf | 2.3 | 1.9 | 0.96 |
-| #6834 | Ignore T2 headset remotes when switching layouts | yashranaway | 2.3 | 1.0 | 0.97 |
 | #13784 | Make the screensaver fullscreen when a layer surface holds keyboard focus | seantimm | 2.3 | 1.0 | 0.95 |
 | #12377 | Fix emoji/clipboard paste into browsers with Ctrl+V | AndrijaSkontra | 2.3 | 1.8 | 0.92 |
 | #13313 | Reject shell metacharacters in USB input-device names | Chessing234 | 2.3 | 1.1 | 0.93 |
@@ -211,7 +203,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #7241 | Inset BorderSurface strokes a device pixel to survive clip edges | gsamokovarov | 2.3 | 1.0 | 0.94 |
 | #13579 | Wait for the first plugin scan before building the stock bar | manuaudio | 2.2 | 1.4 | 0.97 |
 | #13097 | Label the weather panel with the location that supplied the weather | surim0n | 2.2 | 1.2 | 0.96 |
-| #12955 | fix: shell bar/tray/agents leftovers (#10989 #11021 #11022) | kvnloo | 2.2 | 1.8 | 0.95 |
 | #10260 | Gate screensaver launches on window class and pidof -x | fresh3nough | 2.2 | 1.1 | 0.97 |
 | #11838 | Fix calendar and weather popup text colours | tcballard | 2.2 | 1.2 | 0.97 |
 | #10190 | Fix workspace indicator after monitor move | dzanaga | 2.2 | 0.9 | 0.97 |
@@ -224,13 +215,11 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #12258 | Keep the screensaver up until it has been focused once | z23 | 2.2 | 1.2 | 0.97 |
 | #8825 | Add --no-gtk option to display text size command | pazthor | 2.2 | 1.8 | 0.74 |
 | #7716 | Gate calculator keybindings with preinstalls | OldJobobo | 2.2 | 1.0 | 0.96 |
-| #12646 | Fix empty-desktop bar reposition by Top-only expand (#11915) | paulogeyer | 2.2 | 1.9 | 0.98 |
 | #12118 | Make scrolling Alt-Tab follow visual order | DaDecky | 2.2 | 2.0 | 0.71 |
 | #10630 | Fix stale Wi-Fi connection state in network bar | chivopic | 2.2 | 1.1 | 0.98 |
 | #8059 | Keep Hyprland helpers global | catlee | 2.2 | 1.0 | 0.95 |
 | #7451 | menu: scale wheel events 3x for faster touchpad scrolling on long lists | tahadx | 2.2 | 1.1 | 0.75 |
 | #7290 | Keep tray icons rendering when an icon switches symbolic state | chiengyn | 2.2 | 1.0 | 0.97 |
-| #13545 | Carry the bar's center anchor when a widget is swapped for its clone | stevederico | 2.2 | 1.6 | 0.97 |
 | #12654 | Prevent screensaver during fullscreen browser video | Caya231 | 2.2 | 1.6 | 0.75 |
 | #12501 | Use output-relative slurp coordinates for region share | paulogeyer | 2.2 | 1.1 | 0.90 |
 | #12431 | Fix: menu `No matches for "abc.."` message overflow | kaunkrishna | 2.2 | 0.5 | 0.92 |
@@ -238,7 +227,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #12963 | fix(media): stop marquee while playback is paused | kvnloo | 2.2 | 1.4 | 0.98 |
 | #12962 | fix(lock): give session lock 1500ms to stabilize outputs | kvnloo | 2.2 | 0.1 | 0.97 |
 | #12183 | Keep weather widget visible when wttr.in TLS fails (#11999) | thescurry | 2.2 | 1.2 | 0.96 |
-| #12184 | Fix bar reposition-drag on an empty desktop (#11915) | thescurry | 2.2 | 1.5 | 0.98 |
 | #11035 | Toggle keybindings with Super+K | KrishRVH | 2.2 | 0.9 | 0.76 |
 | #10361 | Raise browser windows that open behind the presentation float | gradlman | 2.2 | 1.8 | 0.96 |
 | #13332 | Fall back to hyprsunset gamma on displays without DDC/CI | C50NK4 | 2.1 | 1.7 | 0.65 |
@@ -256,7 +244,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #11981 | Fix fullscreen Steam game window rules | flrsn | 2.1 | 1.9 | 0.95 |
 | #8732 | Keep hyprsunset running after a restart | lamchun1110 | 2.1 | 1.9 | 0.96 |
 | #13460 | Guard panel close against throwing plugin implementations | AnPod | 2.1 | 1.6 | 0.98 |
-| #7700 | Match Spotify and Signal launcher windows by class only | ya-luotao | 2.1 | 1.0 | 0.97 |
 | #7020 | Float Java AWT XWayland popups instead of tiling them | v-t-r-gg | 2.1 | 1.0 | 0.87 |
 | #12362 | Pin the keybindings row order to one collation | linyiru | 2.1 | 1.1 | 0.84 |
 | #10270 | Reduce notification overlay surface area | nicknack5050 | 2.1 | 2.4 | 0.67 |
@@ -273,7 +260,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #7637 | Fix positional hotkeys for multi-surface bar widgets | konradk | 2.1 | 1.1 | 0.97 |
 | #13636 | Size bar tray drawer from reveal extent while collapsed | AnPod | 2.0 | 1.4 | 0.96 |
 | #12666 | shell: clamp notification toast width to viewport; battery warning auto-expires | 0xdfi | 2.0 | 1.9 | 0.95 |
-| #10587 | Dismiss screensaver on bare Ctrl while it is open | fresh3nough | 2.0 | 1.4 | 0.96 |
 | #6569 | fix(notifications): animate toast entry/exit and wake engine only on expiry | shrijit37 | 2.0 | 2.1 | 0.60 |
 | #11736 | Guard qmk_hid calls with a timeout so a hung device can't stall theme switch | presidentecarter | 2.0 | 0.9 | 0.96 |
 | #10343 | Don't treat pointer motion right after an output change as lock-screen activity | johnkattenhorn | 2.0 | 1.8 | 0.96 |
@@ -289,12 +275,10 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #11756 | Dim the workspace marker on unfocused monitors | jacobs852 | 2.0 | 1.0 | 0.69 |
 | #10631 | Compute menu row height once per rebuild, not per append | fresh3nough | 2.0 | 1.5 | 0.93 |
 | #9757 | Let on-screen keyboards reach bar panels | ekollof | 2.0 | 0.9 | 0.97 |
-| #9130 | Send clipboard shortcuts using physical XKB keys | yashranaway | 2.0 | 1.2 | 0.96 |
 | #13638 | Force-clear zombie windows that ignore cooperative close | AnPod | 2.0 | 1.1 | 0.96 |
 | #10146 | fix(notifications): group identical notifications the way mako did | rdjperron | 2.0 | 2.6 | 0.96 |
 | #8885 | Batch window pop dispatches | yashranaway | 2.0 | 1.9 | 0.91 |
 | #7146 | Disable the panel by overlay alone in clamshell recovery | mkelk | 2.0 | 2.4 | 0.93 |
-| #6924 | Prevent togglesplit error in scrolling layout | seshna | 2.0 | 1.1 | 0.97 |
 | #13642 | Refresh Apps menu rows on every enter and late shell inject | AnPod | 1.9 | 1.3 | 0.95 |
 | #10629 | Stop force-tiling chromium windows so tab tear-out can move | fresh3nough | 1.9 | 0.8 | 0.92 |
 | #7660 | fix(keybindings): print Lua-compatible combos | ketpatil77 | 1.9 | 0.9 | 0.89 |
@@ -310,7 +294,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #10549 | Use Display P3 on Dell XPS OLED internal panels | j-c-m | 1.9 | 1.1 | 0.71 |
 | #12093 | Paint wall-clock time as soon as the clock widget loads | paulogeyer | 1.9 | 0.8 | 0.96 |
 | #12819 | Add lazy thumbnails and gate layer effects to nearby slides in background switch | sanjyay | 1.9 | 1.7 | 0.95 |
-| #12424 | Notify after successful color selection | sprajs | 1.9 | 1.5 | 0.88 |
 | #8135 | Open the power panel without a battery for profile controls | thecdrz | 1.9 | 1.2 | 0.94 |
 | #13738 | Fall back to device connection state and live status in network bar widget | Pabl0125 | 1.9 | 1.5 | 0.96 |
 | #10019 | Bound colour alias resolution in shell.toml | DanDreadless | 1.9 | 1.4 | 0.96 |
@@ -323,10 +306,8 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #9129 | Ignore vendor hotkey keyboard devices | yashranaway | 1.9 | 1.1 | 0.96 |
 | #7307 | Fit screensaver art to the monitor scale | vitalibondar | 1.9 | 1.7 | 0.88 |
 | #11199 | Support QVariantList in manifestHasKind for cloned menu plugins (#11190) | harshithnadig | 1.8 | 1.8 | 0.97 |
-| #10231 | fix(herdr): free swap_pane_up from close_workspace chord | kvnloo | 1.8 | 0.5 | 0.95 |
 | #8055 | Select share regions in output relative coordinates | koenhendriks | 1.8 | 1.3 | 0.96 |
 | #8048 | Dismiss screensaver on pointer motion | kazeshini178 | 1.8 | 1.8 | 0.89 |
-| #7659 | fix(menu): accept plus in search input | ketpatil77 | 1.8 | 1.0 | 0.97 |
 | #5514 | Fix screenshot cancel cleaning stale hyprpicker | afurm | 1.8 | 0.9 | 0.98 |
 | #13662 | Prefer route-based status for the network bar icon | AnPod | 1.8 | 1.2 | 0.92 |
 | #12357 | Give omacalc a centered floating size | z23 | 1.8 | 0.8 | 0.89 |
@@ -334,7 +315,7 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #10490 | Scope 1Password floating geometry to main window | Drecullith | 1.8 | 1.8 | 0.89 |
 | #9523 | Refocus lock screen when session secures | mlmrx | 1.8 | 1.6 | 0.95 |
 
-## Tranche: fix-misc — 161 PRs recommended as a merge-ready roll-up
+## Tranche: fix-misc — 156 PRs recommended as a merge-ready roll-up
 
 | PR | title | author | finished | effort | fix |
 |---|---|---|---|---|---|
@@ -412,7 +393,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #6471 | Hide sharee nodes from the Tailscale machines list | jmckible | 2.5 | 1.0 | 0.73 |
 | #10785 | Keep menu-plugin app-library when manifests cross the panel Instantiator | ekollof | 2.5 | 1.4 | 0.97 |
 | #12981 | Move plugin manifest scan into an external script | surim0n | 2.5 | 2.1 | 0.94 |
-| #12667 | Accept keypad digits on the lock screen while NumLock is desynced | prabhchintan | 2.5 | 1.3 | 0.97 |
 | #13141 | Wait for a slow-exiting shell before restarting it | Nejcc | 2.4 | 1.2 | 0.97 |
 | #11134 | Reject disabling unknown plugin IDs in PluginRegistry | sanjyay | 2.4 | 1.4 | 0.96 |
 | #12967 | Prefer weather report nearest_area over separate %l city label | kvnloo | 2.4 | 1.5 | 0.95 |
@@ -469,7 +449,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #11092 | Pin recording audio sample rate at 48 kHz | sandmor | 2.1 | 0.5 | 0.97 |
 | #8734 | Share Voxtype status across bar surfaces | lamchun1110 | 2.1 | 2.8 | 0.72 |
 | #7332 | Scroll the Tailscale machine list independently of the panel | andrepadez | 2.1 | 1.3 | 0.72 |
-| #8884 | Load the image thumbnail index once | yashranaway | 2.0 | 1.8 | 0.86 |
 | #8896 | Debounce unforced lock wake calls immediately following display blanking | Sword-Saint69 | 2.0 | 1.3 | 0.97 |
 | #13018 | Fix #12665: omarchy-menu-file returns 0 files when ~/Pictures/~/Videos are symli | yashbijlani | 2.0 | 1.2 | 0.98 |
 | #13063 | fix: report panel plugin load failures instead of throwing | BernhardRode | 2.0 | 0.9 | 0.98 |
@@ -477,8 +456,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #11606 | Stop a web app's generated .desktop id from leaking into app search | brenoperucchi | 2.0 | 1.6 | 0.95 |
 | #7309 | fix: always use sed -i --follow-symlinks to preserve symlinks | calebdw | 2.0 | 1.9 | 0.94 |
 | #13194 | Let bar-entry plugin shells resolve their entry's own service | TMartinPPC | 2.0 | 2.2 | 0.95 |
-| #11022 | Label LimitRow as used and keep collector (est.) | kvnloo | 2.0 | 1.4 | 0.90 |
-| #10530 | Map keypad digits in the polkit dialog when Qt ignores NumLock | MADS0LADEN | 2.0 | 1.1 | 0.96 |
 | #7447 | sleep-monitor: resolve dbus-monitor by absolute path to avoid PATH shadowing | tahadx | 2.0 | 0.9 | 0.97 |
 | #13782 | Retry a sleep inhibitor rejected while logind is still transitioning | Bartok9 | 2.0 | 1.1 | 0.96 |
 | #12406 | Replace eval with quote-aware word split in omarchy-launch-or-focus | dhh | 2.0 | 2.1 | 0.90 |
@@ -498,9 +475,8 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #11338 | Withdraw the toast when the server closes its notification | xmagma-x | 1.8 | 1.5 | 0.98 |
 | #7144 | Window VM start then stop, add retry mechanism for RDP connection | phamdung196 | 1.8 | 1.3 | 0.92 |
 | #8277 | Auto-detect weather units from the configured location's country | Jhon-opt | 1.8 | 2.0 | 0.89 |
-| #11918 | Back off fingerprint retries that fail immediately | CoreyH | 1.8 | 1.8 | 0.96 |
 
-## Tranche: hardware-drivers — 116 PRs recommended as a merge-ready roll-up
+## Tranche: hardware-drivers — 111 PRs recommended as a merge-ready roll-up
 
 | PR | title | author | finished | effort | fix |
 |---|---|---|---|---|---|
@@ -511,7 +487,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #8205 | Read actual gmux display brightness | piotrsynowiec | 2.9 | 1.2 | 0.94 |
 | #13711 | Require the pattern argument in omarchy-hw-match | kvnloo | 2.9 | 1.0 | 0.97 |
 | #10458 | Enable speakers on Late 2015 21.5-inch iMacs | inspiretelapps | 2.9 | 1.8 | 0.80 |
-| #13009 | Guard battery sysfs rate against bogus EC readings | Kristijan-K | 2.9 | 1.7 | 0.95 |
 | #10844 | Close Bluetooth panel after connecting | sergedoub | 2.9 | 1.0 | 0.87 |
 | #9883 | Keep low-battery latch across AC online flaps | fresh3nough | 2.9 | 1.1 | 0.98 |
 | #12387 | Detect the Chipsailing CS9711 USB reader | yashranaway | 2.8 | 1.1 | 0.94 |
@@ -560,7 +535,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #8712 | Skip powerprofilesctl when daemon is down | Elshayib | 2.4 | 1.9 | 0.96 |
 | #11785 | Serialize repeating volume adjustments | Yiteng-CHEN | 2.4 | 1.8 | 0.92 |
 | #9755 | Refresh monitor brightness state every second | iccodes | 2.4 | 0.8 | 0.93 |
-| #12423 | Keep disabled display backlights off and preserve saved brightness | sprajs | 2.4 | 1.3 | 0.93 |
 | #9638 | Switch Bluetooth headsets to HFP when selecting their input | fresh3nough | 2.4 | 1.6 | 0.95 |
 | #7948 | Stop the DMI chassis fallback in omarchy-hw-laptop reading an empty string | chubuntuarc | 2.3 | 1.0 | 0.97 |
 | #9524 | Detect Broadcom ControlVault 3 fingerprint readers | qybaihe | 2.3 | 1.2 | 0.79 |
@@ -579,7 +553,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #9483 | Only point the session at NVIDIA when NVIDIA is driving the screen | VykosMolt | 2.2 | 1.4 | 0.79 |
 | #13598 | Back off bt-agent restarts while a device flaps | AnPod | 2.2 | 1.4 | 0.96 |
 | #9997 | bluetooth: surface passkey prompt during device pairing | Johann-S | 2.2 | 1.1 | 0.88 |
-| #13543 | Back off Bluetooth discovery retries while the adapter refuses them | stevederico | 2.1 | 1.6 | 0.95 |
 | #13199 | Clean up legacy NVIDIA driver overrides during upgrades | ryanrhughes | 2.1 | 1.8 | 0.86 |
 | #12950 | Keep Bluetooth USB controllers awake when TLP manages USB power | s-gato | 2.1 | 1.2 | 0.88 |
 | #11312 | Software brightness fallback when DRM backlight is missing | Infringer13 | 2.1 | 2.3 | 0.66 |
@@ -591,7 +564,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #9218 | Detect Apple bcm5974 trackpads in omarchy-hw-touchpad | DeanWahle | 2.0 | 0.5 | 0.97 |
 | #10366 | Fix keyboard backlight restore after screensaver dismiss | marcindyguda | 2.0 | 1.7 | 0.98 |
 | #8221 | Reference count the Wi-Fi scanner so a closed panel cannot scan | xraid | 2.0 | 2.7 | 0.98 |
-| #13029 | Find system batteries not named BAT* | rafaelguariento | 2.0 | 1.9 | 0.97 |
 | #10148 | Use software volume for Audient USB audio interfaces | kmpeeduwee | 2.0 | 1.5 | 0.87 |
 | #8226 | Stop one speaker dropping out on the Dell XPS 14 | hartct | 2.0 | 1.2 | 0.93 |
 | #10196 | Require a real charge threshold before reporting a held charge | gabamnml | 2.0 | 1.8 | 0.97 |
@@ -619,9 +591,8 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #13797 | Smooth out battery time | shawnyeager | 1.9 | 1.6 | 0.92 |
 | #9370 | Prefer nvidia_wmi_ec_backlight over cosmetic nvidia_0 | megascan | 1.8 | 1.3 | 0.87 |
 | #8227 | feat(asus): follow GZ302 keyboard backlight on the chassis window LED | JustNak | 1.8 | 2.5 | 0.60 |
-| #13466 | Back off Bluetooth discovery retries instead of spamming at 1 Hz | AnPod | 1.8 | 1.3 | 0.97 |
 
-## Tranche: shell-cli — 63 PRs recommended as a merge-ready roll-up
+## Tranche: shell-cli — 62 PRs recommended as a merge-ready roll-up
 
 | PR | title | author | finished | effort | fix |
 |---|---|---|---|---|---|
@@ -687,9 +658,8 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #13678 | Only claim Restored when plugin remove re-enables the source | AnPod | 1.9 | 1.0 | 0.96 |
 | #8466 | Report Omarchy dev-link session state accurately | Skeptomenos | 1.8 | 1.8 | 0.92 |
 | #12063 | Only leave the alternate screen after a session that actually dropped | AronBakes | 1.8 | 1.1 | 0.97 |
-| #9490 | Quote omarchy-launch-or-focus-tui and -webapp arguments like install-app | taufderl | 1.8 | 1.1 | 0.77 |
 
-## Tranche: apps-integrations — 54 PRs recommended as a merge-ready roll-up
+## Tranche: apps-integrations — 53 PRs recommended as a merge-ready roll-up
 
 | PR | title | author | finished | effort | fix |
 |---|---|---|---|---|---|
@@ -720,7 +690,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #8932 | Tile the Battle.net client instead of floating it | michielvandermeer | 2.5 | 2.0 | 0.89 |
 | #8533 | fix(tailscale): isolate claim path argument | ketpatil77 | 2.5 | 0.9 | 0.95 |
 | #9927 | Avoid focusing Quickshell plugin windows | imzihuailin | 2.4 | 1.8 | 0.92 |
-| #5600 | fix imv image navigation | ilyaZar | 2.4 | 1.2 | 0.94 |
 | #7797 | Add Remove > 1Password to the shell menu | Shaivarth | 2.4 | 0.8 | 0.71 |
 | #8761 | Keep mailto parameters out of HEY's recipient | tony-roslund | 2.4 | 1.1 | 0.97 |
 | #13843 | Provision Helix theme links for existing installations | Susensio | 2.4 | 1.6 | 0.83 |
@@ -748,7 +717,7 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #9191 | Dropbox widget: scan the team root, not the member folder | renerocksai | 1.8 | 0.9 | 0.97 |
 | #12786 | Follow an opened link to the browser window, never an open web app | legendik | 1.8 | 1.3 | 0.96 |
 
-## Tranche: agents-ai — 47 PRs recommended as a merge-ready roll-up
+## Tranche: agents-ai — 45 PRs recommended as a merge-ready roll-up
 
 | PR | title | author | finished | effort | fix |
 |---|---|---|---|---|---|
@@ -777,8 +746,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #8399 | Migrate invitation hooks to notification argv | salemsayed | 2.3 | 2.1 | 0.88 |
 | #10067 | Add fallback reload Timer for agent usage records | fresh3nough | 2.3 | 1.1 | 0.95 |
 | #9697 | Report unreadable Claude transcripts once per scan | shaynhornik | 2.2 | 1.0 | 0.96 |
-| #13109 | Resolve Codex through mise which instead of running the lazy launcher | surim0n | 2.2 | 1.6 | 0.96 |
-| #12425 | Notify on agent limit resets with provider and deadline reconciliation | sprajs | 2.2 | 2.5 | 0.86 |
 | #12547 | Activate the Omarchy theme for Claude Code when it's set as the agent | prusso | 2.2 | 1.5 | 0.76 |
 | #13339 | Guard synced agent snapshot aggregation | AFOliveira | 2.2 | 2.2 | 0.92 |
 | #13611 | Give default agents explicit mise packages including Copilot npm | AnPod | 2.1 | 1.6 | 0.93 |
@@ -800,7 +767,7 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #10040 | Render usageStatusText in the agents status banner | Bartok9 | 1.9 | 0.5 | 0.97 |
 | #12032 | Count only subscription-backed sessions as Codex usage | Ronin11 | 1.9 | 1.1 | 0.95 |
 
-## Tranche: update-release — 33 PRs recommended as a merge-ready roll-up
+## Tranche: update-release — 31 PRs recommended as a merge-ready roll-up
 
 | PR | title | author | finished | effort | fix |
 |---|---|---|---|---|---|
@@ -811,7 +778,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #12535 | Stop fetching the deleted master branch | paulogeyer | 2.9 | 1.8 | 0.96 |
 | #8824 | Skip orphan prompt during unattended updates | maxcroy1 | 2.8 | 1.7 | 0.94 |
 | #10066 | Distinguish checkupdates failure from up to date in update widget | fresh3nough | 2.8 | 1.3 | 0.97 |
-| #6951 | Pin root= before the packages that can drop it | dhh | 2.7 | 1.2 | 0.94 |
 | #13538 | Say which files block an upgrade the conflict recovery won't clear | stevederico | 2.7 | 1.1 | 0.73 |
 | #9423 | Bound the browser policy refresh so a wedged browser can't stall an update | VykosMolt | 2.7 | 1.4 | 0.95 |
 | #12503 | Skip CUPS discovery cleanup when the scheduler is stopped | paulogeyer | 2.7 | 1.0 | 0.97 |
@@ -819,7 +785,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #12174 | Give the Mise PATH cleanup a collision-free migration id | ekollof | 2.6 | 0.7 | 0.96 |
 | #10524 | Avoid reboot prompts after identical Hyprland reinstalls | Brams-s | 2.5 | 2.0 | 0.96 |
 | #6972 | Restore leftover app-menu icons after the Quattro upgrade | calledtoconstruct | 2.5 | 1.6 | 0.97 |
-| #11023 | Warn when root Btrfs spans extra LUKS devices the initramfs cannot unlock | kvnloo | 2.5 | 1.2 | 0.78 |
 | #11480 | Serialize package availability checks across callers | yashranaway | 2.5 | 1.8 | 0.96 |
 | #7398 | Resolve package-backed OMARCHY_PATH symlinks | mdenesfe | 2.5 | 1.8 | 0.98 |
 | #13617 | Skip orphan gum confirm when omarchy-update runs unattended | AnPod | 2.5 | 1.2 | 0.96 |
@@ -838,12 +803,11 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 | #13061 | Accept the -- operand separator in the kernel migration test pacman stubs | en3r0 | 1.9 | 1.4 | 0.97 |
 | #12920 | Seed fcitx5 DefaultIM from vconsole XKBLAYOUT | Chessing234 | 1.8 | 1.6 | 0.87 |
 
-## Tranche: install-setup — 30 PRs recommended as a merge-ready roll-up
+## Tranche: install-setup — 29 PRs recommended as a merge-ready roll-up
 
 | PR | title | author | finished | effort | fix |
 |---|---|---|---|---|---|
 | #13721 | setup-form: reject usernames longer than 32 characters | kvnloo | 2.9 | 1.1 | 0.97 |
-| #11025 | Install menu: gate eight x86_64-only rows on omarchy-hw-x86-64 | kvnloo | 2.9 | 1.4 | 0.93 |
 | #12384 | Encode browser native-host paths as JSON | yashranaway | 2.9 | 1.7 | 0.97 |
 | #12004 | Remove Herdr with preinstalls | markallisongit | 2.9 | 1.3 | 0.95 |
 | #8486 | Detect Broadcom fingerprint readers by vendor ID | gbillium143 | 2.8 | 0.8 | 0.97 |
@@ -889,65 +853,171 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 
 ## Duplicate / overlapping clusters (consolidate; maintainer picks the winner)
 
-- #9605 (canonical candidate), #10411 (superseded), #12019 (superseded), #12323 (superseded), #13154 (superseded), #13213 (superseded), #13750 (superseded) — e.g. “Clear set-ID bits when securing the Windows VM mount sources”
-- #7765 (canonical candidate), #8065 (superseded), #12635 (superseded) — e.g. “Add OpenCode Zen usage to the agents panel”
-- #13459 (canonical candidate), #13463 (superseded), #13613 (superseded) — e.g. “Scale clock panel hero date with fontScale”
-- #13165 (canonical candidate), #13477 (superseded), #13645 (superseded) — e.g. “Skip placeholder screens when building bars”
+- #9605 (canonical candidate), #10411 (superseded), #12019 (superseded), #12264 (superseded), #12323 (superseded), #13154 (superseded), #13213 (superseded), #13750 (superseded) — e.g. “Clear set-ID bits when securing the Windows VM mount sources”
+- #7765 (canonical candidate), #8065 (superseded), #12635 (superseded), #12651 (superseded) — e.g. “Add OpenCode Zen usage to the agents panel”
+- #6572 (canonical candidate), #7877 (superseded), #8955 (superseded), #13359 (superseded) — e.g. “Re-implement D-Bus idle-inhibit support dropped in the Quattro rewrite”
+- #6834 (canonical candidate), #12350 (superseded), #12679 (superseded) — e.g. “Ignore T2 headset remotes when switching layouts”
+- #6485 (canonical candidate), #12352 (superseded), #13219 (superseded) — e.g. “Add a Grok usage collector”
+- #7659 (canonical candidate), #8023 (superseded), #12574 (superseded) — e.g. “fix(menu): accept plus in search input”
+- #12074 (canonical candidate), #12090 (superseded), #12680 (superseded) — e.g. “Install stock kernel headers for broadcom-wl-dkms on upgraded Macs”
+- #12649 (canonical candidate), #12755 (superseded), #13009 (superseded) — e.g. “Keep UPower rate when sysfs power read fails with ENODEV”
+- #5774 (canonical candidate), #9430 (superseded), #12754 (superseded) — e.g. “Add Vivaldi browser support (fixed)”
+- #11023 (canonical candidate), #11025 (superseded), #12932 (superseded) — e.g. “Warn when root Btrfs spans extra LUKS devices the initramfs cannot unl”
+- #11021 (canonical candidate), #11022 (superseded), #12955 (superseded) — e.g. “Skip tray grab until the SNI menu has children”
+- #7577 (canonical candidate), #9803 (superseded), #13024 (superseded) — e.g. “Stop the Broadcom Wi-Fi quirk breaking Apple Silicon Macs”
 - #10194 (canonical candidate), #11112 (superseded), #13223 (superseded) — e.g. “Fix the display panel's on/off rows under the Lua config parser”
-- #13314 (canonical candidate), #13651 (superseded) — e.g. “Prune stale Quickshell instance logs from the user runtime”
-- #12505 (canonical candidate), #13331 (superseded) — e.g. “Enable Sunshine by its real systemd user unit name”
-- #11565 (canonical candidate), #12831 (superseded) — e.g. “Scope LocalSend firewall rules to private and local subnets (#11560)”
-- #10138 (canonical candidate), #13347 (superseded) — e.g. “Resync the clock when the wall clock is stepped”
+- #13165 (canonical candidate), #13477 (superseded), #13645 (superseded) — e.g. “Skip placeholder screens when building bars”
+- #13459 (canonical candidate), #13463 (superseded), #13613 (superseded) — e.g. “Scale clock panel hero date with fontScale”
+- #13467 (canonical candidate), #13542 (superseded), #13612 (superseded) — e.g. “Let fingerprint setup adopt an already-enrolled print”
 - #10430 (canonical candidate), #12337 (superseded) — e.g. “Make night light temperature configurable”
-- #11976 (canonical candidate), #13369 (superseded) — e.g. “Highlight each monitor's own active workspace in the bar”
-- #12352 (canonical candidate), #13219 (superseded) — e.g. “Add a Grok collector to the agents usage panel”
-- #13377 (canonical candidate), #13660 (superseded) — e.g. “Refuse omarchy-update when invoked as root”
-- #11933 (canonical candidate), #12870 (superseded) — e.g. “Install Bitwarden desktop even when CLI conflicts with nodejs”
-- #11364 (canonical candidate), #12089 (superseded) — e.g. “Keep existing wine when installing Lutris”
-- #7783 (canonical candidate), #12658 (superseded) — e.g. “Keep PwNode objects out of the audio panel's Repeater models”
-- #6058 (canonical candidate), #10867 (superseded) — e.g. “Theme Zen Browser chrome”
-- #13444 (canonical candidate), #13544 (superseded) — e.g. “Keep the reboot offer after a channel switch”
-- #9871 (canonical candidate), #13505 (superseded) — e.g. “Add Hermes usage collector for the agents panel”
-- #5774 (canonical candidate), #9430 (superseded) — e.g. “Add Vivaldi browser support (fixed)”
-- #6098 (canonical candidate), #6802 (superseded) — e.g. “feat(webapps): add Zen browser support to launcher”
-- #13462 (canonical candidate), #13602 (superseded) — e.g. “Preflight the ESP free space before an update”
-- #8429 (canonical candidate), #12957 (superseded) — e.g. “[Security] Keep the update transcript out of world-writable /tmp”
+- #8537 (canonical candidate), #10294 (superseded) — e.g. “Add Alfred/Raycast-style live query plugins to the menu”
+- #9127 (canonical candidate), #12424 (superseded) — e.g. “Add a notification for hyprpicker”
+- #9885 (canonical candidate), #12425 (superseded) — e.g. “Notify when agent limits reset”
+- #9189 (canonical candidate), #12423 (superseded) — e.g. “Keep the backlight off while the laptop panel is disabled”
 - #12024 (canonical candidate), #12445 (superseded) — e.g. “Aggregate battery status across all packs”
-- #13471 (canonical candidate), #13633 (superseded) — e.g. “Give replacement-bar entries their own service lookup”
 - #7568 (canonical candidate), #12446 (superseded) — e.g. “Add dynamic bar transparency mode”
+- #10413 (canonical candidate), #13214 (superseded) — e.g. “Harden omarchy-refresh-config against path traversal”
+- #11918 (canonical candidate), #12461 (superseded) — e.g. “Back off fingerprint retries that fail immediately”
+- #12505 (canonical candidate), #13331 (superseded) — e.g. “Enable Sunshine by its real systemd user unit name”
+- #10463 (canonical candidate), #10920 (superseded) — e.g. “Fix display backlight on Lenovo Yoga Pro 7 15IPH11”
+- #10476 (canonical candidate), #13186 (superseded) — e.g. “Build the calendar month grid in UTC”
+- #8429 (canonical candidate), #12957 (superseded) — e.g. “[Security] Keep the update transcript out of world-writable /tmp”
+- #6951 (canonical candidate), #12548 (superseded) — e.g. “Pin root= before the packages that can drop it”
+- #8875 (canonical candidate), #12569 (superseded) — e.g. “Install lib32 GPU drivers before Steam”
+- #10530 (canonical candidate), #12667 (superseded) — e.g. “Map keypad digits in the polkit dialog when Qt ignores NumLock”
+- #7087 (canonical candidate), #12582 (superseded) — e.g. “Add Cursor usage collector to the agents panel”
+- #10586 (canonical candidate), #13749 (superseded) — e.g. “Ignore Hyprland FALLBACK in external-monitor checks”
+- #10587 (canonical candidate), #13517 (superseded) — e.g. “Dismiss screensaver on bare Ctrl while it is open”
+- #12184 (canonical candidate), #12646 (superseded) — e.g. “Fix bar reposition-drag on an empty desktop (#11915)”
+- #7783 (canonical candidate), #12658 (superseded) — e.g. “Keep PwNode objects out of the audio panel's Repeater models”
+- #10610 (canonical candidate), #12048 (superseded) — e.g. “Add Muse usage collector to the agents panel”
+- #9735 (canonical candidate), #12685 (superseded) — e.g. “Force SPI PIO on MacBook8,1 so the built-in keyboard works”
+- #6587 (canonical candidate), #13137 (superseded) — e.g. “Let [bar] in shell.toml set every token Style reads”
+- #7074 (canonical candidate), #12759 (superseded) — e.g. “Remember cursor position when navigating back in the root menu”
+- #9490 (canonical candidate), #12800 (superseded) — e.g. “Quote omarchy-launch-or-focus-tui and -webapp arguments like install-a”
+- #11565 (canonical candidate), #12831 (superseded) — e.g. “Scope LocalSend firewall rules to private and local subnets (#11560)”
+- #10789 (canonical candidate), #13545 (superseded) — e.g. “Keep the bar center pinned when centerAnchor's widget leaves the layou”
+- #6924 (canonical candidate), #12851 (superseded) — e.g. “Prevent togglesplit error in scrolling layout”
+- #11933 (canonical candidate), #12870 (superseded) — e.g. “Install Bitwarden desktop even when CLI conflicts with nodejs”
+- #6058 (canonical candidate), #10867 (superseded) — e.g. “Theme Zen Browser chrome”
+- #12939 (canonical candidate), #13109 (superseded) — e.g. “Don't let the Codex usage collector install Codex”
+- #6098 (canonical candidate), #6802 (superseded) — e.g. “feat(webapps): add Zen browser support to launcher”
+- #10231 (canonical candidate), #12956 (superseded) — e.g. “fix(herdr): free swap_pane_up from close_workspace chord”
+- #8872 (canonical candidate), #8881 (superseded) — e.g. “fix(notification): bound omarchy-notification-wait by wall clock”
+- #8884 (canonical candidate), #13568 (superseded) — e.g. “Load the image thumbnail index once”
+- #6847 (canonical candidate), #13699 (superseded) — e.g. “Preserve shared boot entries through factory reset”
+- #9130 (canonical candidate), #13007 (superseded) — e.g. “Send clipboard shortcuts using physical XKB keys”
+- #7373 (canonical candidate), #13029 (superseded) — e.g. “update battery lookup”
+- #13041 (canonical candidate), #13673 (superseded) — e.g. “Honour explicit expireTimeout for critical notifications (#12911)”
+- #5431 (canonical candidate), #6897 (superseded) — e.g. “feat(hardware): sync ThinkBook mute LEDs with WirePlumber state”
+- #13044 (canonical candidate), #13094 (superseded) — e.g. “fix(launch-editor): pass wait flags to GUI editors in inline mode (#13”
+- #8952 (canonical candidate), #13848 (superseded) — e.g. “Replace Gemini coding agent with Antigravity (backport of #6900)”
+- #5332 (canonical candidate), #13055 (superseded) — e.g. “Enable SSD TRIM for LUKS-encrypted drives”
+- #5099 (canonical candidate), #11008 (superseded) — e.g. “Fix layout toggle script for special workspaces”
+- #13090 (canonical candidate), #13677 (superseded) — e.g. “Resolve mise wrapper binaries to absolute paths”
+- #13101 (canonical candidate), #13668 (superseded) — e.g. “Actually restart bluetooth.service in omarchy-restart-bluetooth”
+- #11069 (canonical candidate), #11470 (superseded) — e.g. “Run declared plugin cleanup before removal”
+- #4928 (canonical candidate), #7700 (superseded) — e.g. “Only match window class in omarchy-launch-or-focus”
+- #9071 (canonical candidate), #9073 (superseded) — e.g. “Backport constrained Quattro ownership bootstrap to dev”
+- #7023 (canonical candidate), #12022 (superseded) — e.g. “Fix inverted on/off semantics in omarchy-toggle-bar”
+- #7040 (canonical candidate), #11612 (superseded) — e.g. “feat(security): Add face authentication setup and removal commands”
+- #12177 (canonical candidate), #13205 (superseded) — e.g. “Add 80% battery charge cap toggle”
+- #7075 (canonical candidate), #8012 (superseded) — e.g. “menu: add web search fallback for unmatched queries”
+- #8005 (canonical candidate), #13233 (superseded) — e.g. “Fix grammar in navigation manual”
+- #7102 (canonical candidate), #13637 (superseded) — e.g. “Only treat lost focus as a dismissal once the screensaver has held foc”
+- #13258 (canonical candidate), #13620 (superseded) — e.g. “Retry bt-agent after bluetooth.service instead of skipping”
+- #13314 (canonical candidate), #13651 (superseded) — e.g. “Prune stale Quickshell instance logs from the user runtime”
+- #7180 (canonical candidate), #7333 (superseded) — e.g. “Work around Apple BCM4350 suspend failures”
+- #5600 (canonical candidate), #11294 (superseded) — e.g. “fix imv image navigation”
+- #10138 (canonical candidate), #13347 (superseded) — e.g. “Resync the clock when the wall clock is stepped”
+- #11976 (canonical candidate), #13369 (superseded) — e.g. “Highlight each monitor's own active workspace in the bar”
+- #13377 (canonical candidate), #13660 (superseded) — e.g. “Refuse omarchy-update when invoked as root”
+- #11364 (canonical candidate), #12089 (superseded) — e.g. “Keep existing wine when installing Lutris”
+- #13444 (canonical candidate), #13544 (superseded) — e.g. “Keep the reboot offer after a channel switch”
+- #13462 (canonical candidate), #13602 (superseded) — e.g. “Preflight the ESP free space before an update”
+- #13466 (canonical candidate), #13543 (superseded) — e.g. “Back off Bluetooth discovery retries instead of spamming at 1 Hz”
+- #13471 (canonical candidate), #13633 (superseded) — e.g. “Give replacement-bar entries their own service lookup”
 - #13474 (canonical candidate), #13646 (superseded) — e.g. “Soften yay go-mod caches and warn on AUR update failure”
 - #13476 (canonical candidate), #13643 (superseded) — e.g. “Exit compositor fullscreen before launching web apps”
 - #13478 (canonical candidate), #13641 (superseded) — e.g. “Floor Apple Silicon top bars to the camera notch cutout”
 - #13480 (canonical candidate), #13640 (superseded) — e.g. “Wait for an active output before sleep-lock finishes”
-- #8872 (canonical candidate), #8881 (superseded) — e.g. “fix(notification): bound omarchy-notification-wait by wall clock”
-- #8875 (canonical candidate), #12569 (superseded) — e.g. “Install lib32 GPU drivers before Steam”
-- #10413 (canonical candidate), #13214 (superseded) — e.g. “Harden omarchy-refresh-config against path traversal”
-- #6847 (canonical candidate), #13699 (superseded) — e.g. “Preserve shared boot entries through factory reset”
-- #11069 (canonical candidate), #11470 (superseded) — e.g. “Run declared plugin cleanup before removal”
+- #7345 (canonical candidate), #7737 (superseded) — e.g. “Let users rebind the menu's navigation keys”
+- #9871 (canonical candidate), #13505 (superseded) — e.g. “Add Hermes usage collector for the agents panel”
+- #9429 (canonical candidate), #13756 (superseded) — e.g. “Verify the session is secure before system lock succeeds”
 - #13540 (canonical candidate), #13610 (superseded) — e.g. “Hibernate laptops on critical battery once hibernation is set up”
 - #9958 (canonical candidate), #13548 (superseded) — e.g. “Add minimax agent usage collector for opencode”
-- #13542 (canonical candidate), #13612 (superseded) — e.g. “Finish fingerprint setup when a print is already enrolled”
-- #10476 (canonical candidate), #13186 (superseded) — e.g. “Build the calendar month grid in UTC”
-- #13041 (canonical candidate), #13673 (superseded) — e.g. “Honour explicit expireTimeout for critical notifications (#12911)”
-- #13044 (canonical candidate), #13094 (superseded) — e.g. “fix(launch-editor): pass wait flags to GUI editors in inline mode (#13”
-- #7023 (canonical candidate), #12022 (superseded) — e.g. “Fix inverted on/off semantics in omarchy-toggle-bar”
-- #10610 (canonical candidate), #12048 (superseded) — e.g. “Add Muse usage collector to the agents panel”
-- #8023 (canonical candidate), #12574 (superseded) — e.g. “Accept numpad and AltGr input in the menu and image picker filters”
-- #13090 (canonical candidate), #13677 (superseded) — e.g. “Resolve mise wrapper binaries to absolute paths”
-- #7087 (canonical candidate), #12582 (superseded) — e.g. “Add Cursor usage collector to the agents panel”
-- #12074 (canonical candidate), #12090 (superseded) — e.g. “Install stock kernel headers for broadcom-wl-dkms on upgraded Macs”
-- #13101 (canonical candidate), #13668 (superseded) — e.g. “Actually restart bluetooth.service in omarchy-restart-bluetooth”
-- #13258 (canonical candidate), #13620 (superseded) — e.g. “Retry bt-agent after bluetooth.service instead of skipping”
 - #13626 (canonical candidate), #13656 (superseded) — e.g. “Stamp new migrations with wall-clock time”
-- #8005 (canonical candidate), #13233 (superseded) — e.g. “Fix grammar in navigation manual”
-- #7102 (canonical candidate), #13637 (superseded) — e.g. “Only treat lost focus as a dismissal once the screensaver has held foc”
-- #7075 (canonical candidate), #8012 (superseded) — e.g. “menu: add web search fallback for unmatched queries”
 - #11751 (canonical candidate), #13648 (superseded) — e.g. “Unmap KeyboardPanel even when owner.close() throws”
-- #10586 (canonical candidate), #13749 (superseded) — e.g. “Ignore Hyprland FALLBACK in external-monitor checks”
 - #12150 (canonical candidate), #13670 (superseded) — e.g. “Make omarchy toggle bar on/off match bar visibility”
-- #12649 (canonical candidate), #12755 (superseded) — e.g. “Keep UPower rate when sysfs power read fails with ENODEV”
-- #9071 (canonical candidate), #9073 (superseded) — e.g. “Backport constrained Quattro ownership bootstrap to dev”
 - #11669 (canonical candidate), #13729 (superseded) — e.g. “Restore the keyboard backlight level after hibernation”
+- #6105 (canonical candidate), #9679 (superseded) — e.g. “Make webapps profile-aware for Chromium-based browsers”
+- #7894 (canonical candidate), #12142 (superseded) — e.g. “Add fcitx5 theme sync helper”
+- #6019 (canonical candidate), #7945 (superseded) — e.g. “Expand Nautilus into usage as file picker in Open/Save dialog (provide”
+- #10007 (canonical candidate), #12255 (superseded) — e.g. “Preserve built-in fields in partial menu overrides”
+
+## Uncertain pairs — Jev is undecided, human decides
+
+- #13444 ↔ #13616 (P(same)=0.64): “Keep the reboot offer after a channel switch” / “Keep sudo alive and offer reboot after channel switch”
+- #11381 ↔ #12686 (P(same)=0.64): “Install the pre-T2 FaceTime HD camera driver and firmwa” / “[Intel Mac P08] Consolidate FaceTime PCIe camera suppor”
+- #11055 ↔ #11080 (P(same)=0.63): “Move setCenterHoverRevealSuppressed into Panel base to ” / “Fix PluginBarApi hover-reveal writes so cloned panels c”
+- #12067 ↔ #12686 (P(same)=0.63): “Install the FaceTime HD camera driver on Intel Macs tha” / “[Intel Mac P08] Consolidate FaceTime PCIe camera suppor”
+- #7158 ↔ #8531 (P(same)=0.62): “Keep the lock screen fingerprint working across suspend” / “Keep fingerprint unlock working across suspend”
+- #8414 ↔ #12936 (P(same)=0.60): “Detect Microarray MAFP fingerprint reader” / “Detect Microarray MAFP fingerprint readers (3274:8012)”
+- #7528 ↔ #8048 (P(same)=0.60): “Dismiss the screensaver on touch and pointer input, blu” / “Dismiss screensaver on pointer motion”
+- #7577 ↔ #9803 (P(same)=0.59): “Stop the Broadcom Wi-Fi quirk breaking Apple Silicon Ma” / “Fix WPA3 on MacBookPro16,1”
+- #8210 ↔ #8720 (P(same)=0.59): “Let themes set Hyprland rounding and shadow through col” / “Add declarative Hyprland and terminal theming”
+- #8685 ↔ #11056 (P(same)=0.57): “Derive the Hyprland keyboard layout from the console ke” / “Point six installer keymaps at ones systemd can map”
+- #6907 ↔ #13378 (P(same)=0.57): “Restore conventional copy/paste bindings in foot config” / “Add Ctrl+Shift+C/V to existing Foot clipboard bindings”
+- #11033 ↔ #11652 (P(same)=0.56): “Make the Intel IPU6 camera work out of the box” / “Make the Intel IPU6 webcam behind an IVSC work”
+- #8609 ↔ #9095 (P(same)=0.56): “Tell contributors to check for duplicates and the right” / “Tell contributors to search open PRs before writing a f”
+- #10198 ↔ #12683 (P(same)=0.54): “Disable ghost internal display connectors” / “[Intel Mac P05] Handle ghost internal displays”
+- #12020 ↔ #12189 (P(same)=0.54): “Ignore bytecode and temp files in local plugin watcher” / “Only reload local plugins when loadable sources change”
+- #5975 ↔ #10430 (P(same)=0.53): “Make nightlight temperature configurable via env variab” / “Make night light temperature configurable”
+- #6849 ↔ #11076 (P(same)=0.53): “Fix jittery scrolling on Dell XPS 13 Wildcat Lake by di” / “Disable broken eDP Panel Replay on Dell XPS Panther Lak”
+- #11904 ↔ #12692 (P(same)=0.53): “Add omarchy-diagnose-suspend-wake” / “[Intel Mac P14] Consolidate suspend diagnostics”
+- #9880 ↔ #12684 (P(same)=0.53): “Stop installing the obsolete SPI keyboard DKMS package” / “[Intel Mac P06] Retire the legacy SPI package alongside”
+- #10660 ↔ #10677 (P(same)=0.52): “Background wipe animates on only one output” / “Continue the background wipe across every output”
+- #10232 ↔ #12956 (P(same)=0.52): “fix(update): detect aarch64 kernels without vmlinuz” / “fix: herdr swap_pane_up + aarch64 kernel restart (#1023”
+- #11792 ↔ #13205 (P(same)=0.51): “Add battery charge-limit presets to the power panel” / “Add battery charge-limit toggle to power panel (UPower ”
+- #5686 ↔ #10185 (P(same)=0.51): “Add speech-dispatcher and espeak-ng for text-to-speech ” / “Add speech-dispatcher so Brave Web Speech has voices”
+- #8771 ↔ #9164 (P(same)=0.50): “Default OMARCHY_PATH in omarchy-update-available” / “Default OMARCHY_PATH in channel-current and audio-tunin”
+- #10989 ↔ #12955 (P(same)=0.50): “fix: keep 1.25x tooltip and scale-pill borders from dro” / “fix: shell bar/tray/agents leftovers (#10989 #11021 #11”
+- #10393 ↔ #12461 (P(same)=0.50): “Cap lock fingerprint retries; skip closed-lid fingerpri” / “Stop the lock fingerprint retry loop instead of slowing”
+- #5975 ↔ #12337 (P(same)=0.49): “Make nightlight temperature configurable via env variab” / “Make night light temperatures configurable in shell.jso”
+- #11080 ↔ #11751 (P(same)=0.49): “Fix PluginBarApi hover-reveal writes so cloned panels c” / “Unmap KeyboardPanel even when owner.close() throws”
+- #5317 ↔ #8820 (P(same)=0.48): “feat: gracefully swap ALSA hardware profiles on single-” / “Show inactive audio card outputs in picker”
+- #13544 ↔ #13616 (P(same)=0.47): “Offer the reboot after a channel switch” / “Keep sudo alive and offer reboot after channel switch”
+- #12972 ↔ #13019 (P(same)=0.47): “Add a camera bar widget that turns every USB camera off” / “Add a camera bar widget that shows when a webcam is in ”
+- #12253 ↔ #12857 (P(same)=0.47): “Require a mode before counting an external monitor as a” / “Don't reload a 0x0 monitor that already has video modes”
+- #12007 ↔ #12684 (P(same)=0.47): “Drop macbook12-spi-driver-dkms, which no longer builds ” / “[Intel Mac P06] Retire the legacy SPI package alongside”
+- #7471 ↔ #7592 (P(same)=0.46): “Wake the blanked lock screen from the keyboard” / “Refocus the lock password field after resume”
+- #8709 ↔ #9461 (P(same)=0.45): “fix: arm signature verification for the T2 repo and clo” / “[codex] OM-SEC-05: Remove the unsigned Apple T2 package”
+- #9725 ↔ #13138 (P(same)=0.45): “Feature: Allow user to create floating bar by adding su” / “Floating bar: margin, radius, a switch and Hyprland-der”
+- #8169 ↔ #9465 (P(same)=0.44): “Stop apply-system reruns leaving the install log world-” / “[codex] OM-SEC-10: Replace the world-writable installer”
+- #5343 ↔ #7363 (P(same)=0.44): “Install nautilus-open-any-terminal to open the default ” / “Add Open in Terminal to the Files context menu”
+- #7283 ↔ #13007 (P(same)=0.44): “Use layout-independent universal clipboard shortcuts” / “fix(hypr): resolve universal clipboard letters from pri”
+- #7179 ↔ #12420 (P(same)=0.44): “Stop the lock screen overheating the fingerprint reader” / “lock: stop fingerprint scans while the display is blank”
+- #8866 ↔ #12071 (P(same)=0.43): “Fix network panel behind VPN policy routes” / “Show physical network behind TUN routes”
+- #9632 ↔ #11746 (P(same)=0.43): “Keep idle lock handoff concealed” / “Dismiss screensaver on seat input and conceal idle lock”
+- #11477 ↔ #13768 (P(same)=0.42): “Reconcile hibernation resume parameters with the swapfi” / “Keep hibernation resume offset in sync with the swapfil”
+- #8581 ↔ #10130 (P(same)=0.42): “Re-arm lock blank timer with backoff on screen changes” / “Re-arm the lock screen's blank timer from any input whi”
+- #7449 ↔ #8573 (P(same)=0.41): “emoji-insert: persist clipboard instead of clearing it ” / “Fix Emoji Picker for all apps with both keyboard and mo”
+- #7564 ↔ #11733 (P(same)=0.40): “Make the keybindings menu's Lua bind scan safe against ” / “Read keybindings from the running compositor instead of”
+- #9546 ↔ #10330 (P(same)=0.40): “Count omp and pi profile sessions in the agent usage co” / “Add a dedicated pi agent usage collector”
+- #6892 ↔ #8573 (P(same)=0.40): “Fix emoji paste in Firefox” / “Fix Emoji Picker for all apps with both keyboard and mo”
+- #9296 ↔ #12471 (P(same)=0.40): “Recover screen-recording indicator after stuck probes” / “Fix recording indicator stuck 'active' after a force-ki”
+- #9780 ↔ #12016 (P(same)=0.39): “Switch to a workspace on the focused monitor” / “Open a hidden workspace on the bar that was clicked”
+- #10270 ↔ #11394 (P(same)=0.38): “Reduce notification overlay surface area” / “Reduce OSD and notification layer surface area”
+- #10845 ↔ #11121 (P(same)=0.38): “Show API-equivalent agent usage cost” / “Show local agent API cost estimates with stable, respon”
+- #10330 ↔ #10824 (P(same)=0.38): “Add a dedicated pi agent usage collector” / “Add OpenRouter usage collector to the agents panel”
+- #7333 ↔ #12688 (P(same)=0.38): “Reset Apple BCM4350/BCM43602 Wi-Fi around sleep” / “[Intel Mac P10] Consolidate Broadcom calibration and sl”
+- #7187 ↔ #13070 (P(same)=0.37): “Fix image paste in Kitty and Ghostty” / “Paste clipboard images into foot (and Kitty/Ghostty) wi”
+- #12328 ↔ #12691 (P(same)=0.37): “Keep every Intel Mac on its kernel in the linux-omarchy” / “[Intel Mac P13] Consolidate the Intel Mac kernel migrat”
+- #7880 ↔ #13811 (P(same)=0.36): “Don't treat Bluetooth Trusted as a completed pairing” / “fix(bluetooth): recover incomplete pairing”
+- #12248 ↔ #13568 (P(same)=0.36): “Perf: disk speedtest staging, batched window pop, in-me” / “Read the thumbnail index once in the direct image scan”
+- #9070 ↔ #9073 (P(same)=0.35): “Make package ownership the Quattro update boundary” / “Backport constrained Quattro ownership bootstrap to rc”
+- #7180 ↔ #12688 (P(same)=0.35): “Work around Apple BCM4350 suspend failures” / “[Intel Mac P10] Consolidate Broadcom calibration and sl”
+- …and 1 more in out/dupes.json
 
 ## Escalate to senior review (high risk or security-relevant)
 
@@ -1306,7 +1376,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 - #7247 Install Grok through mise's first-party registry
 - #7297 Correctly name grok and add docs link
 - #7463 Fix typo on 04_navigation.md
-- #7894 Add fcitx5 theme sync helper
 - #7995 Stage diagnostics logs privately instead of at fixed /tmp paths
 - #8408 Theme GTK4 apps with Omarchy colors
 - #8421 omarchy-windows-vm: enable windows activation via system firmware by …
@@ -1361,7 +1430,6 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 - #12250 Preserve shell.json and config migration file modes
 - #12252 Capture/cursors: slurp snap, shot-only hardware cursors, vmwgfx software cursors
 - #12263 Monitor: report Hyprland scale and persist named outputs
-- #12264 Windows VM: create launcher after start; clear setgid on harden
 - #12266 Security: id -un sudo grants, TUI desktop escape, Docker DB secrets
 - #12267 Backlight: AIO kernel route and apple-panel-bl priority
 - #12268 Terminal logos: theme-colored ascii and fitted fastfetch
@@ -1371,12 +1439,10 @@ Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / fi
 - #12485 feat: sync Starship prompt with active theme
 - #12486 feat: sync Herdr multiplexer with active theme
 - #12507 Add interactive stepped background alignment and slideshow transition controls to image-pi
-- #12679 [Intel Mac P01] Keep keyboard layout tracking on typing devices
 - #12681 [Intel Mac P03] Consolidate Apple hardware detection
 - #12682 [Intel Mac P04] Consolidate lid handling and display classification
 - #12683 [Intel Mac P05] Handle ghost internal displays
 - #12684 [Intel Mac P06] Retire the legacy SPI package alongside T1Bridge
-- #12685 [Intel Mac P07] Preserve the MacBook8,1 SPI PIO workaround
 - #12687 [Intel Mac P09] Consolidate NVMe suspend applicability
 - #12688 [Intel Mac P10] Consolidate Broadcom calibration and sleep recovery
 - #12689 [Intel Mac P11] Consolidate model-specific Cirrus audio support
