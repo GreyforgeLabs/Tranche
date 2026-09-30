@@ -473,6 +473,35 @@ class WorkflowTests(unittest.TestCase):
         self.judgments(prs)
         self.assertEqual(self.cluster()[0]["ready_prs"], 0)
 
+    def test_security_meta_category_has_top_priority(self):
+        prs = self.inputs([pr(n) for n in (1, 2, 3, 4)])
+        records = {1: dict(answers(), security_flag={"noul": 0.9}),
+                   2: dict(answers(), security_flag={"noul": 0.5}),
+                   3: dict(answers(), security_flag={"noul": 0.49}),
+                   4: dict(answers(), security_flag={"noul": None})}
+        tranche.JUDGMENTS_PATH.write_text("".join(
+            json.dumps({"number": n, "answers": records[n],
+                        "binding": tranche.judgment_binding(prs[n])}) + "\n"
+            for n in sorted(prs)))
+        summary, _ = self.cluster()
+        self.assertEqual(summary["security_priority"], 2)
+        clusters = json.loads((self.out / "clusters.json").read_text())
+        self.assertEqual([item["number"] for item in clusters["security-review"]], [1, 2])
+        markdown = (self.out / "tranches.md").read_text()
+        self.assertLess(markdown.index("Security review — top priority"),
+                        markdown.index("## Review candidates:"))
+        report = self.render()
+        self.assertEqual(report.returncode, 0, report.stderr)
+
+    def test_security_section_absent_when_nothing_flagged(self):
+        prs = self.inputs([pr(1)])
+        self.judgments(prs)
+        summary, _ = self.cluster()
+        self.assertEqual(summary["security_priority"], 0)
+        clusters = json.loads((self.out / "clusters.json").read_text())
+        self.assertEqual(clusters["security-review"], [])
+        self.assertNotIn("Security review — top priority", (self.out / "tranches.md").read_text())
+
     def test_unbound_opt_in_is_inspection_not_freshness_or_readiness(self):
         prs = self.inputs([pr(1), pr(2)])
         self.judgments(prs, legacy=True)

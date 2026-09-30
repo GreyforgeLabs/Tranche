@@ -53,6 +53,9 @@ REPO = "omacom/omarchy"
 BODY_CHARS = 1200
 WORKERS = 6
 BINDING_VERSION = 1
+# Issue #3: security is a meta-category with top priority. A judgment at or above
+# this probability enters the security-first queue, which outranks every category.
+SECURITY_PRIORITY = 0.5
 
 
 def digest(value) -> str:
@@ -784,6 +787,16 @@ def escalated(judgment):
     return (risk is not None and risk >= 3) or (security is not None and security >= 0.5)
 
 
+def security_priority(judgment):
+    """Issue #3: a cross-cutting meta-category ranked above every other category.
+
+    Membership uses the same 0.5 probability bar as senior escalation; unlike a
+    category choice it never replaces the PR's own area. Unknown stays unknown.
+    """
+    security = metric(judgment, "security_flag", "noul")
+    return security is not None and security >= SECURITY_PRIORITY
+
+
 def report_binding(prs, judgments, verdicts):
     return digest({"version": BINDING_VERSION, "repo": REPO,
                    "sources": {n: pr["source_digest"] for n, pr in prs.items()},
@@ -808,6 +821,7 @@ def cmd_cluster(args) -> None:
 
     clusters = {}
     tranches = defaultdict(list)
+    security_review = []
     follow_up, escalate = [], []
     for n, j in sorted(judgments.items()):
         risk = metric(j, "risk")
@@ -822,11 +836,16 @@ def cmd_cluster(args) -> None:
         clusters.setdefault(cat, {}).setdefault(band, []).append(item)
         if review_candidate(prs[n], j, in_group):
             tranches[cat].append(item)
+        if security_priority(j):
+            security_review.append(item)
         finished = metric(j, "finished_form")
         if finished is not None and finished <= 1 and n not in in_group:
             follow_up.append(n)
         if escalated(j):
             escalate.append(n)
+    # Issue #3: the security meta-category is a first-class output key, ordered
+    # before every category when consumers read clusters.json.
+    clusters_payload = {"security-review": security_review, **clusters}
     tokens = Counter()
     for record in [*judgments.values(), *verdicts]:
         for field in ("input_tokens", "output_tokens"):
@@ -847,20 +866,25 @@ def cmd_cluster(args) -> None:
         "superseded": 0, "ready_tranches": len(tranches),
         "ready_prs": sum(map(len, tranches.values())),
         "recommendation_kind": "review-candidates", "needs_author_followup": len(follow_up),
-        "escalate_review": len(escalate),
+        "escalate_review": len(escalate), "security_priority": len(security_review),
         "unknown_risk_or_security": sum(metric(j, "risk") is None or metric(j, "security_flag", "noul") is None
                                         for j in judgments.values()),
         "tokens": {"input": tokens["input_tokens"], "output": tokens["output_tokens"]},
-        "output_digests": {"clusters.json": digest(clusters), "dupes.json": digest(dupes)},
+        "output_digests": {"clusters.json": digest(clusters_payload), "dupes.json": digest(dupes)},
     }
-    atomic_json(OUT_DIR / "clusters.json", clusters)
+    # Issue #3: the security meta-category ships with top priority — its own key
+    # inside clusters.json, sorted probability-first, before any category output.
+    security_review.sort(key=lambda it: (-(it["security_flag"]
+                         if it["security_flag"] is not None else -1), it["number"]))
+    atomic_json(OUT_DIR / "clusters.json", clusters_payload)
     atomic_json(OUT_DIR / "dupes.json", dupes)
     lines = [
         "# Tranche — PR review candidates", "",
         f"Corpus: {len(prs)} observed open PRs; {len(judgments)} matching judgments; "
         f"{summary['unjudged_or_stale']} unjudged/stale; {summary['unbound_judgments']} unbound legacy judgments.",
         f"Review candidates: {summary['ready_prs']}. Model-consistent groups: {len(dupe_groups)}. "
-        f"Groups needing relationship review: {len(review_groups)}.", "",
+        f"Groups needing relationship review: {len(review_groups)}. "
+        f"Security-priority items: {summary['security_priority']} (meta-category, reviewed first).", "",
         "Evidence: titles and shortened descriptions (1200 characters per PR; 400 per pair). "
         "Diffstat is unknown unless captured input supplies it. Patches, CI, reproductions, "
         "fix coverage and security have not been verified. Model scores are suggestions, "
@@ -870,13 +894,21 @@ def cmd_cluster(args) -> None:
         lines += ["LEGACY INSPECTION: unbound judgments cannot establish freshness or enter review-candidate tranches.", ""]
     def cell(value):
         return str(value).replace("|", "\\|").replace("\n", " ")
+    def candidate_row(it):
+        return (f"| [#{it['number']}]({it['url']}) | {cell(it['title'][:80])} | {cell(it['author'])} | "
+                f"{it['finished_form']:.1f} | {it['review_effort']:.1f} | {it['is_fix']:.2f} |")
+    CANDIDATE_TABLE = ("| PR | Title | Author | Model finished | Model effort | Model fix |\n"
+                       "|---|---|---|---|---|---|")
+    if security_review:
+        # Issue #3: security ranks above every category in the report.
+        lines += ["## Security review — top priority (meta-category)", "",
+                  "These PRs touch credentials, remote code execution, sudo/permissions, network",
+                  "exposure or crypto material (model probability ≥ "
+                  f"{SECURITY_PRIORITY}). Review before any category batch.", "",
+                  CANDIDATE_TABLE, *[candidate_row(it) for it in security_review], ""]
     for cat, candidates in sorted(tranches.items(), key=lambda t: -len(t[1])):
-        lines += [f"## Review candidates: {cat} — {len(candidates)} PRs", "",
-                  "| PR | Title | Author | Model finished | Model effort | Model fix |",
-                  "|---|---|---|---|---|---|"]
-        for it in candidates:
-            lines.append(f"| [#{it['number']}]({it['url']}) | {cell(it['title'][:80])} | {cell(it['author'])} | "
-                         f"{it['finished_form']:.1f} | {it['review_effort']:.1f} | {it['is_fix']:.2f} |")
+        lines += [f"## Review candidates: {cat} — {len(candidates)} PRs", "", CANDIDATE_TABLE,
+                  *[candidate_row(it) for it in candidates]]
         lines.append("")
     for label, groups in (("Model-consistent candidate groups — verify fix coverage; no survivor selected", dupe_groups),
                           ("Candidate groups needing relationship review", review_groups)):
