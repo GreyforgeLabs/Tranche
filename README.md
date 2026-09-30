@@ -41,7 +41,8 @@ python3 tranche.py judge            # Jev pass over all PRs  (~7 questions, one 
 python3 tranche.py judge --resume   # reuse only matching input/question/model bindings
 python3 tranche.py dupes            # compare candidate pairs using shortened descriptions
 python3 tranche.py cluster          # build out/{clusters.json,dupes.json,tranches.md,summary.json}
-python3 tranche.py all --resume     # judge --resume + dupes + cluster
+python3 tranche.py batches          # classify candidates into out/batches.json + report batch plan
+python3 tranche.py all --resume     # judge --resume + dupes + cluster + batches
 ```
 
 ## What Jev is asked (one batched call per PR)
@@ -92,9 +93,12 @@ no member is automatically marked superseded.
   (`low`, `core`, `danger`, `unknown`); includes source digest, head SHA and URL.
 - `out/dupes.json` — `confirmed_groups` (model-consistent candidates, **not verified
   duplicates**), `review_groups` and `uncertain_pairs`.
+- `out/batches.json` — suggested cumulative pre-release batches per category
+  (issue #4), bound to the `clusters.json` digest recorded in `summary.json`.
 - `out/summary.json` — counts, token usage for selected records, input binding and
   output digests. Historical `ready_*` keys now count **review candidates**;
-  `superseded` is zero and `superseded_by` is null.
+  `superseded` is zero and `superseded_by` is null. `security_priority` counts
+  the security meta-category.
 - `python3 gen_page.py` — render the matching report to `docs/index.html`. Refuses
   legacy, changed or mixed report inputs until `cluster` is rerun.
 
@@ -102,6 +106,32 @@ Review-candidate thresholds remain risk ≤ 1.5, finished_form ≥ 1.8, is_fix �
 security_flag < 0.5, outside a candidate group. All required numeric fields
 (including review effort) must be valid; the judgment must be current and the PR
 must not be a draft. Missing judgment fields cannot qualify an item.
+
+## Security meta-category (top priority)
+
+Security is a meta-category, not a place in the category list: every PR whose
+`security_flag` probability reaches 0.5 forms a cross-cutting `security-review`
+set that outranks every category. It is the first section of `tranches.md`
+(probability-first order), the `security-review` key of `clusters.json`, and the
+leading **Security first** queue of the workbench — where flagged rows carry a
+red tag and a **Security probability: high first** sort is available. Membership
+never replaces a PR's own category; an unknown security probability is never
+flagged. Review these before any category batch.
+
+## Suggested pre-release batches
+
+Within each category, review candidates are further classified into
+**cumulative pre-release batches** (`tranche.py batches`, issue #4): the
+security meta-category first, then the low/core/danger/unknown model-risk
+bands, chunked into size tiers — S (≤ 8), M (≤ 24), L (≤ 48) — ranked lowest
+model risk first. Each batch records its members plus the cumulative set (the
+batch and every earlier one of its category), which is the source for the
+cumulative PRs that are the final deliverable. Batches are a deterministic
+classification of already-judged evidence — model-suggested ordering, never a
+merge approval. Output: `out/batches.json` (bound to the cluster digest;
+`gen_page.py` refuses a stale file), the batch plan appended to
+`out/tranches.md`, and the **Batched** queue with batch chips and per-PR batch
+detail in the workbench.
 
 ## Freshness and migration
 
