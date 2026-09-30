@@ -1,0 +1,62 @@
+{
+ "agents-ai": {
+  "low": [
+   {
+    "number": 13860,
+    "title": "Write a runtime agent-session receipt on every launch",
+    "author": "unknown",
+    "risk": 1.1,
+    "finished_form": 2.03,
+    "is_fix": 0.09,
+    "review_effort": 1.47,
+    "superseded_by": null
+   },
+   {
+    "number": 13857,
+    "title": "Accept agent prompts from stdin or the clipboard",
+    "author": "unknown",
+    "risk": 0.99,
+    "finished_form": 1.94,
+    "is_fix": 0.1,
+    "review_effort": 1.53,
+    "superseded_by": null
+   },
+   {
+    "number": 13859,
+    "title": "Fire an agent-launch hook before replacing the process",
+    "author": "unknown",
+    "risk": 0.89,
+    "finished_form": 1.93,
+    "is_fix": 0.11,
+    "review_effort": 1.44,
+    "superseded_by": null
+   }
+  ],
+  "core": [
+   {
+    "number": 13856,
+    "title": "Launch Claude with a real permission bypass",
+    "author": "unknown",
+    "risk": 2.3,
+    "finished_form": 1.47,
+    "is_fix": 0.77,
+    "review_effort": 1.14,
+    "superseded_by": null
+   }
+  ]
+ },
+ "apps-integrations": {
+  "low": [
+   {
+    "number": 13858,
+    "title": "Hide Hermes' renamed CLI launcher from Apps",
+    "author": "unknown",
+    "risk": 0.85,
+    "finished_form": 2.79,
+    "is_fix": 0.97,
+    "review_effort": 0.53,
+    "superseded_by": null
+   }
+  ]
+ }
+}

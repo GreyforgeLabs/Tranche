@@ -1,0 +1,16 @@
+{
+ "repo": "omacom/omarchy",
+ "prs_in_corpus": 2832,
+ "judged": 5,
+ "dupe_groups": 0,
+ "prs_in_dupe_groups": 0,
+ "superseded": 0,
+ "ready_tranches": 1,
+ "ready_prs": 1,
+ "needs_author_followup": 0,
+ "escalate_review": 1,
+ "tokens": {
+  "input": 6904,
+  "output": 987
+ }
+}
