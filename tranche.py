@@ -14,6 +14,7 @@ Usage:
   python3 tranche.py dupes [--max-pairs N]
   python3 tranche.py cluster            # writes out/clusters.json, out/dupes.json,
                                        #            out/tranches.md, out/summary.json
+  python3 tranche.py batches            # writes out/batches.json (cumulative pre-release batches)
   python3 tranche.py all [--limit N]
 """
 
@@ -797,6 +798,93 @@ def security_priority(judgment):
     return security is not None and security >= SECURITY_PRIORITY
 
 
+# ---------------------------------------------------------------------------
+# Issue #4 — pre-release batches. Within each category the review candidates are
+# further classified into cumulative batches; those batches are the source of
+# the cumulative PRs that are the final deliverable. Classification is fully
+# deterministic from already-judged evidence: security first, then model risk
+# band, then reviewer-effort-scaled size tiers (S <= 8, M <= 24, L <= 48),
+# lowest risk first so every batch is a strictly growing prefix.
+# ---------------------------------------------------------------------------
+
+BATCH_TIERS = (("S", 8), ("M", 24), ("L", 48))
+SECURITY_BATCH = "security"
+
+
+def batch_chunks(candidates):
+    """Split one group's candidates into disjoint ordered chunks per size tier.
+
+    Ranking is exact model risk ascending, then PR number, so chunks are
+    deterministic; cumulativity is applied by category_batches.
+    """
+    ranked = sorted(candidates, key=lambda it: (it["risk"] if it["risk"] is not None else 99, it["number"]))
+    chunks, start = [], 0
+    for _, size in BATCH_TIERS:
+        chunks.append(ranked[start:start + size])
+        start += size
+    return chunks
+
+
+def category_batches(category, candidates, digest_of_clusters):
+    """Build the cumulative pre-release batches for one category."""
+    security = [it for it in candidates if it["security_flag"] is not None
+                and it["security_flag"] >= SECURITY_PRIORITY]
+    bands = (("low", [it for it in candidates if it["risk"] is not None and it["risk"] <= 1.5]),
+             ("core", [it for it in candidates if it["risk"] is not None and 1.5 < it["risk"] <= 2.5]),
+             ("danger", [it for it in candidates if it["risk"] is not None and it["risk"] > 2.5]),
+             ("unknown", [it for it in candidates if it["risk"] is None]))
+    batches, ordinal = [], 0
+    for label, members in ((SECURITY_BATCH, security), *bands):
+        if not members:
+            continue
+        for (tier, _size), chunk in zip(BATCH_TIERS, batch_chunks(members)):
+            if not chunk:
+                continue
+            ordinal += 1
+            batches.append({
+                "ordinal": ordinal, "id": f"{category}-B{ordinal}",
+                "category": category, "group": label, "tier": tier,
+                "count": len(chunk), "members": [it["number"] for it in chunk],
+            })
+    # Cumulative: batch i carries every member of batches 1..i of this category.
+    for index, batch in enumerate(batches):
+        batch["cumulative_count"] = sum(prior["count"] for prior in batches[:index + 1])
+        batch["cumulative_members"] = sorted(
+            {number for prior in batches[:index + 1] for number in prior["members"]})
+    return {"batches": batches, "binding": digest_of_clusters}
+
+
+def cmd_batches(args) -> None:
+    """Write out/batches.json from the committed cluster observation."""
+    summary = json.loads((OUT_DIR / "summary.json").read_text())
+    clusters = json.loads((OUT_DIR / "clusters.json").read_text())
+    if summary.get("format_version") != 2 or summary.get("repo") != REPO:
+        raise TrancheFatal("Unrecognized cluster observation; run cluster first")
+    binding = summary.get("output_digests", {}).get("clusters.json")
+    if binding != digest(clusters):
+        raise TrancheFatal("clusters.json does not match the recorded digest; run cluster first")
+    batches = {"format_version": 1, "repo": REPO, "clusters_digest": binding,
+               "meaning": "Deterministic pre-release batches per category (issue #4). Cumulative: "
+                          "each batch contains every earlier batch of the same group. Model-suggested, "
+                          "not verified safe to merge.",
+               "categories": {}}
+    total = 0
+    for category, bands in sorted(clusters.items()):
+        if category == "security-review" or not isinstance(bands, dict):
+            continue  # The security meta-category already leads every batch set.
+        candidates = [item for band in ("low", "core", "danger", "unknown")
+                      for item in (bands.get(band) or [])]
+        if not candidates:
+            continue
+        built = category_batches(category, candidates, binding)
+        batches["categories"][category] = built
+        total += len(built["batches"])
+        print(f"{category}: {len(built['batches'])} batches, "
+              f"final cumulative {built['batches'][-1]['cumulative_count'] if built['batches'] else 0}")
+    atomic_json(OUT_DIR / "batches.json", batches)
+    print(f"wrote {OUT_DIR}/batches.json: {total} batches across {len(batches['categories'])} categories")
+
+
 def report_binding(prs, judgments, verdicts):
     return digest({"version": BINDING_VERSION, "repo": REPO,
                    "sources": {n: pr["source_digest"] for n, pr in prs.items()},
@@ -845,6 +933,8 @@ def cmd_cluster(args) -> None:
             escalate.append(n)
     # Issue #3: the security meta-category is a first-class output key, ordered
     # before every category when consumers read clusters.json.
+    security_review.sort(key=lambda it: (-(it["security_flag"]
+                         if it["security_flag"] is not None else -1), it["number"]))
     clusters_payload = {"security-review": security_review, **clusters}
     tokens = Counter()
     for record in [*judgments.values(), *verdicts]:
@@ -874,8 +964,6 @@ def cmd_cluster(args) -> None:
     }
     # Issue #3: the security meta-category ships with top priority — its own key
     # inside clusters.json, sorted probability-first, before any category output.
-    security_review.sort(key=lambda it: (-(it["security_flag"]
-                         if it["security_flag"] is not None else -1), it["number"]))
     atomic_json(OUT_DIR / "clusters.json", clusters_payload)
     atomic_json(OUT_DIR / "dupes.json", dupes)
     lines = [
@@ -952,7 +1040,8 @@ def main() -> None:
     d.add_argument("--max-pairs", type=int, default=300)
     cluster = sub.add_parser("cluster", help="build candidate groups and review reports offline")
     cluster.add_argument("--allow-unbound", action="store_true", help="inspect legacy judgments with freshness warnings; no legacy review tranches")
-    a = sub.add_parser("all", help="judge --resume, dupes, cluster")
+    sub.add_parser("batches", help="classify review candidates into cumulative pre-release batches (issue #4)")
+    a = sub.add_parser("all", help="judge --resume, dupes, cluster, batches")
     a.add_argument("--limit", type=int, default=None)
     a.add_argument("--resume", action="store_true", help="accepted for compatibility; all always resumes")
     a.add_argument("--max-pairs", type=int, default=300)
@@ -969,11 +1058,14 @@ def main() -> None:
         cmd_dupes(args)
     elif args.cmd == "cluster":
         cmd_cluster(args)
+    elif args.cmd == "batches":
+        cmd_batches(args)
     elif args.cmd == "all":
         args.resume = True
         cmd_judge(args)
         cmd_dupes(args)
         cmd_cluster(args)
+        cmd_batches(args)
 
 
 if __name__ == "__main__":

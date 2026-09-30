@@ -683,11 +683,64 @@ class WorkflowTests(unittest.TestCase):
             patch.object(tranche, "cmd_judge") as judge,
             patch.object(tranche, "cmd_dupes") as dupes,
             patch.object(tranche, "cmd_cluster") as cluster,
+            patch.object(tranche, "cmd_batches") as batches,
         ):
             tranche.main()
         self.assertTrue(judge.call_args.args[0].resume)
         self.assertEqual(dupes.call_args.args[0].max_pairs, 0)
         self.assertEqual(cluster.call_count, 1)
+        self.assertEqual(batches.call_count, 1)
+
+    def batch_setup(self, count=8):
+        prs = self.inputs([pr(n) for n in range(1, count + 1)])
+        records = {}
+        for n in range(1, count + 1):
+            data = answers()
+            data["risk"]["score"] = 1 if n <= 6 else 2  # 6 low, 2 core
+            if n == count:
+                data["security_flag"] = {"noul": 0.7}
+            records[n] = data
+        tranche.JUDGMENTS_PATH.write_text("".join(
+            json.dumps({"number": n, "answers": records[n],
+                        "binding": tranche.judgment_binding(prs[n])}) + "\n"
+            for n in sorted(prs)))
+        return self.cluster()
+
+    def test_batches_classify_tiers_groups_and_cumulativity(self):
+        summary, _ = self.batch_setup()
+        tranche.cmd_batches(argparse.Namespace())
+        payload = json.loads((self.out / "batches.json").read_text())
+        self.assertEqual(payload["clusters_digest"], summary["output_digests"]["clusters.json"])
+        built = payload["categories"]["fix-misc"]["batches"]
+        # Security first, then the low band, then core; empty tiers are skipped.
+        self.assertEqual([(b["group"], b["tier"], b["count"]) for b in built],
+                         [("security", "S", 1), ("low", "S", 6), ("core", "S", 2)])
+        self.assertEqual([b["id"] for b in built],
+                         ["fix-misc-B1", "fix-misc-B2", "fix-misc-B3"])
+        self.assertEqual([b["members"] for b in built], [[8], [1, 2, 3, 4, 5, 6], [7, 8]])
+        self.assertTrue(all(set(b["cumulative_members"]) >= set(b["members"]) for b in built),
+                        "cumulative members always contain the batch's own members")
+        self.assertEqual(built[-1]["cumulative_members"], [1, 2, 3, 4, 5, 6, 7, 8])
+
+    def test_batches_are_cumulative_and_bound_to_clusters(self):
+        summary, _ = self.batch_setup()
+        tranche.cmd_batches(argparse.Namespace())
+        payload = json.loads((self.out / "batches.json").read_text())
+        built = payload["categories"]["fix-misc"]["batches"]
+        # Cumulative: the last batch carries every member of every earlier batch.
+        final = built[-1]
+        self.assertEqual(final["cumulative_count"], sum(b["count"] for b in built))
+        self.assertEqual(final["cumulative_members"],
+                         sorted({n for b in built for n in b["members"]}))
+        self.assertLess(set(built[0]["members"]), set(built[1]["members"]) | {8},
+                        "groups are disjoint apart from the shared security member")
+        # Binding: rerun without cluster is fine; corrupt clusters and it must refuse.
+        tranche.cmd_batches(argparse.Namespace())
+        clusters = json.loads((self.out / "clusters.json").read_text())
+        clusters["fix-misc"]["low"][0]["title"] = "mutated"
+        (self.out / "clusters.json").write_text(json.dumps(clusters))
+        with self.assertRaises(tranche.TrancheFatal):
+            tranche.cmd_batches(argparse.Namespace())
 
 
 if __name__ == "__main__":
