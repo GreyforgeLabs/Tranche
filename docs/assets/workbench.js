@@ -44,11 +44,12 @@
   // Issue #3: security is the top-priority meta-category; its queue leads the nav.
   // Issue #4: 'batched' shows every PR assigned to a pre-release batch.
   const queues = {security: 'security_priority', all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', related: 'related', batched: 'batched'};
+  const queueMatch = (pr, field) => !field || pr[field] || (field === 'batched' && pr.batches?.length);
   const PAGE_SIZE = 30;
   function select(rows, state = {}, indexes) {
     const field = queues[state.queue || 'all'];
     const wordCache = new Map(); // Repeated corpus vocabulary pays edit distance only once.
-    const filtered = rows.filter(pr => (!field || pr[field] || (field === 'batched' && pr.batches?.length)) &&
+    const filtered = rows.filter(pr => queueMatch(pr, field) &&
       (!state.category || state.category === 'all' || pr.category === state.category) &&
       matches(pr, state.q || '', indexes?.get(pr.number), wordCache));
     filtered.sort((a, b) => {
@@ -300,7 +301,7 @@
     }
     document.querySelectorAll('[data-queue]').forEach(b => {
       const field = queues[b.dataset.queue];
-      b.querySelector('span').textContent = formatCount(field ? rows.filter(pr => pr[field]).length : rows.length);
+      b.querySelector('span').textContent = formatCount(rows.filter(pr => queueMatch(pr, field)).length);
       b.addEventListener('click', () => update({queue: b.dataset.queue, page: 1, pr: null}));
     });
     $('search').addEventListener('input', () => {
