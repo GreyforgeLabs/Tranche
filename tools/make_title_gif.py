@@ -26,7 +26,7 @@ EFFECT = "colorshift"
 PROBE_W = 54  # probe line width (glyphfx-native habitat)
 FRAME_RATE = 24
 MAX_FRAMES = 60
-TAGLINE = "x Jev"
+TAGLINE = "TRIAGE x Jev"
 BG = (0x16, 0x16, 0x1E)
 DEFAULT_FG = (0xC0, 0xCA, 0xF5)
 
