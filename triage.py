@@ -470,7 +470,9 @@ class DSU:
 
 def cmd_cluster(args) -> None:
     prs = load_prs()
-    judgments = load_judgments()
+    # Drop judgments for PRs that merged/closed since their fetch — the report
+    # must only ever speak about PRs that are still open.
+    judgments = {n: j for n, j in load_judgments().items() if n in prs}
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     # --- duplicate groups from confirmed pairs ---

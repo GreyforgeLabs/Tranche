@@ -78,18 +78,18 @@ parts.append(f"""<!doctype html>
 body{{margin:0;background:var(--bg);color:var(--fg);font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}}
 main{{max-width:1060px;margin:0 auto;padding:32px 20px 80px}}
 a{{color:var(--acc);text-decoration:none}} a:hover{{text-decoration:underline}}
-code{{background:var(--bg2);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.9em}}
+code{{background:var(--bg2);border:1px solid var(--line);border-radius:0;padding:1px 6px;font-size:.9em}}
 header{{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:28px}}
 h1{{font-size:1.9em;margin:0 0 6px}} h1 .jev{{color:var(--pur)}}
 .sub{{color:var(--dim)}}
-blockquote{{margin:18px 0;padding:10px 18px;border-left:3px solid var(--pur);color:var(--fg);background:var(--bg2);border-radius:0 8px 8px 0}}
+blockquote{{margin:18px 0;padding:10px 18px;border-left:3px solid var(--pur);color:var(--fg);background:var(--bg2);border-radius:0}}
 blockquote .who{{color:var(--dim)}}
 .stats{{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:26px 0}}
-.stat{{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px 16px}}
+.stat{{background:var(--bg2);border:1px solid var(--line);border-radius:0;padding:14px 16px}}
 .stat .n{{font-size:1.7em;font-weight:700}} .stat .l{{color:var(--dim);font-size:.85em}}
 .stat.g .n{{color:var(--grn)}} .stat.p .n{{color:var(--pur)}} .stat.y .n{{color:var(--yel)}} .stat.r .n{{color:var(--red)}} .stat.b .n{{color:var(--acc)}}
 h2{{font-size:1.35em;margin:40px 0 12px}}
-details{{background:var(--bg2);border:1px solid var(--line);border-radius:10px;margin:10px 0}}
+details{{background:var(--bg2);border:1px solid var(--line);border-radius:0;margin:10px 0}}
 summary{{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none}}
 summary::before{{content:"▸ ";color:var(--dim)}} details[open] summary::before{{content:"▾ "}}
 summary .cnt{{color:var(--dim);font-weight:400}}
@@ -98,17 +98,17 @@ table{{width:100%;border-collapse:collapse;font-size:.92em;margin-top:8px}}
 th{{text-align:left;color:var(--dim);font-weight:600;border-bottom:1px solid var(--line);padding:6px 8px}}
 td{{padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}}
 tr:last-child td{{border-bottom:none}}
-.sup{{background:#3b2a4d;color:var(--pur);border-radius:4px;padding:0 6px;font-size:.8em}}
+.sup{{background:#3b2a4d;color:var(--pur);border-radius:0;padding:0 6px;font-size:.8em}}
 .canon{{color:var(--grn)}}
 .muted{{color:var(--dim)}}
-.bar{{height:8px;border-radius:4px;background:var(--bg2);overflow:hidden;display:flex;margin-top:6px}}
+.bar{{height:8px;border-radius:0;background:var(--bg2);overflow:hidden;display:flex;margin-top:6px}}
 .bar i{{display:block;height:100%}}
 .legend{{display:flex;flex-wrap:wrap;gap:14px;color:var(--dim);font-size:.85em;margin-top:10px}}
 .legend b{{color:var(--fg);font-weight:600}}
 footer{{margin-top:60px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:.88em}}
 </style></head><body><main>
 <header>
-<h1>Omarchy PR Triage <span class="jev">× Jev</span></h1>
+<img src="assets/omarchy-triage.gif" alt="OMARCHY TRIAGE x Jev" title="OMARCHY TRIAGE x Jev" style="width:min(883px,100%);height:auto;display:block;margin:2px 0 12px">
 <div class="sub">All {summary['prs_in_corpus']} open pull requests of <a href="https://github.com/omacom/omarchy" target="_blank">omacom/omarchy</a>, judged by TypeSafe's <a href="https://docs.typesafe.ai" target="_blank">System One model Jev</a> and clustered into merge tranches. Built by <a href="https://github.com/blackopsrepl" target="_blank">@blackopsrepl</a> for the Omarchy triage team.</div>
 <blockquote>“We're 2,200 PRs deep on GH now and getting nearly a hundred new ones every day. I'll never be able to catch up. Agents will help, but we need humans too. If you have DEEP Linux experience, is agent-forward, and want to join the new Omarchy triage team, write triage@omarchy.org.”<br><span class="who">— DHH, 12 Sep 2026 · <a href="https://x.com/dhh/status/2098755120540393908" target="_blank">x.com/dhh/…</a></span></blockquote>
 <div class="stats">
