@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.0.2](https://github.com/blackopsrepl/Tranche/compare/v0.0.1...v0.0.2) (2026-09-30)
+
+
+### Features
+
+* **batches:** cumulative pre-release batches per category ([a2518b2](https://github.com/blackopsrepl/Tranche/commit/a2518b29b5703ffdfa7ca9bca7e35db35c66ca22)), closes [#4](https://github.com/blackopsrepl/Tranche/issues/4)
+* **cluster:** security meta-category with top priority ([f7dc8e5](https://github.com/blackopsrepl/Tranche/commit/f7dc8e5f262acd7ae83311fdabb8608bea5bcafb)), closes [#3](https://github.com/blackopsrepl/Tranche/issues/3)
+* **report:** restore OMARCHY branding with the Tranche keeper ([def48aa](https://github.com/blackopsrepl/Tranche/commit/def48aae20a72145e9ce9db87f16ee61b2eb2c47))
+* **reports:** suggested pre-release batch plan in tranches.md ([d0c3fc3](https://github.com/blackopsrepl/Tranche/commit/d0c3fc354993afc64c075202d3b2d63e2d949afc)), closes [#4](https://github.com/blackopsrepl/Tranche/issues/4)
+* **workbench:** browse pre-release batches per PR ([3f0bea3](https://github.com/blackopsrepl/Tranche/commit/3f0bea3231c1f2a4b0d0d130e226caf40d6a8719)), closes [#4](https://github.com/blackopsrepl/Tranche/issues/4)
+* **workbench:** make the PR backlog searchable and browsable ([fa4022b](https://github.com/blackopsrepl/Tranche/commit/fa4022b87835d07f197385d608fbd95047334064))
+* **workbench:** security-first queue and sort ([983c890](https://github.com/blackopsrepl/Tranche/commit/983c8908bb26d36eb8aa2c81178cf11164082277)), closes [#3](https://github.com/blackopsrepl/Tranche/issues/3)
+
+
+### Bug Fixes
+
+* **workbench:** batched queue counter uses the same membership predicate as the filter ([8815d7e](https://github.com/blackopsrepl/Tranche/commit/8815d7e95dc047376ee7290c304e1e4efeacb469))
+
 ## 0.0.1 (2026-09-30)
 
 
