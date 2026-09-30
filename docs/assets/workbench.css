@@ -53,6 +53,8 @@ h2 {font-size: 22px; font-weight: 500; line-height: 1.35; margin: 0; letter-spac
 #batch-list {display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px;}
 .batch-card {border: 1px solid var(--line); padding: 12px; display: grid; gap: 10px; align-content: start;}
 .batch-head {display: flex; align-items: center; gap: 10px;}
+.batch-name {display: block; margin-bottom: 6px; font: 12px var(--mono); color: var(--sage);}
+.pair-diagnostic .related-member {margin-top: 4px;}
 .batch-open {min-height: 34px; padding: 4px 10px; font: 12px var(--mono); color: var(--sage);}
 .batch-meta {display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--muted); font-size: 11px;}
 .product-note {font-size: 11px; color: var(--muted); margin: -8px 0 16px;}
