@@ -365,6 +365,82 @@ def cmd_fetch(args) -> None:
     print(f"fetched {total} observed open PRs into {PAGES_DIR}")
 
 
+def finite_json(value):
+    """Keep evidence JSON-shaped while removing non-standard numeric constants."""
+    if isinstance(value, dict):
+        return {key: finite_json(item) for key, item in value.items()}
+    if isinstance(value, list):
+        return [finite_json(item) for item in value]
+    if isinstance(value, float) and not math.isfinite(value):
+        return None
+    return value
+
+
+def normalized_record(record):
+    record = {key: finite_json(value) for key, value in record.items()}
+    usage = record.get("usage")
+    usage = usage if isinstance(usage, dict) else {}
+    record["usage"] = {field: usage.get(field) if type(usage.get(field)) is int
+                       and usage[field] >= 0 else 0
+                       for field in ("input_tokens", "output_tokens")}
+    return record
+
+
+def normalize_pair(record):
+    record = normalized_record(record)
+    choices = pair_questions()["sameness"]["criteria"]
+    verdict = record.get("verdict")
+    if not isinstance(verdict, str) or verdict not in choices:
+        record["verdict"] = None
+    probabilities = record.get("probabilities")
+    probabilities = dict(probabilities) if isinstance(probabilities, dict) else {}
+    for key, value in probabilities.items():
+        if type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= 1:
+            probabilities[key] = None
+    record["probabilities"] = probabilities
+    probabilities["same_change"] = p_same(record)
+    record["normalization_errors"] = [field + ": invalid or missing" for field, value in
+        (("verdict", record.get("verdict")), ("probabilities.same_change", p_same(record)))
+        if value is None]
+    return record
+
+
+def reusable_pair(record):
+    return record.get("verdict") is not None and p_same(record) is not None
+
+
+def normalize_judgment(record):
+    record = normalized_record(record)
+    data = record.get("answers")
+    data = data if isinstance(data, dict) else {}
+    record["answers"] = data
+    errors = []
+    for name, question in judge_questions().items():
+        answer = data.get(name)
+        answer = dict(answer) if isinstance(answer, dict) else {}
+        field = {"choice": "choice", "score": "score", "noul": "noul"}[question["type"]]
+        if field == "choice":
+            value = answer.get(field)
+            valid = isinstance(value, str) and value in question["criteria"]
+        else:
+            value = metric(record, name, field)
+            valid = value is not None
+        if not valid:
+            errors.append(f"answers.{name}.{field}: invalid or missing")
+            value = None
+        answer[field] = value
+        data[name] = answer
+    record["normalization_errors"] = errors
+    return record
+
+
+def reusable_judgment(record):
+    return (record["answers"]["category"]["choice"] is not None
+            and all(metric(record, name, field) is not None for name, field in (
+                ("risk", "score"), ("finished_form", "score"), ("review_effort", "score"),
+                ("is_fix", "noul"), ("security_flag", "noul"))))
+
+
 def load_done() -> dict[int, dict]:
     done: dict[int, dict] = {}
     if JUDGMENTS_PATH.exists():
@@ -373,8 +449,9 @@ def load_done() -> dict[int, dict]:
                 rec = json.loads(line)
             except json.JSONDecodeError:
                 continue
-            if "error" not in rec:
-                done[rec["number"]] = rec
+            if (isinstance(rec, dict) and "error" not in rec
+                    and type(rec.get("number")) is int and rec["number"] > 0):
+                done[rec["number"]] = normalize_judgment(rec)
     return done
 
 
@@ -416,19 +493,24 @@ def current_pairs(prs, judgments, *, allow_unbound=False):
                 record = json.loads(line)
             except json.JSONDecodeError:
                 continue
+            if (not isinstance(record, dict) or "error" in record
+                    or any(type(record.get(key)) is not int or record[key] <= 0 for key in ("a", "b"))):
+                continue
             a, b = sorted((record["a"], record["b"]))
             if a == b or a not in judgments or b not in judgments:
                 continue
             matches = record.get("binding") == pair_binding(prs, a, b)
             legacy = "binding" not in record and allow_unbound
             if matches or legacy:
+                record = normalize_pair(record)
                 pairs[a, b] = dict(record, a=a, b=b, freshness="current" if matches else "unbound")
     return list(pairs.values())
 
 
 def cmd_judge(args) -> None:
     prs = load_prs()
-    done = current_judgments(prs) if args.resume else {}
+    done = {n: rec for n, rec in current_judgments(prs).items()
+            if reusable_judgment(rec)} if args.resume else {}
     if not args.resume:
         JUDGMENTS_PATH.parent.mkdir(parents=True, exist_ok=True)
         JUDGMENTS_PATH.write_text("")
@@ -449,9 +531,9 @@ def cmd_judge(args) -> None:
         pr = prs[number]
         try:
             resp = ask(pr_state(pr), judge_questions(), key)
-            if not isinstance(resp.get("answers"), dict):
-                raise TriageFatal("Model response lacks an answers object")
-            rec = {"number": number, "title": pr["title"], "answers": resp["answers"], "usage": resp.get("usage", {}),
+            if not isinstance(resp, dict):
+                resp = {}
+            rec = {"number": number, "title": pr["title"], "answers": resp.get("answers"), "usage": resp.get("usage", {}),
                    "binding": judgment_binding(pr), "input": pr_state(pr),
                    "source_digest": pr["source_digest"], "head_sha": pr["head_sha"],
                    "updated_at": pr["updated"], "requested_model": MODEL,
@@ -463,11 +545,12 @@ def cmd_judge(args) -> None:
             if "401" in str(e):
                 raise
             return
+        rec = normalize_judgment(rec)
         with lock:
             with JUDGMENTS_PATH.open("a") as f:
-                f.write(json.dumps(rec) + "\n")
-            tokens_in += resp.get("usage", {}).get("input_tokens", 0)
-            tokens_out += resp.get("usage", {}).get("output_tokens", 0)
+                f.write(json.dumps(rec, allow_nan=False) + "\n")
+            tokens_in += rec["usage"]["input_tokens"]
+            tokens_out += rec["usage"]["output_tokens"]
             n = len(done) + 1
             done[number] = rec
             if n % 25 == 0:
@@ -543,7 +626,8 @@ def cmd_dupes(args) -> None:
     missing = len(prs) - len(judgments)
     if missing > 100:
         print(f"warning: {missing} PRs not judged yet; dupe pass runs on judged subset", file=sys.stderr)
-    done_pairs = {(rec["a"], rec["b"]) for rec in current_pairs(prs, judgments)}
+    done_pairs = {(rec["a"], rec["b"]) for rec in current_pairs(prs, judgments)
+                  if reusable_pair(rec)}
     pairs = [(s, a, b) for s, a, b in lexical_pairs(prs, judgments) if (a, b) not in done_pairs]
     pairs = pairs[: args.max_pairs]
     print(f"{len(pairs)} candidate pairs to compare (skipping {len(done_pairs)} matching records)")
@@ -558,10 +642,15 @@ def cmd_dupes(args) -> None:
         if a not in prs or b not in prs:
             return  # candidate became stale (PR closed and refetched mid-run)
         resp = ask({"pr_a": brief(prs[a]), "pr_b": brief(prs[b])}, pair_questions(), key)
+        resp = resp if isinstance(resp, dict) else {}
+        data = resp.get("answers")
+        data = data if isinstance(data, dict) else {}
+        answer = data.get("sameness")
+        answer = answer if isinstance(answer, dict) else {}
         rec = {
             "a": a, "b": b, "similarity": round(s, 3),
-            "verdict": resp["answers"]["sameness"]["choice"],
-            "probabilities": resp["answers"]["sameness"]["probabilities"],
+            "verdict": answer.get("choice"),
+            "probabilities": answer.get("probabilities"),
             "usage": resp.get("usage", {}),
             "binding": pair_binding(prs, a, b),
             "requested_model": MODEL, "resolved_model": resp.get("model"),
@@ -569,9 +658,10 @@ def cmd_dupes(args) -> None:
             "judged_at": datetime.now(timezone.utc).isoformat(),
             "input": {"pr_a": brief(prs[a]), "pr_b": brief(prs[b])},
         }
+        rec = normalize_pair(rec)
         with lock:
             with PAIRS_PATH.open("a") as f:
-                f.write(json.dumps(rec) + "\n")
+                f.write(json.dumps(rec, allow_nan=False) + "\n")
 
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
         futures = [ex.submit(work, it) for it in pairs]
@@ -670,7 +760,7 @@ def review_candidate(pr, judgment, grouped):
     required = [metric(judgment, "risk"), metric(judgment, "finished_form"),
                 metric(judgment, "is_fix", "noul"), metric(judgment, "security_flag", "noul"),
                 metric(judgment, "review_effort")]
-    if (judgment.get("freshness") != "current" or pr["draft"]
+    if (judgment.get("freshness") != "current" or not reusable_judgment(judgment) or pr["draft"]
             or pr["number"] in grouped or any(value is None for value in required)):
         return False
     risk, finished, fix, security, _ = required

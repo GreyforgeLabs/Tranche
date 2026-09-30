@@ -312,6 +312,110 @@ class WorkflowTests(unittest.TestCase):
             self.assertIsNone(triage.metric({"answers": {"risk": {"score": value}}}, "risk"))
         self.assertIsNone(triage.p_same({"probabilities": {"same_change": float("nan")}}))
 
+    def test_model_judgments_normalize_before_save_and_retry_unknown_metrics(self):
+        self.inputs([pr(1)])
+        self.key.side_effect = None
+        self.key.return_value = "synthetic-key"
+        self.model.side_effect = None
+        args = argparse.Namespace(resume=True, limit=None)
+        for value, usage in ((float("nan"), None), (float("inf"), []),
+                             (-float("inf"), {"input_tokens": True, "output_tokens": -1}),
+                             ("1", {"input_tokens": 2.5, "output_tokens": "3"})):
+            with self.subTest(value=value, usage=usage):
+                data = answers()
+                data["risk"]["score"] = value
+                self.model.return_value = {"answers": data, "usage": usage}
+                before = self.model.call_count
+                triage.cmd_judge(args)
+                self.assertEqual(self.model.call_count, before + 1)
+                record = triage.load_done()[1]
+                self.assertIsNone(record["answers"]["risk"]["score"])
+                self.assertEqual(record["answers"]["finished_form"]["score"], 2)
+                self.assertEqual(record["usage"], {"input_tokens": 0, "output_tokens": 0})
+                self.assertTrue(record["normalization_errors"])
+                json.dumps(record, allow_nan=False)
+                self.assertEqual(self.cluster()[0]["ready_prs"], 0)
+                result = self.render()
+                self.assertEqual(result.returncode, 0, result.stderr)
+        self.model.return_value = {"answers": answers(), "usage": {"input_tokens": 7}}
+        triage.cmd_judge(args)
+        before = self.model.call_count
+        triage.cmd_judge(args)
+        self.assertEqual(self.model.call_count, before)
+        self.assertEqual(self.cluster()[0]["tokens"], {"input": 7, "output": 0})
+
+    def test_pair_responses_and_poisoned_caches_recover_without_losing_evidence(self):
+        prs = self.inputs([pr(1), pr(2)])
+        self.judgments(prs)
+        self.pairs(prs, [(1, 2, "same_change", float("nan"))])
+        path = triage.JUDGMENTS_PATH
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        rows[0]["answers"]["risk"]["score"] = float("inf")
+        rows[0]["usage"] = None
+        junk = [None, [], 7, {}, {"number": []}, {"number": True}]
+        path.write_text("broken\n" + "".join(json.dumps(r) + "\n" for r in junk + rows))
+        triage.PAIRS_PATH.write_text("broken\n" + "".join(json.dumps(r) + "\n" for r in
+            [None, [], {}, {"a": [], "b": 2}, {"a": True, "b": 2}]) + triage.PAIRS_PATH.read_text())
+        before = path.read_bytes()
+        self.assertEqual(self.cluster()[0]["ready_prs"], 1)
+        self.assertEqual(self.render().returncode, 0)
+        self.assertEqual(path.read_bytes(), before)  # Recovery is in memory, not binding retrofit.
+        self.key.side_effect = None
+        self.key.return_value = "synthetic-key"
+        self.model.side_effect = None
+        self.model.return_value = {"answers": answers()}
+        triage.cmd_judge(argparse.Namespace(resume=True, limit=None))
+        self.model.assert_called_once()
+        for response in (None, {"answers": []}, {"answers": {"sameness": []}},
+                         {"answers": {"sameness": {"choice": [], "probabilities": []}}},
+                         *[{"answers": {"sameness": {"choice": "same_change",
+                            "probabilities": {"same_change": v}}}, "usage": "invalid"}
+                           for v in (float("nan"), float("inf"), -float("inf"), True, 2)]):
+            with self.subTest(response=response):
+                self.model.return_value = response
+                calls = self.model.call_count
+                triage.cmd_dupes(argparse.Namespace(max_pairs=10))
+                self.assertEqual(self.model.call_count, calls + 1)
+                records = triage.current_pairs(prs, triage.current_judgments(prs))
+                self.assertEqual(len(records), 1)
+                self.assertIsNone(triage.p_same(records[0]))
+                self.assertTrue(records[0]["normalization_errors"])
+                for line in triage.PAIRS_PATH.read_text().splitlines()[7:]:
+                    json.loads(line, parse_constant=lambda token: self.fail(token))
+                self.assertEqual(self.cluster()[1]["confirmed_groups"], [])
+                self.assertEqual(self.render().returncode, 0)
+        self.model.return_value = {"answers": {"sameness": {"choice": "same_change",
+            "probabilities": {"same_change": 0.9}}}, "usage": {"input_tokens": 3}}
+        triage.cmd_dupes(argparse.Namespace(max_pairs=10))
+        calls = self.model.call_count
+        triage.cmd_dupes(argparse.Namespace(max_pairs=10))
+        self.assertEqual(self.model.call_count, calls)
+        self.assertEqual(self.cluster()[1]["confirmed_groups"], [[1, 2]])
+        self.assertEqual(self.render().returncode, 0)
+
+    def test_invalid_category_and_answer_shapes_are_reportable_not_reusable(self):
+        prs = self.inputs([pr(1)])
+        self.key.side_effect = None
+        self.key.return_value = "synthetic-key"
+        self.model.side_effect = None
+        args = argparse.Namespace(resume=True, limit=None)
+        for shape in (dict(answers(), category={"choice": []}), None, [], "bad"):
+            with self.subTest(shape=shape):
+                triage.JUDGMENTS_PATH.write_text(json.dumps({"number": 1,
+                    "answers": shape, "binding": triage.judgment_binding(prs[1])}) + "\n")
+                self.assertEqual(self.cluster()[0]["ready_prs"], 0)
+                self.assertEqual(self.render().returncode, 0)
+                self.model.return_value = {"answers": shape}
+                calls = self.model.call_count
+                triage.cmd_judge(args)
+                triage.cmd_judge(args)
+                self.assertEqual(self.model.call_count, calls + 2)
+                self.assertEqual(self.cluster()[0]["ready_prs"], 0)
+        for response in (None, [], {}):
+            self.model.return_value = response
+            triage.cmd_judge(args)
+            self.assertEqual(self.cluster()[0]["ready_prs"], 0)
+
     def test_drafts_cannot_enter_review_candidates(self):
         prs = self.inputs([pr(1, draft=True)])
         self.judgments(prs)

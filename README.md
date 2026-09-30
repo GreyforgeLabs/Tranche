@@ -102,7 +102,16 @@ Each new judgment binds the repository, full captured PR JSON digest (including
 head SHA/updated time when provided), actual projected model input, questions,
 requested model and binding version. Pair records bind both source inputs and the
 pair questions. Resume reuses only matching records; closed, changed or differently
-configured inputs are excluded from reports. New records retain the input,
+configured inputs are excluded from reports. Matching but malformed responses remain
+reportable as unknown values with `normalization_errors`; they are not resume hits.
+Required category, risk, finished-form, effort, fix and security answers must be valid
+for judgment reuse (the advisory dupe signal is optional). Pair reuse requires a valid
+verdict and finite P(same). New responses and existing JSONL caches share normalization:
+invalid metrics become null, valid evidence is retained, non-finite numbers are removed,
+and usage counters become nonnegative integers (invalid/missing counters become zero).
+Malformed JSONL records without valid positive integer identities are ignored. Recovery
+is in memory and never adds bindings to legacy records. New JSONL writes are strict JSON.
+New records retain the input,
 requested model, returned model/request ID when supplied, and judgment time.
 The local digest detects changed captured bytes, not authenticity or live freshness.
 A floating model alias such as `jev-latest` can move without changing the requested
