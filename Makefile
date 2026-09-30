@@ -26,7 +26,7 @@ JUDGED := $(shell test -f out/judgments.jsonl && wc -l < out/judgments.jsonl || 
 PAIRED := $(shell test -f out/pair_verdicts.jsonl && wc -l < out/pair_verdicts.jsonl || echo 0)
 
 # ============== Phony Targets ==============
-.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments
+.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments test
 
 # ============== Default Target ==============
 .DEFAULT_GOAL := help
@@ -47,15 +47,7 @@ fetch: banner
 	@printf "$(CYAN)$(BOLD)╔══════════════════════════════════════╗$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)║        Fetching Open PRs             ║$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n\n"
-	@printf "$(ARROW) $(BOLD)Paging omacom/omarchy pulls API (curl; python urllib is IPv6-broken here)...$(RESET)\n"
-	@mkdir -p data/pages && rm -f data/pages/page_*.json && \
-		ok=1; for i in $$(seq 1 30); do \
-			curl -sf "https://api.github.com/repos/omacom/omarchy/pulls?state=open&per_page=100&page=$$i" > data/pages/page_$$i.json || { ok=0; break; }; \
-			n=$$(python3 -c "import json;print(len(json.load(open('data/pages/page_$$i.json'))))" 2>/dev/null || echo 0); \
-			printf "$(PROGRESS) page $$i: $$n PRs\n"; \
-			[ "$$n" = "0" ] && break; sleep 0.3; done; \
-		[ $$ok -eq 1 ] && printf "$(GREEN)$(CHECK) Fetch complete$(RESET)\n\n" || \
-		(printf "$(RED)$(CROSS) Fetch failed$(RESET)\n\n" && exit 1)
+	@python3 triage.py fetch --transport curl
 
 # ============== Jev Pipeline ==============
 
@@ -75,7 +67,7 @@ judge-full: banner
 	@python3 triage.py judge
 
 dupes: banner
-	@printf "$(ARROW) $(BOLD)Confirming duplicate pairs with Jev sameness judgments...$(RESET)\n"
+	@printf "$(ARROW) $(BOLD)Comparing candidate pairs with Jev sameness judgments...$(RESET)\n"
 	@python3 triage.py dupes && \
 		printf "$(GREEN)$(CHECK) Pair verdicts in out/pair_verdicts.jsonl$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) Dupe pass failed$(RESET)\n\n" && exit 1)
@@ -100,7 +92,12 @@ gif: banner
 
 # ============== Composite Targets ==============
 
-all: fetch judge dupes cluster page
+all:
+	@$(MAKE) fetch
+	@$(MAKE) judge
+	@$(MAKE) dupes
+	@$(MAKE) cluster
+	@$(MAKE) page
 	@printf "$(GREEN)$(BOLD)╔══════════════════════════════════════╗$(RESET)\n"
 	@printf "$(GREEN)$(BOLD)║        $(CHECK) PIPELINE COMPLETE              ║$(RESET)\n"
 	@printf "$(GREEN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n"
@@ -138,13 +135,16 @@ clean-judgments: banner
 	@rm -fv out/judgments.jsonl out/pair_verdicts.jsonl && \
 		printf "$(GREEN)$(CHECK) Judgment cache cleared$(RESET)\n\n"
 
+test:
+	@python3 -m unittest discover -s tests -v
+
 # ============== Help ==============
 
 help: banner
 	@/bin/echo -e "$(CYAN)$(BOLD)Pipeline:$(RESET)"
 	@/bin/echo -e "  $(GREEN)make fetch$(RESET)         - Refresh open-PR snapshot (curl-paged REST)"
 	@/bin/echo -e "  $(GREEN)make judge$(RESET)         - Jev pass over unjudged PRs (resume-safe)"
-	@/bin/echo -e "  $(GREEN)make dupes$(RESET)         - Confirm duplicate pairs with Jev"
+	@/bin/echo -e "  $(GREEN)make dupes$(RESET)         - Compare candidate pairs with Jev"
 	@/bin/echo -e "  $(GREEN)make cluster$(RESET)       - Build tranches, dupe groups, escalation lists"
 	@/bin/echo -e ""
 	@/bin/echo -e "$(CYAN)$(BOLD)Output:$(RESET)"
@@ -162,5 +162,5 @@ help: banner
 	@/bin/echo -e "  $(GREEN)make clean-judgments$(RESET) - $(RED)Delete the judgment cache$(RESET)"
 	@/bin/echo -e "  $(GREEN)make help$(RESET)          - Show this help message"
 	@/bin/echo -e ""
-	@/bin/echo -e "$(GRAY)API key: ~/Documents/jevapi.txt  ·  Model: jev-latest (jev-1.13.x)$(RESET)"
+	@/bin/echo -e "$(GRAY)API key: ~/Documents/jevapi.txt  ·  Model: jev-latest (alias; resolved version recorded when returned)$(RESET)"
 	@/bin/echo -e ""

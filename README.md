@@ -13,26 +13,26 @@ on 2026-09-12 ([x.com/dhh/status/2098755120540393908](https://x.com/dhh/status/2
 > "Omarchy Triage can help consolidate PRs, remove dupes, and ensure that everything is ready
 > for consideration in a finished form."
 
-This tool does exactly that with [TypeSafe](https://docs.typesafe.ai)'s System One model
-**Jev**: every PR gets a batched set of typed judgments, duplicate candidates are confirmed
-pair-wise, and code clusters the results into merge tranches. Code owns the workflow; Jev
-supplies the semantic judgments. Skill: `.claude/skills/typesafe-ai` (installed via
-`npx skills add typesafe-ai/skills --skill typesafe-ai`).
+This tool uses [TypeSafe](https://docs.typesafe.ai)'s System One model **Jev**
+to suggest review candidates and related PR groups. Code owns the workflow;
+Jev supplies judgments about the descriptions it receives. This is a discovery
+and prioritization pass, not completed QA, verified duplicate detection or a
+security review. Maintainers decide what to merge or close.
 
 ## Setup
 
 ```bash
-# API key (already present on this machine)
+# Needed only for judge/dupes; fetch, cluster and tests do not use a model key
 echo "apikey_..." > ~/Documents/jevapi.txt     # or: export TYPESAFE_API_KEY=...
 ```
 
 ## Usage
 
 ```bash
-python3 triage.py fetch            # refresh data/pages/*.json (open PRs, unauthenticated GH)
+python3 triage.py fetch            # atomically replace data/pages/snapshot.json (open PRs, unauthenticated GH)
 python3 triage.py judge            # Jev pass over all PRs  (~7 questions, one call per PR)
-python3 triage.py judge --resume   # skip already-judged PRs (out/judgments.jsonl)
-python3 triage.py dupes            # confirm candidate duplicate pairs with a Jev pair judgment
+python3 triage.py judge --resume   # reuse only matching input/question/model bindings
+python3 triage.py dupes            # compare candidate pairs using shortened descriptions
 python3 triage.py cluster          # build out/{clusters.json,dupes.json,tranches.md,summary.json}
 python3 triage.py all --resume     # judge --resume + dupes + cluster
 ```
@@ -49,24 +49,79 @@ python3 triage.py all --resume     # judge --resume + dupes + cluster
 | `review_effort` | Score | 0 trivial → 3 substantial                           |
 | `security_flag` | Noul  | P(touches secrets/sudo/remote-code/network exposure) |
 
-Duplicate detection: title-similarity candidates (SequenceMatcher ≥ 0.72 or Jaccard ≥ 0.62)
-**within the same Jev category**, then a Jev `sameness` Choice per pair
-(`same_change` / `related_but_different` / `unrelated`); pairs with
-P(same_change) ≥ 0.65 are unioned into clusters. Oldest PR in a cluster is the canonical
-candidate; the rest are marked superseded.
+## Evidence and candidate groups
+
+The per-PR projection includes title, author, draft status and at most 1200
+cleaned body characters. Pair comparisons receive titles and at most 400 body
+characters each. These calls do **not** inspect patches, test/CI results,
+reproductions, merged history or full fix coverage. `finished_form` reflects
+described testing, not testing performed by this pipeline. Risk/security scores
+are model suggestions; their probabilities have not been independently calibrated.
+
+The GitHub PR-list response generally omits diffstat. Missing or invalid counts
+are explicitly **unknown**, never zero. Enriched legacy pages can provide real
+counts, but neither input path verifies patch contents.
+
+Title similarity (SequenceMatcher ≥ 0.72 or Jaccard ≥ 0.62) within a model category,
+plus body references, proposes pairs. `same_change` with P(same) ≥ 0.65 proposes a
+connection. A connected group is only model-consistent when **all** its internal
+pairs were tested and agree. Contradictory, uncertain, untested or unbound internal
+relationships go to `review_groups` with their diagnostics. Even a consistent
+model group still needs source comparison. PR age does not select a survivor;
+no member is automatically marked superseded.
 
 ## Outputs
 
-- `out/tranches.md` — the human report: merge-ready tranches, duplicate clusters,
-  escalation list (risk ≥ 3.0 or security ≥ 0.5), send-back-to-author list (finished_form ≤ 1.0).
-- `out/clusters.json` — every judged PR by category × risk band (low / core / danger).
-- `out/dupes.json` — confirmed duplicate clusters.
-- `out/summary.json` — counts and token spend.
+- `out/tranches.md` — model-suggested review candidates, relationship diagnostics,
+  risk/security escalation leads and possible author follow-up.
+- `out/clusters.json` — matching judgments by category × model risk band
+  (`low`, `core`, `danger`, `unknown`); includes source digest, head SHA and URL.
+- `out/dupes.json` — `confirmed_groups` (model-consistent candidates, **not verified
+  duplicates**), `review_groups` and `uncertain_pairs`.
+- `out/summary.json` — counts, token usage for selected records, input binding and
+  output digests. Historical `ready_*` keys now count **review candidates**;
+  `superseded` is zero and `superseded_by` is null.
+- `python3 gen_page.py` — render the matching report to `docs/index.html`. Refuses
+  legacy, changed or mixed report inputs until `cluster` is rerun.
 
-A PR is tranche-ready when: risk band `low`, finished_form ≥ 1.8, is_fix ≥ 0.6,
-security_flag < 0.5, not in a duplicate cluster. **The tool recommends; humans merge.**
+Review-candidate thresholds remain risk ≤ 1.5, finished_form ≥ 1.8, is_fix ≥ 0.6,
+security_flag < 0.5, outside a candidate group. All required numeric fields
+(including review effort) must be valid; the judgment must be current and the PR
+must not be a draft. Missing judgment fields cannot qualify an item.
 
-## Freshness
+## Freshness and migration
 
-PR state moves fast (DHH: ~100 new/day). Re-run `fetch` then `all --resume`; only
-new/changed PRs cost Jev tokens.
+`fetch` commits exact observed membership in one atomic local snapshot, including
+empty results and page-boundary endings. Failed pagination leaves the previous
+snapshot untouched. GitHub pagination is not a point-in-time snapshot: PRs can
+change during acquisition, and this tool does not certify that a captured item is
+still open when read later. `make fetch` uses the same code with `--transport curl`
+for the original host's urllib/IPv6 workaround; `make all` runs stages in order.
+
+Each new judgment binds the repository, full captured PR JSON digest (including
+head SHA/updated time when provided), actual projected model input, questions,
+requested model and binding version. Pair records bind both source inputs and the
+pair questions. Resume reuses only matching records; closed, changed or differently
+configured inputs are excluded from reports. New records retain the input,
+requested model, returned model/request ID when supplied, and judgment time.
+The local digest detects changed captured bytes, not authenticity or live freshness.
+A floating model alias such as `jev-latest` can move without changing the requested
+name; use a fixed supported model name or rerun `judge` to force reevaluation.
+
+**Published historical judgments have no bindings and cannot safely be retrofitted.**
+`judge --resume` will reevaluate them, which incurs API cost. Run `judge --resume
+--limit N` and `dupes --max-pairs N` to bound work per pass (`all --resume --limit N
+--max-pairs N` also works). Reports explicitly count excluded unjudged/stale items.
+For offline inspection only, `cluster --allow-unbound` includes legacy judgments
+with warnings; they never enter review-candidate tranches. Bound-but-stale records
+remain excluded even in this mode. Existing published output files are retained
+as historical artifacts rather than regenerated without their original inputs.
+
+## Offline regression checks
+
+```bash
+python3 -m unittest discover -s tests -v  # or make test
+```
+
+Tests use synthetic inputs and mocked transports/model responses. They make no
+network calls, require no credentials and do not modify the published reports.

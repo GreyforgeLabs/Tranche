@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """Omarchy PR triage via TypeSafe Jev.
 
-Groups the open PRs of omacom/omarchy into review tranches, surfaces duplicate
-clusters, and flags items that are not in finished form — the roll-up work DHH
+Groups observed open PRs of omacom/omarchy into review candidates, proposes
+related groups, and flags items that may need follow-up — supporting the roll-up work DHH
 asked the triage team to do (x.com/dhh/status/2098755120540393908).
 
 Judgments come from TypeSafe's System One API (Jev). Code owns the workflow:
-fetch -> judge (one batched call per PR) -> confirm duplicate pairs -> cluster.
+fetch -> judge (one batched call per PR) -> compare candidate pairs -> cluster.
 
 Usage:
-  python3 triage.py fetch              # refresh data/pages/*.json
+  python3 triage.py fetch              # refresh data/pages/snapshot.json
   python3 triage.py judge [--limit N] [--resume]
   python3 triage.py dupes [--max-pairs N]
   python3 triage.py cluster            # writes out/clusters.json, out/dupes.json,
@@ -21,16 +21,23 @@ from __future__ import annotations
 
 import argparse
 import difflib
+import hashlib
 import json
+import math
+import os
 import random
 import re
+import subprocess
 import sys
+import tempfile
 import threading
 import time
 import urllib.error
 import urllib.request
 from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
+from itertools import combinations
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -45,6 +52,26 @@ MODEL = "jev-latest"
 REPO = "omacom/omarchy"
 BODY_CHARS = 1200
 WORKERS = 6
+BINDING_VERSION = 1
+
+
+def digest(value) -> str:
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"),
+                                     ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+
+
+def atomic_json(path: Path, value) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, temporary = tempfile.mkstemp(prefix=".pending-", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as stream:
+            json.dump(value, stream, ensure_ascii=False, allow_nan=False)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
 
 # ---------------------------------------------------------------------------
 # Jev questions — one batched call per PR (independent questions over one state
@@ -171,7 +198,6 @@ class TriageFatal(RuntimeError):
 
 
 def read_key() -> str:
-    import os
     key = os.environ.get("TYPESAFE_API_KEY")
     if key:
         return key.strip()
@@ -184,7 +210,7 @@ def ask(state, questions: dict, key: str, timeout: int = 90) -> dict:
     payload = json.dumps({"state": state, "model": MODEL, "questions": questions}).encode()
     backoff = 2.0
     last = ""
-    for attempt in range(6):
+    for _attempt in range(6):
         req = urllib.request.Request(
             API_URL,
             data=payload,
@@ -197,14 +223,14 @@ def ask(state, questions: dict, key: str, timeout: int = 90) -> dict:
         except urllib.error.HTTPError as e:
             last = f"HTTP {e.code}: {e.read().decode(errors='replace')[:300]}"
             if e.code == 401:
-                raise TriageFatal(f"Auth rejected (401). Check the key. {last}")
+                raise TriageFatal(f"Auth rejected (401). Check the key. {last}") from e
             if e.code == 422:
-                raise TriageFatal(f"Request rejected (422) — question shape bug. {last}")
+                raise TriageFatal(f"Request rejected (422) — question shape bug. {last}") from e
             if e.code in (429, 529) or e.code >= 500:
                 time.sleep(backoff + random.random())
                 backoff = min(backoff * 2, 60)
                 continue
-            raise TriageFatal(last)
+            raise TriageFatal(last) from e
         except urllib.error.URLError as e:
             last = f"network: {e}"
             time.sleep(backoff + random.random())
@@ -216,41 +242,79 @@ def ask(state, questions: dict, key: str, timeout: int = 90) -> dict:
 # Data loading
 # ---------------------------------------------------------------------------
 
+def validate_pr(item):
+    if (not isinstance(item, dict) or type(item.get("number")) is not int
+            or item["number"] <= 0 or not isinstance(item.get("title"), str)
+            or item.get("body") is not None and not isinstance(item["body"], str)):
+        raise TriageFatal("Invalid captured PR shape; fetch again")
+    for field in ("head", "user", "author"):
+        if item.get(field) is not None and not isinstance(item[field], dict):
+            raise TriageFatal(f"Invalid captured PR {field}; fetch again")
+    labels = item.get("labels", [])
+    if not isinstance(labels, list) or any(not isinstance(label, dict) or not isinstance(label.get("name"), str) for label in labels):
+        raise TriageFatal("Invalid captured PR labels; fetch again")
+
+
 def load_prs() -> dict[int, dict]:
     prs: dict[int, dict] = {}
-    for path in sorted(PAGES_DIR.glob("page_*.json")):
-        for p in json.loads(path.read_text()):
+    snapshot = PAGES_DIR / "snapshot.json"
+    if snapshot.exists():
+        value = json.loads(snapshot.read_text())
+        if (not isinstance(value, dict) or type(value.get("version")) is not int
+                or value.get("version") != 1 or value.get("repo") != REPO
+                or value.get("digest") != digest(value.get("items"))):
+            raise TriageFatal("Fetched snapshot identity or checksum differs; fetch again")
+        pages = [value["items"]]
+    else:
+        # Existing/enriched page caches remain readable until the next fetch.
+        pages = [json.loads(path.read_text()) for path in sorted(PAGES_DIR.glob("page_*.json"))]
+    for page in pages:
+        if not isinstance(page, list):
+            raise TriageFatal("Captured PR membership must be a list; fetch again")
+        for p in page:
+            validate_pr(p)
+            if p["number"] in prs:
+                raise TriageFatal("Repeated PR in captured membership; fetch again")
             raw_body = p.get("body") or ""
             refs = sorted({int(x) for x in re.findall(r"#(\d{2,6})", raw_body)})
             body = re.sub(r"<!--.*?-->", "", raw_body, flags=re.S)
             body = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", body)  # images
             body = re.sub(r"https?://\S+", "", body)          # bare links
-            body = re.sub(r"\s+", " ", body).strip()[:BODY_CHARS]
+            body = re.sub(r"\s+", " ", body).strip()
             prs[p["number"]] = {
                 "number": p["number"],
                 "title": p["title"].strip(),
-                "body": body,
+                "body": body[:BODY_CHARS],
                 "author": ((p.get("user") or p.get("author") or {}).get("login", "unknown")),
                 "created": p.get("created_at", ""),
                 "updated": p.get("updated_at", ""),
                 "draft": bool(p.get("draft")),
-                "files": p.get("changed_files", 0),
-                "additions": p.get("additions", 0),
-                "deletions": p.get("deletions", 0),
-                "labels": [l["name"] for l in p.get("labels", [])],
+                "files": p.get("changed_files"),
+                "additions": p.get("additions"),
+                "deletions": p.get("deletions"),
+                "labels": [label["name"] for label in p.get("labels", [])],
                 "refs": refs,
+                "head_sha": (p.get("head") or {}).get("sha"),
+                "url": p.get("html_url") or f"https://github.com/{REPO}/pull/{p['number']}",
+                "source_digest": digest(p),
+                "body_truncated": len(body) > BODY_CHARS,
             }
     return prs
 
 
 def pr_state(pr: dict) -> dict:
+    sizes = [pr[key] for key in ("files", "additions", "deletions")]
+    known = all(type(size) is int and size >= 0 for size in sizes)
     return {
         "pr": {
             "title": pr["title"],
             "body": pr["body"] or "(empty body)",
             "author": pr["author"],
-            "diffstat": f"{pr['files']} files changed, +{pr['additions']}/-{pr['deletions']}",
+            "diffstat": f"{sizes[0]} files changed, +{sizes[1]}/-{sizes[2]}" if known else "unknown (not supplied by the captured PR list)",
             "draft": pr["draft"],
+            "evidence_basis": "title and shortened description; patches, CI and reproduction results not verified",
+            "diffstat_available": known,
+            "body_truncated": pr["body_truncated"],
         }
     }
 
@@ -262,31 +326,43 @@ def pr_state(pr: dict) -> dict:
 def cmd_fetch(args) -> None:
     PAGES_DIR.mkdir(parents=True, exist_ok=True)
     page, total = 1, 0
+    captured = []
+    seen = set()
     while True:
-        out = PAGES_DIR / f"page_{page}.json"
-        with urllib.request.urlopen(
-            f"https://api.github.com/repos/{REPO}/pulls?state=open&per_page=100&page={page}", timeout=60
-        ) as r:
-            arr = json.load(r)
+        url = f"https://api.github.com/repos/{REPO}/pulls?state=open&per_page=100&page={page}"
+        if getattr(args, "transport", "urllib") == "curl":
+            # Keep the Makefile's workaround for hosts with broken urllib IPv6.
+            result = subprocess.run(["curl", "--fail", "--silent", "--show-error",
+                                     "--max-time", "60", url], capture_output=True, text=True)
+            if result.returncode:
+                raise TriageFatal("curl fetch failed; previous snapshot retained")
+            arr = json.loads(result.stdout)
+        else:
+            with urllib.request.urlopen(url, timeout=60) as r:
+                arr = json.load(r)
+        if not isinstance(arr, list):
+            raise TriageFatal("GitHub did not return a PR list; previous snapshot retained")
         if not arr:
-            if page == 1:
-                print("no open PRs (or rate-limited); keeping existing pages")
-            else:
-                out.write_text("[]")
             break
-        out.write_text(json.dumps(arr))
+        for item in arr:
+            validate_pr(item)
+            if item["number"] in seen:
+                raise TriageFatal("Invalid or repeated PR during pagination; previous snapshot retained")
+            seen.add(item["number"])
+        captured.extend(arr)
         total += len(arr)
         print(f"page {page}: {len(arr)} PRs (total {total})")
         if len(arr) < 100:
-            # drop stale pages beyond the end
-            stale = page + 1
-            while (PAGES_DIR / f"page_{stale}.json").exists():
-                (PAGES_DIR / f"page_{stale}.json").unlink()
-                stale += 1
             break
         page += 1
         time.sleep(0.4)
-    print(f"fetched {total} open PRs into {PAGES_DIR}")
+    # One atomic membership commit, including an empty or exact-page result.
+    # Failed/partial fetches leave the last committed observation untouched.
+    atomic_json(PAGES_DIR / "snapshot.json", {
+        "version": 1, "repo": REPO, "items": captured, "digest": digest(captured),
+        "observed_at": datetime.now(timezone.utc).isoformat(),
+    })
+    print(f"fetched {total} observed open PRs into {PAGES_DIR}")
 
 
 def load_done() -> dict[int, dict]:
@@ -302,16 +378,67 @@ def load_done() -> dict[int, dict]:
     return done
 
 
+def judgment_binding(pr):
+    return digest({"version": BINDING_VERSION, "repo": REPO,
+                   "source": pr["source_digest"], "state": pr_state(pr),
+                   "questions": judge_questions(), "model": MODEL})
+
+
+def current_judgments(prs, *, allow_unbound=False):
+    current = {}
+    for number, record in load_done().items():
+        if number not in prs:
+            continue
+        matches = record.get("binding") == judgment_binding(prs[number])
+        legacy = "binding" not in record and allow_unbound
+        if matches or legacy:
+            current[number] = dict(record, freshness="current" if matches else "unbound")
+    return current
+
+
+def brief(pr):
+    return {"number": pr["number"], "title": pr["title"], "body": pr["body"][:400],
+            "evidence_basis": "shortened descriptions only; source equivalence not verified"}
+
+
+def pair_binding(prs, a, b):
+    a, b = sorted((a, b))
+    return digest({"version": BINDING_VERSION, "repo": REPO, "model": MODEL,
+                   "sources": [prs[a]["source_digest"], prs[b]["source_digest"]],
+                   "state": [brief(prs[a]), brief(prs[b])], "questions": pair_questions()})
+
+
+def current_pairs(prs, judgments, *, allow_unbound=False):
+    pairs = {}
+    if PAIRS_PATH.exists():
+        for line in PAIRS_PATH.read_text().splitlines():
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            a, b = sorted((record["a"], record["b"]))
+            if a == b or a not in judgments or b not in judgments:
+                continue
+            matches = record.get("binding") == pair_binding(prs, a, b)
+            legacy = "binding" not in record and allow_unbound
+            if matches or legacy:
+                pairs[a, b] = dict(record, a=a, b=b, freshness="current" if matches else "unbound")
+    return list(pairs.values())
+
+
 def cmd_judge(args) -> None:
     prs = load_prs()
-    done = load_done() if args.resume else {}
+    done = current_judgments(prs) if args.resume else {}
     if not args.resume:
         JUDGMENTS_PATH.parent.mkdir(parents=True, exist_ok=True)
         JUDGMENTS_PATH.write_text("")
+    JUDGMENTS_PATH.parent.mkdir(parents=True, exist_ok=True)
     todo = [n for n in sorted(prs, reverse=True) if n not in done]
     if args.limit:
         todo = todo[: args.limit]
     print(f"{len(prs)} PRs, {len(done)} already judged, {len(todo)} to go")
+    if not todo:
+        return
     key = read_key()
     lock = threading.Lock()
     errors: list[str] = []
@@ -322,7 +449,14 @@ def cmd_judge(args) -> None:
         pr = prs[number]
         try:
             resp = ask(pr_state(pr), judge_questions(), key)
-            rec = {"number": number, "title": pr["title"], "answers": resp["answers"], "usage": resp.get("usage", {})}
+            if not isinstance(resp.get("answers"), dict):
+                raise TriageFatal("Model response lacks an answers object")
+            rec = {"number": number, "title": pr["title"], "answers": resp["answers"], "usage": resp.get("usage", {}),
+                   "binding": judgment_binding(pr), "input": pr_state(pr),
+                   "source_digest": pr["source_digest"], "head_sha": pr["head_sha"],
+                   "updated_at": pr["updated"], "requested_model": MODEL,
+                   "judged_at": datetime.now(timezone.utc).isoformat(),
+                   "resolved_model": resp.get("model"), "request_id": resp.get("request_id")}
         except TriageFatal as e:
             with lock:
                 errors.append(f"#{number}: {e}")
@@ -349,7 +483,7 @@ def cmd_judge(args) -> None:
         print("partial progress is saved; re-run with --resume", file=sys.stderr)
         sys.exit(2)
 
-    print(f"done: {len(done) + 0 if not todo else len(done)} judged this session's target; errors: {len(errors)}")
+    print(f"done: {len(done)} matching judgments; errors: {len(errors)}")
     for e in errors[:10]:
         print("  " + e)
     print(f"tokens: in={tokens_in} out={tokens_out}")
@@ -369,13 +503,13 @@ def lexical_pairs(prs, judgments, threshold=0.72, jaccard_threshold=0.62) -> lis
 
     by_cat: dict[str, list[int]] = defaultdict(list)
     for n, j in judgments.items():
-        cat = j["answers"].get("category", {}).get("choice", "unclear")
+        cat = category(j)
         by_cat[cat].append(n)
     pairs = []
-    for cat, nums in by_cat.items():
+    for nums in by_cat.values():
         nums = sorted(nums)
         for i, a in enumerate(nums):
-            ta, tb_ = prs[a]["title"].lower(), None
+            ta = prs[a]["title"].lower()
             for b in nums[i + 1:]:
                 tb = prs[b]["title"].lower()
                 ratio = difflib.SequenceMatcher(None, ta, tb).ratio()
@@ -405,38 +539,35 @@ def lexical_pairs(prs, judgments, threshold=0.72, jaccard_threshold=0.62) -> lis
 
 def cmd_dupes(args) -> None:
     prs = load_prs()
-    judgments = load_judgments()
+    judgments = current_judgments(prs)
     missing = len(prs) - len(judgments)
     if missing > 100:
         print(f"warning: {missing} PRs not judged yet; dupe pass runs on judged subset", file=sys.stderr)
-    done_pairs: set[tuple[int, int]] = set()
-    if PAIRS_PATH.exists():
-        for line in PAIRS_PATH.read_text().splitlines():
-            try:
-                rec = json.loads(line)
-                done_pairs.add((rec["a"], rec["b"]))
-            except json.JSONDecodeError:
-                continue
+    done_pairs = {(rec["a"], rec["b"]) for rec in current_pairs(prs, judgments)}
     pairs = [(s, a, b) for s, a, b in lexical_pairs(prs, judgments) if (a, b) not in done_pairs]
     pairs = pairs[: args.max_pairs]
-    print(f"{len(pairs)} candidate pairs to confirm (skipping {len(done_pairs)} already done)")
+    print(f"{len(pairs)} candidate pairs to compare (skipping {len(done_pairs)} matching records)")
+    if not pairs:
+        return
+    PAIRS_PATH.parent.mkdir(parents=True, exist_ok=True)
     key = read_key()
     lock = threading.Lock()
-
-    def brief(n):
-        p = prs[n]
-        return {"number": n, "title": p["title"], "body": (p["body"] or "")[:400]}
 
     def work(item):
         s, a, b = item
         if a not in prs or b not in prs:
             return  # candidate became stale (PR closed and refetched mid-run)
-        resp = ask({"pr_a": brief(a), "pr_b": brief(b)}, pair_questions(), key)
+        resp = ask({"pr_a": brief(prs[a]), "pr_b": brief(prs[b])}, pair_questions(), key)
         rec = {
             "a": a, "b": b, "similarity": round(s, 3),
             "verdict": resp["answers"]["sameness"]["choice"],
             "probabilities": resp["answers"]["sameness"]["probabilities"],
             "usage": resp.get("usage", {}),
+            "binding": pair_binding(prs, a, b),
+            "requested_model": MODEL, "resolved_model": resp.get("model"),
+            "request_id": resp.get("request_id"),
+            "judged_at": datetime.now(timezone.utc).isoformat(),
+            "input": {"pr_a": brief(prs[a]), "pr_b": brief(prs[b])},
         }
         with lock:
             with PAIRS_PATH.open("a") as f:
@@ -447,8 +578,8 @@ def cmd_dupes(args) -> None:
         for i, f in enumerate(as_completed(futures)):
             f.result()
             if (i + 1) % 25 == 0:
-                print(f"confirmed {i + 1}/{len(pairs)}")
-    print("dupe confirmation complete")
+                print(f"compared {i + 1}/{len(pairs)}")
+    print("candidate pair comparison complete")
 
 
 class DSU:
@@ -468,226 +599,232 @@ class DSU:
             self.parent[rb] = ra
 
 
+def metric(judgment, name, field="score"):
+    """Absent, non-finite or out-of-range model values are unknown, never zero."""
+    answer = (judgment.get("answers") or {}).get(name)
+    value = answer.get(field) if isinstance(answer, dict) else None
+    ceiling = 1 if field == "noul" else (4 if name == "risk" else 3)
+    if type(value) not in (int, float) or not math.isfinite(value) or not 0 <= value <= ceiling:
+        return None
+    return value
+
+
+def category(judgment):
+    answer = (judgment.get("answers") or {}).get("category")
+    value = answer.get("choice") if isinstance(answer, dict) else None
+    return value if isinstance(value, str) and value in judge_questions()["category"]["criteria"] else "unclear"
+
+
+def p_same(pair):
+    probabilities = pair.get("probabilities")
+    value = probabilities.get("same_change") if isinstance(probabilities, dict) else None
+    return value if type(value) in (int, float) and math.isfinite(value) and 0 <= value <= 1 else None
+
+
+def accepted_pair(pair):
+    probability = p_same(pair)
+    return pair.get("verdict") == "same_change" and probability is not None and probability >= 0.65
+
+
+def duplicate_groups(verdicts):
+    """Connectivity proposes groups; every internal relationship remains visible."""
+    dsu = DSU()
+    indexed = {(v["a"], v["b"]): v for v in verdicts}
+    for v in verdicts:
+        if accepted_pair(v):
+            dsu.union(v["a"], v["b"])
+    connected = defaultdict(list)
+    for number in sorted(dsu.parent):
+        connected[dsu.find(number)].append(number)
+    consistent, review = [], []
+    for members in sorted(connected.values(), key=lambda g: (-len(g), g)):
+        if len(members) < 2:
+            continue
+        conflicts, uncertain, missing = [], [], []
+        unbound = False
+        for a, b in combinations(members, 2):
+            pair = indexed.get((a, b))
+            if pair is None:
+                missing.append([a, b])
+                continue
+            unbound |= pair.get("freshness") != "current"
+            if accepted_pair(pair):
+                continue
+            probability = p_same(pair)
+            diagnostic = {"a": a, "b": b, "verdict": pair.get("verdict"), "p_same": probability}
+            # A confident different-change judgment contradicts equivalence.
+            if pair.get("verdict") in ("related_but_different", "unrelated") and probability is not None and probability < 0.35:
+                conflicts.append(diagnostic)
+            else:
+                uncertain.append(diagnostic)
+        if conflicts or uncertain or missing or unbound:
+            review.append({"members": members, "conflicting_pairs": conflicts,
+                           "uncertain_pairs": uncertain, "missing_pairs": missing,
+                           "unbound_evidence": unbound})
+        else:
+            consistent.append(members)
+    return consistent, review
+
+
+def review_candidate(pr, judgment, grouped):
+    required = [metric(judgment, "risk"), metric(judgment, "finished_form"),
+                metric(judgment, "is_fix", "noul"), metric(judgment, "security_flag", "noul"),
+                metric(judgment, "review_effort")]
+    if (judgment.get("freshness") != "current" or pr["draft"]
+            or pr["number"] in grouped or any(value is None for value in required)):
+        return False
+    risk, finished, fix, security, _ = required
+    return risk <= 1.5 and finished >= 1.8 and fix >= 0.6 and security < 0.5
+
+
+def escalated(judgment):
+    risk, security = metric(judgment, "risk"), metric(judgment, "security_flag", "noul")
+    return (risk is not None and risk >= 3) or (security is not None and security >= 0.5)
+
+
+def report_binding(prs, judgments, verdicts):
+    return digest({"version": BINDING_VERSION, "repo": REPO,
+                   "sources": {n: pr["source_digest"] for n, pr in prs.items()},
+                   "judgments": judgments, "pairs": verdicts,
+                   "questions": [judge_questions(), pair_questions()], "model": MODEL})
+
+
 def cmd_cluster(args) -> None:
     prs = load_prs()
-    # Drop judgments for PRs that merged/closed since their fetch — the report
-    # must only ever speak about PRs that are still open.
-    judgments = {n: j for n, j in load_judgments().items() if n in prs}
+    allow_unbound = getattr(args, "allow_unbound", False)
+    judgments = current_judgments(prs, allow_unbound=allow_unbound)
+    verdicts = current_pairs(prs, judgments, allow_unbound=allow_unbound)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
+    dupe_groups, review_groups = duplicate_groups(verdicts)
+    in_group = {n for g in dupe_groups for n in g} | {n for g in review_groups for n in g["members"]}
+    uncertain_pairs = [{"a": v["a"], "b": v["b"], "p_same": p_same(v),
+                        "similarity": v.get("similarity"), "verdict": v.get("verdict")}
+                       for v in verdicts if not accepted_pair(v)
+                       and (p_same(v) is None or 0.35 <= p_same(v) < 0.65)]
+    uncertain_pairs.sort(key=lambda v: -(v["p_same"] if v["p_same"] is not None else -1))
 
-    # --- duplicate groups from confirmed pairs ---
-    verdicts = []
-    if PAIRS_PATH.exists():
-        for line in PAIRS_PATH.read_text().splitlines():
-            try:
-                verdicts.append(json.loads(line))
-            except json.JSONDecodeError:
-                pass
-    dsu = DSU()
-    for v in verdicts:
-        if v["verdict"] == "same_change" and v["probabilities"].get("same_change", 0) >= 0.65:
-            dsu.union(v["a"], v["b"])
-    groups: dict[int, list[int]] = defaultdict(list)
-    for n in {x for v in verdicts for x in (v["a"], v["b"])}:
-        if n in judgments:
-            groups[dsu.find(n)].append(n)
-    dupe_groups = sorted(
-        [sorted(members) for members in groups.values() if len(members) >= 2],
-        key=lambda g: -len(g),
-    )
-    # Coin-flip pairs: neither auto-union nor discarded — a human decides.
-    uncertain_pairs = sorted(
-        [v for v in verdicts if 0.35 <= v["probabilities"].get("same_change", 0) < 0.65],
-        key=lambda v: -v["probabilities"]["same_change"],
-    )
-    superseded: dict[int, int] = {}
-    for members in dupe_groups:
-        keep = min(members)  # lowest number = oldest = canonical candidate
-        for n in members:
-            if n != keep:
-                superseded[n] = keep
-
-    # --- category x risk clustering ---
-    clusters: dict[str, dict] = {}
-    for n, j in judgments.items():
-        a = j["answers"]
-        cat = a.get("category", {}).get("choice", "unclear")
-        risk = a.get("risk", {}).get("score", 0)
-        band = "low" if risk <= 1.5 else ("core" if risk <= 2.5 else "danger")
-        clusters.setdefault(cat, {}).setdefault(band, []).append(n)
-
-    cluster_out = {
-        cat: {
-            band: [
-                {
-                    "number": n,
-                    "title": prs[n]["title"],
-                    "author": prs[n]["author"],
-                    "risk": round(judgments[n]["answers"].get("risk", {}).get("score", 0), 2),
-                    "finished_form": round(judgments[n]["answers"].get("finished_form", {}).get("score", 0), 2),
-                    "is_fix": round(judgments[n]["answers"].get("is_fix", {}).get("noul", 0), 2),
-                    "review_effort": round(judgments[n]["answers"].get("review_effort", {}).get("score", 0), 2),
-                    "superseded_by": superseded.get(n),
-                }
-                for n in sorted(nums, key=lambda n: -judgments[n]["answers"].get("finished_form", {}).get("score", 0))
-            ]
-            for band, nums in bands.items()
-        }
-        for cat, bands in clusters.items()
-    }
-    (OUT_DIR / "clusters.json").write_text(json.dumps(cluster_out, indent=1))
-    (OUT_DIR / "dupes.json").write_text(json.dumps(
-        {
-            "confirmed_groups": dupe_groups,
-            "uncertain_pairs": [
-                {
-                    "a": v["a"], "b": v["b"],
-                    "p_same": v["probabilities"].get("same_change", 0),
-                    "similarity": v.get("similarity"),
-                    "verdict": v["verdict"],
-                }
-                for v in uncertain_pairs
-            ],
-        },
-        indent=1,
-    ))
-
-    # --- tranches ---
-    def band_of(n):
-        cat = judgments[n]["answers"].get("category", {}).get("choice", "unclear")
-        risk = judgments[n]["answers"].get("risk", {}).get("score", 0)
-        return cat, ("low" if risk <= 1.5 else ("core" if risk <= 2.5 else "danger"))
-
-    in_dupe_group = {n for g in dupe_groups for n in g}
-    tranches = []
-    for cat, bands in cluster_out.items():
-        for band, items in bands.items():
-            if band != "low":
-                continue
-            ready = [
-                it for it in items
-                if it["finished_form"] >= 1.8 and it["is_fix"] >= 0.6
-                and it["number"] not in in_dupe_group
-                and judgments[it["number"]]["answers"].get("security_flag", {}).get("noul", 0) < 0.5
-                and not it["superseded_by"]
-            ]
-            if ready:
-                tranches.append((cat, ready))
-
-    follow_up = [
-        n for n, j in judgments.items()
-        if j["answers"].get("finished_form", {}).get("score", 3) <= 1.0
-        and n not in in_dupe_group and not superseded.get(n)
-    ]
-    escalate = [
-        n for n, j in judgments.items()
-        if j["answers"].get("risk", {}).get("score", 0) >= 3.0
-        or j["answers"].get("security_flag", {}).get("noul", 0) >= 0.5
-    ]
-
+    clusters = {}
+    tranches = defaultdict(list)
+    follow_up, escalate = [], []
+    for n, j in sorted(judgments.items()):
+        risk = metric(j, "risk")
+        band = "unknown" if risk is None else ("low" if risk <= 1.5 else ("core" if risk <= 2.5 else "danger"))
+        cat = category(j)
+        item = {"number": n, "title": prs[n]["title"], "author": prs[n]["author"],
+                "risk": risk, "finished_form": metric(j, "finished_form"),
+                "is_fix": metric(j, "is_fix", "noul"), "review_effort": metric(j, "review_effort"),
+                "security_flag": metric(j, "security_flag", "noul"), "freshness": j["freshness"],
+                "superseded_by": None, "source_digest": prs[n]["source_digest"],
+                "head_sha": prs[n]["head_sha"], "url": prs[n]["url"]}
+        clusters.setdefault(cat, {}).setdefault(band, []).append(item)
+        if review_candidate(prs[n], j, in_group):
+            tranches[cat].append(item)
+        finished = metric(j, "finished_form")
+        if finished is not None and finished <= 1 and n not in in_group:
+            follow_up.append(n)
+        if escalated(j):
+            escalate.append(n)
     tokens = Counter()
-    for j in judgments.values():
-        u = j.get("usage", {})
-        tokens["in"] += u.get("input_tokens", 0)
-        tokens["out"] += u.get("output_tokens", 0)
-    for v in verdicts:
-        u = v.get("usage", {})
-        tokens["in"] += u.get("input_tokens", 0)
-        tokens["out"] += u.get("output_tokens", 0)
+    for record in [*judgments.values(), *verdicts]:
+        for field in ("input_tokens", "output_tokens"):
+            value = record.get("usage", {}).get(field)
+            if type(value) is int and value >= 0:
+                tokens[field] += value
 
+    dupes = {"confirmed_groups": dupe_groups, "review_groups": review_groups,
+             "uncertain_pairs": uncertain_pairs,
+             "meaning": "Model-consistent candidate groups, not verified duplicates. No survivor selected."}
     summary = {
-        "repo": REPO,
-        "prs_in_corpus": len(prs),
-        "judged": len(judgments),
-        "dupe_groups": len(dupe_groups),
-        "uncertain_pairs": len(uncertain_pairs),
-        "prs_in_dupe_groups": len(in_dupe_group),
-        "superseded": len(superseded),
-        "ready_tranches": len(tranches),
-        "ready_prs": sum(len(r) for _, r in tranches),
-        "needs_author_followup": len(follow_up),
+        "format_version": 2, "repo": REPO, "prs_in_corpus": len(prs), "judged": len(judgments),
+        "unjudged_or_stale": len(prs) - len(judgments),
+        "unbound_judgments": sum(j["freshness"] == "unbound" for j in judgments.values()),
+        "allow_unbound": allow_unbound, "report_binding": report_binding(prs, judgments, verdicts),
+        "dupe_groups": len(dupe_groups), "review_groups": len(review_groups),
+        "uncertain_pairs": len(uncertain_pairs), "prs_in_dupe_groups": len(in_group),
+        "superseded": 0, "ready_tranches": len(tranches),
+        "ready_prs": sum(map(len, tranches.values())),
+        "recommendation_kind": "review-candidates", "needs_author_followup": len(follow_up),
         "escalate_review": len(escalate),
-        "tokens": {"input": tokens["in"], "output": tokens["out"]},
+        "unknown_risk_or_security": sum(metric(j, "risk") is None or metric(j, "security_flag", "noul") is None
+                                        for j in judgments.values()),
+        "tokens": {"input": tokens["input_tokens"], "output": tokens["output_tokens"]},
+        "output_digests": {"clusters.json": digest(clusters), "dupes.json": digest(dupes)},
     }
-    (OUT_DIR / "summary.json").write_text(json.dumps(summary, indent=1))
-
-    # --- human report ---
+    atomic_json(OUT_DIR / "clusters.json", clusters)
+    atomic_json(OUT_DIR / "dupes.json", dupes)
     lines = [
-        f"# Omarchy PR tranches — Jev triage",
-        "",
-        f"Corpus: {len(prs)} open PRs, {len(judgments)} judged. "
-        f"Duplicate groups: {len(dupe_groups)} ({len(in_dupe_group)} PRs). "
-        f"Ready-to-roll candidates: {summary['ready_prs']}. "
-        f"Needs author follow-up: {len(follow_up)}. Escalate: {len(escalate)}.",
-        "",
-        "Method: one batched Jev call per PR (category / risk / is_fix / dupe_signal / "
-        "finished_form / review_effort / security_flag); duplicate candidates found by title "
-        "similarity within a category, confirmed by a Jev pair judgment; groups via union-find.",
-        "",
+        "# Omarchy PR review candidates — Jev triage", "",
+        f"Corpus: {len(prs)} observed open PRs; {len(judgments)} matching judgments; "
+        f"{summary['unjudged_or_stale']} unjudged/stale; {summary['unbound_judgments']} unbound legacy judgments.",
+        f"Review candidates: {summary['ready_prs']}. Model-consistent groups: {len(dupe_groups)}. "
+        f"Groups needing relationship review: {len(review_groups)}.", "",
+        "Evidence: titles and shortened descriptions (1200 characters per PR; 400 per pair). "
+        "Diffstat is unknown unless captured input supplies it. Patches, CI, reproductions, "
+        "fix coverage and security have not been verified. Model scores are suggestions, "
+        "not calibrated guarantees or approval to merge/close. Pagination records an observation, not a point-in-time GitHub snapshot.", "",
     ]
-    for cat, ready in sorted(tranches, key=lambda t: -len(t[1])):
-        lines += [f"## Tranche: {cat} — {len(ready)} PRs recommended as a merge-ready roll-up", ""]
-        lines += ["| PR | title | author | finished | effort | fix |", "|---|---|---|---|---|---|"]
-        for it in ready:
-            lines.append(
-                f"| #{it['number']} | {it['title'][:80]} | {it['author']} | "
-                f"{it['finished_form']:.1f} | {it['review_effort']:.1f} | {it['is_fix']:.2f} |"
-            )
+    if allow_unbound:
+        lines += ["LEGACY INSPECTION: unbound judgments cannot establish freshness or enter review-candidate tranches.", ""]
+    def cell(value):
+        return str(value).replace("|", "\\|").replace("\n", " ")
+    for cat, candidates in sorted(tranches.items(), key=lambda t: -len(t[1])):
+        lines += [f"## Review candidates: {cat} — {len(candidates)} PRs", "",
+                  "| PR | Title | Author | Model finished | Model effort | Model fix |",
+                  "|---|---|---|---|---|---|"]
+        for it in candidates:
+            lines.append(f"| [#{it['number']}]({it['url']}) | {cell(it['title'][:80])} | {cell(it['author'])} | "
+                         f"{it['finished_form']:.1f} | {it['review_effort']:.1f} | {it['is_fix']:.2f} |")
         lines.append("")
-    if dupe_groups:
-        lines += ["## Duplicate / overlapping clusters (consolidate; maintainer picks the winner)", ""]
-        for g in dupe_groups:
-            members = ", ".join(
-                f"#{n}{' (superseded)' if n in superseded else ' (canonical candidate)'}" for n in g
-            )
-            first = prs[g[0]]["title"][:70]
-            lines.append(f"- {members} — e.g. “{first}”")
-        lines.append("")
+    for label, groups in (("Model-consistent candidate groups — verify fix coverage; no survivor selected", dupe_groups),
+                          ("Candidate groups needing relationship review", review_groups)):
+        if groups:
+            lines += [f"## {label}", ""]
+            for group in groups:
+                members = group if isinstance(group, list) else group["members"]
+                lines.append("- " + ", ".join(f"#{n}" for n in members))
+                if isinstance(group, dict):
+                    for field in ("conflicting_pairs", "uncertain_pairs", "missing_pairs"):
+                        if group[field]:
+                            lines.append(f"  - {field}: {json.dumps(group[field])}")
+                    if group["unbound_evidence"]:
+                        lines.append("  - Unbound legacy evidence; revisions cannot be checked.")
+            lines.append("")
     if uncertain_pairs:
-        lines += ["## Uncertain pairs — Jev is undecided, human decides", ""]
-        for v in uncertain_pairs[:60]:
-            lines.append(
-                f"- #{v['a']} ↔ #{v['b']} (P(same)={v['probabilities']['same_change']:.2f}): "
-                f"“{prs[v['a']]['title'][:55]}” / “{prs[v['b']]['title'][:55]}”"
-            )
-        if len(uncertain_pairs) > 60:
-            lines.append(f"- …and {len(uncertain_pairs) - 60} more in out/dupes.json")
+        lines += ["## Uncertain pairs — human comparison needed", ""]
+        for pair in uncertain_pairs:
+            lines.append(f"- #{pair['a']} ↔ #{pair['b']}: P(same)={pair['p_same']}")
         lines.append("")
-    if escalate:
-        lines += ["## Escalate to senior review (high risk or security-relevant)", ""]
-        for n in sorted(escalate):
-            j = judgments[n]["answers"]
-            why = []
-            if j.get("risk", {}).get("score", 0) >= 3.0:
-                why.append(f"risk {j['risk']['score']:.1f}")
-            if j.get("security_flag", {}).get("noul", 0) >= 0.5:
-                why.append(f"security {j['security_flag']['noul']:.2f}")
-            lines.append(f"- #{n} {prs[n]['title'][:80]} ({', '.join(why)})")
-        lines.append("")
-    if follow_up:
-        lines += ["## Not in finished form — send back to authors", ""]
-        for n in sorted(follow_up):
-            lines.append(f"- #{n} {prs[n]['title'][:90]}")
-        lines.append("")
-    (OUT_DIR / "tranches.md").write_text("\n".join(lines))
-
+    for label, numbers in (("Escalate for risk/security review", escalate),
+                           ("Possible author follow-up — verify before requesting changes", follow_up)):
+        if numbers:
+            lines += [f"## {label}", "", *[f"- #{n} {cell(prs[n]['title'])}" for n in numbers], ""]
+    (OUT_DIR / "tranches.md").write_text("\n".join(lines), encoding="utf-8")
+    # Commit the report manifest last. The renderer rejects mixed generations.
+    atomic_json(OUT_DIR / "summary.json", summary)
     print(json.dumps(summary, indent=1))
     print(f"\nwrote {OUT_DIR}/clusters.json dupes.json tranches.md summary.json")
-
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("fetch", help="refresh open-PR pages from GitHub")
+    fetch = sub.add_parser("fetch", help="refresh observed open-PR membership from GitHub")
+    fetch.add_argument("--transport", choices=("urllib", "curl"), default="urllib")
     j = sub.add_parser("judge", help="Jev judgment pass over PRs")
     j.add_argument("--limit", type=int, default=None, help="judge only the N newest unjudged PRs")
-    j.add_argument("--resume", action="store_true", help="skip PRs already in out/judgments.jsonl")
-    d = sub.add_parser("dupes", help="confirm candidate duplicate pairs with Jev")
+    j.add_argument("--resume", action="store_true", help="reuse judgments bound to unchanged input/questions/model")
+    d = sub.add_parser("dupes", help="compare candidate pairs with Jev")
     d.add_argument("--max-pairs", type=int, default=300)
-    sub.add_parser("cluster", help="build clusters, tranches and reports")
+    cluster = sub.add_parser("cluster", help="build candidate groups and review reports offline")
+    cluster.add_argument("--allow-unbound", action="store_true", help="inspect legacy judgments with freshness warnings; no legacy review tranches")
     a = sub.add_parser("all", help="judge --resume, dupes, cluster")
     a.add_argument("--limit", type=int, default=None)
+    a.add_argument("--resume", action="store_true", help="accepted for compatibility; all always resumes")
+    a.add_argument("--max-pairs", type=int, default=300)
     args = ap.parse_args()
+    if getattr(args, "limit", None) is not None and args.limit <= 0:
+        ap.error("--limit must be positive")
+    if getattr(args, "max_pairs", 0) < 0:
+        ap.error("--max-pairs must be nonnegative")
     if args.cmd == "fetch":
         cmd_fetch(args)
     elif args.cmd == "judge":
