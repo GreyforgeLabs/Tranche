@@ -161,9 +161,12 @@ test('date and model risk sorts are deterministic with unknown values last', () 
 test('URL state round trips search, queue, category, sort, page and selected PR', () => {
   assert.equal(typeof api.parseState, 'function', 'deep links are implemented');
   const categories = ['all', 'docs', 'unknown'];
-  const state = {q: 'suspend @river #1234', queue: 'senior', category: 'docs', sort: 'risk', page: 3, pr: 1234};
+  const state = {q: 'suspend @river #1234', queue: 'senior', category: 'docs', sort: 'risk', page: 3, pr: 1234, batch: 'B07'};
   assert.deepEqual(api.parseState(api.serializeState(state), categories), state);
-  assert.deepEqual(api.parseState('?q=%3Cscript%3E&queue=no&category=bad&sort=no&page=-5&pr=javascript:1', categories), {q: '<script>', queue: 'all', category: 'all', sort: 'newest', page: 1, pr: null});
+  assert.equal(api.parseState('?batch=B07', categories).batch, 'B07', 'batch deep link');
+  assert.equal(api.parseState('?batch=<script>', categories).batch, '<script>', 'batch id is an opaque token, never HTML');
+  assert.equal(api.parseState('?x=1', categories).batch, null);
+  assert.deepEqual(api.parseState('?q=%3Cscript%3E&queue=no&category=bad&sort=no&page=-5&pr=javascript:1', categories), {q: '<script>', queue: 'all', category: 'all', sort: 'newest', page: 1, pr: null, batch: null});
   for (const value of ['2.5', '1e2', 'Infinity', '9007199254740993', '0', '-1', 'NaN']) {
     assert.equal(api.parseState(`?page=${value}&pr=${value}`, categories).page, 1);
     assert.equal(api.parseState(`?page=${value}&pr=${value}`, categories).pr, null);

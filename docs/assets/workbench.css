@@ -47,6 +47,14 @@ main {min-width: 0; padding: 24px 0 24px 28px;}
 .queue-heading {display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 18px;}
 h2 {font-size: 22px; font-weight: 500; line-height: 1.35; margin: 0; letter-spacing: -.03em;}
 .queue-heading .small {font: 10px var(--mono); letter-spacing: .12em;}
+.batch-overview {border: 1px solid var(--line); border-top: 0; background: var(--surface); padding: 18px 14px 8px; margin-bottom: 20px;}
+.overview-heading {font-size: 16px; font-weight: 500; margin: 0 0 6px;}
+.batch-overview > .small {margin: 0 0 14px; line-height: 1.7;}
+#batch-list {display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 12px;}
+.batch-card {border: 1px solid var(--line); padding: 12px; display: grid; gap: 10px; align-content: start;}
+.batch-head {display: flex; align-items: center; gap: 10px;}
+.batch-open {min-height: 34px; padding: 4px 10px; font: 12px var(--mono); color: var(--sage);}
+.batch-meta {display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--muted); font-size: 11px;}
 .product-note {font-size: 11px; color: var(--muted); margin: -8px 0 16px;}
 .queues {display: flex; gap: 0; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-bottom: 20px;}
 .queues button {border: 0; border-bottom: 2px solid transparent; background: transparent; min-height: 46px; padding: 10px 12px; font-size: 12px;}

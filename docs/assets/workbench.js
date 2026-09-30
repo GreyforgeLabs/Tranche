@@ -50,6 +50,7 @@
     const field = queues[state.queue || 'all'];
     const wordCache = new Map(); // Repeated corpus vocabulary pays edit distance only once.
     const filtered = rows.filter(pr => queueMatch(pr, field) &&
+      (!state.batch || (pr.batches || []).some(batch => batch.id === state.batch)) &&
       (!state.category || state.category === 'all' || pr.category === state.category ||
         (pr.categories || []).includes(state.category)) &&
       matches(pr, state.q || '', indexes?.get(pr.number), wordCache));
@@ -78,7 +79,8 @@
     return {q: params.get('q') || '', queue: Object.hasOwn(queues, queue) ? queue : 'all',
       category: categories.includes(category) ? category : 'all',
       sort: ['newest', 'oldest', 'risk'].includes(sort) ? sort : 'newest',
-      page: positiveInteger(params.get('page')) || 1, pr: positiveInteger(params.get('pr'))};
+      page: positiveInteger(params.get('page')) || 1, pr: positiveInteger(params.get('pr')),
+      batch: params.get('batch') || null};
   }
   function serializeState(state) {
     const params = new URLSearchParams();
@@ -88,6 +90,7 @@
     if (state.sort && state.sort !== 'newest') params.set('sort', state.sort);
     if (state.page > 1) params.set('page', state.page);
     if (positiveInteger(state.pr)) params.set('pr', state.pr);
+    if (state.batch) params.set('batch', state.batch);
     return params.size ? `?${params}` : '';
   }
   const api = {matches, index, select, parseState, serializeState};
@@ -102,6 +105,7 @@
     const rows = data.prs;
     const byNumber = new Map(rows.map(pr => [pr.number, pr]));
     const indexes = new Map(rows.map(pr => [pr.number, index(pr)]));
+    const batchById = new Map((data.batches || []).map(batch => [batch.id, batch]));
     const categories = ['all', ...Object.keys(data.categories)];
     const $ = id => document.getElementById(id);
     const dialog = $('pr-dialog');
@@ -156,6 +160,16 @@
       content.append(node('h3', 'Related PRs'));
       const section = node('div', undefined, 'relationships');
       let found = false;
+      const batchmates = (pr.batches || []).flatMap(batch =>
+        (batchById.get(batch.id)?.members || []).filter(n => n !== pr.number));
+      if (batchmates.length) {
+        found = true;
+        section.append(node('h4', 'Batch members — combine into one PR'));
+        const members = node('div', undefined, 'related-members');
+        batchmates.forEach(n => members.append(memberButton(n)));
+        section.append(members);
+        section.append(node('p', 'Jev judged these PRs to be the same change as this one; verify fix coverage before combining.', 'small'));
+      }
       const groups = [
         ...data.groups.confirmed_groups.map(members => ({members, consistent: true})),
         ...data.groups.review_groups,
@@ -211,7 +225,8 @@
         for (const batch of pr.batches) {
           const item = node('li', undefined, 'pair-diagnostic');
           item.append(node('span', `${batch.id} — merge these ${batch.count} PRs into ONE pull request`, 'batch-name'));
-          item.append(node('p', 'Jev judged these PRs to be the same change (model-consistent). Verify fix coverage before combining; batches are disjoint, so this PR appears in at most one batch.', 'small'));
+          const open = button(`Browse batch ${batch.id} →`, () => {dialog.close(); update({batch: batch.id, page: 1, pr: null});}, 'related-member');
+          item.append(open);
           list.append(item);
         }
         content.append(list);
@@ -219,23 +234,55 @@
       }
       relationships(pr, content);
     }
+    function renderBatchOverview() {
+      const section = $('batch-overview');
+      const batches = data.batches || [];
+      $('batches-view').querySelector('span').textContent = formatCount(batches.length);
+      if (!batches.length) {section.hidden = true; return;}
+      const list = $('batch-list');
+      if (!list.childElementCount) {
+        for (const batch of batches) {
+          const card = node('article', undefined, 'batch-card');
+          const head = node('div', undefined, 'batch-head');
+          const open = button(`${batch.id}`, () => update({batch: batch.id, queue: 'all', category: 'all', q: '', page: 1, pr: null}), 'batch-open');
+          open.setAttribute('aria-label', `Open batch ${batch.id}`);
+          head.append(open, node('span', batch.security_members > 0 ? `Security first · ${batch.security_members} security PR${batch.security_members > 1 ? 's' : ''}` : 'Merge group', 'tag' + (batch.security_members > 0 ? ' security' : '')));
+          const meta = node('div', undefined, 'batch-meta');
+          const risk = typeof batch.average_risk === 'number' && Number.isFinite(batch.average_risk) ? batch.average_risk.toFixed(1) : 'unknown';
+          meta.append(node('span', `${batch.count} PRs → one combined PR`), node('span', `avg risk ${risk}`),
+            node('span', batch.created ? `oldest ${batch.created.slice(0, 10)}` : ''));
+          card.append(head, meta);
+          const members = node('div', undefined, 'related-members');
+          batch.members.forEach(n => members.append(memberButton(n)));
+          card.append(members);
+          list.append(card);
+        }
+      }
+      section.hidden = !state.batch && !batchView;
+    }
+    let batchView = false;
     function render() {
       const result = select(rows, state, indexes);
       state.page = result.page;
       if (state.pr && !byNumber.has(state.pr)) state.pr = null;
+      if (state.batch && !batchById.has(state.batch)) state.batch = null;
       $('search').value = state.q;
       $('sort').value = state.sort;
       $('category').value = state.category;
       document.querySelectorAll('[data-queue]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.queue === state.queue)));
       document.querySelectorAll('[data-category]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.category === state.category)));
+      $('batches-view').setAttribute('aria-pressed', String(batchView || !!state.batch));
       const start = result.total ? (result.page - 1) * PAGE_SIZE + 1 : 0;
       const end = Math.min(result.page * PAGE_SIZE, result.total);
-      $('result-count').textContent = `${formatCount(result.total)} results · ${formatCount(start)}–${formatCount(end)} of ${formatCount(result.total)} · ${formatCount(rows.length)} captured PRs`;
+      $('result-count').textContent = state.batch
+        ? `${state.batch}: ${formatCount(result.total)} PRs to merge into one pull request`
+        : `${formatCount(result.total)} results · ${formatCount(start)}–${formatCount(end)} of ${formatCount(result.total)} · ${formatCount(rows.length)} captured PRs`;
       $('empty').hidden = result.total !== 0;
       $('prev').disabled = result.page <= 1;
       $('next').disabled = result.page >= result.pages;
       $('page-label').textContent = `Page ${result.page} of ${result.pages}`;
-      const nextKey = JSON.stringify([state.q, state.queue, state.category, state.sort, state.page]);
+      renderBatchOverview();
+      const nextKey = JSON.stringify([state.q, state.queue, state.category, state.sort, state.page, state.batch]);
       if (nextKey !== listKey) {
         listKey = nextKey;
         const fragment = document.createDocumentFragment();
@@ -264,6 +311,9 @@
         }
         $('results').replaceChildren(fragment);
       }
+      if (state.batch) {
+        document.querySelector('.batch-overview').scrollIntoView({block: 'start', behavior: 'instant'});
+      }
       if (state.pr) {
         if (dialog.dataset.number !== String(state.pr)) {
           renderDetail(byNumber.get(state.pr)); dialog.dataset.number = state.pr;
@@ -284,7 +334,7 @@
       clearTimeout(timer);
       state = {...state, ...change}; render(); writeURL(replace);
     }
-    function reset() { update({q: '', queue: 'all', category: 'all', sort: 'newest', page: 1, pr: null}); }
+    function reset() { batchView = false; update({q: '', queue: 'all', category: 'all', sort: 'newest', page: 1, pr: null, batch: null}); }
     for (const category of categories) {
       const count = category === 'all' ? rows.length
         : rows.filter(pr => pr.category === category || (pr.categories || []).includes(category)).length;
@@ -301,6 +351,10 @@
     $('search').addEventListener('input', () => {
       clearTimeout(timer);
       timer = setTimeout(() => update({q: $('search').value, page: 1, pr: null}), 50);
+    });
+    $('batches-view').addEventListener('click', () => {
+      batchView = !batchView;
+      update({batch: null, queue: 'all', category: 'all', q: '', page: 1, pr: null});
     });
     $('sort').addEventListener('change', () => update({sort: $('sort').value, page: 1, pr: null}));
     $('category').addEventListener('change', () => update({category: $('category').value, page: 1, pr: null}));

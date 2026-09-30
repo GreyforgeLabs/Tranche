@@ -39,6 +39,12 @@ for batch in (batches or {}).get("batches", []):
     tag = {"id": batch["id"], "count": batch["count"]}
     for number in batch["members"]:
         batch_of.setdefault(number, []).append(tag)
+merge_batches = [
+    {"id": batch["id"], "count": batch["count"], "members": batch["members"],
+     "security_members": batch["security_members"],
+     "average_risk": batch["average_risk"], "created": batch["created"]}
+    for batch in (batches or {}).get("batches", [])
+]
 
 CAT_LABELS = {
     "security-review": "Security (meta)",
@@ -78,6 +84,7 @@ for n, pr in sorted(prs.items()):
     })
 # JSON remains data, never HTML: escape HTML delimiters and JS separators.
 payload = json.dumps({"prs": rows, "categories": CAT_LABELS, "groups": dupes,
+                      "batches": merge_batches,
                       "batches_available": batches is not None},
                      ensure_ascii=True, allow_nan=False, separators=(",", ":"))
 payload = payload.replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
@@ -118,7 +125,13 @@ page = f"""<!doctype html>
 <button type="button" data-queue="followup" aria-pressed="false">Author follow-up <span></span></button>
 <button type="button" data-queue="related" aria-pressed="false">Related PRs <span></span></button>
 <button type="button" data-queue="batched" aria-pressed="false">Batched <span></span></button>
+<button type="button" id="batches-view" aria-pressed="false">Batches <span></span></button>
 </nav>
+<section id="batch-overview" class="batch-overview" aria-label="Pre-release merge batches" hidden>
+<h3 class="overview-heading">Suggested merge batches</h3>
+<p class="small">Each batch is a Jev-determined group of PRs to merge into ONE pull request. Ordered security-first, then average model risk. Model-suggested — never a merge approval. Open a batch to inspect its PRs.</p>
+<div id="batch-list"></div>
+</section>
 <div class="toolbar">
 <div class="search-field"><label for="search" class="sr-only">Search PR title, number, author or description</label><input type="search" id="search" placeholder="Search title, #number, @author, description…" autocomplete="off" spellcheck="false" aria-describedby="search-help"><kbd aria-hidden="true">/</kbd></div>
 <label class="sort-field" for="sort">Sort<select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="risk">Model risk: high first</option></select></label>
