@@ -146,3 +146,27 @@ python3 -m unittest discover -s tests -v  # or make test
 
 Tests use synthetic inputs and mocked transports/model responses. They make no
 network calls, require no credentials and do not modify the published reports.
+
+## Versioned releases
+
+Release tooling requires Node and `commit-and-tag-version` (install with
+`npm install --global commit-and-tag-version@12.5.0`), plus Ruff for `make check`.
+These are developer tools, not runtime Python dependencies. `VERSION` is the only
+version surface; `.versionrc.js` owns its bumps, generated `CHANGELOG.md`, the
+`chore(release)` commit and `v` tag. Never update those by hand.
+
+After merging conventional fix/feature commits, release from a clean, up-to-date
+`main`:
+
+```bash
+git pull --ff-only origin main
+make release-dry-run  # offline checks, clean-main gate, preview; no writes/tags
+make release         # same gate, then tool-generated version/changelog/commit/tag
+git push --atomic origin main "$(git describe --exact-match --tags HEAD)"
+```
+
+Without `--release-as`, the tool chooses the next version from conventional
+commits. One coherent iteration produces one release tag. Inspect the generated
+changelog and verify the remote branch/tag after pushing. Releases version the
+code, not the freshness or correctness of historical model judgments; neither
+release target calls GitHub or Jev or regenerates captured evidence.

@@ -26,7 +26,7 @@ JUDGED := $(shell test -f out/judgments.jsonl && wc -l < out/judgments.jsonl || 
 PAIRED := $(shell test -f out/pair_verdicts.jsonl && wc -l < out/pair_verdicts.jsonl || echo 0)
 
 # ============== Phony Targets ==============
-.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments test
+.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments test check release-check release-dry-run release
 
 # ============== Default Target ==============
 .DEFAULT_GOAL := help
@@ -137,6 +137,22 @@ clean-judgments: banner
 test:
 	@python3 -m unittest discover -s tests -v
 
+check: test
+	@ruff check .
+	@python3 -m compileall -q tranche.py gen_page.py tests tools
+	@git diff --check
+
+release-check: check
+	@node --check .versionrc.js
+	@test "$$(git branch --show-current)" = main || (printf 'Release from main only.\n' >&2; exit 1)
+	@test -z "$$(git status --porcelain)" || (printf 'Commit or remove working-tree changes before releasing.\n' >&2; exit 1)
+
+release-dry-run: release-check
+	@commit-and-tag-version --dry-run
+
+release:
+	@commit-and-tag-version
+
 # ============== Help ==============
 
 help: banner
@@ -154,6 +170,11 @@ help: banner
 	@/bin/echo -e "  $(GREEN)make all$(RESET)           - $(YELLOW)$(BOLD)fetch → judge → dupes → cluster → page$(RESET)"
 	@/bin/echo -e "  $(GREEN)make publish$(RESET)       - Commit docs/ + push (Pages rebuilds)"
 	@/bin/echo -e "  $(GREEN)make verify$(RESET)        - Prove the live page serves"
+	@/bin/echo -e ""
+	@/bin/echo -e "$(CYAN)$(BOLD)Release:$(RESET)"
+	@/bin/echo -e "  $(GREEN)make check$(RESET)         - Offline tests, Ruff, syntax and whitespace"
+	@/bin/echo -e "  $(GREEN)make release-dry-run$(RESET) - Preview version/changelog on clean main"
+	@/bin/echo -e "  $(GREEN)make release$(RESET)       - Gate, bump VERSION, generate changelog, commit + tag"
 	@/bin/echo -e ""
 	@/bin/echo -e "$(CYAN)$(BOLD)Other:$(RESET)"
 	@/bin/echo -e "  $(GREEN)make info$(RESET)          - Show summary.json numbers"
