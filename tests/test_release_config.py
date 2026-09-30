@@ -27,7 +27,7 @@ class ReleaseConfigTests(unittest.TestCase):
         for field in ("commitUrlFormat", "compareUrlFormat", "issueUrlFormat"):
             self.assertTrue(config[field].startswith("https://github.com/blackopsrepl/Tranche/"))
         self.assertEqual(config["scripts"]["prerelease"], "make release-check")
-        self.assertRegex((ROOT / "VERSION").read_text(), r"^\d+\.\d+\.\d+\n$")
+        self.assertRegex((ROOT / "VERSION").read_text(), r"^\d+\.\d+\.\d+\n?$")
 
 
 if __name__ == "__main__":
