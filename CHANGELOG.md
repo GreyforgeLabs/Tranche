@@ -2,6 +2,24 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.0](https://github.com/blackopsrepl/Tranche/compare/v0.0.2...v0.1.0) (2026-09-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **batches:** out/batches.json format_version 2 replaces the
+per-category cumulative tier format.
+
+### Features
+
+* **batches:** batches are Jev-determined merge groups ([98f53d1](https://github.com/blackopsrepl/Tranche/commit/98f53d1ea2fda9e37481af7b220f900dd315fddc)), closes [#4](https://github.com/blackopsrepl/Tranche/issues/4)
+* **workbench:** security as a browsable meta-category ([615c518](https://github.com/blackopsrepl/Tranche/commit/615c518f0ea38d4acb6a77216a665ae1d7fe7a42)), closes [#3](https://github.com/blackopsrepl/Tranche/issues/3)
+
+
+### Bug Fixes
+
+* **workbench:** drop the security sort that reordered every PR ([9008d7e](https://github.com/blackopsrepl/Tranche/commit/9008d7ed95314b5fdcb5ba9267e725dd3060f648)), closes [#3](https://github.com/blackopsrepl/Tranche/issues/3)
+
 ## [0.0.2](https://github.com/blackopsrepl/Tranche/compare/v0.0.1...v0.0.2) (2026-09-30)
 
 
