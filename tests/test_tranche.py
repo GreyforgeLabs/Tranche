@@ -650,7 +650,7 @@ class WorkflowTests(unittest.TestCase):
         page = (self.root / "docs" / "index.html").read_text()
         for text in ('assets/workbench.css', 'assets/workbench.js', '<dialog',
                      'id="search"', 'id="sort"', 'id="category"', 'aria-live="polite"',
-                     'data-queue="security"', 'Security first', 'Security probability',
+                     'data-queue="security"', 'Security first',
                      'Review candidates', 'Senior review', 'Author follow-up', 'Related PRs',
                      'assets/tranche.gif', 'assets/tranche-title.png', 'assets/omarchy.gif',
                      'assets/omarchy-title.png', 'assets/tranche-mascot.png'):

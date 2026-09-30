@@ -39,7 +39,7 @@ test('browser workbench renders safe text, inspects PRs, restores focus and URL 
         check(document.querySelector('[data-queue="security"]').textContent.includes('Security first'), 'security queue leads the nav');
         check([...document.querySelectorAll('[data-queue]')][0].dataset.queue === 'security', 'security is the first queue button');
         check(document.querySelector('[data-queue="batched"]')?.textContent.includes('Batched'), 'batched queue exists');
-        check(document.querySelector('#sort option[value=security]')?.textContent.includes('Security'), 'security sort option');
+        check(!document.querySelector('#sort option[value=security]'), 'no security sort (classification, not an ordering)');
         const row = document.querySelector('.pr-open'); row.focus(); row.click();
         check(document.querySelector('dialog').open, 'native dialog opens');
         check(document.querySelector('#detail-title').textContent === ${JSON.stringify(data.prs[0].title)}, 'full title');
@@ -134,7 +134,7 @@ test('batched queue selects only PRs carrying pre-release batches', () => {
   assert.equal(api.select(rows, {queue: 'all'}).total, 3);
 });
 
-test('security meta-category outranks every chosen sort; security sort orders by probability', () => {
+test('security meta-category queue selects only flagged PRs; sorts stay unbiased', () => {
   const rows = [
     {number: 1, created: '2026-01-01', risk: 0, security: 0.2, security_priority: false},
     {number: 2, created: '2026-01-04', risk: 4, security: 0.9, security_priority: true},
@@ -142,13 +142,11 @@ test('security meta-category outranks every chosen sort; security sort orders by
     {number: 4, created: '2026-01-02', risk: 2, security: null, security_priority: false},
   ];
   const ids = sort => api.select(rows, {sort}).items.map(pr => pr.number);
-  assert.deepEqual(ids('newest'), [2, 3, 4, 1], 'priority leads, then newest first');
-  assert.deepEqual(ids('oldest'), [3, 2, 1, 4], 'priority leads, then oldest first');
-  assert.deepEqual(ids('risk'), [2, 3, 4, 1], 'priority leads, then risk high first');
-  assert.deepEqual(ids('security'), [2, 3, 1, 4], 'probability order inside each group');
-  const rowsWithUnknown = [...rows, {number: 5, created: '2026-01-05', risk: 0, security: null, security_priority: false}];
-  const securityOrder = api.select(rowsWithUnknown, {sort: 'security'}).items.map(pr => pr.number);
-  assert.deepEqual(securityOrder, [2, 3, 1, 4, 5], 'unknown security probability last');
+  assert.deepEqual(ids('newest'), [2, 3, 4, 1], 'newest first, no security bias');
+  assert.deepEqual(ids('oldest'), [1, 4, 3, 2]);
+  assert.deepEqual(ids('risk'), [2, 4, 3, 1], 'risk high first');
+  assert.equal(api.select(rows, {queue: 'security'}).total, 2, 'only security-related PRs');
+  assert.equal(api.select(rows, {queue: 'security'}).items[0].number, 2);
 });
 
 test('date and model risk sorts are deterministic with unknown values last', () => {
