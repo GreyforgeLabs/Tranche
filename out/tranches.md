@@ -1,9 +1,395 @@
 # Tranche — PR review candidates
 
 Corpus: 2836 observed open PRs; 2836 matching judgments; 0 unjudged/stale; 0 unbound legacy judgments.
-Review candidates: 610. Model-consistent groups: 88. Groups needing relationship review: 10.
+Review candidates: 610. Model-consistent groups: 88. Groups needing relationship review: 10. Security-priority items: 378 (meta-category, reviewed first).
 
 Evidence: titles and shortened descriptions (1200 characters per PR; 400 per pair). Diffstat is unknown unless captured input supplies it. Patches, CI, reproductions, fix coverage and security have not been verified. Model scores are suggestions, not calibrated guarantees or approval to merge/close. Pagination records an observation, not a point-in-time GitHub snapshot.
+
+## Security review — top priority (meta-category)
+
+These PRs touch credentials, remote code execution, sudo/permissions, network
+exposure or crypto material (model probability ≥ 0.5). Review before any category batch.
+
+| PR | Title | Author | Model finished | Model effort | Model fix |
+|---|---|---|---|---|---|
+| [#9459](https://github.com/omacom/omarchy/pull/9459) | [codex] OM-SEC-03: Remove public Windows VM default credentials | AFOliveira | 1.5 | 2.9 | 0.66 |
+| [#9464](https://github.com/omacom/omarchy/pull/9464) | [codex] OM-SEC-09: Generate private credentials for development databases | AFOliveira | 2.4 | 2.9 | 0.24 |
+| [#9750](https://github.com/omacom/omarchy/pull/9750) | Kids mode: child installs with a kid password and a parent password | peterholko | 1.0 | 3.0 | 0.04 |
+| [#10219](https://github.com/omacom/omarchy/pull/10219) | security: add a disk-unlock duress password that factory-resets | calebdw | 1.1 | 3.0 | 0.04 |
+| [#7435](https://github.com/omacom/omarchy/pull/7435) | Add Wi-Fi hotspot hosting to the network panel | ujo4eva | 1.0 | 3.0 | 0.03 |
+| [#11172](https://github.com/omacom/omarchy/pull/11172) | Add opt-in sudo authentication policy | shelldandy | 1.2 | 3.0 | 0.08 |
+| [#11379](https://github.com/omacom/omarchy/pull/11379) | Add TPM2-backed PIN authentication for login, sudo, polkit, and lock screen | LoboHacks | 1.2 | 3.0 | 0.05 |
+| [#12078](https://github.com/omacom/omarchy/pull/12078) | Import saved iwd Wi-Fi networks into NetworkManager | oliverox | 1.1 | 2.6 | 0.58 |
+| [#5035](https://github.com/omacom/omarchy/pull/5035) | Prevent empty passwords in omarchy-drive-set-password | marko-builds | 1.1 | 1.2 | 0.96 |
+| [#7828](https://github.com/omacom/omarchy/pull/7828) | Add "Join hidden network" to the Wi-Fi panel | verkligheten | 2.2 | 1.9 | 0.07 |
+| [#8532](https://github.com/omacom/omarchy/pull/8532) | Constrain the asdcontrol sudoers rule to hiddev detect/get/set | marty-schneider | 1.0 | 1.9 | 0.87 |
+| [#8534](https://github.com/omacom/omarchy/pull/8534) | Take privileged usernames from id -un, not USER | marty-schneider | 1.1 | 1.8 | 0.97 |
+| [#10962](https://github.com/omacom/omarchy/pull/10962) | Unattended domain join and domain logon for the Windows VM | ekollof | 1.0 | 3.0 | 0.04 |
+| [#11037](https://github.com/omacom/omarchy/pull/11037) | Harden FIDO2 setup against cached sudo reuse | ErikMelton | 1.2 | 2.7 | 0.81 |
+| [#11438](https://github.com/omacom/omarchy/pull/11438) | Support mounting and unlocking internal and LVM-backed storage in UDisks | 2fd5 | 1.1 | 2.1 | 0.24 |
+| [#11471](https://github.com/omacom/omarchy/pull/11471) | Open Steam Remote Play ports when installing Steam | kh4rit-bot | 1.1 | 1.2 | 0.79 |
+| [#11565](https://github.com/omacom/omarchy/pull/11565) | Scope LocalSend firewall rules to private and local subnets (#11560) | Cid-oe | 1.1 | 1.8 | 0.94 |
+| [#12099](https://github.com/omacom/omarchy/pull/12099) | Harden sshd: localhost bind, key before listen | Chessing234 | 1.9 | 2.1 | 0.44 |
+| [#12165](https://github.com/omacom/omarchy/pull/12165) | Tighten system and authentication file permissions | kairosci | 1.0 | 1.9 | 0.42 |
+| [#12831](https://github.com/omacom/omarchy/pull/12831) | Scope the LocalSend firewall rule to private networks | taufderl | 2.4 | 1.0 | 0.85 |
+| [#13575](https://github.com/omacom/omarchy/pull/13575) | Bound the package-install sudo keepalive and revoke it on exit | Arash-Afshar | 2.5 | 1.7 | 0.90 |
+| [#7272](https://github.com/omacom/omarchy/pull/7272) | Switch between subscription accounts | omarchybot | 1.0 | 3.0 | 0.07 |
+| [#7274](https://github.com/omacom/omarchy/pull/7274) | Add a Kimi usage collector to the agents panel | sorenmat | 1.0 | 2.3 | 0.04 |
+| [#7455](https://github.com/omacom/omarchy/pull/7455) | Read Fireworks credentials from pi's auth.json | TyRichards | 1.2 | 1.9 | 0.68 |
+| [#8889](https://github.com/omacom/omarchy/pull/8889) | Apply uinput permissions through tmpfiles | yashranaway | 2.0 | 1.6 | 0.93 |
+| [#9043](https://github.com/omacom/omarchy/pull/9043) | Authorize SSH keys into the invoking user's home | PyRo1121 | 2.1 | 1.4 | 0.97 |
+| [#9221](https://github.com/omacom/omarchy/pull/9221) | Add AirPlay audio output | jtsiros | 2.2 | 2.0 | 0.14 |
+| [#9239](https://github.com/omacom/omarchy/pull/9239) | Sync the GNOME keyring on user password changes | hudsonwa | 1.1 | 2.0 | 0.95 |
+| [#9248](https://github.com/omacom/omarchy/pull/9248) | Add managed account website allowlists | redreceipt | 1.6 | 3.0 | 0.03 |
+| [#9463](https://github.com/omacom/omarchy/pull/9463) | [codex] OM-SEC-08: Publish SSH only after proving key-only access | AFOliveira | 1.0 | 3.0 | 0.77 |
+| [#9470](https://github.com/omacom/omarchy/pull/9470) | [codex] OM-SEC-15: Keep mixed-trust installers outside sudo lifetime | AFOliveira | 1.2 | 3.0 | 0.81 |
+| [#9477](https://github.com/omacom/omarchy/pull/9477) | [codex] OM-SEC-23: Keep debug collectors outside dmesg authorization | AFOliveira | 1.5 | 3.0 | 0.57 |
+| [#10018](https://github.com/omacom/omarchy/pull/10018) | Pin Signal to gnome-libsecret like the browsers | hudsonwa | 1.2 | 2.0 | 0.94 |
+| [#10689](https://github.com/omacom/omarchy/pull/10689) | Fingerprint setup and enrolment as a shell overlay | inauman | 1.0 | 3.0 | 0.04 |
+| [#11314](https://github.com/omacom/omarchy/pull/11314) | System security hardening | kairosci | 1.0 | 3.0 | 0.06 |
+| [#11612](https://github.com/omacom/omarchy/pull/11612) | feat(security): Facelock face unlock for lock screen, sudo, and polkit | GianlucaMinoprio | 2.0 | 3.0 | 0.07 |
+| [#11697](https://github.com/omacom/omarchy/pull/11697) | Repair a broken passwordless default keyring before session apps use it | Chessing234 | 1.7 | 2.3 | 0.93 |
+| [#12164](https://github.com/omacom/omarchy/pull/12164) | Apply sudo session isolation and security flags | kairosci | 1.0 | 1.8 | 0.14 |
+| [#12718](https://github.com/omacom/omarchy/pull/12718) | Security: refresh-config path, password sync, input names, plugin USER, ldisc, f | Chessing234 | 0.9 | 2.9 | 0.86 |
+| [#12817](https://github.com/omacom/omarchy/pull/12817) | Face authentication: lock screen, sudo and polkit by IR camera | mellismas | 1.0 | 3.0 | 0.03 |
+| [#12901](https://github.com/omacom/omarchy/pull/12901) | Enable Voxtype GPU backend through sudo | Chessing234 | 1.7 | 1.2 | 0.85 |
+| [#13432](https://github.com/omacom/omarchy/pull/13432) | Keep a legacy Windows VM password with $$ working after the Quattro migration | omarchybot | 1.1 | 1.1 | 0.95 |
+| [#13479](https://github.com/omacom/omarchy/pull/13479) | Authorize omarchy-channel-set once for the whole switch | AnPod | 1.3 | 2.4 | 0.92 |
+| [#6736](https://github.com/omacom/omarchy/pull/6736) | Docker multi-arch build with sudo support | axelfontaine | 2.5 | 2.2 | 0.87 |
+| [#7501](https://github.com/omacom/omarchy/pull/7501) | Apply session monitor scale to the SDDM greeter | calledtoconstruct | 2.0 | 2.6 | 0.72 |
+| [#7814](https://github.com/omacom/omarchy/pull/7814) | Add encrypted, versioned, off-site backups | achevalier-dev | 1.0 | 3.0 | 0.03 |
+| [#7990](https://github.com/omacom/omarchy/pull/7990) | Clear passwordless sudo grants at boot | Adolanium | 1.1 | 2.0 | 0.93 |
+| [#9474](https://github.com/omacom/omarchy/pull/9474) | [codex] OM-SEC-19: Protect migration and SSH setup authorization | AFOliveira | 1.2 | 3.0 | 0.86 |
+| [#9573](https://github.com/omacom/omarchy/pull/9573) | Judge the invoking user's authorized keys when removing SSH access | shaynhornik | 2.1 | 1.5 | 0.96 |
+| [#9605](https://github.com/omacom/omarchy/pull/9605) | Clear set-ID bits when securing the Windows VM mount sources | omarchybot | 1.1 | 1.6 | 0.97 |
+| [#11461](https://github.com/omacom/omarchy/pull/11461) | Keep the caller's editor across sudo for vipw and vigr | photuris | 1.2 | 1.9 | 0.92 |
+| [#11989](https://github.com/omacom/omarchy/pull/11989) | Add Google Antigravity usage collector and panel integration | steph4n-gh | 1.0 | 2.8 | 0.03 |
+| [#12103](https://github.com/omacom/omarchy/pull/12103) | Strip dangerous caps from gsr-kms-server and btop | Chessing234 | 1.0 | 2.0 | 0.68 |
+| [#12246](https://github.com/omacom/omarchy/pull/12246) | Boot: ESP free space, Limine prune, /boot perms, signed upgrade, SDDM keyring | Chessing234 | 1.0 | 2.8 | 0.45 |
+| [#12266](https://github.com/omacom/omarchy/pull/12266) | Security: id -un sudo grants, TUI desktop escape, Docker DB secrets | Chessing234 | 0.7 | 2.7 | 0.67 |
+| [#12788](https://github.com/omacom/omarchy/pull/12788) | Add optional AirPods bar integration | artinlenz | 2.0 | 3.0 | 0.03 |
+| [#13215](https://github.com/omacom/omarchy/pull/13215) | Sync root when updating the user password from the menu | Chessing234 | 1.8 | 1.0 | 0.91 |
+| [#13800](https://github.com/omacom/omarchy/pull/13800) | Strip setgid and setuid bits from Windows VM mount directories (#13558) | szaidi-code | 1.0 | 1.1 | 0.92 |
+| [#6647](https://github.com/omacom/omarchy/pull/6647) | Add local and remote Hermes usage sources to Agents panel | okurmustafa | 1.0 | 3.0 | 0.04 |
+| [#7417](https://github.com/omacom/omarchy/pull/7417) | Add NetBird mesh VPN integration | stijoh | 1.0 | 3.0 | 0.02 |
+| [#8326](https://github.com/omacom/omarchy/pull/8326) | Read Claude limits with a sibling CLI's token when the saved one lapsed | lepht | 1.4 | 2.0 | 0.75 |
+| [#9465](https://github.com/omacom/omarchy/pull/9465) | [codex] OM-SEC-10: Replace the world-writable installer log | AFOliveira | 1.2 | 3.0 | 0.82 |
+| [#9475](https://github.com/omacom/omarchy/pull/9475) | [codex] OM-SEC-21: Authenticate only after package picker code exits | AFOliveira | 1.1 | 2.9 | 0.68 |
+| [#9700](https://github.com/omacom/omarchy/pull/9700) | Seed Chromium's first-run preferences with a mode the browser can read | shaynhornik | 1.1 | 1.0 | 0.95 |
+| [#9783](https://github.com/omacom/omarchy/pull/9783) | Fix Windows VM helper rejecting setgid source directories | ekollof | 1.1 | 2.0 | 0.97 |
+| [#10602](https://github.com/omacom/omarchy/pull/10602) | Fix Wi-Fi password recovery after authentication failure | cristianbica | 2.9 | 1.9 | 0.98 |
+| [#10738](https://github.com/omacom/omarchy/pull/10738) | Require auth to change system NetworkManager connections | danjonesio | 1.9 | 1.0 | 0.63 |
+| [#10769](https://github.com/omacom/omarchy/pull/10769) | Restrict clipboard history file modes | danjonesio | 2.9 | 1.8 | 0.90 |
+| [#10977](https://github.com/omacom/omarchy/pull/10977) | Add `omarchy vm`, a disposable Omarchy in QEMU/KVM | jankeesvw | 1.1 | 3.0 | 0.03 |
+| [#11786](https://github.com/omacom/omarchy/pull/11786) | Reclaim pre-4.0 user-owned Plymouth and SDDM theme directories | Chessing234 | 1.8 | 2.0 | 0.93 |
+| [#11967](https://github.com/omacom/omarchy/pull/11967) | Agents: user collectors + Go connection settings card | washburnello | 1.1 | 2.8 | 0.05 |
+| [#12177](https://github.com/omacom/omarchy/pull/12177) | Add 80% battery charge cap toggle | Per0-1 | 2.1 | 2.1 | 0.04 |
+| [#12244](https://github.com/omacom/omarchy/pull/12244) | Chromium: overrideable OAuth env and CVE security-floor upgrade | Chessing234 | 1.0 | 2.3 | 0.29 |
+| [#12715](https://github.com/omacom/omarchy/pull/12715) | Finish 1Password install: local polkit owners and MCP setgid | Chessing234 | 1.5 | 1.9 | 0.82 |
+| [#12888](https://github.com/omacom/omarchy/pull/12888) | Abort Tailscale remove when sudo is cancelled | Chessing234 | 1.9 | 1.7 | 0.97 |
+| [#12889](https://github.com/omacom/omarchy/pull/12889) | Reuse existing enterprise Wi-Fi profiles on reconnect | Chessing234 | 1.9 | 2.2 | 0.89 |
+| [#13052](https://github.com/omacom/omarchy/pull/13052) | Add a LiteLLM collector for the agents usage panel | brynnjocelyn | 1.2 | 2.1 | 0.04 |
+| [#13112](https://github.com/omacom/omarchy/pull/13112) | Stop broadcasting hostname and permanent MAC on every network | surim0n | 1.7 | 2.1 | 0.25 |
+| [#13533](https://github.com/omacom/omarchy/pull/13533) | Join a self-hosted Tailscale coordination server | z23 | 1.3 | 2.1 | 0.65 |
+| [#13616](https://github.com/omacom/omarchy/pull/13616) | Keep sudo alive and offer reboot after channel switch | AnPod | 1.8 | 1.9 | 0.92 |
+| [#8014](https://github.com/omacom/omarchy/pull/8014) | Keep Wi-Fi password entry stable during scans | jeremydixon22 | 2.8 | 2.0 | 0.86 |
+| [#8251](https://github.com/omacom/omarchy/pull/8251) | Add a copy action for the revealed wifi password | pastawithpesto | 2.3 | 1.2 | 0.04 |
+| [#8294](https://github.com/omacom/omarchy/pull/8294) | Add Wi-Fi QR code scanning | icehunt | 2.1 | 2.7 | 0.03 |
+| [#8831](https://github.com/omacom/omarchy/pull/8831) | Allow IGMP so multicast group queries stop flooding the firewall log | pixelpush-io | 1.9 | 1.0 | 0.75 |
+| [#9506](https://github.com/omacom/omarchy/pull/9506) | Keep SSH setup from disabling passwords on a writable home | mark-groves | 1.3 | 1.1 | 0.94 |
+| [#9597](https://github.com/omacom/omarchy/pull/9597) | Add MiniMax Token Plan support | McoreD | 1.1 | 3.0 | 0.04 |
+| [#9875](https://github.com/omacom/omarchy/pull/9875) | Probe sudo non-interactively so unattended updates cannot hang | konsorsiumai | 1.9 | 1.6 | 0.96 |
+| [#10082](https://github.com/omacom/omarchy/pull/10082) | Bound lock authentication resource use | vip32 | 1.0 | 2.9 | 0.54 |
+| [#10396](https://github.com/omacom/omarchy/pull/10396) | Strip password keyring auth from sddm-autologin too | calledtoconstruct | 1.0 | 1.6 | 0.90 |
+| [#11196](https://github.com/omacom/omarchy/pull/11196) | Screen time for the child profile, with two modes | jankeesvw | 1.0 | 3.0 | 0.03 |
+| [#11386](https://github.com/omacom/omarchy/pull/11386) | Run development containers with rootless Docker | acrogenesis | 1.0 | 3.0 | 0.10 |
+| [#11428](https://github.com/omacom/omarchy/pull/11428) | Add ZeroTier as an installable service | Michallote | 1.3 | 1.9 | 0.03 |
+| [#12162](https://github.com/omacom/omarchy/pull/12162) | Harden SSH client and daemon cryptographic defaults | kairosci | 1.0 | 1.9 | 0.12 |
+| [#12265](https://github.com/omacom/omarchy/pull/12265) | Agent usage: config-dir cache key and owner-only modes | Chessing234 | 2.0 | 2.1 | 0.88 |
+| [#12323](https://github.com/omacom/omarchy/pull/12323) | Clear setgid when hardening Windows VM directories | atoslins | 1.7 | 1.8 | 0.97 |
+| [#12583](https://github.com/omacom/omarchy/pull/12583) | Let the Wi-Fi passphrase be read back while typing it | fazzledev | 1.1 | 1.8 | 0.19 |
+| [#12883](https://github.com/omacom/omarchy/pull/12883) | Scope the dev-link secure_path drop-in to the linking user | taufderl | 1.0 | 1.1 | 0.66 |
+| [#12895](https://github.com/omacom/omarchy/pull/12895) | Don't add controller users to the input group | taufderl | 1.9 | 1.0 | 0.84 |
+| [#12972](https://github.com/omacom/omarchy/pull/12972) | Add a camera bar widget that turns every USB camera off | GustavoBelo | 1.1 | 2.8 | 0.04 |
+| [#13474](https://github.com/omacom/omarchy/pull/13474) | Soften yay go-mod caches and warn on AUR update failure | AnPod | 2.5 | 1.8 | 0.94 |
+| [#13513](https://github.com/omacom/omarchy/pull/13513) | Run a lock hook when the screen locks | kisom | 2.0 | 1.9 | 0.32 |
+| [#13750](https://github.com/omacom/omarchy/pull/13750) | Clear setgid when hardening Windows VM mount sources | dhiasalhiQ | 1.4 | 1.3 | 0.96 |
+| [#7913](https://github.com/omacom/omarchy/pull/7913) | Add maker install group with ESP32/ESP-IDF toolchain setup | JoseEchave | 1.1 | 2.8 | 0.04 |
+| [#8169](https://github.com/omacom/omarchy/pull/8169) | Stop apply-system reruns leaving the install log world-writable | Adolanium | 1.1 | 1.0 | 0.96 |
+| [#8336](https://github.com/omacom/omarchy/pull/8336) | Add face authentication (howdy) to the lock screen | krismach | 1.0 | 3.0 | 0.03 |
+| [#10172](https://github.com/omacom/omarchy/pull/10172) | Add Ollama Cloud usage collector to the agents panel | DanteCpp | 1.0 | 2.3 | 0.03 |
+| [#11444](https://github.com/omacom/omarchy/pull/11444) | Add GitLab Duo CLI as a default coding agent | vglafirov | 1.0 | 2.4 | 0.04 |
+| [#11725](https://github.com/omacom/omarchy/pull/11725) | feat(config): configure gnome-libsecret password store for VS Code | SantoshTunga | 1.4 | 1.4 | 0.63 |
+| [#11804](https://github.com/omacom/omarchy/pull/11804) | Tell agents to retry with pkexec when sudo needs a password | cristim | 2.0 | 1.0 | 0.46 |
+| [#13316](https://github.com/omacom/omarchy/pull/13316) | Preserve GUM environment records during factory-reset elevation | AFOliveira | 2.0 | 1.9 | 0.90 |
+| [#13770](https://github.com/omacom/omarchy/pull/13770) | Switch between several Claude and Codex subscriptions, and build apps the Omarch | dhh | 1.0 | 3.0 | 0.03 |
+| [#9307](https://github.com/omacom/omarchy/pull/9307) | Clarify that "grab key from github" in sshd setup authorizes EVERY machine that  | simonallfrey | 1.4 | 1.9 | 0.46 |
+| [#9965](https://github.com/omacom/omarchy/pull/9965) | Show Bluetooth pairing codes in the Omarchy panel | Zhaoyikaiii | 1.4 | 3.0 | 0.30 |
+| [#9995](https://github.com/omacom/omarchy/pull/9995) | Pin Helium password store to libsecret | Ahmed-Sinkeat | 1.8 | 2.0 | 0.24 |
+| [#10022](https://github.com/omacom/omarchy/pull/10022) | Do not let a migration inherit its path overrides from the caller | DanDreadless | 1.1 | 1.4 | 0.55 |
+| [#10411](https://github.com/omacom/omarchy/pull/10411) | Clear setgid before setting the Windows VM mount modes | srikat | 1.4 | 1.1 | 0.97 |
+| [#11032](https://github.com/omacom/omarchy/pull/11032) | Make Podman native with optional Docker compatibility | acrogenesis | 1.0 | 3.0 | 0.04 |
+| [#11720](https://github.com/omacom/omarchy/pull/11720) | Add eye toggle to reveal the Wi-Fi passphrase | cristim | 2.8 | 1.3 | 0.07 |
+| [#12542](https://github.com/omacom/omarchy/pull/12542) | Sort passwd_tries sudoers before user overrides | paulogeyer | 2.3 | 1.4 | 0.90 |
+| [#12651](https://github.com/omacom/omarchy/pull/12651) | feat(agents): add OpenCode Go usage with V2 support | felixzsh | 1.1 | 3.0 | 0.07 |
+| [#13377](https://github.com/omacom/omarchy/pull/13377) | Refuse omarchy-update when invoked as root | Chessing234 | 1.8 | 1.0 | 0.96 |
+| [#13646](https://github.com/omacom/omarchy/pull/13646) | Soften yay go-mod caches and warn on AUR update failure | AnPod | 1.8 | 1.3 | 0.91 |
+| [#13660](https://github.com/omacom/omarchy/pull/13660) | Refuse to run omarchy-update as root | AnPod | 1.8 | 1.0 | 0.94 |
+| [#5284](https://github.com/omacom/omarchy/pull/5284) | Add NuPhy Air75 V3 keyboard support | felipe3dfx | 1.1 | 2.9 | 0.18 |
+| [#7051](https://github.com/omacom/omarchy/pull/7051) | Add Synthetic Labs quotas to the agents panel | aserper | 1.4 | 2.4 | 0.04 |
+| [#8441](https://github.com/omacom/omarchy/pull/8441) | Pin Cursor password store to gnome-libsecret so GitHub login can use the OS keyr | MrBazzieB | 1.1 | 2.0 | 0.75 |
+| [#8487](https://github.com/omacom/omarchy/pull/8487) | Add openzoo as a coding agent option: claude code, no api key, pays per call | staccDOTsol | 1.1 | 1.9 | 0.03 |
+| [#9319](https://github.com/omacom/omarchy/pull/9319) | Give the Secret portal a provider so Chromium can open its password store | wombatoperator | 1.2 | 1.1 | 0.91 |
+| [#9723](https://github.com/omacom/omarchy/pull/9723) | Add an embedded dev-env for ESP32 and Arduino boards | HugoluizMTB | 1.2 | 2.2 | 0.09 |
+| [#9946](https://github.com/omacom/omarchy/pull/9946) | Reach the forwarded SSH agent from Herdr panes | chriopter | 1.1 | 3.0 | 0.50 |
+| [#10655](https://github.com/omacom/omarchy/pull/10655) | Harden linux-modules-cleanup.service with a systemd drop-in | surim0n | 2.2 | 2.6 | 0.73 |
+| [#12015](https://github.com/omacom/omarchy/pull/12015) | Restore the input group for Voxtype evdev hotkey users | kurenn | 1.4 | 1.1 | 0.96 |
+| [#12815](https://github.com/omacom/omarchy/pull/12815) | Refuse to run the tailscale and sshd setup commands as root | troelsim | 2.5 | 1.2 | 0.94 |
+| [#13213](https://github.com/omacom/omarchy/pull/13213) | Clear setgid when hardening Windows VM mount sources | naseebnaushad | 2.5 | 1.0 | 0.97 |
+| [#13467](https://github.com/omacom/omarchy/pull/13467) | Let fingerprint setup adopt an already-enrolled print | AnPod | 1.5 | 1.1 | 0.96 |
+| [#13548](https://github.com/omacom/omarchy/pull/13548) | Add an OpenCode agent usage collector | bitbonsai | 1.2 | 2.3 | 0.06 |
+| [#13845](https://github.com/omacom/omarchy/pull/13845) | Add omp (Oh My Pi) usage collector to the agents panel | Bekkenes | 1.0 | 2.0 | 0.04 |
+| [#4997](https://github.com/omacom/omarchy/pull/4997) | Add NetBird as optional VPN service | n0pashkov | 1.2 | 2.0 | 0.02 |
+| [#5545](https://github.com/omacom/omarchy/pull/5545) | Stop package install flows after aborts or failures | afurm | 1.7 | 2.0 | 0.96 |
+| [#8472](https://github.com/omacom/omarchy/pull/8472) | Omarchy v4.0.2 | ryanrhughes | 1.0 | 3.0 | 0.59 |
+| [#8709](https://github.com/omacom/omarchy/pull/8709) | fix: arm signature verification for the T2 repo and close the quattro override w | rmacy | 1.7 | 2.2 | 0.90 |
+| [#9460](https://github.com/omacom/omarchy/pull/9460) | [codex] OM-SEC-04: Require package authenticity during Quattro | AFOliveira | 2.0 | 2.6 | 0.39 |
+| [#12110](https://github.com/omacom/omarchy/pull/12110) | Fingerprint setup: keep working forks; silent lid-open PAM gate | Chessing234 | 1.5 | 2.1 | 0.82 |
+| [#12169](https://github.com/omacom/omarchy/pull/12169) | Configure default deny firewall rules with UFW | kairosci | 1.0 | 1.3 | 0.11 |
+| [#12582](https://github.com/omacom/omarchy/pull/12582) | Add a Cursor collector to the agents panel | markxiong0122 | 1.3 | 2.1 | 0.03 |
+| [#5431](https://github.com/omacom/omarchy/pull/5431) | feat(hardware): sync ThinkBook mute LEDs with WirePlumber state | Dev-solder124 | 1.1 | 2.2 | 0.22 |
+| [#7087](https://github.com/omacom/omarchy/pull/7087) | Add Cursor usage collector to the agents panel | AndrijaSkontra | 2.3 | 2.9 | 0.05 |
+| [#8019](https://github.com/omacom/omarchy/pull/8019) | Eye toggle to show/hide the Wi-Fi password | lethaale | 1.0 | 1.2 | 0.11 |
+| [#8707](https://github.com/omacom/omarchy/pull/8707) | Set Tailscale operator for Taildrop | Elshayib | 2.4 | 1.0 | 0.96 |
+| [#10717](https://github.com/omacom/omarchy/pull/10717) | Report SSH service disable failures before cleanup | yashranaway | 2.0 | 1.1 | 0.94 |
+| [#10824](https://github.com/omacom/omarchy/pull/10824) | Add OpenRouter usage collector to the agents panel | Azonnali | 1.1 | 2.2 | 0.13 |
+| [#11097](https://github.com/omacom/omarchy/pull/11097) | Keep the powerprofilesctl shebang fix applied across daemon upgrades (#11031) | sandmor | 1.1 | 2.0 | 0.97 |
+| [#11479](https://github.com/omacom/omarchy/pull/11479) | Reject root-run updates before changing user state | yashranaway | 2.3 | 1.3 | 0.95 |
+| [#11966](https://github.com/omacom/omarchy/pull/11966) | Fix captive portal sign-in URL (#11961) | thescurry | 2.1 | 1.7 | 0.96 |
+| [#12001](https://github.com/omacom/omarchy/pull/12001) | Pass Download Video extension tab cookies to yt-dlp | j-c-m | 1.1 | 1.9 | 0.77 |
+| [#13856](https://github.com/omacom/omarchy/pull/13856) | Launch Claude with a real permission bypass | Chessing234 | 1.2 | 1.2 | 0.73 |
+| [#5744](https://github.com/omacom/omarchy/pull/5744) | feat: Add installer for official Obsidian CLI | yugal1107 | 1.6 | 1.2 | 0.13 |
+| [#7040](https://github.com/omacom/omarchy/pull/7040) | feat(security): Add face authentication setup and removal commands | tyvsmith | 1.0 | 2.9 | 0.03 |
+| [#9834](https://github.com/omacom/omarchy/pull/9834) | Refuse to run the shell suite as root | maralcbr | 1.9 | 1.3 | 0.86 |
+| [#9873](https://github.com/omacom/omarchy/pull/9873) | Defer to system-auth in the polkit stack written by fingerprint/FIDO2 setup | Wheel-Smith | 1.1 | 1.3 | 0.96 |
+| [#10338](https://github.com/omacom/omarchy/pull/10338) | Fix the Windows VM refusing to start after its first launch | shilai-li | 1.1 | 1.4 | 0.97 |
+| [#11322](https://github.com/omacom/omarchy/pull/11322) | Recreate lock screen fingerprint PAM file for pre-quattro setups | RobertStevenson | 1.8 | 1.6 | 0.94 |
+| [#12019](https://github.com/omacom/omarchy/pull/12019) | Clear special bits when hardening Windows VM dirs | ram-devv1 | 2.3 | 1.3 | 0.97 |
+| [#12698](https://github.com/omacom/omarchy/pull/12698) | Add omarchy menu secret for masked secret entry | hrnbld | 1.9 | 1.3 | 0.06 |
+| [#12717](https://github.com/omacom/omarchy/pull/12717) | Drive: disk parent, mmcblk/loop names, password lsblk/cancel | Chessing234 | 1.0 | 2.7 | 0.85 |
+| [#11367](https://github.com/omacom/omarchy/pull/11367) | Add MiniMax Code (mcode) to the agents panel and default agent switch | joshleblanc | 1.0 | 2.7 | 0.03 |
+| [#11423](https://github.com/omacom/omarchy/pull/11423) | Install OpenCode V2 through mise's npm backend | AndreasHald | 1.1 | 2.3 | 0.34 |
+| [#11907](https://github.com/omacom/omarchy/pull/11907) | Stop Chromium Google OAuth workaround that causes SIGTRAP crashes | AndrijaSkontra | 1.6 | 2.0 | 0.96 |
+| [#12155](https://github.com/omacom/omarchy/pull/12155) | Fix six reported bugs: bar toggle, hibernation, weather, VM mounts, keybindings  | merkhanov | 1.6 | 2.6 | 0.98 |
+| [#12264](https://github.com/omacom/omarchy/pull/12264) | Windows VM: create launcher after start; clear setgid on harden | Chessing234 | 0.7 | 2.3 | 0.54 |
+| [#13036](https://github.com/omacom/omarchy/pull/13036) | Add Local AI: run the model validated for your GPU and open a coding agent on it | 0xSero | 1.5 | 3.0 | 0.03 |
+| [#13075](https://github.com/omacom/omarchy/pull/13075) | Add Cloudflare to Install > Service | yamz8 | 2.0 | 1.8 | 0.04 |
+| [#13154](https://github.com/omacom/omarchy/pull/13154) | Strip stray special mode bits when hardening Windows VM directories | MehrshadFb | 2.0 | 1.0 | 0.97 |
+| [#13280](https://github.com/omacom/omarchy/pull/13280) | Draft: bound the hotspot to a participant limit | ujo4eva | 1.0 | 2.6 | 0.17 |
+| [#6980](https://github.com/omacom/omarchy/pull/6980) | Add agent security scans for untrusted software | cempack | 1.0 | 3.0 | 0.05 |
+| [#8065](https://github.com/omacom/omarchy/pull/8065) | Add OpenCode Go usage collector for the agents panel | rechedev9 | 1.1 | 2.2 | 0.03 |
+| [#10113](https://github.com/omacom/omarchy/pull/10113) | fix(windows-vm): accept dockur 2777 shared mount mode on launch | lushprey | 1.7 | 1.5 | 0.96 |
+| [#11197](https://github.com/omacom/omarchy/pull/11197) | Make network speed test resilient with dynamic token fetch and Cloudflare fallba | harshithnadig | 1.4 | 2.3 | 0.83 |
+| [#12159](https://github.com/omacom/omarchy/pull/12159) | Harden kernel and network sysctl parameters | kairosci | 1.0 | 2.1 | 0.08 |
+| [#12891](https://github.com/omacom/omarchy/pull/12891) | Add show/hide toggle to the Wi-Fi passphrase field | rewisch | 2.3 | 1.2 | 0.09 |
+| [#7537](https://github.com/omacom/omarchy/pull/7537) | Show limits for OpenCode's OpenAI account | oorestisime | 2.4 | 2.2 | 0.16 |
+| [#8130](https://github.com/omacom/omarchy/pull/8130) | Stop NordVPN installation after setup failure | llirik0 | 2.3 | 1.4 | 0.96 |
+| [#9511](https://github.com/omacom/omarchy/pull/9511) | Support non-interactive updates with --yes | zerone0x | 2.0 | 2.5 | 0.27 |
+| [#10644](https://github.com/omacom/omarchy/pull/10644) | Guide an offline first login through terminal network setup | NickThompson42 | 1.1 | 2.1 | 0.39 |
+| [#12170](https://github.com/omacom/omarchy/pull/12170) | Apply systemd sandboxing drop-ins for core system services | kairosci | 1.0 | 2.3 | 0.08 |
+| [#12836](https://github.com/omacom/omarchy/pull/12836) | Install Hermes as the self-updating runtime in every flow | spencerbull | 1.4 | 2.9 | 0.60 |
+| [#13542](https://github.com/omacom/omarchy/pull/13542) | Finish fingerprint setup when a print is already enrolled | stevederico | 1.1 | 1.4 | 0.96 |
+| [#7857](https://github.com/omacom/omarchy/pull/7857) | feat(surface-touch): add touchscreen support for Surface devices via linux-surfa | div5yesh | 1.1 | 2.7 | 0.06 |
+| [#7971](https://github.com/omacom/omarchy/pull/7971) | Let the compositor and audio graph take the realtime priority they ask for | omarchybot | 1.2 | 1.3 | 0.81 |
+| [#8188](https://github.com/omacom/omarchy/pull/8188) | Add and remove tailnets from the Tailscale panel | stephentaylor-com | 1.8 | 2.7 | 0.28 |
+| [#10110](https://github.com/omacom/omarchy/pull/10110) | Add DaVinci Resolve and DaVinci Resolve Studio installers | sharms | 1.1 | 2.7 | 0.03 |
+| [#10435](https://github.com/omacom/omarchy/pull/10435) | Add VSCodium as a default editor and installer option | epkoen | 1.1 | 2.1 | 0.03 |
+| [#6912](https://github.com/omacom/omarchy/pull/6912) | Fix FIDO2 setup on keys that require user verification | Erijl | 1.5 | 1.7 | 0.96 |
+| [#7554](https://github.com/omacom/omarchy/pull/7554) | Add bb to the AI install menu | melonamin | 1.8 | 2.0 | 0.03 |
+| [#9227](https://github.com/omacom/omarchy/pull/9227) | Require interactive confirmation for AUR installs and updates | vikram | 1.1 | 2.0 | 0.12 |
+| [#9695](https://github.com/omacom/omarchy/pull/9695) | Add a Setup > Region toggle with Chinese language and input method | ZacharyZhang-NY | 2.1 | 2.6 | 0.09 |
+| [#9894](https://github.com/omacom/omarchy/pull/9894) | Fix Tailscale plugin failing to reconnect when accept-routes is enabled | llstrk | 1.0 | 2.8 | 0.92 |
+| [#9909](https://github.com/omacom/omarchy/pull/9909) | Track AppImages from GitHub releases and update them daily | alfkonee | 1.0 | 2.9 | 0.06 |
+| [#10473](https://github.com/omacom/omarchy/pull/10473) | network speedtest: use tokenless Cloudflare endpoints | Snowfedya | 2.8 | 1.7 | 0.96 |
+| [#11470](https://github.com/omacom/omarchy/pull/11470) | Run declared plugin cleanup before removal | antongisli | 1.0 | 3.0 | 0.22 |
+| [#12059](https://github.com/omacom/omarchy/pull/12059) | Run the default agent on another machine | CocaKova | 1.0 | 3.0 | 0.06 |
+| [#13296](https://github.com/omacom/omarchy/pull/13296) | Install OpenClaw as a self-updating copy under ~/.openclaw | spencerbull | 1.2 | 2.9 | 0.72 |
+| [#13652](https://github.com/omacom/omarchy/pull/13652) | Drop pam_faillock preauth silent so lockouts are visible | AnPod | 1.5 | 0.9 | 0.88 |
+| [#8662](https://github.com/omacom/omarchy/pull/8662) | Sanitize legacy Windows VM usernames | Elshayib | 2.5 | 1.1 | 0.96 |
+| [#9500](https://github.com/omacom/omarchy/pull/9500) | Give visudo an editor that Omarchy actually installs | d-zalewski | 1.5 | 1.0 | 0.95 |
+| [#10974](https://github.com/omacom/omarchy/pull/10974) | Rust-first sandboxed Quickshell plugins | jacob-vincent-mink | 1.0 | 3.0 | 0.03 |
+| [#11574](https://github.com/omacom/omarchy/pull/11574) | Add expandable hourly rain tables to the weather panel | AnPod | 1.1 | 2.6 | 0.03 |
+| [#6807](https://github.com/omacom/omarchy/pull/6807) | Detect captive portals and offer to sign in | scottjones | 1.0 | 2.7 | 0.07 |
+| [#6847](https://github.com/omacom/omarchy/pull/6847) | Preserve shared boot entries through factory reset | yashranaway | 1.2 | 3.0 | 0.87 |
+| [#9571](https://github.com/omacom/omarchy/pull/9571) | Resolve the invoking user's home in removal cleanup scripts | shaynhornik | 1.2 | 2.1 | 0.97 |
+| [#11839](https://github.com/omacom/omarchy/pull/11839) | feat: add commandcode, qwen audio agent, and colibri to AI installs | HIMANSHU11827 | 1.0 | 2.4 | 0.02 |
+| [#12279](https://github.com/omacom/omarchy/pull/12279) | Clear the eight-second enterprise Wi-Fi auth timeout | DonnieFi | 1.1 | 1.9 | 0.92 |
+| [#13106](https://github.com/omacom/omarchy/pull/13106) | Skip the Codex app-server probe when there are no credentials | surim0n | 2.4 | 1.1 | 0.78 |
+| [#13811](https://github.com/omacom/omarchy/pull/13811) | fix(bluetooth): recover incomplete pairing | jsonMartin | 1.9 | 2.0 | 0.96 |
+| [#6474](https://github.com/omacom/omarchy/pull/6474) | Add Android development environment | ryuhzk | 1.2 | 2.2 | 0.03 |
+| [#7882](https://github.com/omacom/omarchy/pull/7882) | Add native Syncthing integration | k-bx | 1.5 | 3.0 | 0.03 |
+| [#8035](https://github.com/omacom/omarchy/pull/8035) | Add VPN section to the network panel | thooams | 1.9 | 2.5 | 0.04 |
+| [#9044](https://github.com/omacom/omarchy/pull/9044) | Keep SDDM auto-login off encrypted roots in the quattro upgrade | PyRo1121 | 1.7 | 1.3 | 0.96 |
+| [#9461](https://github.com/omacom/omarchy/pull/9461) | [codex] OM-SEC-05: Remove the unsigned Apple T2 package source | AFOliveira | 1.0 | 3.0 | 0.45 |
+| [#9594](https://github.com/omacom/omarchy/pull/9594) | Fix XDG Secret portal keyring access | pkwagner | 1.4 | 1.1 | 0.94 |
+| [#5654](https://github.com/omacom/omarchy/pull/5654) | Add Install -> Editor -> Jetbrains menu | NicolasDorier | 1.4 | 2.6 | 0.18 |
+| [#7258](https://github.com/omacom/omarchy/pull/7258) | Restore early Thunderbolt authorization for LUKS unlock | chriopter | 1.1 | 2.2 | 0.77 |
+| [#8093](https://github.com/omacom/omarchy/pull/8093) | Call a lapsed Claude access token paused, not signed out | meibe-ab | 1.8 | 1.1 | 0.93 |
+| [#9539](https://github.com/omacom/omarchy/pull/9539) | Add cursor theme selection to the Style menu | TheLinuxITGuy | 1.9 | 2.3 | 0.03 |
+| [#11722](https://github.com/omacom/omarchy/pull/11722) | Add llmman to Install > AI and Remove > AI | ericcurtin | 1.1 | 1.9 | 0.04 |
+| [#12245](https://github.com/omacom/omarchy/pull/12245) | Lock/sleep: fail-closed, clamshell, auth UI, lid focus, logind | Chessing234 | 0.9 | 2.7 | 0.66 |
+| [#12796](https://github.com/omacom/omarchy/pull/12796) | Fix omarchy update under sudo: unset OMARCHY_PATH and yay-as-root | mrpink77it | 1.1 | 2.0 | 0.96 |
+| [#12925](https://github.com/omacom/omarchy/pull/12925) | Add a reveal toggle to masked TextFields, wired up for the Wi-Fi passphrase | jankeesvw | 2.1 | 1.8 | 0.07 |
+| [#13312](https://github.com/omacom/omarchy/pull/13312) | Require a per-session token for notification click-exec | Chessing234 | 1.9 | 2.3 | 0.85 |
+| [#13796](https://github.com/omacom/omarchy/pull/13796) | Keep an early polkit Enter and submit it when PAM asks | cristim | 1.2 | 1.2 | 0.96 |
+| [#9878](https://github.com/omacom/omarchy/pull/9878) | Re-apply hardware pacman repos after a refresh restore | hudsonwa | 1.1 | 1.0 | 0.97 |
+| [#11381](https://github.com/omacom/omarchy/pull/11381) | Install the pre-T2 FaceTime HD camera driver and firmware | rand0mdud3 | 2.8 | 2.2 | 0.73 |
+| [#12111](https://github.com/omacom/omarchy/pull/12111) | Harden notification image copies, exec tokens, and hint reads | Chessing234 | 1.3 | 2.1 | 0.57 |
+| [#13047](https://github.com/omacom/omarchy/pull/13047) | Pin factory-reset elevation to the packaged command | AFOliveira | 1.9 | 1.0 | 0.92 |
+| [#13101](https://github.com/omacom/omarchy/pull/13101) | Actually restart bluetooth.service in omarchy-restart-bluetooth | surim0n | 1.8 | 1.0 | 0.96 |
+| [#6557](https://github.com/omacom/omarchy/pull/6557) | feature(editor) add Doom Emacs installer, uninstaller, and theming integration | Irfrit | 1.0 | 2.9 | 0.02 |
+| [#7831](https://github.com/omacom/omarchy/pull/7831) | Reload a wedged Wi-Fi radio without waiting for the user | acrogenesis | 1.1 | 2.6 | 0.84 |
+| [#8001](https://github.com/omacom/omarchy/pull/8001) | Fix GitHub credential helpers after mise gh upgrades | thecdrz | 2.0 | 1.4 | 0.96 |
+| [#11144](https://github.com/omacom/omarchy/pull/11144) | Add Axon as a default coding agent | codywakeford | 2.4 | 2.2 | 0.04 |
+| [#12070](https://github.com/omacom/omarchy/pull/12070) | Answer ARP only from the interface that owns the address | michaeldeby | 2.2 | 0.9 | 0.90 |
+| [#13085](https://github.com/omacom/omarchy/pull/13085) | Restart bluetoothd and reload btusb when the adapter is wedged | pedrohfp | 1.2 | 1.1 | 0.96 |
+| [#13734](https://github.com/omacom/omarchy/pull/13734) | Add a sign-in button to the agents panel's auth card | branewyn | 1.1 | 2.0 | 0.13 |
+| [#13742](https://github.com/omacom/omarchy/pull/13742) | Test passwordless sudo revoke hook packaging | haiderakt | 2.6 | 0.9 | 0.64 |
+| [#6965](https://github.com/omacom/omarchy/pull/6965) | Add git-based backup and restore | andresreibel | 1.1 | 3.0 | 0.03 |
+| [#9729](https://github.com/omacom/omarchy/pull/9729) | Add Setup Wizard for NVIDIA DisplayPort 1.4 EDID Fix | JaxonWright | 1.1 | 2.9 | 0.27 |
+| [#10610](https://github.com/omacom/omarchy/pull/10610) | Add Muse usage collector to the agents panel | andresantonioriveros | 1.2 | 3.0 | 0.03 |
+| [#13088](https://github.com/omacom/omarchy/pull/13088) | Fix network panel Forget centering, add Cancel for in-flight connects | thedavidweng | 2.4 | 2.0 | 0.87 |
+| [#13699](https://github.com/omacom/omarchy/pull/13699) | Keep other systems' boot entries through a factory reset | xdanger | 1.1 | 2.3 | 0.95 |
+| [#13763](https://github.com/omacom/omarchy/pull/13763) | Add Cloudmail to Install > Service | ferdousbhai | 1.4 | 2.2 | 0.03 |
+| [#12475](https://github.com/omacom/omarchy/pull/12475) | network: keep passphrase prompt focused through scan reorders | FernandoCassioDev | 1.5 | 1.1 | 0.97 |
+| [#12957](https://github.com/omacom/omarchy/pull/12957) | Keep the update transcript out of world-writable /tmp | taufderl | 2.1 | 1.3 | 0.93 |
+| [#6697](https://github.com/omacom/omarchy/pull/6697) | Adding Atuin be default for better shell search / history | mrpbennett | 1.0 | 1.9 | 0.04 |
+| [#7485](https://github.com/omacom/omarchy/pull/7485) | Add Firebase CLI development environment via mise | calledtoconstruct | 1.9 | 1.4 | 0.04 |
+| [#7731](https://github.com/omacom/omarchy/pull/7731) | Show Windows PCs and admin shares in Files | gmcclelland90 | 1.2 | 2.0 | 0.20 |
+| [#8801](https://github.com/omacom/omarchy/pull/8801) | Add Helium and Ungoogled Chromium browser support | YamilG | 1.8 | 2.9 | 0.05 |
+| [#8908](https://github.com/omacom/omarchy/pull/8908) | Switch DNS providers without DHCP churn or profile rewrites | danbosscher | 1.9 | 3.0 | 0.45 |
+| [#9777](https://github.com/omacom/omarchy/pull/9777) | Add DeepSeek Harness to the agent roster and Install > AI | falser101 | 1.4 | 2.1 | 0.04 |
+| [#10262](https://github.com/omacom/omarchy/pull/10262) | Snapshot BASHPID before /proc fd walks in windows-vm mounts | fresh3nough | 2.2 | 1.8 | 0.97 |
+| [#11017](https://github.com/omacom/omarchy/pull/11017) | Install missing BCM43602 board NVRAM on MacBookPro13,3 | justin-schroeder | 2.4 | 2.2 | 0.71 |
+| [#11874](https://github.com/omacom/omarchy/pull/11874) | Require approval for new USB and Thunderbolt devices by default | acrogenesis | 1.0 | 3.0 | 0.12 |
+| [#9024](https://github.com/omacom/omarchy/pull/9024) | Auto-create /etc/1password/custom_allowed_browsers on install | spuder | 1.1 | 1.0 | 0.46 |
+| [#13664](https://github.com/omacom/omarchy/pull/13664) | Give each webapp its own Chromium profile | AnPod | 1.4 | 1.5 | 0.80 |
+| [#6844](https://github.com/omacom/omarchy/pull/6844) | Add Amp as a default coding agent | daveashworth | 2.6 | 2.6 | 0.06 |
+| [#10109](https://github.com/omacom/omarchy/pull/10109) | Add a disposable Omarchy lab VM | acrogenesis | 1.0 | 3.0 | 0.03 |
+| [#13362](https://github.com/omacom/omarchy/pull/13362) | Converge omarchy-mac and omarchy-mx-mac into upstream Omarchy | maralcbr | 1.5 | 3.0 | 0.15 |
+| [#6513](https://github.com/omacom/omarchy/pull/6513) | Enable DNS-over-TLS for custom DNS providers | KazeTachinuu | 2.3 | 1.3 | 0.87 |
+| [#7071](https://github.com/omacom/omarchy/pull/7071) | Migrate Brave Origin Beta profile data to stable | jakiurcore | 2.4 | 1.4 | 0.85 |
+| [#7799](https://github.com/omacom/omarchy/pull/7799) | Show banked rate limit resets on the Codex tab | btsouth | 1.5 | 1.9 | 0.21 |
+| [#8930](https://github.com/omacom/omarchy/pull/8930) | Harden lock lifecycle, recovery, and keyboard wake | AFOliveira | 1.8 | 3.0 | 0.69 |
+| [#10393](https://github.com/omacom/omarchy/pull/10393) | Cap lock fingerprint retries; skip closed-lid fingerprint; silence sudo/polkit P | calledtoconstruct | 1.0 | 2.5 | 0.82 |
+| [#11242](https://github.com/omacom/omarchy/pull/11242) | Install the marketplace-verified snapshot by default in plugin add | StavWasPlayZ | 1.1 | 2.3 | 0.34 |
+| [#12287](https://github.com/omacom/omarchy/pull/12287) | Add the theme marketplace: browse, install and update community themes | tahayvr | 1.1 | 3.0 | 0.02 |
+| [#12766](https://github.com/omacom/omarchy/pull/12766) | Add Bluetooth file receiving to the Bluetooth panel | krsna1729 | 1.1 | 2.4 | 0.04 |
+| [#12897](https://github.com/omacom/omarchy/pull/12897) | Accept device-initiated Bluetooth Just Works pairing | Chessing234 | 1.6 | 2.5 | 0.76 |
+| [#13200](https://github.com/omacom/omarchy/pull/13200) | Sign in to captive portals in a dropdown instead of the browser | JGh0stSecOps | 1.2 | 2.6 | 0.14 |
+| [#13836](https://github.com/omacom/omarchy/pull/13836) | Link Pi agent skills into PI_CODING_AGENT_DIR | Chessing234 | 1.4 | 2.0 | 0.24 |
+| [#6664](https://github.com/omacom/omarchy/pull/6664) | Fix fingerprint setup script to detect non-libfprint-git providers | abbaty48 | 1.1 | 1.1 | 0.97 |
+| [#7622](https://github.com/omacom/omarchy/pull/7622) | Add an omarchy:// link handler for installing plugins from a web page | hegjon | 1.0 | 2.2 | 0.03 |
+| [#7680](https://github.com/omacom/omarchy/pull/7680) | Add a reveal toggle to the lock screen password field | thooams | 1.1 | 1.8 | 0.09 |
+| [#8952](https://github.com/omacom/omarchy/pull/8952) | Replace Gemini coding agent with Antigravity (backport of #6900) | KOUSTAV2409 | 1.9 | 2.3 | 0.62 |
+| [#12160](https://github.com/omacom/omarchy/pull/12160) | Disable core dump generation to prevent memory exposure | kairosci | 1.0 | 1.6 | 0.36 |
+| [#12167](https://github.com/omacom/omarchy/pull/12167) | Add audit rules for sensitive files and privilege changes | kairosci | 1.0 | 1.7 | 0.05 |
+| [#7995](https://github.com/omacom/omarchy/pull/7995) | Stage diagnostics logs privately instead of at fixed /tmp paths | Adolanium | 1.0 | 2.0 | 0.74 |
+| [#13829](https://github.com/omacom/omarchy/pull/13829) | Resync Wi-Fi rows when a listed network's saved profile attaches | mcurtis | 1.3 | 1.6 | 0.95 |
+| [#6515](https://github.com/omacom/omarchy/pull/6515) | Support hardware, fingerprint, and password Polkit flows | mattrayner | 1.0 | 2.9 | 0.20 |
+| [#10346](https://github.com/omacom/omarchy/pull/10346) | Pin Electron password store to gnome-libsecret | cempack | 1.7 | 1.7 | 0.32 |
+| [#10428](https://github.com/omacom/omarchy/pull/10428) | Distinguish sudo failure from missing Snapper configs | fresh3nough | 2.9 | 1.0 | 0.97 |
+| [#11216](https://github.com/omacom/omarchy/pull/11216) | Integrate NetClaw into Omarchy with Light and Full setup | automateyournetwork | 1.2 | 3.0 | 0.03 |
+| [#11289](https://github.com/omacom/omarchy/pull/11289) | Add the headless server edition | bartex | 1.0 | 3.0 | 0.02 |
+| [#11983](https://github.com/omacom/omarchy/pull/11983) | Show which processes asked for a polkit password | cristim | 1.1 | 2.6 | 0.23 |
+| [#13187](https://github.com/omacom/omarchy/pull/13187) | Setup fingerprint for Validity/Synaptics readers via python-validity | prashanth-7861 | 1.1 | 2.8 | 0.56 |
+| [#5562](https://github.com/omacom/omarchy/pull/5562) | fix(network): add default iwd config to prevent micro drops | nim-p99 | 1.5 | 1.5 | 0.73 |
+| [#6719](https://github.com/omacom/omarchy/pull/6719) | when installing Bitwarden, ask user if it should be used as SSH agent | sgruendel | 0.7 | 1.2 | 0.09 |
+| [#13110](https://github.com/omacom/omarchy/pull/13110) | Ship a managed Chromium privacy policy alongside the theme color | surim0n | 1.4 | 2.2 | 0.21 |
+| [#13183](https://github.com/omacom/omarchy/pull/13183) | Add password visibility toggle to lock screen | cristim | 1.2 | 1.3 | 0.08 |
+| [#13283](https://github.com/omacom/omarchy/pull/13283) | Tell the user when pam_faillock has locked the account | Chessing234 | 1.7 | 1.1 | 0.79 |
+| [#9320](https://github.com/omacom/omarchy/pull/9320) | Add Oma, voice control for the desktop, as an optional service | wombatoperator | 1.2 | 1.9 | 0.02 |
+| [#10257](https://github.com/omacom/omarchy/pull/10257) | Redact network identifiers from debug output | wbnns | 1.1 | 2.3 | 0.86 |
+| [#11984](https://github.com/omacom/omarchy/pull/11984) | Explain polkit commands with the default coding agent on request | cristim | 1.0 | 2.3 | 0.07 |
+| [#13690](https://github.com/omacom/omarchy/pull/13690) | Add region profiles, starting with China's package repositories | xdanger | 1.0 | 3.0 | 0.03 |
+| [#8537](https://github.com/omacom/omarchy/pull/8537) | Add Alfred/Raycast-style live query plugins to the menu | avillagran | 1.3 | 3.0 | 0.02 |
+| [#13098](https://github.com/omacom/omarchy/pull/13098) | Default dictation to verified Cohere Vulkan, paste and Atreyu visuals | ryanrhughes | 1.0 | 3.0 | 0.07 |
+| [#13612](https://github.com/omacom/omarchy/pull/13612) | Configure fingerprint PAM when prints are already enrolled | AnPod | 1.1 | 1.9 | 0.90 |
+| [#13625](https://github.com/omacom/omarchy/pull/13625) | Do not block SDDM autologin on pam_gnome_keyring | AnPod | 1.1 | 1.1 | 0.93 |
+| [#5139](https://github.com/omacom/omarchy/pull/5139) | Add Orca screen reader with Piper TTS | fedesapuppo | 1.0 | 2.0 | 0.03 |
+| [#8639](https://github.com/omacom/omarchy/pull/8639) | Allow forgetting the connected Wi-Fi network | Githubguy132010 | 2.2 | 1.0 | 0.82 |
+| [#12105](https://github.com/omacom/omarchy/pull/12105) | Intelligently fallback to available agent when default agent has exhausted usage | davidsilvasmith | 1.5 | 2.1 | 0.49 |
+| [#12260](https://github.com/omacom/omarchy/pull/12260) | Give third-party plugins their own entry settings and auth service | Chessing234 | 1.6 | 2.1 | 0.64 |
+| [#12605](https://github.com/omacom/omarchy/pull/12605) | Add Devin collector to the agents panel | betizzel | 1.1 | 2.9 | 0.03 |
+| [#13848](https://github.com/omacom/omarchy/pull/13848) | [4.0.4/4.0.5] Replace deprecated Gemini CLI with Google Antigravity (#6900) | Merxxotas | 2.0 | 2.8 | 0.53 |
+| [#7566](https://github.com/omacom/omarchy/pull/7566) | Add Z.ai GLM Coding Plan agent usage collector | FelipeMayerDev | 1.9 | 2.0 | 0.03 |
+| [#7871](https://github.com/omacom/omarchy/pull/7871) | Stop the lid gate logging a PAM failure on every open-lid sudo | vstoyanov | 1.1 | 1.7 | 0.92 |
+| [#8204](https://github.com/omacom/omarchy/pull/8204) | Stop probing the internal T2 network interface | robzolkos | 2.5 | 1.8 | 0.83 |
+| [#9009](https://github.com/omacom/omarchy/pull/9009) | Document re-enabling BitLocker after dual-boot installation | TNL402 | 1.1 | 1.3 | 0.53 |
+| [#9531](https://github.com/omacom/omarchy/pull/9531) | Wait for the Windows VM RDP service before connecting | qybaihe | 2.2 | 1.6 | 0.94 |
+| [#12329](https://github.com/omacom/omarchy/pull/12329) | Add Remove menu for coding agents | gitpushmainforce | 1.4 | 2.1 | 0.06 |
+| [#12459](https://github.com/omacom/omarchy/pull/12459) | Add an optional installer for the asciipaper live wallpaper | cYoren | 1.3 | 2.6 | 0.02 |
+| [#12896](https://github.com/omacom/omarchy/pull/12896) | Persist XKBLAYOUT for LUKS so non-US layouts stay typeable | Chessing234 | 1.7 | 2.1 | 0.87 |
+| [#13630](https://github.com/omacom/omarchy/pull/13630) | Prefer IPP Everywhere when adding network printers | AnPod | 1.3 | 1.9 | 0.27 |
+| [#8910](https://github.com/omacom/omarchy/pull/8910) | Avoid redundant lock after encrypted hibernate | ClGratton | 1.1 | 2.4 | 0.89 |
+| [#10185](https://github.com/omacom/omarchy/pull/10185) | Add speech-dispatcher so Brave Web Speech has voices | fernandofreamunde | 1.5 | 2.2 | 0.64 |
+| [#11067](https://github.com/omacom/omarchy/pull/11067) | Add Qwen Code as a default coding agent | cdenike | 1.8 | 2.0 | 0.03 |
+| [#11956](https://github.com/omacom/omarchy/pull/11956) | Upgrade existing Sunshine installations to the security release | ErikMelton | 1.8 | 1.9 | 0.67 |
+| [#8413](https://github.com/omacom/omarchy/pull/8413) | Add Scanner support | axelfontaine | 2.2 | 2.5 | 0.04 |
+| [#11858](https://github.com/omacom/omarchy/pull/11858) | Clear and swallow the lock-screen wake key so it is not typed as a password char | h14h | 2.6 | 1.1 | 0.95 |
+| [#12196](https://github.com/omacom/omarchy/pull/12196) | Stop speed test workers outliving a killed parent | Marjinoz | 2.7 | 1.5 | 0.98 |
+| [#13745](https://github.com/omacom/omarchy/pull/13745) | Open the captive portal sign-in page on detection when asked to | phedoreanu | 2.2 | 1.9 | 0.11 |
+| [#6532](https://github.com/omacom/omarchy/pull/6532) | Abort pkg-install when the package transaction fails or is interrupted | merdiofriviaisherebitch | 2.5 | 1.4 | 0.97 |
+| [#8377](https://github.com/omacom/omarchy/pull/8377) | Browse and install any mise tool from the menu | nimixh | 2.2 | 2.0 | 0.05 |
+| [#9557](https://github.com/omacom/omarchy/pull/9557) | Allow plugins to specify package dependencies (optional + required) | jamesmcm | 1.0 | 2.6 | 0.04 |
+| [#10080](https://github.com/omacom/omarchy/pull/10080) | Agents panel: every signed-in Claude account, and an opt-in Columns layout | joelzamboni | 1.3 | 2.7 | 0.03 |
+| [#10248](https://github.com/omacom/omarchy/pull/10248) | Add Update Plugin to Setup > Plugins menu | buffpesos | 1.1 | 2.0 | 0.05 |
+| [#11768](https://github.com/omacom/omarchy/pull/11768) | Keep the Windows VM boundary probe off the host's mounts | therahul-yo | 1.1 | 2.2 | 0.93 |
+| [#12114](https://github.com/omacom/omarchy/pull/12114) | Bar status: Steam idle-inhibit, Wi-Fi/SSID, Bluetooth alias/pairable | Chessing234 | 1.0 | 2.1 | 0.66 |
+| [#12161](https://github.com/omacom/omarchy/pull/12161) | Blacklist uncommon network protocols and legacy filesystem modules | kairosci | 1.0 | 1.7 | 0.14 |
+| [#12394](https://github.com/omacom/omarchy/pull/12394) | hw: cover all Framework 16 input-module product IDs in qmk_hid udev rule | CRTFD-DVLPR | 1.1 | 0.9 | 0.84 |
+| [#7598](https://github.com/omacom/omarchy/pull/7598) | Fix orphaned network speed test workers | MBemera | 2.8 | 2.1 | 0.96 |
+| [#10683](https://github.com/omacom/omarchy/pull/10683) | Add a DeepSeek usage collector for the agents panel | aholbreich | 1.1 | 1.9 | 0.09 |
+| [#5177](https://github.com/omacom/omarchy/pull/5177) | Add NPU support to voxtype install and migration | jacob-vincent-mink | 1.0 | 3.0 | 0.05 |
+| [#5279](https://github.com/omacom/omarchy/pull/5279) | Add per-network DNS configuration for WiFi | roib | 1.1 | 2.0 | 0.04 |
+| [#9398](https://github.com/omacom/omarchy/pull/9398) | Discover LUKS drives via lsblk, not blkid | fresh3nough | 2.8 | 1.0 | 0.97 |
+| [#10952](https://github.com/omacom/omarchy/pull/10952) | Start Omarchy Server edition predicates and menu | dl-alexandre | 2.1 | 2.9 | 0.05 |
+| [#11398](https://github.com/omacom/omarchy/pull/11398) | feat(install): accept owner/repo shorthand in plugin add and theme install | rpaweb | 1.1 | 1.8 | 0.05 |
+| [#13107](https://github.com/omacom/omarchy/pull/13107) | Fall back to Cloudflare endpoints when api.fast.com is unreachable | surim0n | 1.9 | 2.0 | 0.78 |
+| [#13563](https://github.com/omacom/omarchy/pull/13563) | Add animated installer presentation with embedded interactive controls | tcballard | 1.6 | 3.0 | 0.04 |
+| [#7062](https://github.com/omacom/omarchy/pull/7062) | Support DoT endpoints in `omarchy dns Custom` | ujo4eva | 1.1 | 1.9 | 0.12 |
+| [#8578](https://github.com/omacom/omarchy/pull/8578) | Update installed themes in parallel | zackerydev | 2.4 | 1.9 | 0.16 |
+| [#9381](https://github.com/omacom/omarchy/pull/9381) | Show what PAM asked for in the polkit dialog | julianduque | 1.2 | 1.3 | 0.92 |
+| [#10944](https://github.com/omacom/omarchy/pull/10944) | Keep lock password field focused | ArveLomsland | 1.4 | 1.9 | 0.79 |
+| [#11388](https://github.com/omacom/omarchy/pull/11388) | Sync the pacman databases before the first package install | mkenigs | 1.3 | 1.9 | 0.94 |
+| [#11731](https://github.com/omacom/omarchy/pull/11731) | Add iPhone cable support via usbmuxd and gvfs-afc | basalto | 2.1 | 1.7 | 0.05 |
+| [#8715](https://github.com/omacom/omarchy/pull/8715) | Add agent diagnostics, MCP inspection, and safe launch mode | jmohouse6 | 1.9 | 2.9 | 0.06 |
+| [#11795](https://github.com/omacom/omarchy/pull/11795) | Show the command being authorized at the top of the polkit prompt | cristim | 1.1 | 1.9 | 0.72 |
+| [#5136](https://github.com/omacom/omarchy/pull/5136) | Add auto power profile switching for T2 MacBooks | fedesapuppo | 1.2 | 2.4 | 0.06 |
+| [#7890](https://github.com/omacom/omarchy/pull/7890) | Reject Voxtype on CPUs without AVX2 | kx0101 | 2.0 | 1.6 | 0.94 |
+| [#9288](https://github.com/omacom/omarchy/pull/9288) | Set kernel.kptr_restrict=1 in the shipped sysctl drop-in | fresh3nough | 2.5 | 1.1 | 0.58 |
+| [#10088](https://github.com/omacom/omarchy/pull/10088) | Add omarchy-install-blesh for opt-in ble.sh autocompletion | hen8y | 2.5 | 1.7 | 0.03 |
+| [#10288](https://github.com/omacom/omarchy/pull/10288) | feat(network): add wired NIC DHCP/static IPv4 settings to the panel | hehh2001 | 1.1 | 2.4 | 0.03 |
+| [#10730](https://github.com/omacom/omarchy/pull/10730) | Add Command Code as a coding agent choice | ahmadawais | 1.6 | 2.0 | 0.03 |
+| [#11198](https://github.com/omacom/omarchy/pull/11198) | Make the adapter pairable while pairing a Bluetooth device | megamos | 1.1 | 1.4 | 0.95 |
+| [#13481](https://github.com/omacom/omarchy/pull/13481) | Add opt-in default-browser links for web apps | JSRRosenbaum | 1.9 | 2.9 | 0.11 |
+| [#5818](https://github.com/omacom/omarchy/pull/5818) | Add Affinity Suite installer with DPI scaling for Hyprland | Cliffback | 1.1 | 1.9 | 0.12 |
+| [#7158](https://github.com/omacom/omarchy/pull/7158) | Keep the lock screen fingerprint working across suspend, and show when the reade | GeertJohan | 1.1 | 2.5 | 0.95 |
+| [#8315](https://github.com/omacom/omarchy/pull/8315) | Network panel: show External IP in connection details | nixfred | 2.0 | 1.2 | 0.04 |
+| [#9596](https://github.com/omacom/omarchy/pull/9596) | feat(mise): install default CLI tools through native lazy shims | jdx | 1.1 | 2.8 | 0.05 |
+| [#10058](https://github.com/omacom/omarchy/pull/10058) | Add an Ethernet toggle to the network panel | e2jk | 1.3 | 2.0 | 0.05 |
+| [#10530](https://github.com/omacom/omarchy/pull/10530) | Map keypad digits in the polkit dialog when Qt ignores NumLock | MADS0LADEN | 1.8 | 1.1 | 0.95 |
+| [#10756](https://github.com/omacom/omarchy/pull/10756) | Add Ubuntu Cloud Agent environment for CLI and shell tests | ryanrhughes | 2.6 | 1.9 | 0.21 |
+| [#10802](https://github.com/omacom/omarchy/pull/10802) | Keep web app and browser launches on http(s) | Chessing234 | 1.3 | 2.1 | 0.85 |
+| [#12109](https://github.com/omacom/omarchy/pull/12109) | Keep update/runtime/diagnostics out of world-writable /tmp | Chessing234 | 1.9 | 2.1 | 0.83 |
+| [#7609](https://github.com/omacom/omarchy/pull/7609) | Suppress keyring "reinstalling" warning in any locale | fldc | 2.2 | 0.7 | 0.94 |
+| [#8051](https://github.com/omacom/omarchy/pull/8051) | Add Junie as a selectable default coding agent | reinierbutot | 1.0 | 2.0 | 0.03 |
+| [#8704](https://github.com/omacom/omarchy/pull/8704) | Enable docker.service for Docker DBs | Elshayib | 2.3 | 1.9 | 0.92 |
+| [#8796](https://github.com/omacom/omarchy/pull/8796) | windows-vm: negotiate RDP with /sec:tls by default | joeldeteves | 2.0 | 1.1 | 0.72 |
+| [#10347](https://github.com/omacom/omarchy/pull/10347) | Add optional Ponte Android remote service commands | LucasOl1337 | 2.0 | 2.7 | 0.03 |
+| [#10594](https://github.com/omacom/omarchy/pull/10594) | Add optional Agent Desktops app for background agent work | not-compromised | 1.1 | 2.9 | 0.02 |
+| [#11129](https://github.com/omacom/omarchy/pull/11129) | Add Kilo AI | WebReflection | 1.0 | 2.0 | 0.03 |
+| [#11286](https://github.com/omacom/omarchy/pull/11286) | Configure persistent Wi-Fi Direct PC identity | alchemy | 2.1 | 1.0 | 0.26 |
 
 ## Review candidates: desktop-config — 255 PRs
 
@@ -1332,3 +1718,152 @@ Evidence: titles and shortened descriptions (1200 characters per PR; 400 per pai
 - #13608 Make Elsewhen migration bar put best-effort on shell timeouts
 - #13609 Keep connected Bluetooth devices with address-like names
 - #13770 Switch between several Claude and Codex subscriptions, and build apps the Omarchy way
+
+# Suggested pre-release batches (issue #4)
+
+Deterministic classification of the review candidates above: security first, then
+low/core/danger/unknown model-risk bands, chunked into S (≤ 8), M (≤ 24), L (≤ 48) tiers ranked lowest
+risk first. Cumulative: each batch contains every earlier batch of its group. These
+are the source for the cumulative PRs that are the final deliverable — model-suggested,
+not verified safe to merge.
+
+## agents-ai
+
+| Batch | Group | Tier | Size | Cumulative | Members |
+|---|---|---|---|---|---|
+| agents-ai-B1 | security | S | 8 | 8 | #8093 #8715 #7537 #9320 #7566 #13106 #7051 #10683 |
+| agents-ai-B2 | security | M | 24 | 32 | #10824 #12105 #7799 #10172 #10756 #11722 #13845 #13734 #10610 #13548 #7455 #11144 #7087 #11067 #12582 #8051 #10080 #12329 #8487 #10730 #7554 #8065 #13052 #11367 |
+| agents-ai-B3 | security | L | 28 | 60 | #11129 #8326 #11967 #13770 #9597 #6844 #7274 #12605 #7272 #11444 #12059 #11989 #9777 #6647 #8952 #13848 #11839 #12651 #11423 #11984 #13036 #10594 #13836 #12836 #13296 #13856 #6980 #12265 |
+| agents-ai-B4 | low | S | 8 | 68 | #13735 #7297 #11131 #6718 #5925 #7322 #11360 #8893 |
+| agents-ai-B5 | low | M | 24 | 92 | #11466 #10040 #10068 #10060 #11892 #13780 #13870 #10845 #6542 #8497 #13059 #12527 #13740 #6570 #7298 #12278 #10175 #8892 #12986 #8093 #12414 #7861 #8448 #11070 |
+| agents-ai-B6 | low | L | 48 | 140 | #11121 #8450 #8715 #8862 #10067 #11109 #11124 #12483 #6478 #7225 #7547 #7686 #7924 #8345 #8479 #8755 #8958 #9208 #9546 #9697 #9885 #10606 #10633 #11188 #11267 #11896 #12803 #13198 #13209 #13458 #13553 #13621 #13837 #6860 #7537 #7725 #8602 #8977 #9320 #9869 #9900 #9956 #10675 #11488 #12032 #12352 #12939 #13109 |
+| agents-ai-B7 | core | S | 8 | 148 | #12605 #7272 #7261 #13607 #11444 #12059 #11989 #9777 |
+| agents-ai-B8 | core | M | 19 | 167 | #6647 #8124 #8952 #13848 #11839 #12651 #11423 #11984 #11342 #13036 #10079 #10594 #13836 #6982 #12836 #13296 #11250 #13856 #10911 |
+| agents-ai-B9 | danger | S | 2 | 169 | #6980 #12265 |
+
+## apps-integrations
+
+| Batch | Group | Tier | Size | Cumulative | Members |
+|---|---|---|---|---|---|
+| apps-integrations-B1 | security | S | 8 | 8 | #13075 #11725 #12001 #5744 #10346 #13763 #5818 #8441 |
+| apps-integrations-B2 | security | M | 24 | 32 | #6557 #13098 #10435 #11907 #10347 #13481 #9995 #13664 #4997 #5654 #7882 #7622 #10110 #10802 #11216 #13110 #7731 #8801 #9024 #9894 #8188 #12244 #10018 #11196 |
+| apps-integrations-B3 | security | L | 5 | 37 | #12888 #11428 #7417 #9723 #12715 |
+| apps-integrations-B4 | low | S | 8 | 45 | #11493 #7797 #13309 #10654 #12368 #13234 #11706 #9364 |
+| apps-integrations-B5 | low | M | 24 | 69 | #7450 #10367 #12870 #7170 #9578 #5968 #11294 #13858 #5934 #9035 #13272 #6802 #9430 #10567 #6098 #8400 #7337 #13000 #13412 #5600 #5774 #9233 #12256 #12780 |
+| apps-integrations-B6 | low | L | 48 | 117 | #12974 #13248 #4985 #6698 #7267 #7356 #7494 #8343 #8499 #8525 #8700 #8932 #9191 #9206 #9806 #9927 #11164 #11436 #11998 #12781 #12801 #13195 #13619 #13685 #13710 #13830 #5954 #7039 #8299 #8383 #8761 #9172 #9431 #9449 #10538 #12137 #12432 #12988 #13039 #13075 #13354 #13772 #8575 #9891 #9906 #11454 #11728 #11955 |
+| apps-integrations-B7 | core | S | 8 | 125 | #12139 #9995 #11571 #6454 #5553 #7715 #12089 #12834 |
+| apps-integrations-B8 | core | M | 24 | 149 | #10370 #13664 #4997 #11364 #9011 #9124 #11978 #5654 #9037 #12754 #7882 #13262 #10573 #7622 #13588 #10110 #7444 #10802 #12148 #11216 #13110 #10446 #11053 #7731 |
+| apps-integrations-B9 | core | L | 5 | 154 | #10884 #8801 #9024 #9894 #8188 |
+| apps-integrations-B10 | danger | S | 8 | 162 | #12244 #7817 #10018 #11196 #12888 #11428 #7417 #9723 |
+| apps-integrations-B11 | danger | M | 1 | 163 | #12715 |
+
+## desktop-config
+
+| Batch | Group | Tier | Size | Cumulative | Members |
+|---|---|---|---|---|---|
+| desktop-config-B1 | security | S | 8 | 8 | #12925 #7680 #8019 #12891 #9594 #8315 #12459 #13183 |
+| desktop-config-B2 | security | M | 23 | 31 | #8578 #11858 #10944 #12287 #9319 #8537 #13200 #11574 #9539 #6515 #13625 #12111 #10058 #12015 #10288 #8035 #13312 #12155 #11786 #7501 #12972 #8336 #12245 |
+| desktop-config-B3 | low | S | 8 | 39 | #9691 #12488 #12783 #10560 #6696 #13267 #7240 #8437 |
+| desktop-config-B4 | low | M | 24 | 63 | #12694 #7302 #9313 #10571 #12091 #10517 #8846 #13497 #10470 #12826 #7219 #9223 #10341 #11906 #13065 #13603 #8569 #13232 #13190 #11491 #7296 #8830 #13133 #7560 |
+| desktop-config-B5 | low | L | 48 | 111 | #8857 #10540 #8654 #13126 #13580 #12431 #12794 #13565 #13810 #9345 #10867 #8214 #9986 #10776 #6467 #8907 #10751 #13613 #7836 #6920 #7075 #9492 #8980 #13255 #7653 #8815 #9000 #9690 #11042 #12486 #4990 #8407 #10115 #13191 #13641 #7088 #9535 #12255 #13653 #10697 #12795 #7490 #9742 #10345 #12613 #13120 #13461 #13463 |
+| desktop-config-B6 | core | S | 8 | 119 | #11827 #9520 #11545 #9919 #13460 #5282 #9312 #10713 |
+| desktop-config-B7 | core | M | 24 | 143 | #12051 #9523 #7651 #11574 #13490 #13313 #7992 #8811 #13359 #9493 #13480 #6403 #8025 #9539 #12277 #6515 #9436 #9170 #12913 #6865 #10722 #7945 #4593 #11420 |
+| desktop-config-B8 | core | L | 18 | 161 | #7193 #12956 #6019 #13625 #10027 #10719 #8733 #12616 #10663 #7486 #10653 #8087 #9632 #12111 #10015 #10058 #12015 #11912 |
+| desktop-config-B9 | danger | S | 8 | 169 | #10288 #8035 #11746 #13312 #12155 #11786 #7501 #12972 |
+| desktop-config-B10 | danger | M | 3 | 172 | #8336 #7169 #12245 |
+
+## docs
+
+| Batch | Group | Tier | Size | Cumulative | Members |
+|---|---|---|---|---|---|
+| docs-B1 | security | S | 2 | 2 | #9009 #11804 |
+| docs-B2 | low | S | 8 | 10 | #7063 #7463 #7631 #7654 #7787 #7792 #8005 #8006 |
+| docs-B3 | low | M | 24 | 34 | #8287 #8609 #8699 #8783 #8805 #8974 #9062 #9722 #9867 #9993 #10017 #10167 #10499 #10580 #10708 #10783 #10866 #10942 #11045 #11290 #11677 #12006 #12284 #12390 |
+| docs-B4 | low | L | 36 | 70 | #12543 #12577 #13228 #13233 #13366 #13389 #13472 #13723 #7318 #7601 #8585 #9009 #11087 #11179 #11464 #13817 #7095 #9095 #7931 #11026 #11296 #13056 #11803 #8064 #13003 #11804 #11284 #7428 #10123 #11530 #13717 #9486 #10237 #6959 #11708 #7690 |
+
+## fix-misc
+
+| Batch | Group | Tier | Size | Cumulative | Members |
+|---|---|---|---|---|---|
+| fix-misc-B1 | security | S | 8 | 8 | #11795 #9398 #13088 #9531 #13796 #7598 #10530 #12196 |
+| fix-misc-B2 | security | M | 24 | 32 | #10428 #13742 #9834 #13513 #12260 #8662 #6965 #11983 #10262 #10257 #13047 #10411 #11768 #8910 #5545 #7062 #13213 #10769 #12070 #10338 #7995 #10113 #11470 #13800 |
+| fix-misc-B3 | security | L | 37 | 69 | #13283 #9500 #13154 #13750 #12019 #10717 #12109 #9571 #12883 #13112 #9605 #12323 #9288 #10738 #9475 #6736 #9783 #12160 #10393 #12542 #13652 #8908 #11461 #12159 #11438 #12103 #12717 #9477 #10655 #10082 #12170 #9573 #12165 #12162 #8930 #11314 #10219 |
+| fix-misc-B4 | low | S | 8 | 77 | #12344 #8741 #10557 #8165 #9973 #11022 #7661 #13766 |
+| fix-misc-B5 | low | M | 24 | 101 | #12867 #7216 #8787 #12809 #7332 #10510 #7402 #11483 #10181 #11795 #9903 #10632 #13574 #13842 #11010 #8653 #11579 #13681 #12452 #12575 #11606 #7491 #11747 #6725 |
+| fix-misc-B6 | low | L | 48 | 149 | #8959 #11287 #13212 #13557 #8016 #8269 #8640 #9514 #10007 #13096 #10457 #11057 #11156 #11667 #12828 #12943 #13305 #13469 #13561 #7074 #7406 #8765 #10070 #11577 #11847 #11963 #12866 #13824 #7517 #8076 #8570 #8664 #8828 #9006 #9426 #10228 #10476 #11421 #11568 #11730 #11860 #12098 #12223 #12776 #12966 #13043 #13390 #13751 |
+| fix-misc-B7 | core | S | 8 | 157 | #9807 #13651 #12260 #12937 #12023 #13819 #8662 #9847 |
+| fix-misc-B8 | core | M | 24 | 181 | #7155 #9033 #8644 #9001 #12071 #13282 #10497 #10083 #6965 #6906 #9429 #11983 #10235 #8531 #10262 #11554 #6813 #10257 #13047 #10236 #12291 #9575 #12220 #6494 |
+| fix-misc-B9 | core | L | 16 | 197 | #7673 #11069 #12106 #8793 #11273 #10411 #11768 #12461 #8910 #5241 #5545 #7062 #13213 #10769 #7572 #12070 |
+| fix-misc-B10 | danger | S | 8 | 205 | #10338 #7995 #10113 #11470 #13800 #12046 #11920 #5761 |
+| fix-misc-B11 | danger | M | 24 | 229 | #13283 #9500 #13154 #13750 #11476 #13055 #12019 #10717 #12109 #9571 #8199 #12883 #13112 #11948 #9605 #12323 #9288 #11759 #10738 #9475 #6736 #9783 #12160 #13311 |
+| fix-misc-B12 | danger | L | 19 | 248 | #10393 #12542 #13652 #8908 #11461 #12159 #11438 #12103 #12717 #9477 #10655 #10082 #12170 #9573 #12165 #12162 #8930 #11314 #10219 |
+
+## hardware-drivers
+
+| Batch | Group | Tier | Size | Cumulative | Members |
+|---|---|---|---|---|---|
+| hardware-drivers-B1 | security | S | 8 | 8 | #8251 #11720 #13829 #11197 #12583 #13745 #8014 #11286 |
+| hardware-drivers-B2 | security | M | 24 | 32 | #11198 #10602 #12475 #13101 #8639 #7828 #13811 #9878 #12114 #11731 #8413 #11097 #5279 #12279 #12766 #5136 #8294 #11966 #12394 #12788 #6807 #13085 #5562 #9965 |
+| hardware-drivers-B3 | security | L | 18 | 50 | #13280 #8204 #5431 #12897 #7435 #9729 #7857 #12161 #9221 #12177 #5284 #11017 #12889 #11381 #7831 #8532 #11874 #7258 |
+| hardware-drivers-B4 | low | S | 8 | 58 | #8330 #11228 #12200 #9763 #13761 #9553 #6829 #7308 |
+| hardware-drivers-B5 | low | M | 24 | 82 | #10377 #13245 #13009 #10196 #13759 #13775 #7037 #8663 #12231 #13016 #5716 #7373 #7915 #8096 #9063 #9218 #9348 #9435 #9495 #10191 #11001 #12024 #12445 #12484 |
+| hardware-drivers-B6 | low | L | 48 | 130 | #12568 #12755 #13292 #7475 #7745 #8284 #8317 #8713 #8871 #9400 #9612 #9755 #9883 #10071 #11785 #11837 #12649 #12960 #13029 #5317 #7186 #7812 #7948 #8251 #8737 #10844 #11720 #12489 #12842 #6548 #7336 #9160 #10076 #10222 #10364 #10392 #12552 #12634 #13111 #13405 #13711 #13715 #13744 #7681 #7837 #8712 #9132 #9997 |
+| hardware-drivers-B7 | core | S | 8 | 138 | #8875 #8929 #10926 #12367 #13861 #8014 #9409 #11592 |
+| hardware-drivers-B8 | core | M | 24 | 162 | #5020 #11286 #8476 #11198 #7951 #11387 #10602 #12683 #7177 #13076 #9230 #5130 #5193 #7329 #12185 #12475 #7353 #8221 #13260 #12692 #11315 #13668 #5445 #7965 |
+| hardware-drivers-B9 | core | L | 48 | 210 | #13540 #12691 #9850 #12216 #11880 #12420 #13284 #10320 #12590 #12210 #10313 #11840 #12977 #13834 #8750 #11624 #13101 #13667 #13005 #13671 #13115 #6149 #11432 #13539 #9860 #13610 #8371 #12682 #6928 #10592 #12636 #7594 #8639 #9105 #10920 #12936 #12125 #13728 #11831 #11870 #13778 #11033 #12569 #13148 #7828 #13811 #8464 #11843 |
+| hardware-drivers-B10 | danger | S | 8 | 218 | #11966 #13082 #11072 #12394 #5335 #11911 #12788 #13615 |
+| hardware-drivers-B11 | danger | M | 24 | 242 | #6807 #12286 #8295 #9202 #9210 #8421 #12685 #9276 #13085 #5430 #9899 #11616 #8151 #9815 #5562 #13238 #13663 #9816 #5194 #8546 #10184 #10936 #13298 #9965 |
+| hardware-drivers-B12 | danger | L | 48 | 290 | #10139 #11570 #13024 #7644 #7993 #11548 #5951 #12076 #7004 #12680 #13280 #10332 #11536 #12687 #8187 #12267 #8204 #13623 #12007 #5431 #7343 #13129 #5262 #12897 #5140 #11076 #7577 #7671 #12074 #6596 #7435 #9729 #13820 #7950 #8090 #12003 #13532 #9803 #7180 #8812 #10910 #7857 #10758 #12161 #12314 #12968 #7333 #9221 |
+
+## install-setup
+
+| Batch | Group | Tier | Size | Cumulative | Members |
+|---|---|---|---|---|---|
+| install-setup-B1 | security | S | 8 | 8 | #8377 #10248 #7485 #10952 #6532 #6719 #7890 #10644 |
+| install-setup-B2 | security | M | 24 | 32 | #12815 #9381 #9557 #13563 #10109 #13630 #11289 #5035 #8704 #11388 #9695 #8130 #5139 #13690 #10185 #6664 #5177 #10977 #9307 #13215 #6513 #10962 #12901 #7871 |
+| install-setup-B3 | security | L | 48 | 80 | #12167 #13612 #13533 #13542 #11322 #6474 #7158 #12896 #10396 #13316 #13467 #12831 #7040 #8169 #9506 #7990 #9043 #11697 #12895 #7971 #11471 #13187 #8831 #11032 #7913 #9873 #9700 #8709 #9750 #10689 #9470 #11565 #12110 #6912 #8534 #12169 #11172 #11037 #9248 #11386 #11612 #9465 #12718 #9461 #11379 #12817 #9459 #9463 |
+| install-setup-B4 | low | S | 8 | 88 | #7161 #7740 #9192 #9163 #10147 #5112 #7763 #13013 |
+| install-setup-B5 | low | M | 24 | 112 | #11691 #6777 #13028 #12965 #11025 #10805 #8377 #11000 #11047 #12581 #10248 #7485 #8117 #8631 #9739 #12415 #12521 #7729 #12752 #12890 #11694 #11842 #7473 #13585 |
+| install-setup-B6 | low | L | 48 | 160 | #13470 #5031 #9741 #9273 #9432 #13719 #8486 #5999 #9680 #11973 #9175 #13079 #13441 #10353 #10828 #13765 #9634 #10582 #6932 #10823 #12480 #9420 #10952 #12701 #6532 #6719 #7890 #12695 #5343 #9626 #10472 #10548 #11435 #13547 #8116 #13721 #12384 #12971 #11719 #8091 #10599 #11125 #11288 #10644 #12312 #6967 #12104 #12633 |
+| install-setup-B7 | core | S | 8 | 168 | #11953 #13071 #12037 #12358 #7667 #12004 #12505 #8682 |
+| install-setup-B8 | core | M | 24 | 192 | #11484 #12056 #9244 #8186 #11056 #13331 #11259 #12723 #9358 #9381 #12598 #8670 #10949 #12932 #7583 #9150 #12923 #8442 #9282 #9557 #9633 #5148 #8430 #13563 |
+| install-setup-B9 | core | L | 39 | 231 | #9299 #12816 #10109 #13630 #5686 #10707 #11289 #13644 #5035 #8704 #13243 #10293 #11388 #13508 #6730 #9695 #11418 #8130 #8133 #5139 #11538 #6753 #13705 #5890 #11523 #11477 #13690 #8316 #11481 #9228 #10185 #13768 #6664 #5177 #6553 #10977 #12271 #9307 #9686 |
+| install-setup-B10 | danger | S | 8 | 239 | #13215 #6513 #10962 #12901 #8829 #7871 #12167 #13612 |
+| install-setup-B11 | danger | M | 24 | 263 | #13533 #13542 #5938 #11322 #6474 #7158 #11401 #12896 #10396 #13316 #13467 #12833 #12831 #7040 #8169 #8756 #9506 #7990 #9043 #11697 #12895 #7971 #9454 #11471 |
+| install-setup-B12 | danger | L | 32 | 295 | #13187 #8831 #11032 #7913 #9873 #9700 #8709 #9750 #10689 #9470 #11565 #12110 #6912 #8534 #12169 #11172 #11037 #9248 #11386 #11612 #12176 #9465 #12718 #9461 #11379 #12817 #9459 #8994 #9463 #12099 #9464 #13362 |
+
+## shell-cli
+
+| Batch | Group | Tier | Size | Cumulative | Members |
+|---|---|---|---|---|---|
+| shell-cli-B1 | security | S | 8 | 8 | #12698 #10473 #8796 #8001 #10088 #13107 #11398 #11242 |
+| shell-cli-B2 | security | M | 7 | 15 | #9227 #6697 #7814 #9596 #9946 #13575 #12164 |
+| shell-cli-B3 | low | S | 8 | 23 | #12268 #11853 #13720 #12653 #7365 #11670 #13237 #7796 |
+| shell-cli-B4 | low | M | 24 | 47 | #12485 #10847 #5564 #4936 #6481 #11962 #10180 #11150 #5195 #10667 #11120 #11872 #9022 #10259 #11098 #11371 #11468 #12837 #7541 #12081 #5224 #6042 #6078 #6839 |
+| shell-cli-B5 | low | L | 48 | 95 | #7338 #7370 #8034 #8466 #8556 #8630 #8880 #9014 #9039 #9040 #9126 #9487 #9977 #10536 #11205 #12135 #12138 #12171 #12363 #12364 #12600 #12644 #12670 #12841 #13018 #13197 #13386 #13568 #13674 #13678 #13706 #13712 #13724 #13801 #5049 #7434 #8033 #8084 #8179 #8406 #9038 #11210 #11482 #12063 #12283 #12416 #12465 #12698 |
+| shell-cli-B6 | core | S | 7 | 102 | #6697 #9503 #11240 #12872 #7814 #9596 #9946 |
+| shell-cli-B7 | danger | S | 2 | 104 | #13575 #12164 |
+
+## unclear
+
+| Batch | Group | Tier | Size | Cumulative | Members |
+|---|---|---|---|---|---|
+| unclear-B1 | security | S | 3 | 3 | #10974 #12264 #12266 |
+| unclear-B2 | low | S | 8 | 11 | #8995 #11945 #9424 #10491 #10893 #10511 #8522 #6930 |
+| unclear-B3 | low | M | 8 | 19 | #7372 #10919 #11661 #12269 #6966 #10558 #4962 #13217 |
+| unclear-B4 | danger | S | 3 | 22 | #10974 #12264 #12266 |
+
+## update-release
+
+| Batch | Group | Tier | Size | Cumulative | Members |
+|---|---|---|---|---|---|
+| update-release-B1 | security | S | 8 | 8 | #11479 #13660 #9909 #13377 #12796 #7609 #9044 #9511 |
+| update-release-B2 | security | M | 20 | 28 | #13699 #13432 #11956 #10022 #13646 #7071 #9875 #13616 #12957 #13474 #8707 #9239 #13479 #8889 #12078 #8472 #9460 #9474 #6847 #12246 |
+| update-release-B3 | low | S | 8 | 36 | #10747 #9893 #13365 #7398 #10326 #5902 #10066 #13061 |
+| update-release-B4 | low | M | 24 | 60 | #13626 #11217 #12835 #9343 #12094 #13656 #13799 #11023 #11480 #13538 #7136 #13556 #8708 #12421 #12797 #6907 #8042 #10308 #13468 #13500 #11692 #12503 #8399 #12359 |
+| update-release-B5 | low | L | 30 | 90 | #12174 #10398 #10742 #7130 #8163 #9286 #11151 #7400 #10865 #12860 #10232 #12920 #13617 #9703 #10205 #12778 #6872 #8081 #11558 #13444 #8493 #8992 #6884 #6972 #9568 #6767 #10183 #10524 #8724 #9423 |
+| update-release-B6 | core | S | 8 | 98 | #7256 #8771 #7474 #11479 #12101 #12419 #12905 #13371 |
+| update-release-B7 | core | M | 24 | 122 | #8590 #8854 #13660 #10878 #13352 #13608 #12250 #12722 #12532 #12535 #12906 #10710 #8824 #5866 #13781 #7998 #8791 #13544 #9139 #9909 #7396 #12871 #13377 #12796 |
+| update-release-B8 | core | L | 33 | 155 | #13602 #10711 #7609 #10812 #8781 #11207 #10301 #11805 #12328 #13426 #12548 #13584 #9044 #11478 #6951 #10886 #13601 #13526 #13462 #10165 #12186 #9511 #11528 #11222 #10166 #13699 #13432 #9472 #11956 #6840 #10022 #13397 #13646 |
+| update-release-B9 | danger | S | 8 | 163 | #5332 #6758 #7071 #8429 #9875 #13616 #9070 #12957 |
+| update-release-B10 | danger | M | 18 | 181 | #13474 #8707 #9071 #9239 #12909 #7223 #9285 #9073 #7410 #8175 #13479 #8889 #12078 #8472 #9460 #9474 #6847 #12246 |
