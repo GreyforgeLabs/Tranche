@@ -1,5 +1,10 @@
 # omarchy-pr-jev-triage
 
+<img src="docs/assets/tranche-mascot.png" alt="Tranche, a watchful geometric owl holding a bundle of three pull-request cards" width="200">
+
+**Tranche, the backlog keeper.** Spots duplicates and gathers fixes into reviewable
+batches. Jev supplies the judgments; humans make the merge call.
+
 Triage tooling for the Omarchy PR backlog, built for the triage team DHH stood up
 on 2026-09-12 ([x.com/dhh/status/2098755120540393908](https://x.com/dhh/status/2098755120540393908)):
 
