@@ -132,8 +132,9 @@ merge first), then by average model risk, then age; each batch becomes one
 cumulative PR of the final deliverable. Batches are a model-suggested
 plan, never verified safe to merge. Output: `out/batches.json` (bound to the
 dupes digest; `gen_page.py` refuses a stale file), the batch plan appended to
-`out/tranches.md`, and the **Batched** queue with merge chips and per-PR batch
-detail in the workbench. PRs outside a confirmed group are intentionally
+`out/tranches.md`, and the **Batches** view with per-batch member browsing,
+reviewer agent prompts and per-PR batch detail in the workbench. PRs outside a
+confirmed group are intentionally
 unbatched.
 
 ## Freshness and migration

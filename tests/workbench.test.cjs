@@ -38,7 +38,8 @@ test('browser workbench renders safe text, inspects PRs, restores focus and URL 
         check(!window.pwned && !document.querySelector('#results img'), 'title stays inert');
         check(document.querySelector('[data-queue="security"]').textContent.includes('Security first'), 'security queue leads the nav');
         check([...document.querySelectorAll('[data-queue]')][0].dataset.queue === 'security', 'security is the first queue button');
-        check(document.querySelector('[data-queue="batched"]')?.textContent.includes('Batched'), 'batched queue exists');
+        check(!document.querySelector('[data-queue="batched"]'), 'no batched queue (batch browsing lives in the Batches view)');
+        check(document.getElementById('batches-view')?.textContent.includes('Batches'), 'batches view toggle exists');
         check(!document.querySelector('#sort option[value=security]'), 'no security sort (classification, not an ordering)');
         const row = document.querySelector('.pr-open'); row.focus(); row.click();
         check(document.querySelector('dialog').open, 'native dialog opens');
@@ -125,13 +126,6 @@ test('queues and categories filter independently; page totals include all result
   assert.equal(empty.total, 0);
   assert.equal(empty.page, 1);
   assert.deepEqual(empty.items, []);
-});
-
-test('batched queue selects only PRs carrying pre-release batches', () => {
-  const rows = [{number: 1, batches: [{id: 'docs-B1'}]}, {number: 2, batches: []}, {number: 3}];
-  assert.equal(api.select(rows, {queue: 'batched'}).total, 1);
-  assert.equal(api.select(rows, {queue: 'batched'}).items[0].number, 1);
-  assert.equal(api.select(rows, {queue: 'all'}).total, 3);
 });
 
 test('security meta-category queue selects only flagged PRs; sorts stay unbiased', () => {

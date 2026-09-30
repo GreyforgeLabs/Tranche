@@ -42,9 +42,9 @@
     });
   }
   // Issue #3: security is the top-priority meta-category; its queue leads the nav.
-  // Issue #4: 'batched' shows every PR assigned to a pre-release batch.
-  const queues = {security: 'security_priority', all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', related: 'related', batched: 'batched'};
-  const queueMatch = (pr, field) => !field || pr[field] || (field === 'batched' && pr.batches?.length);
+  // Batch membership is browsed through the Batches view, not a queue.
+  const queues = {security: 'security_priority', all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', related: 'related'};
+  const queueMatch = (pr, field) => !field || pr[field];
   const PAGE_SIZE = 30;
   function select(rows, state = {}, indexes) {
     const field = queues[state.queue || 'all'];

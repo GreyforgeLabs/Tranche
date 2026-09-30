@@ -125,7 +125,6 @@ page = f"""<!doctype html>
 <button type="button" data-queue="senior" aria-pressed="false">Senior review <span></span></button>
 <button type="button" data-queue="followup" aria-pressed="false">Author follow-up <span></span></button>
 <button type="button" data-queue="related" aria-pressed="false">Related PRs <span></span></button>
-<button type="button" data-queue="batched" aria-pressed="false">Batched <span></span></button>
 <button type="button" id="batches-view" aria-pressed="false">Batches <span></span></button>
 </nav>
 <section id="batch-overview" class="batch-overview" aria-label="Pre-release merge batches" hidden>
