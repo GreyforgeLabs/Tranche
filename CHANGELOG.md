@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.2.0](https://github.com/blackopsrepl/Tranche/compare/v0.1.1...v0.2.0) (2026-09-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* **batches:** out/batches.json format_version 3 (batch_size, per-batch
+review_prompt; ids now B001-style).
+
+### Features
+
+* **batches:** batches of five with per-batch reviewer agent prompts ([9b6e7c0](https://github.com/blackopsrepl/Tranche/commit/9b6e7c0aec7d3d5fd7243b1cb7b729fbf0c0d0b6))
+
+
+### Bug Fixes
+
+* **workbench:** batch section in the inspector keeps its heading, button and flow on separate lines ([390330a](https://github.com/blackopsrepl/Tranche/commit/390330ad413b831b0f8af3719672515a53a3ca48))
+
 ## [0.1.1](https://github.com/blackopsrepl/Tranche/compare/v0.1.0...v0.1.1) (2026-09-30)
 
 
