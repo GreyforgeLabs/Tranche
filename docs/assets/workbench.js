@@ -224,7 +224,8 @@
         const list = node('ul', undefined, 'diagnostics');
         for (const batch of pr.batches) {
           const item = node('li', undefined, 'pair-diagnostic');
-          item.append(node('span', `${batch.id} — merge these ${batch.count} PRs into ONE pull request`, 'batch-name'));
+          item.append(node('span', `${batch.id} — batch of ${batch.count} PRs merged together as one tranche`, 'batch-name'));
+          item.append(node('p', 'Jev determined the composition: same-change groups inside the batch combine into one pull request. Batches are disjoint, so this PR appears in at most one batch.', 'small'));
           const open = button(`Browse batch ${batch.id} →`, () => {dialog.close(); update({batch: batch.id, page: 1, pr: null});}, 'related-member');
           item.append(open);
           list.append(item);
@@ -316,7 +317,7 @@
           if (pr.security_priority) meta.append(node('span', 'Security first', 'tag security'));
           if (pr.related) meta.append(node('span', 'Related', 'tag'));
           for (const batch of pr.batches || []) {
-            meta.append(node('span', `${batch.id} · merge into one PR (+${batch.count})`, 'tag batch'));
+            meta.append(node('span', `${batch.id} · batch of ${batch.count}`, 'tag batch'));
           }
           if (pr.freshness !== 'current') meta.append(node('span', pr.freshness === 'unbound' ? 'Unbound evidence' : 'Unjudged / stale', 'tag'));
           const info = node('span', undefined, 'pr-info'); info.append(heading, meta);
