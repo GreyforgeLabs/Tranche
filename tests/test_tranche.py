@@ -564,11 +564,23 @@ class WorkflowTests(unittest.TestCase):
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
         page = (self.root / "docs" / "index.html").read_text()
-        self.assertIn("1 PRs unjudged or stale", page)
-        self.assertIn("&lt;script&gt;alert(1)&lt;/script&gt;", page)
+        import re
+        payload = re.search(r'<script id="workbench-data" type="application/json">(.*?)</script>', page, re.S)
+        self.assertIsNotNone(payload, "Workbench must include all captured PRs")
+        rows = json.loads(payload.group(1))["prs"]
+        self.assertEqual([row["number"] for row in rows], [1, 2])
+        self.assertEqual(rows[0]["title"], "Fix <script>alert(1)</script>")
+        self.assertNotIn("<script>alert(1)</script>", page)
+        self.assertIn(r"\u003cscript\u003e", payload.group(1))
+        self.assertTrue(rows[0]["candidate"])
+        self.assertFalse(rows[1]["candidate"])
+        self.assertIsNone(rows[1]["risk"])
+        self.assertIsNone(rows[1]["security"])
+        self.assertEqual(rows[1]["freshness"], "unjudged or stale")
+        self.assertEqual(rows[1]["category"], "unknown")
         self.assertNotIn("reviewed &amp; QA'd", page)
         self.assertNotIn("security-clean", page)
-        self.assertIn("source review and testing still required", page)
+        self.assertIn("AI-assisted priorities; review code and tests before merging.", page)
 
     def test_html_exposes_group_conflicts(self):
         prs = self.inputs([pr(1), pr(2), pr(3)])
@@ -596,13 +608,31 @@ class WorkflowTests(unittest.TestCase):
         self.assertNotEqual(self.render().returncode, 0)
         self.assertEqual(target.read_bytes(), before)
 
+    def test_workbench_has_native_controls_and_no_process_commentary(self):
+        prs = self.inputs([pr(1, body='Snippet </script><img src=x onerror=alert(1)> & text')])
+        self.judgments(prs)
+        self.cluster()
+        self.assertEqual(self.render().returncode, 0)
+        page = (self.root / "docs" / "index.html").read_text()
+        for text in ('assets/workbench.css', 'assets/workbench.js', '<dialog',
+                     'id="search"', 'id="sort"', 'id="category"', 'aria-live="polite"',
+                     'Review candidates', 'Senior review', 'Author follow-up', 'Related PRs',
+                     'assets/tranche.gif', 'assets/tranche-title.png', 'assets/omarchy.gif',
+                     'assets/omarchy-title.png', 'assets/tranche-mascot.png'):
+            self.assertIn(text, page)
+        for text in ('Observation:', 'requested jev', 'fresh runs:', '<blockquote>',
+                     '<b>Method.</b>', 'fetch → judge', '<img src=x onerror=alert(1)>'):
+            self.assertNotIn(text, page)
+        self.assertIn(r'\u003c/script\u003e', page)
+        self.assertIn(r'\u0026', page)
+
     def test_empty_corpus_renders_without_credentials(self):
         self.inputs([])
         self.cluster()
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn(
-            "0 observed open pull requests", (self.root / "docs" / "index.html").read_text()
+            "0 captured PRs", (self.root / "docs" / "index.html").read_text()
         )
 
     def test_all_supports_documented_resume_and_pair_budget(self):

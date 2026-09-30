@@ -138,6 +138,7 @@ test:
 	@python3 -m unittest discover -s tests -v
 
 check: test
+	@if command -v node >/dev/null 2>&1; then node --test tests/workbench.test.cjs; else printf 'Node unavailable; optional frontend tests skipped.\n'; fi
 	@ruff check .
 	@python3 -m compileall -q tranche.py gen_page.py tests tools
 	@git diff --check

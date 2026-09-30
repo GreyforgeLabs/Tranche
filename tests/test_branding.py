@@ -30,6 +30,11 @@ class BrandingTests(unittest.TestCase):
         self.assertIn('assets/tranche-mascot.png', page)
         self.assertIn('OMARCHY — TRIAGE with Tranche (powered by Jev)', page)
 
+    def test_offline_check_runs_optional_node_frontend_tests(self):
+        makefile = (ROOT / "Makefile").read_text()
+        self.assertIn("node --test tests/workbench.test.cjs", makefile)
+        self.assertIn("command -v node", makefile)
+
     @unittest.skipUnless(shutil.which("rsvg-convert"), "Title generation needs optional librsvg")
     def test_only_tranche_in_tagline_receives_the_animated_gradient(self):
         try:
