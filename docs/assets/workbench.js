@@ -50,7 +50,8 @@
     const field = queues[state.queue || 'all'];
     const wordCache = new Map(); // Repeated corpus vocabulary pays edit distance only once.
     const filtered = rows.filter(pr => queueMatch(pr, field) &&
-      (!state.category || state.category === 'all' || pr.category === state.category) &&
+      (!state.category || state.category === 'all' || pr.category === state.category ||
+        (pr.categories || []).includes(state.category)) &&
       matches(pr, state.q || '', indexes?.get(pr.number), wordCache));
     filtered.sort((a, b) => {
       const riskSort = state.sort === 'risk';
@@ -285,7 +286,8 @@
     }
     function reset() { update({q: '', queue: 'all', category: 'all', sort: 'newest', page: 1, pr: null}); }
     for (const category of categories) {
-      const count = category === 'all' ? rows.length : rows.filter(pr => pr.category === category).length;
+      const count = category === 'all' ? rows.length
+        : rows.filter(pr => pr.category === category || (pr.categories || []).includes(category)).length;
       const b = button('', () => update({category, page: 1, pr: null}), 'category-button');
       b.dataset.category = category;
       b.append(node('span', category === 'all' ? 'All categories' : categoryLabel(category)), node('span', formatCount(count), 'category-count'));

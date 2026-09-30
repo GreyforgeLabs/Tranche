@@ -41,6 +41,7 @@ for batch in (batches or {}).get("batches", []):
         batch_of.setdefault(number, []).append(tag)
 
 CAT_LABELS = {
+    "security-review": "Security (meta)",
     "install-setup": "Install & Setup", "desktop-config": "Desktop Config",
     "shell-cli": "Shell & CLI", "apps-integrations": "Apps & Integrations",
     "hardware-drivers": "Hardware & Drivers", "update-release": "Update & Release",
@@ -60,6 +61,8 @@ for n, pr in sorted(prs.items()):
         "body_truncated": pr["body_truncated"], "author": pr["author"],
         "created": pr["created"], "draft": pr["draft"],
         "category": tranche.category(judgment) if judgment else "unknown",
+        "categories": ([ "security-review" ]
+                       if judgment and tranche.security_priority(judgment) else []),
         "freshness": judgment.get("freshness", "unjudged or stale"),
         "risk": tranche.metric(judgment, "risk"),
         "security": tranche.metric(judgment, "security_flag", "noul"),
