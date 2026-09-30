@@ -234,6 +234,13 @@
       }
       relationships(pr, content);
     }
+    function copyPrompt(batchId) {
+      const batch = batchById.get(batchId);
+      if (!batch?.review_prompt) return;
+      navigator.clipboard?.writeText(batch.review_prompt);
+      const card = document.querySelector(`.batch-card[data-batch="${batchId}"] .copy-prompt`);
+      if (card) {card.textContent = 'Copied ✓'; setTimeout(() => {card.textContent = 'Copy agent prompt';}, 1600);}
+    }
     function renderBatchOverview() {
       const section = $('batch-overview');
       const batches = data.batches || [];
@@ -243,10 +250,14 @@
       if (!list.childElementCount) {
         for (const batch of batches) {
           const card = node('article', undefined, 'batch-card');
+          card.dataset.batch = batch.id;
           const head = node('div', undefined, 'batch-head');
           const open = button(`${batch.id}`, () => update({batch: batch.id, queue: 'all', category: 'all', q: '', page: 1, pr: null}), 'batch-open');
           open.setAttribute('aria-label', `Open batch ${batch.id}`);
           head.append(open, node('span', batch.security_members > 0 ? `Security first · ${batch.security_members} security PR${batch.security_members > 1 ? 's' : ''}` : 'Merge group', 'tag' + (batch.security_members > 0 ? ' security' : '')));
+          const copy = button('Copy agent prompt', () => copyPrompt(batch.id), 'copy-prompt');
+          copy.setAttribute('aria-label', `Copy reviewer agent prompt for ${batch.id}`);
+          head.append(copy);
           const meta = node('div', undefined, 'batch-meta');
           const risk = typeof batch.average_risk === 'number' && Number.isFinite(batch.average_risk) ? batch.average_risk.toFixed(1) : 'unknown';
           meta.append(node('span', `${batch.count} PRs → one combined PR`), node('span', `avg risk ${risk}`),
@@ -255,6 +266,11 @@
           const members = node('div', undefined, 'related-members');
           batch.members.forEach(n => members.append(memberButton(n)));
           card.append(members);
+          const details = node('details', undefined, 'prompt-details');
+          details.append(node('summary', 'Reviewer agent prompt'));
+          const pre = node('pre', batch.review_prompt, 'prompt-text');
+          details.append(pre);
+          card.append(details);
           list.append(card);
         }
       }

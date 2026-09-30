@@ -56,6 +56,10 @@ h2 {font-size: 22px; font-weight: 500; line-height: 1.35; margin: 0; letter-spac
 .batch-name {display: block; margin-bottom: 6px; font: 12px var(--mono); color: var(--sage);}
 .pair-diagnostic .related-member {margin-top: 4px;}
 .batch-open {min-height: 34px; padding: 4px 10px; font: 12px var(--mono); color: var(--sage);}
+.copy-prompt {min-height: 30px; padding: 2px 8px; font-size: 11px; margin-left: auto; color: var(--muted);}
+.prompt-details {border-top: 1px solid var(--line); padding-top: 8px;}
+.prompt-details summary {cursor: pointer; font: 11px var(--mono); color: var(--blue);}
+.prompt-text {margin: 8px 0 0; padding: 10px; border: 1px solid var(--line); background: var(--bg); font: 11px/1.6 var(--mono); white-space: pre-wrap; overflow-wrap: anywhere; max-height: 260px; overflow-y: auto; color: var(--muted);}
 .batch-meta {display: flex; flex-wrap: wrap; gap: 4px 14px; color: var(--muted); font-size: 11px;}
 .product-note {font-size: 11px; color: var(--muted); margin: -8px 0 16px;}
 .queues {display: flex; gap: 0; flex-wrap: wrap; border-bottom: 1px solid var(--line); margin-bottom: 20px;}

@@ -799,63 +799,104 @@ def security_priority(judgment):
 
 
 # ---------------------------------------------------------------------------
-# Issue #4 — pre-release batches. A batch is a Jev-determined group of PRs that
-# should be merged into ONE pull request: exactly the model-consistent
-# same_change groups from the dupe pipeline. Batches are strictly disjoint —
-# every PR belongs to at most one batch (review groups with contradictory or
-# untested internal evidence are excluded entirely, so no PR is claimed twice).
-# Batches are ordered security-first, then by average model risk, then age.
+# Issue #4 — pre-release batches. A batch is 5 PRs merged together as one
+# tranche. Jev determines the composition: model-consistent same_change groups
+# are atomic units (their PRs combine into ONE pull request inside the batch),
+# remaining PRs fill the batch up to five. Units are ordered security-first,
+# then average model risk, then age. Batches are strictly disjoint — every PR
+# belongs to at most one batch — and review groups (contradictory or untested
+# internal evidence) are excluded entirely so no PR is claimed twice.
 # ---------------------------------------------------------------------------
 
-SECURITY_BATCH = "security"
+BATCH_SIZE = 5
 
 
-def merge_batches(dupe_groups, judgments, prs, dupes_digest):
-    """Turn model-consistent duplicate groups into ordered merge batches."""
-    def security_flag(n):
-        value = metric(judgments.get(n, {}), "security_flag", "noul")
-        return value if value is not None else 0.0
+def batch_review_prompt(members, batch_id, prs):
+    """Reviewer agent prompt: point it at every PR of the batch and demand a
+    methodical unified proposal + plan. Deterministic, self-contained text."""
+    listed = "\n".join(f"- #{n}: {prs[n]['title']} — {prs[n]['url']}" for n in members
+                       if n in prs)
+    return (
+        f"You are reviewing Omarchy pre-release batch {batch_id} ({len(members)} PRs to be "
+        f"merged together as one tranche).\n\n"
+        f"Pull requests in this batch:\n{listed}\n\n"
+        "Work through the batch methodically:\n"
+        "1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged "
+        "as the same change, verify they truly overlap and identify the strongest implementation "
+        "of each.\n"
+        "2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and "
+        "check each PR's CI status.\n"
+        "3. Produce ONE unified proposal for the batch: what merges, in which order, what gets "
+        "squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.\n"
+        "4. Verify the plan: does the combined result still build and pass tests? Any PR that "
+        "cannot be verified stays out — say so explicitly.\n"
+        "5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, "
+        "(c) risks with mitigations, (d) an explicit list of anything excluded and why.\n\n"
+        "Facts over plausibility: base every claim on the actual diffs and CI state, never on "
+        "titles alone. You are proposing — the human decides."
+    )
 
-    def risk(n):
-        return metric(judgments.get(n, {}), "risk")
 
-    prepared = []
-    for members in dupe_groups:
-        judged = [n for n in members if n in judgments]
-        risks = [value for n in judged if (value := risk(n)) is not None]
-        prepared.append({
-            "members": list(members),
-            "security_members": sum(1 for n in judged if security_flag(n) >= SECURITY_PRIORITY),
-            "average_risk": round(sum(risks) / len(risks), 2) if risks else None,
-            "created": min((prs[n]["created"] for n in members if n in prs), default=""),
-        })
-    # Top priority: batches containing security-related PRs merge first.
-    prepared.sort(key=lambda g: (-g["security_members"],
-                                 g["average_risk"] if g["average_risk"] is not None else 99,
-                                 g["created"], g["members"][0]))
+def merge_batches(dupes, judgments, prs, dupes_digest):
+    """Pack PRs into security-first batches of five, Jev-determined."""
+    def security_count(members):
+        return sum(1 for n in members
+                   if (metric(judgments.get(n, {}), "security_flag", "noul") or 0) >= SECURITY_PRIORITY)
+
+    def unit_stats(members):
+        risks = [value for n in members if (value := metric(judgments.get(n, {}), "risk")) is not None]
+        return (security_count(members),
+                round(sum(risks) / len(risks), 2) if risks else None,
+                min((prs[n]["created"] for n in members if n in prs), default=""))
+
+    grouped, units = set(), []
+    for members in dupes["confirmed_groups"]:
+        security, average_risk, created = unit_stats(members)
+        units.append({"members": list(members), "same_change": True, "security": security,
+                      "risk": average_risk, "created": created})
+        grouped.update(members)
+    excluded = set()
+    for group in dupes["review_groups"]:
+        excluded.update(group["members"])
+    for n in sorted(prs):
+        if n not in grouped and n not in excluded:
+            security, average_risk, created = unit_stats([n])
+            units.append({"members": [n], "same_change": False, "security": security,
+                          "risk": average_risk, "created": created})
+    # Top priority: security-related material first, then lower model risk, then age.
+    units.sort(key=lambda u: (-u["security"], u["risk"] if u["risk"] is not None else 99,
+                              u["created"], u["members"][0]))
+    packed, current = [], []
+    for unit in units:
+        if current and len(current) + len(unit["members"]) > BATCH_SIZE:
+            packed.append(current)
+            current = []
+        current.extend(unit["members"])
+    if current:
+        packed.append(current)
     batches = []
-    for ordinal, group in enumerate(prepared, 1):
+    for ordinal, members in enumerate(packed, 1):
+        security, average_risk, created = unit_stats(members)
+        groups = sum(1 for unit in units if unit["same_change"] and set(unit["members"]) <= set(members))
         batches.append({
-            "ordinal": ordinal, "id": f"B{ordinal:02d}",
-            "members": group["members"], "count": len(group["members"]),
-            "target": "one combined pull request",
-            "security_members": group["security_members"],
-            "average_risk": group["average_risk"], "created": group["created"],
-            "evidence": "model-consistent same_change group; verify fix coverage before combining",
+            "ordinal": ordinal, "id": f"B{ordinal:03d}",
+            "members": members, "count": len(members),
+            "target": "merged together as one tranche",
+            "same_change_groups": groups,
+            "security_members": security, "average_risk": average_risk, "created": created,
+            "review_prompt": batch_review_prompt(members, f"B{ordinal:03d}", prs),
         })
-    covered = sum(len(group["members"]) for group in prepared)
     return {
-        "format_version": 2, "repo": REPO, "dupes_digest": dupes_digest,
-        "meaning": "A batch is a Jev-determined group of PRs to merge into ONE pull request "
-                   "(issue #4). Batches are disjoint: every PR belongs to at most one batch. "
+        "format_version": 3, "repo": REPO, "dupes_digest": dupes_digest,
+        "batch_size": BATCH_SIZE,
+        "meaning": "A batch is 5 PRs merged together as one tranche (issue #4). Jev determines the "
+                   "composition: same_change groups are atomic and combine into ONE pull request "
+                   "inside their batch. Batches are disjoint: every PR belongs to at most one batch. "
                    "Ordered security-first. Model-suggested, not verified safe to merge.",
         "batches": batches,
         "security_batches": sum(1 for b in batches if b["security_members"] > 0),
-        "excluded": {
-            "review_groups": "contradictory or untested internal evidence — resolve manually first",
-            "uncertain_pairs": "not same_change with P >= 0.65 — not safe to combine",
-        },
-        "unbatched_prs": max(0, len(prs) - covered),
+        "same_change_groups": sum(b["same_change_groups"] for b in batches),
+        "excluded_review_prs": len(excluded),
     }
 
 
@@ -873,40 +914,47 @@ def cmd_batches(args) -> None:
         raise TrancheFatal("dupes.json does not match the recorded digest; run cluster first")
     prs = load_prs()
     judgments = current_judgments(prs)
-    batches = merge_batches(dupes["confirmed_groups"], judgments, prs,
-                            digests["dupes.json"])
+    batches = merge_batches(dupes, judgments, prs, digests["dupes.json"])
     atomic_json(OUT_DIR / "batches.json", batches)
     append_batch_plan(batches)
-    print(f"{len(batches['batches'])} merge batches ({batches['security_batches']} security-first), "
-          f"{batches['unbatched_prs']} PRs intentionally unbatched")
+    print(f"{len(batches['batches'])} batches of ≤ {batches['batch_size']} PRs "
+          f"({batches['security_batches']} security-first, {batches['same_change_groups']} "
+          f"same-change groups, {batches['excluded_review_prs']} review-group PRs excluded)")
     print(f"wrote {OUT_DIR}/batches.json")
 
 
 def append_batch_plan(batches) -> None:
-    """Append the suggested merge-batch plan to the published tranches.md."""
+    """Append the suggested batch plan to the published tranches.md."""
     path = OUT_DIR / "tranches.md"
     if not path.exists():
         return  # cluster owns the report; batches only append its plan section.
     lines = ["", "# Suggested pre-release batches (issue #4)", "",
-             "A batch is a Jev-determined group of PRs to **merge into ONE pull request** — the",
-             "model-consistent same_change groups. Batches are disjoint (every PR is in at most one",
-             "batch); review groups and uncertain pairs are excluded on purpose. Ordered",
-             "security-first, then by average model risk. This is the source for the cumulative",
-             "PRs of the final deliverable — model-suggested, never verified safe to merge.", "",
+             f"A batch is **{batches['batch_size']} PRs merged together as one tranche**. Jev determines",
+             "the composition: model-consistent same_change groups are atomic — their PRs combine into",
+             "ONE pull request inside the batch. Batches are disjoint (every PR is in at most one",
+             "batch); review groups are excluded on purpose. Ordered security-first, then average",
+             "model risk, then age. Model-suggested, never verified safe to merge.", "",
              f"Batches: {len(batches['batches'])} · security-first batches: "
-             f"{batches['security_batches']} · PRs intentionally unbatched: "
-             f"{batches['unbatched_prs']}.", ""]
+             f"{batches['security_batches']} · same-change groups: "
+             f"{batches['same_change_groups']} · review-group PRs excluded: "
+             f"{batches['excluded_review_prs']}.", ""]
     if batches["batches"]:
-        lines += ["| Batch | Merge into one PR | Security | Avg model risk | Members |",
-                  "|---|---|---|---|---|"]
+        lines += ["| Batch | Size | Security | Avg risk | Groups | Members |",
+                  "|---|---|---|---|---|---|"]
         for batch in batches["batches"]:
             members = " ".join(f"#{n}" for n in batch["members"])
             risk = "unknown" if batch["average_risk"] is None else f"{batch['average_risk']:.1f}"
-            lines.append(f"| {batch['id']} | {batch['count']} PRs | "
-                         f"{batch['security_members'] or '—'} | {risk} | {members} |")
-        lines.append("")
+            lines.append(f"| {batch['id']} | {batch['count']} | "
+                         f"{batch['security_members'] or '—'} | {risk} | "
+                         f"{batch['same_change_groups'] or '—'} | {members} |")
+        lines += ["", "## Reviewer agent prompts", "",
+                  "Copy-paste a prompt into an agent to start a thorough, methodical review that",
+                  "produces one unified proposal + merge plan for the batch.", ""]
+        for batch in batches["batches"]:
+            lines += [f"### {batch['id']}", "", "```", batch["review_prompt"], "```", ""]
+    text = "\n".join(lines).rstrip("\n") + "\n"
     with path.open("a", encoding="utf-8") as stream:
-        stream.write("\n".join(lines))
+        stream.write(text)
 
 
 def report_binding(prs, judgments, verdicts):

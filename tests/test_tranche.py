@@ -678,11 +678,13 @@ class WorkflowTests(unittest.TestCase):
             page, re.S).group(1))
         self.assertTrue(payload["batches_available"])
         batched = [row for row in payload["prs"] if row["batches"]]
-        self.assertEqual(len(batched), 2, "only the merge group's PRs are batched")
+        self.assertEqual(len(batched), 9, "nine batchable PRs across two batches")
         by_number = {row["number"]: row["batches"] for row in payload["prs"]}
-        self.assertEqual([b["id"] for b in by_number[1]], ["B01"])
-        self.assertEqual([b["id"] for b in by_number[2]], ["B01"])
-        self.assertIn("B01", page)
+        self.assertEqual(by_number[1][0]["id"], "B001")
+        self.assertEqual(by_number[12][0]["id"], "B002")
+        self.assertIn("B001", page)
+        self.assertIn("review_prompt", page)
+        self.assertIn("unified proposal", page)
         # A batches file bound to a different dupe run must never render.
         dupes = json.loads((self.out / "dupes.json").read_text())
         dupes["confirmed_groups"] = []
@@ -715,10 +717,13 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(batches.call_count, 1)
 
     def merge_setup(self):
-        """Group [1,2] confirmed; [3,4,5] in review (conflict); 6 ungrouped."""
-        prs = self.inputs([pr(n) for n in (1, 2, 3, 4, 5, 6)])
+        """Group [1,2] confirmed; [3,4,5] in review (conflict); 6-12 ungrouped.
+
+        Batchable PRs: 1, 2, 6..12 = 9 → batches of 5 then 4.
+        """
+        prs = self.inputs([pr(n) for n in range(1, 13)])
         records = {}
-        for n in range(1, 7):
+        for n in range(1, 13):
             data = answers()
             if n == 1:
                 data["security_flag"] = {"noul": 0.9}
@@ -732,30 +737,39 @@ class WorkflowTests(unittest.TestCase):
                          (3, 5, "unrelated", 0.1)])
         return prs, self.cluster()[0]
 
-    def test_batches_are_disjoint_jev_merge_groups_security_first(self):
+    def test_batches_are_size_five_disjoint_and_security_first(self):
         prs, summary = self.merge_setup()
         tranche.cmd_batches(argparse.Namespace())
         payload = json.loads((self.out / "batches.json").read_text())
-        self.assertEqual(payload["format_version"], 2)
+        self.assertEqual(payload["format_version"], 3)
         self.assertEqual(payload["dupes_digest"], summary["output_digests"]["dupes.json"])
+        self.assertEqual(payload["batch_size"], 5)
         batches = payload["batches"]
-        # A batch is a Jev-determined group to merge into ONE pull request.
-        self.assertEqual([b["members"] for b in batches], [[1, 2]])
-        self.assertEqual(batches[0]["id"], "B01")
-        self.assertEqual(batches[0]["target"], "one combined pull request")
+        # Size: 9 batchable PRs pack into batches of 5 then 4.
+        self.assertEqual([b["count"] for b in batches], [5, 4])
+        self.assertEqual([b["id"] for b in batches], ["B001", "B002"])
+        # Security first: the security-related PR leads the first batch.
+        self.assertEqual(batches[0]["members"][0], 1)
         self.assertEqual(batches[0]["security_members"], 1)
-        self.assertEqual(payload["security_batches"], 1)
-        # Strict disjointness: one PR belongs to at most one batch.
+        # The same-change group [1,2] stays atomic inside one batch.
+        batch_of = {n: i for i, b in enumerate(batches) for n in b["members"]}
+        self.assertEqual(batch_of[1], batch_of[2])
+        # Strict disjointness and review-group exclusion.
         flat = [n for b in batches for n in b["members"]]
         self.assertEqual(len(flat), len(set(flat)))
-        # Review groups (conflicting internal evidence) are never auto-batched.
-        self.assertNotIn(3, flat)
-        self.assertNotIn(4, flat)
-        self.assertNotIn(5, flat)
-        self.assertEqual(payload["unbatched_prs"], 4)
+        self.assertEqual(set(flat), {1, 2, 6, 7, 8, 9, 10, 11, 12})
+        self.assertEqual(payload["excluded_review_prs"], 3)
+        self.assertEqual(payload["same_change_groups"], 1)
+        # Every batch carries a copy-paste reviewer agent prompt pointing at all its PRs.
+        for batch in batches:
+            prompt = batch["review_prompt"]
+            self.assertIn(batch["id"], prompt)
+            self.assertIn("unified proposal", prompt)
+            for n in batch["members"]:
+                self.assertIn(f"#{n}", prompt)
         markdown = (self.out / "tranches.md").read_text()
-        self.assertIn("merge into ONE pull request", markdown)
-        self.assertIn("#1 #2", markdown)
+        self.assertIn("Reviewer agent prompts", markdown)
+        self.assertIn("Copy-paste a prompt", markdown)
 
     def test_batches_refuse_outputs_that_drifted_from_the_summary(self):
         self.merge_setup()

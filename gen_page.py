@@ -31,7 +31,7 @@ batches_path = OUT / "batches.json"
 batches = None
 if batches_path.exists():
     batches = json.loads(batches_path.read_text())
-    if (batches.get("format_version") != 2 or batches.get("repo") != tranche.REPO
+    if (batches.get("format_version") != 3 or batches.get("repo") != tranche.REPO
             or batches.get("dupes_digest") != summary["output_digests"]["dupes.json"]):
         raise tranche.TrancheFatal("batches.json is stale or foreign; rerun 'tranche.py batches' before rendering")
 batch_of = {}
@@ -42,7 +42,8 @@ for batch in (batches or {}).get("batches", []):
 merge_batches = [
     {"id": batch["id"], "count": batch["count"], "members": batch["members"],
      "security_members": batch["security_members"],
-     "average_risk": batch["average_risk"], "created": batch["created"]}
+     "average_risk": batch["average_risk"], "created": batch["created"],
+     "review_prompt": batch["review_prompt"]}
     for batch in (batches or {}).get("batches", [])
 ]
 
