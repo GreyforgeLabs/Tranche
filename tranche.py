@@ -799,59 +799,114 @@ def security_priority(judgment):
 
 
 # ---------------------------------------------------------------------------
-# Issue #4 — pre-release batches. Within each category the review candidates are
-# further classified into cumulative batches; those batches are the source of
-# the cumulative PRs that are the final deliverable. Classification is fully
-# deterministic from already-judged evidence: security first, then model risk
-# band, then reviewer-effort-scaled size tiers (S <= 8, M <= 24, L <= 48),
-# lowest risk first so every batch is a strictly growing prefix.
+# Issue #4 — pre-release batches. A batch is a Jev-determined group of PRs that
+# should be merged into ONE pull request: exactly the model-consistent
+# same_change groups from the dupe pipeline. Batches are strictly disjoint —
+# every PR belongs to at most one batch (review groups with contradictory or
+# untested internal evidence are excluded entirely, so no PR is claimed twice).
+# Batches are ordered security-first, then by average model risk, then age.
 # ---------------------------------------------------------------------------
 
-BATCH_TIERS = (("S", 8), ("M", 24), ("L", 48))
 SECURITY_BATCH = "security"
 
 
-def batch_chunks(candidates):
-    """Split one group's candidates into disjoint ordered chunks per size tier.
+def merge_batches(dupe_groups, judgments, prs, dupes_digest):
+    """Turn model-consistent duplicate groups into ordered merge batches."""
+    def security_flag(n):
+        value = metric(judgments.get(n, {}), "security_flag", "noul")
+        return value if value is not None else 0.0
 
-    Ranking is exact model risk ascending, then PR number, so chunks are
-    deterministic; cumulativity is applied by category_batches.
-    """
-    ranked = sorted(candidates, key=lambda it: (it["risk"] if it["risk"] is not None else 99, it["number"]))
-    chunks, start = [], 0
-    for _, size in BATCH_TIERS:
-        chunks.append(ranked[start:start + size])
-        start += size
-    return chunks
+    def risk(n):
+        return metric(judgments.get(n, {}), "risk")
+
+    prepared = []
+    for members in dupe_groups:
+        judged = [n for n in members if n in judgments]
+        risks = [value for n in judged if (value := risk(n)) is not None]
+        prepared.append({
+            "members": list(members),
+            "security_members": sum(1 for n in judged if security_flag(n) >= SECURITY_PRIORITY),
+            "average_risk": round(sum(risks) / len(risks), 2) if risks else None,
+            "created": min((prs[n]["created"] for n in members if n in prs), default=""),
+        })
+    # Top priority: batches containing security-related PRs merge first.
+    prepared.sort(key=lambda g: (-g["security_members"],
+                                 g["average_risk"] if g["average_risk"] is not None else 99,
+                                 g["created"], g["members"][0]))
+    batches = []
+    for ordinal, group in enumerate(prepared, 1):
+        batches.append({
+            "ordinal": ordinal, "id": f"B{ordinal:02d}",
+            "members": group["members"], "count": len(group["members"]),
+            "target": "one combined pull request",
+            "security_members": group["security_members"],
+            "average_risk": group["average_risk"], "created": group["created"],
+            "evidence": "model-consistent same_change group; verify fix coverage before combining",
+        })
+    covered = sum(len(group["members"]) for group in prepared)
+    return {
+        "format_version": 2, "repo": REPO, "dupes_digest": dupes_digest,
+        "meaning": "A batch is a Jev-determined group of PRs to merge into ONE pull request "
+                   "(issue #4). Batches are disjoint: every PR belongs to at most one batch. "
+                   "Ordered security-first. Model-suggested, not verified safe to merge.",
+        "batches": batches,
+        "security_batches": sum(1 for b in batches if b["security_members"] > 0),
+        "excluded": {
+            "review_groups": "contradictory or untested internal evidence — resolve manually first",
+            "uncertain_pairs": "not same_change with P >= 0.65 — not safe to combine",
+        },
+        "unbatched_prs": max(0, len(prs) - covered),
+    }
 
 
-def category_batches(category, candidates, digest_of_clusters):
-    """Build the cumulative pre-release batches for one category."""
-    security = [it for it in candidates if it["security_flag"] is not None
-                and it["security_flag"] >= SECURITY_PRIORITY]
-    bands = (("low", [it for it in candidates if it["risk"] is not None and it["risk"] <= 1.5]),
-             ("core", [it for it in candidates if it["risk"] is not None and 1.5 < it["risk"] <= 2.5]),
-             ("danger", [it for it in candidates if it["risk"] is not None and it["risk"] > 2.5]),
-             ("unknown", [it for it in candidates if it["risk"] is None]))
-    batches, ordinal = [], 0
-    for label, members in ((SECURITY_BATCH, security), *bands):
-        if not members:
-            continue
-        for (tier, _size), chunk in zip(BATCH_TIERS, batch_chunks(members)):
-            if not chunk:
-                continue
-            ordinal += 1
-            batches.append({
-                "ordinal": ordinal, "id": f"{category}-B{ordinal}",
-                "category": category, "group": label, "tier": tier,
-                "count": len(chunk), "members": [it["number"] for it in chunk],
-            })
-    # Cumulative: batch i carries every member of batches 1..i of this category.
-    for index, batch in enumerate(batches):
-        batch["cumulative_count"] = sum(prior["count"] for prior in batches[:index + 1])
-        batch["cumulative_members"] = sorted(
-            {number for prior in batches[:index + 1] for number in prior["members"]})
-    return {"batches": batches, "binding": digest_of_clusters}
+def cmd_batches(args) -> None:
+    """Write out/batches.json and the tranches.md batch plan (issue #4)."""
+    summary = json.loads((OUT_DIR / "summary.json").read_text())
+    dupes = json.loads((OUT_DIR / "dupes.json").read_text())
+    clusters = json.loads((OUT_DIR / "clusters.json").read_text())
+    if summary.get("format_version") != 2 or summary.get("repo") != REPO:
+        raise TrancheFatal("Unrecognized cluster observation; run cluster first")
+    digests = summary.get("output_digests", {})
+    if digests.get("clusters.json") != digest(clusters):
+        raise TrancheFatal("clusters.json does not match the recorded digest; run cluster first")
+    if digests.get("dupes.json") != digest(dupes):
+        raise TrancheFatal("dupes.json does not match the recorded digest; run cluster first")
+    prs = load_prs()
+    judgments = current_judgments(prs)
+    batches = merge_batches(dupes["confirmed_groups"], judgments, prs,
+                            digests["dupes.json"])
+    atomic_json(OUT_DIR / "batches.json", batches)
+    append_batch_plan(batches)
+    print(f"{len(batches['batches'])} merge batches ({batches['security_batches']} security-first), "
+          f"{batches['unbatched_prs']} PRs intentionally unbatched")
+    print(f"wrote {OUT_DIR}/batches.json")
+
+
+def append_batch_plan(batches) -> None:
+    """Append the suggested merge-batch plan to the published tranches.md."""
+    path = OUT_DIR / "tranches.md"
+    if not path.exists():
+        return  # cluster owns the report; batches only append its plan section.
+    lines = ["", "# Suggested pre-release batches (issue #4)", "",
+             "A batch is a Jev-determined group of PRs to **merge into ONE pull request** — the",
+             "model-consistent same_change groups. Batches are disjoint (every PR is in at most one",
+             "batch); review groups and uncertain pairs are excluded on purpose. Ordered",
+             "security-first, then by average model risk. This is the source for the cumulative",
+             "PRs of the final deliverable — model-suggested, never verified safe to merge.", "",
+             f"Batches: {len(batches['batches'])} · security-first batches: "
+             f"{batches['security_batches']} · PRs intentionally unbatched: "
+             f"{batches['unbatched_prs']}.", ""]
+    if batches["batches"]:
+        lines += ["| Batch | Merge into one PR | Security | Avg model risk | Members |",
+                  "|---|---|---|---|---|"]
+        for batch in batches["batches"]:
+            members = " ".join(f"#{n}" for n in batch["members"])
+            risk = "unknown" if batch["average_risk"] is None else f"{batch['average_risk']:.1f}"
+            lines.append(f"| {batch['id']} | {batch['count']} PRs | "
+                         f"{batch['security_members'] or '—'} | {risk} | {members} |")
+        lines.append("")
+    with path.open("a", encoding="utf-8") as stream:
+        stream.write("\n".join(lines))
 
 
 def report_binding(prs, judgments, verdicts):
@@ -997,63 +1052,6 @@ def cmd_cluster(args) -> None:
     print(json.dumps(summary, indent=1))
     print(f"\nwrote {OUT_DIR}/clusters.json dupes.json tranches.md summary.json")
 
-
-def cmd_batches(args) -> None:
-    """Write out/batches.json and the tranches.md batch plan (issue #4)."""
-    summary = json.loads((OUT_DIR / "summary.json").read_text())
-    clusters = json.loads((OUT_DIR / "clusters.json").read_text())
-    if summary.get("format_version") != 2 or summary.get("repo") != REPO:
-        raise TrancheFatal("Unrecognized cluster observation; run cluster first")
-    binding = summary.get("output_digests", {}).get("clusters.json")
-    if binding != digest(clusters):
-        raise TrancheFatal("clusters.json does not match the recorded digest; run cluster first")
-    batches = {"format_version": 1, "repo": REPO, "clusters_digest": binding,
-               "meaning": "Deterministic pre-release batches per category (issue #4). Cumulative: "
-                          "each batch contains every earlier batch of the same group. Model-suggested, "
-                          "not verified safe to merge.",
-               "categories": {}}
-    total = 0
-    for category, bands in sorted(clusters.items()):
-        if category == "security-review" or not isinstance(bands, dict):
-            continue  # The security meta-category already leads every batch set.
-        candidates = [item for band in ("low", "core", "danger", "unknown")
-                      for item in (bands.get(band) or [])]
-        if not candidates:
-            continue
-        built = category_batches(category, candidates, binding)
-        batches["categories"][category] = built
-        total += len(built["batches"])
-        print(f"{category}: {len(built['batches'])} batches, "
-              f"final cumulative {built['batches'][-1]['cumulative_count'] if built['batches'] else 0}")
-    atomic_json(OUT_DIR / "batches.json", batches)
-    append_batch_plan(batches)
-    print(f"wrote {OUT_DIR}/batches.json: {total} batches across {len(batches['categories'])} categories")
-
-
-def append_batch_plan(batches) -> None:
-    """Append the suggested pre-release batch plan to the published tranches.md."""
-    path = OUT_DIR / "tranches.md"
-    if not path.exists():
-        return  # cluster owns the report; batches only append its plan section.
-    lines = ["", "# Suggested pre-release batches (issue #4)", "",
-             "Deterministic classification of the review candidates above: security first, then",
-             f"low/core/danger/unknown model-risk bands, chunked into "
-             f"{', '.join(f'{name} (≤ {size})' for name, size in BATCH_TIERS)} tiers ranked lowest",
-             "risk first. Cumulative: each batch contains every earlier batch of its group. These",
-             "are the source for the cumulative PRs that are the final deliverable — model-suggested,",
-             "not verified safe to merge.", ""]
-    for category, built in batches["categories"].items():
-        lines.append(f"## {category}")
-        lines.append("")
-        lines.append("| Batch | Group | Tier | Size | Cumulative | Members |")
-        lines.append("|---|---|---|---|---|---|")
-        for batch in built["batches"]:
-            members = " ".join(f"#{n}" for n in batch["members"])
-            lines.append(f"| {batch['id']} | {batch['group']} | {batch['tier']} | "
-                         f"{batch['count']} | {batch['cumulative_count']} | {members} |")
-        lines.append("")
-    with path.open("a", encoding="utf-8") as stream:
-        stream.write("\n".join(lines))
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)

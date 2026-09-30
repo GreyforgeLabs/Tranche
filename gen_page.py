@@ -25,22 +25,20 @@ if (summary.get("format_version") != 2
                                               "dupes.json": tranche.digest(dupes)}):
     raise tranche.TrancheFatal("Report inputs changed or are legacy/mixed; rerun cluster before rendering")
 
-# Issue #4: pre-release batches ship with the workbench when present; a stale
-# or foreign batches file must never be shown against a newer cluster run.
+# Issue #4: merge batches ship with the workbench when present; a stale or
+# foreign batches file must never be shown against a newer dupe run.
 batches_path = OUT / "batches.json"
 batches = None
 if batches_path.exists():
     batches = json.loads(batches_path.read_text())
-    if (batches.get("format_version") != 1 or batches.get("repo") != tranche.REPO
-            or batches.get("clusters_digest") != summary["output_digests"]["clusters.json"]):
+    if (batches.get("format_version") != 2 or batches.get("repo") != tranche.REPO
+            or batches.get("dupes_digest") != summary["output_digests"]["dupes.json"]):
         raise tranche.TrancheFatal("batches.json is stale or foreign; rerun 'tranche.py batches' before rendering")
 batch_of = {}
-for category in (batches or {}).get("categories", {}).values():
-    for batch in category["batches"]:
-        tag = {"id": batch["id"], "group": batch["group"], "tier": batch["tier"],
-               "count": batch["count"], "cumulative_count": batch["cumulative_count"]}
-        for number in batch["members"]:
-            batch_of.setdefault(number, []).append(tag)
+for batch in (batches or {}).get("batches", []):
+    tag = {"id": batch["id"], "count": batch["count"]}
+    for number in batch["members"]:
+        batch_of.setdefault(number, []).append(tag)
 
 CAT_LABELS = {
     "install-setup": "Install & Setup", "desktop-config": "Desktop Config",

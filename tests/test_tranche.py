@@ -668,7 +668,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn(r'\u0026', page)
 
     def test_render_embeds_batches_and_refuses_stale_batch_file(self):
-        self.batch_setup()
+        self.merge_setup()
         tranche.cmd_batches(argparse.Namespace())
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
@@ -678,16 +678,15 @@ class WorkflowTests(unittest.TestCase):
             page, re.S).group(1))
         self.assertTrue(payload["batches_available"])
         batched = [row for row in payload["prs"] if row["batches"]]
-        self.assertEqual(len(batched), 8, "every candidate is a member of some batch")
+        self.assertEqual(len(batched), 2, "only the merge group's PRs are batched")
         by_number = {row["number"]: row["batches"] for row in payload["prs"]}
-        self.assertEqual([b["id"] for b in by_number[8]], ["fix-misc-B1", "fix-misc-B3"],
-                         "a PR can serve in several groups; tags list each")
-        self.assertEqual([b["id"] for b in by_number[1]], ["fix-misc-B2"])
-        self.assertIn("fix-misc-B3", page)
-        # A batches file bound to a different cluster run must never render.
-        clusters = json.loads((self.out / "clusters.json").read_text())
-        clusters["fix-misc"]["low"][0]["title"] = "mutated"
-        (self.out / "clusters.json").write_text(json.dumps(clusters))
+        self.assertEqual([b["id"] for b in by_number[1]], ["B01"])
+        self.assertEqual([b["id"] for b in by_number[2]], ["B01"])
+        self.assertIn("B01", page)
+        # A batches file bound to a different dupe run must never render.
+        dupes = json.loads((self.out / "dupes.json").read_text())
+        dupes["confirmed_groups"] = []
+        (self.out / "dupes.json").write_text(json.dumps(dupes))
         self.assertNotEqual(self.render().returncode, 0)
 
     def test_empty_corpus_renders_without_credentials(self):
@@ -715,51 +714,57 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(cluster.call_count, 1)
         self.assertEqual(batches.call_count, 1)
 
-    def batch_setup(self, count=8):
-        prs = self.inputs([pr(n) for n in range(1, count + 1)])
+    def merge_setup(self):
+        """Group [1,2] confirmed; [3,4,5] in review (conflict); 6 ungrouped."""
+        prs = self.inputs([pr(n) for n in (1, 2, 3, 4, 5, 6)])
         records = {}
-        for n in range(1, count + 1):
+        for n in range(1, 7):
             data = answers()
-            data["risk"]["score"] = 1 if n <= 6 else 2  # 6 low, 2 core
-            if n == count:
-                data["security_flag"] = {"noul": 0.7}
+            if n == 1:
+                data["security_flag"] = {"noul": 0.9}
             records[n] = data
         tranche.JUDGMENTS_PATH.write_text("".join(
             json.dumps({"number": n, "answers": records[n],
                         "binding": tranche.judgment_binding(prs[n])}) + "\n"
             for n in sorted(prs)))
-        return self.cluster()
+        self.pairs(prs, [(1, 2, "same_change", 0.9),
+                         (3, 4, "same_change", 0.9), (4, 5, "same_change", 0.9),
+                         (3, 5, "unrelated", 0.1)])
+        return prs, self.cluster()[0]
 
-    def test_batches_classify_tiers_groups_and_cumulativity(self):
-        summary, _ = self.batch_setup()
+    def test_batches_are_disjoint_jev_merge_groups_security_first(self):
+        prs, summary = self.merge_setup()
         tranche.cmd_batches(argparse.Namespace())
         payload = json.loads((self.out / "batches.json").read_text())
-        self.assertEqual(payload["clusters_digest"], summary["output_digests"]["clusters.json"])
-        built = payload["categories"]["fix-misc"]["batches"]
-        # Security first, then the low band, then core; empty tiers are skipped.
-        self.assertEqual([(b["group"], b["tier"], b["count"]) for b in built],
-                         [("security", "S", 1), ("low", "S", 6), ("core", "S", 2)])
-        self.assertEqual([b["id"] for b in built],
-                         ["fix-misc-B1", "fix-misc-B2", "fix-misc-B3"])
-        self.assertEqual([b["members"] for b in built], [[8], [1, 2, 3, 4, 5, 6], [7, 8]])
-        self.assertTrue(all(set(b["cumulative_members"]) >= set(b["members"]) for b in built),
-                        "cumulative members always contain the batch's own members")
-        self.assertEqual(built[-1]["cumulative_members"], [1, 2, 3, 4, 5, 6, 7, 8])
+        self.assertEqual(payload["format_version"], 2)
+        self.assertEqual(payload["dupes_digest"], summary["output_digests"]["dupes.json"])
+        batches = payload["batches"]
+        # A batch is a Jev-determined group to merge into ONE pull request.
+        self.assertEqual([b["members"] for b in batches], [[1, 2]])
+        self.assertEqual(batches[0]["id"], "B01")
+        self.assertEqual(batches[0]["target"], "one combined pull request")
+        self.assertEqual(batches[0]["security_members"], 1)
+        self.assertEqual(payload["security_batches"], 1)
+        # Strict disjointness: one PR belongs to at most one batch.
+        flat = [n for b in batches for n in b["members"]]
+        self.assertEqual(len(flat), len(set(flat)))
+        # Review groups (conflicting internal evidence) are never auto-batched.
+        self.assertNotIn(3, flat)
+        self.assertNotIn(4, flat)
+        self.assertNotIn(5, flat)
+        self.assertEqual(payload["unbatched_prs"], 4)
+        markdown = (self.out / "tranches.md").read_text()
+        self.assertIn("merge into ONE pull request", markdown)
+        self.assertIn("#1 #2", markdown)
 
-    def test_batches_are_cumulative_and_bound_to_clusters(self):
-        summary, _ = self.batch_setup()
+    def test_batches_refuse_outputs_that_drifted_from_the_summary(self):
+        self.merge_setup()
         tranche.cmd_batches(argparse.Namespace())
-        payload = json.loads((self.out / "batches.json").read_text())
-        built = payload["categories"]["fix-misc"]["batches"]
-        # Cumulative: the last batch carries every member of every earlier batch.
-        final = built[-1]
-        self.assertEqual(final["cumulative_count"], sum(b["count"] for b in built))
-        self.assertEqual(final["cumulative_members"],
-                         sorted({n for b in built for n in b["members"]}))
-        self.assertLess(set(built[0]["members"]), set(built[1]["members"]) | {8},
-                        "groups are disjoint apart from the shared security member")
-        # Binding: rerun without cluster is fine; corrupt clusters and it must refuse.
-        tranche.cmd_batches(argparse.Namespace())
+        dupes = json.loads((self.out / "dupes.json").read_text())
+        dupes["confirmed_groups"] = []
+        (self.out / "dupes.json").write_text(json.dumps(dupes))
+        with self.assertRaises(tranche.TrancheFatal):
+            tranche.cmd_batches(argparse.Namespace())
         clusters = json.loads((self.out / "clusters.json").read_text())
         clusters["fix-misc"]["low"][0]["title"] = "mutated"
         (self.out / "clusters.json").write_text(json.dumps(clusters))
