@@ -18,17 +18,30 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = Path(__file__).resolve().parent.parent
 OUT_GIF = ROOT / "docs" / "assets" / "omarchy-triage.gif"
 
-TEXT = "OMARCHY TRIAGE x JEV"
+# The OMARCHY wordmark, verbatim from omarchy.org's hero (8 lines, 52 cols)
+OMARCHY_ART = """                                █
+                                █
+                                █
+                               ▇█        ▂
+                   ▅          ▅██        █  ▂
+ ▂                 █         ▂███▅       █▂ █ ▅
+▂█▅   ▆      █     █▄       ▃█████      ▃██▂█ █▃▂
+███▇▆▇█▅▁▃▅▃▅█▂▂▅▇▃██▄▆▄▇▃▃▆██████▆▄▂▅█▁█████▆████▇▅"""
+ART_W = 52
+TAGLINE = "x Jev".center(ART_W)
+# glyphfx destroys multi-line layout on its terminal grid (blank rows collapse,
+# leading spaces vanish), so we probe its colorshift gradient with a solid line
+# and paint the captured color sequence onto the art ourselves.
+PROBE = "M" * ART_W
 EFFECT = "colorshift"
-CANVAS_W = len(TEXT) + 6
-CANVAS_H = 4
+PROBE_W = ART_W + 2
 FRAME_RATE = 24
-MAX_FRAMES = 260
+MAX_FRAMES = 60
 BG = (0x16, 0x16, 0x1E)
 DEFAULT_FG = (0xC0, 0xCA, 0xF5)
 
 FONT_PATH = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
-FONT_SIZE = 72
+FONT_SIZE = 34
 
 # xterm 256-color palette (indices 16..255) for 38;5;n fallback
 def xterm_palette():
@@ -128,89 +141,6 @@ class Grid:
         return tuple(tuple(row) for row in self.cells)
 
 
-def parse_frames(data: bytes, w: int, h: int):
-    grid = Grid(w, h)
-    frames = []
-    i, n = 0, len(data)
-
-    def emit():
-        frames.append(grid.snapshot())
-
-    emit()  # initial blank
-    while i < n:
-        b = data[i]
-        if b == 0x1B:
-            if i + 1 >= n:
-                break
-            nxt = data[i + 1]
-            if nxt == ord("["):
-                j = i + 2
-                private = ""
-                if j < n and data[j:j+1] in (b"?", b">", b"=", b"<"):
-                    private = chr(data[j]); j += 1
-                k = j
-                while k < n and not (0x40 <= data[k] <= 0x7E):
-                    k += 1
-                if k >= n:
-                    break
-                final = chr(data[k])
-                params = data[j:k].decode("ascii", "replace")
-                if final in "78":  # DECSC/DECRC arrive as ESC 7 (no bracket) — handled below
-                    pass
-                grid.csi(private, params, final)
-                i = k + 1
-                continue
-            elif nxt in (ord("7"), ord("8")):
-                if nxt == ord("7"):
-                    grid.saved = (grid.row, grid.col)
-                else:
-                    grid.row, grid.col = grid.saved
-                i += 2
-                continue
-            elif nxt == ord("]"):  # OSC — skip to BEL or ST
-                j = i + 2
-                while j < n and data[j] != 0x07 and not (data[j:j+2] == b"\x1b\\"):
-                    j += 1
-                i = j + (2 if data[j:j+2] == b"\x1b\\" else 1)
-                continue
-            elif nxt in (ord("M"), ord("D")):
-                grid.row = max(0, grid.row - 1)
-                i += 2
-                continue
-            elif nxt in (ord("E"),):
-                grid.row = min(h - 1, grid.row + 1); grid.col = 0
-                i += 2
-                continue
-            else:
-                i += 2
-                continue
-        if b == 0x0D:
-            grid.col = 0
-            i += 1
-            continue
-        if b == 0x0A:
-            grid.row = min(h - 1, grid.row + 1)
-            i += 1
-            continue
-        # printable — decode one UTF-8 char
-        length = 1
-        if b >= 0xF0: length = 4
-        elif b >= 0xE0: length = 3
-        elif b >= 0xC0: length = 2
-        ch = data[i : i + length].decode("utf-8", "replace")
-        grid.put(ch)
-        i += length
-        # frame boundary heuristic is unnecessary: glyphfx repaints via cursor
-        # homing + full-line redraws; we snapshot on every cursor-home instead.
-        if grid.col >= w:
-            grid.col = 0
-            grid.row = min(h - 1, grid.row + 1)
-    # Snapshot strategy: capture screen state at every frame delimiter seen in the
-    # stream. Simpler robust approach: re-walk and snapshot after each ESC[4A-like
-    # homing sequence. Implemented via callback in csi through a wrapper below.
-    return frames
-
-
 def parse_frames_with_snapshots(data: bytes, w: int, h: int):
     """Same parser, but snapshots at every cursor-home (frame repaint)."""
     grid = Grid(w, h)
@@ -303,26 +233,84 @@ def render(frames, w, h):
     return imgs
 
 
-def main():
+def probe_gradient():
+    """Run glyphfx colorshift on a solid line; return [(chars, fg) per frame]."""
     os.environ.setdefault("TERM", "xterm-256color")
     cap = subprocess.run(
-        ["glyphfx", "--canvas-width", str(CANVAS_W), "--canvas-height", str(CANVAS_H),
+        ["glyphfx", "--canvas-width", str(PROBE_W), "--canvas-height", "1",
          "--frame-rate", str(FRAME_RATE), "--no-restore-cursor", EFFECT, "--no-loop", "--cycles", "1"],
-        input=TEXT.encode(), capture_output=True, timeout=120,
+        input=PROBE.encode(), capture_output=True, timeout=120,
     )
     if cap.returncode != 0 or len(cap.stdout) < 500:
         sys.exit(f"glyphfx failed rc={cap.returncode}: {cap.stderr[:300]}")
-    frames = parse_frames_with_snapshots(cap.stdout, CANVAS_W, CANVAS_H)
-    if len(frames) > MAX_FRAMES:
-        step = len(frames) / MAX_FRAMES
-        frames = [frames[int(i * step)] for i in range(MAX_FRAMES)]
-    imgs = render(frames, CANVAS_W, CANVAS_H)
+    frames = parse_frames_with_snapshots(cap.stdout, PROBE_W, 1)
+    rows = []
+    seen = set()
+    for snap in frames:
+        row = snap[0]
+        key = hash(row)
+        if key in seen:
+            continue
+        seen.add(key)
+        rows.append([(ch, fg) for ch, fg, _ in row])
+    # trim fully-blank frames at both ends
+    def blank(row):
+        return all(ch == " " for ch, _ in row)
+    while rows and blank(rows[0]):
+        rows.pop(0)
+    while rows and blank(rows[-1]):
+        rows.pop()
+    return rows
+
+
+def compose():
+    """Paint the probed gradient onto the OMARCHY art + tagline; render frames."""
+    grad_rows = probe_gradient()
+    print(f"probed gradient frames: {len(grad_rows)}")
+    art_lines = OMARCHY_ART.split("\n")
+    canvas = [list(line.ljust(ART_W)) for line in art_lines] + [list(TAGLINE)]
+
+    # real render: fixed canvas, gradient colors applied column-wise per row
+    font = ImageFont.truetype(FONT_PATH, FONT_SIZE)
+    advance = font.getlength("M")
+    cell_h = int(FONT_SIZE * 1.02)  # tight: stacked blocks connect into solid columns
+    tag_gap = int(FONT_SIZE * 0.9)  # breathing room above the tagline
+    n_art = len(OMARCHY_ART.split("\n"))
+    W, H = int(round(ART_W * advance)), n_art * cell_h + tag_gap + cell_h
+    out = []
+    for row in grad_rows:
+        # column color: reuse the probe's per-column color at the art's width
+        col_colors = []
+        for c in range(ART_W):
+            ch_probe, fg = row[min(c, len(row) - 1)]
+            col_colors.append(fg)
+        img = Image.new("RGB", (W, H), BG)
+        d = ImageDraw.Draw(img)
+        for r, line in enumerate(canvas):
+            y = r * cell_h + (tag_gap if r >= n_art else 0)
+            for c, ch in enumerate(line):
+                if ch == " ":
+                    continue
+                fg = col_colors[c] or DEFAULT_FG
+                x = int(c * advance)
+                d.text((x, y + (cell_h - FONT_SIZE) // 2), ch, font=font, fill=tuple(fg))
+        out.append(img)
+    # trim trailing frames identical to the final gradient rest state
+    while len(out) > 8 and out[-1].tobytes() == out[-2].tobytes():
+        out.pop()
+    if len(out) > MAX_FRAMES:
+        step = len(out) / MAX_FRAMES
+        out = [out[int(i * step)] for i in range(MAX_FRAMES)]
+    return out
+
+
+def main():
+    imgs = compose()
     OUT_GIF.parent.mkdir(parents=True, exist_ok=True)
     imgs[0].save(
         OUT_GIF, save_all=True, append_images=imgs[1:],
         duration=int(1000 / FRAME_RATE), loop=0, optimize=True,
     )
-    n_colors = len({px for img in imgs[::12] for px in img.getdata() if px != BG})
     print(f"frames kept: {len(imgs)} | size: {imgs[0].width}x{imgs[0].height} | "
           f"file: {OUT_GIF.stat().st_size // 1024} KB")
 

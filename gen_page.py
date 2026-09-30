@@ -108,7 +108,7 @@ tr:last-child td{{border-bottom:none}}
 footer{{margin-top:60px;border-top:1px solid var(--line);padding-top:18px;color:var(--dim);font-size:.88em}}
 </style></head><body><main>
 <header>
-<img src="assets/omarchy-triage.gif" alt="OMARCHY TRIAGE x Jev" title="OMARCHY TRIAGE x Jev" style="width:min(883px,100%);height:auto;display:block;margin:2px 0 12px">
+<img src="assets/omarchy-triage.gif" alt="OMARCHY x Jev" title="OMARCHY x Jev" style="width:min(1064px,100%);height:auto;display:block;margin:2px 0 12px">
 <div class="sub">All {summary['prs_in_corpus']} open pull requests of <a href="https://github.com/omacom/omarchy" target="_blank">omacom/omarchy</a>, judged by TypeSafe's <a href="https://docs.typesafe.ai" target="_blank">System One model Jev</a> and clustered into merge tranches. Built by <a href="https://github.com/blackopsrepl" target="_blank">@blackopsrepl</a> for the Omarchy triage team.</div>
 <blockquote>“We're 2,200 PRs deep on GH now and getting nearly a hundred new ones every day. I'll never be able to catch up. Agents will help, but we need humans too. If you have DEEP Linux experience, is agent-forward, and want to join the new Omarchy triage team, write triage@omarchy.org.”<br><span class="who">— DHH, 12 Sep 2026 · <a href="https://x.com/dhh/status/2098755120540393908" target="_blank">x.com/dhh/…</a></span></blockquote>
 <div class="stats">
