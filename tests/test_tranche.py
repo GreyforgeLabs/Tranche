@@ -228,7 +228,7 @@ class WorkflowTests(unittest.TestCase):
         changed = self.inputs([pr(1), pr(2, head={"sha": "new"})])
         new_judgments = self.judgments(changed)
         self.assertEqual(tranche.current_pairs(changed, new_judgments), [])
-        with patch.object(tranche, "pair_questions", return_value={"new": "policy"}):
+        with patch.object(tranche, "pair_questions", return_value={"new": {"type": "choice", "criteria": ["only"]}}):
             self.assertEqual(tranche.current_pairs(prs, judgments), [])
         with patch.object(tranche, "MODEL", "new-model"):
             self.assertEqual(tranche.current_pairs(prs, judgments), [])
@@ -621,6 +621,19 @@ class WorkflowTests(unittest.TestCase):
                 tranche.cmd_fetch(argparse.Namespace(transport="curl"))
         self.assertEqual((self.pages / "snapshot.json").read_bytes(), before)
 
+    def test_fetch_authenticates_through_gh_never_a_token_in_argv(self):
+        """Unauthenticated GitHub allows 60 requests/hour; a capture costs ~29."""
+        self.inputs([pr(1)])
+        result = subprocess.CompletedProcess([], 0, json.dumps([]), "")
+        with patch.object(tranche.subprocess, "run", return_value=result) as run:
+            tranche.cmd_fetch(argparse.Namespace(transport="gh"))
+        command = run.call_args.args[0]
+        self.assertEqual(command[:2], ["gh", "api"])
+        # No credential may ever reach an argv: it would be visible in `ps`.
+        self.assertNotIn("Authorization", " ".join(command))
+        self.assertFalse(any("token" in str(part).lower() for part in command))
+        self.assertEqual(set(tranche.load_prs()), set())
+
     def test_snapshot_repository_and_content_integrity_are_checked(self):
         items = [pr(1)]
         for field, replacement in (("repo", "other/repo"), ("items", [pr(2)]), ("version", 999)):
@@ -830,6 +843,149 @@ class WorkflowTests(unittest.TestCase):
         (self.out / "clusters.json").write_text(json.dumps(clusters))
         with self.assertRaises(tranche.TrancheFatal):
             tranche.cmd_batches(argparse.Namespace())
+
+    def test_evidence_digest_ignores_the_churning_repository_envelope(self):
+        """A refetch that only moves repo-wide counters must not invalidate work."""
+        item = pr(1)
+        item["base"] = {"ref": "master", "sha": "base", "repo": {
+            "id": 1, "full_name": "omacom/omarchy", "stargazers_count": 43_000,
+            "open_issues_count": 4_900, "pushed_at": "2026-01-02T00:00:00Z"}}
+        item["_links"] = {"self": {"href": "https://api.github.com/repos/omacom/omarchy/pulls/1"}}
+        item["statuses_url"] = "https://api.github.com/repos/omacom/omarchy/statuses/old"
+        refetched = copy.deepcopy(item)
+        refetched["base"]["repo"].update(stargazers_count=43_014, open_issues_count=5_003,
+                                         pushed_at="2026-02-01T00:00:00Z")
+        refetched["_links"] = {"self": {"href": "https://api.github.com/other"}}
+        refetched["statuses_url"] = "https://api.github.com/repos/omacom/omarchy/statuses/new"
+
+        prs = self.inputs([item, pr(2)])
+        self.judgments(prs)
+        self.pairs(prs, [(1, 2, "same_change", 0.9)])
+        later = self.inputs([refetched, pr(2)])
+        self.assertEqual(later[1]["source_digest"] != prs[1]["source_digest"], True)
+        self.assertEqual(later[1]["evidence_digest"], prs[1]["evidence_digest"])
+        self.assertEqual(len(tranche.current_judgments(later)), 2)
+        self.assertEqual(len(tranche.current_pairs(later, self.judgments(later))), 1)
+
+    def test_real_pr_changes_still_invalidate_evidence_and_verdicts(self):
+        prs = self.inputs([pr(1), pr(2)])
+        self.judgments(prs)
+        self.pairs(prs, [(1, 2, "same_change", 0.9)])
+        for change in ({"body": "A different description."}, {"title": "Different title"},
+                       {"head": {"sha": "moved"}}, {"updated_at": "2026-03-01T00:00:00Z"},
+                       {"labels": [{"name": "needs-testing"}]}, {"draft": True}):
+            with self.subTest(change=change):
+                changed = self.inputs([pr(1, **change), pr(2)])
+                self.assertNotIn(1, tranche.current_judgments(changed))
+                self.assertEqual(tranche.current_pairs(changed, self.judgments(changed)), [])
+                self.assertEqual(tranche.pair_cache(changed, {})[(1, 2)]["freshness"], "stale")
+
+    def test_dupes_reuses_bound_verdicts_and_reruns_only_what_moved(self):
+        prs = self.inputs([pr(1), pr(2)])
+        self.judgments(prs)
+        self.pairs(prs, [(1, 2, "same_change", 0.9)])
+        self.key.side_effect = None
+        self.key.return_value = "synthetic-key"
+        self.model.side_effect = None
+        self.model.return_value = {
+            "answers": {"sameness": {"choice": "same_change",
+                                     "probabilities": {"same_change": 0.9}}},
+            "usage": {"input_tokens": 260, "output_tokens": 12},
+        }
+        # Nothing moved: no call, and the cached verdict is still current.
+        tranche.cmd_dupes(argparse.Namespace(max_pairs=10))
+        self.model.assert_not_called()
+        # The pair's PR changed: exactly one call, and the record replaces it.
+        moved = self.inputs([pr(1, body="Rewritten description."), pr(2)])
+        judgments = self.judgments(moved)
+        self.assertEqual(tranche.pair_cache(moved, judgments)[(1, 2)]["freshness"], "stale")
+        tranche.cmd_dupes(argparse.Namespace(max_pairs=10))
+        self.assertEqual(self.model.call_count, 1)
+        self.assertEqual(tranche.pair_cache(moved, judgments)[(1, 2)]["freshness"], "current")
+        self.assertEqual(len(tranche.current_pairs(moved, judgments)), 1)
+
+    def test_refresh_dry_run_reports_work_without_writing(self):
+        prs = self.inputs([pr(1), pr(2)])
+        self.judgments(prs)
+        self.pairs(prs, [(1, 2, "same_change", 0.9)])
+        before = (self.out / "summary.json").exists()
+        with patch.object(sys, "argv", ["tranche.py", "refresh", "--dry-run",
+                                        "--max-pairs", "0"]):
+            tranche.main()
+        self.model.assert_not_called()  # --dry-run spends nothing
+        self.assertFalse(before)
+        self.assertFalse((self.out / "summary.json").exists())  # and writes nothing
+        self.assertFalse((self.out / "dupes.json").exists())
+
+    def test_refresh_dry_run_and_dupes_report_the_same_work(self):
+        """One predicate, two consumers: the reported count must be the work done.
+
+        A stale verdict for a pair that is no longer a candidate is not work:
+        nothing asks for that verdict, so re-running it would never converge and
+        the counter would report outstanding work forever.
+        """
+        prs = self.inputs([pr(1), pr(2)])
+        self.judgments(prs)
+        self.pairs(prs, [(1, 2, "same_change", 0.9)])
+        # A stored verdict for a pair that is not a candidate pair at all.
+        (self.out / "pair_verdicts.jsonl").open("a").write(
+            json.dumps({"a": 81, "b": 82, "verdict": "same_change",
+                        "probabilities": {"same_change": 0.9}}) + "\n")
+        judgments = tranche.current_judgments(prs)
+        # No candidate is outstanding: the orphan verdict is not work.
+        self.assertEqual(tranche.outstanding_pairs(prs, judgments), [])
+        self.model.assert_not_called()
+        # A candidate whose PR moved is reported as work by both consumers.
+        moved = self.inputs([pr(1, body="Rewritten."), pr(2)])
+        moved_judgments = self.judgments(moved)
+        pending = tranche.outstanding_pairs(moved, moved_judgments)
+        self.assertEqual([(a, b) for _, a, b in pending], [(1, 2)])
+        self.key.side_effect = None
+        self.key.return_value = "synthetic-key"
+        self.model.side_effect = None
+        self.model.return_value = {
+            "answers": {"sameness": {"choice": "same_change",
+                                     "probabilities": {"same_change": 0.9}}},
+        }
+        tranche.cmd_dupes(argparse.Namespace(max_pairs=10))
+        self.assertEqual(self.model.call_count, 1)  # exactly the reported work
+        self.assertEqual(tranche.outstanding_pairs(moved, moved_judgments), [])
+
+    def test_refresh_runs_the_documented_incremental_pipeline_once(self):
+        with (
+            patch.object(sys, "argv", ["tranche.py", "refresh", "--max-pairs", "7"]),
+            patch.object(tranche, "cmd_fetch") as fetch,
+            patch.object(tranche, "cmd_judge") as judge,
+            patch.object(tranche, "cmd_dupes") as dupes,
+            patch.object(tranche, "cmd_cluster") as cluster,
+            patch.object(tranche, "cmd_batches") as batches,
+            patch.object(tranche, "render_page") as page,
+        ):
+            tranche.main()
+        self.assertEqual(fetch.call_args.args[0].transport, "gh")
+        self.assertTrue(judge.call_args.args[0].resume)
+        self.assertEqual(dupes.call_args.args[0].max_pairs, 7)
+        self.assertFalse(cluster.call_args.args[0].allow_unbound)
+        self.assertEqual(cluster.call_count, 1)
+        self.assertEqual(batches.call_count, 1)
+        self.assertEqual(page.call_count, 1)
+        # A second consecutive refresh with nothing changed spends no model call.
+        self.model.assert_not_called()
+
+    def test_refresh_no_page_still_clusters(self):
+        with (
+            patch.object(sys, "argv", ["tranche.py", "refresh", "--no-page"]),
+            patch.object(tranche, "cmd_fetch"),
+            patch.object(tranche, "cmd_judge"),
+            patch.object(tranche, "cmd_dupes"),
+            patch.object(tranche, "cmd_cluster") as cluster,
+            patch.object(tranche, "cmd_batches") as batches,
+            patch.object(tranche, "render_page") as page,
+        ):
+            tranche.main()
+        self.assertEqual(cluster.call_count, 1)
+        self.assertEqual(batches.call_count, 1)
+        page.assert_not_called()
 
 
 if __name__ == "__main__":

@@ -35,7 +35,7 @@ JUDGED := $(shell test -f out/judgments.jsonl && wc -l < out/judgments.jsonl || 
 PAIRED := $(shell test -f out/pair_verdicts.jsonl && wc -l < out/pair_verdicts.jsonl || echo 0)
 
 # ============== Phony Targets ==============
-.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments test check mcp-check print-interpreter release-check release-dry-run release
+.PHONY: banner help fetch refresh judge judge-full dupes cluster page gif all publish verify info clean-judgments test check mcp-check print-interpreter release-check release-dry-run release
 
 # ============== Default Target ==============
 .DEFAULT_GOAL := help
@@ -55,7 +55,7 @@ fetch: banner
 	@printf "$(CYAN)$(BOLD)╔══════════════════════════════════════╗$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)║        Fetching Open PRs             ║$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n\n"
-	@$(PYTHON) tranche.py fetch --transport curl
+	@$(PYTHON) tranche.py fetch --transport gh
 
 # ============== Jev Pipeline ==============
 
@@ -99,6 +99,12 @@ gif: banner
 		(printf "$(RED)$(CROSS) GIF generation failed$(RESET)\n\n" && exit 1)
 
 # ============== Composite Targets ==============
+
+refresh: banner
+	@printf "$(CYAN)$(BOLD)╔══════════════════════════════════════╗$(RESET)\n"
+	@printf "$(CYAN)$(BOLD)║     Incremental Refresh (all)        ║$(RESET)\n"
+	@printf "$(CYAN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n\n"
+	@$(PYTHON) tranche.py refresh --max-pairs $(if $(MAX_PAIRS),$(MAX_PAIRS),400)
 
 all:
 	@$(MAKE) fetch
@@ -177,10 +183,11 @@ release:
 
 help: banner
 	@/bin/echo -e "$(CYAN)$(BOLD)Pipeline:$(RESET)"
-	@/bin/echo -e "  $(GREEN)make fetch$(RESET)         - Refresh open-PR snapshot (curl-paged REST)"
+	@/bin/echo -e "  $(GREEN)make fetch$(RESET)         - Refresh open-PR snapshot (authenticated via gh)"
 	@/bin/echo -e "  $(GREEN)make judge$(RESET)         - Jev pass over unjudged PRs (resume-safe)"
 	@/bin/echo -e "  $(GREEN)make dupes$(RESET)         - Compare candidate pairs with Jev"
 	@/bin/echo -e "  $(GREEN)make cluster$(RESET)       - Build tranches, dupe groups, escalation lists"
+	@/bin/echo -e "  $(GREEN)make refresh$(RESET)       - $(BOLD)Deterministic incremental refresh of everything$(RESET)"
 	@/bin/echo -e ""
 	@/bin/echo -e "$(CYAN)$(BOLD)Output:$(RESET)"
 	@/bin/echo -e "  $(GREEN)make page$(RESET)          - Render docs/index.html from out/ data"

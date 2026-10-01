@@ -9,6 +9,7 @@ Judgments come from TypeSafe's System One API (Jev). Code owns the workflow:
 fetch -> judge (one batched call per PR) -> compare candidate pairs -> cluster.
 
 Usage:
+  python3 tranche.py refresh            # the whole pipeline, incremental, one command
   python3 tranche.py fetch              # refresh data/pages/snapshot.json
   python3 tranche.py judge [--limit N] [--resume]
   python3 tranche.py dupes [--max-pairs N]
@@ -275,6 +276,56 @@ QUALIFIED_REFERENCE = re.compile(r"(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)#(?P
 BARE_REFERENCE = re.compile(r"(?<![\w#])#(?P<number>\d+)\b")
 
 
+# Captured fields that carry this PR's own reviewable evidence. Everything else
+# in a GitHub pull-list envelope churns without the PR changing: `base.repo`
+# embeds repository-wide counters (stargazers, forks, open_issues, pushed_at,
+# updated_at) that move on every unrelated event, `_links`/`statuses_url` are
+# URL scaffolding, and `user`/`head` embed whole nested objects whose remote
+# halves drift independently. Digesting the whole envelope made every PR look
+# changed after every fetch.
+PR_EVIDENCE_FIELDS = (
+    "number", "title", "body", "created_at", "updated_at", "state", "draft",
+    "labels", "milestone", "requested_reviewers", "requested_teams",
+    "changed_files", "additions", "deletions", "commits", "comments",
+    "review_comments", "merged_at", "merge_commit_sha", "user", "head",
+)
+# Nested objects inside the evidence set, reduced to the PR-owned half.
+PR_EVIDENCE_PROJECTION = {
+    "user": ("login",),
+    "head": ("sha", "ref", "label"),
+}
+
+
+def pr_evidence_digest(item: dict) -> str:
+    """Digest of the captured fields a judgment actually depends on."""
+    evidence = {}
+    for field in PR_EVIDENCE_FIELDS:
+        if field not in item:
+            continue
+        value = item[field]
+        keep = PR_EVIDENCE_PROJECTION.get(field)
+        if keep and isinstance(value, dict):
+            value = {key: value[key] for key in keep if key in value}
+        elif keep and isinstance(value, list):
+            value = [{key: part[key] for key in keep if key in part}
+                     if isinstance(part, dict) else part for part in value]
+        elif field == "labels":
+            value = [label.get("name") if isinstance(label, dict) else label for label in value]
+        evidence[field] = value
+    return digest(evidence)
+
+
+def reference_digest(item: dict) -> str:
+    """Digest of the body references a PR contributes as comparison candidates.
+
+    Kept out of `pr_evidence_digest`: refs come from the raw captured body, they
+    are not part of any judgment or pair binding, and only `dupes` reads them.
+    """
+    raw = item.get("body") or ""
+    number = item.get("number")
+    return digest({"references": reference_numbers(raw, REPO, number if type(number) is int else None)})
+
+
 def reference_numbers(raw_body: str, repository: str = REPO, own_number: int | None = None) -> list[int]:
     """PR numbers of `repository` literally mentioned in a description.
 
@@ -340,9 +391,16 @@ def load_prs() -> dict[int, dict]:
                 "head_sha": (p.get("head") or {}).get("sha"),
                 "url": p.get("html_url") or f"https://github.com/{REPO}/pull/{p['number']}",
                 "source_digest": digest(p),
+                "evidence_digest": pr_evidence_digest(p),
+                "ref_digest": digest({"references": refs}),
                 "body_truncated": len(body) > BODY_CHARS,
             }
     return prs
+
+
+def ref_index(prs) -> dict[int, list[int]]:
+    """PR number → the references it contributes as comparison candidates."""
+    return {n: pr.get("refs", []) for n, pr in prs.items()}
 
 
 def pr_state(pr: dict) -> dict:
@@ -366,23 +424,45 @@ def pr_state(pr: dict) -> dict:
 # Commands
 # ---------------------------------------------------------------------------
 
+GITHUB_API = "https://api.github.com"
+
+
+def fetch_page(url: str, transport: str) -> list:
+    """One page of the open-PR list, over `gh` (preferred), curl or urllib.
+
+    `gh api` is preferred because it is already authenticated: unauthenticated
+    GitHub allows 60 requests an hour and one capture of this backlog costs
+    about 29, so an unauthenticated refresh fails on the third pass. The token
+    stays inside `gh` — it is never read by this process and never placed in an
+    argv, where it would be visible to every user on the host via `ps`.
+    """
+    if transport == "gh":
+        result = subprocess.run(["gh", "api", url], capture_output=True, text=True, timeout=120)
+        if result.returncode:
+            detail = result.stderr.strip().splitlines()[-1] if result.stderr.strip() else "no detail"
+            raise TrancheFatal(f"gh api fetch failed ({detail}); previous snapshot retained")
+        return json.loads(result.stdout)
+    if transport == "curl":
+        # The original host's urllib/IPv6 workaround. Deliberately unauthenticated.
+        command = ["curl", "--fail", "--silent", "--show-error", "--max-time", "60", url]
+        result = subprocess.run(command, capture_output=True, text=True)
+        if result.returncode:
+            detail = result.stderr.strip().splitlines()[-1] if result.stderr.strip() else "no detail"
+            raise TrancheFatal(f"curl fetch failed ({detail}); previous snapshot retained")
+        return json.loads(result.stdout)
+    with urllib.request.urlopen(url, timeout=60) as response:
+        return json.load(response)
+
+
 def cmd_fetch(args) -> None:
     PAGES_DIR.mkdir(parents=True, exist_ok=True)
     page, total = 1, 0
     captured = []
     seen = set()
+    transport = getattr(args, "transport", "gh")
     while True:
-        url = f"https://api.github.com/repos/{REPO}/pulls?state=open&per_page=100&page={page}"
-        if getattr(args, "transport", "urllib") == "curl":
-            # Keep the Makefile's workaround for hosts with broken urllib IPv6.
-            result = subprocess.run(["curl", "--fail", "--silent", "--show-error",
-                                     "--max-time", "60", url], capture_output=True, text=True)
-            if result.returncode:
-                raise TrancheFatal("curl fetch failed; previous snapshot retained")
-            arr = json.loads(result.stdout)
-        else:
-            with urllib.request.urlopen(url, timeout=60) as r:
-                arr = json.load(r)
+        url = f"{GITHUB_API}/repos/{REPO}/pulls?state=open&per_page=100&page={page}"
+        arr = fetch_page(url, transport)
         if not isinstance(arr, list):
             raise TrancheFatal("GitHub did not return a PR list; previous snapshot retained")
         if not arr:
@@ -431,7 +511,8 @@ def normalized_record(record):
 
 def normalize_pair(record):
     record = normalized_record(record)
-    choices = pair_questions()["sameness"]["criteria"]
+    policy = pair_questions().get("sameness")
+    choices = policy.get("criteria", []) if isinstance(policy, dict) else []
     verdict = record.get("verdict")
     if not isinstance(verdict, str) or verdict not in choices:
         record["verdict"] = None
@@ -445,7 +526,31 @@ def normalize_pair(record):
     record["normalization_errors"] = [field + ": invalid or missing" for field, value in
         (("verdict", record.get("verdict")), ("probabilities.same_change", p_same(record)))
         if value is None]
+    # The judgment block is what the report re-reads; the per-request token usage
+    # is not. Keep it out of the cached record so cluster can read the multi-megabyte
+    # log without holding every usage block in memory.
+    if type(record.get("input_tokens")) is not int or type(record.get("output_tokens")) is not int:
+        usage = record.get("usage") if isinstance(record.get("usage"), dict) else {}
+        record.pop("input_tokens", None)
+        record.pop("output_tokens", None)
+        for field in ("input_tokens", "output_tokens"):
+            value = usage.get(field)
+            record[field] = value if type(value) is int and value >= 0 else 0
+    record.pop("usage", None)
     return record
+
+
+def pair_usage(record: dict) -> tuple[int, int]:
+    """Tokens spent on one pair verdict, for a cached record or a raw API reply."""
+    usage = record.get("usage")
+    usage = usage if isinstance(usage, dict) else {}
+    values = []
+    for field in ("input_tokens", "output_tokens"):
+        value = record.get(field)
+        if type(value) is not int or value < 0:
+            value = usage.get(field)
+        values.append(value if type(value) is int and value >= 0 else 0)
+    return values[0], values[1]
 
 
 def reusable_pair(record):
@@ -477,30 +582,57 @@ def normalize_judgment(record):
     return record
 
 
+def judgment_is_current(pr, record) -> bool:
+    """True when a stored judgment still answers today's question for today's evidence.
+
+    The PR's own captured evidence and the model/question policy both bind a
+    judgment, so a changed description or a newer model re-asks the question,
+    while a re-fetch of unchanged evidence does not. `state` is compared as the
+    projection stored with the record, so records written before evidence
+    digests existed verify exactly as they were judged. Completeness is not
+    tested here: an answer with an unknown field is still the answer that was
+    given, and dropping it would turn a known category into an unknown one.
+    """
+    return (record.get("binding") == judgment_binding(pr)
+            or (record.get("input") == pr_state(pr)
+                and record.get("requested_model") == MODEL))
+
+
 def reusable_judgment(record):
-    return (record["answers"]["category"]["choice"] is not None
+    return (record.get("answers", {}).get("category", {}).get("choice") is not None
             and all(metric(record, name, field) is not None for name, field in (
                 ("risk", "score"), ("finished_form", "score"), ("review_effort", "score"),
                 ("is_fix", "noul"), ("security_flag", "noul"))))
 
 
 def load_done() -> dict[int, dict]:
+    """Latest usable judgment per PR, reading the cache without loading it twice.
+
+    The log is append-only, so one PR can hold several lines; only the last
+    valid record per number wins and a bounded tail of it is returned, because
+    the full log has multi-megabyte `input` and `usage` blocks that no caller
+    needs. A malformed tail (a truncated write) never costs the earlier records.
+    """
     done: dict[int, dict] = {}
-    if JUDGMENTS_PATH.exists():
-        for line in JUDGMENTS_PATH.read_text().splitlines():
+    if not JUDGMENTS_PATH.exists():
+        return done
+    with JUDGMENTS_PATH.open(encoding="utf-8") as stream:
+        for line in stream:
+            if "\"number\"" not in line:
+                continue
             try:
                 rec = json.loads(line)
             except json.JSONDecodeError:
                 continue
             if (isinstance(rec, dict) and "error" not in rec
                     and type(rec.get("number")) is int and rec["number"] > 0):
-                done[rec["number"]] = normalize_judgment(rec)
-    return done
+                done[rec["number"]] = rec
+    return {number: normalize_judgment(rec) for number, rec in done.items()}
 
 
 def judgment_binding(pr):
     return digest({"version": BINDING_VERSION, "repo": REPO,
-                   "source": pr["source_digest"], "state": pr_state(pr),
+                   "source": pr["evidence_digest"], "state": pr_state(pr),
                    "questions": judge_questions(), "model": MODEL})
 
 
@@ -509,7 +641,7 @@ def current_judgments(prs, *, allow_unbound=False):
     for number, record in load_done().items():
         if number not in prs:
             continue
-        matches = record.get("binding") == judgment_binding(prs[number])
+        matches = judgment_is_current(prs[number], record)
         legacy = "binding" not in record and allow_unbound
         if matches or legacy:
             current[number] = dict(record, freshness="current" if matches else "unbound")
@@ -524,30 +656,44 @@ def brief(pr):
 def pair_binding(prs, a, b):
     a, b = sorted((a, b))
     return digest({"version": BINDING_VERSION, "repo": REPO, "model": MODEL,
-                   "sources": [prs[a]["source_digest"], prs[b]["source_digest"]],
+                   "sources": [prs[a]["evidence_digest"], prs[b]["evidence_digest"]],
                    "state": [brief(prs[a]), brief(prs[b])], "questions": pair_questions()})
 
 
 def current_pairs(prs, judgments, *, allow_unbound=False):
+    """Pair verdicts a report may publish.
+
+    A verdict is published when the pair's current descriptions still verify
+    against the record (binding, or the byte-identical inputs it was shown) —
+    that is the same strict rule as before, and it never invents a relationship.
+    A pair whose similarity has since fallen below the discovery threshold is
+    still published when the model actually judged it: the threshold finds
+    candidates, it does not get to hide a verified dupe. Legacy records without a
+    binding are inspection-only behind `allow_unbound`.
+    """
     pairs = {}
-    if PAIRS_PATH.exists():
-        for line in PAIRS_PATH.read_text().splitlines():
-            try:
-                record = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            if (not isinstance(record, dict) or "error" in record
-                    or any(type(record.get(key)) is not int or record[key] <= 0 for key in ("a", "b"))):
-                continue
-            a, b = sorted((record["a"], record["b"]))
-            if a == b or a not in judgments or b not in judgments:
-                continue
-            matches = record.get("binding") == pair_binding(prs, a, b)
-            legacy = "binding" not in record and allow_unbound
-            if matches or legacy:
-                record = normalize_pair(record)
-                pairs[a, b] = dict(record, a=a, b=b, freshness="current" if matches else "unbound")
+    for pair, record in current_verdicts(prs).items():
+        a, b = pair
+        if a not in judgments or b not in judgments:
+            continue
+        matches = pair_is_current(prs, pair, record)
+        legacy = "binding" not in record and allow_unbound
+        if matches or legacy:
+            pairs[pair] = dict(record, a=a, b=b,
+                               freshness="current" if matches else "unbound")
     return list(pairs.values())
+
+
+def pair_cache(prs, judgments) -> dict[tuple[int, int], dict]:
+    """Every captured pair with a stored verdict, newest first.
+
+    The reuse predicate for `dupes` is `reusable_pair` + `pair_is_current`, so a
+    verdict survives a refetch that does not move the evidence it was based on
+    and is replaced the moment evidence, model or policy changes.
+    """
+    return {pair: dict(record, a=pair[0], b=pair[1],
+                       freshness="current" if pair_is_current(prs, pair, record) else "stale")
+            for pair, record in current_verdicts(prs).items()}
 
 
 def cmd_judge(args) -> None:
@@ -578,7 +724,7 @@ def cmd_judge(args) -> None:
                 resp = {}
             rec = {"number": number, "title": pr["title"], "answers": resp.get("answers"), "usage": resp.get("usage", {}),
                    "binding": judgment_binding(pr), "input": pr_state(pr),
-                   "source_digest": pr["source_digest"], "head_sha": pr["head_sha"],
+                   "source_digest": pr["evidence_digest"], "head_sha": pr["head_sha"],
                    "updated_at": pr["updated"], "requested_model": MODEL,
                    "judged_at": datetime.now(timezone.utc).isoformat(),
                    "resolved_model": resp.get("model"), "request_id": resp.get("request_id")}
@@ -619,7 +765,53 @@ def load_judgments() -> dict[int, dict]:
     return load_done()
 
 
-def lexical_pairs(prs, judgments, threshold=0.72, jaccard_threshold=0.62) -> list[tuple[float, int, int]]:
+def current_verdicts(prs) -> dict[tuple[int, int], dict]:
+    """Newest stored verdict per pair, for pairs whose members are both captured.
+
+    The log is append-only, so the same pair can appear many times; only the last
+    valid record wins. Records written by older code without a `binding` are kept
+    as unbound evidence, exactly as before.
+    """
+    verdicts: dict[tuple[int, int], dict] = {}
+    if not PAIRS_PATH.exists():
+        return verdicts
+    with PAIRS_PATH.open(encoding="utf-8") as stream:
+        for line in stream:
+            if "\"a\"" not in line:
+                continue
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                continue
+            if not isinstance(record, dict) or "error" in record:
+                continue
+            if any(type(record.get(key)) is not int or record[key] <= 0 for key in ("a", "b")):
+                continue
+            pair = (min(record["a"], record["b"]), max(record["a"], record["b"]))
+            if pair[0] == pair[1] or pair[0] not in prs or pair[1] not in prs:
+                continue
+            verdicts[pair] = normalize_pair(record)
+    return verdicts
+
+
+def pair_is_current(prs, pair, record) -> bool:
+    """True when a stored verdict still answers today's question for today's evidence.
+
+    Same rule as `judgment_is_current`: the binding is authoritative when it
+    matches, otherwise the verdict is still reusable if the two descriptions it
+    was shown are byte-identical today and the model alias is unchanged. A pair
+    verdict compares descriptions, so a moved branch that leaves the text alone
+    does not invalidate it.
+    """
+    a, b = pair
+    if record.get("binding") == pair_binding(prs, a, b):
+        return True
+    return (record.get("input") == {"pr_a": brief(prs[a]), "pr_b": brief(prs[b])}
+            and record.get("requested_model") == MODEL)
+
+
+def lexical_pairs(prs, judgments, refs=None, threshold=0.72,
+                  jaccard_threshold=0.62) -> list[tuple[float, int, int]]:
     """Candidate duplicate pairs: high title similarity within the same judged category."""
 
     def toks(s):
@@ -649,18 +841,56 @@ def lexical_pairs(prs, judgments, threshold=0.72, jaccard_threshold=0.62) -> lis
                         pairs.append((jac, a, b))
     pairs.sort(reverse=True)
     seen = {(a, b) for _, a, b in pairs}
+
+    def pair_key(a, b):
+        return (min(a, b), max(a, b))
+
     # Cross-referenced PRs (body cites each other) are candidate duplicates even
     # when titles differ — e.g. fixes to the same bug split across files.
     for n, pr in prs.items():
-        if n not in judgments:
+        if n not in judgments or (refs and n not in refs):
             continue
-        for r in pr.get("refs", []):
-            a, b = min(n, r), max(n, r)
-            if a in prs and b in prs and a in judgments and b in judgments and (a, b) not in seen:
+        for r in (refs or {}).get(n, pr.get("refs", [])):
+            a, b = pair_key(n, r)
+            if a != b and a in prs and b in prs and a in judgments and b in judgments and (a, b) not in seen:
                 seen.add((a, b))
                 pairs.append((1.0, a, b))
     pairs.sort(key=lambda t: -t[0])
     return pairs
+
+
+def candidate_pairs(prs, judgments=None, refs=None) -> dict[tuple[int, int], float]:
+    """The pairs worth a model verdict, as {(a, b): similarity}.
+
+    Similarity alone cannot be trusted as a proxy: the candidate set also
+    carries the title-independent body-reference edges, and it moves whenever
+    one side's title, category or refs change. So the pair cache is keyed by
+    membership in this exact set, not by a single pair's own score.
+    """
+    if judgments is not None:
+        scored = lexical_pairs(prs, judgments, refs=refs)
+    else:
+        scored = lexical_pairs(prs, current_judgments(prs), refs=refs)
+    return {(a, b): score for score, a, b in scored}
+
+
+def outstanding_pairs(prs, judgments) -> list[tuple[float, int, int]]:
+    """The exact work a `dupes` pass would do, best candidate first.
+
+    Defined once and consumed by both `dupes` and `refresh --dry-run`, so the
+    reported count can never disagree with the work performed. A stored verdict
+    that is still current is not work; neither is a pair that has stopped being
+    a candidate (its similarity fell below the threshold or its body reference
+    was removed) even though its verdict is now stale — re-running it would be
+    work that never converges, because nothing asks for that verdict.
+    """
+    cache = pair_cache(prs, judgments)
+    done = {pair for pair, rec in cache.items()
+            if reusable_pair(rec) and rec["freshness"] == "current"}
+    candidates = candidate_pairs(prs, judgments, ref_index(prs))
+    work = [(score, a, b) for (a, b), score in candidates.items() if (a, b) not in done]
+    work.sort(key=lambda item: -item[0])
+    return work
 
 
 def cmd_dupes(args) -> None:
@@ -669,18 +899,20 @@ def cmd_dupes(args) -> None:
     missing = len(prs) - len(judgments)
     if missing > 100:
         print(f"warning: {missing} PRs not judged yet; dupe pass runs on judged subset", file=sys.stderr)
-    done_pairs = {(rec["a"], rec["b"]) for rec in current_pairs(prs, judgments)
-                  if reusable_pair(rec)}
-    pairs = [(s, a, b) for s, a, b in lexical_pairs(prs, judgments) if (a, b) not in done_pairs]
-    pairs = pairs[: args.max_pairs]
-    print(f"{len(pairs)} candidate pairs to compare (skipping {len(done_pairs)} matching records)")
+    candidates = candidate_pairs(prs, judgments, ref_index(prs))
+    pending = outstanding_pairs(prs, judgments)
+    print(f"{len(pending[:args.max_pairs])} candidate pairs to compare "
+          f"(skipping {len(candidates) - len(pending)} matching records)")
+    pairs = pending[: args.max_pairs]
     if not pairs:
         return
     PAIRS_PATH.parent.mkdir(parents=True, exist_ok=True)
     key = read_key()
     lock = threading.Lock()
+    tokens_in = tokens_out = 0
 
     def work(item):
+        nonlocal tokens_in, tokens_out
         s, a, b = item
         if a not in prs or b not in prs:
             return  # candidate became stale (PR closed and refetched mid-run)
@@ -705,6 +937,8 @@ def cmd_dupes(args) -> None:
         with lock:
             with PAIRS_PATH.open("a") as f:
                 f.write(json.dumps(rec, allow_nan=False) + "\n")
+            tokens_in += pair_usage(rec)[0]
+            tokens_out += pair_usage(rec)[1]
 
     with ThreadPoolExecutor(max_workers=WORKERS) as ex:
         futures = [ex.submit(work, it) for it in pairs]
@@ -713,6 +947,7 @@ def cmd_dupes(args) -> None:
             if (i + 1) % 25 == 0:
                 print(f"compared {i + 1}/{len(pairs)}")
     print("candidate pair comparison complete")
+    print(f"tokens: in={tokens_in} out={tokens_out}")
 
 
 class DSU:
@@ -998,7 +1233,10 @@ def append_batch_plan(batches) -> None:
 
 def report_binding(prs, judgments, verdicts):
     return digest({"version": BINDING_VERSION, "repo": REPO,
-                   "sources": {n: pr["source_digest"] for n, pr in prs.items()},
+                   "sources": {n: {"source": pr["source_digest"],
+                                   "evidence": pr["evidence_digest"],
+                                   "references": pr["ref_digest"]}
+                               for n, pr in prs.items()},
                    "judgments": judgments, "pairs": verdicts,
                    "questions": [judge_questions(), pair_questions()], "model": MODEL})
 
@@ -1031,6 +1269,7 @@ def cmd_cluster(args) -> None:
                 "is_fix": metric(j, "is_fix", "noul"), "review_effort": metric(j, "review_effort"),
                 "security_flag": metric(j, "security_flag", "noul"), "freshness": j["freshness"],
                 "superseded_by": None, "source_digest": prs[n]["source_digest"],
+                "evidence_digest": prs[n]["evidence_digest"],
                 "head_sha": prs[n]["head_sha"], "url": prs[n]["url"]}
         clusters.setdefault(cat, {}).setdefault(band, []).append(item)
         if review_candidate(prs[n], j, in_group):
@@ -1140,11 +1379,75 @@ def cmd_cluster(args) -> None:
     print(f"\nwrote {OUT_DIR}/clusters.json dupes.json tranches.md summary.json")
 
 
+def cmd_refresh(args) -> None:
+    """Deterministic incremental refresh: the documented one-command pipeline.
+
+    Runs the same steps in the same order every time and reuses everything the
+    caches can still support, so the work is proportional to what actually
+    changed since the last pass rather than to the corpus size.
+    """
+    steps = [step for step in ("fetch", "judge", "dupes", "cluster", "batches", "page")
+             if not (step == "page" and args.no_page)]
+    before = None
+    summary_path = OUT_DIR / "summary.json"
+    if summary_path.exists():
+        try:
+            before = json.loads(summary_path.read_text())
+        except json.JSONDecodeError:
+            before = None
+
+    if args.dry_run:
+        prs = load_prs()
+        judgments = current_judgments(prs)
+        pending = outstanding_pairs(prs, judgments)
+        print(f"refresh plan ({' -> '.join(steps)}), no changes written:")
+        print(f"  judged now          {len(judgments)}/{len(prs)} captured PRs")
+        print(f"  pair verdicts to re-run  {len(pending)} of "
+              f"{len(candidate_pairs(prs, judgments, ref_index(prs)))} candidates")
+        if "fetch" in steps:
+            print("  fetch               would re-read open-PR membership from GitHub")
+        return
+
+    print(f"refresh: {' -> '.join(steps)}")
+    for step in steps:
+        if step == "fetch":
+            cmd_fetch(argparse.Namespace(transport="gh"))
+        elif step == "judge":
+            cmd_judge(argparse.Namespace(resume=True, limit=None))
+        elif step == "dupes":
+            cmd_dupes(argparse.Namespace(max_pairs=args.max_pairs))
+        elif step == "cluster":
+            cmd_cluster(argparse.Namespace(allow_unbound=False))
+        elif step == "batches":
+            cmd_batches(argparse.Namespace())
+        elif step == "page":
+            render_page()
+
+    after = json.loads(summary_path.read_text()) if summary_path.exists() else {}
+    print("\nrefresh complete")
+    for key in ("prs_in_corpus", "judged", "dupe_groups", "review_groups",
+                "uncertain_pairs", "ready_prs", "escalate_review", "security_priority"):
+        old, new = (before or {}).get(key), after.get(key)
+        marker = "" if old == new else f"   (was {old})"
+        print(f"  {key:<22} {new}{marker}")
+
+
+def render_page() -> None:
+    """Render docs/index.html through gen_page.py, refusing inconsistent inputs."""
+    result = subprocess.run([sys.executable, str(ROOT / "gen_page.py")],
+                            capture_output=True, text=True)
+    sys.stdout.write(result.stdout)
+    if result.returncode:
+        sys.stderr.write(result.stderr)
+        raise TrancheFatal("page rendering failed; out/ inputs were not rewritten")
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
     fetch = sub.add_parser("fetch", help="refresh observed open-PR membership from GitHub")
-    fetch.add_argument("--transport", choices=("urllib", "curl"), default="urllib")
+    fetch.add_argument("--transport", choices=("gh", "urllib", "curl"), default="gh",
+                       help="gh (authenticated via the gh CLI, default), curl or urllib")
     j = sub.add_parser("judge", help="Jev judgment pass over PRs")
     j.add_argument("--limit", type=int, default=None, help="judge only the N newest unjudged PRs")
     j.add_argument("--resume", action="store_true", help="reuse judgments bound to unchanged input/questions/model")
@@ -1153,6 +1456,11 @@ def main() -> None:
     cluster = sub.add_parser("cluster", help="build candidate groups and review reports offline")
     cluster.add_argument("--allow-unbound", action="store_true", help="inspect legacy judgments with freshness warnings; no legacy review tranches")
     sub.add_parser("batches", help="classify review candidates into cumulative pre-release batches (issue #4)")
+    refresh = sub.add_parser("refresh", help="deterministic incremental refresh: fetch → judge → dupes → cluster → batches → page")
+    refresh.add_argument("--max-pairs", type=int, default=400,
+                         help="cap model pair comparisons this pass (default 400)")
+    refresh.add_argument("--no-page", action="store_true", help="skip rendering docs/index.html")
+    refresh.add_argument("--dry-run", action="store_true", help="report what would change without writing")
     a = sub.add_parser("all", help="judge --resume, dupes, cluster, batches")
     a.add_argument("--limit", type=int, default=None)
     a.add_argument("--resume", action="store_true", help="accepted for compatibility; all always resumes")
@@ -1172,6 +1480,8 @@ def main() -> None:
         cmd_cluster(args)
     elif args.cmd == "batches":
         cmd_batches(args)
+    elif args.cmd == "refresh":
+        cmd_refresh(args)
     elif args.cmd == "all":
         args.resume = True
         cmd_judge(args)

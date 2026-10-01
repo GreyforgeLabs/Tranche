@@ -226,7 +226,8 @@ class Reports:
         for item in page:
             members = item.get("members", [item.get("a"), item.get("b")])
             item["sources"] = {str(n): {key: self.prs[n][key] for key in
-                                       ("number", "source_digest", "head_sha", "updated", "url")}
+                                       ("number", "source_digest", "evidence_digest",
+                                        "head_sha", "updated", "url")}
                                for n in members}
         end = offset + limit
         return self._envelope(items=page, total=len(items), offset=offset,
