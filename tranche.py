@@ -1192,6 +1192,25 @@ def park_state(dupes, judgments, prs):
     return parks
 
 
+def pr_activity(pr, record):
+    """Head evidence is distinct from GitHub thread churn (including bots).
+
+    A matching recorded head establishes an idle lower bound at judgment time.
+    An unjudged PR has only its creation date as an age proxy. GitHub's
+    updated_at is displayed as thread metadata, never used for priority.
+    """
+    bound_head = record.get("head_sha")
+    head_moved = bool(bound_head and pr.get("head_sha") and bound_head != pr["head_sha"])
+    idle_since = None if head_moved else (
+        record.get("judged_at") if bound_head and bound_head == pr.get("head_sha")
+        else pr.get("created"))
+    return {"head_moved": head_moved, "idle_since": idle_since,
+            "idle_basis": "unknown" if head_moved or not idle_since else
+                          "judgment" if bound_head and bound_head == pr.get("head_sha")
+                          and record.get("judged_at") else "creation",
+            "thread_updated": pr.get("updated")}
+
+
 def merge_batches(dupes, judgments, prs, dupes_digest):
     """Pack PRs into security-first batches of five, Jev-determined.
 
@@ -1227,9 +1246,17 @@ def merge_batches(dupes, judgments, prs, dupes_digest):
             security, average_risk, created = unit_stats([n])
             units.append({"members": [n], "same_change": False, "security": security,
                           "risk": average_risk, "created": created})
-    # Top priority: security-related material first, then lower model risk, then age.
-    units.sort(key=lambda u: (-u["security"], u["risk"] if u["risk"] is not None else 99,
-                              u["created"], u["members"][0]))
+    # Security outranks all risk bands; within a band, the longest evidenced
+    # quiet head goes first. The newest bound in an atomic unit is its floor.
+    def unit_priority(unit):
+        activity = [pr_activity(prs[n], judgments.get(n, {})) for n in unit["members"]]
+        moving = any(item["head_moved"] for item in activity)
+        idle = max((item["idle_since"] or "9999" for item in activity), default="9999")
+        risk = unit["risk"]
+        band = 3 if risk is None else 0 if risk <= 1.5 else 1 if risk <= 2.5 else 2
+        return (-unit["security"], band, moving, idle, unit["created"], unit["members"][0])
+
+    units.sort(key=unit_priority)
     packed, current = [], []
     for unit in units:
         if current and len(current) + len(unit["members"]) > BATCH_SIZE:
@@ -1258,7 +1285,8 @@ def merge_batches(dupes, judgments, prs, dupes_digest):
         "meaning": "A batch is 5 PRs merged together as one tranche (issue #4). Jev determines the "
                    "composition: same_change groups are atomic and combine into ONE pull request "
                    "inside their batch. Batches are disjoint: every PR belongs to at most one batch. "
-                   "Ordered security-first. Parked PRs are excluded before packing (issue #8). "
+                   "Ordered security-first, then risk band and evidenced idle lower bound. "
+                   "Parked PRs are excluded before packing (issue #8). "
                    "Model-suggested, not verified safe to merge.",
         "batches": batches,
         "security_batches": sum(1 for b in batches if b["security_members"] > 0),
@@ -1305,8 +1333,8 @@ def append_batch_plan(batches) -> None:
              f"A batch is **{batches['batch_size']} PRs merged together as one tranche**. Jev determines",
              "the composition: model-consistent same_change groups are atomic — their PRs combine into",
              "ONE pull request inside the batch. Batches are disjoint (every PR is in at most one",
-             "batch); review groups are excluded on purpose. Ordered security-first, then average",
-             "model risk, then age. Model-suggested, never verified safe to merge.", "",
+             "batch); review groups are excluded on purpose. Ordered security-first, then",
+             "risk band and evidenced head idle time. Model-suggested, never verified safe to merge.", "",
              f"Batches: {len(batches['batches'])} · security-first batches: "
              f"{batches['security_batches']} · same-change groups: "
              f"{batches['same_change_groups']} · review-group PRs excluded: "

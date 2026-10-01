@@ -97,6 +97,7 @@ select {background: var(--surface); border: 1px solid var(--line); padding: 10px
 .tag.security {color: var(--red); border-color: #f7768e55; font-weight: 700;}
 .tag.batch {color: var(--blue); border-color: #7aa2f755;}
 .tag.parked {color: #e0af68; border-color: #e0af6855;} /* amber: held, not refused */
+.tag.revised {color: var(--blue); border-color: #7aa2f755;}
 .draft {color: #e0af68; border-color: #e0af6833;}
 .risk {font: 11px var(--mono); text-align: right; white-space: nowrap;}
 .risk.known {color: var(--sage);}

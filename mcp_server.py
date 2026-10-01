@@ -6,6 +6,7 @@ import json
 import math
 import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import tranche
@@ -107,6 +108,7 @@ class Reports:
         self.batches, self.parked = batches, parked
         self.summary, self.clusters, self.dupes = summary, clusters, dupes
         self.prs, self.judgments, self.pairs = prs, judgments, pairs
+        self.latest_judgments = tranche.load_done()
         self.identity = {"report_binding": summary["report_binding"],
                          "batches.json": tranche.digest(batches) if batches is not None else None,
                          "parked.json": tranche.digest(parked) if parked is not None else None,
@@ -117,6 +119,10 @@ class Reports:
                   "digests": self.identity, **data}
         result_text(result)
         return result
+
+    def _activity(self, members):
+        return {str(n): tranche.pr_activity(self.prs[n], self.latest_judgments.get(n, {}))
+                for n in members}
 
     def _rows(self):
         grouped = {n for group in self.dupes["confirmed_groups"] for n in group}
@@ -141,7 +147,8 @@ class Reports:
                        senior=tranche.escalated(judgment),
                        followup=finished is not None and finished <= 1 and number not in grouped,
                        related=number in related,
-                       parked=list(parked.get(number, [])))
+                       parked=list(parked.get(number, [])),
+                       activity=self._activity([number])[str(number)])
             rows.append(row)
         rows.sort(key=lambda row: (not row["security_priority"],
                                   row["risk"] if row["risk"] is not None else 99,
@@ -207,7 +214,8 @@ class Reports:
         self._load()
         batch = self._batch(batch_id)
         rows = {row["number"]: row for row in self._rows()}
-        return self._envelope(batch=batch, prs=[rows[n] for n in batch["members"]])
+        return self._envelope(batch=batch, prs=[rows[n] for n in batch["members"]],
+                              activity=self._activity(batch["members"]))
 
     def next_prompt(self, after: int | str | None = None):
         self._load()
@@ -220,7 +228,8 @@ class Reports:
         if type(after) is not int or not 0 <= after <= len(self.batches["batches"]):
             raise ReportError("after must be an existing batch id or ordinal (0 starts)")
         batch = next((b for b in self.batches["batches"] if b["ordinal"] > after), None)
-        return self._envelope(batch=batch)
+        return self._envelope(batch=batch,
+                              activity=self._activity(batch["members"]) if batch else {})
 
     def related(self, number: int, offset: int = 0, limit: int = 25):
         self._load()
@@ -280,7 +289,25 @@ class Reports:
         # summary.json coverage is outside output_digests; derive it from inputs.
         coverage = {"prs_in_corpus": len(self.prs), "judged": len(self.judgments),
                     "unjudged": len(self.prs) - len(self.judgments)}
-        return self._envelope(summary=coverage, batches_available=self.batches is not None,
+        activity = self._activity(self.prs)
+        now = datetime.now(timezone.utc)
+        durations = []
+        for item in activity.values():
+            if item["idle_basis"] != "judgment":
+                continue  # creation age is not evidence of a still head
+            try:
+                elapsed = (now - datetime.fromisoformat(item["idle_since"].replace("Z", "+00:00"))).days
+                durations.append(max(0, elapsed))
+            except (ValueError, TypeError, OverflowError):
+                pass
+        activity_counts = {"head_moved": sum(item["head_moved"] for item in activity.values()),
+                           "idle_since_known": sum(bool(item["idle_since"]) for item in activity.values()),
+                           "idle_7d": sum(days >= 7 for days in durations),
+                           "idle_30d": sum(days >= 30 for days in durations),
+                           "idle_60d": sum(days >= 60 for days in durations),
+                           "as_of": now.isoformat()}
+        return self._envelope(summary=coverage, activity=activity_counts,
+                              batches_available=self.batches is not None,
                               category_counts=category_counts, queues=queues,
                               parked=parked_block,
                               batches=overview, filters={

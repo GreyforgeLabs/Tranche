@@ -93,6 +93,7 @@ in_dupe = {n for g in dupes["confirmed_groups"] for n in g} | {n for g in dupes[
 related = in_dupe | {n for pair in dupes["uncertain_pairs"] for n in (pair["a"], pair["b"])}
 parked_by_number = {m["number"]: m for m in (parked or {}).get("members", [])}
 rows = []
+latest_judgments = tranche.load_done()
 for n, pr in sorted(prs.items()):
     judgment = judgments.get(n, {})
     finished = tranche.metric(judgment, "finished_form")
@@ -100,6 +101,7 @@ for n, pr in sorted(prs.items()):
         "number": n, "title": pr["title"], "body": pr["body"],
         "body_truncated": pr["body_truncated"], "author": pr["author"],
         "created": pr["created"], "draft": pr["draft"],
+        "activity": tranche.pr_activity(pr, latest_judgments.get(n, {})),
         "category": tranche.category(judgment) if judgment else "unknown",
         "categories": ([ "security-review" ]
                        if judgment and tranche.security_priority(judgment) else []),

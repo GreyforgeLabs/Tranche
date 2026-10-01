@@ -114,10 +114,10 @@ regenerates reports, calls Jev, claims work, or writes to GitHub.
 
 | Tool | Contract |
 | --- | --- |
-| `surface()` | Computed corpus coverage, category counts, priority queue membership, batch ordinals, parked state with unblock paths and available filters. |
-| `query(...)` | Text, category, risk band, security, exact finished-form score, batch and queue filters; security-first ordering; bounded pagination. |
-| `pick(batch_id)` | The batch and member source/head bindings, with the exact workbench `review_prompt`. |
-| `next_prompt(after)` | The next ordinal after an integer or batch ID; omitted cursor starts at the first batch. Exhaustion returns `batch: null`. Stateless: no reservation or completed-work tracking. |
+| `surface()` | Computed corpus coverage, category counts, priority queue membership, batch ordinals, parked state with unblock paths, head-activity idle counts and available filters. |
+| `query(...)` | Text, category, risk band, security, exact finished-form score, batch and queue filters; security-first ordering; bounded pagination. Rows carry a `head_moved`/`idle_since` activity label. |
+| `pick(batch_id)` | The batch, member source/head bindings, per-member head-activity labels and the exact workbench `review_prompt`. |
+| `next_prompt(after)` | The next ordinal after an integer or batch ID; omitted cursor starts at the first batch. Exhaustion returns `batch: null`. Annotates the batch's members with head-activity labels. Stateless: no reservation or completed-work tracking. |
 | `related(number)` | Proposed group edges and explicit uncertain/contradictory/malformed diagnostics, with verdict and P(same) where available. |
 | `digests()` | Report binding, output digests and SHA-256 hashes of the input/report bytes read. |
 
@@ -242,7 +242,11 @@ groups from the dupe pipeline. Batches are **disjoint** — every PR belongs to
 at most one batch — and groups with contradictory or untested internal
 evidence (review groups) plus uncertain pairs are excluded on purpose.
 Batches are ordered security-first (batches containing security-related PRs
-merge first), then by average model risk, then age; each batch becomes one
+merge first), then by risk band, then by the newest evidenced idle bound in the
+group: the head revision bound at judgment time is the activity signal, because
+`updated_at` on this repository is continuous bot churn (issue #11). A PR whose
+head changed since its bound judgment is "head revised" — it sinks in the order
+and is flagged — without any extra GitHub or model calls; each batch becomes one
 cumulative PR of the final deliverable. Batches are a model-suggested
 plan, never verified safe to merge. Output: `out/batches.json` (bound to the
 dupes digest; `gen_page.py` refuses a stale file), the batch plan appended to

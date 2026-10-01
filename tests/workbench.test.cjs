@@ -30,7 +30,7 @@ test('browser workbench renders safe text, inspects PRs, restores focus and URL 
   try {
     const pagePath = path.join(directory, 'probe.html');
     const page = fs.readFileSync(path.join(__dirname, '../docs/index.html'), 'utf8');
-    const data = {prs: [{number: 1234, title: 'Fix <img src=x onerror="window.pwned=1"> suspend', body: '</script><b>bluetooth</b>', author: 'river', category: 'docs', created: '2026-01-01', risk: null, security: 0.8, security_priority: true, finished: null, draft: false, freshness: 'unjudged or stale', related: true, candidate: false, senior: false, followup: false}], categories: {docs: 'Docs', unknown: 'Unknown'}, groups: {confirmed_groups: [], review_groups: [], uncertain_pairs: [{a: 1234, b: 4321, verdict: 'unrelated', p_same: 0.9, classification: 'contradictory'}]}};
+    const data = {prs: [{number: 1234, title: 'Fix <img src=x onerror="window.pwned=1"> suspend', body: '</script><b>bluetooth</b>', author: 'river', category: 'docs', created: '2026-01-01', activity: {head_moved: true, idle_since: null, thread_updated: '2026-02-01'}, risk: null, security: 0.8, security_priority: true, finished: null, draft: false, freshness: 'unjudged or stale', related: true, candidate: false, senior: false, followup: false}], categories: {docs: 'Docs', unknown: 'Unknown'}, groups: {confirmed_groups: [], review_groups: [], uncertain_pairs: [{a: 1234, b: 4321, verdict: 'unrelated', p_same: 0.9, classification: 'contradictory'}]}};
     data.prs.push({number:4321, title:'Add screensaver timer', body:'', author:'stone', category:'docs', created:'2025-01-01', risk:0, security:0, security_priority:false, finished:0, draft:true, freshness:'current', related:true});
     data.groups.review_groups.push({members:[1234,4321], conflicting_pairs:[{a:1234,b:4321,verdict:'unrelated',p_same:0.1,classification:'different'}], uncertain_pairs:[], missing_pairs:[[1234,9999]], unbound_evidence:true});
     const payload = JSON.stringify(data).replace(/</g, '\\u003c');
@@ -53,6 +53,9 @@ test('browser workbench renders safe text, inspects PRs, restores focus and URL 
         document.body.dispatchEvent(new KeyboardEvent('keydown', {key:'k', ctrlKey:true, bubbles:true, cancelable:true}));
         check(document.activeElement.id === 'search', 'Ctrl K shortcut');
         check(document.querySelectorAll('.pr-row').length === 2, 'all captured PRs rendered');
+        check(document.querySelector('.pr-meta .tag.revised')?.textContent === 'Head revised', 'revision badge');
+        check(document.querySelector('[data-queue="revised"] span').textContent === '1', 'revised queue count');
+        check(document.querySelector('#sort option[value=idle]'), 'idle sort available');
         check(!window.pwned && !document.querySelector('#results img'), 'title stays inert');
         check(document.querySelector('[data-queue="security"]').textContent.includes('Security first'), 'security queue leads the nav');
         check([...document.querySelectorAll('[data-queue]')][0].dataset.queue === 'security', 'security is the first queue button');
@@ -206,6 +209,18 @@ test('date and model risk sorts are deterministic with unknown values last', () 
   assert.deepEqual(ids('oldest'), [1, 2, 3, 4]);
   assert.deepEqual(ids('risk'), [3, 2, 1, 4]);
   assert.deepEqual(rows.map(pr => pr.number), [1, 2, 3, 4], 'source is not mutated');
+});
+
+test('recent revisions queue and idle sort use head evidence, not thread updates', () => {
+  const rows = [
+    {number: 1, title: 'Older', body: '', author: 'a', created: '2026-01-01', activity: {head_moved: false, idle_since: '2026-01-02', thread_updated: '2026-10-01'}},
+    {number: 2, title: 'Revised', body: '', author: 'b', created: '2026-01-02', activity: {head_moved: true, idle_since: null, thread_updated: '2026-01-02'}},
+    {number: 3, title: 'Quiet', body: '', author: 'c', created: '2026-01-03', activity: {head_moved: false, idle_since: '2026-09-30', thread_updated: '2026-01-03'}},
+  ];
+  assert.deepEqual(api.select(rows, {queue: 'revised'}).items.map(r => r.number), [2]);
+  assert.deepEqual(api.select(rows, {sort: 'idle'}).items.map(r => r.number), [1, 3, 2]);
+  assert.equal(api.parseState('?queue=revised&sort=idle').queue, 'revised');
+  assert.equal(api.parseState('?queue=revised&sort=idle').sort, 'idle');
 });
 
 test('URL state round trips search, queue, category, sort, page and selected PR', () => {

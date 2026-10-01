@@ -34,16 +34,17 @@
 <button type="button" data-queue="followup" aria-pressed="false">Author follow-up <span></span></button>
 <button type="button" data-queue="parked" aria-pressed="false">Parked <span></span></button>
 <button type="button" data-queue="related" aria-pressed="false">Related PRs <span></span></button>
+<button type="button" data-queue="revised" aria-pressed="false">Head revised <span></span></button>
 <button type="button" id="batches-view" aria-pressed="false">Batches <span></span></button>
 </nav>
 <section id="batch-overview" class="batch-overview" aria-label="Pre-release merge batches" hidden>
 <h3 class="overview-heading">Suggested merge batches</h3>
-<p class="small">Each batch is a Jev-determined group of PRs to merge into ONE pull request. Ordered security-first, then average model risk. Model-suggested — never a merge approval. Open a batch to inspect its PRs.</p>
+<p class="small">Each batch is a Jev-determined group of PRs to merge into ONE pull request. Ordered security-first, then risk band and evidenced head idle time. Model-suggested — never a merge approval. Open a batch to inspect its PRs.</p>
 <div id="batch-list"></div>
 </section>
 <div class="toolbar">
 <div class="search-field"><label for="search" class="sr-only">Search PR title, number, author or description</label><input type="search" id="search" placeholder="Search title, #number, @author, description…" autocomplete="off" spellcheck="false" aria-describedby="search-help"><kbd aria-hidden="true">/</kbd></div>
-<label class="sort-field" for="sort">Sort<select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="risk">Model risk: high first</option></select></label>
+<label class="sort-field" for="sort">Sort<select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="risk">Model risk: high first</option><option value="idle">Head idle: oldest bound first</option></select></label>
 </div>
 <div class="result-summary"><p id="result-count" role="status" aria-live="polite" aria-atomic="true"></p><button id="reset" type="button">Reset filters</button></div>
 <p id="search-help" class="search-help">Typo-tolerant search · combine terms · exact #number / @author <span>Ctrl+K to search</span></p>

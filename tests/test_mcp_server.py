@@ -44,6 +44,9 @@ class MCPTests(unittest.TestCase):
         self.assertEqual(result["repo"], tranche.REPO)
         self.assertEqual(result["summary"]["prs_in_corpus"], 2)
         self.assertEqual(result["summary"]["judged"], 2)
+        self.assertEqual(result["activity"]["head_moved"], 0)
+        self.assertEqual(result["activity"]["idle_since_known"], 2)
+        self.assertIn("idle_30d", result["activity"])
         summary_path = self.out / "summary.json"
         summary = json.loads(summary_path.read_text())
         summary.update(prs_in_corpus=999999, judged=999999)
@@ -173,6 +176,8 @@ class MCPTests(unittest.TestCase):
         picked = server.pick("B001")
         self.assertEqual(picked["batch"], expected)
         self.assertEqual({p["number"] for p in picked["prs"]}, set(expected["members"]))
+        self.assertEqual(set(picked["activity"]), {str(n) for n in expected["members"]})
+        self.assertEqual(server.next_prompt()["activity"], picked["activity"])
         self.assertEqual(server.query(batch="B001")["total"], expected["count"])
         self.assertEqual(server.next_prompt()["batch"], expected)
         self.assertIsNone(server.next_prompt(after=1)["batch"])

@@ -861,6 +861,58 @@ class WorkflowTests(unittest.TestCase):
                          (3, 5, "unrelated", 0.1)])
         return prs, self.cluster()[0]
 
+    def test_activity_uses_bound_head_and_never_thread_update(self):
+        observed = {"head_sha": "new", "created": "2026-01-01T00:00:00Z",
+                    "updated": "2026-10-01T00:00:00Z"}
+        old = {"head_sha": "old", "judged_at": "2026-02-01T00:00:00Z"}
+        self.assertEqual(tranche.pr_activity(observed, old),
+                         {"head_moved": True, "idle_since": None, "idle_basis": "unknown",
+                          "thread_updated": observed["updated"]})
+        current = dict(old, head_sha="new")
+        self.assertEqual(tranche.pr_activity(observed, current)["idle_since"], old["judged_at"])
+        self.assertFalse(tranche.pr_activity(observed, current)["head_moved"])
+        self.assertEqual(tranche.pr_activity(observed, {})["idle_since"], observed["created"])
+        self.assertFalse(tranche.pr_activity(observed, {})["head_moved"])
+
+    def test_idle_first_within_risk_band_preserves_security_and_park(self):
+        prs = {n: dict(pr(n), created="2026-01-01T00:00:00Z", head_sha=f"sha{n}",
+                       url=f"https://github.com/omacom/omarchy/pull/{n}")
+               for n in range(1, 8)}
+        judgments = {n: {"answers": answers(), "head_sha": f"sha{n}",
+                         "judged_at": "2026-01-10T00:00:00Z" if n == 2 else
+                                      "2026-03-01T00:00:00Z"} for n in range(1, 8)}
+        judgments[3]["answers"] = dict(answers(), security_flag={"noul": 0.9})
+        judgments[4]["answers"] = dict(answers(), finished_form={"score": 1})
+        judgments[5]["head_sha"] = "old-head"
+        judgments[6]["answers"] = dict(answers(), risk={"score": 3})
+        dupes = {"confirmed_groups": [], "review_groups": []}
+        result = tranche.merge_batches(dupes, judgments, prs, "digest")
+        order = [n for batch in result["batches"] for n in batch["members"]]
+        self.assertEqual(order[0], 3)
+        self.assertLess(order.index(2), order.index(1))
+        self.assertLess(order.index(1), order.index(5))
+        self.assertNotIn(4, order)
+
+    def test_render_exposes_head_revision_and_idle_lower_bound(self):
+        prs = self.inputs([pr(1), pr(2)])
+        self.judgments(prs)
+        records = [json.loads(line) for line in tranche.JUDGMENTS_PATH.read_text().splitlines()]
+        for record in records:
+            record.update(head_sha=prs[record["number"]]["head_sha"],
+                          judged_at="2026-01-02T00:00:00+00:00")
+        tranche.JUDGMENTS_PATH.write_text("".join(json.dumps(r) + "\n" for r in records))
+        self.inputs([pr(1, head={"sha": "revised"}), pr(2)])
+        self.cluster()
+        result = self.render()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        rows = {r["number"]: r for r in json.loads(
+            (self.root / "docs" / "data" / "workbench.json").read_text())["prs"]}
+        self.assertTrue(rows[1]["activity"]["head_moved"])
+        self.assertIsNone(rows[1]["activity"]["idle_since"])
+        self.assertFalse(rows[2]["activity"]["head_moved"])
+        self.assertTrue(rows[2]["activity"]["idle_since"])
+        self.assertEqual(rows[1]["activity"]["thread_updated"], prs[1]["updated"])
+
     def test_park_set_reads_only_pipeline_legible_facts(self):
         prs = {1: pr(1), 2: pr(2, draft=True), 3: pr(3), 4: pr(4)}
         judgments = {1: {"answers": answers()}, 2: {"answers": answers()},
