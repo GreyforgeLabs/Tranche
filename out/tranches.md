@@ -1,7 +1,7 @@
 # Tranche — PR review candidates
 
-Corpus: 2873 observed open PRs; 2873 matching judgments; 0 unjudged/stale; 0 unbound legacy judgments.
-Review candidates: 625. Model-consistent groups: 91. Groups needing relationship review: 9. Security-priority items: 372 (meta-category, reviewed first).
+Corpus: 2817 observed open PRs; 2817 matching judgments; 0 unjudged/stale; 0 unbound legacy judgments.
+Review candidates: 616. Model-consistent groups: 86. Groups needing relationship review: 10. Security-priority items: 367 (meta-category, reviewed first).
 
 Evidence: titles and shortened descriptions (1200 characters per PR; 400 per pair). Diffstat is unknown unless captured input supplies it. Patches, CI, reproductions, fix coverage and security have not been verified. Model scores are suggestions, not calibrated guarantees or approval to merge/close. Pagination records an observation, not a point-in-time GitHub snapshot.
 
@@ -20,7 +20,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#11172](https://github.com/omacom/omarchy/pull/11172) | Add opt-in sudo authentication policy | shelldandy | 1.2 | 3.0 | 0.08 |
 | [#11379](https://github.com/omacom/omarchy/pull/11379) | Add TPM2-backed PIN authentication for login, sudo, polkit, and lock screen | LoboHacks | 1.1 | 3.0 | 0.04 |
 | [#12078](https://github.com/omacom/omarchy/pull/12078) | Import saved iwd Wi-Fi networks into NetworkManager | oliverox | 1.1 | 2.6 | 0.58 |
-| [#13947](https://github.com/omacom/omarchy/pull/13947) | Require CA and server validation for enterprise Wi-Fi | sprajs | 2.3 | 2.2 | 0.65 |
 | [#5035](https://github.com/omacom/omarchy/pull/5035) | Prevent empty passwords in omarchy-drive-set-password | marko-builds | 1.1 | 1.2 | 0.96 |
 | [#7274](https://github.com/omacom/omarchy/pull/7274) | Add a Kimi usage collector to the agents panel | sorenmat | 1.0 | 2.4 | 0.04 |
 | [#7828](https://github.com/omacom/omarchy/pull/7828) | Add "Join hidden network" to the Wi-Fi panel | verkligheten | 2.2 | 1.9 | 0.07 |
@@ -35,9 +34,9 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#12831](https://github.com/omacom/omarchy/pull/12831) | Scope the LocalSend firewall rule to private networks | taufderl | 2.4 | 1.0 | 0.85 |
 | [#13533](https://github.com/omacom/omarchy/pull/13533) | Join a self-hosted Tailscale coordination server | z23 | 1.0 | 2.5 | 0.08 |
 | [#13575](https://github.com/omacom/omarchy/pull/13575) | Bound the package-install sudo keepalive and revoke it on exit | Arash-Afshar | 2.5 | 1.7 | 0.90 |
+| [#13947](https://github.com/omacom/omarchy/pull/13947) | Require CA and server validation for enterprise Wi-Fi | sprajs | 1.1 | 2.7 | 0.43 |
 | [#7272](https://github.com/omacom/omarchy/pull/7272) | Switch between subscription accounts | omarchybot | 1.1 | 3.0 | 0.08 |
 | [#7455](https://github.com/omacom/omarchy/pull/7455) | Read Fireworks credentials from pi's auth.json | TyRichards | 1.2 | 1.9 | 0.68 |
-| [#7990](https://github.com/omacom/omarchy/pull/7990) | Clear passwordless sudo grants at boot | Adolanium | 1.1 | 2.0 | 0.94 |
 | [#8889](https://github.com/omacom/omarchy/pull/8889) | Apply uinput permissions through tmpfiles | yashranaway | 1.9 | 1.5 | 0.93 |
 | [#9043](https://github.com/omacom/omarchy/pull/9043) | Authorize SSH keys into the invoking user's home | PyRo1121 | 2.2 | 1.6 | 0.97 |
 | [#9239](https://github.com/omacom/omarchy/pull/9239) | Sync the GNOME keyring on user password changes | hudsonwa | 1.1 | 2.0 | 0.95 |
@@ -45,7 +44,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#9477](https://github.com/omacom/omarchy/pull/9477) | [codex] OM-SEC-23: Keep debug collectors outside dmesg authorization | AFOliveira | 1.5 | 3.0 | 0.58 |
 | [#10018](https://github.com/omacom/omarchy/pull/10018) | Pin Signal to gnome-libsecret like the browsers | hudsonwa | 1.2 | 2.0 | 0.93 |
 | [#11314](https://github.com/omacom/omarchy/pull/11314) | System security hardening | kairosci | 1.0 | 3.0 | 0.05 |
-| [#11461](https://github.com/omacom/omarchy/pull/11461) | Keep the caller's editor across sudo for vipw and vigr | photuris | 1.1 | 1.9 | 0.92 |
 | [#11612](https://github.com/omacom/omarchy/pull/11612) | feat(security): Facelock face unlock for lock screen, sudo, and polkit | GianlucaMinoprio | 2.0 | 3.0 | 0.07 |
 | [#11697](https://github.com/omacom/omarchy/pull/11697) | Repair a broken passwordless default keyring before session apps use it | Chessing234 | 1.8 | 2.3 | 0.93 |
 | [#12266](https://github.com/omacom/omarchy/pull/12266) | Preserve TUI command arguments and stage Docker database credentials | Chessing234 | 1.0 | 2.9 | 0.41 |
@@ -130,7 +128,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#13316](https://github.com/omacom/omarchy/pull/13316) | Preserve GUM environment records during factory-reset elevation | AFOliveira | 2.0 | 1.9 | 0.90 |
 | [#13377](https://github.com/omacom/omarchy/pull/13377) | Refuse omarchy-update when invoked as root | Chessing234 | 1.8 | 1.0 | 0.96 |
 | [#13646](https://github.com/omacom/omarchy/pull/13646) | Soften yay go-mod caches and warn on AUR update failure | AnPod | 1.8 | 1.4 | 0.90 |
-| [#13770](https://github.com/omacom/omarchy/pull/13770) | Switch between several Claude and Codex subscriptions, and build apps the Omarch | dhh | 1.0 | 3.0 | 0.03 |
 | [#13845](https://github.com/omacom/omarchy/pull/13845) | Add omp (Oh My Pi) usage collector to the agents panel | Bekkenes | 1.0 | 2.0 | 0.04 |
 | [#13901](https://github.com/omacom/omarchy/pull/13901) | Refuse inactive status while a reserved-prefix sudo rule is live | Bartok9 | 2.3 | 1.4 | 0.94 |
 | [#8487](https://github.com/omacom/omarchy/pull/8487) | Add openzoo as a coding agent option: claude code, no api key, pays per call | staccDOTsol | 1.1 | 1.9 | 0.03 |
@@ -226,6 +223,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#12059](https://github.com/omacom/omarchy/pull/12059) | Run the default agent on another machine | CocaKova | 1.0 | 3.0 | 0.06 |
 | [#13312](https://github.com/omacom/omarchy/pull/13312) | Require a per-session token for notification click-exec | Chessing234 | 1.9 | 2.3 | 0.85 |
 | [#13652](https://github.com/omacom/omarchy/pull/13652) | Drop pam_faillock preauth silent so lockouts are visible | AnPod | 1.5 | 0.9 | 0.89 |
+| [#13796](https://github.com/omacom/omarchy/pull/13796) | Keep an early polkit Enter and submit it in the background when PAM asks | cristim | 1.2 | 1.2 | 0.95 |
 | [#5654](https://github.com/omacom/omarchy/pull/5654) | Add Install -> Editor -> Jetbrains menu | NicolasDorier | 1.4 | 2.6 | 0.19 |
 | [#8001](https://github.com/omacom/omarchy/pull/8001) | Fix GitHub credential helpers after mise gh upgrades | thecdrz | 2.0 | 1.4 | 0.97 |
 | [#9695](https://github.com/omacom/omarchy/pull/9695) | Add a Setup > Region toggle with Chinese language and input method | ZacharyZhang-NY | 2.1 | 2.6 | 0.08 |
@@ -245,8 +243,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#9878](https://github.com/omacom/omarchy/pull/9878) | Re-apply hardware pacman repos after a refresh restore | hudsonwa | 1.1 | 1.0 | 0.98 |
 | [#12070](https://github.com/omacom/omarchy/pull/12070) | Answer ARP only from the interface that owns the address | michaeldeby | 2.3 | 0.9 | 0.88 |
 | [#13101](https://github.com/omacom/omarchy/pull/13101) | Actually restart bluetooth.service in omarchy-restart-bluetooth | surim0n | 1.8 | 1.0 | 0.96 |
-| [#13734](https://github.com/omacom/omarchy/pull/13734) | Add a sign-in button to the agents panel's auth card | branewyn | 1.1 | 2.0 | 0.13 |
-| [#13796](https://github.com/omacom/omarchy/pull/13796) | Keep an early polkit Enter and submit it when PAM asks | cristim | 1.1 | 1.2 | 0.95 |
 | [#6965](https://github.com/omacom/omarchy/pull/6965) | Add git-based backup and restore | andresreibel | 1.1 | 3.0 | 0.03 |
 | [#9539](https://github.com/omacom/omarchy/pull/9539) | Add cursor theme selection to the Style menu | TheLinuxITGuy | 1.9 | 2.4 | 0.03 |
 | [#9571](https://github.com/omacom/omarchy/pull/9571) | Resolve the invoking user's home in removal cleanup scripts | shaynhornik | 1.2 | 2.1 | 0.97 |
@@ -328,9 +324,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#6532](https://github.com/omacom/omarchy/pull/6532) | Abort pkg-install when the package transaction fails or is interrupted | merdiofriviaisherebitch | 2.4 | 1.3 | 0.97 |
 | [#7871](https://github.com/omacom/omarchy/pull/7871) | Stop the lid gate logging a PAM failure on every open-lid sudo | vstoyanov | 1.2 | 1.7 | 0.93 |
 | [#9531](https://github.com/omacom/omarchy/pull/9531) | Wait for the Windows VM RDP service before connecting | qybaihe | 2.2 | 1.6 | 0.94 |
-| [#12196](https://github.com/omacom/omarchy/pull/12196) | Stop speed test workers outliving a killed parent | Marjinoz | 2.7 | 1.5 | 0.98 |
 | [#8204](https://github.com/omacom/omarchy/pull/8204) | Stop probing the internal T2 network interface | robzolkos | 2.6 | 1.8 | 0.82 |
-| [#11858](https://github.com/omacom/omarchy/pull/11858) | Clear and swallow the lock-screen wake key so it is not typed as a password char | h14h | 2.7 | 1.1 | 0.95 |
 | [#11956](https://github.com/omacom/omarchy/pull/11956) | Upgrade existing Sunshine installations to the security release | ErikMelton | 1.9 | 1.9 | 0.61 |
 | [#12896](https://github.com/omacom/omarchy/pull/12896) | Persist XKBLAYOUT for LUKS so non-US layouts stay typeable | Chessing234 | 1.8 | 2.1 | 0.87 |
 | [#5139](https://github.com/omacom/omarchy/pull/5139) | Add Orca screen reader with Piper TTS | fedesapuppo | 1.0 | 2.0 | 0.03 |
@@ -362,6 +356,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#8715](https://github.com/omacom/omarchy/pull/8715) | Add agent diagnostics, MCP inspection, and safe launch mode | jmohouse6 | 1.9 | 2.9 | 0.06 |
 | [#10952](https://github.com/omacom/omarchy/pull/10952) | Start Omarchy Server edition predicates and menu | dl-alexandre | 2.0 | 2.9 | 0.04 |
 | [#11731](https://github.com/omacom/omarchy/pull/11731) | Add iPhone cable support via usbmuxd and gvfs-afc | basalto | 2.0 | 1.7 | 0.05 |
+| [#11858](https://github.com/omacom/omarchy/pull/11858) | Clear and swallow the lock-screen wake key so it is not typed as a password char | h14h | 2.5 | 1.1 | 0.94 |
 | [#7158](https://github.com/omacom/omarchy/pull/7158) | Keep the lock screen fingerprint working across suspend, and show when the reade | GeertJohan | 1.1 | 2.5 | 0.95 |
 | [#8578](https://github.com/omacom/omarchy/pull/8578) | Update installed themes in parallel | zackerydev | 2.4 | 1.9 | 0.15 |
 | [#9398](https://github.com/omacom/omarchy/pull/9398) | Discover LUKS drives via lsblk, not blkid | fresh3nough | 2.8 | 1.0 | 0.97 |
@@ -385,7 +380,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#10730](https://github.com/omacom/omarchy/pull/10730) | Add Command Code as a coding agent choice | ahmadawais | 1.6 | 2.0 | 0.03 |
 | [#11388](https://github.com/omacom/omarchy/pull/11388) | Sync the pacman databases before the first package install | mkenigs | 1.2 | 1.9 | 0.95 |
 
-## Review candidates: desktop-config — 262 PRs
+## Review candidates: desktop-config — 257 PRs
 
 | PR | Title | Author | Model finished | Model effort | Model fix |
 |---|---|---|---|---|---|
@@ -410,23 +405,18 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#7219](https://github.com/omacom/omarchy/pull/7219) | Fix keyboard label and Wi-Fi scrollbar alignment | WhiteHades | 1.8 | 1.5 | 0.90 |
 | [#7240](https://github.com/omacom/omarchy/pull/7240) | Fix invisible VS Code list hover state | yacobmole | 2.7 | 0.5 | 0.94 |
 | [#7241](https://github.com/omacom/omarchy/pull/7241) | Inset BorderSurface strokes a device pixel to survive clip edges | gsamokovarov | 2.1 | 1.0 | 0.93 |
-| [#7245](https://github.com/omacom/omarchy/pull/7245) | fix(shell): position bar widget panels relative to anchor widget | ax1g | 2.0 | 1.5 | 0.97 |
 | [#7269](https://github.com/omacom/omarchy/pull/7269) | Run the shell on the Vulkan backend on primary NVIDIA GPUs | PavelAlennikov | 2.3 | 1.7 | 0.90 |
 | [#7273](https://github.com/omacom/omarchy/pull/7273) | Match the volume OSD icon to the output switcher | xymbol | 2.8 | 1.9 | 0.75 |
-| [#7283](https://github.com/omacom/omarchy/pull/7283) | Use layout-independent universal clipboard shortcuts | janhesters | 2.4 | 1.7 | 0.94 |
 | [#7296](https://github.com/omacom/omarchy/pull/7296) | feat: wrap the overflowing text in the menu | Sameer292 | 2.3 | 1.0 | 0.88 |
 | [#7404](https://github.com/omacom/omarchy/pull/7404) | Accept theme-set display names in theme remove | 686f6c61 | 2.6 | 1.0 | 0.96 |
 | [#7419](https://github.com/omacom/omarchy/pull/7419) | Let Chromium size and position PiP windows (Fixes #7391) | shrijit37 | 2.6 | 1.1 | 0.96 |
 | [#7451](https://github.com/omacom/omarchy/pull/7451) | menu: scale wheel events 3x for faster touchpad scrolling on long lists | tahadx | 2.0 | 1.1 | 0.68 |
 | [#7465](https://github.com/omacom/omarchy/pull/7465) | Fix Obsidian focus pattern for its current app id | johnnynia | 2.7 | 0.5 | 0.97 |
 | [#7471](https://github.com/omacom/omarchy/pull/7471) | Wake the blanked lock screen from the keyboard | notTanveer | 2.2 | 1.0 | 0.95 |
-| [#7488](https://github.com/omacom/omarchy/pull/7488) | Detect Apple Silicon trackpads in omarchy-hw-touchpad | Skeptomenos | 2.4 | 0.6 | 0.93 |
 | [#7495](https://github.com/omacom/omarchy/pull/7495) | Keep the monitor layout when changing scale | Piemme99 | 2.8 | 1.2 | 0.96 |
 | [#7497](https://github.com/omacom/omarchy/pull/7497) | Stop monitor scaling from persisting a scale the reload will undo | davydotcom | 2.3 | 1.7 | 0.95 |
 | [#7536](https://github.com/omacom/omarchy/pull/7536) | Treat Ctrl+[ as panel escape | NorthernReach | 2.3 | 1.2 | 0.82 |
-| [#7560](https://github.com/omacom/omarchy/pull/7560) | Fix weather panel hero overlapping location at triple-digit temps | guilhermetk | 2.6 | 1.0 | 0.97 |
 | [#7563](https://github.com/omacom/omarchy/pull/7563) | Clear a stuck bar-move ghost when the gesture is interrupted | calledtoconstruct | 2.4 | 1.2 | 0.97 |
-| [#7592](https://github.com/omacom/omarchy/pull/7592) | Refocus the lock password field after resume | RovshanMuradov | 2.6 | 1.0 | 0.97 |
 | [#7653](https://github.com/omacom/omarchy/pull/7653) | Keep menu empty-state text inside the card | benwillems | 2.5 | 1.6 | 0.94 |
 | [#7713](https://github.com/omacom/omarchy/pull/7713) | Include dual-width fonts in font picker | OldJobobo | 2.7 | 1.3 | 0.86 |
 | [#7716](https://github.com/omacom/omarchy/pull/7716) | Gate calculator keybindings with preinstalls | OldJobobo | 1.9 | 1.0 | 0.95 |
@@ -501,6 +491,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#9760](https://github.com/omacom/omarchy/pull/9760) | List hybrid plugins as enabled when they live in plugins[] | ujo4eva | 2.4 | 1.1 | 0.93 |
 | [#9882](https://github.com/omacom/omarchy/pull/9882) | Tag Chromium --app web apps as chromium-based browsers | fresh3nough | 2.0 | 1.1 | 0.95 |
 | [#9889](https://github.com/omacom/omarchy/pull/9889) | Load workspace layout saves from the layouts directory | fresh3nough | 1.8 | 1.9 | 0.96 |
+| [#9967](https://github.com/omacom/omarchy/pull/9967) | Resolve a live Hyprland signature before restarting the shell | fresh3nough | 2.0 | 1.8 | 0.97 |
 | [#9972](https://github.com/omacom/omarchy/pull/9972) | Skip readonly moduleName/settings writes in bar injectProps | fresh3nough | 2.3 | 1.0 | 0.97 |
 | [#9976](https://github.com/omacom/omarchy/pull/9976) | Load personal Hyprland overrides through require_optional.safe | fresh3nough | 2.5 | 1.5 | 0.95 |
 | [#9978](https://github.com/omacom/omarchy/pull/9978) | Load personal hypr.envs after package Hyprland defaults | fresh3nough | 2.5 | 1.9 | 0.96 |
@@ -543,6 +534,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#10958](https://github.com/omacom/omarchy/pull/10958) | Fix bar reordering for duplicate widgets | roonakyadav | 2.4 | 2.0 | 0.97 |
 | [#10984](https://github.com/omacom/omarchy/pull/10984) | Pin gcr-prompter so Unlock Keyring stays on the current workspace | Literato2 | 2.1 | 1.0 | 0.85 |
 | [#10989](https://github.com/omacom/omarchy/pull/10989) | fix: keep 1.25x tooltip and scale-pill borders from dropping edges | kvnloo | 2.6 | 2.0 | 0.96 |
+| [#11008](https://github.com/omacom/omarchy/pull/11008) | Toggle the layout of an open scratchpad, not the workspace under it | jaderfeijo | 2.4 | 1.1 | 0.97 |
 | [#11021](https://github.com/omacom/omarchy/pull/11021) | Skip tray grab until the SNI menu has children | kvnloo | 2.7 | 1.2 | 0.96 |
 | [#11034](https://github.com/omacom/omarchy/pull/11034) | Clamp notification cards to the width their container has | SimonSchubert | 2.4 | 1.2 | 0.94 |
 | [#11035](https://github.com/omacom/omarchy/pull/11035) | Toggle keybindings with Super+K | KrishRVH | 2.0 | 1.0 | 0.66 |
@@ -563,15 +555,12 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#11838](https://github.com/omacom/omarchy/pull/11838) | Fix calendar and weather popup text colours | tcballard | 2.1 | 1.3 | 0.96 |
 | [#11863](https://github.com/omacom/omarchy/pull/11863) | Skip dwindle togglesplit on scrolling workspaces | Per0-1 | 2.6 | 1.1 | 0.92 |
 | [#11882](https://github.com/omacom/omarchy/pull/11882) | Fix stale menu-image thumbnails after in-place overwrite (#11806) | thescurry | 2.6 | 1.1 | 0.97 |
-| [#11946](https://github.com/omacom/omarchy/pull/11946) | Fix calendar hero overflowing on narrow panels (MacBook M1 Pro) | marcindyguda | 2.1 | 1.7 | 0.97 |
 | [#11970](https://github.com/omacom/omarchy/pull/11970) | Wire serviceFor for installed third-party bar plugins (#11949) | thescurry | 2.4 | 1.1 | 0.97 |
 | [#11981](https://github.com/omacom/omarchy/pull/11981) | Fix fullscreen Steam game window rules | flrsn | 2.0 | 2.0 | 0.94 |
-| [#12022](https://github.com/omacom/omarchy/pull/12022) | Fix inverted on/off semantics of toggle bar | ram-devv1 | 2.2 | 1.8 | 0.97 |
 | [#12042](https://github.com/omacom/omarchy/pull/12042) | Render every modifier Hyprland can bind in the keybindings menu | jimjimovich | 2.6 | 1.0 | 0.92 |
 | [#12118](https://github.com/omacom/omarchy/pull/12118) | Make scrolling Alt-Tab follow visual order | DaDecky | 2.1 | 2.0 | 0.68 |
 | [#12183](https://github.com/omacom/omarchy/pull/12183) | Keep weather widget visible when wttr.in TLS fails (#11999) | thescurry | 1.9 | 1.1 | 0.95 |
 | [#12189](https://github.com/omacom/omarchy/pull/12189) | Only reload local plugins when loadable sources change | DonnieFi | 2.4 | 1.9 | 0.88 |
-| [#12257](https://github.com/omacom/omarchy/pull/12257) | fix(bar/tray): collapse the tray drawer's reserved space | nas3ts | 2.1 | 1.9 | 0.91 |
 | [#12258](https://github.com/omacom/omarchy/pull/12258) | Keep the screensaver up until it has been focused once | z23 | 1.9 | 1.1 | 0.96 |
 | [#12307](https://github.com/omacom/omarchy/pull/12307) | Prefer a known internal touchpad when an external trackpad is connected | shmlkv | 2.7 | 1.8 | 0.86 |
 | [#12360](https://github.com/omacom/omarchy/pull/12360) | Toggle a touchpad's mouse-emulation sibling with it | z23 | 2.0 | 1.8 | 0.93 |
@@ -585,6 +574,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#12541](https://github.com/omacom/omarchy/pull/12541) | Apply brightness to mirrored external displays | paulogeyer | 2.5 | 1.2 | 0.93 |
 | [#12579](https://github.com/omacom/omarchy/pull/12579) | Keep the Omarchy screensaver from firing during VLC playback | evandrojr | 2.2 | 1.0 | 0.91 |
 | [#12606](https://github.com/omacom/omarchy/pull/12606) | Inhibit idle and screensaver when browsers or video web apps are fullscreen | murdawkmedia | 2.1 | 1.1 | 0.80 |
+| [#12646](https://github.com/omacom/omarchy/pull/12646) | Fix empty-desktop bar reposition by Top-only expand (#11915) | paulogeyer | 2.0 | 2.0 | 0.97 |
 | [#12654](https://github.com/omacom/omarchy/pull/12654) | Prevent screensaver during fullscreen browser video | Caya231 | 2.1 | 1.8 | 0.75 |
 | [#12666](https://github.com/omacom/omarchy/pull/12666) | shell: clamp notification toast width to viewport; battery warning auto-expires | 0xdfi | 1.9 | 1.9 | 0.93 |
 | [#12676](https://github.com/omacom/omarchy/pull/12676) | Parse keys whose type is spelled out in the keybindings menu | seletz | 2.8 | 1.3 | 0.95 |
@@ -614,7 +604,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#13132](https://github.com/omacom/omarchy/pull/13132) | Keep tmux from stamping backgrounds on self-reloading terminals | anandude | 2.5 | 1.5 | 0.90 |
 | [#13133](https://github.com/omacom/omarchy/pull/13133) | Sync vscode theme test with the real-file extension | anandude | 2.8 | 1.1 | 0.92 |
 | [#13190](https://github.com/omacom/omarchy/pull/13190) | Always show notification dismiss control | guillesrl | 2.4 | 1.2 | 0.60 |
-| [#13255](https://github.com/omacom/omarchy/pull/13255) | Fix menu JSONC trailing-comma stripping corrupting string values | buger | 2.9 | 1.0 | 0.98 |
 | [#13259](https://github.com/omacom/omarchy/pull/13259) | Force DPMS enable on system wake when status is stale | Bartok9 | 2.1 | 1.5 | 0.87 |
 | [#13332](https://github.com/omacom/omarchy/pull/13332) | Fall back to hyprsunset gamma on displays without DDC/CI | C50NK4 | 2.1 | 1.8 | 0.66 |
 | [#13379](https://github.com/omacom/omarchy/pull/13379) | Stop fetching system stats the power panel no longer shows | benwillems | 2.2 | 1.5 | 0.93 |
@@ -625,7 +614,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#13495](https://github.com/omacom/omarchy/pull/13495) | clock: make panel SystemClock precision follow the bar's seconds detection | aasmpro | 2.5 | 1.1 | 0.88 |
 | [#13497](https://github.com/omacom/omarchy/pull/13497) | Fix: white/vantablack request a Yaru grey variant no package ships | baron-hines | 2.2 | 0.9 | 0.95 |
 | [#13503](https://github.com/omacom/omarchy/pull/13503) | Keep Foot's font size when changing the font | ashuttl | 2.6 | 1.0 | 0.97 |
-| [#13511](https://github.com/omacom/omarchy/pull/13511) | Fix menu JSONC top-level array rendering phantom rows | buger | 2.8 | 0.8 | 0.98 |
 | [#13541](https://github.com/omacom/omarchy/pull/13541) | Catch the bar clock up after a suspend | stevederico | 2.2 | 1.1 | 0.97 |
 | [#13564](https://github.com/omacom/omarchy/pull/13564) | Move the parked overlay to the focused monitor before it is shown | manuaudio | 2.8 | 1.0 | 0.96 |
 | [#13579](https://github.com/omacom/omarchy/pull/13579) | Wait for the first plugin scan before building the stock bar | manuaudio | 2.2 | 1.5 | 0.96 |
@@ -651,8 +639,10 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#13897](https://github.com/omacom/omarchy/pull/13897) | Scope screenshot picker controls to Omarchy's picker | mkenter | 2.0 | 2.1 | 0.94 |
 | [#13914](https://github.com/omacom/omarchy/pull/13914) | Retry transparent bar sampling after input changes | sprajs | 2.3 | 2.2 | 0.95 |
 | [#13915](https://github.com/omacom/omarchy/pull/13915) | Scope indicator hover reveal to each bar surface | sprajs | 2.3 | 3.0 | 0.91 |
+| [#13961](https://github.com/omacom/omarchy/pull/13961) | Remove notifications withdrawn by senders | lcorneliussen | 2.0 | 1.3 | 0.94 |
+| [#13969](https://github.com/omacom/omarchy/pull/13969) | Notification popups outlive their advertised lifetime across a suspend | SorenHJohansen | 1.8 | 1.1 | 0.96 |
 
-## Review candidates: fix-misc — 123 PRs
+## Review candidates: fix-misc — 119 PRs
 
 | PR | Title | Author | Model finished | Model effort | Model fix |
 |---|---|---|---|---|---|
@@ -688,7 +678,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#8866](https://github.com/omacom/omarchy/pull/8866) | Fix network panel behind VPN policy routes | hehh2001 | 2.1 | 1.9 | 0.93 |
 | [#8978](https://github.com/omacom/omarchy/pull/8978) | fix(shell): report failed desktop entry launches | fgrehm | 2.1 | 1.7 | 0.91 |
 | [#9013](https://github.com/omacom/omarchy/pull/9013) | fix: address high-confidence shellcheck findings | fgrehm | 1.9 | 2.0 | 0.91 |
-| [#9042](https://github.com/omacom/omarchy/pull/9042) | Run the screensaver exit handler exactly once | PyRo1121 | 2.6 | 1.1 | 0.98 |
+| [#9042](https://github.com/omacom/omarchy/pull/9042) | Run the screensaver exit handler exactly once | PyRo1121 | 2.5 | 1.2 | 0.98 |
 | [#9128](https://github.com/omacom/omarchy/pull/9128) | Detect browser families without launching them | yashranaway | 1.8 | 1.4 | 0.94 |
 | [#9161](https://github.com/omacom/omarchy/pull/9161) | Discover and normalize web app icons | DerpyCrabs | 1.9 | 2.0 | 0.76 |
 | [#9344](https://github.com/omacom/omarchy/pull/9344) | Keep speed tests loaded during process cleanup | ptqa | 2.9 | 1.8 | 0.96 |
@@ -725,7 +715,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#11606](https://github.com/omacom/omarchy/pull/11606) | Stop a web app's generated .desktop id from leaking into app search | brenoperucchi | 1.9 | 1.7 | 0.95 |
 | [#11679](https://github.com/omacom/omarchy/pull/11679) | Keep living scripts off their historic siblings in Chromium fallback | anant1811 | 2.7 | 1.6 | 0.87 |
 | [#11730](https://github.com/omacom/omarchy/pull/11730) | Rank an app above the menu actions that manage it | ivorycrayon | 2.4 | 1.1 | 0.92 |
-| [#11847](https://github.com/omacom/omarchy/pull/11847) | Don't fail the locate test on non-UTF-8 files under bin/ | cristim | 2.9 | 0.9 | 0.97 |
 | [#11918](https://github.com/omacom/omarchy/pull/11918) | Back off fingerprint retries that fail immediately | CoreyH | 1.9 | 1.6 | 0.96 |
 | [#11965](https://github.com/omacom/omarchy/pull/11965) | fix: use the current login shell for desktop app launches | ralphsmith80 | 2.6 | 1.5 | 0.95 |
 | [#12020](https://github.com/omacom/omarchy/pull/12020) | Ignore bytecode and temp files in local plugin watcher | ram-devv1 | 2.5 | 1.2 | 0.97 |
@@ -735,8 +724,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#12386](https://github.com/omacom/omarchy/pull/12386) | Report ASCII export write failures | yashranaway | 2.7 | 1.3 | 0.96 |
 | [#12457](https://github.com/omacom/omarchy/pull/12457) | Escape font names before rewriting terminal and fontconfig files | cYoren | 2.1 | 1.8 | 0.96 |
 | [#12471](https://github.com/omacom/omarchy/pull/12471) | Fix recording indicator stuck 'active' after a force-killed stop | ReneXiong | 2.2 | 1.9 | 0.97 |
-| [#12479](https://github.com/omacom/omarchy/pull/12479) | Drop destroyed PipeWire nodes from the audio panel fallback cache | Abnersouza7 | 2.9 | 1.0 | 0.98 |
-| [#12544](https://github.com/omacom/omarchy/pull/12544) | Back off fingerprint lock retries on hard device errors | thabopal | 2.1 | 1.0 | 0.96 |
 | [#12669](https://github.com/omacom/omarchy/pull/12669) | Follow symlink starting points in omarchy-menu-file | Bartok9 | 1.9 | 2.0 | 0.94 |
 | [#12697](https://github.com/omacom/omarchy/pull/12697) | Preserve configured cursors for screenshots on transformed displays | DiegoYegros | 1.9 | 1.8 | 0.81 |
 | [#12718](https://github.com/omacom/omarchy/pull/12718) | Validate plugin clone usernames before creating files | Chessing234 | 2.0 | 1.8 | 0.79 |
@@ -766,11 +753,9 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#13360](https://github.com/omacom/omarchy/pull/13360) | Encode transcode clipboard file URIs | HerrStolzier | 2.2 | 1.0 | 0.96 |
 | [#13498](https://github.com/omacom/omarchy/pull/13498) | Fix: omarchy plugin clone can generate a colliding plugin id | baron-hines | 2.4 | 1.1 | 0.98 |
 | [#13509](https://github.com/omacom/omarchy/pull/13509) | Check a clone's source before reporting it restored | yeomanse | 2.3 | 1.0 | 0.96 |
-| [#13512](https://github.com/omacom/omarchy/pull/13512) | Fix menu JSONC inline comment tails emptying the whole menu | buger | 2.8 | 1.1 | 0.98 |
 | [#13529](https://github.com/omacom/omarchy/pull/13529) | Show physical uplink in network panel with TUN proxies | LIghtJUNction | 2.6 | 1.9 | 0.93 |
 | [#13557](https://github.com/omacom/omarchy/pull/13557) | Run the ShellIpc registration check without a shell | manuaudio | 2.7 | 1.0 | 0.96 |
 | [#13561](https://github.com/omacom/omarchy/pull/13561) | Run the browser launcher test against the checkout's helpers | manuaudio | 2.2 | 0.9 | 0.93 |
-| [#13681](https://github.com/omacom/omarchy/pull/13681) | Parse menu JSONC with string-aware comments and object roots | AnPod | 2.2 | 2.0 | 0.92 |
 | [#13714](https://github.com/omacom/omarchy/pull/13714) | menu-input/menu-select: reject unknown flags | kvnloo | 2.5 | 1.2 | 0.93 |
 | [#13730](https://github.com/omacom/omarchy/pull/13730) | Preserve notification images from localhost file URLs | Inference1 | 2.5 | 1.1 | 0.95 |
 | [#13751](https://github.com/omacom/omarchy/pull/13751) | Walk the calendar grid at noon so a midnight DST start can't repeat a day | dhiasalhiQ | 2.7 | 1.1 | 0.97 |
@@ -778,14 +763,14 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#13916](https://github.com/omacom/omarchy/pull/13916) | Include popup padding in dropdown height | sprajs | 2.3 | 1.3 | 0.95 |
 | [#13917](https://github.com/omacom/omarchy/pull/13917) | Preserve normal borders on selected controls | sprajs | 2.3 | 2.0 | 0.88 |
 | [#13921](https://github.com/omacom/omarchy/pull/13921) | Cap idle timeouts to the largest Qt Timer interval | Coding-Sparrow | 2.8 | 1.0 | 0.97 |
-| [#13946](https://github.com/omacom/omarchy/pull/13946) | Propagate widget placement errors without saving failed changes | sprajs | 2.8 | 1.8 | 0.96 |
+| [#13946](https://github.com/omacom/omarchy/pull/13946) | Propagate widget placement errors without saving failed changes | sprajs | 2.9 | 1.8 | 0.96 |
+| [#13951](https://github.com/omacom/omarchy/pull/13951) | List commands moved into a group by metadata in fast-path group help | XNinety9 | 2.7 | 1.1 | 0.96 |
 
-## Review candidates: hardware-drivers — 74 PRs
+## Review candidates: hardware-drivers — 75 PRs
 
 | PR | Title | Author | Model finished | Model effort | Model fix |
 |---|---|---|---|---|---|
 | [#6388](https://github.com/omacom/omarchy/pull/6388) | Fix ASUS ExpertBook B9406 touchpad quirk never being applied | dhh | 2.0 | 1.5 | 0.96 |
-| [#6548](https://github.com/omacom/omarchy/pull/6548) | Fix audio device labels and guard seamless output switching | HANCORE-linux | 2.8 | 2.0 | 0.91 |
 | [#7186](https://github.com/omacom/omarchy/pull/7186) | Report combined dual-battery status in the power panel | unleashed-nick | 2.4 | 2.2 | 0.89 |
 | [#7308](https://github.com/omacom/omarchy/pull/7308) | Keep jack names on multi-port audio devices | sunblot | 2.7 | 1.1 | 0.90 |
 | [#7336](https://github.com/omacom/omarchy/pull/7336) | Re-detect Apple display when cached hiddev node stops responding | 0xApotheosis | 2.3 | 1.3 | 0.96 |
@@ -847,6 +832,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#12950](https://github.com/omacom/omarchy/pull/12950) | Keep Bluetooth USB controllers awake when TLP manages USB power | s-gato | 2.0 | 1.3 | 0.89 |
 | [#12953](https://github.com/omacom/omarchy/pull/12953) | Detect Realtek USB Finger Print readers (2541) | Chessing234 | 1.9 | 1.4 | 0.94 |
 | [#13016](https://github.com/omacom/omarchy/pull/13016) | Derive power panel charge direction from settled battery state | jaderfeijo | 2.3 | 1.7 | 0.96 |
+| [#13029](https://github.com/omacom/omarchy/pull/13029) | Find system batteries not named BAT* | rafaelguariento | 1.9 | 1.9 | 0.96 |
 | [#13099](https://github.com/omacom/omarchy/pull/13099) | Write output volume through pactl, not the node-bound setter | surim0n | 2.0 | 1.1 | 0.96 |
 | [#13111](https://github.com/omacom/omarchy/pull/13111) | Fall back to UPower when the sysfs battery rate is implausible | surim0n | 2.6 | 1.2 | 0.96 |
 | [#13189](https://github.com/omacom/omarchy/pull/13189) | Force software video decode in Chromium on NVIDIA GPUs with GSP firmware | jampick | 2.2 | 1.3 | 0.94 |
@@ -858,8 +844,9 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#13744](https://github.com/omacom/omarchy/pull/13744) | Detect NEXT Biometrics readers as fingerprint hardware | lovecamera68-ai | 2.9 | 0.8 | 0.91 |
 | [#13881](https://github.com/omacom/omarchy/pull/13881) | Fix muted icon for headphone outputs | cookiefresh607 | 2.0 | 1.0 | 0.96 |
 | [#13902](https://github.com/omacom/omarchy/pull/13902) | [4.0.4 backport] Only force NVIDIA VA-API/GLX env when NVIDIA drives the display | ruornil | 2.3 | 1.4 | 0.95 |
+| [#13949](https://github.com/omacom/omarchy/pull/13949) | Recognize nvidia_wmi_ec_backlight/nvidia_0 in omarchy-hw-display | selenophilezh | 2.1 | 1.2 | 0.88 |
 
-## Review candidates: shell-cli — 47 PRs
+## Review candidates: shell-cli — 48 PRs
 
 | PR | Title | Author | Model finished | Model effort | Model fix |
 |---|---|---|---|---|---|
@@ -910,6 +897,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#13716](https://github.com/omacom/omarchy/pull/13716) | restart-app: require the application name | kvnloo | 1.9 | 1.0 | 0.91 |
 | [#13720](https://github.com/omacom/omarchy/pull/13720) | group listing: describe the visible share/show/upgrade groups | kvnloo | 2.3 | 0.9 | 0.75 |
 | [#13913](https://github.com/omacom/omarchy/pull/13913) | Read fresh shell config before mutations | sprajs | 2.0 | 2.9 | 0.83 |
+| [#13965](https://github.com/omacom/omarchy/pull/13965) | omarchy-plugin-add: mv -T so a lost race fails instead of nesting | SorenHJohansen | 1.9 | 1.0 | 0.62 |
 
 ## Review candidates: apps-integrations — 39 PRs
 
@@ -917,7 +905,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 |---|---|---|---|---|---|
 | [#5934](https://github.com/omacom/omarchy/pull/5934) | omarchy-webapp-install: set StartupWMClass so app switchers find the icon | andyjeffries | 2.6 | 0.9 | 0.93 |
 | [#6333](https://github.com/omacom/omarchy/pull/6333) | Prevent Chromium Vulkan crashes on Wayland | a-b | 1.9 | 2.0 | 0.88 |
-| [#7356](https://github.com/omacom/omarchy/pull/7356) | Detect the tailscale CLI without the which package | anupanup2001 | 2.9 | 1.0 | 0.96 |
 | [#7599](https://github.com/omacom/omarchy/pull/7599) | Convert downloaded web app icons to PNG | pjgeutjens | 2.3 | 2.0 | 0.89 |
 | [#7778](https://github.com/omacom/omarchy/pull/7778) | Remove GeForce NOW launcher leftovers on uninstall | husamemadH | 2.9 | 1.2 | 0.97 |
 | [#7797](https://github.com/omacom/omarchy/pull/7797) | Add Remove > 1Password to the shell menu | Shaivarth | 2.2 | 0.9 | 0.66 |
@@ -927,6 +914,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#8379](https://github.com/omacom/omarchy/pull/8379) | Use the real game title for RetroArch launchers installed from arcade ROMs | axelfontaine | 2.8 | 1.9 | 0.74 |
 | [#8533](https://github.com/omacom/omarchy/pull/8533) | fix(tailscale): isolate claim path argument | ketpatil77 | 2.3 | 1.0 | 0.95 |
 | [#8761](https://github.com/omacom/omarchy/pull/8761) | Keep mailto parameters out of HEY's recipient | tony-roslund | 2.0 | 1.0 | 0.97 |
+| [#8879](https://github.com/omacom/omarchy/pull/8879) | Use Sunshine's packaged systemd unit | yashranaway | 2.0 | 1.1 | 0.96 |
 | [#8932](https://github.com/omacom/omarchy/pull/8932) | Tile the Battle.net client instead of floating it | michielvandermeer | 2.2 | 2.2 | 0.88 |
 | [#9365](https://github.com/omacom/omarchy/pull/9365) | Fail terminal install before rewriting the default | fresh3nough | 2.8 | 1.4 | 0.98 |
 | [#9431](https://github.com/omacom/omarchy/pull/9431) | Read the default browser once, and recognise one that registered itself | VykosMolt | 2.7 | 2.0 | 0.87 |
@@ -955,13 +943,12 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#13858](https://github.com/omacom/omarchy/pull/13858) | Hide Hermes' renamed CLI launcher from Apps | manuaudio | 2.5 | 0.6 | 0.96 |
 | [#13935](https://github.com/omacom/omarchy/pull/13935) | games-retro-install: spec-correct .desktop escaping for ROM names and paths | kvnloo | 2.3 | 1.9 | 0.96 |
 
-## Review candidates: agents-ai — 33 PRs
+## Review candidates: agents-ai — 32 PRs
 
 | PR | Title | Author | Model finished | Model effort | Model fix |
 |---|---|---|---|---|---|
 | [#6478](https://github.com/omacom/omarchy/pull/6478) | Attribute Codex sessions to their model from thread settings | dalmasluca | 2.1 | 1.6 | 0.96 |
 | [#7298](https://github.com/omacom/omarchy/pull/7298) | Stop the agents panel scrolling by a few pixels | YehudaGurovich | 2.2 | 1.0 | 0.69 |
-| [#7924](https://github.com/omacom/omarchy/pull/7924) | Fix Codex usage collector's stale --ask-for-approval value | iaikanshb | 2.8 | 0.4 | 0.97 |
 | [#8073](https://github.com/omacom/omarchy/pull/8073) | fix: detect early Codex app-server exits | dcalliari | 1.9 | 1.8 | 0.96 |
 | [#8254](https://github.com/omacom/omarchy/pull/8254) | Defeat mise's release cooldown when selecting the default agent | yashksaini-coder | 2.7 | 0.6 | 0.96 |
 | [#8257](https://github.com/omacom/omarchy/pull/8257) | Warn the agent skill off pulling graphical-session.target | kkoontz | 2.1 | 2.0 | 0.72 |
@@ -993,7 +980,7 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#13740](https://github.com/omacom/omarchy/pull/13740) | Keep RPC method names out of the Codex limits help text | alanw707 | 2.4 | 1.3 | 0.92 |
 | [#13835](https://github.com/omacom/omarchy/pull/13835) | Mute crash toasts while diagnosis is in flight | Chessing234 | 2.4 | 2.6 | 0.89 |
 
-## Review candidates: update-release — 22 PRs
+## Review candidates: update-release — 21 PRs
 
 | PR | Title | Author | Model finished | Model effort | Model fix |
 |---|---|---|---|---|---|
@@ -1013,7 +1000,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 | [#11480](https://github.com/omacom/omarchy/pull/11480) | Serialize package availability checks across callers | yashranaway | 2.4 | 1.8 | 0.95 |
 | [#12174](https://github.com/omacom/omarchy/pull/12174) | Give the Mise PATH cleanup a collision-free migration id | ekollof | 2.2 | 0.8 | 0.95 |
 | [#12359](https://github.com/omacom/omarchy/pull/12359) | Let GUI-started update prompts be answered with the mouse | z23 | 2.7 | 2.2 | 0.84 |
-| [#12503](https://github.com/omacom/omarchy/pull/12503) | Skip CUPS discovery cleanup when the scheduler is stopped | paulogeyer | 2.5 | 1.0 | 0.96 |
 | [#12797](https://github.com/omacom/omarchy/pull/12797) | Retry omarchy-bar put when omarchy-shell times out while busy | sanjyay | 2.1 | 1.0 | 0.97 |
 | [#12860](https://github.com/omacom/omarchy/pull/12860) | Default OMARCHY_PATH in update-dev and channel-current | anandude | 2.7 | 1.6 | 0.95 |
 | [#13538](https://github.com/omacom/omarchy/pull/13538) | Say which files block an upgrade the conflict recovery won't clear | stevederico | 2.4 | 1.1 | 0.77 |
@@ -1067,7 +1053,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #13165, #13477, #13645
 - #13459, #13463, #13613
 - #4928, #7700
-- #5099, #11008
 - #5332, #13055
 - #5600, #11294
 - #6019, #7945
@@ -1084,7 +1069,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #7087, #12582
 - #7102, #13637
 - #7180, #7333
-- #7373, #13029
 - #7568, #12446
 - #7659, #8023
 - #7783, #12658
@@ -1106,7 +1090,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #9871, #13505
 - #9885, #12425
 - #9958, #13548
-- #9967, #13945
 - #10007, #12255
 - #10138, #13347
 - #10231, #12956
@@ -1123,15 +1106,13 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #11033, #11652
 - #11055, #11080
 - #11069, #11470
-- #11364, #12089
 - #11565, #12831
 - #11669, #13729
 - #11751, #13648
 - #11933, #12870
+- #11952, #13918
 - #11976, #13369
-- #12024, #12445
 - #12177, #13205
-- #12184, #12646
 - #12505, #13331
 - #12585, #13204
 - #12939, #13109
@@ -1172,19 +1153,20 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
   - missing_pairs: [[10194, 13223]]
 - #11023, #11025, #12932
   - missing_pairs: [[11023, 11025]]
+- #13305, #13681, #13968
+  - missing_pairs: [[13305, 13681]]
 - #13467, #13542, #13612
   - missing_pairs: [[13467, 13612]]
 
 ## Uncertain pairs — human comparison needed
 
 - #7765 ↔ #12635: P(same)=0.64; verdict=same_change; uncertain
+- #9967 ↔ #13945: P(same)=0.64; verdict=same_change; uncertain
 - #12248 ↔ #13568: P(same)=0.63; verdict=same_change; uncertain
 - #11021 ↔ #12955: P(same)=0.62; verdict=same_change; uncertain
 - #12264 ↔ #12323: P(same)=0.62; verdict=same_change; uncertain
-- #7023 ↔ #12022: P(same)=0.61; verdict=same_change; uncertain
 - #7577 ↔ #9803: P(same)=0.61; verdict=same_change; uncertain
 - #5317 ↔ #8820: P(same)=0.61; verdict=same_change; uncertain
-- #6907 ↔ #13378: P(same)=0.61; verdict=same_change; uncertain
 - #9130 ↔ #13007: P(same)=0.6; verdict=same_change; uncertain
 - #8537 ↔ #10294: P(same)=0.58; verdict=same_change; uncertain
 - #11381 ↔ #12686: P(same)=0.58; verdict=same_change; uncertain
@@ -1195,7 +1177,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #8609 ↔ #9095: P(same)=0.5599999999999999; verdict=same_change; uncertain
 - #10232 ↔ #12956: P(same)=0.5599999999999999; verdict=same_change; uncertain
 - #6834 ↔ #12679: P(same)=0.55; verdict=same_change; uncertain
-- #7471 ↔ #7592: P(same)=0.54; verdict=same_change; uncertain
 - #7345 ↔ #7737: P(same)=0.54; verdict=same_change; uncertain
 - #13444 ↔ #13616: P(same)=0.53; verdict=same_change; uncertain
 - #10660 ↔ #10677: P(same)=0.53; verdict=same_change; uncertain
@@ -1208,10 +1189,8 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #11918 ↔ #12461: P(same)=0.51; verdict=same_change; uncertain
 - #11733 ↔ #13276: P(same)=0.51; verdict=same_change; uncertain
 - #7528 ↔ #8048: P(same)=0.5; verdict=same_change; uncertain
-- #11952 ↔ #13918: P(same)=0.5; verdict=related_but_different; uncertain
 - #11792 ↔ #13205: P(same)=0.49; verdict=related_but_different; uncertain
 - #9880 ↔ #12684: P(same)=0.49; verdict=related_but_different; uncertain
-- #7158 ↔ #8531: P(same)=0.48; verdict=related_but_different; uncertain
 - #12253 ↔ #12857: P(same)=0.46; verdict=related_but_different; uncertain
 - #8709 ↔ #9461: P(same)=0.45; verdict=related_but_different; uncertain
 - #5343 ↔ #7363: P(same)=0.45; verdict=related_but_different; uncertain
@@ -1219,13 +1198,13 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #6849 ↔ #11076: P(same)=0.44; verdict=related_but_different; uncertain
 - #7187 ↔ #13070: P(same)=0.44; verdict=related_but_different; uncertain
 - #10713 ↔ #12682: P(same)=0.44; verdict=related_but_different; uncertain
-- #7449 ↔ #8573: P(same)=0.43; verdict=related_but_different; uncertain
 - #5975 ↔ #12337: P(same)=0.42; verdict=related_but_different; uncertain
 - #10989 ↔ #12955: P(same)=0.42; verdict=related_but_different; uncertain
 - #10393 ↔ #12461: P(same)=0.41; verdict=related_but_different; uncertain
 - #7179 ↔ #12420: P(same)=0.41; verdict=related_but_different; uncertain
 - #8169 ↔ #9465: P(same)=0.4; verdict=related_but_different; uncertain
 - #9725 ↔ #13138: P(same)=0.4; verdict=related_but_different; uncertain
+- #6525 ↔ #13968: P(same)=0.4; verdict=related_but_different; uncertain
 - #13544 ↔ #13616: P(same)=0.39; verdict=related_but_different; uncertain
 - #10330 ↔ #10824: P(same)=0.39; verdict=related_but_different; uncertain
 - #8771 ↔ #9164: P(same)=0.39; verdict=related_but_different; uncertain
@@ -1239,7 +1218,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #11080 ↔ #11751: P(same)=0.36; verdict=related_but_different; uncertain
 - #9546 ↔ #10330: P(same)=0.36; verdict=related_but_different; uncertain
 - #10331 ↔ #13148: P(same)=0.36; verdict=related_but_different; uncertain
-- #7283 ↔ #13007: P(same)=0.36; verdict=related_but_different; uncertain
 - #10270 ↔ #11394: P(same)=0.35; verdict=related_but_different; uncertain
 - #11477 ↔ #13768: P(same)=0.35; verdict=related_but_different; uncertain
 - #10293 ↔ #10301: P(same)=0.35; verdict=related_but_different; uncertain
@@ -1310,7 +1288,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #7882 Add native Syncthing integration
 - #7913 Add maker install group with ESP32/ESP-IDF toolchain setup
 - #7971 Let the compositor and audio graph take the realtime priority they ask for
-- #7990 Clear passwordless sudo grants at boot
 - #7995 Stage diagnostics logs privately instead of at fixed /tmp paths
 - #8001 Fix GitHub credential helpers after mise gh upgrades
 - #8014 Keep Wi-Fi password entry stable during scans
@@ -1473,7 +1450,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #11428 Add ZeroTier as an installable service
 - #11438 Support mounting and unlocking internal and LVM-backed storage in UDisks
 - #11444 Add GitLab Duo CLI as a default coding agent
-- #11461 Keep the caller's editor across sudo for vipw and vigr
 - #11470 Run declared plugin cleanup before removal
 - #11471 Open Steam Remote Play ports when installing Steam
 - #11479 Reject root-run updates before changing user state
@@ -1524,7 +1500,6 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #12170 Apply systemd sandboxing drop-ins for core system services
 - #12176 fix(hibernate): create top-level @swap subvolume so btrfs hibernation works
 - #12177 Add 80% battery charge cap toggle
-- #12196 Stop speed test workers outliving a killed parent
 - #12244 Chromium: overrideable OAuth env and CVE security-floor upgrade
 - #12246 Boot: ESP free space, Limine prune, /boot perms, signed upgrade, SDDM keyring
 - #12260 Give third-party plugins their own entry settings and auth service
@@ -1612,13 +1587,11 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #13690 Add region profiles, starting with China's package repositories
 - #13699 Keep other systems' boot entries through a factory reset
 - #13705 post-install(pacman): clamp system clock on aarch64 if RTC uninitialized
-- #13734 Add a sign-in button to the agents panel's auth card
 - #13742 Test passwordless sudo revoke hook packaging
 - #13745 Open the captive portal sign-in page on detection when asked to
 - #13750 Clear setgid when hardening Windows VM mount sources
 - #13763 Add Cloudmail to Install > Service
-- #13770 Switch between several Claude and Codex subscriptions, and build apps the Omarchy way
-- #13796 Keep an early polkit Enter and submit it when PAM asks
+- #13796 Keep an early polkit Enter and submit it in the background when PAM asks
 - #13800 Strip setgid and setuid bits from Windows VM mount directories (#13558)
 - #13811 fix(bluetooth): recover incomplete pairing
 - #13829 Resync Wi-Fi rows when a listed network's saved profile attaches
@@ -1654,12 +1627,12 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #6725 fix: collapse dropdown toggle on second click
 - #6980 Add agent security scans for untrusted software
 - #7092 fix: Add rocm-smi-lib for AMD GPU support in btop- #4999
-- #7129 Fix Voxtype GPU setup failing silently
 - #7161 Add Quattro first-boot sizzle clip and source stills
 - #7170 Add a manual reader to the Omarchy shell
 - #7297 Correctly name grok and add docs link
 - #7463 Fix typo on 04_navigation.md
 - #7995 Stage diagnostics logs privately instead of at fixed /tmp paths
+- #8408 Theme GTK4 apps with Omarchy colors
 - #8421 omarchy-windows-vm: enable windows activation via system firmware by …
 - #8472 Omarchy v4.0.2
 - #8481 Add OpenCode agent setup: default config, AGENTS.md, and installer
@@ -1724,8 +1697,8 @@ exposure or crypto material (model probability ≥ 0.5). Review before any categ
 - #13608 Make Elsewhen migration bar put best-effort on shell timeouts
 - #13609 Keep connected Bluetooth devices with address-like names
 - #13624 Keep keyboard focus on fullscreen Proton games
-- #13770 Switch between several Claude and Codex subscriptions, and build apps the Omarchy way
 - #13930 Let the mouse wheel cycle a closed Dropdown's selection
+- #13970 omarchy-restart-shell refuses to recover after a crash, reporting a lock that no longer exists
 
 # Suggested pre-release batches (issue #4)
 
@@ -1735,544 +1708,532 @@ ONE pull request inside the batch. Batches are disjoint (every PR is in at most 
 batch); review groups are excluded on purpose. Ordered security-first, then
 risk band and evidenced head idle time. Model-suggested, never verified safe to merge.
 
-Batches: 534 · security-first batches: 66 · same-change groups: 82 · review-group PRs excluded: 31.
+Batches: 522 · security-first batches: 65 · same-change groups: 77 · review-group PRs excluded: 34.
 
 | Batch | Size | Security | Avg risk | Groups | Members |
 |---|---|---|---|---|---|
 | B001 | 4 | 4 | 1.4 | 2 | #7087 #12582 #13377 #13660 |
 | B002 | 4 | 4 | 2.2 | 2 | #8952 #13848 #13474 #13646 |
 | B003 | 5 | 5 | 2.5 | 2 | #11565 #12831 #6847 #13699 #13941 |
-| B004 | 5 | 5 | 1.2 | — | #13845 #13829 #13796 #13763 #13745 |
-| B005 | 5 | 5 | 1.3 | — | #13742 #13734 #13513 #13200 #13183 |
-| B006 | 5 | 5 | 1.1 | — | #13106 #13107 #13088 #13075 #13052 |
-| B007 | 5 | 5 | 1.1 | — | #12925 #12891 #12815 #12698 #12583 |
-| B008 | 5 | 5 | 1.2 | — | #12459 #12329 #12260 #12196 #12105 |
-| B009 | 5 | 5 | 1.1 | — | #12001 #11967 #11907 #11858 #11804 |
-| B010 | 5 | 5 | 1.0 | — | #11795 #11725 #11720 #11722 #11398 |
-| B011 | 5 | 5 | 1.2 | — | #11367 #11242 #11197 #11144 #11067 |
-| B012 | 5 | 5 | 1.1 | — | #10952 #10944 #10824 #10730 #10683 |
-| B013 | 5 | 5 | 1.3 | — | #10644 #10473 #10435 #10428 #10347 |
-| B014 | 4 | 4 | 1.1 | — | #10346 #10248 #10172 #10088 |
-| B015 | 5 | 4 | 1.2 | 1 | #9958 #13548 #9834 #9597 #9594 |
-| B016 | 5 | 5 | 0.9 | — | #9531 #9398 #9320 #9319 #9009 |
-| B017 | 5 | 5 | 1.2 | — | #8796 #8715 #8578 #8537 #8487 |
-| B018 | 5 | 5 | 1.2 | — | #8441 #8439 #8377 #8326 #8315 |
-| B019 | 5 | 5 | 1.1 | — | #8251 #8093 #8014 #8019 #8001 |
-| B020 | 5 | 5 | 1.1 | — | #7799 #7680 #7598 #7566 #7554 |
-| B021 | 5 | 5 | 1.1 | — | #7537 #7485 #7455 #7051 #6844 |
-| B022 | 5 | 5 | 1.4 | — | #6771 #6557 #6532 #5744 #13875 |
-| B023 | 5 | 5 | 2.1 | — | #13856 #13836 #13811 #13705 #13690 |
-| B024 | 5 | 5 | 2.0 | — | #13664 #13630 #13625 #13432 #13296 |
-| B025 | 5 | 4 | 1.9 | 1 | #13110 #13101 #13668 #13036 #13047 |
-| B026 | 5 | 5 | 2.2 | — | #12901 #12836 #12796 #12788 #12766 |
-| B027 | 5 | 4 | 1.9 | 1 | #12605 #12475 #12279 #12177 #13205 |
-| B028 | 5 | 5 | 2.1 | — | #12111 #12070 #12059 #12015 #11984 |
-| B029 | 5 | 5 | 2.1 | — | #11989 #11983 #11966 #11956 #11839 |
-| B030 | 5 | 5 | 1.8 | — | #11768 #11731 #11574 #11479 #11444 |
-| B031 | 5 | 5 | 1.9 | — | #11423 #11388 #11289 #11216 #11198 |
-| B032 | 5 | 4 | 2.2 | 1 | #11097 #11069 #11470 #10977 #10802 |
-| B033 | 5 | 5 | 2.0 | — | #10769 #10602 #10262 #10257 #10185 |
-| B034 | 5 | 5 | 2.1 | — | #10110 #10109 #10022 #9995 #9946 |
-| B035 | 5 | 5 | 2.0 | — | #9894 #9878 #9777 #9695 #9596 |
-| B036 | 5 | 5 | 2.0 | — | #9539 #9511 #9381 #9307 #9227 |
-| B037 | 5 | 5 | 2.0 | — | #9044 #9024 #8910 #8801 #8662 |
-| B038 | 5 | 5 | 2.2 | — | #8639 #8413 #8294 #8188 #8130 |
-| B039 | 5 | 5 | 2.0 | — | #7882 #7828 #7814 #7731 #7622 |
-| B040 | 5 | 5 | 1.7 | — | #7274 #7272 #7261 #7062 #6965 |
-| B041 | 5 | 5 | 2.0 | — | #6807 #6697 #6664 #6647 #6515 |
-| B042 | 5 | 5 | 2.2 | — | #5654 #5545 #5279 #5139 #5136 |
-| B043 | 5 | 5 | 2.4 | — | #5035 #4997 #13937 #13901 #13887 |
-| B044 | 5 | 5 | 2.8 | — | #13800 #13652 #13616 #13575 #13533 |
-| B045 | 5 | 5 | 2.9 | — | #13479 #13362 #13316 #13312 #13283 |
-| B046 | 5 | 5 | 2.7 | — | #13215 #13187 #13112 #13085 #12897 |
-| B047 | 5 | 5 | 2.8 | — | #12895 #12896 #12888 #12889 #12883 |
-| B048 | 5 | 5 | 2.9 | — | #12715 #12542 #12394 #12266 #12265 |
-| B049 | 5 | 5 | 3.0 | — | #12165 #12161 #12164 #12162 #12160 |
-| B050 | 5 | 5 | 3.0 | — | #12159 #12155 #12110 #12103 #12078 |
-| B051 | 5 | 5 | 2.9 | — | #11874 #11786 #11697 #11471 #11461 |
-| B052 | 5 | 5 | 3.0 | — | #11438 #11428 #11386 #11381 #11379 |
-| B053 | 5 | 5 | 2.9 | — | #11322 #11196 #11172 #11037 #11017 |
-| B054 | 5 | 5 | 2.8 | — | #10974 #10962 #10738 #10717 #10689 |
-| B055 | 5 | 5 | 2.7 | — | #10655 #10396 #10393 #10338 #10288 |
-| B056 | 5 | 5 | 2.8 | — | #10219 #10113 #10018 #9965 #9875 |
-| B057 | 5 | 5 | 2.9 | — | #9873 #9783 #9750 #9729 #9723 |
-| B058 | 5 | 5 | 2.9 | — | #9700 #9573 #9571 #9506 #9500 |
-| B059 | 5 | 5 | 3.0 | — | #9475 #9464 #9454 #9288 #9248 |
-| B060 | 5 | 5 | 2.9 | — | #9239 #9221 #9043 #8908 #8889 |
-| B061 | 4 | 4 | 2.9 | — | #8831 #8707 #8709 #8534 |
-| B062 | 5 | 4 | 2.8 | 1 | #8429 #12957 #8336 #8204 #8169 |
-| B063 | 5 | 5 | 2.8 | — | #8035 #7990 #7971 #7913 #7871 |
-| B064 | 5 | 5 | 2.9 | — | #7857 #7831 #7501 #7435 #7417 |
-| B065 | 5 | 5 | 2.9 | — | #7258 #7158 #7071 #6912 #6736 |
-| B066 | 5 | 5 | 2.7 | — | #6513 #6474 #5431 #5284 #13947 |
-| B067 | 5 | — | 1.0 | — | #13939 #13940 #13935 #13928 #13929 |
-| B068 | 5 | — | 0.8 | — | #13924 #13921 #13917 #13923 #13918 |
-| B069 | 5 | — | 1.2 | — | #13916 #13915 #13914 #13910 #13913 |
-| B070 | 5 | — | 0.8 | — | #13911 #13907 #13909 #13905 #13902 |
-| B071 | 5 | — | 0.8 | — | #13894 #13895 #13897 #13888 #13885 |
-| B072 | 5 | — | 1.1 | — | #13886 #13881 #13883 #13879 #13878 |
-| B073 | 5 | — | 1.0 | — | #13870 #13862 #13860 #13859 #13858 |
-| B074 | 5 | — | 1.0 | — | #13857 #13851 #13850 #13843 #13842 |
-| B075 | 5 | — | 1.1 | — | #13841 #13837 #13835 #13833 #13831 |
-| B076 | 5 | — | 1.1 | — | #13830 #13824 #13818 #13813 #13816 |
-| B077 | 5 | — | 0.8 | — | #13817 #13810 #13809 #13806 #13805 |
-| B078 | 5 | — | 1.1 | — | #13807 #13808 #13804 #13803 #13802 |
-| B079 | 5 | — | 1.1 | 1 | #13801 #13799 #13797 #13792 #13903 |
-| B080 | 5 | — | 1.0 | — | #13787 #13784 #13783 #13780 #13782 |
-| B081 | 5 | — | 1.0 | — | #13776 #13772 #13775 #13769 #13766 |
-| B082 | 5 | — | 1.0 | — | #13765 #13761 #13759 #13755 #13751 |
-| B083 | 5 | — | 1.0 | — | #13747 #13744 #13743 #13740 #13738 |
-| B084 | 5 | — | 0.8 | — | #13737 #13735 #13732 #13730 #13725 |
-| B085 | 5 | — | 0.8 | — | #13724 #13723 #13722 #13720 #13721 |
-| B086 | 5 | — | 1.1 | — | #13719 #13718 #13716 #13714 #13715 |
-| B087 | 5 | — | 0.8 | — | #13717 #13713 #13712 #13710 #13711 |
-| B088 | 5 | — | 1.0 | — | #13709 #13706 #13703 #13698 #13693 |
-| B089 | 5 | — | 1.1 | — | #13688 #13685 #13684 #13681 #13680 |
-| B090 | 5 | — | 1.0 | — | #13679 #13678 #13676 #13674 #13669 |
-| B091 | 5 | — | 1.2 | — | #13670 #13666 #13665 #13662 #13661 |
-| B092 | 5 | — | 1.1 | — | #13659 #13658 #13655 #13654 #13653 |
-| B093 | 5 | — | 1.1 | — | #13657 #13649 #13647 #13642 #13639 |
-| B094 | 5 | — | 1.0 | — | #13638 #13636 #13634 #13635 #13631 |
-| B095 | 5 | — | 1.1 | 1 | #13632 #13629 #13628 #13626 #13656 |
-| B096 | 5 | — | 1.1 | — | #13622 #13621 #13619 #13617 #13614 |
-| B097 | 5 | — | 1.1 | — | #13611 #13607 #13604 #13603 #13600 |
-| B098 | 5 | — | 1.0 | — | #13598 #13593 #13590 #13585 #13581 |
-| B099 | 5 | — | 0.9 | — | #13580 #13579 #13576 #13574 #13570 |
-| B100 | 5 | — | 0.9 | — | #13569 #13567 #13565 #13564 #13561 |
-| B101 | 5 | — | 1.1 | — | #13559 #13557 #13556 #13553 #13547 |
-| B102 | 5 | — | 1.0 | — | #13546 #13541 #13536 #13538 #13531 |
-| B103 | 5 | — | 1.0 | — | #13529 #13512 #13511 #13509 #13503 |
-| B104 | 5 | — | 0.9 | — | #13501 #13500 #13499 #13497 #13498 |
-| B105 | 5 | — | 0.9 | — | #13495 #13496 #13494 #13486 #13483 |
-| B106 | 4 | — | 1.4 | 1 | #13481 #13482 #13480 #13640 |
-| B107 | 5 | — | 1.0 | 2 | #13478 #13641 #13476 #13643 #13475 |
-| B108 | 5 | — | 0.8 | 1 | #13473 #13472 #13471 #13633 #13470 |
-| B109 | 5 | — | 1.1 | 1 | #13468 #13469 #13466 #13543 #13465 |
-| B110 | 5 | — | 0.9 | 1 | #13464 #13461 #13459 #13463 #13613 |
-| B111 | 5 | — | 1.0 | — | #13458 #13451 #13446 #13441 #13412 |
-| B112 | 5 | — | 0.8 | — | #13405 #13409 #13396 #13390 #13389 |
-| B113 | 5 | — | 1.0 | — | #13386 #13379 #13378 #13373 #13365 |
-| B114 | 5 | — | 1.1 | — | #13364 #13360 #13354 #13353 #13345 |
-| B115 | 5 | — | 1.1 | — | #13351 #13340 #13339 #13332 #13338 |
-| B116 | 5 | — | 1.1 | — | #13327 #13318 #13305 #13293 #13292 |
-| B117 | 5 | — | 0.8 | — | #13277 #13276 #13272 #13267 #13261 |
-| B118 | 5 | — | 1.1 | 1 | #13259 #13258 #13620 #13255 #13248 |
-| B119 | 5 | — | 1.0 | — | #13245 #13241 #13242 #13240 #13239 |
-| B120 | 5 | — | 0.8 | — | #13237 #13236 #13235 #13234 #13232 |
-| B121 | 5 | — | 1.0 | — | #13230 #13228 #13227 #13225 #13221 |
-| B122 | 5 | — | 1.0 | — | #13216 #13217 #13212 #13209 #13203 |
-| B123 | 5 | — | 1.0 | — | #13198 #13197 #13195 #13194 #13193 |
-| B124 | 4 | — | 1.0 | — | #13191 #13190 #13189 #13176 |
-| B125 | 5 | — | 1.0 | 1 | #13165 #13477 #13645 #13161 #13166 |
-| B126 | 5 | — | 1.1 | — | #13159 #13156 #13151 #13144 #13142 |
-| B127 | 5 | — | 0.9 | — | #13141 #13140 #13138 #13139 #13133 |
-| B128 | 5 | — | 1.0 | — | #13132 #13126 #13127 #13123 #13121 |
-| B129 | 5 | — | 1.0 | — | #13120 #13114 #13116 #13113 #13111 |
-| B130 | 5 | — | 1.1 | — | #13104 #13103 #13102 #13100 #13099 |
-| B131 | 4 | — | 1.0 | — | #13097 #13095 #13096 #13092 |
-| B132 | 5 | — | 1.1 | 1 | #13090 #13677 #13086 #13083 #13079 |
-| B133 | 5 | — | 1.2 | — | #13074 #13070 #13071 #13064 #13061 |
-| B134 | 5 | — | 0.7 | — | #13065 #13063 #13059 #13043 #13056 |
-| B135 | 4 | — | 1.0 | 1 | #13042 #13041 #13673 #13039 |
-| B136 | 5 | — | 0.9 | 1 | #13044 #13094 #13031 #13033 #13028 |
-| B137 | 5 | — | 0.9 | — | #13016 #13018 #13013 #13008 #13012 |
-| B138 | 5 | — | 1.1 | — | #13007 #13006 #13000 #13004 #12999 |
-| B139 | 5 | — | 1.0 | — | #12996 #12991 #12992 #12988 #12986 |
-| B140 | 5 | — | 1.1 | — | #12985 #12982 #12983 #12981 #12979 |
-| B141 | 5 | — | 1.2 | — | #12975 #12978 #12973 #12974 #12970 |
-| B142 | 5 | — | 1.1 | — | #12971 #12969 #12967 #12966 #12965 |
-| B143 | 5 | — | 1.0 | — | #12961 #12964 #12963 #12962 #12960 |
-| B144 | 5 | — | 1.3 | — | #12958 #12953 #12952 #12937 #12950 |
-| B145 | 5 | — | 1.1 | 1 | #12939 #13109 #12943 #12935 #12928 |
-| B146 | 5 | — | 1.1 | — | #12931 #12920 #12916 #12892 #12890 |
-| B147 | 5 | — | 1.0 | — | #12884 #12882 #12877 #12867 #12865 |
-| B148 | 5 | — | 1.1 | — | #12866 #12863 #12862 #12860 #12857 |
-| B149 | 5 | — | 1.1 | — | #12842 #12841 #12837 #12835 #12832 |
-| B150 | 5 | — | 0.9 | — | #12829 #12828 #12826 #12819 #12814 |
-| B151 | 5 | — | 1.1 | — | #12809 #12807 #12808 #12803 #12801 |
-| B152 | 5 | — | 1.0 | — | #12797 #12795 #12794 #12785 #12786 |
-| B153 | 5 | — | 0.9 | — | #12784 #12781 #12783 #12778 #12780 |
-| B154 | 5 | — | 1.0 | — | #12776 #12769 #12768 #12775 #12763 |
-| B155 | 5 | — | 1.1 | — | #12753 #12752 #12750 #12743 #12741 |
-| B156 | 5 | — | 1.2 | — | #12733 #12731 #12719 #12718 #12712 |
-| B157 | 5 | — | 0.9 | — | #12701 #12697 #12696 #12695 #12694 |
-| B158 | 5 | — | 1.0 | — | #12693 #12676 #12672 #12671 #12669 |
-| B159 | 5 | — | 1.0 | — | #12670 #12659 #12666 #12660 #12656 |
-| B160 | 5 | — | 0.9 | 1 | #12654 #12649 #12755 #13009 #12653 |
-| B161 | 5 | — | 1.1 | — | #12644 #12634 #12633 #12606 #12613 |
-| B162 | 5 | — | 1.0 | 1 | #12603 #12585 #13204 #12579 #12578 |
-| B163 | 5 | — | 1.1 | — | #12571 #12566 #12567 #12559 #12553 |
-| B164 | 5 | — | 0.9 | — | #12557 #12552 #12547 #12544 #12543 |
-| B165 | 5 | — | 1.0 | — | #12540 #12541 #12536 #12533 #12527 |
-| B166 | 5 | — | 1.1 | — | #12512 #12517 #12504 #12503 #12501 |
-| B167 | 5 | — | 1.1 | — | #12489 #12502 #12487 #12484 #12483 |
-| B168 | 5 | — | 1.1 | — | #12480 #12479 #12477 #12472 #12471 |
-| B169 | 5 | — | 1.0 | — | #12452 #12456 #12451 #12457 #12432 |
-| B170 | 5 | — | 1.2 | — | #12439 #12435 #12431 #12427 #12422 |
-| B171 | 5 | — | 1.1 | — | #12417 #12416 #12415 #12414 #12413 |
-| B172 | 5 | — | 0.9 | — | #12407 #12412 #12406 #12390 #12388 |
-| B173 | 5 | — | 1.2 | — | #12387 #12389 #12386 #12385 #12384 |
-| B174 | 5 | — | 1.0 | — | #12377 #12364 #12363 #12362 #12361 |
-| B175 | 5 | — | 1.1 | — | #12360 #12359 #12357 #12353 #12350 |
-| B176 | 5 | — | 0.9 | — | #12344 #12338 #12336 #12320 #12312 |
-| B177 | 5 | — | 0.8 | — | #12307 #12306 #12300 #12299 #12284 |
-| B178 | 5 | — | 1.0 | — | #12283 #12278 #12268 #12261 #12259 |
-| B179 | 5 | — | 1.1 | — | #12258 #12257 #12256 #12254 #12253 |
-| B180 | 5 | — | 1.2 | — | #12251 #12248 #12247 #12241 #12234 |
-| B181 | 5 | — | 0.9 | — | #12232 #12231 #12223 #12213 #12200 |
-| B182 | 5 | — | 1.1 | 1 | #12199 #12189 #12184 #12646 #12183 |
-| B183 | 5 | — | 1.2 | — | #12175 #12174 #12171 #12172 #12168 |
-| B184 | 5 | — | 1.1 | — | #12166 #12137 #12138 #12135 #12132 |
-| B185 | 5 | — | 1.2 | — | #12126 #12133 #12118 #12104 #12101 |
-| B186 | 5 | — | 0.8 | — | #12094 #12098 #12091 #12093 #12081 |
-| B187 | 5 | — | 0.9 | — | #12072 #12063 #12058 #12042 #12040 |
-| B188 | 4 | — | 1.1 | — | #12037 #12036 #12032 #12034 |
-| B189 | 5 | — | 1.0 | 1 | #12024 #12445 #12021 #12022 #12016 |
-| B190 | 4 | — | 1.0 | — | #12020 #11998 #11996 #11981 |
-| B191 | 5 | — | 0.8 | 1 | #11976 #13369 #11975 #12006 #11973 |
-| B192 | 5 | — | 1.0 | — | #11970 #11965 #11963 #11962 #11959 |
-| B193 | 5 | — | 1.2 | — | #11955 #11952 #11951 #11946 #11944 |
-| B194 | 5 | — | 1.2 | 1 | #11937 #11935 #11933 #12870 #11925 |
-| B195 | 5 | — | 1.1 | — | #11930 #11918 #11904 #11892 #11893 |
-| B196 | 5 | — | 1.1 | — | #11888 #11896 #11887 #11882 #11877 |
-| B197 | 5 | — | 0.9 | — | #11872 #11863 #11860 #11855 #11853 |
-| B198 | 5 | — | 1.1 | — | #11854 #11851 #11848 #11847 #11842 |
-| B199 | 5 | — | 1.0 | — | #11838 #11837 #11835 #11836 #11826 |
-| B200 | 5 | — | 0.9 | — | #11792 #11803 #11785 #11758 #11782 |
-| B201 | 5 | — | 1.1 | 1 | #11756 #11751 #13648 #11743 #11747 |
-| B202 | 5 | — | 1.1 | — | #11742 #11733 #11736 #11734 #11732 |
-| B203 | 5 | — | 0.9 | — | #11730 #11724 #11728 #11715 #11708 |
-| B204 | 5 | — | 1.1 | — | #11719 #11706 #11701 #11694 #11695 |
-| B205 | 5 | — | 1.1 | — | #11691 #11692 #11686 #11685 #11681 |
-| B206 | 4 | — | 0.7 | — | #11679 #11675 #11677 #11670 |
-| B207 | 5 | — | 1.1 | 1 | #11669 #13729 #11667 #11663 #11661 |
-| B208 | 5 | — | 1.1 | — | #11659 #11639 #11631 #11626 #11610 |
-| B209 | 5 | — | 1.0 | — | #11606 #11581 #11578 #11577 #11568 |
-| B210 | 5 | — | 1.2 | — | #11569 #11566 #11558 #11553 #11545 |
-| B211 | 5 | — | 1.1 | — | #11534 #11525 #11520 #11516 #11496 |
-| B212 | 5 | — | 0.8 | — | #11503 #11492 #11493 #11488 #11491 |
-| B213 | 5 | — | 1.1 | — | #11487 #11484 #11483 #11482 #11480 |
-| B214 | 5 | — | 0.7 | — | #11475 #11468 #11466 #11464 #11454 |
-| B215 | 5 | — | 1.1 | — | #11451 #11455 #11447 #11441 #11435 |
-| B216 | 5 | — | 1.0 | — | #11436 #11421 #11415 #11414 #11408 |
-| B217 | 5 | — | 1.1 | — | #11404 #11403 #11393 #11385 #11371 |
-| B218 | 5 | — | 1.0 | — | #11378 #11360 #11344 #11357 #11312 |
-| B219 | 5 | — | 0.9 | — | #11309 #11304 #11302 #11296 #11295 |
-| B220 | 5 | — | 0.8 | — | #11291 #11290 #11288 #11287 #11267 |
-| B221 | 5 | — | 0.8 | — | #11252 #11244 #11285 #11269 #11284 |
-| B222 | 5 | — | 0.9 | — | #11239 #11238 #11235 #11228 #11210 |
-| B223 | 5 | — | 1.0 | — | #11217 #11223 #11209 #11199 #11205 |
-| B224 | 5 | — | 0.8 | — | #11195 #11188 #11181 #11191 #11179 |
-| B225 | 5 | — | 1.0 | — | #11178 #11177 #11174 #11169 #11164 |
-| B226 | 5 | — | 1.0 | — | #11162 #11160 #11161 #11156 #11157 |
-| B227 | 5 | — | 1.1 | — | #11155 #11154 #11151 #11146 #11150 |
-| B228 | 5 | — | 0.9 | — | #11142 #11136 #11134 #11129 #11131 |
-| B229 | 5 | — | 1.1 | — | #11125 #11124 #11120 #11121 #11117 |
-| B230 | 5 | — | 1.0 | — | #11116 #11114 #11118 #11109 #11098 |
-| B231 | 5 | — | 1.1 | — | #11096 #11103 #11092 #11089 #11082 |
-| B232 | 4 | — | 0.8 | — | #11087 #11079 #11057 #11054 |
-| B233 | 5 | — | 0.9 | 1 | #11055 #11080 #11047 #11044 #11045 |
-| B234 | 4 | — | 0.7 | — | #11042 #11035 #11034 #11026 |
-| B235 | 5 | — | 1.0 | 1 | #11022 #12955 #11021 #11014 #11015 |
-| B236 | 5 | — | 1.1 | — | #11012 #11009 #10998 #11000 #10991 |
-| B237 | 5 | — | 1.1 | — | #10984 #10989 #10993 #10980 #10958 |
-| B238 | 5 | — | 0.8 | — | #10951 #10942 #10931 #10919 #10917 |
-| B239 | 5 | — | 1.1 | — | #10915 #10905 #10869 #10872 #10873 |
-| B240 | 5 | — | 0.8 | — | #10866 #10847 #10865 #10864 #10844 |
-| B241 | 5 | — | 1.0 | — | #10845 #10841 #10831 #10838 #10823 |
-| B242 | 5 | — | 1.1 | — | #10828 #10817 #10805 #10811 #10799 |
-| B243 | 5 | — | 0.8 | 1 | #10783 #10789 #13545 #10776 #10781 |
-| B244 | 5 | — | 1.0 | — | #10764 #10763 #10756 #10751 #10749 |
-| B245 | 5 | — | 1.1 | — | #10743 #10742 #10731 #10728 #10724 |
-| B246 | 5 | — | 0.9 | — | #10721 #10716 #10715 #10709 #10708 |
-| B247 | 5 | — | 1.0 | — | #10705 #10697 #10704 #10693 #10686 |
-| B248 | 5 | — | 1.0 | — | #10679 #10680 #10675 #10667 #10668 |
-| B249 | 5 | — | 1.0 | — | #10664 #10665 #10660 #10657 #10654 |
-| B250 | 5 | — | 1.0 | — | #10639 #10634 #10633 #10631 #10632 |
-| B251 | 5 | — | 1.1 | — | #10630 #10629 #10628 #10627 #10614 |
-| B252 | 4 | — | 1.1 | 1 | #10606 #10599 #10587 #13517 |
-| B253 | 5 | — | 0.9 | 1 | #10586 #13749 #10582 #10580 #10578 |
-| B254 | 5 | — | 1.1 | — | #10575 #10577 #10576 #10574 #10565 |
-| B255 | 5 | — | 0.9 | — | #10567 #10570 #10564 #10558 #10557 |
-| B256 | 5 | — | 0.9 | — | #10553 #10552 #10571 #10550 #10547 |
-| B257 | 5 | — | 1.0 | — | #10548 #10549 #10542 #10540 #10536 |
-| B258 | 5 | — | 1.1 | 1 | #10538 #10530 #12667 #10531 #10529 |
-| B259 | 5 | — | 0.9 | — | #10524 #10520 #10513 #10517 #10511 |
-| B260 | 5 | — | 0.8 | — | #10510 #10501 #10499 #10494 #10490 |
-| B261 | 5 | — | 1.1 | 1 | #10483 #10476 #13186 #10475 #10472 |
-| B262 | 5 | — | 1.0 | — | #10470 #10468 #10458 #10457 #10455 |
-| B263 | 5 | — | 1.1 | 1 | #10430 #12337 #10418 #10414 #10416 |
-| B264 | 5 | — | 1.2 | 1 | #10408 #10402 #10413 #13214 #10400 |
-| B265 | 5 | — | 1.1 | — | #10398 #10397 #10394 #10390 #10392 |
-| B266 | 5 | — | 1.0 | — | #10383 #10377 #10367 #10366 #10364 |
-| B267 | 5 | — | 1.0 | — | #10362 #10361 #10353 #10343 #10341 |
-| B268 | 5 | — | 1.2 | — | #10345 #10336 #10333 #10330 #10331 |
-| B269 | 5 | — | 1.1 | — | #10326 #10308 #10298 #10294 #10291 |
-| B270 | 5 | — | 1.0 | — | #10278 #10274 #10277 #10268 #10260 |
-| B271 | 5 | — | 1.1 | — | #10253 #10259 #10249 #10239 #10238 |
-| B272 | 5 | — | 1.0 | 1 | #10237 #10231 #12956 #10232 #10228 |
-| B273 | 5 | — | 1.0 | — | #10229 #10222 #10215 #10210 #10196 |
-| B274 | 5 | — | 1.3 | — | #10198 #10205 #10191 #10190 #10183 |
-| B275 | 5 | — | 1.0 | — | #10182 #10181 #10180 #10175 #10176 |
-| B276 | 5 | — | 1.0 | — | #10171 #10168 #10167 #10159 #10160 |
-| B277 | 5 | — | 0.9 | — | #10162 #10157 #10148 #10147 #10146 |
-| B278 | 5 | — | 1.0 | 1 | #10144 #10138 #13347 #10130 #10129 |
-| B279 | 5 | — | 0.8 | — | #10125 #10123 #10115 #10116 #10106 |
-| B280 | 5 | — | 1.0 | — | #10095 #10092 #10080 #10077 #10071 |
-| B281 | 5 | — | 0.9 | — | #10076 #10070 #10068 #10067 #10066 |
-| B282 | 5 | — | 1.0 | — | #10060 #10056 #10043 #10041 #10040 |
-| B283 | 4 | — | 0.8 | — | #10031 #10020 #10017 #10019 |
-| B284 | 5 | — | 1.0 | 1 | #10007 #12255 #10006 #10003 #9997 |
-| B285 | 5 | — | 0.8 | — | #10002 #9993 #9986 #9985 #9978 |
-| B286 | 5 | — | 0.9 | — | #9984 #9977 #9976 #9973 #9972 |
-| B287 | 5 | — | 1.1 | — | #9969 #9968 #9962 #9956 #9945 |
-| B288 | 5 | — | 1.0 | — | #9942 #9933 #9930 #9929 #9927 |
-| B289 | 5 | — | 1.1 | — | #9921 #9928 #9919 #9917 #9908 |
-| B290 | 5 | — | 1.0 | — | #9906 #9903 #9898 #9900 #9893 |
-| B291 | 4 | — | 1.0 | — | #9892 #9891 #9883 #9889 |
-| B292 | 5 | — | 1.0 | 1 | #9885 #12425 #9882 #9886 #9881 |
-| B293 | 5 | — | 0.8 | 1 | #9876 #9871 #13505 #9869 #9867 |
-| B294 | 5 | — | 1.0 | — | #9864 #9848 #9838 #9829 #9819 |
-| B295 | 5 | — | 1.0 | — | #9814 #9809 #9806 #9797 #9790 |
-| B296 | 5 | — | 1.1 | — | #9788 #9780 #9768 #9764 #9763 |
-| B297 | 5 | — | 1.0 | — | #9761 #9758 #9760 #9757 #9755 |
-| B298 | 5 | — | 1.1 | — | #9752 #9747 #9741 #9742 #9730 |
-| B299 | 5 | — | 0.9 | — | #9733 #9725 #9722 #9717 #9716 |
-| B300 | 5 | — | 1.0 | — | #9697 #9703 #9694 #9693 #9691 |
-| B301 | 5 | — | 1.0 | — | #9690 #9680 #9667 #9660 #9662 |
-| B302 | 5 | — | 1.1 | — | #9649 #9638 #9637 #9634 #9629 |
-| B303 | 5 | — | 1.2 | — | #9621 #9614 #9612 #9590 #9583 |
-| B304 | 5 | — | 1.2 | — | #9578 #9570 #9568 #9565 #9563 |
-| B305 | 5 | — | 1.1 | — | #9554 #9553 #9551 #9550 #9545 |
-| B306 | 5 | — | 1.0 | — | #9546 #9542 #9535 #9525 #9524 |
-| B307 | 5 | — | 1.0 | — | #9522 #9514 #9509 #9508 #9495 |
-| B308 | 5 | — | 0.8 | 1 | #9490 #12800 #9488 #9487 #9486 |
-| B309 | 5 | — | 1.1 | — | #9483 #9482 #9479 #9449 #9456 |
-| B310 | 5 | — | 1.0 | — | #9448 #9435 #9432 #9431 #9426 |
-| B311 | 5 | — | 1.2 | — | #9425 #9423 #9420 #9419 #9408 |
-| B312 | 5 | — | 1.1 | — | #9409 #9400 #9370 #9364 #9365 |
-| B313 | 5 | — | 1.1 | — | #9363 #9362 #9352 #9348 #9346 |
-| B314 | 5 | — | 1.1 | — | #9350 #9345 #9344 #9343 #9337 |
-| B315 | 5 | — | 0.9 | — | #9313 #9327 #9296 #9290 #9286 |
-| B316 | 5 | — | 1.1 | — | #9281 #9280 #9279 #9277 #9273 |
-| B317 | 5 | — | 1.1 | — | #9270 #9265 #9260 #9245 #9238 |
-| B318 | 5 | — | 0.9 | — | #9233 #9234 #9223 #9218 #9219 |
-| B319 | 5 | — | 1.1 | — | #9217 #9212 #9211 #9206 #9203 |
-| B320 | 5 | — | 0.9 | — | #9209 #9201 #9192 #9191 #9186 |
-| B321 | 5 | — | 0.9 | — | #9175 #9169 #9168 #9164 #9163 |
-| B322 | 5 | — | 1.2 | 1 | #9161 #9160 #9159 #9189 #12423 |
-| B323 | 5 | — | 1.1 | — | #9155 #9152 #9148 #9135 #9132 |
-| B324 | 5 | — | 1.1 | — | #9133 #9131 #9130 #9129 #9128 |
-| B325 | 5 | — | 1.0 | 1 | #9126 #9127 #12424 #9121 #9120 |
-| B326 | 5 | — | 0.8 | — | #9113 #9108 #9110 #9103 #9095 |
-| B327 | 5 | — | 0.9 | — | #9094 #9093 #9063 #9058 #9062 |
-| B328 | 5 | — | 1.1 | — | #9056 #9055 #9050 #9049 #9042 |
-| B329 | 5 | — | 1.0 | — | #9041 #9040 #9039 #9038 #9035 |
-| B330 | 5 | — | 1.0 | — | #9025 #9031 #9017 #9022 #9015 |
-| B331 | 5 | — | 1.1 | — | #9014 #9013 #9006 #9000 #8992 |
-| B332 | 5 | — | 1.0 | — | #8982 #8987 #8980 #8978 #8977 |
-| B333 | 5 | — | 0.8 | — | #8974 #8965 #8968 #8959 #8958 |
-| B334 | 5 | — | 1.1 | — | #8947 #8942 #8932 #8941 #8929 |
-| B335 | 5 | — | 1.1 | — | #8927 #8923 #8922 #8913 #8907 |
-| B336 | 5 | — | 0.9 | — | #8904 #8893 #8886 #8892 #8896 |
-| B337 | 5 | — | 1.0 | 1 | #8885 #8884 #13568 #8877 #8880 |
-| B338 | 5 | — | 1.1 | 1 | #8876 #8872 #8881 #8871 #8873 |
-| B339 | 5 | — | 0.9 | — | #8865 #8862 #8860 #8857 #8852 |
-| B340 | 5 | — | 0.8 | — | #8866 #8846 #8841 #8830 #8828 |
-| B341 | 5 | — | 1.0 | — | #8827 #8825 #8820 #8815 #8809 |
-| B342 | 5 | — | 1.0 | — | #8808 #8804 #8802 #8794 #8792 |
-| B343 | 5 | — | 1.2 | — | #8787 #8786 #8773 #8777 #8771 |
-| B344 | 5 | — | 1.0 | — | #8768 #8766 #8765 #8761 #8759 |
-| B345 | 5 | — | 0.9 | — | #8755 #8743 #8739 #8741 #8737 |
-| B346 | 5 | — | 1.1 | — | #8734 #8724 #8732 #8720 #8713 |
-| B347 | 5 | — | 0.8 | — | #8708 #8712 #8700 #8696 #8699 |
-| B348 | 5 | — | 1.2 | 1 | #8692 #8695 #8688 #8685 #11056 |
-| B349 | 5 | — | 1.1 | — | #8683 #8684 #8681 #8675 #8664 |
-| B350 | 5 | — | 0.9 | — | #8663 #8666 #8661 #8654 #8640 |
-| B351 | 5 | — | 1.1 | — | #8653 #8634 #8635 #8633 #8631 |
-| B352 | 5 | — | 0.8 | — | #8625 #8630 #8615 #8610 #8609 |
-| B353 | 5 | — | 1.0 | — | #8605 #8599 #8602 #8597 #8595 |
-| B354 | 5 | — | 0.9 | — | #8581 #8585 #8579 #8576 #8575 |
-| B355 | 5 | — | 0.9 | — | #8569 #8573 #8570 #8561 #8560 |
-| B356 | 5 | — | 1.0 | — | #8559 #8556 #8557 #8525 #8533 |
-| B357 | 5 | — | 1.1 | — | #8522 #8524 #8519 #8517 #8500 |
-| B358 | 5 | — | 1.1 | — | #8499 #8497 #8493 #8486 #8479 |
-| B359 | 5 | — | 1.0 | — | #8466 #8450 #8449 #8448 #8443 |
-| B360 | 5 | — | 0.8 | — | #8437 #8435 #8414 #8411 #8407 |
-| B361 | 5 | — | 1.0 | — | #8406 #8402 #8400 #8399 #8393 |
-| B362 | 5 | — | 1.0 | — | #8391 #8379 #8383 #8350 #8345 |
-| B363 | 5 | — | 1.1 | — | #8344 #8341 #8343 #8333 #8329 |
-| B364 | 5 | — | 0.9 | — | #8330 #8318 #8325 #8317 #8308 |
-| B365 | 5 | — | 0.9 | — | #8313 #8307 #8304 #8299 #8287 |
-| B366 | 5 | — | 1.0 | — | #8284 #8281 #8278 #8277 #8269 |
-| B367 | 5 | — | 1.1 | — | #8267 #8266 #8265 #8260 #8259 |
-| B368 | 5 | — | 1.0 | — | #8264 #8258 #8257 #8254 #8229 |
-| B369 | 5 | — | 1.1 | — | #8247 #8228 #8227 #8214 #8210 |
-| B370 | 5 | — | 1.0 | — | #8205 #8182 #8179 #8164 #8165 |
-| B371 | 5 | — | 1.2 | — | #8163 #8153 #8141 #8160 #8135 |
-| B372 | 5 | — | 1.2 | — | #8128 #8121 #8119 #8117 #8116 |
-| B373 | 5 | — | 1.1 | — | #8096 #8101 #8091 #8084 #8086 |
-| B374 | 5 | — | 1.1 | — | #8081 #8078 #8069 #8076 #8073 |
-| B375 | 5 | — | 0.9 | — | #8064 #8059 #8051 #8055 #8042 |
-| B376 | 5 | — | 1.1 | — | #8036 #8048 #8033 #8034 #8017 |
-| B377 | 5 | — | 0.4 | 1 | #8016 #8011 #8005 #13233 #8006 |
-| B378 | 5 | — | 1.0 | — | #8004 #7975 #7954 #7948 #7946 |
-| B379 | 5 | — | 0.8 | — | #7931 #7932 #7938 #7927 #7924 |
-| B380 | 5 | — | 1.0 | — | #7915 #7905 #7910 #7899 #7898 |
-| B381 | 5 | — | 1.3 | — | #7886 #7890 #7880 #7877 #7876 |
-| B382 | 5 | — | 1.1 | — | #7861 #7863 #7851 #7839 #7837 |
-| B383 | 5 | — | 1.0 | 1 | #7836 #7833 #11338 #7827 #7826 |
-| B384 | 5 | — | 1.1 | — | #7821 #7816 #7819 #7812 #7808 |
-| B385 | 5 | — | 0.7 | — | #7806 #7797 #7794 #7796 #7792 |
-| B386 | 5 | — | 1.0 | 1 | #7787 #7779 #7783 #12658 #7778 |
-| B387 | 5 | — | 1.0 | — | #7771 #7766 #7765 #7763 #7757 |
-| B388 | 5 | — | 1.1 | — | #7756 #7754 #7748 #7746 #7745 |
-| B389 | 5 | — | 0.8 | — | #7740 #7738 #7737 #7736 #7727 |
-| B390 | 5 | — | 1.1 | — | #7729 #7726 #7725 #7723 #7722 |
-| B391 | 5 | — | 1.0 | — | #7717 #7716 #7714 #7713 #7708 |
-| B392 | 5 | — | 1.1 | — | #7694 #7692 #7693 #7690 #7686 |
-| B393 | 5 | — | 0.9 | 1 | #7681 #7661 #7660 #7659 #8023 |
-| B394 | 5 | — | 0.6 | — | #7654 #7653 #7637 #7631 #7623 |
-| B395 | 5 | — | 0.9 | — | #7615 #7610 #7601 #7599 #7592 |
-| B396 | 5 | — | 1.1 | 1 | #7579 #7578 #7570 #7568 #12446 |
-| B397 | 5 | — | 1.0 | — | #7564 #7563 #7560 #7551 #7547 |
-| B398 | 5 | — | 1.0 | — | #7545 #7543 #7541 #7542 #7536 |
-| B399 | 5 | — | 1.1 | — | #7528 #7517 #7512 #7497 #7495 |
-| B400 | 5 | — | 0.9 | — | #7494 #7493 #7491 #7490 #7488 |
-| B401 | 5 | — | 1.0 | — | #7475 #7473 #7471 #7468 #7465 |
-| B402 | 5 | — | 1.1 | — | #7460 #7459 #7452 #7451 #7450 |
-| B403 | 5 | — | 1.2 | — | #7447 #7449 #7446 #7445 #7436 |
-| B404 | 5 | — | 0.8 | — | #7434 #7433 #7428 #7419 #7413 |
-| B405 | 5 | — | 1.0 | — | #7431 #7408 #7406 #7402 #7404 |
-| B406 | 5 | — | 1.1 | — | #7405 #7400 #7398 #7387 #7386 |
-| B407 | 5 | — | 1.1 | 1 | #7385 #7381 #7373 #13029 #7372 |
-| B408 | 5 | — | 1.0 | — | #7366 #7370 #7365 #7363 #7356 |
-| B409 | 5 | — | 1.1 | — | #7345 #7344 #7340 #7338 #7336 |
-| B410 | 5 | — | 0.6 | — | #7337 #7332 #7322 #7320 #7318 |
-| B411 | 5 | — | 0.8 | — | #7309 #7308 #7298 #7307 #7302 |
-| B412 | 5 | — | 0.9 | — | #7296 #7290 #7289 #7283 #7282 |
-| B413 | 5 | — | 1.1 | — | #7286 #7273 #7269 #7267 #7259 |
-| B414 | 5 | — | 1.1 | — | #7254 #7251 #7247 #7246 #7245 |
-| B415 | 5 | — | 0.8 | — | #7243 #7241 #7240 #7239 #7231 |
-| B416 | 5 | — | 0.9 | — | #7235 #7225 #7219 #7216 #7207 |
-| B417 | 5 | — | 1.1 | — | #7205 #7197 #7189 #7188 #7186 |
-| B418 | 5 | — | 1.1 | — | #7187 #7173 #7168 #7164 #7163 |
-| B419 | 5 | — | 1.1 | — | #7152 #7146 #7136 #7131 #7144 |
-| B420 | 5 | — | 0.9 | 1 | #7130 #7102 #13637 #7095 #7088 |
-| B421 | 5 | — | 1.0 | 2 | #7075 #8012 #7074 #12759 #7065 |
-| B422 | 5 | — | 0.8 | — | #7063 #7042 #7039 #7037 #7036 |
-| B423 | 5 | — | 1.1 | — | #7024 #7029 #7030 #7023 #7020 |
-| B424 | 5 | — | 1.1 | — | #7017 #7016 #7011 #7000 #7002 |
-| B425 | 5 | — | 1.1 | — | #6979 #6967 #6966 #6963 #6961 |
-| B426 | 5 | — | 0.9 | — | #6959 #6958 #6954 #6930 #6932 |
-| B427 | 5 | — | 1.1 | 1 | #6920 #6972 #6924 #12851 #6918 |
-| B428 | 5 | — | 1.2 | — | #6916 #6907 #6904 #6897 #6884 |
-| B429 | 5 | — | 1.1 | — | #6896 #6892 #6856 #6860 #6871 |
-| B430 | 5 | — | 1.2 | — | #6872 #6839 #6834 #6832 #6831 |
-| B431 | 5 | — | 1.1 | — | #6829 #6828 #6797 #6812 #6782 |
-| B432 | 5 | — | 1.2 | — | #6786 #6777 #6767 #6761 #6760 |
-| B433 | 5 | — | 1.0 | — | #6742 #6739 #6720 #6718 #6710 |
-| B434 | 5 | — | 0.8 | — | #6698 #6696 #6693 #6662 #6642 |
-| B435 | 5 | — | 1.0 | 1 | #6587 #13137 #6570 #6589 #6569 |
-| B436 | 5 | — | 1.1 | — | #6550 #6548 #6533 #6525 #6521 |
-| B437 | 5 | — | 1.1 | — | #6511 #6510 #6508 #6507 #6506 |
-| B438 | 5 | — | 1.0 | — | #6496 #6501 #6505 #6489 #6478 |
-| B439 | 5 | — | 0.9 | — | #6481 #6471 #6470 #6467 #6451 |
-| B440 | 4 | — | 1.2 | — | #6402 #6388 #6333 #6122 |
-| B441 | 5 | — | 1.0 | 1 | #6105 #9679 #6104 #6100 #6078 |
-| B442 | 5 | — | 1.0 | 1 | #6058 #10867 #6042 #5999 #5964 |
-| B443 | 5 | — | 0.8 | — | #5954 #5934 #5925 #5902 #5884 |
-| B444 | 5 | — | 1.1 | — | #5881 #5850 #5839 #5818 #5830 |
-| B445 | 4 | — | 1.0 | — | #5809 #5796 #5716 #5603 |
-| B446 | 5 | — | 1.0 | 1 | #5600 #11294 #5589 #5585 #5571 |
-| B447 | 5 | — | 1.1 | — | #5567 #5564 #5514 #5424 #5343 |
-| B448 | 5 | — | 1.1 | — | #5317 #5403 #5312 #5309 #5282 |
-| B449 | 5 | — | 1.1 | 1 | #5195 #5144 #5099 #11008 #5031 |
-| B450 | 5 | — | 1.1 | — | #5020 #5011 #4985 #4962 #4936 |
-| B451 | 5 | — | 1.1 | 1 | #4928 #7700 #4890 #4829 #4749 |
-| B452 | 4 | — | 1.1 | — | #4750 #12538 #13946 #13777 |
-| B453 | 5 | — | 0.9 | 1 | #9967 #13945 #12568 #12572 #12577 |
-| B454 | 5 | — | 1.6 | — | #12595 #12600 #13936 #13938 #13934 |
-| B455 | 5 | — | 1.9 | — | #13933 #13925 #13908 #13889 #13861 |
-| B456 | 5 | — | 2.0 | — | #13867 #13819 #13781 #13778 #13768 |
-| B457 | 5 | — | 1.8 | — | #13762 #13728 #13671 #13667 #13651 |
-| B458 | 5 | — | 1.9 | — | #13644 #13601 #13588 #13584 #13552 |
-| B459 | 5 | — | 2.0 | 1 | #13540 #13610 #13539 #13526 #13508 |
-| B460 | 4 | — | 1.8 | 1 | #13490 #13462 #13602 #13460 |
-| B461 | 5 | — | 1.8 | 1 | #13444 #13544 #13426 #13397 #13371 |
-| B462 | 5 | — | 1.8 | — | #13352 #13262 #13260 #13243 #13148 |
-| B463 | 5 | — | 1.9 | — | #13115 #13076 #13005 #12977 #12936 |
-| B464 | 5 | — | 1.7 | — | #12923 #12913 #12906 #12905 #12871 |
-| B465 | 5 | — | 1.8 | — | #12834 #12816 #12723 #12722 #12636 |
-| B466 | 5 | — | 1.8 | — | #12616 #12545 #12532 #12535 #12524 |
-| B467 | 5 | — | 2.0 | 1 | #12510 #12505 #13331 #12461 #12428 |
-| B468 | 5 | — | 1.7 | — | #12421 #12420 #12419 #12358 #12328 |
-| B469 | 5 | — | 1.8 | — | #12291 #12277 #12263 #12252 #12250 |
-| B470 | 5 | — | 1.9 | — | #12245 #12220 #12216 #12211 #12210 |
-| B471 | 5 | — | 1.9 | — | #12203 #12186 #12185 #12148 #12139 |
-| B472 | 5 | — | 1.9 | — | #12125 #12106 #12076 #12071 #12056 |
-| B473 | 5 | — | 1.8 | — | #12023 #11978 #12004 #11953 #11920 |
-| B474 | 5 | — | 2.0 | — | #11912 #11880 #11870 #11843 #11840 |
-| B475 | 5 | — | 1.8 | — | #11827 #11831 #11805 #11624 #11592 |
-| B476 | 5 | — | 1.9 | — | #11571 #11554 #11538 #11528 #11523 |
-| B477 | 5 | — | 2.0 | — | #11481 #11478 #11477 #11432 #11420 |
-| B478 | 5 | — | 1.7 | 1 | #11418 #11387 #11364 #12089 #11315 |
-| B479 | 5 | — | 1.8 | — | #11286 #11260 #11259 #11250 #11273 |
-| B480 | 5 | — | 1.9 | — | #11240 #11222 #11207 #11053 #10949 |
-| B481 | 5 | — | 1.9 | — | #10926 #10911 #10886 #10884 #10878 |
-| B482 | 5 | — | 2.0 | — | #10877 #10812 #10752 #10722 #10719 |
-| B483 | 5 | — | 1.8 | — | #10713 #10711 #10710 #10707 #10663 |
-| B484 | 5 | — | 2.0 | — | #10653 #10594 #10592 #10573 #10519 |
-| B485 | 5 | — | 2.1 | 1 | #10498 #10497 #10485 #10463 #10920 |
-| B486 | 5 | — | 1.9 | — | #10446 #10370 #10314 #10320 #10313 |
-| B487 | 5 | — | 2.0 | — | #10301 #10293 #10236 #10235 #10165 |
-| B488 | 5 | — | 2.1 | — | #10166 #10111 #10083 #10079 #10058 |
-| B489 | 5 | — | 2.0 | — | #10015 #9880 #9850 #9847 #9824 |
-| B490 | 5 | — | 2.0 | — | #9807 #9796 #9686 #9633 #9632 |
-| B491 | 5 | — | 1.6 | — | #9575 #9523 #9520 #9503 #9493 |
-| B492 | 5 | — | 1.9 | 1 | #9472 #9445 #9436 #9429 #13756 |
-| B493 | 5 | — | 1.7 | — | #9358 #9299 #9312 #9282 #9244 |
-| B494 | 5 | — | 2.1 | — | #9230 #9228 #9210 #9195 #9170 |
-| B495 | 5 | — | 1.8 | — | #9150 #9139 #9124 #9105 #9037 |
-| B496 | 5 | — | 1.8 | — | #9033 #9011 #9001 #8940 #8879 |
-| B497 | 5 | — | 1.6 | 1 | #8875 #12569 #8874 #8854 #8824 |
-| B498 | 5 | — | 1.9 | — | #8821 #8811 #8793 #8781 #8750 |
-| B499 | 5 | — | 1.8 | — | #8733 #8704 #8682 #8670 #8644 |
-| B500 | 5 | — | 1.9 | — | #8590 #8588 #8531 #8514 #8476 |
-| B501 | 5 | — | 1.9 | — | #8464 #8442 #8430 #8426 #8408 |
-| B502 | 5 | — | 1.9 | — | #8385 #8371 #8316 #8221 #8186 |
-| B503 | 5 | — | 1.8 | — | #8124 #8087 #8025 #7998 #7992 |
-| B504 | 5 | — | 1.8 | — | #7951 #7773 #7715 #7673 #7667 |
-| B505 | 5 | — | 1.8 | — | #7651 #7609 #7594 #7486 #7474 |
-| B506 | 5 | — | 1.9 | — | #7444 #7396 #7353 #7348 #7329 |
-| B507 | 5 | — | 1.7 | — | #7256 #7196 #7193 #7177 #7155 |
-| B508 | 5 | — | 2.1 | 1 | #7044 #6982 #6951 #12548 #6928 |
-| B509 | 5 | — | 1.9 | — | #6906 #6865 #6849 #6840 #6813 |
-| B510 | 5 | — | 2.0 | — | #6753 #6730 #6553 #6494 #6454 |
-| B511 | 5 | — | 1.9 | 1 | #6403 #6149 #6019 #7945 #5890 |
-| B512 | 5 | — | 1.9 | — | #5866 #5686 #5553 #5453 #5445 |
-| B513 | 5 | — | 1.9 | — | #5335 #5241 #5209 #5193 #5148 |
-| B514 | 5 | — | 1.9 | — | #5130 #4793 #4593 #12590 #12598 |
-| B515 | 5 | — | 2.8 | — | #13820 #13675 #13672 #13663 #13623 |
-| B516 | 5 | — | 2.7 | — | #13615 #13532 #13311 #13298 #13238 |
-| B517 | 5 | — | 2.8 | — | #13192 #13129 #13082 #12909 #12833 |
-| B518 | 5 | — | 2.9 | — | #12314 #12286 #12176 #12109 #12067 |
-| B519 | 5 | — | 2.7 | — | #12046 #12003 #11948 #11917 #11911 |
-| B520 | 5 | — | 2.8 | — | #11759 #11748 #11746 #11655 #11616 |
-| B521 | 5 | — | 2.7 | — | #11570 #11548 #11536 #11476 #11401 |
-| B522 | 5 | — | 2.8 | 1 | #11311 #11076 #11064 #11033 #11652 |
-| B523 | 5 | — | 2.9 | — | #10936 #10910 #10758 #10332 #10306 |
-| B524 | 5 | — | 2.7 | — | #10184 #10169 #10139 #10065 #9899 |
-| B525 | 5 | — | 2.9 | — | #9830 #9816 #9815 #9692 #9332 |
-| B526 | 5 | — | 2.8 | — | #9285 #9276 #9202 #9070 #8994 |
-| B527 | 5 | — | 2.8 | — | #8812 #8756 #8546 #8489 #8295 |
-| B528 | 5 | — | 2.9 | — | #8285 #8263 #8199 #8187 #8175 |
-| B529 | 5 | — | 2.7 | — | #8151 #8127 #8090 #8022 #7993 |
-| B530 | 5 | — | 2.8 | — | #7950 #7817 #7732 #7671 #7644 |
-| B531 | 5 | — | 2.8 | — | #7572 #7410 #7343 #7223 #7169 |
-| B532 | 5 | — | 2.9 | — | #7064 #7004 #6929 #6921 #6758 |
-| B533 | 5 | — | 2.7 | — | #6596 #5951 #5938 #5761 #5430 |
-| B534 | 5 | — | 2.7 | 1 | #5332 #13055 #5194 #5140 #12055 |
+| B004 | 5 | 5 | 1.2 | — | #13845 #13829 #13763 #13745 #13742 |
+| B005 | 5 | 5 | 1.2 | — | #13513 #13200 #13183 #13106 #13107 |
+| B006 | 5 | 5 | 1.1 | — | #13088 #13075 #13052 #12925 #12891 |
+| B007 | 5 | 5 | 1.2 | — | #12815 #12698 #12583 #12459 #12329 |
+| B008 | 5 | 5 | 1.3 | — | #12260 #12105 #12001 #11967 #11907 |
+| B009 | 5 | 5 | 0.8 | — | #11804 #11795 #11725 #11720 #11722 |
+| B010 | 5 | 5 | 1.2 | — | #11398 #11367 #11242 #11197 #11144 |
+| B011 | 5 | 5 | 1.2 | — | #11067 #10952 #10944 #10824 #10730 |
+| B012 | 5 | 5 | 1.2 | — | #10683 #10644 #10473 #10435 #10428 |
+| B013 | 5 | 5 | 1.1 | — | #10347 #10346 #10248 #10172 #10088 |
+| B014 | 5 | 4 | 1.2 | 1 | #9958 #13548 #9834 #9597 #9594 |
+| B015 | 5 | 5 | 1.1 | — | #9531 #9398 #9320 #9319 #8796 |
+| B016 | 5 | 5 | 1.2 | — | #8715 #8578 #8537 #8487 #8441 |
+| B017 | 5 | 5 | 1.1 | — | #8439 #8377 #8326 #8315 #8251 |
+| B018 | 5 | 5 | 1.1 | — | #8014 #8019 #8001 #7799 #7680 |
+| B019 | 5 | 5 | 1.1 | — | #7598 #7566 #7554 #7537 #7485 |
+| B020 | 5 | 5 | 1.2 | — | #7455 #7051 #6844 #6771 #6557 |
+| B021 | 5 | 5 | 0.9 | — | #6532 #5744 #13796 #8093 #9009 |
+| B022 | 5 | 5 | 2.2 | — | #13875 #13856 #13836 #13811 #13705 |
+| B023 | 5 | 5 | 2.0 | — | #13690 #13664 #13630 #13625 #13432 |
+| B024 | 5 | 4 | 1.9 | 1 | #13296 #13110 #13101 #13668 #13036 |
+| B025 | 5 | 5 | 2.1 | — | #13047 #12901 #12836 #12796 #12788 |
+| B026 | 4 | 4 | 2.0 | — | #12766 #12605 #12475 #12279 |
+| B027 | 5 | 4 | 2.2 | 1 | #12177 #13205 #12111 #12070 #12015 |
+| B028 | 5 | 5 | 2.1 | — | #11984 #11989 #11983 #11966 #11956 |
+| B029 | 5 | 5 | 1.9 | — | #11839 #11768 #11731 #11574 #11479 |
+| B030 | 5 | 5 | 1.9 | — | #11444 #11423 #11388 #11289 #11216 |
+| B031 | 5 | 4 | 2.1 | 1 | #11198 #11097 #11069 #11470 #10977 |
+| B032 | 5 | 5 | 1.9 | — | #10802 #10769 #10602 #10262 #10257 |
+| B033 | 5 | 5 | 2.0 | — | #10185 #10110 #10109 #10022 #9995 |
+| B034 | 5 | 5 | 2.1 | — | #9946 #9894 #9878 #9777 #9695 |
+| B035 | 5 | 5 | 2.1 | — | #9596 #9539 #9511 #9381 #9307 |
+| B036 | 5 | 5 | 2.0 | — | #9227 #9024 #8910 #8801 #8639 |
+| B037 | 5 | 5 | 2.2 | — | #8413 #8294 #8188 #8130 #7882 |
+| B038 | 5 | 5 | 1.9 | — | #7828 #7814 #7731 #7622 #7274 |
+| B039 | 5 | 5 | 1.9 | — | #7272 #7261 #7062 #6965 #6807 |
+| B040 | 5 | 5 | 1.9 | — | #6697 #6664 #6647 #6515 #5654 |
+| B041 | 5 | 5 | 2.2 | — | #5545 #5279 #5139 #5136 #5035 |
+| B042 | 5 | 5 | 2.0 | — | #4997 #8662 #9044 #12059 #13937 |
+| B043 | 5 | 5 | 2.7 | — | #13901 #13887 #13800 #13652 #13616 |
+| B044 | 5 | 5 | 2.9 | — | #13575 #13533 #13479 #13362 #13316 |
+| B045 | 5 | 5 | 2.7 | — | #13312 #13283 #13215 #13187 #13112 |
+| B046 | 5 | 5 | 2.7 | — | #13085 #12897 #12895 #12896 #12888 |
+| B047 | 5 | 5 | 2.9 | — | #12889 #12715 #12542 #12394 #12266 |
+| B048 | 5 | 5 | 3.0 | — | #12265 #12165 #12161 #12164 #12162 |
+| B049 | 5 | 5 | 2.9 | — | #12160 #12159 #12155 #12110 #12103 |
+| B050 | 5 | 5 | 2.9 | — | #12078 #11874 #11786 #11697 #11471 |
+| B051 | 5 | 5 | 3.0 | — | #11438 #11428 #11386 #11381 #11379 |
+| B052 | 5 | 5 | 2.9 | — | #11322 #11196 #11172 #11037 #11017 |
+| B053 | 5 | 5 | 2.8 | — | #10974 #10962 #10738 #10717 #10689 |
+| B054 | 5 | 5 | 2.7 | — | #10655 #10396 #10393 #10338 #10288 |
+| B055 | 5 | 5 | 2.8 | — | #10219 #10113 #10018 #9965 #9875 |
+| B056 | 5 | 5 | 2.9 | — | #9873 #9783 #9750 #9729 #9723 |
+| B057 | 5 | 5 | 2.9 | — | #9700 #9573 #9571 #9506 #9500 |
+| B058 | 5 | 5 | 3.0 | — | #9475 #9464 #9454 #9288 #9248 |
+| B059 | 5 | 5 | 2.9 | — | #9239 #9221 #9043 #8908 #8889 |
+| B060 | 5 | 5 | 2.9 | — | #8831 #8707 #8709 #8534 #8336 |
+| B061 | 5 | 5 | 2.8 | — | #8204 #8169 #8035 #7971 #7913 |
+| B062 | 5 | 5 | 2.9 | — | #7871 #7857 #7831 #7501 #7435 |
+| B063 | 5 | 5 | 2.8 | — | #7417 #7258 #7158 #7071 #6912 |
+| B064 | 5 | 5 | 2.8 | — | #6736 #6513 #6474 #5431 #5284 |
+| B065 | 5 | 3 | 2.4 | 1 | #13947 #8429 #12957 #12883 #13939 |
+| B066 | 5 | — | 0.8 | — | #13940 #13935 #13928 #13929 #13924 |
+| B067 | 5 | — | 1.1 | — | #13917 #13916 #13915 #13914 #13910 |
+| B068 | 5 | — | 0.9 | — | #13913 #13911 #13907 #13909 #13905 |
+| B069 | 5 | — | 0.8 | — | #13902 #13894 #13895 #13897 #13888 |
+| B070 | 5 | — | 1.1 | — | #13885 #13886 #13881 #13883 #13878 |
+| B071 | 5 | — | 1.0 | — | #13870 #13862 #13860 #13859 #13858 |
+| B072 | 5 | — | 1.0 | — | #13857 #13850 #13843 #13842 #13841 |
+| B073 | 5 | — | 1.1 | — | #13837 #13835 #13833 #13831 #13830 |
+| B074 | 5 | — | 0.9 | — | #13824 #13818 #13813 #13816 #13817 |
+| B075 | 5 | — | 1.0 | — | #13810 #13809 #13806 #13805 #13807 |
+| B076 | 5 | — | 1.1 | — | #13808 #13804 #13803 #13802 #13801 |
+| B077 | 5 | — | 1.1 | 1 | #13799 #13797 #13792 #13903 #13787 |
+| B078 | 5 | — | 1.0 | — | #13784 #13783 #13780 #13782 #13776 |
+| B079 | 5 | — | 1.0 | — | #13772 #13775 #13769 #13766 #13765 |
+| B080 | 5 | — | 1.0 | — | #13761 #13759 #13755 #13751 #13747 |
+| B081 | 5 | — | 1.0 | — | #13744 #13743 #13740 #13738 #13737 |
+| B082 | 5 | — | 0.8 | — | #13735 #13732 #13730 #13725 #13724 |
+| B083 | 5 | — | 0.8 | — | #13723 #13722 #13720 #13721 #13719 |
+| B084 | 5 | — | 0.9 | — | #13718 #13716 #13714 #13715 #13717 |
+| B085 | 5 | — | 1.0 | — | #13713 #13712 #13710 #13711 #13709 |
+| B086 | 5 | — | 1.0 | — | #13706 #13703 #13698 #13693 #13688 |
+| B087 | 5 | — | 1.1 | — | #13685 #13684 #13680 #13679 #13678 |
+| B088 | 5 | — | 1.1 | — | #13676 #13674 #13669 #13670 #13666 |
+| B089 | 5 | — | 1.1 | — | #13665 #13662 #13661 #13659 #13658 |
+| B090 | 5 | — | 1.0 | — | #13655 #13654 #13653 #13657 #13649 |
+| B091 | 5 | — | 1.1 | — | #13647 #13642 #13639 #13638 #13636 |
+| B092 | 5 | — | 1.1 | — | #13634 #13635 #13631 #13632 #13629 |
+| B093 | 5 | — | 1.1 | 1 | #13628 #13626 #13656 #13622 #13621 |
+| B094 | 5 | — | 1.2 | — | #13619 #13617 #13614 #13611 #13607 |
+| B095 | 5 | — | 1.0 | — | #13604 #13603 #13600 #13598 #13593 |
+| B096 | 5 | — | 1.0 | — | #13590 #13585 #13581 #13580 #13579 |
+| B097 | 5 | — | 1.0 | — | #13576 #13574 #13570 #13569 #13567 |
+| B098 | 5 | — | 0.9 | — | #13565 #13564 #13561 #13559 #13557 |
+| B099 | 5 | — | 1.1 | — | #13556 #13553 #13547 #13546 #13541 |
+| B100 | 5 | — | 1.1 | — | #13536 #13538 #13531 #13529 #13509 |
+| B101 | 5 | — | 0.9 | — | #13503 #13501 #13500 #13499 #13497 |
+| B102 | 5 | — | 0.9 | — | #13498 #13495 #13496 #13494 #13486 |
+| B103 | 5 | — | 1.3 | 1 | #13483 #13481 #13482 #13480 #13640 |
+| B104 | 5 | — | 1.0 | 2 | #13478 #13641 #13476 #13643 #13475 |
+| B105 | 5 | — | 0.8 | 1 | #13473 #13472 #13471 #13633 #13470 |
+| B106 | 5 | — | 1.1 | 1 | #13468 #13469 #13466 #13543 #13465 |
+| B107 | 5 | — | 0.9 | 1 | #13464 #13461 #13459 #13463 #13613 |
+| B108 | 5 | — | 1.0 | — | #13458 #13451 #13446 #13441 #13412 |
+| B109 | 5 | — | 0.8 | — | #13405 #13409 #13396 #13390 #13389 |
+| B110 | 5 | — | 1.0 | — | #13386 #13379 #13378 #13373 #13365 |
+| B111 | 5 | — | 1.1 | — | #13364 #13360 #13354 #13353 #13345 |
+| B112 | 5 | — | 1.1 | — | #13351 #13340 #13339 #13332 #13338 |
+| B113 | 5 | — | 1.1 | — | #13327 #13318 #13293 #13292 #13277 |
+| B114 | 5 | — | 0.8 | — | #13276 #13272 #13267 #13261 #13259 |
+| B115 | 5 | — | 1.1 | 1 | #13258 #13620 #13248 #13245 #13241 |
+| B116 | 5 | — | 1.0 | — | #13242 #13240 #13239 #13237 #13236 |
+| B117 | 5 | — | 0.7 | — | #13235 #13234 #13232 #13230 #13228 |
+| B118 | 5 | — | 1.1 | — | #13227 #13225 #13221 #13216 #13217 |
+| B119 | 5 | — | 1.0 | — | #13212 #13209 #13203 #13198 #13197 |
+| B120 | 5 | — | 0.9 | — | #13195 #13194 #13193 #13191 #13190 |
+| B121 | 5 | — | 1.1 | 1 | #13189 #13176 #13165 #13477 #13645 |
+| B122 | 5 | — | 1.1 | — | #13161 #13166 #13159 #13156 #13151 |
+| B123 | 5 | — | 1.0 | — | #13144 #13142 #13141 #13140 #13138 |
+| B124 | 5 | — | 0.8 | — | #13139 #13133 #13132 #13126 #13127 |
+| B125 | 5 | — | 1.0 | — | #13123 #13121 #13120 #13114 #13116 |
+| B126 | 5 | — | 1.1 | — | #13113 #13111 #13104 #13103 #13102 |
+| B127 | 5 | — | 1.0 | — | #13100 #13099 #13097 #13095 #13096 |
+| B128 | 5 | — | 1.1 | 1 | #13092 #13090 #13677 #13086 #13083 |
+| B129 | 5 | — | 1.2 | — | #13079 #13074 #13070 #13071 #13064 |
+| B130 | 5 | — | 0.9 | — | #13061 #13065 #13063 #13059 #13043 |
+| B131 | 5 | — | 0.8 | 1 | #13056 #13042 #13041 #13673 #13039 |
+| B132 | 5 | — | 0.9 | 1 | #13044 #13094 #13031 #13033 #13028 |
+| B133 | 5 | — | 0.9 | — | #13029 #13016 #13018 #13013 #13008 |
+| B134 | 5 | — | 1.1 | — | #13012 #13007 #13006 #13000 #13004 |
+| B135 | 5 | — | 1.1 | — | #12999 #12996 #12991 #12992 #12988 |
+| B136 | 5 | — | 1.0 | — | #12986 #12985 #12982 #12983 #12981 |
+| B137 | 5 | — | 1.2 | — | #12979 #12975 #12978 #12973 #12974 |
+| B138 | 5 | — | 1.1 | — | #12970 #12971 #12969 #12967 #12966 |
+| B139 | 5 | — | 1.0 | — | #12965 #12961 #12964 #12963 #12962 |
+| B140 | 5 | — | 1.2 | — | #12960 #12958 #12953 #12952 #12937 |
+| B141 | 5 | — | 1.1 | 1 | #12950 #12939 #13109 #12943 #12935 |
+| B142 | 5 | — | 1.1 | — | #12928 #12931 #12920 #12916 #12892 |
+| B143 | 5 | — | 1.0 | — | #12890 #12884 #12882 #12877 #12867 |
+| B144 | 5 | — | 1.1 | — | #12865 #12866 #12863 #12862 #12860 |
+| B145 | 5 | — | 1.0 | — | #12857 #12842 #12841 #12837 #12835 |
+| B146 | 5 | — | 0.9 | — | #12832 #12829 #12828 #12826 #12819 |
+| B147 | 5 | — | 1.1 | — | #12814 #12809 #12807 #12808 #12803 |
+| B148 | 5 | — | 1.0 | — | #12801 #12797 #12795 #12794 #12785 |
+| B149 | 5 | — | 0.9 | — | #12786 #12784 #12781 #12783 #12778 |
+| B150 | 5 | — | 1.0 | — | #12780 #12776 #12769 #12768 #12775 |
+| B151 | 5 | — | 1.0 | — | #12763 #12753 #12752 #12750 #12743 |
+| B152 | 5 | — | 1.2 | — | #12741 #12733 #12731 #12719 #12718 |
+| B153 | 5 | — | 1.1 | — | #12712 #12701 #12697 #12696 #12695 |
+| B154 | 5 | — | 0.8 | — | #12694 #12693 #12676 #12672 #12671 |
+| B155 | 5 | — | 1.0 | — | #12669 #12670 #12659 #12666 #12660 |
+| B156 | 5 | — | 1.0 | 1 | #12656 #12654 #12649 #12755 #13009 |
+| B157 | 5 | — | 1.0 | — | #12653 #12644 #12646 #12634 #12633 |
+| B158 | 5 | — | 1.0 | 1 | #12606 #12613 #12585 #13204 #12579 |
+| B159 | 5 | — | 1.0 | — | #12578 #12571 #12566 #12567 #12559 |
+| B160 | 5 | — | 0.9 | — | #12553 #12552 #12547 #12543 #12540 |
+| B161 | 5 | — | 1.0 | — | #12541 #12536 #12533 #12527 #12512 |
+| B162 | 5 | — | 1.2 | — | #12517 #12504 #12489 #12502 #12487 |
+| B163 | 5 | — | 1.0 | — | #12484 #12483 #12477 #12471 #12452 |
+| B164 | 5 | — | 1.1 | — | #12456 #12451 #12457 #12432 #12439 |
+| B165 | 5 | — | 1.2 | — | #12435 #12431 #12427 #12422 #12417 |
+| B166 | 5 | — | 1.0 | — | #12416 #12415 #12414 #12413 #12407 |
+| B167 | 5 | — | 0.9 | — | #12412 #12406 #12390 #12388 #12387 |
+| B168 | 5 | — | 1.1 | — | #12389 #12386 #12385 #12384 #12377 |
+| B169 | 5 | — | 1.1 | — | #12364 #12363 #12361 #12359 #12353 |
+| B170 | 5 | — | 0.9 | — | #12350 #12344 #12338 #12336 #12320 |
+| B171 | 5 | — | 0.9 | — | #12312 #12307 #12306 #12300 #12284 |
+| B172 | 5 | — | 1.0 | — | #12283 #12278 #12268 #12261 #12256 |
+| B173 | 5 | — | 1.2 | — | #12254 #12253 #12251 #12248 #12247 |
+| B174 | 5 | — | 1.1 | — | #12241 #12234 #12232 #12231 #12223 |
+| B175 | 5 | — | 0.9 | — | #12213 #12200 #12199 #12189 #12183 |
+| B176 | 5 | — | 1.2 | — | #12175 #12174 #12172 #12168 #12166 |
+| B177 | 5 | — | 1.1 | — | #12137 #12138 #12135 #12132 #12126 |
+| B178 | 5 | — | 1.2 | — | #12133 #12118 #12104 #12101 #12094 |
+| B179 | 5 | — | 0.8 | — | #12098 #12091 #12081 #12072 #12058 |
+| B180 | 5 | — | 1.1 | — | #12042 #12040 #12037 #12036 #12032 |
+| B181 | 5 | — | 1.0 | — | #12034 #12021 #12016 #12020 #11998 |
+| B182 | 5 | — | 1.0 | 1 | #11996 #11981 #11976 #13369 #11975 |
+| B183 | 5 | — | 0.8 | — | #12006 #11970 #11965 #11963 #11962 |
+| B184 | 5 | — | 1.2 | — | #11959 #11955 #11951 #11944 #11937 |
+| B185 | 5 | — | 1.2 | 1 | #11935 #11933 #12870 #11925 #11930 |
+| B186 | 5 | — | 1.1 | — | #11918 #11904 #11892 #11888 #11896 |
+| B187 | 5 | — | 1.1 | — | #11887 #11882 #11877 #11872 #11863 |
+| B188 | 5 | — | 0.9 | — | #11860 #11855 #11853 #11854 #11851 |
+| B189 | 5 | — | 1.1 | — | #11848 #11842 #11838 #11835 #11836 |
+| B190 | 5 | — | 0.9 | — | #11826 #11792 #11803 #11785 #11758 |
+| B191 | 5 | — | 1.1 | 1 | #11782 #11756 #11751 #13648 #11743 |
+| B192 | 5 | — | 1.1 | — | #11747 #11742 #11733 #11736 #11734 |
+| B193 | 5 | — | 0.9 | — | #11732 #11730 #11724 #11715 #11708 |
+| B194 | 5 | — | 1.1 | — | #11719 #11706 #11701 #11694 #11695 |
+| B195 | 5 | — | 1.1 | — | #11691 #11692 #11686 #11685 #11681 |
+| B196 | 4 | — | 0.7 | — | #11679 #11675 #11677 #11670 |
+| B197 | 5 | — | 1.1 | 1 | #11669 #13729 #11667 #11663 #11661 |
+| B198 | 5 | — | 1.1 | — | #11659 #11639 #11631 #11626 #11610 |
+| B199 | 5 | — | 1.0 | — | #11606 #11581 #11578 #11577 #11568 |
+| B200 | 5 | — | 1.2 | — | #11569 #11558 #11553 #11545 #11534 |
+| B201 | 5 | — | 1.1 | — | #11525 #11520 #11516 #11496 #11503 |
+| B202 | 5 | — | 0.8 | — | #11492 #11493 #11488 #11491 #11487 |
+| B203 | 5 | — | 1.1 | — | #11484 #11483 #11482 #11480 #11475 |
+| B204 | 5 | — | 0.7 | — | #11468 #11466 #11464 #11454 #11451 |
+| B205 | 5 | — | 1.1 | — | #11455 #11447 #11441 #11435 #11436 |
+| B206 | 5 | — | 1.1 | — | #11421 #11415 #11414 #11408 #11404 |
+| B207 | 5 | — | 1.0 | — | #11403 #11393 #11385 #11371 #11378 |
+| B208 | 5 | — | 1.0 | — | #11360 #11344 #11357 #11312 #11309 |
+| B209 | 5 | — | 0.8 | — | #11304 #11302 #11296 #11295 #11291 |
+| B210 | 5 | — | 0.9 | — | #11290 #11288 #11287 #11267 #11252 |
+| B211 | 5 | — | 0.8 | — | #11244 #11285 #11269 #11284 #11239 |
+| B212 | 5 | — | 0.9 | — | #11238 #11235 #11228 #11210 #11217 |
+| B213 | 5 | — | 1.0 | — | #11223 #11209 #11205 #11195 #11188 |
+| B214 | 5 | — | 0.9 | — | #11181 #11191 #11179 #11178 #11177 |
+| B215 | 5 | — | 1.0 | — | #11174 #11169 #11164 #11162 #11160 |
+| B216 | 5 | — | 1.0 | — | #11161 #11156 #11157 #11155 #11154 |
+| B217 | 5 | — | 1.1 | — | #11151 #11146 #11150 #11142 #11136 |
+| B218 | 5 | — | 0.9 | — | #11134 #11129 #11131 #11125 #11124 |
+| B219 | 5 | — | 1.0 | — | #11120 #11121 #11117 #11116 #11114 |
+| B220 | 5 | — | 1.1 | — | #11118 #11109 #11098 #11096 #11103 |
+| B221 | 5 | — | 0.9 | — | #11092 #11089 #11082 #11087 #11079 |
+| B222 | 5 | — | 1.1 | 1 | #11057 #11054 #11055 #11080 #11047 |
+| B223 | 5 | — | 0.8 | — | #11044 #11045 #11042 #11035 #11034 |
+| B224 | 5 | — | 0.8 | 1 | #11026 #11022 #12955 #11021 #11014 |
+| B225 | 5 | — | 1.1 | — | #11015 #11012 #11009 #11008 #10998 |
+| B226 | 5 | — | 1.0 | — | #11000 #10991 #10984 #10989 #10993 |
+| B227 | 5 | — | 0.9 | — | #10980 #10958 #10951 #10942 #10931 |
+| B228 | 5 | — | 1.0 | — | #10919 #10917 #10915 #10905 #10869 |
+| B229 | 5 | — | 0.9 | — | #10872 #10873 #10866 #10847 #10865 |
+| B230 | 5 | — | 1.0 | — | #10864 #10844 #10845 #10841 #10831 |
+| B231 | 5 | — | 1.1 | — | #10838 #10823 #10828 #10817 #10805 |
+| B232 | 5 | — | 0.8 | 1 | #10811 #10799 #10783 #10789 #13545 |
+| B233 | 5 | — | 1.1 | — | #10776 #10781 #10764 #10763 #10756 |
+| B234 | 5 | — | 1.0 | — | #10751 #10749 #10743 #10742 #10731 |
+| B235 | 5 | — | 1.1 | — | #10728 #10724 #10721 #10716 #10715 |
+| B236 | 5 | — | 0.8 | — | #10709 #10708 #10705 #10697 #10704 |
+| B237 | 5 | — | 1.1 | — | #10693 #10686 #10679 #10680 #10675 |
+| B238 | 5 | — | 1.0 | — | #10667 #10668 #10664 #10660 #10657 |
+| B239 | 5 | — | 0.9 | — | #10654 #10639 #10634 #10633 #10631 |
+| B240 | 5 | — | 1.0 | — | #10632 #10630 #10629 #10628 #10627 |
+| B241 | 5 | — | 1.1 | 1 | #10614 #10606 #10599 #10587 #13517 |
+| B242 | 5 | — | 0.9 | 1 | #10586 #13749 #10582 #10580 #10578 |
+| B243 | 5 | — | 1.1 | — | #10575 #10577 #10576 #10574 #10565 |
+| B244 | 5 | — | 0.9 | — | #10567 #10570 #10564 #10558 #10557 |
+| B245 | 5 | — | 0.9 | — | #10553 #10552 #10571 #10550 #10547 |
+| B246 | 5 | — | 1.0 | — | #10548 #10549 #10540 #10536 #10538 |
+| B247 | 5 | — | 1.2 | 1 | #10530 #12667 #10531 #10529 #10524 |
+| B248 | 5 | — | 0.8 | — | #10520 #10513 #10517 #10511 #10510 |
+| B249 | 5 | — | 0.8 | — | #10501 #10499 #10494 #10490 #10483 |
+| B250 | 5 | — | 0.9 | 1 | #10476 #13186 #10475 #10472 #10470 |
+| B251 | 4 | — | 1.2 | — | #10468 #10458 #10457 #10455 |
+| B252 | 5 | — | 1.1 | 1 | #10430 #12337 #10418 #10414 #10416 |
+| B253 | 5 | — | 1.2 | 1 | #10408 #10402 #10413 #13214 #10400 |
+| B254 | 5 | — | 1.1 | — | #10398 #10397 #10394 #10390 #10392 |
+| B255 | 5 | — | 1.0 | — | #10383 #10377 #10367 #10366 #10364 |
+| B256 | 5 | — | 1.0 | — | #10362 #10361 #10353 #10343 #10341 |
+| B257 | 5 | — | 1.2 | — | #10345 #10336 #10333 #10330 #10331 |
+| B258 | 5 | — | 1.1 | — | #10326 #10308 #10298 #10294 #10291 |
+| B259 | 5 | — | 1.0 | — | #10278 #10274 #10277 #10268 #10260 |
+| B260 | 5 | — | 1.1 | — | #10253 #10259 #10249 #10239 #10238 |
+| B261 | 5 | — | 1.0 | 1 | #10237 #10231 #12956 #10232 #10228 |
+| B262 | 5 | — | 1.0 | — | #10229 #10222 #10215 #10210 #10196 |
+| B263 | 5 | — | 1.3 | — | #10198 #10205 #10191 #10190 #10183 |
+| B264 | 5 | — | 1.0 | — | #10182 #10181 #10180 #10175 #10176 |
+| B265 | 5 | — | 1.0 | — | #10171 #10168 #10167 #10159 #10160 |
+| B266 | 5 | — | 0.9 | — | #10162 #10157 #10148 #10147 #10146 |
+| B267 | 5 | — | 1.0 | 1 | #10144 #10138 #13347 #10130 #10129 |
+| B268 | 5 | — | 0.8 | — | #10125 #10123 #10115 #10116 #10106 |
+| B269 | 5 | — | 1.0 | — | #10095 #10092 #10080 #10077 #10071 |
+| B270 | 5 | — | 0.9 | — | #10076 #10070 #10068 #10067 #10066 |
+| B271 | 5 | — | 1.0 | — | #10060 #10056 #10043 #10041 #10040 |
+| B272 | 4 | — | 0.8 | — | #10031 #10020 #10017 #10019 |
+| B273 | 5 | — | 1.0 | 1 | #10007 #12255 #10006 #10003 #9997 |
+| B274 | 5 | — | 0.8 | — | #10002 #9993 #9986 #9985 #9978 |
+| B275 | 5 | — | 0.9 | — | #9984 #9977 #9976 #9973 #9972 |
+| B276 | 5 | — | 1.1 | — | #9969 #9967 #9968 #9962 #9956 |
+| B277 | 5 | — | 1.0 | — | #9945 #9942 #9933 #9930 #9929 |
+| B278 | 5 | — | 1.1 | — | #9927 #9921 #9928 #9919 #9917 |
+| B279 | 5 | — | 1.0 | — | #9908 #9906 #9903 #9898 #9900 |
+| B280 | 5 | — | 1.0 | — | #9893 #9892 #9891 #9883 #9889 |
+| B281 | 4 | — | 1.0 | — | #9882 #9886 #9881 #9876 |
+| B282 | 5 | — | 0.8 | 1 | #9871 #13505 #9869 #9867 #9864 |
+| B283 | 5 | — | 1.0 | — | #9848 #9838 #9829 #9819 #9814 |
+| B284 | 5 | — | 1.1 | — | #9809 #9806 #9797 #9790 #9788 |
+| B285 | 5 | — | 1.0 | — | #9780 #9768 #9764 #9763 #9761 |
+| B286 | 5 | — | 1.1 | — | #9758 #9760 #9757 #9755 #9752 |
+| B287 | 5 | — | 1.1 | — | #9747 #9741 #9742 #9730 #9733 |
+| B288 | 5 | — | 0.8 | — | #9725 #9722 #9717 #9716 #9697 |
+| B289 | 5 | — | 0.9 | — | #9703 #9694 #9693 #9691 #9690 |
+| B290 | 5 | — | 1.1 | — | #9680 #9667 #9660 #9662 #9649 |
+| B291 | 5 | — | 1.1 | — | #9638 #9637 #9634 #9629 #9621 |
+| B292 | 5 | — | 1.2 | — | #9614 #9612 #9590 #9583 #9578 |
+| B293 | 5 | — | 1.3 | — | #9570 #9568 #9565 #9563 #9554 |
+| B294 | 5 | — | 1.1 | — | #9553 #9551 #9550 #9545 #9546 |
+| B295 | 5 | — | 1.1 | — | #9542 #9535 #9525 #9524 #9522 |
+| B296 | 4 | — | 1.0 | — | #9514 #9509 #9508 #9495 |
+| B297 | 5 | — | 0.8 | 1 | #9490 #12800 #9488 #9487 #9486 |
+| B298 | 5 | — | 1.1 | — | #9483 #9482 #9479 #9449 #9456 |
+| B299 | 5 | — | 1.0 | — | #9448 #9435 #9432 #9431 #9426 |
+| B300 | 5 | — | 1.2 | — | #9425 #9423 #9420 #9419 #9408 |
+| B301 | 5 | — | 1.1 | — | #9409 #9400 #9370 #9364 #9365 |
+| B302 | 5 | — | 1.1 | — | #9363 #9362 #9352 #9348 #9346 |
+| B303 | 5 | — | 1.1 | — | #9350 #9345 #9344 #9343 #9337 |
+| B304 | 5 | — | 1.1 | — | #9327 #9296 #9290 #9286 #9281 |
+| B305 | 5 | — | 1.1 | — | #9280 #9279 #9277 #9273 #9270 |
+| B306 | 5 | — | 1.1 | — | #9265 #9260 #9245 #9238 #9233 |
+| B307 | 5 | — | 0.9 | — | #9234 #9223 #9218 #9217 #9212 |
+| B308 | 5 | — | 0.9 | — | #9211 #9206 #9203 #9209 #9192 |
+| B309 | 5 | — | 1.0 | — | #9191 #9186 #9175 #9168 #9164 |
+| B310 | 4 | — | 0.9 | — | #9163 #9161 #9160 #9159 |
+| B311 | 5 | — | 1.2 | 1 | #9189 #12423 #9155 #9152 #9132 |
+| B312 | 5 | — | 1.0 | — | #9133 #9130 #9129 #9128 #9126 |
+| B313 | 5 | — | 1.0 | 1 | #9127 #12424 #9121 #9113 #9110 |
+| B314 | 5 | — | 0.8 | — | #9103 #9095 #9094 #9093 #9063 |
+| B315 | 5 | — | 0.9 | — | #9058 #9062 #9055 #9050 #9049 |
+| B316 | 5 | — | 1.0 | — | #9040 #9039 #9038 #9035 #9025 |
+| B317 | 5 | — | 1.1 | — | #9031 #9022 #9015 #9000 #8992 |
+| B318 | 5 | — | 0.8 | — | #8982 #8987 #8980 #8978 #8974 |
+| B319 | 5 | — | 1.0 | — | #8965 #8968 #8959 #8958 #8942 |
+| B320 | 5 | — | 1.2 | — | #8932 #8941 #8929 #8927 #8923 |
+| B321 | 5 | — | 0.9 | — | #8922 #8913 #8907 #8904 #8893 |
+| B322 | 4 | — | 1.1 | — | #8886 #8896 #8885 #8876 |
+| B323 | 5 | — | 1.1 | 1 | #8872 #8881 #8871 #8873 #8862 |
+| B324 | 5 | — | 0.8 | — | #8860 #8857 #8866 #8846 #8841 |
+| B325 | 5 | — | 0.9 | — | #8830 #8828 #8827 #8825 #8820 |
+| B326 | 5 | — | 1.0 | — | #8815 #8809 #8808 #8804 #8802 |
+| B327 | 5 | — | 1.2 | — | #8787 #8786 #8773 #8777 #8771 |
+| B328 | 5 | — | 1.0 | — | #8766 #8765 #8761 #8759 #8755 |
+| B329 | 5 | — | 0.9 | — | #8743 #8739 #8741 #8737 #8734 |
+| B330 | 5 | — | 1.0 | — | #8720 #8713 #8712 #8700 #8696 |
+| B331 | 4 | — | 0.8 | — | #8699 #8692 #8695 #8688 |
+| B332 | 5 | — | 1.2 | 1 | #8685 #11056 #8683 #8684 #8681 |
+| B333 | 5 | — | 1.0 | — | #8675 #8664 #8663 #8666 #8661 |
+| B334 | 5 | — | 1.1 | — | #8640 #8653 #8634 #8635 #8633 |
+| B335 | 5 | — | 1.1 | — | #8631 #8625 #8615 #8610 #8599 |
+| B336 | 5 | — | 0.9 | — | #8602 #8595 #8581 #8585 #8579 |
+| B337 | 5 | — | 0.9 | — | #8576 #8575 #8569 #8573 #8570 |
+| B338 | 5 | — | 1.0 | — | #8561 #8560 #8559 #8556 #8557 |
+| B339 | 5 | — | 1.1 | — | #8525 #8533 #8522 #8524 #8519 |
+| B340 | 5 | — | 1.1 | — | #8517 #8500 #8499 #8493 #8486 |
+| B341 | 5 | — | 1.0 | — | #8479 #8466 #8450 #8449 #8448 |
+| B342 | 5 | — | 0.8 | — | #8443 #8437 #8414 #8411 #8407 |
+| B343 | 5 | — | 1.0 | — | #8406 #8402 #8400 #8399 #8393 |
+| B344 | 5 | — | 1.0 | — | #8391 #8379 #8383 #8350 #8345 |
+| B345 | 5 | — | 1.1 | — | #8344 #8341 #8343 #8333 #8329 |
+| B346 | 5 | — | 0.9 | — | #8330 #8318 #8325 #8317 #8308 |
+| B347 | 5 | — | 0.9 | — | #8313 #8307 #8304 #8299 #8287 |
+| B348 | 5 | — | 1.0 | — | #8284 #8281 #8278 #8277 #8269 |
+| B349 | 5 | — | 1.1 | — | #8267 #8266 #8265 #8260 #8259 |
+| B350 | 5 | — | 1.0 | — | #8264 #8258 #8254 #8229 #8247 |
+| B351 | 5 | — | 1.1 | — | #8228 #8227 #8214 #8210 #8205 |
+| B352 | 5 | — | 1.0 | — | #8182 #8179 #8164 #8165 #8163 |
+| B353 | 5 | — | 1.2 | — | #8153 #8141 #8135 #8128 #8121 |
+| B354 | 5 | — | 1.1 | — | #8119 #8117 #8116 #8096 #8101 |
+| B355 | 5 | — | 1.2 | — | #8091 #8084 #8086 #8081 #8078 |
+| B356 | 5 | — | 0.9 | — | #8069 #8076 #8064 #8059 #8051 |
+| B357 | 5 | — | 1.1 | — | #8055 #8042 #8036 #8048 #8033 |
+| B358 | 4 | — | 1.1 | — | #8034 #8017 #8016 #8011 |
+| B359 | 5 | — | 0.5 | 1 | #8005 #13233 #8006 #8004 #7975 |
+| B360 | 5 | — | 0.8 | — | #7954 #7948 #7946 #7931 #7932 |
+| B361 | 5 | — | 1.0 | — | #7938 #7927 #7915 #7905 #7910 |
+| B362 | 5 | — | 1.3 | — | #7899 #7886 #7890 #7880 #7877 |
+| B363 | 5 | — | 1.1 | — | #7876 #7861 #7863 #7839 #7837 |
+| B364 | 5 | — | 1.0 | 1 | #7836 #7833 #11338 #7827 #7826 |
+| B365 | 5 | — | 1.1 | — | #7821 #7816 #7819 #7808 #7806 |
+| B366 | 5 | — | 0.4 | — | #7797 #7794 #7796 #7792 #7787 |
+| B367 | 5 | — | 1.2 | 1 | #7779 #7783 #12658 #7778 #7771 |
+| B368 | 5 | — | 1.0 | — | #7766 #7765 #7763 #7757 #7756 |
+| B369 | 5 | — | 0.9 | — | #7754 #7748 #7746 #7745 #7740 |
+| B370 | 5 | — | 1.0 | — | #7738 #7737 #7736 #7727 #7729 |
+| B371 | 5 | — | 1.1 | — | #7726 #7725 #7723 #7722 #7717 |
+| B372 | 5 | — | 1.1 | — | #7716 #7714 #7713 #7708 #7694 |
+| B373 | 5 | — | 1.0 | — | #7692 #7693 #7690 #7686 #7681 |
+| B374 | 5 | — | 0.7 | 1 | #7661 #7660 #7659 #8023 #7654 |
+| B375 | 5 | — | 0.8 | — | #7653 #7637 #7631 #7623 #7615 |
+| B376 | 5 | — | 0.9 | — | #7610 #7601 #7599 #7579 #7578 |
+| B377 | 5 | — | 1.1 | 1 | #7570 #7568 #12446 #7564 #7563 |
+| B378 | 5 | — | 1.1 | — | #7551 #7547 #7545 #7543 #7541 |
+| B379 | 5 | — | 1.0 | — | #7542 #7536 #7528 #7517 #7512 |
+| B380 | 5 | — | 1.0 | — | #7497 #7495 #7494 #7493 #7491 |
+| B381 | 5 | — | 1.0 | — | #7490 #7475 #7473 #7471 #7468 |
+| B382 | 5 | — | 1.1 | — | #7465 #7460 #7459 #7452 #7451 |
+| B383 | 5 | — | 1.1 | — | #7450 #7447 #7446 #7445 #7436 |
+| B384 | 5 | — | 0.8 | — | #7434 #7433 #7428 #7419 #7413 |
+| B385 | 5 | — | 1.0 | — | #7431 #7406 #7402 #7404 #7405 |
+| B386 | 5 | — | 1.1 | — | #7400 #7398 #7387 #7386 #7385 |
+| B387 | 5 | — | 1.0 | — | #7381 #7372 #7366 #7370 #7365 |
+| B388 | 5 | — | 1.1 | — | #7363 #7345 #7344 #7340 #7338 |
+| B389 | 5 | — | 0.8 | — | #7336 #7337 #7332 #7322 #7320 |
+| B390 | 5 | — | 0.8 | — | #7318 #7309 #7308 #7298 #7307 |
+| B391 | 5 | — | 0.7 | — | #7302 #7296 #7290 #7289 #7282 |
+| B392 | 5 | — | 1.1 | — | #7286 #7273 #7269 #7267 #7259 |
+| B393 | 5 | — | 1.1 | — | #7254 #7251 #7247 #7246 #7243 |
+| B394 | 5 | — | 0.8 | — | #7241 #7240 #7231 #7235 #7225 |
+| B395 | 5 | — | 0.9 | — | #7219 #7216 #7207 #7205 #7197 |
+| B396 | 5 | — | 1.0 | — | #7189 #7188 #7186 #7187 #7173 |
+| B397 | 5 | — | 1.1 | — | #7168 #7164 #7163 #7152 #7146 |
+| B398 | 5 | — | 1.2 | 1 | #7136 #7131 #7130 #7102 #13637 |
+| B399 | 4 | — | 0.7 | 1 | #7095 #7088 #7075 #8012 |
+| B400 | 5 | — | 0.8 | 1 | #7074 #12759 #7065 #7063 #7042 |
+| B401 | 5 | — | 1.1 | — | #7039 #7037 #7036 #7024 #7029 |
+| B402 | 5 | — | 1.1 | — | #7030 #7023 #7020 #7017 #7016 |
+| B403 | 5 | — | 1.2 | — | #7011 #7000 #7002 #6979 #6967 |
+| B404 | 5 | — | 0.9 | — | #6966 #6963 #6961 #6959 #6958 |
+| B405 | 5 | — | 1.1 | — | #6954 #6930 #6932 #6920 #6972 |
+| B406 | 5 | — | 1.1 | 1 | #6924 #12851 #6916 #6904 #6897 |
+| B407 | 5 | — | 1.2 | — | #6884 #6896 #6892 #6860 #6871 |
+| B408 | 5 | — | 1.2 | — | #6872 #6839 #6834 #6832 #6831 |
+| B409 | 5 | — | 1.1 | — | #6829 #6828 #6797 #6812 #6782 |
+| B410 | 5 | — | 1.2 | — | #6786 #6777 #6767 #6761 #6760 |
+| B411 | 5 | — | 1.0 | — | #6742 #6739 #6720 #6718 #6710 |
+| B412 | 5 | — | 0.8 | — | #6698 #6696 #6693 #6662 #6642 |
+| B413 | 5 | — | 1.0 | 1 | #6587 #13137 #6570 #6589 #6569 |
+| B414 | 5 | — | 1.1 | — | #6550 #6533 #6525 #6521 #6510 |
+| B415 | 5 | — | 1.0 | — | #6508 #6507 #6496 #6501 #6505 |
+| B416 | 5 | — | 1.0 | — | #6489 #6478 #6481 #6471 #6470 |
+| B417 | 5 | — | 1.1 | — | #6467 #6451 #6402 #6388 #6333 |
+| B418 | 5 | — | 1.0 | 1 | #6122 #6105 #9679 #6104 #6100 |
+| B419 | 5 | — | 1.0 | 1 | #6078 #6058 #10867 #6042 #5999 |
+| B420 | 5 | — | 0.9 | — | #5964 #5954 #5934 #5925 #5902 |
+| B421 | 5 | — | 1.1 | — | #5884 #5881 #5850 #5839 #5818 |
+| B422 | 5 | — | 1.1 | — | #5830 #5809 #5796 #5716 #5603 |
+| B423 | 5 | — | 1.0 | 1 | #5600 #11294 #5589 #5585 #5571 |
+| B424 | 5 | — | 1.1 | — | #5567 #5564 #5424 #5343 #5317 |
+| B425 | 5 | — | 1.1 | — | #5403 #5312 #5309 #5282 #5195 |
+| B426 | 5 | — | 1.1 | — | #5144 #5031 #5020 #5011 #4985 |
+| B427 | 5 | — | 1.0 | 1 | #4962 #4936 #4928 #7700 #4890 |
+| B428 | 5 | — | 1.2 | — | #4829 #4749 #4750 #12538 #13777 |
+| B429 | 5 | — | 1.2 | — | #13966 #13965 #13969 #13961 #13962 |
+| B430 | 5 | — | 0.9 | — | #13955 #13963 #13957 #13952 #13951 |
+| B431 | 4 | — | 1.1 | 1 | #13949 #13946 #11952 #13918 |
+| B432 | 5 | — | 1.1 | 1 | #9885 #12425 #10665 #9042 #8879 |
+| B433 | 5 | — | 1.0 | — | #6918 #8073 #8257 #8497 #8597 |
+| B434 | 5 | — | 0.8 | — | #8605 #8609 #8630 #8654 #8708 |
+| B435 | 5 | — | 1.1 | — | #8724 #8732 #8768 #8792 #8794 |
+| B436 | 4 | — | 1.0 | — | #8852 #8865 #8877 #8880 |
+| B437 | 5 | — | 1.0 | 1 | #8884 #13568 #8892 #8947 #8977 |
+| B438 | 5 | — | 1.1 | — | #9006 #9013 #9014 #9017 #9041 |
+| B439 | 5 | — | 1.1 | — | #9056 #9108 #9120 #9131 #9135 |
+| B440 | 5 | — | 0.9 | — | #9148 #9169 #9201 #9219 #9313 |
+| B441 | 5 | — | 1.1 | — | #10542 #12258 #12259 #12357 #12360 |
+| B442 | 5 | — | 0.8 | — | #12362 #12557 #12568 #12572 #12577 |
+| B443 | 5 | — | 1.1 | — | #12595 #12600 #13851 #13879 #13921 |
+| B444 | 5 | — | 1.8 | — | #13923 #13936 #13938 #13934 #13933 |
+| B445 | 5 | — | 1.6 | — | #13925 #13908 #13861 #13819 #13781 |
+| B446 | 5 | — | 2.0 | — | #13778 #13768 #13762 #13728 #13671 |
+| B447 | 5 | — | 1.9 | — | #13667 #13651 #13644 #13601 #13588 |
+| B448 | 5 | — | 1.9 | 1 | #13584 #13552 #13540 #13610 #13539 |
+| B449 | 5 | — | 1.9 | 1 | #13526 #13508 #13490 #13462 #13602 |
+| B450 | 5 | — | 1.8 | 1 | #13460 #13444 #13544 #13426 #13397 |
+| B451 | 5 | — | 1.7 | — | #13371 #13352 #13262 #13260 #13243 |
+| B452 | 5 | — | 1.9 | — | #13148 #13115 #13076 #13005 #12977 |
+| B453 | 5 | — | 1.7 | — | #12936 #12923 #12913 #12906 #12905 |
+| B454 | 5 | — | 1.8 | — | #12871 #12816 #12723 #12722 #12636 |
+| B455 | 4 | — | 1.9 | — | #12545 #12535 #12524 #12510 |
+| B456 | 5 | — | 1.9 | 1 | #12505 #13331 #12461 #12428 #12421 |
+| B457 | 5 | — | 1.8 | — | #12420 #12419 #12358 #12328 #12291 |
+| B458 | 5 | — | 1.8 | — | #12277 #12263 #12252 #12250 #12245 |
+| B459 | 5 | — | 2.0 | — | #12220 #12216 #12211 #12210 #12203 |
+| B460 | 5 | — | 2.1 | — | #12186 #12148 #12125 #12106 #12076 |
+| B461 | 5 | — | 1.6 | — | #12071 #12056 #12023 #11978 #12004 |
+| B462 | 5 | — | 2.0 | — | #11953 #11920 #11912 #11880 #11870 |
+| B463 | 5 | — | 1.9 | — | #11843 #11840 #11827 #11831 #11624 |
+| B464 | 5 | — | 1.9 | — | #11571 #11554 #11538 #11523 #11481 |
+| B465 | 5 | — | 2.0 | — | #11478 #11477 #11432 #11420 #11418 |
+| B466 | 5 | — | 1.6 | — | #11387 #11364 #11315 #11286 #11260 |
+| B467 | 5 | — | 1.9 | — | #11259 #11250 #11273 #11240 #11222 |
+| B468 | 5 | — | 1.9 | — | #11207 #11053 #10949 #10926 #10911 |
+| B469 | 5 | — | 2.0 | — | #10886 #10884 #10878 #10877 #10812 |
+| B470 | 5 | — | 1.8 | — | #10752 #10722 #10719 #10713 #10711 |
+| B471 | 5 | — | 1.9 | — | #10710 #10707 #10663 #10653 #10594 |
+| B472 | 5 | — | 2.0 | — | #10592 #10573 #10519 #10498 #10497 |
+| B473 | 5 | — | 2.1 | 1 | #10485 #10463 #10920 #10446 #10370 |
+| B474 | 5 | — | 1.9 | — | #10314 #10320 #10313 #10301 #10293 |
+| B475 | 5 | — | 2.1 | — | #10236 #10235 #10165 #10166 #10111 |
+| B476 | 5 | — | 2.1 | — | #10083 #10079 #10058 #10015 #9880 |
+| B477 | 5 | — | 1.9 | — | #9850 #9847 #9824 #9807 #9796 |
+| B478 | 5 | — | 2.0 | — | #9686 #9633 #9632 #9575 #9523 |
+| B479 | 5 | — | 1.9 | — | #9520 #9503 #9493 #9472 #9445 |
+| B480 | 5 | — | 1.7 | 1 | #9436 #9429 #13756 #9358 #9299 |
+| B481 | 5 | — | 2.0 | — | #9282 #9244 #9230 #9228 #9210 |
+| B482 | 5 | — | 1.8 | — | #9195 #9170 #9124 #9033 #9001 |
+| B483 | 5 | — | 1.8 | 1 | #8940 #8875 #12569 #8854 #8824 |
+| B484 | 5 | — | 1.9 | — | #8821 #8811 #8793 #8781 #8750 |
+| B485 | 5 | — | 1.7 | — | #8682 #8670 #8644 #8590 #8514 |
+| B486 | 5 | — | 1.9 | — | #8476 #8464 #8442 #8430 #8426 |
+| B487 | 5 | — | 1.8 | — | #8385 #8371 #8221 #8186 #8124 |
+| B488 | 5 | — | 1.7 | — | #8087 #8025 #7998 #7992 #7951 |
+| B489 | 5 | — | 1.8 | — | #7773 #7715 #7673 #7667 #7651 |
+| B490 | 5 | — | 1.9 | — | #7609 #7594 #7486 #7474 #7444 |
+| B491 | 5 | — | 1.8 | — | #7396 #7353 #7348 #7329 #7256 |
+| B492 | 5 | — | 2.0 | — | #7196 #7193 #7155 #7044 #6982 |
+| B493 | 5 | — | 1.9 | 1 | #6951 #12548 #6928 #6906 #6865 |
+| B494 | 5 | — | 2.1 | — | #6849 #6840 #6813 #6753 #6730 |
+| B495 | 5 | — | 1.9 | — | #6553 #6494 #6454 #6403 #6149 |
+| B496 | 5 | — | 1.9 | 1 | #6019 #7945 #5890 #5866 #5686 |
+| B497 | 5 | — | 2.1 | — | #5553 #5453 #5445 #5335 #5241 |
+| B498 | 5 | — | 1.8 | — | #5209 #5193 #5148 #5130 #4793 |
+| B499 | 5 | — | 1.8 | — | #4593 #13967 #13964 #13945 #12598 |
+| B500 | 5 | — | 1.8 | — | #11805 #8704 #8733 #8874 #9011 |
+| B501 | 5 | — | 1.8 | — | #9037 #9105 #9139 #9150 #9312 |
+| B502 | 5 | — | 1.9 | — | #12139 #12590 #12616 #12834 #13867 |
+| B503 | 5 | — | 2.6 | — | #13889 #13820 #13675 #13672 #13663 |
+| B504 | 5 | — | 2.8 | — | #13623 #13615 #13532 #13311 #13298 |
+| B505 | 5 | — | 2.8 | — | #13238 #13192 #13129 #13082 #12909 |
+| B506 | 5 | — | 2.9 | — | #12833 #12314 #12176 #12109 #12067 |
+| B507 | 5 | — | 2.7 | — | #12046 #12003 #11948 #11917 #11911 |
+| B508 | 5 | — | 2.8 | — | #11759 #11748 #11746 #11655 #11570 |
+| B509 | 5 | — | 2.8 | — | #11548 #11476 #11401 #11311 #11076 |
+| B510 | 5 | — | 2.7 | 1 | #11064 #11033 #11652 #10936 #10910 |
+| B511 | 5 | — | 2.8 | — | #10758 #10332 #10306 #10184 #10169 |
+| B512 | 5 | — | 2.9 | — | #10139 #10065 #9899 #9830 #9816 |
+| B513 | 5 | — | 2.8 | — | #9815 #9692 #9332 #9285 #9276 |
+| B514 | 5 | — | 2.9 | — | #9070 #8994 #8812 #8756 #8546 |
+| B515 | 5 | — | 2.8 | — | #8489 #8295 #8285 #8263 #8199 |
+| B516 | 5 | — | 2.7 | — | #8187 #8151 #8090 #8022 #7993 |
+| B517 | 5 | — | 2.8 | — | #7950 #7817 #7732 #7671 #7644 |
+| B518 | 5 | — | 2.8 | — | #7572 #7410 #7343 #7223 #7169 |
+| B519 | 5 | — | 2.9 | — | #7064 #7004 #6929 #6921 #6758 |
+| B520 | 5 | — | 2.7 | — | #6596 #5951 #5938 #5761 #5430 |
+| B521 | 5 | — | 2.7 | 1 | #5332 #13055 #5194 #12055 #11536 |
+| B522 | 1 | — | 2.5 | — | #9202 |
 
 ## Reviewer agent prompts
 
@@ -2351,9 +2312,9 @@ You are reviewing Omarchy pre-release batch B004 (5 PRs to be merged together as
 Pull requests in this batch:
 - #13845: Add omp (Oh My Pi) usage collector to the agents panel — https://github.com/omacom/omarchy/pull/13845
 - #13829: Resync Wi-Fi rows when a listed network's saved profile attaches — https://github.com/omacom/omarchy/pull/13829
-- #13796: Keep an early polkit Enter and submit it when PAM asks — https://github.com/omacom/omarchy/pull/13796
 - #13763: Add Cloudmail to Install > Service — https://github.com/omacom/omarchy/pull/13763
 - #13745: Open the captive portal sign-in page on detection when asked to — https://github.com/omacom/omarchy/pull/13745
+- #13742: Test passwordless sudo revoke hook packaging — https://github.com/omacom/omarchy/pull/13742
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2371,11 +2332,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B005 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13742: Test passwordless sudo revoke hook packaging — https://github.com/omacom/omarchy/pull/13742
-- #13734: Add a sign-in button to the agents panel's auth card — https://github.com/omacom/omarchy/pull/13734
 - #13513: Run a lock hook when the screen locks — https://github.com/omacom/omarchy/pull/13513
 - #13200: Sign in to captive portals in a dropdown instead of the browser — https://github.com/omacom/omarchy/pull/13200
 - #13183: Add password visibility toggle to lock screen — https://github.com/omacom/omarchy/pull/13183
+- #13106: Skip the Codex app-server probe when there are no credentials — https://github.com/omacom/omarchy/pull/13106
+- #13107: Fall back to Cloudflare endpoints when api.fast.com is unreachable — https://github.com/omacom/omarchy/pull/13107
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2393,11 +2354,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B006 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13106: Skip the Codex app-server probe when there are no credentials — https://github.com/omacom/omarchy/pull/13106
-- #13107: Fall back to Cloudflare endpoints when api.fast.com is unreachable — https://github.com/omacom/omarchy/pull/13107
 - #13088: Fix network panel Forget centering, add Cancel for in-flight connects — https://github.com/omacom/omarchy/pull/13088
 - #13075: Add Cloudflare to Install > Service — https://github.com/omacom/omarchy/pull/13075
 - #13052: Add a LiteLLM collector for the agents usage panel — https://github.com/omacom/omarchy/pull/13052
+- #12925: Add a reveal toggle to masked TextFields, wired up for the Wi-Fi passphrase — https://github.com/omacom/omarchy/pull/12925
+- #12891: Add show/hide toggle to the Wi-Fi passphrase field — https://github.com/omacom/omarchy/pull/12891
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2415,11 +2376,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B007 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12925: Add a reveal toggle to masked TextFields, wired up for the Wi-Fi passphrase — https://github.com/omacom/omarchy/pull/12925
-- #12891: Add show/hide toggle to the Wi-Fi passphrase field — https://github.com/omacom/omarchy/pull/12891
 - #12815: Refuse to run the tailscale and sshd setup commands as root — https://github.com/omacom/omarchy/pull/12815
 - #12698: Add omarchy menu secret for masked secret entry — https://github.com/omacom/omarchy/pull/12698
 - #12583: Let the Wi-Fi passphrase be read back while typing it — https://github.com/omacom/omarchy/pull/12583
+- #12459: Add an optional installer for the asciipaper live wallpaper — https://github.com/omacom/omarchy/pull/12459
+- #12329: Add Remove menu for coding agents — https://github.com/omacom/omarchy/pull/12329
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2437,11 +2398,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B008 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12459: Add an optional installer for the asciipaper live wallpaper — https://github.com/omacom/omarchy/pull/12459
-- #12329: Add Remove menu for coding agents — https://github.com/omacom/omarchy/pull/12329
 - #12260: Give third-party plugins their own entry settings and auth service — https://github.com/omacom/omarchy/pull/12260
-- #12196: Stop speed test workers outliving a killed parent — https://github.com/omacom/omarchy/pull/12196
 - #12105: Intelligently fallback to available agent when default agent has exhausted usage — https://github.com/omacom/omarchy/pull/12105
+- #12001: Pass Download Video extension tab cookies to yt-dlp — https://github.com/omacom/omarchy/pull/12001
+- #11967: Agents: user collectors + Go connection settings card — https://github.com/omacom/omarchy/pull/11967
+- #11907: Stop Chromium Google OAuth workaround that causes SIGTRAP crashes — https://github.com/omacom/omarchy/pull/11907
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2459,11 +2420,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B009 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12001: Pass Download Video extension tab cookies to yt-dlp — https://github.com/omacom/omarchy/pull/12001
-- #11967: Agents: user collectors + Go connection settings card — https://github.com/omacom/omarchy/pull/11967
-- #11907: Stop Chromium Google OAuth workaround that causes SIGTRAP crashes — https://github.com/omacom/omarchy/pull/11907
-- #11858: Clear and swallow the lock-screen wake key so it is not typed as a password character — https://github.com/omacom/omarchy/pull/11858
 - #11804: Tell agents to retry with pkexec when sudo needs a password — https://github.com/omacom/omarchy/pull/11804
+- #11795: Show the command being authorized at the top of the polkit prompt — https://github.com/omacom/omarchy/pull/11795
+- #11725: feat(config): configure gnome-libsecret password store for VS Code — https://github.com/omacom/omarchy/pull/11725
+- #11720: Add eye toggle to reveal the Wi-Fi passphrase — https://github.com/omacom/omarchy/pull/11720
+- #11722: Add llmman to Install > AI and Remove > AI — https://github.com/omacom/omarchy/pull/11722
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2481,11 +2442,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B010 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11795: Show the command being authorized at the top of the polkit prompt — https://github.com/omacom/omarchy/pull/11795
-- #11725: feat(config): configure gnome-libsecret password store for VS Code — https://github.com/omacom/omarchy/pull/11725
-- #11720: Add eye toggle to reveal the Wi-Fi passphrase — https://github.com/omacom/omarchy/pull/11720
-- #11722: Add llmman to Install > AI and Remove > AI — https://github.com/omacom/omarchy/pull/11722
 - #11398: feat(install): accept owner/repo shorthand in plugin add and theme install — https://github.com/omacom/omarchy/pull/11398
+- #11367: Add MiniMax Code (mcode) to the agents panel and default agent switch — https://github.com/omacom/omarchy/pull/11367
+- #11242: Install the marketplace-verified snapshot by default in plugin add — https://github.com/omacom/omarchy/pull/11242
+- #11197: Make network speed test resilient with dynamic token fetch and Cloudflare fallback (#11166) — https://github.com/omacom/omarchy/pull/11197
+- #11144: Add Axon as a default coding agent — https://github.com/omacom/omarchy/pull/11144
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2503,11 +2464,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B011 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11367: Add MiniMax Code (mcode) to the agents panel and default agent switch — https://github.com/omacom/omarchy/pull/11367
-- #11242: Install the marketplace-verified snapshot by default in plugin add — https://github.com/omacom/omarchy/pull/11242
-- #11197: Make network speed test resilient with dynamic token fetch and Cloudflare fallback (#11166) — https://github.com/omacom/omarchy/pull/11197
-- #11144: Add Axon as a default coding agent — https://github.com/omacom/omarchy/pull/11144
 - #11067: Add Qwen Code as a default coding agent — https://github.com/omacom/omarchy/pull/11067
+- #10952: Start Omarchy Server edition predicates and menu — https://github.com/omacom/omarchy/pull/10952
+- #10944: Keep lock password field focused — https://github.com/omacom/omarchy/pull/10944
+- #10824: Add OpenRouter usage collector to the agents panel — https://github.com/omacom/omarchy/pull/10824
+- #10730: Add Command Code as a coding agent choice — https://github.com/omacom/omarchy/pull/10730
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2525,11 +2486,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B012 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10952: Start Omarchy Server edition predicates and menu — https://github.com/omacom/omarchy/pull/10952
-- #10944: Keep lock password field focused — https://github.com/omacom/omarchy/pull/10944
-- #10824: Add OpenRouter usage collector to the agents panel — https://github.com/omacom/omarchy/pull/10824
-- #10730: Add Command Code as a coding agent choice — https://github.com/omacom/omarchy/pull/10730
 - #10683: Add a DeepSeek usage collector for the agents panel — https://github.com/omacom/omarchy/pull/10683
+- #10644: Guide an offline first login through terminal network setup — https://github.com/omacom/omarchy/pull/10644
+- #10473: network speedtest: use tokenless Cloudflare endpoints — https://github.com/omacom/omarchy/pull/10473
+- #10435: Add VSCodium as a default editor and installer option — https://github.com/omacom/omarchy/pull/10435
+- #10428: Distinguish sudo failure from missing Snapper configs — https://github.com/omacom/omarchy/pull/10428
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2547,28 +2508,7 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B013 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10644: Guide an offline first login through terminal network setup — https://github.com/omacom/omarchy/pull/10644
-- #10473: network speedtest: use tokenless Cloudflare endpoints — https://github.com/omacom/omarchy/pull/10473
-- #10435: Add VSCodium as a default editor and installer option — https://github.com/omacom/omarchy/pull/10435
-- #10428: Distinguish sudo failure from missing Snapper configs — https://github.com/omacom/omarchy/pull/10428
 - #10347: Add optional Ponte Android remote service commands — https://github.com/omacom/omarchy/pull/10347
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B014
-
-```
-You are reviewing Omarchy pre-release batch B014 (4 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #10346: Pin Electron password store to gnome-libsecret — https://github.com/omacom/omarchy/pull/10346
 - #10248: Add Update Plugin to Setup > Plugins menu — https://github.com/omacom/omarchy/pull/10248
 - #10172: Add Ollama Cloud usage collector to the agents panel — https://github.com/omacom/omarchy/pull/10172
@@ -2584,10 +2524,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B015
+### B014
 
 ```
-You are reviewing Omarchy pre-release batch B015 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B014 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9958: Add minimax agent usage collector for opencode — https://github.com/omacom/omarchy/pull/9958
@@ -2606,17 +2546,39 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B016
+### B015
 
 ```
-You are reviewing Omarchy pre-release batch B016 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B015 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9531: Wait for the Windows VM RDP service before connecting — https://github.com/omacom/omarchy/pull/9531
 - #9398: Discover LUKS drives via lsblk, not blkid — https://github.com/omacom/omarchy/pull/9398
 - #9320: Add Oma, voice control for the desktop, as an optional service — https://github.com/omacom/omarchy/pull/9320
 - #9319: Give the Secret portal a provider so Chromium can open its password store — https://github.com/omacom/omarchy/pull/9319
-- #9009: Document re-enabling BitLocker after dual-boot installation — https://github.com/omacom/omarchy/pull/9009
+- #8796: windows-vm: negotiate RDP with /sec:tls by default — https://github.com/omacom/omarchy/pull/8796
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B016
+
+```
+You are reviewing Omarchy pre-release batch B016 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #8715: Add agent diagnostics, MCP inspection, and safe launch mode — https://github.com/omacom/omarchy/pull/8715
+- #8578: Update installed themes in parallel — https://github.com/omacom/omarchy/pull/8578
+- #8537: Add Alfred/Raycast-style live query plugins to the menu — https://github.com/omacom/omarchy/pull/8537
+- #8487: Add openzoo as a coding agent option: claude code, no api key, pays per call — https://github.com/omacom/omarchy/pull/8487
+- #8441: Pin Cursor password store to gnome-libsecret so GitHub login can use the OS keyring — https://github.com/omacom/omarchy/pull/8441
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2634,11 +2596,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B017 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8796: windows-vm: negotiate RDP with /sec:tls by default — https://github.com/omacom/omarchy/pull/8796
-- #8715: Add agent diagnostics, MCP inspection, and safe launch mode — https://github.com/omacom/omarchy/pull/8715
-- #8578: Update installed themes in parallel — https://github.com/omacom/omarchy/pull/8578
-- #8537: Add Alfred/Raycast-style live query plugins to the menu — https://github.com/omacom/omarchy/pull/8537
-- #8487: Add openzoo as a coding agent option: claude code, no api key, pays per call — https://github.com/omacom/omarchy/pull/8487
+- #8439: Add omarchy plugin audit for plugin capability reporting — https://github.com/omacom/omarchy/pull/8439
+- #8377: Browse and install any mise tool from the menu — https://github.com/omacom/omarchy/pull/8377
+- #8326: Read Claude limits with a sibling CLI's token when the saved one lapsed — https://github.com/omacom/omarchy/pull/8326
+- #8315: Network panel: show External IP in connection details — https://github.com/omacom/omarchy/pull/8315
+- #8251: Add a copy action for the revealed wifi password — https://github.com/omacom/omarchy/pull/8251
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2656,11 +2618,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B018 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8441: Pin Cursor password store to gnome-libsecret so GitHub login can use the OS keyring — https://github.com/omacom/omarchy/pull/8441
-- #8439: Add omarchy plugin audit for plugin capability reporting — https://github.com/omacom/omarchy/pull/8439
-- #8377: Browse and install any mise tool from the menu — https://github.com/omacom/omarchy/pull/8377
-- #8326: Read Claude limits with a sibling CLI's token when the saved one lapsed — https://github.com/omacom/omarchy/pull/8326
-- #8315: Network panel: show External IP in connection details — https://github.com/omacom/omarchy/pull/8315
+- #8014: Keep Wi-Fi password entry stable during scans — https://github.com/omacom/omarchy/pull/8014
+- #8019: Eye toggle to show/hide the Wi-Fi password — https://github.com/omacom/omarchy/pull/8019
+- #8001: Fix GitHub credential helpers after mise gh upgrades — https://github.com/omacom/omarchy/pull/8001
+- #7799: Show banked rate limit resets on the Codex tab — https://github.com/omacom/omarchy/pull/7799
+- #7680: Add a reveal toggle to the lock screen password field — https://github.com/omacom/omarchy/pull/7680
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2678,11 +2640,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B019 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8251: Add a copy action for the revealed wifi password — https://github.com/omacom/omarchy/pull/8251
-- #8093: Call a lapsed Claude access token paused, not signed out — https://github.com/omacom/omarchy/pull/8093
-- #8014: Keep Wi-Fi password entry stable during scans — https://github.com/omacom/omarchy/pull/8014
-- #8019: Eye toggle to show/hide the Wi-Fi password — https://github.com/omacom/omarchy/pull/8019
-- #8001: Fix GitHub credential helpers after mise gh upgrades — https://github.com/omacom/omarchy/pull/8001
+- #7598: Fix orphaned network speed test workers — https://github.com/omacom/omarchy/pull/7598
+- #7566: Add Z.ai GLM Coding Plan agent usage collector — https://github.com/omacom/omarchy/pull/7566
+- #7554: Add bb to the AI install menu — https://github.com/omacom/omarchy/pull/7554
+- #7537: Show limits for OpenCode's OpenAI account — https://github.com/omacom/omarchy/pull/7537
+- #7485: Add Firebase CLI development environment via mise — https://github.com/omacom/omarchy/pull/7485
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2700,11 +2662,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B020 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7799: Show banked rate limit resets on the Codex tab — https://github.com/omacom/omarchy/pull/7799
-- #7680: Add a reveal toggle to the lock screen password field — https://github.com/omacom/omarchy/pull/7680
-- #7598: Fix orphaned network speed test workers — https://github.com/omacom/omarchy/pull/7598
-- #7566: Add Z.ai GLM Coding Plan agent usage collector — https://github.com/omacom/omarchy/pull/7566
-- #7554: Add bb to the AI install menu — https://github.com/omacom/omarchy/pull/7554
+- #7455: Read Fireworks credentials from pi's auth.json — https://github.com/omacom/omarchy/pull/7455
+- #7051: Add Synthetic Labs quotas to the agents panel — https://github.com/omacom/omarchy/pull/7051
+- #6844: Add Amp as a default coding agent — https://github.com/omacom/omarchy/pull/6844
+- #6771: Review a plugin's code with the default coding agent before adding it — https://github.com/omacom/omarchy/pull/6771
+- #6557: feature(editor) add Doom Emacs installer, uninstaller, and theming integration — https://github.com/omacom/omarchy/pull/6557
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2722,11 +2684,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B021 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7537: Show limits for OpenCode's OpenAI account — https://github.com/omacom/omarchy/pull/7537
-- #7485: Add Firebase CLI development environment via mise — https://github.com/omacom/omarchy/pull/7485
-- #7455: Read Fireworks credentials from pi's auth.json — https://github.com/omacom/omarchy/pull/7455
-- #7051: Add Synthetic Labs quotas to the agents panel — https://github.com/omacom/omarchy/pull/7051
-- #6844: Add Amp as a default coding agent — https://github.com/omacom/omarchy/pull/6844
+- #6532: Abort pkg-install when the package transaction fails or is interrupted — https://github.com/omacom/omarchy/pull/6532
+- #5744: feat: Add installer for official Obsidian CLI — https://github.com/omacom/omarchy/pull/5744
+- #13796: Keep an early polkit Enter and submit it in the background when PAM asks — https://github.com/omacom/omarchy/pull/13796
+- #8093: Call a lapsed Claude access token paused, not signed out — https://github.com/omacom/omarchy/pull/8093
+- #9009: Document re-enabling BitLocker after dual-boot installation — https://github.com/omacom/omarchy/pull/9009
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2744,11 +2706,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B022 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #6771: Review a plugin's code with the default coding agent before adding it — https://github.com/omacom/omarchy/pull/6771
-- #6557: feature(editor) add Doom Emacs installer, uninstaller, and theming integration — https://github.com/omacom/omarchy/pull/6557
-- #6532: Abort pkg-install when the package transaction fails or is interrupted — https://github.com/omacom/omarchy/pull/6532
-- #5744: feat: Add installer for official Obsidian CLI — https://github.com/omacom/omarchy/pull/5744
 - #13875: Drop the lock on saved open Wi-Fi networks — https://github.com/omacom/omarchy/pull/13875
+- #13856: Launch Claude with a real permission bypass — https://github.com/omacom/omarchy/pull/13856
+- #13836: Link Pi agent skills into PI_CODING_AGENT_DIR — https://github.com/omacom/omarchy/pull/13836
+- #13811: fix(bluetooth): recover incomplete pairing — https://github.com/omacom/omarchy/pull/13811
+- #13705: post-install(pacman): clamp system clock on aarch64 if RTC uninitialized — https://github.com/omacom/omarchy/pull/13705
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2766,11 +2728,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B023 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13856: Launch Claude with a real permission bypass — https://github.com/omacom/omarchy/pull/13856
-- #13836: Link Pi agent skills into PI_CODING_AGENT_DIR — https://github.com/omacom/omarchy/pull/13836
-- #13811: fix(bluetooth): recover incomplete pairing — https://github.com/omacom/omarchy/pull/13811
-- #13705: post-install(pacman): clamp system clock on aarch64 if RTC uninitialized — https://github.com/omacom/omarchy/pull/13705
 - #13690: Add region profiles, starting with China's package repositories — https://github.com/omacom/omarchy/pull/13690
+- #13664: Give each webapp its own Chromium profile — https://github.com/omacom/omarchy/pull/13664
+- #13630: Prefer IPP Everywhere when adding network printers — https://github.com/omacom/omarchy/pull/13630
+- #13625: Do not block SDDM autologin on pam_gnome_keyring — https://github.com/omacom/omarchy/pull/13625
+- #13432: Keep a legacy Windows VM password with $$ working after the Quattro migration — https://github.com/omacom/omarchy/pull/13432
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2788,11 +2750,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B024 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13664: Give each webapp its own Chromium profile — https://github.com/omacom/omarchy/pull/13664
-- #13630: Prefer IPP Everywhere when adding network printers — https://github.com/omacom/omarchy/pull/13630
-- #13625: Do not block SDDM autologin on pam_gnome_keyring — https://github.com/omacom/omarchy/pull/13625
-- #13432: Keep a legacy Windows VM password with $$ working after the Quattro migration — https://github.com/omacom/omarchy/pull/13432
 - #13296: Install OpenClaw as a self-updating copy under ~/.openclaw — https://github.com/omacom/omarchy/pull/13296
+- #13110: Ship a managed Chromium privacy policy alongside the theme color — https://github.com/omacom/omarchy/pull/13110
+- #13101: Actually restart bluetooth.service in omarchy-restart-bluetooth — https://github.com/omacom/omarchy/pull/13101
+- #13668: Restart bluetooth.service from omarchy-restart-bluetooth — https://github.com/omacom/omarchy/pull/13668
+- #13036: Add Local AI: run the model validated for your GPU and open a coding agent on it — https://github.com/omacom/omarchy/pull/13036
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2810,11 +2772,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B025 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13110: Ship a managed Chromium privacy policy alongside the theme color — https://github.com/omacom/omarchy/pull/13110
-- #13101: Actually restart bluetooth.service in omarchy-restart-bluetooth — https://github.com/omacom/omarchy/pull/13101
-- #13668: Restart bluetooth.service from omarchy-restart-bluetooth — https://github.com/omacom/omarchy/pull/13668
-- #13036: Add Local AI: run the model validated for your GPU and open a coding agent on it — https://github.com/omacom/omarchy/pull/13036
 - #13047: Pin factory-reset elevation to the packaged command — https://github.com/omacom/omarchy/pull/13047
+- #12901: Enable Voxtype GPU backend through sudo — https://github.com/omacom/omarchy/pull/12901
+- #12836: Install Hermes as the self-updating runtime in every flow — https://github.com/omacom/omarchy/pull/12836
+- #12796: Fix omarchy update under sudo: unset OMARCHY_PATH and yay-as-root — https://github.com/omacom/omarchy/pull/12796
+- #12788: Add optional AirPods bar integration — https://github.com/omacom/omarchy/pull/12788
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2829,14 +2791,13 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B026
 
 ```
-You are reviewing Omarchy pre-release batch B026 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B026 (4 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12901: Enable Voxtype GPU backend through sudo — https://github.com/omacom/omarchy/pull/12901
-- #12836: Install Hermes as the self-updating runtime in every flow — https://github.com/omacom/omarchy/pull/12836
-- #12796: Fix omarchy update under sudo: unset OMARCHY_PATH and yay-as-root — https://github.com/omacom/omarchy/pull/12796
-- #12788: Add optional AirPods bar integration — https://github.com/omacom/omarchy/pull/12788
 - #12766: Add Bluetooth file receiving to the Bluetooth panel — https://github.com/omacom/omarchy/pull/12766
+- #12605: Add Devin collector to the agents panel — https://github.com/omacom/omarchy/pull/12605
+- #12475: network: keep passphrase prompt focused through scan reorders — https://github.com/omacom/omarchy/pull/12475
+- #12279: Clear the eight-second enterprise Wi-Fi auth timeout — https://github.com/omacom/omarchy/pull/12279
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2854,11 +2815,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B027 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12605: Add Devin collector to the agents panel — https://github.com/omacom/omarchy/pull/12605
-- #12475: network: keep passphrase prompt focused through scan reorders — https://github.com/omacom/omarchy/pull/12475
-- #12279: Clear the eight-second enterprise Wi-Fi auth timeout — https://github.com/omacom/omarchy/pull/12279
 - #12177: Add 80% battery charge cap toggle — https://github.com/omacom/omarchy/pull/12177
 - #13205: Add battery charge-limit toggle to power panel (UPower D-Bus) — https://github.com/omacom/omarchy/pull/13205
+- #12111: Harden notification image copies, exec tokens, and hint reads — https://github.com/omacom/omarchy/pull/12111
+- #12070: Answer ARP only from the interface that owns the address — https://github.com/omacom/omarchy/pull/12070
+- #12015: Restore the input group for Voxtype evdev hotkey users — https://github.com/omacom/omarchy/pull/12015
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2876,11 +2837,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B028 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12111: Harden notification image copies, exec tokens, and hint reads — https://github.com/omacom/omarchy/pull/12111
-- #12070: Answer ARP only from the interface that owns the address — https://github.com/omacom/omarchy/pull/12070
-- #12059: Run the default agent on another machine — https://github.com/omacom/omarchy/pull/12059
-- #12015: Restore the input group for Voxtype evdev hotkey users — https://github.com/omacom/omarchy/pull/12015
 - #11984: Explain polkit commands with the default coding agent on request — https://github.com/omacom/omarchy/pull/11984
+- #11989: Add Google Antigravity usage collector and panel integration — https://github.com/omacom/omarchy/pull/11989
+- #11983: Show which processes asked for a polkit password — https://github.com/omacom/omarchy/pull/11983
+- #11966: Fix captive portal sign-in URL (#11961) — https://github.com/omacom/omarchy/pull/11966
+- #11956: Upgrade existing Sunshine installations to the security release — https://github.com/omacom/omarchy/pull/11956
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2898,11 +2859,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B029 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11989: Add Google Antigravity usage collector and panel integration — https://github.com/omacom/omarchy/pull/11989
-- #11983: Show which processes asked for a polkit password — https://github.com/omacom/omarchy/pull/11983
-- #11966: Fix captive portal sign-in URL (#11961) — https://github.com/omacom/omarchy/pull/11966
-- #11956: Upgrade existing Sunshine installations to the security release — https://github.com/omacom/omarchy/pull/11956
 - #11839: feat: add commandcode, qwen audio agent, and colibri to AI installs — https://github.com/omacom/omarchy/pull/11839
+- #11768: Keep the Windows VM boundary probe off the host's mounts — https://github.com/omacom/omarchy/pull/11768
+- #11731: Add iPhone cable support via usbmuxd and gvfs-afc — https://github.com/omacom/omarchy/pull/11731
+- #11574: Add expandable hourly rain tables to the weather panel — https://github.com/omacom/omarchy/pull/11574
+- #11479: Reject root-run updates before changing user state — https://github.com/omacom/omarchy/pull/11479
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2920,11 +2881,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B030 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11768: Keep the Windows VM boundary probe off the host's mounts — https://github.com/omacom/omarchy/pull/11768
-- #11731: Add iPhone cable support via usbmuxd and gvfs-afc — https://github.com/omacom/omarchy/pull/11731
-- #11574: Add expandable hourly rain tables to the weather panel — https://github.com/omacom/omarchy/pull/11574
-- #11479: Reject root-run updates before changing user state — https://github.com/omacom/omarchy/pull/11479
 - #11444: Add GitLab Duo CLI as a default coding agent — https://github.com/omacom/omarchy/pull/11444
+- #11423: Install OpenCode V2 through mise's npm backend — https://github.com/omacom/omarchy/pull/11423
+- #11388: Sync the pacman databases before the first package install — https://github.com/omacom/omarchy/pull/11388
+- #11289: Add the headless server edition — https://github.com/omacom/omarchy/pull/11289
+- #11216: Integrate NetClaw into Omarchy with Light and Full setup — https://github.com/omacom/omarchy/pull/11216
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2942,11 +2903,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B031 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11423: Install OpenCode V2 through mise's npm backend — https://github.com/omacom/omarchy/pull/11423
-- #11388: Sync the pacman databases before the first package install — https://github.com/omacom/omarchy/pull/11388
-- #11289: Add the headless server edition — https://github.com/omacom/omarchy/pull/11289
-- #11216: Integrate NetClaw into Omarchy with Light and Full setup — https://github.com/omacom/omarchy/pull/11216
 - #11198: Make the adapter pairable while pairing a Bluetooth device — https://github.com/omacom/omarchy/pull/11198
+- #11097: Keep the powerprofilesctl shebang fix applied across daemon upgrades (#11031) — https://github.com/omacom/omarchy/pull/11097
+- #11069: Run declared plugin cleanup before removal — https://github.com/omacom/omarchy/pull/11069
+- #11470: Run declared plugin cleanup before removal — https://github.com/omacom/omarchy/pull/11470
+- #10977: Add `omarchy vm`, a disposable Omarchy in QEMU/KVM — https://github.com/omacom/omarchy/pull/10977
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2964,11 +2925,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B032 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11097: Keep the powerprofilesctl shebang fix applied across daemon upgrades (#11031) — https://github.com/omacom/omarchy/pull/11097
-- #11069: Run declared plugin cleanup before removal — https://github.com/omacom/omarchy/pull/11069
-- #11470: Run declared plugin cleanup before removal — https://github.com/omacom/omarchy/pull/11470
-- #10977: Add `omarchy vm`, a disposable Omarchy in QEMU/KVM — https://github.com/omacom/omarchy/pull/10977
 - #10802: Keep web app and browser launches on http(s) — https://github.com/omacom/omarchy/pull/10802
+- #10769: Restrict clipboard history file modes — https://github.com/omacom/omarchy/pull/10769
+- #10602: Fix Wi-Fi password recovery after authentication failure — https://github.com/omacom/omarchy/pull/10602
+- #10262: Snapshot BASHPID before /proc fd walks in windows-vm mounts — https://github.com/omacom/omarchy/pull/10262
+- #10257: Redact network identifiers from debug output — https://github.com/omacom/omarchy/pull/10257
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -2986,11 +2947,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B033 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10769: Restrict clipboard history file modes — https://github.com/omacom/omarchy/pull/10769
-- #10602: Fix Wi-Fi password recovery after authentication failure — https://github.com/omacom/omarchy/pull/10602
-- #10262: Snapshot BASHPID before /proc fd walks in windows-vm mounts — https://github.com/omacom/omarchy/pull/10262
-- #10257: Redact network identifiers from debug output — https://github.com/omacom/omarchy/pull/10257
 - #10185: Add speech-dispatcher so Brave Web Speech has voices — https://github.com/omacom/omarchy/pull/10185
+- #10110: Add DaVinci Resolve and DaVinci Resolve Studio installers — https://github.com/omacom/omarchy/pull/10110
+- #10109: Add a disposable Omarchy lab VM — https://github.com/omacom/omarchy/pull/10109
+- #10022: Do not let a migration inherit its path overrides from the caller — https://github.com/omacom/omarchy/pull/10022
+- #9995: Pin Helium password store to libsecret — https://github.com/omacom/omarchy/pull/9995
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3008,11 +2969,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B034 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10110: Add DaVinci Resolve and DaVinci Resolve Studio installers — https://github.com/omacom/omarchy/pull/10110
-- #10109: Add a disposable Omarchy lab VM — https://github.com/omacom/omarchy/pull/10109
-- #10022: Do not let a migration inherit its path overrides from the caller — https://github.com/omacom/omarchy/pull/10022
-- #9995: Pin Helium password store to libsecret — https://github.com/omacom/omarchy/pull/9995
 - #9946: Reach the forwarded SSH agent from Herdr panes — https://github.com/omacom/omarchy/pull/9946
+- #9894: Fix Tailscale plugin failing to reconnect when accept-routes is enabled — https://github.com/omacom/omarchy/pull/9894
+- #9878: Re-apply hardware pacman repos after a refresh restore — https://github.com/omacom/omarchy/pull/9878
+- #9777: Add DeepSeek Harness to the agent roster and Install > AI — https://github.com/omacom/omarchy/pull/9777
+- #9695: Add a Setup > Region toggle with Chinese language and input method — https://github.com/omacom/omarchy/pull/9695
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3030,11 +2991,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B035 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9894: Fix Tailscale plugin failing to reconnect when accept-routes is enabled — https://github.com/omacom/omarchy/pull/9894
-- #9878: Re-apply hardware pacman repos after a refresh restore — https://github.com/omacom/omarchy/pull/9878
-- #9777: Add DeepSeek Harness to the agent roster and Install > AI — https://github.com/omacom/omarchy/pull/9777
-- #9695: Add a Setup > Region toggle with Chinese language and input method — https://github.com/omacom/omarchy/pull/9695
 - #9596: feat(mise): install default CLI tools through native lazy shims — https://github.com/omacom/omarchy/pull/9596
+- #9539: Add cursor theme selection to the Style menu — https://github.com/omacom/omarchy/pull/9539
+- #9511: Support non-interactive updates with --yes — https://github.com/omacom/omarchy/pull/9511
+- #9381: Show what PAM asked for in the polkit dialog — https://github.com/omacom/omarchy/pull/9381
+- #9307: Clarify that "grab key from github" in sshd setup authorizes EVERY machine that publishes public key on your github a/c — https://github.com/omacom/omarchy/pull/9307
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3052,11 +3013,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B036 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9539: Add cursor theme selection to the Style menu — https://github.com/omacom/omarchy/pull/9539
-- #9511: Support non-interactive updates with --yes — https://github.com/omacom/omarchy/pull/9511
-- #9381: Show what PAM asked for in the polkit dialog — https://github.com/omacom/omarchy/pull/9381
-- #9307: Clarify that "grab key from github" in sshd setup authorizes EVERY machine that publishes public key on your github a/c — https://github.com/omacom/omarchy/pull/9307
 - #9227: Require interactive confirmation for AUR installs and updates — https://github.com/omacom/omarchy/pull/9227
+- #9024: Auto-create /etc/1password/custom_allowed_browsers on install — https://github.com/omacom/omarchy/pull/9024
+- #8910: Avoid redundant lock after encrypted hibernate — https://github.com/omacom/omarchy/pull/8910
+- #8801: Add Helium and Ungoogled Chromium browser support — https://github.com/omacom/omarchy/pull/8801
+- #8639: Allow forgetting the connected Wi-Fi network — https://github.com/omacom/omarchy/pull/8639
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3074,11 +3035,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B037 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9044: Keep SDDM auto-login off encrypted roots in the quattro upgrade — https://github.com/omacom/omarchy/pull/9044
-- #9024: Auto-create /etc/1password/custom_allowed_browsers on install — https://github.com/omacom/omarchy/pull/9024
-- #8910: Avoid redundant lock after encrypted hibernate — https://github.com/omacom/omarchy/pull/8910
-- #8801: Add Helium and Ungoogled Chromium browser support — https://github.com/omacom/omarchy/pull/8801
-- #8662: Sanitize legacy Windows VM usernames — https://github.com/omacom/omarchy/pull/8662
+- #8413: Add Scanner support — https://github.com/omacom/omarchy/pull/8413
+- #8294: Add Wi-Fi QR code scanning — https://github.com/omacom/omarchy/pull/8294
+- #8188: Add and remove tailnets from the Tailscale panel — https://github.com/omacom/omarchy/pull/8188
+- #8130: Stop NordVPN installation after setup failure — https://github.com/omacom/omarchy/pull/8130
+- #7882: Add native Syncthing integration — https://github.com/omacom/omarchy/pull/7882
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3096,11 +3057,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B038 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8639: Allow forgetting the connected Wi-Fi network — https://github.com/omacom/omarchy/pull/8639
-- #8413: Add Scanner support — https://github.com/omacom/omarchy/pull/8413
-- #8294: Add Wi-Fi QR code scanning — https://github.com/omacom/omarchy/pull/8294
-- #8188: Add and remove tailnets from the Tailscale panel — https://github.com/omacom/omarchy/pull/8188
-- #8130: Stop NordVPN installation after setup failure — https://github.com/omacom/omarchy/pull/8130
+- #7828: Add "Join hidden network" to the Wi-Fi panel — https://github.com/omacom/omarchy/pull/7828
+- #7814: Add encrypted, versioned, off-site backups — https://github.com/omacom/omarchy/pull/7814
+- #7731: Show Windows PCs and admin shares in Files — https://github.com/omacom/omarchy/pull/7731
+- #7622: Add an omarchy:// link handler for installing plugins from a web page — https://github.com/omacom/omarchy/pull/7622
+- #7274: Add a Kimi usage collector to the agents panel — https://github.com/omacom/omarchy/pull/7274
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3118,11 +3079,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B039 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7882: Add native Syncthing integration — https://github.com/omacom/omarchy/pull/7882
-- #7828: Add "Join hidden network" to the Wi-Fi panel — https://github.com/omacom/omarchy/pull/7828
-- #7814: Add encrypted, versioned, off-site backups — https://github.com/omacom/omarchy/pull/7814
-- #7731: Show Windows PCs and admin shares in Files — https://github.com/omacom/omarchy/pull/7731
-- #7622: Add an omarchy:// link handler for installing plugins from a web page — https://github.com/omacom/omarchy/pull/7622
+- #7272: Switch between subscription accounts — https://github.com/omacom/omarchy/pull/7272
+- #7261: Add Kimi as a selectable default coding agent — https://github.com/omacom/omarchy/pull/7261
+- #7062: Support DoT endpoints in `omarchy dns Custom` — https://github.com/omacom/omarchy/pull/7062
+- #6965: Add git-based backup and restore — https://github.com/omacom/omarchy/pull/6965
+- #6807: Detect captive portals and offer to sign in — https://github.com/omacom/omarchy/pull/6807
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3140,11 +3101,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B040 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7274: Add a Kimi usage collector to the agents panel — https://github.com/omacom/omarchy/pull/7274
-- #7272: Switch between subscription accounts — https://github.com/omacom/omarchy/pull/7272
-- #7261: Add Kimi as a selectable default coding agent — https://github.com/omacom/omarchy/pull/7261
-- #7062: Support DoT endpoints in `omarchy dns Custom` — https://github.com/omacom/omarchy/pull/7062
-- #6965: Add git-based backup and restore — https://github.com/omacom/omarchy/pull/6965
+- #6697: Adding Atuin be default for better shell search / history — https://github.com/omacom/omarchy/pull/6697
+- #6664: Fix fingerprint setup script to detect non-libfprint-git providers — https://github.com/omacom/omarchy/pull/6664
+- #6647: Add local and remote Hermes usage sources to Agents panel — https://github.com/omacom/omarchy/pull/6647
+- #6515: Support hardware, fingerprint, and password Polkit flows — https://github.com/omacom/omarchy/pull/6515
+- #5654: Add Install -> Editor -> Jetbrains menu — https://github.com/omacom/omarchy/pull/5654
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3162,11 +3123,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B041 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #6807: Detect captive portals and offer to sign in — https://github.com/omacom/omarchy/pull/6807
-- #6697: Adding Atuin be default for better shell search / history — https://github.com/omacom/omarchy/pull/6697
-- #6664: Fix fingerprint setup script to detect non-libfprint-git providers — https://github.com/omacom/omarchy/pull/6664
-- #6647: Add local and remote Hermes usage sources to Agents panel — https://github.com/omacom/omarchy/pull/6647
-- #6515: Support hardware, fingerprint, and password Polkit flows — https://github.com/omacom/omarchy/pull/6515
+- #5545: Stop package install flows after aborts or failures — https://github.com/omacom/omarchy/pull/5545
+- #5279: Add per-network DNS configuration for WiFi — https://github.com/omacom/omarchy/pull/5279
+- #5139: Add Orca screen reader with Piper TTS — https://github.com/omacom/omarchy/pull/5139
+- #5136: Add auto power profile switching for T2 MacBooks — https://github.com/omacom/omarchy/pull/5136
+- #5035: Prevent empty passwords in omarchy-drive-set-password — https://github.com/omacom/omarchy/pull/5035
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3184,11 +3145,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B042 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #5654: Add Install -> Editor -> Jetbrains menu — https://github.com/omacom/omarchy/pull/5654
-- #5545: Stop package install flows after aborts or failures — https://github.com/omacom/omarchy/pull/5545
-- #5279: Add per-network DNS configuration for WiFi — https://github.com/omacom/omarchy/pull/5279
-- #5139: Add Orca screen reader with Piper TTS — https://github.com/omacom/omarchy/pull/5139
-- #5136: Add auto power profile switching for T2 MacBooks — https://github.com/omacom/omarchy/pull/5136
+- #4997: Add NetBird as optional VPN service — https://github.com/omacom/omarchy/pull/4997
+- #8662: Sanitize legacy Windows VM usernames — https://github.com/omacom/omarchy/pull/8662
+- #9044: Keep SDDM auto-login off encrypted roots in the quattro upgrade — https://github.com/omacom/omarchy/pull/9044
+- #12059: Run the default agent on another machine — https://github.com/omacom/omarchy/pull/12059
+- #13937: update: claim the update log atomically before root script(1) — https://github.com/omacom/omarchy/pull/13937
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3206,11 +3167,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B043 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #5035: Prevent empty passwords in omarchy-drive-set-password — https://github.com/omacom/omarchy/pull/5035
-- #4997: Add NetBird as optional VPN service — https://github.com/omacom/omarchy/pull/4997
-- #13937: update: claim the update log atomically before root script(1) — https://github.com/omacom/omarchy/pull/13937
 - #13901: Refuse inactive status while a reserved-prefix sudo rule is live — https://github.com/omacom/omarchy/pull/13901
 - #13887: Control LG UltraFine brightness with the brightness keys — https://github.com/omacom/omarchy/pull/13887
+- #13800: Strip setgid and setuid bits from Windows VM mount directories (#13558) — https://github.com/omacom/omarchy/pull/13800
+- #13652: Drop pam_faillock preauth silent so lockouts are visible — https://github.com/omacom/omarchy/pull/13652
+- #13616: Keep sudo alive and offer reboot after channel switch — https://github.com/omacom/omarchy/pull/13616
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3228,11 +3189,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B044 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13800: Strip setgid and setuid bits from Windows VM mount directories (#13558) — https://github.com/omacom/omarchy/pull/13800
-- #13652: Drop pam_faillock preauth silent so lockouts are visible — https://github.com/omacom/omarchy/pull/13652
-- #13616: Keep sudo alive and offer reboot after channel switch — https://github.com/omacom/omarchy/pull/13616
 - #13575: Bound the package-install sudo keepalive and revoke it on exit — https://github.com/omacom/omarchy/pull/13575
 - #13533: Join a self-hosted Tailscale coordination server — https://github.com/omacom/omarchy/pull/13533
+- #13479: Authorize omarchy-channel-set once for the whole switch — https://github.com/omacom/omarchy/pull/13479
+- #13362: Converge omarchy-mac and omarchy-mx-mac into upstream Omarchy — https://github.com/omacom/omarchy/pull/13362
+- #13316: Preserve GUM environment records during factory-reset elevation — https://github.com/omacom/omarchy/pull/13316
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3250,11 +3211,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B045 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13479: Authorize omarchy-channel-set once for the whole switch — https://github.com/omacom/omarchy/pull/13479
-- #13362: Converge omarchy-mac and omarchy-mx-mac into upstream Omarchy — https://github.com/omacom/omarchy/pull/13362
-- #13316: Preserve GUM environment records during factory-reset elevation — https://github.com/omacom/omarchy/pull/13316
 - #13312: Require a per-session token for notification click-exec — https://github.com/omacom/omarchy/pull/13312
 - #13283: Tell the user when pam_faillock has locked the account — https://github.com/omacom/omarchy/pull/13283
+- #13215: Sync root when updating the user password from the menu — https://github.com/omacom/omarchy/pull/13215
+- #13187: Setup fingerprint for Validity/Synaptics readers via python-validity — https://github.com/omacom/omarchy/pull/13187
+- #13112: Stop broadcasting hostname and permanent MAC on every network — https://github.com/omacom/omarchy/pull/13112
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3272,11 +3233,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B046 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13215: Sync root when updating the user password from the menu — https://github.com/omacom/omarchy/pull/13215
-- #13187: Setup fingerprint for Validity/Synaptics readers via python-validity — https://github.com/omacom/omarchy/pull/13187
-- #13112: Stop broadcasting hostname and permanent MAC on every network — https://github.com/omacom/omarchy/pull/13112
 - #13085: Restart bluetoothd and reload btusb when the adapter is wedged — https://github.com/omacom/omarchy/pull/13085
 - #12897: Accept device-initiated Bluetooth Just Works pairing — https://github.com/omacom/omarchy/pull/12897
+- #12895: Don't add controller users to the input group — https://github.com/omacom/omarchy/pull/12895
+- #12896: Persist XKBLAYOUT for LUKS so non-US layouts stay typeable — https://github.com/omacom/omarchy/pull/12896
+- #12888: Abort Tailscale remove when sudo is cancelled — https://github.com/omacom/omarchy/pull/12888
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3294,11 +3255,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B047 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12895: Don't add controller users to the input group — https://github.com/omacom/omarchy/pull/12895
-- #12896: Persist XKBLAYOUT for LUKS so non-US layouts stay typeable — https://github.com/omacom/omarchy/pull/12896
-- #12888: Abort Tailscale remove when sudo is cancelled — https://github.com/omacom/omarchy/pull/12888
 - #12889: Reuse existing enterprise Wi-Fi profiles on reconnect — https://github.com/omacom/omarchy/pull/12889
-- #12883: Scope the dev-link secure_path drop-in to the linking user — https://github.com/omacom/omarchy/pull/12883
+- #12715: Finish 1Password install: local polkit owners and MCP setgid — https://github.com/omacom/omarchy/pull/12715
+- #12542: Sort passwd_tries sudoers before user overrides — https://github.com/omacom/omarchy/pull/12542
+- #12394: hw: cover all Framework 16 input-module product IDs in qmk_hid udev rule — https://github.com/omacom/omarchy/pull/12394
+- #12266: Preserve TUI command arguments and stage Docker database credentials — https://github.com/omacom/omarchy/pull/12266
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3316,11 +3277,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B048 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12715: Finish 1Password install: local polkit owners and MCP setgid — https://github.com/omacom/omarchy/pull/12715
-- #12542: Sort passwd_tries sudoers before user overrides — https://github.com/omacom/omarchy/pull/12542
-- #12394: hw: cover all Framework 16 input-module product IDs in qmk_hid udev rule — https://github.com/omacom/omarchy/pull/12394
-- #12266: Preserve TUI command arguments and stage Docker database credentials — https://github.com/omacom/omarchy/pull/12266
 - #12265: Agent usage: config-dir cache key and owner-only modes — https://github.com/omacom/omarchy/pull/12265
+- #12165: Tighten system and authentication file permissions — https://github.com/omacom/omarchy/pull/12165
+- #12161: Blacklist uncommon network protocols and legacy filesystem modules — https://github.com/omacom/omarchy/pull/12161
+- #12164: Apply sudo session isolation and security flags — https://github.com/omacom/omarchy/pull/12164
+- #12162: Harden SSH client and daemon cryptographic defaults — https://github.com/omacom/omarchy/pull/12162
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3338,11 +3299,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B049 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12165: Tighten system and authentication file permissions — https://github.com/omacom/omarchy/pull/12165
-- #12161: Blacklist uncommon network protocols and legacy filesystem modules — https://github.com/omacom/omarchy/pull/12161
-- #12164: Apply sudo session isolation and security flags — https://github.com/omacom/omarchy/pull/12164
-- #12162: Harden SSH client and daemon cryptographic defaults — https://github.com/omacom/omarchy/pull/12162
 - #12160: Disable core dump generation to prevent memory exposure — https://github.com/omacom/omarchy/pull/12160
+- #12159: Harden kernel and network sysctl parameters — https://github.com/omacom/omarchy/pull/12159
+- #12155: Fix six reported bugs: bar toggle, hibernation, weather, VM mounts, keybindings menu, group binds — https://github.com/omacom/omarchy/pull/12155
+- #12110: Fingerprint setup: keep working forks; silent lid-open PAM gate — https://github.com/omacom/omarchy/pull/12110
+- #12103: Strip dangerous caps from gsr-kms-server and btop — https://github.com/omacom/omarchy/pull/12103
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3360,11 +3321,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B050 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12159: Harden kernel and network sysctl parameters — https://github.com/omacom/omarchy/pull/12159
-- #12155: Fix six reported bugs: bar toggle, hibernation, weather, VM mounts, keybindings menu, group binds — https://github.com/omacom/omarchy/pull/12155
-- #12110: Fingerprint setup: keep working forks; silent lid-open PAM gate — https://github.com/omacom/omarchy/pull/12110
-- #12103: Strip dangerous caps from gsr-kms-server and btop — https://github.com/omacom/omarchy/pull/12103
 - #12078: Import saved iwd Wi-Fi networks into NetworkManager — https://github.com/omacom/omarchy/pull/12078
+- #11874: Require approval for new USB and Thunderbolt devices by default — https://github.com/omacom/omarchy/pull/11874
+- #11786: Reclaim pre-4.0 user-owned Plymouth and SDDM theme directories — https://github.com/omacom/omarchy/pull/11786
+- #11697: Repair a broken passwordless default keyring before session apps use it — https://github.com/omacom/omarchy/pull/11697
+- #11471: Open Steam Remote Play ports when installing Steam — https://github.com/omacom/omarchy/pull/11471
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3380,28 +3341,6 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 
 ```
 You are reviewing Omarchy pre-release batch B051 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11874: Require approval for new USB and Thunderbolt devices by default — https://github.com/omacom/omarchy/pull/11874
-- #11786: Reclaim pre-4.0 user-owned Plymouth and SDDM theme directories — https://github.com/omacom/omarchy/pull/11786
-- #11697: Repair a broken passwordless default keyring before session apps use it — https://github.com/omacom/omarchy/pull/11697
-- #11471: Open Steam Remote Play ports when installing Steam — https://github.com/omacom/omarchy/pull/11471
-- #11461: Keep the caller's editor across sudo for vipw and vigr — https://github.com/omacom/omarchy/pull/11461
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B052
-
-```
-You are reviewing Omarchy pre-release batch B052 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #11438: Support mounting and unlocking internal and LVM-backed storage in UDisks — https://github.com/omacom/omarchy/pull/11438
@@ -3420,10 +3359,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B053
+### B052
 
 ```
-You are reviewing Omarchy pre-release batch B053 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B052 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #11322: Recreate lock screen fingerprint PAM file for pre-quattro setups — https://github.com/omacom/omarchy/pull/11322
@@ -3442,10 +3381,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B054
+### B053
 
 ```
-You are reviewing Omarchy pre-release batch B054 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B053 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10974: Rust-first sandboxed Quickshell plugins — https://github.com/omacom/omarchy/pull/10974
@@ -3464,10 +3403,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B055
+### B054
 
 ```
-You are reviewing Omarchy pre-release batch B055 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B054 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10655: Harden linux-modules-cleanup.service with a systemd drop-in — https://github.com/omacom/omarchy/pull/10655
@@ -3486,10 +3425,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B056
+### B055
 
 ```
-You are reviewing Omarchy pre-release batch B056 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B055 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10219: security: add a disk-unlock duress password that factory-resets — https://github.com/omacom/omarchy/pull/10219
@@ -3508,10 +3447,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B057
+### B056
 
 ```
-You are reviewing Omarchy pre-release batch B057 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B056 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9873: Defer to system-auth in the polkit stack written by fingerprint/FIDO2 setup — https://github.com/omacom/omarchy/pull/9873
@@ -3530,10 +3469,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B058
+### B057
 
 ```
-You are reviewing Omarchy pre-release batch B058 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B057 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9700: Seed Chromium's first-run preferences with a mode the browser can read — https://github.com/omacom/omarchy/pull/9700
@@ -3552,10 +3491,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B059
+### B058
 
 ```
-You are reviewing Omarchy pre-release batch B059 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B058 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9475: [codex] OM-SEC-21: Authenticate only after package picker code exits — https://github.com/omacom/omarchy/pull/9475
@@ -3574,10 +3513,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B060
+### B059
 
 ```
-You are reviewing Omarchy pre-release batch B060 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B059 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9239: Sync the GNOME keyring on user password changes — https://github.com/omacom/omarchy/pull/9239
@@ -3596,16 +3535,39 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B061
+### B060
 
 ```
-You are reviewing Omarchy pre-release batch B061 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B060 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8831: Allow IGMP so multicast group queries stop flooding the firewall log — https://github.com/omacom/omarchy/pull/8831
 - #8707: Set Tailscale operator for Taildrop — https://github.com/omacom/omarchy/pull/8707
 - #8709: fix: arm signature verification for the T2 repo and close the quattro override window — https://github.com/omacom/omarchy/pull/8709
 - #8534: Take privileged usernames from id -un, not USER — https://github.com/omacom/omarchy/pull/8534
+- #8336: Add face authentication (howdy) to the lock screen — https://github.com/omacom/omarchy/pull/8336
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B061
+
+```
+You are reviewing Omarchy pre-release batch B061 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #8204: Stop probing the internal T2 network interface — https://github.com/omacom/omarchy/pull/8204
+- #8169: Stop apply-system reruns leaving the install log world-writable — https://github.com/omacom/omarchy/pull/8169
+- #8035: Add VPN section to the network panel — https://github.com/omacom/omarchy/pull/8035
+- #7971: Let the compositor and audio graph take the realtime priority they ask for — https://github.com/omacom/omarchy/pull/7971
+- #7913: Add maker install group with ESP32/ESP-IDF toolchain setup — https://github.com/omacom/omarchy/pull/7913
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3623,11 +3585,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B062 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8429: [Security] Keep the update transcript out of world-writable /tmp — https://github.com/omacom/omarchy/pull/8429
-- #12957: Keep the update transcript out of world-writable /tmp — https://github.com/omacom/omarchy/pull/12957
-- #8336: Add face authentication (howdy) to the lock screen — https://github.com/omacom/omarchy/pull/8336
-- #8204: Stop probing the internal T2 network interface — https://github.com/omacom/omarchy/pull/8204
-- #8169: Stop apply-system reruns leaving the install log world-writable — https://github.com/omacom/omarchy/pull/8169
+- #7871: Stop the lid gate logging a PAM failure on every open-lid sudo — https://github.com/omacom/omarchy/pull/7871
+- #7857: feat(surface-touch): add touchscreen support for Surface devices via linux-surface kernel as boot option — https://github.com/omacom/omarchy/pull/7857
+- #7831: Reload a wedged Wi-Fi radio without waiting for the user — https://github.com/omacom/omarchy/pull/7831
+- #7501: Apply session monitor scale to the SDDM greeter — https://github.com/omacom/omarchy/pull/7501
+- #7435: Add Wi-Fi hotspot hosting to the network panel — https://github.com/omacom/omarchy/pull/7435
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3645,11 +3607,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B063 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8035: Add VPN section to the network panel — https://github.com/omacom/omarchy/pull/8035
-- #7990: Clear passwordless sudo grants at boot — https://github.com/omacom/omarchy/pull/7990
-- #7971: Let the compositor and audio graph take the realtime priority they ask for — https://github.com/omacom/omarchy/pull/7971
-- #7913: Add maker install group with ESP32/ESP-IDF toolchain setup — https://github.com/omacom/omarchy/pull/7913
-- #7871: Stop the lid gate logging a PAM failure on every open-lid sudo — https://github.com/omacom/omarchy/pull/7871
+- #7417: Add NetBird mesh VPN integration — https://github.com/omacom/omarchy/pull/7417
+- #7258: Restore early Thunderbolt authorization for LUKS unlock — https://github.com/omacom/omarchy/pull/7258
+- #7158: Keep the lock screen fingerprint working across suspend, and show when the reader is unavailable — https://github.com/omacom/omarchy/pull/7158
+- #7071: Migrate Brave Origin Beta profile data to stable — https://github.com/omacom/omarchy/pull/7071
+- #6912: Fix FIDO2 setup on keys that require user verification — https://github.com/omacom/omarchy/pull/6912
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3667,11 +3629,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B064 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7857: feat(surface-touch): add touchscreen support for Surface devices via linux-surface kernel as boot option — https://github.com/omacom/omarchy/pull/7857
-- #7831: Reload a wedged Wi-Fi radio without waiting for the user — https://github.com/omacom/omarchy/pull/7831
-- #7501: Apply session monitor scale to the SDDM greeter — https://github.com/omacom/omarchy/pull/7501
-- #7435: Add Wi-Fi hotspot hosting to the network panel — https://github.com/omacom/omarchy/pull/7435
-- #7417: Add NetBird mesh VPN integration — https://github.com/omacom/omarchy/pull/7417
+- #6736: Docker multi-arch build with sudo support — https://github.com/omacom/omarchy/pull/6736
+- #6513: Enable DNS-over-TLS for custom DNS providers — https://github.com/omacom/omarchy/pull/6513
+- #6474: Add Android development environment — https://github.com/omacom/omarchy/pull/6474
+- #5431: feat(hardware): sync ThinkBook mute LEDs with WirePlumber state — https://github.com/omacom/omarchy/pull/5431
+- #5284: Add NuPhy Air75 V3 keyboard support — https://github.com/omacom/omarchy/pull/5284
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3689,11 +3651,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B065 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7258: Restore early Thunderbolt authorization for LUKS unlock — https://github.com/omacom/omarchy/pull/7258
-- #7158: Keep the lock screen fingerprint working across suspend, and show when the reader is unavailable — https://github.com/omacom/omarchy/pull/7158
-- #7071: Migrate Brave Origin Beta profile data to stable — https://github.com/omacom/omarchy/pull/7071
-- #6912: Fix FIDO2 setup on keys that require user verification — https://github.com/omacom/omarchy/pull/6912
-- #6736: Docker multi-arch build with sudo support — https://github.com/omacom/omarchy/pull/6736
+- #13947: Require CA and server validation for enterprise Wi-Fi — https://github.com/omacom/omarchy/pull/13947
+- #8429: [Security] Keep the update transcript out of world-writable /tmp — https://github.com/omacom/omarchy/pull/8429
+- #12957: Keep the update transcript out of world-writable /tmp — https://github.com/omacom/omarchy/pull/12957
+- #12883: Scope the dev-link secure_path drop-in to the linking user — https://github.com/omacom/omarchy/pull/12883
+- #13939: Reject unknown targets in omarchy-install-dev-env — https://github.com/omacom/omarchy/pull/13939
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3711,11 +3673,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B066 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #6513: Enable DNS-over-TLS for custom DNS providers — https://github.com/omacom/omarchy/pull/6513
-- #6474: Add Android development environment — https://github.com/omacom/omarchy/pull/6474
-- #5431: feat(hardware): sync ThinkBook mute LEDs with WirePlumber state — https://github.com/omacom/omarchy/pull/5431
-- #5284: Add NuPhy Air75 V3 keyboard support — https://github.com/omacom/omarchy/pull/5284
-- #13947: Require CA and server validation for enterprise Wi-Fi — https://github.com/omacom/omarchy/pull/13947
+- #13940: fix(imv): open AVIF, HEIF, and JXL files — https://github.com/omacom/omarchy/pull/13940
+- #13935: games-retro-install: spec-correct .desktop escaping for ROM names and paths — https://github.com/omacom/omarchy/pull/13935
+- #13928: Focus the right app when its notification name differs from its window class — https://github.com/omacom/omarchy/pull/13928
+- #13929: Skip source outputs with no client when moving them to the new default input — https://github.com/omacom/omarchy/pull/13929
+- #13924: docs: prefer omarchy debug with omarchy-debug fallback — https://github.com/omacom/omarchy/pull/13924
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3733,11 +3695,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B067 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13939: Reject unknown targets in omarchy-install-dev-env — https://github.com/omacom/omarchy/pull/13939
-- #13940: fix(imv): open AVIF, HEIF, and JXL files — https://github.com/omacom/omarchy/pull/13940
-- #13935: games-retro-install: spec-correct .desktop escaping for ROM names and paths — https://github.com/omacom/omarchy/pull/13935
-- #13928: Focus the right app when its notification name differs from its window class — https://github.com/omacom/omarchy/pull/13928
-- #13929: Skip source outputs with no client when moving them to the new default input — https://github.com/omacom/omarchy/pull/13929
+- #13917: Preserve normal borders on selected controls — https://github.com/omacom/omarchy/pull/13917
+- #13916: Include popup padding in dropdown height — https://github.com/omacom/omarchy/pull/13916
+- #13915: Scope indicator hover reveal to each bar surface — https://github.com/omacom/omarchy/pull/13915
+- #13914: Retry transparent bar sampling after input changes — https://github.com/omacom/omarchy/pull/13914
+- #13910: Pin the device scale factor in 1Password autostart — https://github.com/omacom/omarchy/pull/13910
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3755,11 +3717,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B068 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13924: docs: prefer omarchy debug with omarchy-debug fallback — https://github.com/omacom/omarchy/pull/13924
-- #13921: Cap idle timeouts to the largest Qt Timer interval — https://github.com/omacom/omarchy/pull/13921
-- #13917: Preserve normal borders on selected controls — https://github.com/omacom/omarchy/pull/13917
-- #13923: Warn when a bind's id lands where nothing reads it — https://github.com/omacom/omarchy/pull/13923
-- #13918: Show fingerprint reader state on the lock screen, and fade the lock over the desktop — https://github.com/omacom/omarchy/pull/13918
+- #13913: Read fresh shell config before mutations — https://github.com/omacom/omarchy/pull/13913
+- #13911: Fix hot reload of local plugins by busting the component cache — https://github.com/omacom/omarchy/pull/13911
+- #13907: Restore lock screen focus after a failed password — https://github.com/omacom/omarchy/pull/13907
+- #13909: Document closing windows vs terminating programs in the hyprland skill — https://github.com/omacom/omarchy/pull/13909
+- #13905: Add Left, Right, Above, and Below to the Display panel — https://github.com/omacom/omarchy/pull/13905
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3777,11 +3739,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B069 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13916: Include popup padding in dropdown height — https://github.com/omacom/omarchy/pull/13916
-- #13915: Scope indicator hover reveal to each bar surface — https://github.com/omacom/omarchy/pull/13915
-- #13914: Retry transparent bar sampling after input changes — https://github.com/omacom/omarchy/pull/13914
-- #13910: Pin the device scale factor in 1Password autostart — https://github.com/omacom/omarchy/pull/13910
-- #13913: Read fresh shell config before mutations — https://github.com/omacom/omarchy/pull/13913
+- #13902: [4.0.4 backport] Only force NVIDIA VA-API/GLX env when NVIDIA drives the display — https://github.com/omacom/omarchy/pull/13902
+- #13894: Count Claude usage from opencode v2 sessions — https://github.com/omacom/omarchy/pull/13894
+- #13895: Correct omarchy-pkg-add AUR claim in AGENTS.md — https://github.com/omacom/omarchy/pull/13895
+- #13897: Scope screenshot picker controls to Omarchy's picker — https://github.com/omacom/omarchy/pull/13897
+- #13888: Sort and pair keybinding rows by id, not by display text — https://github.com/omacom/omarchy/pull/13888
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3799,11 +3761,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B070 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13911: Fix hot reload of local plugins by busting the component cache — https://github.com/omacom/omarchy/pull/13911
-- #13907: Restore lock screen focus after a failed password — https://github.com/omacom/omarchy/pull/13907
-- #13909: Document closing windows vs terminating programs in the hyprland skill — https://github.com/omacom/omarchy/pull/13909
-- #13905: Add Left, Right, Above, and Below to the Display panel — https://github.com/omacom/omarchy/pull/13905
-- #13902: [4.0.4 backport] Only force NVIDIA VA-API/GLX env when NVIDIA drives the display — https://github.com/omacom/omarchy/pull/13902
+- #13885: directional focus in Scrolling Layout fullscreen — https://github.com/omacom/omarchy/pull/13885
+- #13886: Keep the tray while only hidden items remain — https://github.com/omacom/omarchy/pull/13886
+- #13881: Fix muted icon for headphone outputs — https://github.com/omacom/omarchy/pull/13881
+- #13883: Add an opt-in bar ticker for incoming agent messages — https://github.com/omacom/omarchy/pull/13883
+- #13878: Don't report a kernel update for kernels installed outside pacman — https://github.com/omacom/omarchy/pull/13878
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3819,50 +3781,6 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 
 ```
 You are reviewing Omarchy pre-release batch B071 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #13894: Count Claude usage from opencode v2 sessions — https://github.com/omacom/omarchy/pull/13894
-- #13895: Correct omarchy-pkg-add AUR claim in AGENTS.md — https://github.com/omacom/omarchy/pull/13895
-- #13897: Scope screenshot picker controls to Omarchy's picker — https://github.com/omacom/omarchy/pull/13897
-- #13888: Sort and pair keybinding rows by id, not by display text — https://github.com/omacom/omarchy/pull/13888
-- #13885: directional focus in Scrolling Layout fullscreen — https://github.com/omacom/omarchy/pull/13885
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B072
-
-```
-You are reviewing Omarchy pre-release batch B072 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #13886: Keep the tray while only hidden items remain — https://github.com/omacom/omarchy/pull/13886
-- #13881: Fix muted icon for headphone outputs — https://github.com/omacom/omarchy/pull/13881
-- #13883: Add an opt-in bar ticker for incoming agent messages — https://github.com/omacom/omarchy/pull/13883
-- #13879: Launch web apps in an installed Chromium-based browser — https://github.com/omacom/omarchy/pull/13879
-- #13878: Don't report a kernel update for kernels installed outside pacman — https://github.com/omacom/omarchy/pull/13878
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B073
-
-```
-You are reviewing Omarchy pre-release batch B073 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13870: Show elapsed time beside each usage meter in the agents panel — https://github.com/omacom/omarchy/pull/13870
@@ -3881,17 +3799,61 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
+### B072
+
+```
+You are reviewing Omarchy pre-release batch B072 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13857: Accept agent prompts from stdin or the clipboard — https://github.com/omacom/omarchy/pull/13857
+- #13850: Hold notification toasts back behind a fullscreen window — https://github.com/omacom/omarchy/pull/13850
+- #13843: Provision Helix theme links for existing installations — https://github.com/omacom/omarchy/pull/13843
+- #13842: Warn when a plugin's service or id lookup is denied — https://github.com/omacom/omarchy/pull/13842
+- #13841: Run the screensaver in WezTerm too — https://github.com/omacom/omarchy/pull/13841
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B073
+
+```
+You are reviewing Omarchy pre-release batch B073 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13837: Export OMARCHY_AGENT and OMARCHY_AGENT_CWD into launched harnesses — https://github.com/omacom/omarchy/pull/13837
+- #13835: Mute crash toasts while diagnosis is in flight — https://github.com/omacom/omarchy/pull/13835
+- #13833: Add opt-in request-dispatch hook before agent launch — https://github.com/omacom/omarchy/pull/13833
+- #13831: Open hyprmoncfg layouts from the Display menu — https://github.com/omacom/omarchy/pull/13831
+- #13830: Read the default browser without xdg-settings — https://github.com/omacom/omarchy/pull/13830
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
 ### B074
 
 ```
 You are reviewing Omarchy pre-release batch B074 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13857: Accept agent prompts from stdin or the clipboard — https://github.com/omacom/omarchy/pull/13857
-- #13851: Fix clock widget rendering weekday/month names in English regardless of locale — https://github.com/omacom/omarchy/pull/13851
-- #13850: Hold notification toasts back behind a fullscreen window — https://github.com/omacom/omarchy/pull/13850
-- #13843: Provision Helix theme links for existing installations — https://github.com/omacom/omarchy/pull/13843
-- #13842: Warn when a plugin's service or id lookup is denied — https://github.com/omacom/omarchy/pull/13842
+- #13824: Add a delayed screenshot to the capture menu — https://github.com/omacom/omarchy/pull/13824
+- #13818: Ignore static pointer position changes on lock screen wake (#13812) — https://github.com/omacom/omarchy/pull/13818
+- #13813: Stop the dictation indicator from making voxtype run nvidia-smi — https://github.com/omacom/omarchy/pull/13813
+- #13816: Handle interleaved Codex RPC notifications without timing out (#13773) — https://github.com/omacom/omarchy/pull/13816
+- #13817: Document omarchy-debug directly in bundled agent skills (#13702) — https://github.com/omacom/omarchy/pull/13817
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3909,11 +3871,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B075 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13841: Run the screensaver in WezTerm too — https://github.com/omacom/omarchy/pull/13841
-- #13837: Export OMARCHY_AGENT and OMARCHY_AGENT_CWD into launched harnesses — https://github.com/omacom/omarchy/pull/13837
-- #13835: Mute crash toasts while diagnosis is in flight — https://github.com/omacom/omarchy/pull/13835
-- #13833: Add opt-in request-dispatch hook before agent launch — https://github.com/omacom/omarchy/pull/13833
-- #13831: Open hyprmoncfg layouts from the Display menu — https://github.com/omacom/omarchy/pull/13831
+- #13810: Fix vscode theme file verification in test/cli — https://github.com/omacom/omarchy/pull/13810
+- #13809: Reposition parked overlay window on focus change before opening (#13562) — https://github.com/omacom/omarchy/pull/13809
+- #13806: Retain Bluetooth controls when unpowered and cap discovery retry (#13523, #13447) — https://github.com/omacom/omarchy/pull/13806
+- #13805: Support additional i2c touchpad bus drivers in restart trackpad (#13398) — https://github.com/omacom/omarchy/pull/13805
+- #13807: Prompt voxtype installation when command is missing (#13594) — https://github.com/omacom/omarchy/pull/13807
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3931,11 +3893,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B076 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13830: Read the default browser without xdg-settings — https://github.com/omacom/omarchy/pull/13830
-- #13824: Add a delayed screenshot to the capture menu — https://github.com/omacom/omarchy/pull/13824
-- #13818: Ignore static pointer position changes on lock screen wake (#13812) — https://github.com/omacom/omarchy/pull/13818
-- #13813: Stop the dictation indicator from making voxtype run nvidia-smi — https://github.com/omacom/omarchy/pull/13813
-- #13816: Handle interleaved Codex RPC notifications without timing out (#13773) — https://github.com/omacom/omarchy/pull/13816
+- #13808: Ignore virtual interfaces and resolve physical uplink in network status (#13525) — https://github.com/omacom/omarchy/pull/13808
+- #13804: Add drift watchdog timer to recover clock after system resume (#13504) — https://github.com/omacom/omarchy/pull/13804
+- #13803: Fix JSONC inline comments and reject root arrays in MenuModel (#13492, #13493) — https://github.com/omacom/omarchy/pull/13803
+- #13802: Add timeout duration to app launch notifications (#13535, #13566) — https://github.com/omacom/omarchy/pull/13802
+- #13801: Only report plugin restoration when previously disabled (#13507) — https://github.com/omacom/omarchy/pull/13801
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3953,11 +3915,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B077 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13817: Document omarchy-debug directly in bundled agent skills (#13702) — https://github.com/omacom/omarchy/pull/13817
-- #13810: Fix vscode theme file verification in test/cli — https://github.com/omacom/omarchy/pull/13810
-- #13809: Reposition parked overlay window on focus change before opening (#13562) — https://github.com/omacom/omarchy/pull/13809
-- #13806: Retain Bluetooth controls when unpowered and cap discovery retry (#13523, #13447) — https://github.com/omacom/omarchy/pull/13806
-- #13805: Support additional i2c touchpad bus drivers in restart trackpad (#13398) — https://github.com/omacom/omarchy/pull/13805
+- #13799: Prevent migration timestamp collisions by using epoch seconds (#13516) — https://github.com/omacom/omarchy/pull/13799
+- #13797: Smooth out battery time — https://github.com/omacom/omarchy/pull/13797
+- #13792: Remap overlay surfaces after their output is removed — https://github.com/omacom/omarchy/pull/13792
+- #13903: Keep overlay surfaces alive across monitor changes — https://github.com/omacom/omarchy/pull/13903
+- #13787: Fix square aspect toggle on scrolling workspaces — https://github.com/omacom/omarchy/pull/13787
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3975,11 +3937,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B078 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13807: Prompt voxtype installation when command is missing (#13594) — https://github.com/omacom/omarchy/pull/13807
-- #13808: Ignore virtual interfaces and resolve physical uplink in network status (#13525) — https://github.com/omacom/omarchy/pull/13808
-- #13804: Add drift watchdog timer to recover clock after system resume (#13504) — https://github.com/omacom/omarchy/pull/13804
-- #13803: Fix JSONC inline comments and reject root arrays in MenuModel (#13492, #13493) — https://github.com/omacom/omarchy/pull/13803
-- #13802: Add timeout duration to app launch notifications (#13535, #13566) — https://github.com/omacom/omarchy/pull/13802
+- #13784: Make the screensaver fullscreen when a layer surface holds keyboard focus — https://github.com/omacom/omarchy/pull/13784
+- #13783: Re-resolve OverlayWindow.targetScreen when Quickshell.screens changes — https://github.com/omacom/omarchy/pull/13783
+- #13780: Rank the agents by what is left this week in a radar — https://github.com/omacom/omarchy/pull/13780
+- #13782: Retry a sleep inhibitor rejected while logind is still transitioning — https://github.com/omacom/omarchy/pull/13782
+- #13776: Step the bar below the screensaver while one is up — https://github.com/omacom/omarchy/pull/13776
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -3997,11 +3959,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B079 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13801: Only report plugin restoration when previously disabled (#13507) — https://github.com/omacom/omarchy/pull/13801
-- #13799: Prevent migration timestamp collisions by using epoch seconds (#13516) — https://github.com/omacom/omarchy/pull/13799
-- #13797: Smooth out battery time — https://github.com/omacom/omarchy/pull/13797
-- #13792: Remap overlay surfaces after their output is removed — https://github.com/omacom/omarchy/pull/13792
-- #13903: Keep overlay surfaces alive across monitor changes — https://github.com/omacom/omarchy/pull/13903
+- #13772: Reveal Dropbox files through org.freedesktop.FileManager1 — https://github.com/omacom/omarchy/pull/13772
+- #13775: Leave unplugged inputs out of the audio panel — https://github.com/omacom/omarchy/pull/13775
+- #13769: Stop mise wrappers recursing when mise's activation variables are missing — https://github.com/omacom/omarchy/pull/13769
+- #13766: Fix stale VS Code theme assertions in test/cli — https://github.com/omacom/omarchy/pull/13766
+- #13765: Write GTK bookmarks atomically instead of check-then-act — https://github.com/omacom/omarchy/pull/13765
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4019,11 +3981,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B080 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13787: Fix square aspect toggle on scrolling workspaces — https://github.com/omacom/omarchy/pull/13787
-- #13784: Make the screensaver fullscreen when a layer surface holds keyboard focus — https://github.com/omacom/omarchy/pull/13784
-- #13783: Re-resolve OverlayWindow.targetScreen when Quickshell.screens changes — https://github.com/omacom/omarchy/pull/13783
-- #13780: Rank the agents by what is left this week in a radar — https://github.com/omacom/omarchy/pull/13780
-- #13782: Retry a sleep inhibitor rejected while logind is still transitioning — https://github.com/omacom/omarchy/pull/13782
+- #13761: Add a playback test for the selected audio output — https://github.com/omacom/omarchy/pull/13761
+- #13759: Add an explicit microphone test to the audio panel — https://github.com/omacom/omarchy/pull/13759
+- #13755: Propagate display-power dispatch failures — https://github.com/omacom/omarchy/pull/13755
+- #13751: Walk the calendar grid at noon so a midnight DST start can't repeat a day — https://github.com/omacom/omarchy/pull/13751
+- #13747: move screen recording from `Alt + Print Screen` to preserve SysRq keys — https://github.com/omacom/omarchy/pull/13747
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4041,11 +4003,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B081 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13776: Step the bar below the screensaver while one is up — https://github.com/omacom/omarchy/pull/13776
-- #13772: Reveal Dropbox files through org.freedesktop.FileManager1 — https://github.com/omacom/omarchy/pull/13772
-- #13775: Leave unplugged inputs out of the audio panel — https://github.com/omacom/omarchy/pull/13775
-- #13769: Stop mise wrappers recursing when mise's activation variables are missing — https://github.com/omacom/omarchy/pull/13769
-- #13766: Fix stale VS Code theme assertions in test/cli — https://github.com/omacom/omarchy/pull/13766
+- #13744: Detect NEXT Biometrics readers as fingerprint hardware — https://github.com/omacom/omarchy/pull/13744
+- #13743: Add plugin lifecycle hooks after add and remove — https://github.com/omacom/omarchy/pull/13743
+- #13740: Keep RPC method names out of the Codex limits help text — https://github.com/omacom/omarchy/pull/13740
+- #13738: Fall back to device connection state and live status in network bar widget — https://github.com/omacom/omarchy/pull/13738
+- #13737: Fix empty glyph in omarchy-font-set restart notifications — https://github.com/omacom/omarchy/pull/13737
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4063,11 +4025,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B082 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13765: Write GTK bookmarks atomically instead of check-then-act — https://github.com/omacom/omarchy/pull/13765
-- #13761: Add a playback test for the selected audio output — https://github.com/omacom/omarchy/pull/13761
-- #13759: Add an explicit microphone test to the audio panel — https://github.com/omacom/omarchy/pull/13759
-- #13755: Propagate display-power dispatch failures — https://github.com/omacom/omarchy/pull/13755
-- #13751: Walk the calendar grid at noon so a midnight DST start can't repeat a day — https://github.com/omacom/omarchy/pull/13751
+- #13735: Fix and expand the omarchy agent skill — https://github.com/omacom/omarchy/pull/13735
+- #13732: Add force-kill app hotkey — https://github.com/omacom/omarchy/pull/13732
+- #13730: Preserve notification images from localhost file URLs — https://github.com/omacom/omarchy/pull/13730
+- #13725: Fix Display panel display toggle using rejected hyprctl keyword — https://github.com/omacom/omarchy/pull/13725
+- #13724: Add Hangul keyboard layout commands — https://github.com/omacom/omarchy/pull/13724
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4085,11 +4047,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B083 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13747: move screen recording from `Alt + Print Screen` to preserve SysRq keys — https://github.com/omacom/omarchy/pull/13747
-- #13744: Detect NEXT Biometrics readers as fingerprint hardware — https://github.com/omacom/omarchy/pull/13744
-- #13743: Add plugin lifecycle hooks after add and remove — https://github.com/omacom/omarchy/pull/13743
-- #13740: Keep RPC method names out of the Codex limits help text — https://github.com/omacom/omarchy/pull/13740
-- #13738: Fall back to device connection state and live status in network bar widget — https://github.com/omacom/omarchy/pull/13738
+- #13723: agents/skills: fix two stale claims in the task guides — https://github.com/omacom/omarchy/pull/13723
+- #13722: menu keybindings: --config requires a value, reject unknown flags — https://github.com/omacom/omarchy/pull/13722
+- #13720: group listing: describe the visible share/show/upgrade groups — https://github.com/omacom/omarchy/pull/13720
+- #13721: setup-form: reject usernames longer than 32 characters — https://github.com/omacom/omarchy/pull/13721
+- #13719: install-xcompose: stop blanking ~/.XCompose on refresh with empty inputs — https://github.com/omacom/omarchy/pull/13719
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4107,11 +4069,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B084 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13737: Fix empty glyph in omarchy-font-set restart notifications — https://github.com/omacom/omarchy/pull/13737
-- #13735: Fix and expand the omarchy agent skill — https://github.com/omacom/omarchy/pull/13735
-- #13732: Add force-kill app hotkey — https://github.com/omacom/omarchy/pull/13732
-- #13730: Preserve notification images from localhost file URLs — https://github.com/omacom/omarchy/pull/13730
-- #13725: Fix Display panel display toggle using rejected hyprctl keyword — https://github.com/omacom/omarchy/pull/13725
+- #13718: theme-set-pi: stop stomping the user's chosen theme on re-provision — https://github.com/omacom/omarchy/pull/13718
+- #13716: restart-app: require the application name — https://github.com/omacom/omarchy/pull/13716
+- #13714: menu-input/menu-select: reject unknown flags — https://github.com/omacom/omarchy/pull/13714
+- #13715: brightness-keyboard: reject unknown directions before touching hardware — https://github.com/omacom/omarchy/pull/13715
+- #13717: menu-images: document --prepare-only in args header and usage — https://github.com/omacom/omarchy/pull/13717
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4129,11 +4091,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B085 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13724: Add Hangul keyboard layout commands — https://github.com/omacom/omarchy/pull/13724
-- #13723: agents/skills: fix two stale claims in the task guides — https://github.com/omacom/omarchy/pull/13723
-- #13722: menu keybindings: --config requires a value, reject unknown flags — https://github.com/omacom/omarchy/pull/13722
-- #13720: group listing: describe the visible share/show/upgrade groups — https://github.com/omacom/omarchy/pull/13720
-- #13721: setup-form: reject usernames longer than 32 characters — https://github.com/omacom/omarchy/pull/13721
+- #13713: theme-set-claude/pi: clean up staged tmp file when settings update fails — https://github.com/omacom/omarchy/pull/13713
+- #13712: dev font add: require --codepoint in the private-use range — https://github.com/omacom/omarchy/pull/13712
+- #13710: Refuse to launch when no default browser is configured — https://github.com/omacom/omarchy/pull/13710
+- #13711: Require the pattern argument in omarchy-hw-match — https://github.com/omacom/omarchy/pull/13711
+- #13709: fix(hyprland): reload guard skips instances whose getoption has no bool — https://github.com/omacom/omarchy/pull/13709
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4151,11 +4113,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B086 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13719: install-xcompose: stop blanking ~/.XCompose on refresh with empty inputs — https://github.com/omacom/omarchy/pull/13719
-- #13718: theme-set-pi: stop stomping the user's chosen theme on re-provision — https://github.com/omacom/omarchy/pull/13718
-- #13716: restart-app: require the application name — https://github.com/omacom/omarchy/pull/13716
-- #13714: menu-input/menu-select: reject unknown flags — https://github.com/omacom/omarchy/pull/13714
-- #13715: brightness-keyboard: reject unknown directions before touching hardware — https://github.com/omacom/omarchy/pull/13715
+- #13706: Avoid sentence-ending periods in clipboard links — https://github.com/omacom/omarchy/pull/13706
+- #13703: Fix Codex limits timing out on buffered app-server replies — https://github.com/omacom/omarchy/pull/13703
+- #13698: Raise an overlay before resizing it onto its monitor — https://github.com/omacom/omarchy/pull/13698
+- #13693: Sync the Pi theme into PI_CODING_AGENT_DIR when it is set — https://github.com/omacom/omarchy/pull/13693
+- #13688: Keep fullscreen windows from taking the keyboard back — https://github.com/omacom/omarchy/pull/13688
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4173,11 +4135,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B087 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13717: menu-images: document --prepare-only in args header and usage — https://github.com/omacom/omarchy/pull/13717
-- #13713: theme-set-claude/pi: clean up staged tmp file when settings update fails — https://github.com/omacom/omarchy/pull/13713
-- #13712: dev font add: require --codepoint in the private-use range — https://github.com/omacom/omarchy/pull/13712
-- #13710: Refuse to launch when no default browser is configured — https://github.com/omacom/omarchy/pull/13710
-- #13711: Require the pattern argument in omarchy-hw-match — https://github.com/omacom/omarchy/pull/13711
+- #13685: Fix Obsidian Electron flags and float Mullvad VPN — https://github.com/omacom/omarchy/pull/13685
+- #13684: Re-probe night light after each minute so the bar follows hyprsunset's schedule — https://github.com/omacom/omarchy/pull/13684
+- #13680: Center network Forget control and add Cancel while connecting — https://github.com/omacom/omarchy/pull/13680
+- #13679: Dismiss tray menu on activate and hide tooltip over it — https://github.com/omacom/omarchy/pull/13679
+- #13678: Only claim Restored when plugin remove re-enables the source — https://github.com/omacom/omarchy/pull/13678
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4195,11 +4157,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B088 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13709: fix(hyprland): reload guard skips instances whose getoption has no bool — https://github.com/omacom/omarchy/pull/13709
-- #13706: Avoid sentence-ending periods in clipboard links — https://github.com/omacom/omarchy/pull/13706
-- #13703: Fix Codex limits timing out on buffered app-server replies — https://github.com/omacom/omarchy/pull/13703
-- #13698: Raise an overlay before resizing it onto its monitor — https://github.com/omacom/omarchy/pull/13698
-- #13693: Sync the Pi theme into PI_CODING_AGENT_DIR when it is set — https://github.com/omacom/omarchy/pull/13693
+- #13676: Round weather coordinates to two decimal places — https://github.com/omacom/omarchy/pull/13676
+- #13674: Quote launch-or-focus wrapper argv for re-parse — https://github.com/omacom/omarchy/pull/13674
+- #13669: Give launch OSD a finite duration backstop — https://github.com/omacom/omarchy/pull/13669
+- #13670: Make omarchy toggle bar on/off match user polarity — https://github.com/omacom/omarchy/pull/13670
+- #13666: Prefer main-table uplink over Clash TUN — https://github.com/omacom/omarchy/pull/13666
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4217,11 +4179,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B089 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13688: Keep fullscreen windows from taking the keyboard back — https://github.com/omacom/omarchy/pull/13688
-- #13685: Fix Obsidian Electron flags and float Mullvad VPN — https://github.com/omacom/omarchy/pull/13685
-- #13684: Re-probe night light after each minute so the bar follows hyprsunset's schedule — https://github.com/omacom/omarchy/pull/13684
-- #13681: Parse menu JSONC with string-aware comments and object roots — https://github.com/omacom/omarchy/pull/13681
-- #13680: Center network Forget control and add Cancel while connecting — https://github.com/omacom/omarchy/pull/13680
+- #13665: Key workspace layout rules by name for named workspaces — https://github.com/omacom/omarchy/pull/13665
+- #13662: Prefer route-based status for the network bar icon — https://github.com/omacom/omarchy/pull/13662
+- #13661: Lock on Apple Silicon SMC lid close — https://github.com/omacom/omarchy/pull/13661
+- #13659: Only export NVIDIA env when NVIDIA drives a display — https://github.com/omacom/omarchy/pull/13659
+- #13658: Refresh bar clock when sleep monitor restarts after resume — https://github.com/omacom/omarchy/pull/13658
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4239,11 +4201,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B090 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13679: Dismiss tray menu on activate and hide tooltip over it — https://github.com/omacom/omarchy/pull/13679
-- #13678: Only claim Restored when plugin remove re-enables the source — https://github.com/omacom/omarchy/pull/13678
-- #13676: Round weather coordinates to two decimal places — https://github.com/omacom/omarchy/pull/13676
-- #13674: Quote launch-or-focus wrapper argv for re-parse — https://github.com/omacom/omarchy/pull/13674
-- #13669: Give launch OSD a finite duration backstop — https://github.com/omacom/omarchy/pull/13669
+- #13655: Allow Bluetooth bar toggle when adapter is rfkill-blocked — https://github.com/omacom/omarchy/pull/13655
+- #13654: Disable Chromium accelerated video decode on NVIDIA GSP — https://github.com/omacom/omarchy/pull/13654
+- #13653: Show CPU and memory stats in the Power panel — https://github.com/omacom/omarchy/pull/13653
+- #13657: Pass Super clipboard chords through to Emacs — https://github.com/omacom/omarchy/pull/13657
+- #13649: Migrate Foot clipboard bindings for Super+C/V — https://github.com/omacom/omarchy/pull/13649
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4261,11 +4223,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B091 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13670: Make omarchy toggle bar on/off match user polarity — https://github.com/omacom/omarchy/pull/13670
-- #13666: Prefer main-table uplink over Clash TUN — https://github.com/omacom/omarchy/pull/13666
-- #13665: Key workspace layout rules by name for named workspaces — https://github.com/omacom/omarchy/pull/13665
-- #13662: Prefer route-based status for the network bar icon — https://github.com/omacom/omarchy/pull/13662
-- #13661: Lock on Apple Silicon SMC lid close — https://github.com/omacom/omarchy/pull/13661
+- #13647: Clear fullscreen stolen when screensaver loses focus — https://github.com/omacom/omarchy/pull/13647
+- #13642: Refresh Apps menu rows on every enter and late shell inject — https://github.com/omacom/omarchy/pull/13642
+- #13639: Pin Voxtype capture to the Asahi mic map on Apple Silicon — https://github.com/omacom/omarchy/pull/13639
+- #13638: Force-clear zombie windows that ignore cooperative close — https://github.com/omacom/omarchy/pull/13638
+- #13636: Size bar tray drawer from reveal extent while collapsed — https://github.com/omacom/omarchy/pull/13636
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4283,11 +4245,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B092 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13659: Only export NVIDIA env when NVIDIA drives a display — https://github.com/omacom/omarchy/pull/13659
-- #13658: Refresh bar clock when sleep monitor restarts after resume — https://github.com/omacom/omarchy/pull/13658
-- #13655: Allow Bluetooth bar toggle when adapter is rfkill-blocked — https://github.com/omacom/omarchy/pull/13655
-- #13654: Disable Chromium accelerated video decode on NVIDIA GSP — https://github.com/omacom/omarchy/pull/13654
-- #13653: Show CPU and memory stats in the Power panel — https://github.com/omacom/omarchy/pull/13653
+- #13634: Send Ctrl+C for Super+C when Codex is focused — https://github.com/omacom/omarchy/pull/13634
+- #13635: Stop Nautilus file-operations grabs from blocking the desktop — https://github.com/omacom/omarchy/pull/13635
+- #13631: Cap screensaver ttfx at 30fps by default — https://github.com/omacom/omarchy/pull/13631
+- #13632: Load plugin bar widgets synchronously like services — https://github.com/omacom/omarchy/pull/13632
+- #13629: Wait for NTP before snapshotting and document dual-boot RTC — https://github.com/omacom/omarchy/pull/13629
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4305,11 +4267,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B093 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13657: Pass Super clipboard chords through to Emacs — https://github.com/omacom/omarchy/pull/13657
-- #13649: Migrate Foot clipboard bindings for Super+C/V — https://github.com/omacom/omarchy/pull/13649
-- #13647: Clear fullscreen stolen when screensaver loses focus — https://github.com/omacom/omarchy/pull/13647
-- #13642: Refresh Apps menu rows on every enter and late shell inject — https://github.com/omacom/omarchy/pull/13642
-- #13639: Pin Voxtype capture to the Asahi mic map on Apple Silicon — https://github.com/omacom/omarchy/pull/13639
+- #13628: Reap crash-relaunched Quickshell orphans without -p — https://github.com/omacom/omarchy/pull/13628
+- #13626: Stamp new migrations with wall-clock time — https://github.com/omacom/omarchy/pull/13626
+- #13656: Stamp new migrations with wall-clock time — https://github.com/omacom/omarchy/pull/13656
+- #13622: Bound Bluetooth discoveryRetry StartDiscovery attempts — https://github.com/omacom/omarchy/pull/13622
+- #13621: Scan Codex pi sessions with rg --no-ignore — https://github.com/omacom/omarchy/pull/13621
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4327,11 +4289,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B094 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13638: Force-clear zombie windows that ignore cooperative close — https://github.com/omacom/omarchy/pull/13638
-- #13636: Size bar tray drawer from reveal extent while collapsed — https://github.com/omacom/omarchy/pull/13636
-- #13634: Send Ctrl+C for Super+C when Codex is focused — https://github.com/omacom/omarchy/pull/13634
-- #13635: Stop Nautilus file-operations grabs from blocking the desktop — https://github.com/omacom/omarchy/pull/13635
-- #13631: Cap screensaver ttfx at 30fps by default — https://github.com/omacom/omarchy/pull/13631
+- #13619: Refuse a second Battle.net launch while one is already running — https://github.com/omacom/omarchy/pull/13619
+- #13617: Skip orphan gum confirm when omarchy-update runs unattended — https://github.com/omacom/omarchy/pull/13617
+- #13614: Guard mise stubs against PATH recursion when a tool is missing — https://github.com/omacom/omarchy/pull/13614
+- #13611: Give default agents explicit mise packages including Copilot npm — https://github.com/omacom/omarchy/pull/13611
+- #13607: Seed Codex auto-review in config.toml to keep shared server — https://github.com/omacom/omarchy/pull/13607
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4349,11 +4311,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B095 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13632: Load plugin bar widgets synchronously like services — https://github.com/omacom/omarchy/pull/13632
-- #13629: Wait for NTP before snapshotting and document dual-boot RTC — https://github.com/omacom/omarchy/pull/13629
-- #13628: Reap crash-relaunched Quickshell orphans without -p — https://github.com/omacom/omarchy/pull/13628
-- #13626: Stamp new migrations with wall-clock time — https://github.com/omacom/omarchy/pull/13626
-- #13656: Stamp new migrations with wall-clock time — https://github.com/omacom/omarchy/pull/13656
+- #13604: Fall back to desktop-entry hint for notification icons — https://github.com/omacom/omarchy/pull/13604
+- #13603: Float Chrome Live Caption instead of tiling it — https://github.com/omacom/omarchy/pull/13603
+- #13600: Reset elan_i2c trackpads and fail clearly when none match — https://github.com/omacom/omarchy/pull/13600
+- #13598: Back off bt-agent restarts while a device flaps — https://github.com/omacom/omarchy/pull/13598
+- #13593: Scale the bar spacer with the spacing scale and text size — https://github.com/omacom/omarchy/pull/13593
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4371,11 +4333,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B096 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13622: Bound Bluetooth discoveryRetry StartDiscovery attempts — https://github.com/omacom/omarchy/pull/13622
-- #13621: Scan Codex pi sessions with rg --no-ignore — https://github.com/omacom/omarchy/pull/13621
-- #13619: Refuse a second Battle.net launch while one is already running — https://github.com/omacom/omarchy/pull/13619
-- #13617: Skip orphan gum confirm when omarchy-update runs unattended — https://github.com/omacom/omarchy/pull/13617
-- #13614: Guard mise stubs against PATH recursion when a tool is missing — https://github.com/omacom/omarchy/pull/13614
+- #13590: Show keyboard state that changes what a keystroke types on the lock screen — https://github.com/omacom/omarchy/pull/13590
+- #13585: Match GDK_SCALE to the displays at first run — https://github.com/omacom/omarchy/pull/13585
+- #13581: Keep Google Meet browser border when switching tabs — https://github.com/omacom/omarchy/pull/13581
+- #13580: Tint Cloudflare connected tray icon for light themes — https://github.com/omacom/omarchy/pull/13580
+- #13579: Wait for the first plugin scan before building the stock bar — https://github.com/omacom/omarchy/pull/13579
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4393,11 +4355,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B097 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13611: Give default agents explicit mise packages including Copilot npm — https://github.com/omacom/omarchy/pull/13611
-- #13607: Seed Codex auto-review in config.toml to keep shared server — https://github.com/omacom/omarchy/pull/13607
-- #13604: Fall back to desktop-entry hint for notification icons — https://github.com/omacom/omarchy/pull/13604
-- #13603: Float Chrome Live Caption instead of tiling it — https://github.com/omacom/omarchy/pull/13603
-- #13600: Reset elan_i2c trackpads and fail clearly when none match — https://github.com/omacom/omarchy/pull/13600
+- #13576: Support double-press actions in Hyprland bindings — https://github.com/omacom/omarchy/pull/13576
+- #13574: Widen the network panel with a raised body-small font — https://github.com/omacom/omarchy/pull/13574
+- #13570: Group bar widgets on shared ovals — https://github.com/omacom/omarchy/pull/13570
+- #13569: Add a floating bar option (`bar.floating`) — https://github.com/omacom/omarchy/pull/13569
+- #13567: Compute image picker filter positions in one pass — https://github.com/omacom/omarchy/pull/13567
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4415,11 +4377,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B098 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13598: Back off bt-agent restarts while a device flaps — https://github.com/omacom/omarchy/pull/13598
-- #13593: Scale the bar spacer with the spacing scale and text size — https://github.com/omacom/omarchy/pull/13593
-- #13590: Show keyboard state that changes what a keystroke types on the lock screen — https://github.com/omacom/omarchy/pull/13590
-- #13585: Match GDK_SCALE to the displays at first run — https://github.com/omacom/omarchy/pull/13585
-- #13581: Keep Google Meet browser border when switching tabs — https://github.com/omacom/omarchy/pull/13581
+- #13565: Make locked Hyprland groups follow the theme — https://github.com/omacom/omarchy/pull/13565
+- #13564: Move the parked overlay to the focused monitor before it is shown — https://github.com/omacom/omarchy/pull/13564
+- #13561: Run the browser launcher test against the checkout's helpers — https://github.com/omacom/omarchy/pull/13561
+- #13559: Let apps opt out of the universal clipboard's Ctrl translation — https://github.com/omacom/omarchy/pull/13559
+- #13557: Run the ShellIpc registration check without a shell — https://github.com/omacom/omarchy/pull/13557
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4437,11 +4399,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B099 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13580: Tint Cloudflare connected tray icon for light themes — https://github.com/omacom/omarchy/pull/13580
-- #13579: Wait for the first plugin scan before building the stock bar — https://github.com/omacom/omarchy/pull/13579
-- #13576: Support double-press actions in Hyprland bindings — https://github.com/omacom/omarchy/pull/13576
-- #13574: Widen the network panel with a raised body-small font — https://github.com/omacom/omarchy/pull/13574
-- #13570: Group bar widgets on shared ovals — https://github.com/omacom/omarchy/pull/13570
+- #13556: Keep the Elsewhen migration test out of the real cache — https://github.com/omacom/omarchy/pull/13556
+- #13553: Add Antigravity usage collector for the agents panel — https://github.com/omacom/omarchy/pull/13553
+- #13547: omarchy-refresh-config shouldn't override symlinked file content — https://github.com/omacom/omarchy/pull/13547
+- #13546: Spell dates in the language named by shell.json — https://github.com/omacom/omarchy/pull/13546
+- #13541: Catch the bar clock up after a suspend — https://github.com/omacom/omarchy/pull/13541
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4459,11 +4421,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B100 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13569: Add a floating bar option (`bar.floating`) — https://github.com/omacom/omarchy/pull/13569
-- #13567: Compute image picker filter positions in one pass — https://github.com/omacom/omarchy/pull/13567
-- #13565: Make locked Hyprland groups follow the theme — https://github.com/omacom/omarchy/pull/13565
-- #13564: Move the parked overlay to the focused monitor before it is shown — https://github.com/omacom/omarchy/pull/13564
-- #13561: Run the browser launcher test against the checkout's helpers — https://github.com/omacom/omarchy/pull/13561
+- #13536: Give launch OSD a finite duration so a lost close can't leave it up — https://github.com/omacom/omarchy/pull/13536
+- #13538: Say which files block an upgrade the conflict recovery won't clear — https://github.com/omacom/omarchy/pull/13538
+- #13531: Rotate the laptop display with the accelerometer on convertibles — https://github.com/omacom/omarchy/pull/13531
+- #13529: Show physical uplink in network panel with TUN proxies — https://github.com/omacom/omarchy/pull/13529
+- #13509: Check a clone's source before reporting it restored — https://github.com/omacom/omarchy/pull/13509
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4481,11 +4443,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B101 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13559: Let apps opt out of the universal clipboard's Ctrl translation — https://github.com/omacom/omarchy/pull/13559
-- #13557: Run the ShellIpc registration check without a shell — https://github.com/omacom/omarchy/pull/13557
-- #13556: Keep the Elsewhen migration test out of the real cache — https://github.com/omacom/omarchy/pull/13556
-- #13553: Add Antigravity usage collector for the agents panel — https://github.com/omacom/omarchy/pull/13553
-- #13547: omarchy-refresh-config shouldn't override symlinked file content — https://github.com/omacom/omarchy/pull/13547
+- #13503: Keep Foot's font size when changing the font — https://github.com/omacom/omarchy/pull/13503
+- #13501: Make the weather popup anchoring configurable (centerOnBar) — https://github.com/omacom/omarchy/pull/13501
+- #13500: Discussion + hook: give cloned plugins an update path (auto-sync forks on omarchy update) — https://github.com/omacom/omarchy/pull/13500
+- #13499: Add --toggle to omarchy-launch-or-focus-tui (open/close bar widgets) — https://github.com/omacom/omarchy/pull/13499
+- #13497: Fix: white/vantablack request a Yaru grey variant no package ships — https://github.com/omacom/omarchy/pull/13497
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4503,11 +4465,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B102 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13546: Spell dates in the language named by shell.json — https://github.com/omacom/omarchy/pull/13546
-- #13541: Catch the bar clock up after a suspend — https://github.com/omacom/omarchy/pull/13541
-- #13536: Give launch OSD a finite duration so a lost close can't leave it up — https://github.com/omacom/omarchy/pull/13536
-- #13538: Say which files block an upgrade the conflict recovery won't clear — https://github.com/omacom/omarchy/pull/13538
-- #13531: Rotate the laptop display with the accelerometer on convertibles — https://github.com/omacom/omarchy/pull/13531
+- #13498: Fix: omarchy plugin clone can generate a colliding plugin id — https://github.com/omacom/omarchy/pull/13498
+- #13495: clock: make panel SystemClock precision follow the bar's seconds detection — https://github.com/omacom/omarchy/pull/13495
+- #13496: Theme GTK4/libadwaita apps to match the active Omarchy theme — https://github.com/omacom/omarchy/pull/13496
+- #13494: Add volume, mute, and brightness controls to the menu — https://github.com/omacom/omarchy/pull/13494
+- #13486: Keep F9 dictation from sticking when another key is pressed while it's held — https://github.com/omacom/omarchy/pull/13486
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4525,72 +4487,7 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B103 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13529: Show physical uplink in network panel with TUN proxies — https://github.com/omacom/omarchy/pull/13529
-- #13512: Fix menu JSONC inline comment tails emptying the whole menu — https://github.com/omacom/omarchy/pull/13512
-- #13511: Fix menu JSONC top-level array rendering phantom rows — https://github.com/omacom/omarchy/pull/13511
-- #13509: Check a clone's source before reporting it restored — https://github.com/omacom/omarchy/pull/13509
-- #13503: Keep Foot's font size when changing the font — https://github.com/omacom/omarchy/pull/13503
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B104
-
-```
-You are reviewing Omarchy pre-release batch B104 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #13501: Make the weather popup anchoring configurable (centerOnBar) — https://github.com/omacom/omarchy/pull/13501
-- #13500: Discussion + hook: give cloned plugins an update path (auto-sync forks on omarchy update) — https://github.com/omacom/omarchy/pull/13500
-- #13499: Add --toggle to omarchy-launch-or-focus-tui (open/close bar widgets) — https://github.com/omacom/omarchy/pull/13499
-- #13497: Fix: white/vantablack request a Yaru grey variant no package ships — https://github.com/omacom/omarchy/pull/13497
-- #13498: Fix: omarchy plugin clone can generate a colliding plugin id — https://github.com/omacom/omarchy/pull/13498
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B105
-
-```
-You are reviewing Omarchy pre-release batch B105 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #13495: clock: make panel SystemClock precision follow the bar's seconds detection — https://github.com/omacom/omarchy/pull/13495
-- #13496: Theme GTK4/libadwaita apps to match the active Omarchy theme — https://github.com/omacom/omarchy/pull/13496
-- #13494: Add volume, mute, and brightness controls to the menu — https://github.com/omacom/omarchy/pull/13494
-- #13486: Keep F9 dictation from sticking when another key is pressed while it's held — https://github.com/omacom/omarchy/pull/13486
 - #13483: Fix tooltip border clipping at fractional scales — https://github.com/omacom/omarchy/pull/13483
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B106
-
-```
-You are reviewing Omarchy pre-release batch B106 (4 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #13481: Add opt-in default-browser links for web apps — https://github.com/omacom/omarchy/pull/13481
 - #13482: Fix bar tooltips for BarWidget roots — https://github.com/omacom/omarchy/pull/13482
 - #13480: Wait for an active output before sleep-lock finishes — https://github.com/omacom/omarchy/pull/13480
@@ -4606,10 +4503,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B107
+### B104
 
 ```
-You are reviewing Omarchy pre-release batch B107 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B104 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13478: Floor Apple Silicon top bars to the camera notch cutout — https://github.com/omacom/omarchy/pull/13478
@@ -4628,10 +4525,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B108
+### B105
 
 ```
-You are reviewing Omarchy pre-release batch B108 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B105 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13473: Reserve only revealed tray drawer width when collapsed — https://github.com/omacom/omarchy/pull/13473
@@ -4650,10 +4547,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B109
+### B106
 
 ```
-You are reviewing Omarchy pre-release batch B109 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B106 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13468: Carry omarchy-bar put past a timing-out shell — https://github.com/omacom/omarchy/pull/13468
@@ -4672,10 +4569,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B110
+### B107
 
 ```
-You are reviewing Omarchy pre-release batch B110 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B107 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13464: Make Codex account/read optional in the usage collector — https://github.com/omacom/omarchy/pull/13464
@@ -4694,10 +4591,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B111
+### B108
 
 ```
-You are reviewing Omarchy pre-release batch B111 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B108 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13458: Raise Codex usage RPC timeout from 4s to 10s — https://github.com/omacom/omarchy/pull/13458
@@ -4716,10 +4613,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B112
+### B109
 
 ```
-You are reviewing Omarchy pre-release batch B112 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B109 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13405: Drive the mute indicator LED from the output volume key — https://github.com/omacom/omarchy/pull/13405
@@ -4738,10 +4635,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B113
+### B110
 
 ```
-You are reviewing Omarchy pre-release batch B113 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B110 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13386: Activate mise after starship and zoxide — https://github.com/omacom/omarchy/pull/13386
@@ -4760,10 +4657,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B114
+### B111
 
 ```
-You are reviewing Omarchy pre-release batch B114 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B111 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13364: Stop prepending mise shims to the uwsm session PATH — https://github.com/omacom/omarchy/pull/13364
@@ -4782,10 +4679,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B115
+### B112
 
 ```
-You are reviewing Omarchy pre-release batch B115 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B112 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13351: Stop prepending OMARCHY_PATH/bin to PATH in Hyprland envs — https://github.com/omacom/omarchy/pull/13351
@@ -4804,17 +4701,83 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
+### B113
+
+```
+You are reviewing Omarchy pre-release batch B113 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13327: Make Japanese input work out of the box (JIS defaults + omarchy setup japanese) — https://github.com/omacom/omarchy/pull/13327
+- #13318: Show temperature in weather bar — https://github.com/omacom/omarchy/pull/13318
+- #13293: Per-monitor scaling from the Display panel — https://github.com/omacom/omarchy/pull/13293
+- #13292: Fix battery status reading a phantom BAT device on dual-bay ThinkPads — https://github.com/omacom/omarchy/pull/13292
+- #13277: Copy About details as plain text for bug reports — https://github.com/omacom/omarchy/pull/13277
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B114
+
+```
+You are reviewing Omarchy pre-release batch B114 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13276: fix(keybindings): keep the Lua bind scan alive past qconsole.lua — https://github.com/omacom/omarchy/pull/13276
+- #13272: Add Cloudflare bar panel — https://github.com/omacom/omarchy/pull/13272
+- #13267: Explain that the empty monitor rule applies to every display — https://github.com/omacom/omarchy/pull/13267
+- #13261: feat(brightness): lower brightness with hyprsunset — https://github.com/omacom/omarchy/pull/13261
+- #13259: Force DPMS enable on system wake when status is stale — https://github.com/omacom/omarchy/pull/13259
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B115
+
+```
+You are reviewing Omarchy pre-release batch B115 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13258: Retry bt-agent after bluetooth.service instead of skipping — https://github.com/omacom/omarchy/pull/13258
+- #13620: Retry bt-agent until bluetooth.service is active — https://github.com/omacom/omarchy/pull/13620
+- #13248: Use Tailscale machine names and add optional offline peers — https://github.com/omacom/omarchy/pull/13248
+- #13245: Group audio outputs and label same-named AirPlay speakers — https://github.com/omacom/omarchy/pull/13245
+- #13241: Launch web apps through their full Desktop Entry Exec command — https://github.com/omacom/omarchy/pull/13241
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
 ### B116
 
 ```
 You are reviewing Omarchy pre-release batch B116 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13327: Make Japanese input work out of the box (JIS defaults + omarchy setup japanese) — https://github.com/omacom/omarchy/pull/13327
-- #13318: Show temperature in weather bar — https://github.com/omacom/omarchy/pull/13318
-- #13305: fix(menu): prevent trailing comma stripper from eating commas inside strings (#13250) — https://github.com/omacom/omarchy/pull/13305
-- #13293: Per-monitor scaling from the Display panel — https://github.com/omacom/omarchy/pull/13293
-- #13292: Fix battery status reading a phantom BAT device on dual-bay ThinkPads — https://github.com/omacom/omarchy/pull/13292
+- #13242: Invalidate image row cache when a file is edited in place — https://github.com/omacom/omarchy/pull/13242
+- #13240: Launch browsers through their full Desktop Entry Exec command — https://github.com/omacom/omarchy/pull/13240
+- #13239: Bound speedtest transfers so hung endpoints cannot strand workers — https://github.com/omacom/omarchy/pull/13239
+- #13237: Cap the command list column width to keep summaries from wrapping — https://github.com/omacom/omarchy/pull/13237
+- #13236: Use zed as the default editor canonical name — https://github.com/omacom/omarchy/pull/13236
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4832,11 +4795,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B117 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13277: Copy About details as plain text for bug reports — https://github.com/omacom/omarchy/pull/13277
-- #13276: fix(keybindings): keep the Lua bind scan alive past qconsole.lua — https://github.com/omacom/omarchy/pull/13276
-- #13272: Add Cloudflare bar panel — https://github.com/omacom/omarchy/pull/13272
-- #13267: Explain that the empty monitor rule applies to every display — https://github.com/omacom/omarchy/pull/13267
-- #13261: feat(brightness): lower brightness with hyprsunset — https://github.com/omacom/omarchy/pull/13261
+- #13235: Keep kitty bold and italic fonts in sync on font set — https://github.com/omacom/omarchy/pull/13235
+- #13234: Match wezterm's full app_id as a terminal — https://github.com/omacom/omarchy/pull/13234
+- #13232: Fix trailing space in fastfetch swap icon — https://github.com/omacom/omarchy/pull/13232
+- #13230: Fix Sunshine service name in omarchy-install-service-sunshine — https://github.com/omacom/omarchy/pull/13230
+- #13228: Document Lua bind dispatch and new plugin install steps in agent skill — https://github.com/omacom/omarchy/pull/13228
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4854,11 +4817,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B118 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13259: Force DPMS enable on system wake when status is stale — https://github.com/omacom/omarchy/pull/13259
-- #13258: Retry bt-agent after bluetooth.service instead of skipping — https://github.com/omacom/omarchy/pull/13258
-- #13620: Retry bt-agent until bluetooth.service is active — https://github.com/omacom/omarchy/pull/13620
-- #13255: Fix menu JSONC trailing-comma stripping corrupting string values — https://github.com/omacom/omarchy/pull/13255
-- #13248: Use Tailscale machine names and add optional offline peers — https://github.com/omacom/omarchy/pull/13248
+- #13227: Reset keyboard layout before suspend lock — https://github.com/omacom/omarchy/pull/13227
+- #13225: `fix(menu): restore menu active item selection when navigating back to parent menu — https://github.com/omacom/omarchy/pull/13225
+- #13221: Load shell configuration before starting plugin discovery — https://github.com/omacom/omarchy/pull/13221
+- #13216: Restart the shell when Hyprland drops its event socket — https://github.com/omacom/omarchy/pull/13216
+- #13217: Show security-key progress in the Polkit prompt — https://github.com/omacom/omarchy/pull/13217
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4876,11 +4839,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B119 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13245: Group audio outputs and label same-named AirPlay speakers — https://github.com/omacom/omarchy/pull/13245
-- #13241: Launch web apps through their full Desktop Entry Exec command — https://github.com/omacom/omarchy/pull/13241
-- #13242: Invalidate image row cache when a file is edited in place — https://github.com/omacom/omarchy/pull/13242
-- #13240: Launch browsers through their full Desktop Entry Exec command — https://github.com/omacom/omarchy/pull/13240
-- #13239: Bound speedtest transfers so hung endpoints cannot strand workers — https://github.com/omacom/omarchy/pull/13239
+- #13212: Expose shell controls to assistive technology — https://github.com/omacom/omarchy/pull/13212
+- #13209: fix(agents): count pi sessions when HOME is a git checkout — https://github.com/omacom/omarchy/pull/13209
+- #13203: Let omarchy-hyprland-focus-app focus an exact window by address — https://github.com/omacom/omarchy/pull/13203
+- #13198: Show agent usage freshness and alert on low allowance — https://github.com/omacom/omarchy/pull/13198
+- #13197: Follow symlink dirs in omarchy-menu-file — https://github.com/omacom/omarchy/pull/13197
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4898,11 +4861,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B120 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13237: Cap the command list column width to keep summaries from wrapping — https://github.com/omacom/omarchy/pull/13237
-- #13236: Use zed as the default editor canonical name — https://github.com/omacom/omarchy/pull/13236
-- #13235: Keep kitty bold and italic fonts in sync on font set — https://github.com/omacom/omarchy/pull/13235
-- #13234: Match wezterm's full app_id as a terminal — https://github.com/omacom/omarchy/pull/13234
-- #13232: Fix trailing space in fastfetch swap icon — https://github.com/omacom/omarchy/pull/13232
+- #13195: Make Battle.net launch args configurable — https://github.com/omacom/omarchy/pull/13195
+- #13194: Let bar-entry plugin shells resolve their entry's own service — https://github.com/omacom/omarchy/pull/13194
+- #13193: Use the KeyboardPanel focus pattern on the full-screen overlays — https://github.com/omacom/omarchy/pull/13193
+- #13191: Add theme-controlled shell shadows — https://github.com/omacom/omarchy/pull/13191
+- #13190: Always show notification dismiss control — https://github.com/omacom/omarchy/pull/13190
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4920,11 +4883,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B121 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13230: Fix Sunshine service name in omarchy-install-service-sunshine — https://github.com/omacom/omarchy/pull/13230
-- #13228: Document Lua bind dispatch and new plugin install steps in agent skill — https://github.com/omacom/omarchy/pull/13228
-- #13227: Reset keyboard layout before suspend lock — https://github.com/omacom/omarchy/pull/13227
-- #13225: `fix(menu): restore menu active item selection when navigating back to parent menu — https://github.com/omacom/omarchy/pull/13225
-- #13221: Load shell configuration before starting plugin discovery — https://github.com/omacom/omarchy/pull/13221
+- #13189: Force software video decode in Chromium on NVIDIA GPUs with GSP firmware — https://github.com/omacom/omarchy/pull/13189
+- #13176: Retry delay inhibit after logind OperationInProgress on resume — https://github.com/omacom/omarchy/pull/13176
+- #13165: Skip placeholder screens when building bars — https://github.com/omacom/omarchy/pull/13165
+- #13477: Skip placeholder and FALLBACK screens when creating bars — https://github.com/omacom/omarchy/pull/13477
+- #13645: Skip placeholder and FALLBACK screens when building bars — https://github.com/omacom/omarchy/pull/13645
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4942,11 +4905,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B122 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13216: Restart the shell when Hyprland drops its event socket — https://github.com/omacom/omarchy/pull/13216
-- #13217: Show security-key progress in the Polkit prompt — https://github.com/omacom/omarchy/pull/13217
-- #13212: Expose shell controls to assistive technology — https://github.com/omacom/omarchy/pull/13212
-- #13209: fix(agents): count pi sessions when HOME is a git checkout — https://github.com/omacom/omarchy/pull/13209
-- #13203: Let omarchy-hyprland-focus-app focus an exact window by address — https://github.com/omacom/omarchy/pull/13203
+- #13161: feat(notifications): cap critical popups at max duration instead of forever — https://github.com/omacom/omarchy/pull/13161
+- #13166: Mirror Hyprland triangular corners in shell surfaces — https://github.com/omacom/omarchy/pull/13166
+- #13159: Give third-party critical notifications a finite popup lifetime — https://github.com/omacom/omarchy/pull/13159
+- #13156: Reset the keyboard layout from the lock service for every lock path — https://github.com/omacom/omarchy/pull/13156
+- #13151: Keep the Windows VM running through a guest restart — https://github.com/omacom/omarchy/pull/13151
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4964,11 +4927,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B123 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13198: Show agent usage freshness and alert on low allowance — https://github.com/omacom/omarchy/pull/13198
-- #13197: Follow symlink dirs in omarchy-menu-file — https://github.com/omacom/omarchy/pull/13197
-- #13195: Make Battle.net launch args configurable — https://github.com/omacom/omarchy/pull/13195
-- #13194: Let bar-entry plugin shells resolve their entry's own service — https://github.com/omacom/omarchy/pull/13194
-- #13193: Use the KeyboardPanel focus pattern on the full-screen overlays — https://github.com/omacom/omarchy/pull/13193
+- #13144: Close the image viewer with Escape — https://github.com/omacom/omarchy/pull/13144
+- #13142: Preserve monitor position and per-output scale when scaling — https://github.com/omacom/omarchy/pull/13142
+- #13141: Wait for a slow-exiting shell before restarting it — https://github.com/omacom/omarchy/pull/13141
+- #13140: Bar options: right-click menu, omarchy bar pills|floating, menu rows — https://github.com/omacom/omarchy/pull/13140
+- #13138: Floating bar: margin, radius, a switch and Hyprland-derived defaults — https://github.com/omacom/omarchy/pull/13138
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -4983,13 +4946,14 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B124
 
 ```
-You are reviewing Omarchy pre-release batch B124 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B124 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13191: Add theme-controlled shell shadows — https://github.com/omacom/omarchy/pull/13191
-- #13190: Always show notification dismiss control — https://github.com/omacom/omarchy/pull/13190
-- #13189: Force software video decode in Chromium on NVIDIA GPUs with GSP firmware — https://github.com/omacom/omarchy/pull/13189
-- #13176: Retry delay inhibit after logind OperationInProgress on resume — https://github.com/omacom/omarchy/pull/13176
+- #13139: Bar pills: an optional background per widget or run of widgets — https://github.com/omacom/omarchy/pull/13139
+- #13133: Sync vscode theme test with the real-file extension — https://github.com/omacom/omarchy/pull/13133
+- #13132: Keep tmux from stamping backgrounds on self-reloading terminals — https://github.com/omacom/omarchy/pull/13132
+- #13126: Keep the reveal mask rendering so background transitions animate — https://github.com/omacom/omarchy/pull/13126
+- #13127: Walk the calendar grid from noon across midnight DST switches — https://github.com/omacom/omarchy/pull/13127
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5007,11 +4971,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B125 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13165: Skip placeholder screens when building bars — https://github.com/omacom/omarchy/pull/13165
-- #13477: Skip placeholder and FALLBACK screens when creating bars — https://github.com/omacom/omarchy/pull/13477
-- #13645: Skip placeholder and FALLBACK screens when building bars — https://github.com/omacom/omarchy/pull/13645
-- #13161: feat(notifications): cap critical popups at max duration instead of forever — https://github.com/omacom/omarchy/pull/13161
-- #13166: Mirror Hyprland triangular corners in shell surfaces — https://github.com/omacom/omarchy/pull/13166
+- #13123: Default image opens to imv-dir for folder navigation — https://github.com/omacom/omarchy/pull/13123
+- #13121: tray: mirror drawer direction in leading bar sections — https://github.com/omacom/omarchy/pull/13121
+- #13120: Add background gradients to popup panels — https://github.com/omacom/omarchy/pull/13120
+- #13114: Skip read-only injectProps writes for the custom command module — https://github.com/omacom/omarchy/pull/13114
+- #13116: Only leave the alternate screen after SSH when it is still on — https://github.com/omacom/omarchy/pull/13116
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5029,11 +4993,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B126 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13159: Give third-party critical notifications a finite popup lifetime — https://github.com/omacom/omarchy/pull/13159
-- #13156: Reset the keyboard layout from the lock service for every lock path — https://github.com/omacom/omarchy/pull/13156
-- #13151: Keep the Windows VM running through a guest restart — https://github.com/omacom/omarchy/pull/13151
-- #13144: Close the image viewer with Escape — https://github.com/omacom/omarchy/pull/13144
-- #13142: Preserve monitor position and per-output scale when scaling — https://github.com/omacom/omarchy/pull/13142
+- #13113: Round weather coordinates to ~1 km before storing and sending — https://github.com/omacom/omarchy/pull/13113
+- #13111: Fall back to UPower when the sysfs battery rate is implausible — https://github.com/omacom/omarchy/pull/13111
+- #13104: Keep the last valid shell.json when the user file is truncated — https://github.com/omacom/omarchy/pull/13104
+- #13103: Refocus the origin window before pasting a picked clipboard entry — https://github.com/omacom/omarchy/pull/13103
+- #13102: Read codex app-server replies unbuffered in the usage collector — https://github.com/omacom/omarchy/pull/13102
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5051,11 +5015,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B127 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13141: Wait for a slow-exiting shell before restarting it — https://github.com/omacom/omarchy/pull/13141
-- #13140: Bar options: right-click menu, omarchy bar pills|floating, menu rows — https://github.com/omacom/omarchy/pull/13140
-- #13138: Floating bar: margin, radius, a switch and Hyprland-derived defaults — https://github.com/omacom/omarchy/pull/13138
-- #13139: Bar pills: an optional background per widget or run of widgets — https://github.com/omacom/omarchy/pull/13139
-- #13133: Sync vscode theme test with the real-file extension — https://github.com/omacom/omarchy/pull/13133
+- #13100: notifications: honor expireTimeout for critical alerts — https://github.com/omacom/omarchy/pull/13100
+- #13099: Write output volume through pactl, not the node-bound setter — https://github.com/omacom/omarchy/pull/13099
+- #13097: Label the weather panel with the location that supplied the weather — https://github.com/omacom/omarchy/pull/13097
+- #13095: Keep the launch OSD timeout from being restarted indefinitely — https://github.com/omacom/omarchy/pull/13095
+- #13096: Build the calendar grid cursor at noon, not midnight — https://github.com/omacom/omarchy/pull/13096
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5073,11 +5037,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B128 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13132: Keep tmux from stamping backgrounds on self-reloading terminals — https://github.com/omacom/omarchy/pull/13132
-- #13126: Keep the reveal mask rendering so background transitions animate — https://github.com/omacom/omarchy/pull/13126
-- #13127: Walk the calendar grid from noon across midnight DST switches — https://github.com/omacom/omarchy/pull/13127
-- #13123: Default image opens to imv-dir for folder navigation — https://github.com/omacom/omarchy/pull/13123
-- #13121: tray: mirror drawer direction in leading bar sections — https://github.com/omacom/omarchy/pull/13121
+- #13092: Write the monospace rule to a conf.d drop-in, not fonts.conf — https://github.com/omacom/omarchy/pull/13092
+- #13090: Resolve mise wrapper binaries to absolute paths — https://github.com/omacom/omarchy/pull/13090
+- #13677: Resolve mise wrapper binaries to absolute paths — https://github.com/omacom/omarchy/pull/13677
+- #13086: Avoid readonly writes in command bar modules — https://github.com/omacom/omarchy/pull/13086
+- #13083: Add a Unicode paint overlay for branding art — https://github.com/omacom/omarchy/pull/13083
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5095,11 +5059,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B129 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13120: Add background gradients to popup panels — https://github.com/omacom/omarchy/pull/13120
-- #13114: Skip read-only injectProps writes for the custom command module — https://github.com/omacom/omarchy/pull/13114
-- #13116: Only leave the alternate screen after SSH when it is still on — https://github.com/omacom/omarchy/pull/13116
-- #13113: Round weather coordinates to ~1 km before storing and sending — https://github.com/omacom/omarchy/pull/13113
-- #13111: Fall back to UPower when the sysfs battery rate is implausible — https://github.com/omacom/omarchy/pull/13111
+- #13079: Remove the hey, basecamp, and cf stubs with preinstalls — https://github.com/omacom/omarchy/pull/13079
+- #13074: Add omarchy install tql and omarchy remove tql — https://github.com/omacom/omarchy/pull/13074
+- #13070: Paste clipboard images into foot (and Kitty/Ghostty) with SUPER+V — https://github.com/omacom/omarchy/pull/13070
+- #13071: Add Flutter dev environment — https://github.com/omacom/omarchy/pull/13071
+- #13064: fix: re-deliver host apis to loaded panel plugins after a revoke — https://github.com/omacom/omarchy/pull/13064
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5117,11 +5081,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B130 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13104: Keep the last valid shell.json when the user file is truncated — https://github.com/omacom/omarchy/pull/13104
-- #13103: Refocus the origin window before pasting a picked clipboard entry — https://github.com/omacom/omarchy/pull/13103
-- #13102: Read codex app-server replies unbuffered in the usage collector — https://github.com/omacom/omarchy/pull/13102
-- #13100: notifications: honor expireTimeout for critical alerts — https://github.com/omacom/omarchy/pull/13100
-- #13099: Write output volume through pactl, not the node-bound setter — https://github.com/omacom/omarchy/pull/13099
+- #13061: Accept the -- operand separator in the kernel migration test pacman stubs — https://github.com/omacom/omarchy/pull/13061
+- #13065: Update the VS Code theme CLI checks for the copied theme file — https://github.com/omacom/omarchy/pull/13065
+- #13063: fix: report panel plugin load failures instead of throwing — https://github.com/omacom/omarchy/pull/13063
+- #13059: Describe Codex rate-limit RPC timeouts instead of the method name — https://github.com/omacom/omarchy/pull/13059
+- #13043: Menu: coerce string select deltas; let summons open on a named row with primed checkmarks — https://github.com/omacom/omarchy/pull/13043
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5136,96 +5100,10 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B131
 
 ```
-You are reviewing Omarchy pre-release batch B131 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B131 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13097: Label the weather panel with the location that supplied the weather — https://github.com/omacom/omarchy/pull/13097
-- #13095: Keep the launch OSD timeout from being restarted indefinitely — https://github.com/omacom/omarchy/pull/13095
-- #13096: Build the calendar grid cursor at noon, not midnight — https://github.com/omacom/omarchy/pull/13096
-- #13092: Write the monospace rule to a conf.d drop-in, not fonts.conf — https://github.com/omacom/omarchy/pull/13092
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B132
-
-```
-You are reviewing Omarchy pre-release batch B132 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #13090: Resolve mise wrapper binaries to absolute paths — https://github.com/omacom/omarchy/pull/13090
-- #13677: Resolve mise wrapper binaries to absolute paths — https://github.com/omacom/omarchy/pull/13677
-- #13086: Avoid readonly writes in command bar modules — https://github.com/omacom/omarchy/pull/13086
-- #13083: Add a Unicode paint overlay for branding art — https://github.com/omacom/omarchy/pull/13083
-- #13079: Remove the hey, basecamp, and cf stubs with preinstalls — https://github.com/omacom/omarchy/pull/13079
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B133
-
-```
-You are reviewing Omarchy pre-release batch B133 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #13074: Add omarchy install tql and omarchy remove tql — https://github.com/omacom/omarchy/pull/13074
-- #13070: Paste clipboard images into foot (and Kitty/Ghostty) with SUPER+V — https://github.com/omacom/omarchy/pull/13070
-- #13071: Add Flutter dev environment — https://github.com/omacom/omarchy/pull/13071
-- #13064: fix: re-deliver host apis to loaded panel plugins after a revoke — https://github.com/omacom/omarchy/pull/13064
-- #13061: Accept the -- operand separator in the kernel migration test pacman stubs — https://github.com/omacom/omarchy/pull/13061
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B134
-
-```
-You are reviewing Omarchy pre-release batch B134 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #13065: Update the VS Code theme CLI checks for the copied theme file — https://github.com/omacom/omarchy/pull/13065
-- #13063: fix: report panel plugin load failures instead of throwing — https://github.com/omacom/omarchy/pull/13063
-- #13059: Describe Codex rate-limit RPC timeouts instead of the method name — https://github.com/omacom/omarchy/pull/13059
-- #13043: Menu: coerce string select deltas; let summons open on a named row with primed checkmarks — https://github.com/omacom/omarchy/pull/13043
 - #13056: Have the omarchy skill check existing and marketplace plugins before building — https://github.com/omacom/omarchy/pull/13056
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B135
-
-```
-You are reviewing Omarchy pre-release batch B135 (4 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #13042: Inhibit idle while Spotify is fullscreen — https://github.com/omacom/omarchy/pull/13042
 - #13041: Honour explicit expireTimeout for critical notifications (#12911) — https://github.com/omacom/omarchy/pull/13041
 - #13673: Honour expireTimeout on critical notification toasts — https://github.com/omacom/omarchy/pull/13673
@@ -5241,10 +5119,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B136
+### B132
 
 ```
-You are reviewing Omarchy pre-release batch B136 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B132 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #13044: fix(launch-editor): pass wait flags to GUI editors in inline mode (#13037) — https://github.com/omacom/omarchy/pull/13044
@@ -5263,17 +5141,105 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
+### B133
+
+```
+You are reviewing Omarchy pre-release batch B133 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13029: Find system batteries not named BAT* — https://github.com/omacom/omarchy/pull/13029
+- #13016: Derive power panel charge direction from settled battery state — https://github.com/omacom/omarchy/pull/13016
+- #13018: Fix #12665: omarchy-menu-file returns 0 files when ~/Pictures/~/Videos are symlinks (transco — https://github.com/omacom/omarchy/pull/13018
+- #13013: Warn that Remove Preinstalls also takes user-added web apps and TUIs — https://github.com/omacom/omarchy/pull/13013
+- #13008: fix(tray): allow left-click toggle on expand chevron and keep drawer open with menu — https://github.com/omacom/omarchy/pull/13008
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B134
+
+```
+You are reviewing Omarchy pre-release batch B134 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13012: Restore menu selection when navigating back — https://github.com/omacom/omarchy/pull/13012
+- #13007: fix(hypr): resolve universal clipboard letters from primary layout — https://github.com/omacom/omarchy/pull/13007
+- #13006: fix(plugins): suspend local watch during plugin update (#12859) — https://github.com/omacom/omarchy/pull/13006
+- #13000: Sync the Omarchy theme to the Unreal Engine editor — https://github.com/omacom/omarchy/pull/13000
+- #13004: fix(audio): set Bluetooth sink volume via pactl (#12886) — https://github.com/omacom/omarchy/pull/13004
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B135
+
+```
+You are reviewing Omarchy pre-release batch B135 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #12999: Write fontconfig monospace drop-in instead of fonts.conf (#12927) — https://github.com/omacom/omarchy/pull/12999
+- #12996: fix(shell): keep scoped APIs on cloned menu plugins (#12944) — https://github.com/omacom/omarchy/pull/12996
+- #12991: fix(clipboard): paste into the window that opened the manager (#12987) — https://github.com/omacom/omarchy/pull/12991
+- #12992: fix(shell): keep last valid shell.json when the file truncates (#12990) — https://github.com/omacom/omarchy/pull/12992
+- #12988: Stop dropbox-cli status polling while Dropbox is unlinked — https://github.com/omacom/omarchy/pull/12988
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B136
+
+```
+You are reviewing Omarchy pre-release batch B136 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #12986: fix(agents): surface stale usage from record updatedAt (#12849) — https://github.com/omacom/omarchy/pull/12986
+- #12985: Fix clock calendar grid shifting a day after a spring-forward DST transition — https://github.com/omacom/omarchy/pull/12985
+- #12982: Add pixel-art animations to weather popup — https://github.com/omacom/omarchy/pull/12982
+- #12983: Add signal fallback to omarchy-restart-shell for IPC-wedged shells — https://github.com/omacom/omarchy/pull/12983
+- #12981: Move plugin manifest scan into an external script — https://github.com/omacom/omarchy/pull/12981
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
 ### B137
 
 ```
 You are reviewing Omarchy pre-release batch B137 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13016: Derive power panel charge direction from settled battery state — https://github.com/omacom/omarchy/pull/13016
-- #13018: Fix #12665: omarchy-menu-file returns 0 files when ~/Pictures/~/Videos are symlinks (transco — https://github.com/omacom/omarchy/pull/13018
-- #13013: Warn that Remove Preinstalls also takes user-added web apps and TUIs — https://github.com/omacom/omarchy/pull/13013
-- #13008: fix(tray): allow left-click toggle on expand chevron and keep drawer open with menu — https://github.com/omacom/omarchy/pull/13008
-- #13012: Restore menu selection when navigating back — https://github.com/omacom/omarchy/pull/13012
+- #12979: Fix Codex usage timeouts on batched replies — https://github.com/omacom/omarchy/pull/12979
+- #12975: Dismiss screensaver on pointer activity after launch settle — https://github.com/omacom/omarchy/pull/12975
+- #12978: Feature: Global workspace sync for multi-monitor setups — https://github.com/omacom/omarchy/pull/12978
+- #12973: Fix cloned background service failing to load — https://github.com/omacom/omarchy/pull/12973
+- #12974: Stop Dropbox panel inventing quota from plan name — https://github.com/omacom/omarchy/pull/12974
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5291,11 +5257,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B138 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13007: fix(hypr): resolve universal clipboard letters from primary layout — https://github.com/omacom/omarchy/pull/13007
-- #13006: fix(plugins): suspend local watch during plugin update (#12859) — https://github.com/omacom/omarchy/pull/13006
-- #13000: Sync the Omarchy theme to the Unreal Engine editor — https://github.com/omacom/omarchy/pull/13000
-- #13004: fix(audio): set Bluetooth sink volume via pactl (#12886) — https://github.com/omacom/omarchy/pull/13004
-- #12999: Write fontconfig monospace drop-in instead of fonts.conf (#12927) — https://github.com/omacom/omarchy/pull/12999
+- #12970: Defer tray submenu stack swaps past the click call stack — https://github.com/omacom/omarchy/pull/12970
+- #12971: Omit --load-extension from Google Chrome browser flags — https://github.com/omacom/omarchy/pull/12971
+- #12969: Match fontconfig monospace override on first family only — https://github.com/omacom/omarchy/pull/12969
+- #12967: Prefer weather report nearest_area over separate %l city label — https://github.com/omacom/omarchy/pull/12967
+- #12966: Do not restart launchTimeout on retriggered launches — https://github.com/omacom/omarchy/pull/12966
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5313,11 +5279,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B139 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12996: fix(shell): keep scoped APIs on cloned menu plugins (#12944) — https://github.com/omacom/omarchy/pull/12996
-- #12991: fix(clipboard): paste into the window that opened the manager (#12987) — https://github.com/omacom/omarchy/pull/12991
-- #12992: fix(shell): keep last valid shell.json when the file truncates (#12990) — https://github.com/omacom/omarchy/pull/12992
-- #12988: Stop dropbox-cli status polling while Dropbox is unlinked — https://github.com/omacom/omarchy/pull/12988
-- #12986: fix(agents): surface stale usage from record updatedAt (#12849) — https://github.com/omacom/omarchy/pull/12986
+- #12965: Add Bare JS runtime to developer tools — https://github.com/omacom/omarchy/pull/12965
+- #12961: fix(hypr): layout-toggle named workspaces by name selector — https://github.com/omacom/omarchy/pull/12961
+- #12964: Honor critical notification expireTimeout when sender requests one — https://github.com/omacom/omarchy/pull/12964
+- #12963: fix(media): stop marquee while playback is paused — https://github.com/omacom/omarchy/pull/12963
+- #12962: fix(lock): give session lock 1500ms to stabilize outputs — https://github.com/omacom/omarchy/pull/12962
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5335,11 +5301,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B140 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12985: Fix clock calendar grid shifting a day after a spring-forward DST transition — https://github.com/omacom/omarchy/pull/12985
-- #12982: Add pixel-art animations to weather popup — https://github.com/omacom/omarchy/pull/12982
-- #12983: Add signal fallback to omarchy-restart-shell for IPC-wedged shells — https://github.com/omacom/omarchy/pull/12983
-- #12981: Move plugin manifest scan into an external script — https://github.com/omacom/omarchy/pull/12981
-- #12979: Fix Codex usage timeouts on batched replies — https://github.com/omacom/omarchy/pull/12979
+- #12960: fix(keyboard): keep backlight restore across repeated off — https://github.com/omacom/omarchy/pull/12960
+- #12958: Ask RTKit directly for the speaker tuning's realtime priority — https://github.com/omacom/omarchy/pull/12958
+- #12953: Detect Realtek USB Finger Print readers (2541) — https://github.com/omacom/omarchy/pull/12953
+- #12952: Bound weather fetch response sizes and reject truncated transfers — https://github.com/omacom/omarchy/pull/12952
+- #12937: fix: keep keepLoaded services across _syncServices disable — https://github.com/omacom/omarchy/pull/12937
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5357,11 +5323,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B141 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12975: Dismiss screensaver on pointer activity after launch settle — https://github.com/omacom/omarchy/pull/12975
-- #12978: Feature: Global workspace sync for multi-monitor setups — https://github.com/omacom/omarchy/pull/12978
-- #12973: Fix cloned background service failing to load — https://github.com/omacom/omarchy/pull/12973
-- #12974: Stop Dropbox panel inventing quota from plan name — https://github.com/omacom/omarchy/pull/12974
-- #12970: Defer tray submenu stack swaps past the click call stack — https://github.com/omacom/omarchy/pull/12970
+- #12950: Keep Bluetooth USB controllers awake when TLP manages USB power — https://github.com/omacom/omarchy/pull/12950
+- #12939: Don't let the Codex usage collector install Codex — https://github.com/omacom/omarchy/pull/12939
+- #13109: Resolve Codex through mise which instead of running the lazy launcher — https://github.com/omacom/omarchy/pull/13109
+- #12943: Build the clock month grid at noon so DST gaps do not repeat a day — https://github.com/omacom/omarchy/pull/12943
+- #12935: Write fontconfig monospace override to conf.d drop-in — https://github.com/omacom/omarchy/pull/12935
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5379,11 +5345,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B142 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12971: Omit --load-extension from Google Chrome browser flags — https://github.com/omacom/omarchy/pull/12971
-- #12969: Match fontconfig monospace override on first family only — https://github.com/omacom/omarchy/pull/12969
-- #12967: Prefer weather report nearest_area over separate %l city label — https://github.com/omacom/omarchy/pull/12967
-- #12966: Do not restart launchTimeout on retriggered launches — https://github.com/omacom/omarchy/pull/12966
-- #12965: Add Bare JS runtime to developer tools — https://github.com/omacom/omarchy/pull/12965
+- #12928: test: resolve lua via command -p to avoid shim loops — https://github.com/omacom/omarchy/pull/12928
+- #12931: Load high contrast VS Code themes as hc-black/hc-light — https://github.com/omacom/omarchy/pull/12931
+- #12920: Seed fcitx5 DefaultIM from vconsole XKBLAYOUT — https://github.com/omacom/omarchy/pull/12920
+- #12916: fix(menu): contain the keybindings Lua bind scan — https://github.com/omacom/omarchy/pull/12916
+- #12892: Remove dead CommonJS module.exports guards from shell JS modules — https://github.com/omacom/omarchy/pull/12892
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5401,11 +5367,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B143 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12961: fix(hypr): layout-toggle named workspaces by name selector — https://github.com/omacom/omarchy/pull/12961
-- #12964: Honor critical notification expireTimeout when sender requests one — https://github.com/omacom/omarchy/pull/12964
-- #12963: fix(media): stop marquee while playback is paused — https://github.com/omacom/omarchy/pull/12963
-- #12962: fix(lock): give session lock 1500ms to stabilize outputs — https://github.com/omacom/omarchy/pull/12962
-- #12960: fix(keyboard): keep backlight restore across repeated off — https://github.com/omacom/omarchy/pull/12960
+- #12890: Add an optional installer for Nepali Unicode keyboards — https://github.com/omacom/omarchy/pull/12890
+- #12884: Group duplicate notifications with a count — https://github.com/omacom/omarchy/pull/12884
+- #12882: Keep a closed lid awake from the power panel — https://github.com/omacom/omarchy/pull/12882
+- #12877: Tray: activating an item dismisses its menu, and a press dismisses the tooltip — https://github.com/omacom/omarchy/pull/12877
+- #12867: Elide the head of the reminder typing line — https://github.com/omacom/omarchy/pull/12867
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5423,11 +5389,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B144 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12958: Ask RTKit directly for the speaker tuning's realtime priority — https://github.com/omacom/omarchy/pull/12958
-- #12953: Detect Realtek USB Finger Print readers (2541) — https://github.com/omacom/omarchy/pull/12953
-- #12952: Bound weather fetch response sizes and reject truncated transfers — https://github.com/omacom/omarchy/pull/12952
-- #12937: fix: keep keepLoaded services across _syncServices disable — https://github.com/omacom/omarchy/pull/12937
-- #12950: Keep Bluetooth USB controllers awake when TLP manages USB power — https://github.com/omacom/omarchy/pull/12950
+- #12865: Read Codex day totals from the account, and label each usage section's source — https://github.com/omacom/omarchy/pull/12865
+- #12866: Start speedtest measurement window on first sample — https://github.com/omacom/omarchy/pull/12866
+- #12863: Retry Bluetooth pairing once on failure — https://github.com/omacom/omarchy/pull/12863
+- #12862: Re-tile Meet meeting windows caught by the PiP rule — https://github.com/omacom/omarchy/pull/12862
+- #12860: Default OMARCHY_PATH in update-dev and channel-current — https://github.com/omacom/omarchy/pull/12860
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5445,11 +5411,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B145 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12939: Don't let the Codex usage collector install Codex — https://github.com/omacom/omarchy/pull/12939
-- #13109: Resolve Codex through mise which instead of running the lazy launcher — https://github.com/omacom/omarchy/pull/13109
-- #12943: Build the clock month grid at noon so DST gaps do not repeat a day — https://github.com/omacom/omarchy/pull/12943
-- #12935: Write fontconfig monospace override to conf.d drop-in — https://github.com/omacom/omarchy/pull/12935
-- #12928: test: resolve lua via command -p to avoid shim loops — https://github.com/omacom/omarchy/pull/12928
+- #12857: Don't reload a 0x0 monitor that already has video modes — https://github.com/omacom/omarchy/pull/12857
+- #12842: fix(audio): resolve the fronted sink from the running graph, not only from a shipped tuning — https://github.com/omacom/omarchy/pull/12842
+- #12841: Fix omarchy-launch-browser crashing Chrome when man-db is absent — https://github.com/omacom/omarchy/pull/12841
+- #12837: Fix tab completion for typed omarchy-* commands — https://github.com/omacom/omarchy/pull/12837
+- #12835: Stop treating an initramfs hook banner as a failed rebuild — https://github.com/omacom/omarchy/pull/12835
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5467,11 +5433,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B146 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12931: Load high contrast VS Code themes as hc-black/hc-light — https://github.com/omacom/omarchy/pull/12931
-- #12920: Seed fcitx5 DefaultIM from vconsole XKBLAYOUT — https://github.com/omacom/omarchy/pull/12920
-- #12916: fix(menu): contain the keybindings Lua bind scan — https://github.com/omacom/omarchy/pull/12916
-- #12892: Remove dead CommonJS module.exports guards from shell JS modules — https://github.com/omacom/omarchy/pull/12892
-- #12890: Add an optional installer for Nepali Unicode keyboards — https://github.com/omacom/omarchy/pull/12890
+- #12832: Escape notification body markup instead of only stripping image tags — https://github.com/omacom/omarchy/pull/12832
+- #12829: Drop a2dp_source from Bluetooth auto-connect to prevent WirePlumber crash — https://github.com/omacom/omarchy/pull/12829
+- #12828: test: avoid false failures in desktop OCR checks — https://github.com/omacom/omarchy/pull/12828
+- #12826: Sleep alias for Suspend in the Omarchy menu — https://github.com/omacom/omarchy/pull/12826
+- #12819: Add lazy thumbnails and gate layer effects to nearby slides in background switcher — https://github.com/omacom/omarchy/pull/12819
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5489,11 +5455,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B147 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12884: Group duplicate notifications with a count — https://github.com/omacom/omarchy/pull/12884
-- #12882: Keep a closed lid awake from the power panel — https://github.com/omacom/omarchy/pull/12882
-- #12877: Tray: activating an item dismisses its menu, and a press dismisses the tooltip — https://github.com/omacom/omarchy/pull/12877
-- #12867: Elide the head of the reminder typing line — https://github.com/omacom/omarchy/pull/12867
-- #12865: Read Codex day totals from the account, and label each usage section's source — https://github.com/omacom/omarchy/pull/12865
+- #12814: Keep panel focus during panel switches — https://github.com/omacom/omarchy/pull/12814
+- #12809: Use popup text color for network panel popup content — https://github.com/omacom/omarchy/pull/12809
+- #12807: Open the Emacs default editor as a frame on the daemon — https://github.com/omacom/omarchy/pull/12807
+- #12808: Add native wezterm support — https://github.com/omacom/omarchy/pull/12808
+- #12803: Pre-filter Codex session lines before JSON parsing — https://github.com/omacom/omarchy/pull/12803
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5511,11 +5477,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B148 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12866: Start speedtest measurement window on first sample — https://github.com/omacom/omarchy/pull/12866
-- #12863: Retry Bluetooth pairing once on failure — https://github.com/omacom/omarchy/pull/12863
-- #12862: Re-tile Meet meeting windows caught by the PiP rule — https://github.com/omacom/omarchy/pull/12862
-- #12860: Default OMARCHY_PATH in update-dev and channel-current — https://github.com/omacom/omarchy/pull/12860
-- #12857: Don't reload a 0x0 monitor that already has video modes — https://github.com/omacom/omarchy/pull/12857
+- #12801: Explicitly set text/plain UTF-8 MIME type in omarchy-clipboard-paste-text — https://github.com/omacom/omarchy/pull/12801
+- #12797: Retry omarchy-bar put when omarchy-shell times out while busy — https://github.com/omacom/omarchy/pull/12797
+- #12795: Name the catppuccin flavour LazyVim loads instead of the plugin entrypoint — https://github.com/omacom/omarchy/pull/12795
+- #12794: Correct why the notification click falls back to focusing the app — https://github.com/omacom/omarchy/pull/12794
+- #12785: fix: correct Khadas Mind Graphics Speaker volume mapping — https://github.com/omacom/omarchy/pull/12785
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5533,11 +5499,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B149 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12842: fix(audio): resolve the fronted sink from the running graph, not only from a shipped tuning — https://github.com/omacom/omarchy/pull/12842
-- #12841: Fix omarchy-launch-browser crashing Chrome when man-db is absent — https://github.com/omacom/omarchy/pull/12841
-- #12837: Fix tab completion for typed omarchy-* commands — https://github.com/omacom/omarchy/pull/12837
-- #12835: Stop treating an initramfs hook banner as a failed rebuild — https://github.com/omacom/omarchy/pull/12835
-- #12832: Escape notification body markup instead of only stripping image tags — https://github.com/omacom/omarchy/pull/12832
+- #12786: Follow an opened link to the browser window, never an open web app — https://github.com/omacom/omarchy/pull/12786
+- #12784: Respect 1Password lock settings — https://github.com/omacom/omarchy/pull/12784
+- #12781: Let the Dropbox widget take an explicit storage quota — https://github.com/omacom/omarchy/pull/12781
+- #12783: Add Cyber theme — https://github.com/omacom/omarchy/pull/12783
+- #12778: Keep the desktop responsive during AUR source builds — https://github.com/omacom/omarchy/pull/12778
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5555,11 +5521,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B150 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12829: Drop a2dp_source from Bluetooth auto-connect to prevent WirePlumber crash — https://github.com/omacom/omarchy/pull/12829
-- #12828: test: avoid false failures in desktop OCR checks — https://github.com/omacom/omarchy/pull/12828
-- #12826: Sleep alias for Suspend in the Omarchy menu — https://github.com/omacom/omarchy/pull/12826
-- #12819: Add lazy thumbnails and gate layer effects to nearby slides in background switcher — https://github.com/omacom/omarchy/pull/12819
-- #12814: Keep panel focus during panel switches — https://github.com/omacom/omarchy/pull/12814
+- #12780: Exclude Dropbox's internal directories from the widget scan — https://github.com/omacom/omarchy/pull/12780
+- #12776: Restart media marquee once width bindings settle — https://github.com/omacom/omarchy/pull/12776
+- #12769: Handle low-resolution brightness deltas safely — https://github.com/omacom/omarchy/pull/12769
+- #12768: Refuse power profile autodetect when the power source is unknown — https://github.com/omacom/omarchy/pull/12768
+- #12775: Add master to the Super + L workspace layout cycle — https://github.com/omacom/omarchy/pull/12775
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5577,11 +5543,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B151 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12809: Use popup text color for network panel popup content — https://github.com/omacom/omarchy/pull/12809
-- #12807: Open the Emacs default editor as a frame on the daemon — https://github.com/omacom/omarchy/pull/12807
-- #12808: Add native wezterm support — https://github.com/omacom/omarchy/pull/12808
-- #12803: Pre-filter Codex session lines before JSON parsing — https://github.com/omacom/omarchy/pull/12803
-- #12801: Explicitly set text/plain UTF-8 MIME type in omarchy-clipboard-paste-text — https://github.com/omacom/omarchy/pull/12801
+- #12763: Recover off-screen JetBrains Toolbox windows — https://github.com/omacom/omarchy/pull/12763
+- #12753: Scope bluetooth rfkill block to HCI adapters, sparing platform switches — https://github.com/omacom/omarchy/pull/12753
+- #12752: Add a Caps Lock behaviour choice to Input setup — https://github.com/omacom/omarchy/pull/12752
+- #12750: Fix `omarchy debug` route when debug binaries ship outside `$OMARCHY_BIN_DIR` — https://github.com/omacom/omarchy/pull/12750
+- #12743: Prefer Nerd Font Propo variants in the bar — https://github.com/omacom/omarchy/pull/12743
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5599,11 +5565,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B152 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12797: Retry omarchy-bar put when omarchy-shell times out while busy — https://github.com/omacom/omarchy/pull/12797
-- #12795: Name the catppuccin flavour LazyVim loads instead of the plugin entrypoint — https://github.com/omacom/omarchy/pull/12795
-- #12794: Correct why the notification click falls back to focusing the app — https://github.com/omacom/omarchy/pull/12794
-- #12785: fix: correct Khadas Mind Graphics Speaker volume mapping — https://github.com/omacom/omarchy/pull/12785
-- #12786: Follow an opened link to the browser window, never an open web app — https://github.com/omacom/omarchy/pull/12786
+- #12741: Resolve and persist notification icon hints and desktop identity — https://github.com/omacom/omarchy/pull/12741
+- #12733: Refuse direct boot on Surface firmware — https://github.com/omacom/omarchy/pull/12733
+- #12731: Rebuild the IdleMonitor instead of retuning it — https://github.com/omacom/omarchy/pull/12731
+- #12719: Add --branch to omarchy plugin add — https://github.com/omacom/omarchy/pull/12719
+- #12718: Validate plugin clone usernames before creating files — https://github.com/omacom/omarchy/pull/12718
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5621,11 +5587,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B153 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12784: Respect 1Password lock settings — https://github.com/omacom/omarchy/pull/12784
-- #12781: Let the Dropbox widget take an explicit storage quota — https://github.com/omacom/omarchy/pull/12781
-- #12783: Add Cyber theme — https://github.com/omacom/omarchy/pull/12783
-- #12778: Keep the desktop responsive during AUR source builds — https://github.com/omacom/omarchy/pull/12778
-- #12780: Exclude Dropbox's internal directories from the widget scan — https://github.com/omacom/omarchy/pull/12780
+- #12712: Fix infinite iteration in keybinding scanner API stubs — https://github.com/omacom/omarchy/pull/12712
+- #12701: Add Qoder as a default editor and installer option — https://github.com/omacom/omarchy/pull/12701
+- #12697: Preserve configured cursors for screenshots on transformed displays — https://github.com/omacom/omarchy/pull/12697
+- #12696: Fall back to the kernel HID battery when BlueZ reports none — https://github.com/omacom/omarchy/pull/12696
+- #12695: Use shallow clones for external repositories — https://github.com/omacom/omarchy/pull/12695
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5643,11 +5609,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B154 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12776: Restart media marquee once width bindings settle — https://github.com/omacom/omarchy/pull/12776
-- #12769: Handle low-resolution brightness deltas safely — https://github.com/omacom/omarchy/pull/12769
-- #12768: Refuse power profile autodetect when the power source is unknown — https://github.com/omacom/omarchy/pull/12768
-- #12775: Add master to the Super + L workspace layout cycle — https://github.com/omacom/omarchy/pull/12775
-- #12763: Recover off-screen JetBrains Toolbox windows — https://github.com/omacom/omarchy/pull/12763
+- #12694: Add Polam theme — https://github.com/omacom/omarchy/pull/12694
+- #12693: fix(hypr): bind the lid switch by its Apple Silicon device name too — https://github.com/omacom/omarchy/pull/12693
+- #12676: Parse keys whose type is spelled out in the keybindings menu — https://github.com/omacom/omarchy/pull/12676
+- #12672: Add toggle to keep occupied workspaces numbered consecutively — https://github.com/omacom/omarchy/pull/12672
+- #12671: omarchy-hibernation-available: return failure when the kernel will refuse to hibernate (#7730) — https://github.com/omacom/omarchy/pull/12671
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5665,11 +5631,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B155 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12753: Scope bluetooth rfkill block to HCI adapters, sparing platform switches — https://github.com/omacom/omarchy/pull/12753
-- #12752: Add a Caps Lock behaviour choice to Input setup — https://github.com/omacom/omarchy/pull/12752
-- #12750: Fix `omarchy debug` route when debug binaries ship outside `$OMARCHY_BIN_DIR` — https://github.com/omacom/omarchy/pull/12750
-- #12743: Prefer Nerd Font Propo variants in the bar — https://github.com/omacom/omarchy/pull/12743
-- #12741: Resolve and persist notification icon hints and desktop identity — https://github.com/omacom/omarchy/pull/12741
+- #12669: Follow symlink starting points in omarchy-menu-file — https://github.com/omacom/omarchy/pull/12669
+- #12670: omarchy-font-set: fire terminal-restart notifications and stop leaking PIDs (#12596) — https://github.com/omacom/omarchy/pull/12670
+- #12659: Flash workspace buttons when they need attention — https://github.com/omacom/omarchy/pull/12659
+- #12666: shell: clamp notification toast width to viewport; battery warning auto-expires — https://github.com/omacom/omarchy/pull/12666
+- #12660: Add a workspace compaction command per monitor — https://github.com/omacom/omarchy/pull/12660
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5687,11 +5653,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B156 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12733: Refuse direct boot on Surface firmware — https://github.com/omacom/omarchy/pull/12733
-- #12731: Rebuild the IdleMonitor instead of retuning it — https://github.com/omacom/omarchy/pull/12731
-- #12719: Add --branch to omarchy plugin add — https://github.com/omacom/omarchy/pull/12719
-- #12718: Validate plugin clone usernames before creating files — https://github.com/omacom/omarchy/pull/12718
-- #12712: Fix infinite iteration in keybinding scanner API stubs — https://github.com/omacom/omarchy/pull/12712
+- #12656: Show parallel video downloads with option to cancel — https://github.com/omacom/omarchy/pull/12656
+- #12654: Prevent screensaver during fullscreen browser video — https://github.com/omacom/omarchy/pull/12654
+- #12649: Keep UPower rate when sysfs power read fails with ENODEV — https://github.com/omacom/omarchy/pull/12649
+- #12755: Keep UPower rate when sysfs power reads fail or are non-numeric — https://github.com/omacom/omarchy/pull/12755
+- #13009: Guard battery sysfs rate against bogus EC readings — https://github.com/omacom/omarchy/pull/13009
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5709,11 +5675,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B157 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12701: Add Qoder as a default editor and installer option — https://github.com/omacom/omarchy/pull/12701
-- #12697: Preserve configured cursors for screenshots on transformed displays — https://github.com/omacom/omarchy/pull/12697
-- #12696: Fall back to the kernel HID battery when BlueZ reports none — https://github.com/omacom/omarchy/pull/12696
-- #12695: Use shallow clones for external repositories — https://github.com/omacom/omarchy/pull/12695
-- #12694: Add Polam theme — https://github.com/omacom/omarchy/pull/12694
+- #12653: Install triage-o-mator: tool to manage Issues and PRs (no binary, just plain data) — https://github.com/omacom/omarchy/pull/12653
+- #12644: Return the menu cursor to the entered row when going back — https://github.com/omacom/omarchy/pull/12644
+- #12646: Fix empty-desktop bar reposition by Top-only expand (#11915) — https://github.com/omacom/omarchy/pull/12646
+- #12634: Wake displays before restoring keyboard and clamshell state — https://github.com/omacom/omarchy/pull/12634
+- #12633: Add language selector and translation catalog — https://github.com/omacom/omarchy/pull/12633
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5731,11 +5697,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B158 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12693: fix(hypr): bind the lid switch by its Apple Silicon device name too — https://github.com/omacom/omarchy/pull/12693
-- #12676: Parse keys whose type is spelled out in the keybindings menu — https://github.com/omacom/omarchy/pull/12676
-- #12672: Add toggle to keep occupied workspaces numbered consecutively — https://github.com/omacom/omarchy/pull/12672
-- #12671: omarchy-hibernation-available: return failure when the kernel will refuse to hibernate (#7730) — https://github.com/omacom/omarchy/pull/12671
-- #12669: Follow symlink starting points in omarchy-menu-file — https://github.com/omacom/omarchy/pull/12669
+- #12606: Inhibit idle and screensaver when browsers or video web apps are fullscreen — https://github.com/omacom/omarchy/pull/12606
+- #12613: Open the X post composer in zen mode — https://github.com/omacom/omarchy/pull/12613
+- #12585: Keep the Bluetooth widget on the bar while the radio is off — https://github.com/omacom/omarchy/pull/12585
+- #13204: Keep the bluetooth widget on the bar when the radio is blocked — https://github.com/omacom/omarchy/pull/13204
+- #12579: Keep the Omarchy screensaver from firing during VLC playback — https://github.com/omacom/omarchy/pull/12579
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5753,11 +5719,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B159 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12670: omarchy-font-set: fire terminal-restart notifications and stop leaking PIDs (#12596) — https://github.com/omacom/omarchy/pull/12670
-- #12659: Flash workspace buttons when they need attention — https://github.com/omacom/omarchy/pull/12659
-- #12666: shell: clamp notification toast width to viewport; battery warning auto-expires — https://github.com/omacom/omarchy/pull/12666
-- #12660: Add a workspace compaction command per monitor — https://github.com/omacom/omarchy/pull/12660
-- #12656: Show parallel video downloads with option to cancel — https://github.com/omacom/omarchy/pull/12656
+- #12578: Give the herdr window its own app-id — https://github.com/omacom/omarchy/pull/12578
+- #12571: Night light: opt-in sunrise/sunset scheduling via --setup and --reset — https://github.com/omacom/omarchy/pull/12571
+- #12566: Add numpad workspace shortcuts — https://github.com/omacom/omarchy/pull/12566
+- #12567: Show a web app's own icon on notifications — https://github.com/omacom/omarchy/pull/12567
+- #12559: Give screen recording stop more than five seconds to mux — https://github.com/omacom/omarchy/pull/12559
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5775,11 +5741,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B160 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12654: Prevent screensaver during fullscreen browser video — https://github.com/omacom/omarchy/pull/12654
-- #12649: Keep UPower rate when sysfs power read fails with ENODEV — https://github.com/omacom/omarchy/pull/12649
-- #12755: Keep UPower rate when sysfs power reads fail or are non-numeric — https://github.com/omacom/omarchy/pull/12755
-- #13009: Guard battery sysfs rate against bogus EC readings — https://github.com/omacom/omarchy/pull/13009
-- #12653: Install triage-o-mator: tool to manage Issues and PRs (no binary, just plain data) — https://github.com/omacom/omarchy/pull/12653
+- #12553: Restore ThinkPad keyboard backlight after sleep and boot — https://github.com/omacom/omarchy/pull/12553
+- #12552: Read and set the power profile over D-Bus instead of powerprofilesctl — https://github.com/omacom/omarchy/pull/12552
+- #12547: Activate the Omarchy theme for Claude Code when it's set as the agent — https://github.com/omacom/omarchy/pull/12547
+- #12543: Add Italian manual translation — https://github.com/omacom/omarchy/pull/12543
+- #12540: Restore bar-widget entries on enable when a plugins[] record lingers — https://github.com/omacom/omarchy/pull/12540
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5797,11 +5763,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B161 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12644: Return the menu cursor to the entered row when going back — https://github.com/omacom/omarchy/pull/12644
-- #12634: Wake displays before restoring keyboard and clamshell state — https://github.com/omacom/omarchy/pull/12634
-- #12633: Add language selector and translation catalog — https://github.com/omacom/omarchy/pull/12633
-- #12606: Inhibit idle and screensaver when browsers or video web apps are fullscreen — https://github.com/omacom/omarchy/pull/12606
-- #12613: Open the X post composer in zen mode — https://github.com/omacom/omarchy/pull/12613
+- #12541: Apply brightness to mirrored external displays — https://github.com/omacom/omarchy/pull/12541
+- #12536: Enable Num Lock by default on the SDDM login screen — https://github.com/omacom/omarchy/pull/12536
+- #12533: Resolve wrapped desktop Exec= in browser and webapp launchers — https://github.com/omacom/omarchy/pull/12533
+- #12527: Split weekly agent limit meters into day segments — https://github.com/omacom/omarchy/pull/12527
+- #12512: Exclude covered windows from the capture picker — https://github.com/omacom/omarchy/pull/12512
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5819,11 +5785,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B162 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12603: Keep the idle monitor subscribed while stay-awake is on — https://github.com/omacom/omarchy/pull/12603
-- #12585: Keep the Bluetooth widget on the bar while the radio is off — https://github.com/omacom/omarchy/pull/12585
-- #13204: Keep the bluetooth widget on the bar when the radio is blocked — https://github.com/omacom/omarchy/pull/13204
-- #12579: Keep the Omarchy screensaver from firing during VLC playback — https://github.com/omacom/omarchy/pull/12579
-- #12578: Give the herdr window its own app-id — https://github.com/omacom/omarchy/pull/12578
+- #12517: Position picture-in-picture from its final size, like webcam overlay — https://github.com/omacom/omarchy/pull/12517
+- #12504: Skip force-igpu Vfio dance when no NVIDIA GPU is present — https://github.com/omacom/omarchy/pull/12504
+- #12489: List each plugged-in jack of a multi-port sink as its own audio output — https://github.com/omacom/omarchy/pull/12489
+- #12502: Keep the keyboard backlight level across lock and suspend — https://github.com/omacom/omarchy/pull/12502
+- #12487: fix: write Hermes bootstrap marker after headless install — https://github.com/omacom/omarchy/pull/12487
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5841,11 +5807,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B163 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12571: Night light: opt-in sunrise/sunset scheduling via --setup and --reset — https://github.com/omacom/omarchy/pull/12571
-- #12566: Add numpad workspace shortcuts — https://github.com/omacom/omarchy/pull/12566
-- #12567: Show a web app's own icon on notifications — https://github.com/omacom/omarchy/pull/12567
-- #12559: Give screen recording stop more than five seconds to mux — https://github.com/omacom/omarchy/pull/12559
-- #12553: Restore ThinkPad keyboard backlight after sleep and boot — https://github.com/omacom/omarchy/pull/12553
+- #12484: Report an unavailable battery cycle count as unknown — https://github.com/omacom/omarchy/pull/12484
+- #12483: Add an AI-assisted problem investigation entry point — https://github.com/omacom/omarchy/pull/12483
+- #12477: Use Fitts law for bar corner icons — https://github.com/omacom/omarchy/pull/12477
+- #12471: Fix recording indicator stuck 'active' after a force-killed stop — https://github.com/omacom/omarchy/pull/12471
+- #12452: Drop redundant height bindings that loop in panel delegates — https://github.com/omacom/omarchy/pull/12452
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5863,11 +5829,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B164 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12557: Give binds a stable id to key on — https://github.com/omacom/omarchy/pull/12557
-- #12552: Read and set the power profile over D-Bus instead of powerprofilesctl — https://github.com/omacom/omarchy/pull/12552
-- #12547: Activate the Omarchy theme for Claude Code when it's set as the agent — https://github.com/omacom/omarchy/pull/12547
-- #12544: Back off fingerprint lock retries on hard device errors — https://github.com/omacom/omarchy/pull/12544
-- #12543: Add Italian manual translation — https://github.com/omacom/omarchy/pull/12543
+- #12456: Quote OMARCHY_PATH in the function loader glob — https://github.com/omacom/omarchy/pull/12456
+- #12451: Feature: Add native Quick Notes scratchpad — https://github.com/omacom/omarchy/pull/12451
+- #12457: Escape font names before rewriting terminal and fontconfig files — https://github.com/omacom/omarchy/pull/12457
+- #12432: Scale Battle.net to the focused monitor — https://github.com/omacom/omarchy/pull/12432
+- #12439: Add reusable multi-monitor profiles — https://github.com/omacom/omarchy/pull/12439
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5885,11 +5851,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B165 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12540: Restore bar-widget entries on enable when a plugins[] record lingers — https://github.com/omacom/omarchy/pull/12540
-- #12541: Apply brightness to mirrored external displays — https://github.com/omacom/omarchy/pull/12541
-- #12536: Enable Num Lock by default on the SDDM login screen — https://github.com/omacom/omarchy/pull/12536
-- #12533: Resolve wrapped desktop Exec= in browser and webapp launchers — https://github.com/omacom/omarchy/pull/12533
-- #12527: Split weekly agent limit meters into day segments — https://github.com/omacom/omarchy/pull/12527
+- #12435: Reclaim lock screen keyboard focus after resume from suspend — https://github.com/omacom/omarchy/pull/12435
+- #12431: Fix: menu `No matches for "abc.."` message overflow — https://github.com/omacom/omarchy/pull/12431
+- #12427: feat(sleep): opt-in suspend battery floor for laptops without hibernation — https://github.com/omacom/omarchy/pull/12427
+- #12422: Add presentation mode while preserving independent settings — https://github.com/omacom/omarchy/pull/12422
+- #12417: Centralize optional preinstall packages — https://github.com/omacom/omarchy/pull/12417
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5907,11 +5873,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B166 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12512: Exclude covered windows from the capture picker — https://github.com/omacom/omarchy/pull/12512
-- #12517: Position picture-in-picture from its final size, like webcam overlay — https://github.com/omacom/omarchy/pull/12517
-- #12504: Skip force-igpu Vfio dance when no NVIDIA GPU is present — https://github.com/omacom/omarchy/pull/12504
-- #12503: Skip CUPS discovery cleanup when the scheduler is stopped — https://github.com/omacom/omarchy/pull/12503
-- #12501: Use output-relative slurp coordinates for region share — https://github.com/omacom/omarchy/pull/12501
+- #12416: Add offline shell plugin safety audit — https://github.com/omacom/omarchy/pull/12416
+- #12415: Make first-run onboarding recoverable — https://github.com/omacom/omarchy/pull/12415
+- #12414: Bound unreadable Claude transcript warnings — https://github.com/omacom/omarchy/pull/12414
+- #12413: Add shell recovery tooling for broken plugin configuration — https://github.com/omacom/omarchy/pull/12413
+- #12407: Draw the current weather over the wallpaper — https://github.com/omacom/omarchy/pull/12407
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5929,11 +5895,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B167 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12489: List each plugged-in jack of a multi-port sink as its own audio output — https://github.com/omacom/omarchy/pull/12489
-- #12502: Keep the keyboard backlight level across lock and suspend — https://github.com/omacom/omarchy/pull/12502
-- #12487: fix: write Hermes bootstrap marker after headless install — https://github.com/omacom/omarchy/pull/12487
-- #12484: Report an unavailable battery cycle count as unknown — https://github.com/omacom/omarchy/pull/12484
-- #12483: Add an AI-assisted problem investigation entry point — https://github.com/omacom/omarchy/pull/12483
+- #12412: preserve all bash history: never overwrite — https://github.com/omacom/omarchy/pull/12412
+- #12406: Replace eval with quote-aware word split in omarchy-launch-or-focus — https://github.com/omacom/omarchy/pull/12406
+- #12390: docs: clarify kernel cmdline is not read from /etc/kernel/cmdline — https://github.com/omacom/omarchy/pull/12390
+- #12388: Launch windowless apps when a notification toast is clicked — https://github.com/omacom/omarchy/pull/12388
+- #12387: Detect the Chipsailing CS9711 USB reader — https://github.com/omacom/omarchy/pull/12387
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5951,11 +5917,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B168 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12480: Stop fingerprint setup when fprintd exposes no device — https://github.com/omacom/omarchy/pull/12480
-- #12479: Drop destroyed PipeWire nodes from the audio panel fallback cache — https://github.com/omacom/omarchy/pull/12479
-- #12477: Use Fitts law for bar corner icons — https://github.com/omacom/omarchy/pull/12477
-- #12472: Fix Sunshine double-start: bind only the user unit, drop Hyprland autostart entry — https://github.com/omacom/omarchy/pull/12472
-- #12471: Fix recording indicator stuck 'active' after a force-killed stop — https://github.com/omacom/omarchy/pull/12471
+- #12389: Add undo for silent window-to-workspace moves — https://github.com/omacom/omarchy/pull/12389
+- #12386: Report ASCII export write failures — https://github.com/omacom/omarchy/pull/12386
+- #12385: Report failed theme removal before announcing success — https://github.com/omacom/omarchy/pull/12385
+- #12384: Encode browser native-host paths as JSON — https://github.com/omacom/omarchy/pull/12384
+- #12377: Fix emoji/clipboard paste into browsers with Ctrl+V — https://github.com/omacom/omarchy/pull/12377
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5973,11 +5939,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B169 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12452: Drop redundant height bindings that loop in panel delegates — https://github.com/omacom/omarchy/pull/12452
-- #12456: Quote OMARCHY_PATH in the function loader glob — https://github.com/omacom/omarchy/pull/12456
-- #12451: Feature: Add native Quick Notes scratchpad — https://github.com/omacom/omarchy/pull/12451
-- #12457: Escape font names before rewriting terminal and fontconfig files — https://github.com/omacom/omarchy/pull/12457
-- #12432: Scale Battle.net to the focused monitor — https://github.com/omacom/omarchy/pull/12432
+- #12364: Only restart the shell after Voxtype configure if the config changed — https://github.com/omacom/omarchy/pull/12364
+- #12363: Let the menu selector return an option's index — https://github.com/omacom/omarchy/pull/12363
+- #12361: Check the weather hook's exit status, not its message — https://github.com/omacom/omarchy/pull/12361
+- #12359: Let GUI-started update prompts be answered with the mouse — https://github.com/omacom/omarchy/pull/12359
+- #12353: Discover agent usage collectors in ~/.config/omarchy/agents/collectors — https://github.com/omacom/omarchy/pull/12353
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -5995,11 +5961,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B170 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12439: Add reusable multi-monitor profiles — https://github.com/omacom/omarchy/pull/12439
-- #12435: Reclaim lock screen keyboard focus after resume from suspend — https://github.com/omacom/omarchy/pull/12435
-- #12431: Fix: menu `No matches for "abc.."` message overflow — https://github.com/omacom/omarchy/pull/12431
-- #12427: feat(sleep): opt-in suspend battery floor for laptops without hibernation — https://github.com/omacom/omarchy/pull/12427
-- #12422: Add presentation mode while preserving independent settings — https://github.com/omacom/omarchy/pull/12422
+- #12350: Ignore the Apple SMC power/lid device in the keyboard layout widget — https://github.com/omacom/omarchy/pull/12350
+- #12344: Declare which command output is parsed, and gate it — https://github.com/omacom/omarchy/pull/12344
+- #12338: Make the menu search line a real text input — https://github.com/omacom/omarchy/pull/12338
+- #12336: Optimize Codex usage session scanning — https://github.com/omacom/omarchy/pull/12336
+- #12320: Parse top CPU idle under decimal-comma locales — https://github.com/omacom/omarchy/pull/12320
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6017,11 +5983,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B171 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12417: Centralize optional preinstall packages — https://github.com/omacom/omarchy/pull/12417
-- #12416: Add offline shell plugin safety audit — https://github.com/omacom/omarchy/pull/12416
-- #12415: Make first-run onboarding recoverable — https://github.com/omacom/omarchy/pull/12415
-- #12414: Bound unreadable Claude transcript warnings — https://github.com/omacom/omarchy/pull/12414
-- #12413: Add shell recovery tooling for broken plugin configuration — https://github.com/omacom/omarchy/pull/12413
+- #12312: Add one-step Traditional Chinese input setup — https://github.com/omacom/omarchy/pull/12312
+- #12307: Prefer a known internal touchpad when an external trackpad is connected — https://github.com/omacom/omarchy/pull/12307
+- #12306: Show the volume OSD for volume changes made outside the volume keys — https://github.com/omacom/omarchy/pull/12306
+- #12300: Fix fronted sink detection for community speaker tunings — https://github.com/omacom/omarchy/pull/12300
+- #12284: Explain password prompts with passwordless sudo — https://github.com/omacom/omarchy/pull/12284
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6039,11 +6005,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B172 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12407: Draw the current weather over the wallpaper — https://github.com/omacom/omarchy/pull/12407
-- #12412: preserve all bash history: never overwrite — https://github.com/omacom/omarchy/pull/12412
-- #12406: Replace eval with quote-aware word split in omarchy-launch-or-focus — https://github.com/omacom/omarchy/pull/12406
-- #12390: docs: clarify kernel cmdline is not read from /etc/kernel/cmdline — https://github.com/omacom/omarchy/pull/12390
-- #12388: Launch windowless apps when a notification toast is clicked — https://github.com/omacom/omarchy/pull/12388
+- #12283: Ask the multiplexer where the focused pane is — https://github.com/omacom/omarchy/pull/12283
+- #12278: Show the Claude usage-credit allowance in the agents panel — https://github.com/omacom/omarchy/pull/12278
+- #12268: Terminal logos: theme-colored ascii and fitted fastfetch — https://github.com/omacom/omarchy/pull/12268
+- #12261: Recover polkit agent registration when a stale listener blocks pkexec — https://github.com/omacom/omarchy/pull/12261
+- #12256: Probe Tailscale with omarchy-cmd-present instead of which — https://github.com/omacom/omarchy/pull/12256
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6061,11 +6027,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B173 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12387: Detect the Chipsailing CS9711 USB reader — https://github.com/omacom/omarchy/pull/12387
-- #12389: Add undo for silent window-to-workspace moves — https://github.com/omacom/omarchy/pull/12389
-- #12386: Report ASCII export write failures — https://github.com/omacom/omarchy/pull/12386
-- #12385: Report failed theme removal before announcing success — https://github.com/omacom/omarchy/pull/12385
-- #12384: Encode browser native-host paths as JSON — https://github.com/omacom/omarchy/pull/12384
+- #12254: Schedule logout with systemd-run like reboot and shutdown — https://github.com/omacom/omarchy/pull/12254
+- #12253: Require a mode before counting an external monitor as active — https://github.com/omacom/omarchy/pull/12253
+- #12251: Add Phantombot as a default agent option — https://github.com/omacom/omarchy/pull/12251
+- #12248: Show disk staging throughput and reuse the image index — https://github.com/omacom/omarchy/pull/12248
+- #12247: Theme: dark Yaru icons, bg/next/prev, themed Done logo, noprofile theme-set — https://github.com/omacom/omarchy/pull/12247
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6083,11 +6049,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B174 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12377: Fix emoji/clipboard paste into browsers with Ctrl+V — https://github.com/omacom/omarchy/pull/12377
-- #12364: Only restart the shell after Voxtype configure if the config changed — https://github.com/omacom/omarchy/pull/12364
-- #12363: Let the menu selector return an option's index — https://github.com/omacom/omarchy/pull/12363
-- #12362: Pin the keybindings row order to one collation — https://github.com/omacom/omarchy/pull/12362
-- #12361: Check the weather hook's exit status, not its message — https://github.com/omacom/omarchy/pull/12361
+- #12241: Keep bluetooth bar icon visible after adapter disappears — https://github.com/omacom/omarchy/pull/12241
+- #12234: fix(nvim): relink treesitter queries orphaned by retired lazyvim package — https://github.com/omacom/omarchy/pull/12234
+- #12232: Show weather wind speed in m/s where that is the local convention — https://github.com/omacom/omarchy/pull/12232
+- #12231: List local audio outputs before network ones in the audio panel — https://github.com/omacom/omarchy/pull/12231
+- #12223: fix(menu): rank installed apps above menu entries in search — https://github.com/omacom/omarchy/pull/12223
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6105,11 +6071,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B175 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12360: Toggle a touchpad's mouse-emulation sibling with it — https://github.com/omacom/omarchy/pull/12360
-- #12359: Let GUI-started update prompts be answered with the mouse — https://github.com/omacom/omarchy/pull/12359
-- #12357: Give omacalc a centered floating size — https://github.com/omacom/omarchy/pull/12357
-- #12353: Discover agent usage collectors in ~/.config/omarchy/agents/collectors — https://github.com/omacom/omarchy/pull/12353
-- #12350: Ignore the Apple SMC power/lid device in the keyboard layout widget — https://github.com/omacom/omarchy/pull/12350
+- #12213: fix(shell): PanelToolTip renders long text on one unbounded line — https://github.com/omacom/omarchy/pull/12213
+- #12200: Document MacBookPro16,1 power tuning and validation — https://github.com/omacom/omarchy/pull/12200
+- #12199: Apply theme accent to OpenRGB devices on theme switch — https://github.com/omacom/omarchy/pull/12199
+- #12189: Only reload local plugins when loadable sources change — https://github.com/omacom/omarchy/pull/12189
+- #12183: Keep weather widget visible when wttr.in TLS fails (#11999) — https://github.com/omacom/omarchy/pull/12183
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6127,11 +6093,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B176 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12344: Declare which command output is parsed, and gate it — https://github.com/omacom/omarchy/pull/12344
-- #12338: Make the menu search line a real text input — https://github.com/omacom/omarchy/pull/12338
-- #12336: Optimize Codex usage session scanning — https://github.com/omacom/omarchy/pull/12336
-- #12320: Parse top CPU idle under decimal-comma locales — https://github.com/omacom/omarchy/pull/12320
-- #12312: Add one-step Traditional Chinese input setup — https://github.com/omacom/omarchy/pull/12312
+- #12175: Move only application streams when switching the audio input — https://github.com/omacom/omarchy/pull/12175
+- #12174: Give the Mise PATH cleanup a collision-free migration id — https://github.com/omacom/omarchy/pull/12174
+- #12172: Add qutebrowser, with ad blocking and ad-free YouTube — https://github.com/omacom/omarchy/pull/12172
+- #12168: Add Nextcloud to the install menu — https://github.com/omacom/omarchy/pull/12168
+- #12166: Add Thunderbird to the install menu — https://github.com/omacom/omarchy/pull/12166
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6149,11 +6115,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B177 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12307: Prefer a known internal touchpad when an external trackpad is connected — https://github.com/omacom/omarchy/pull/12307
-- #12306: Show the volume OSD for volume changes made outside the volume keys — https://github.com/omacom/omarchy/pull/12306
-- #12300: Fix fronted sink detection for community speaker tunings — https://github.com/omacom/omarchy/pull/12300
-- #12299: fix(audio): generically resolve downstream physical sink via PipeWire in omarchy-audio-output-sink — https://github.com/omacom/omarchy/pull/12299
-- #12284: Explain password prompts with passwordless sudo — https://github.com/omacom/omarchy/pull/12284
+- #12137: Give Brave and Zen their own brand glyphs — https://github.com/omacom/omarchy/pull/12137
+- #12138: Keep both coordinates when wttr.in auto-detects a location as lat,lon — https://github.com/omacom/omarchy/pull/12138
+- #12135: feat(transcode): quality tiers, size estimates, and actual size in the completion notification — https://github.com/omacom/omarchy/pull/12135
+- #12132: Add Helium as a supported browser — https://github.com/omacom/omarchy/pull/12132
+- #12126: network: fall back to omarchy-network-status for wifi bar icon state — https://github.com/omacom/omarchy/pull/12126
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6171,11 +6137,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B178 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12283: Ask the multiplexer where the focused pane is — https://github.com/omacom/omarchy/pull/12283
-- #12278: Show the Claude usage-credit allowance in the agents panel — https://github.com/omacom/omarchy/pull/12278
-- #12268: Terminal logos: theme-colored ascii and fitted fastfetch — https://github.com/omacom/omarchy/pull/12268
-- #12261: Recover polkit agent registration when a stale listener blocks pkexec — https://github.com/omacom/omarchy/pull/12261
-- #12259: Trust battery device state over UPower.onBattery — https://github.com/omacom/omarchy/pull/12259
+- #12133: Add color inversion for the desktop and the focused window — https://github.com/omacom/omarchy/pull/12133
+- #12118: Make scrolling Alt-Tab follow visual order — https://github.com/omacom/omarchy/pull/12118
+- #12104: Validate omarchy-hook names on run and install — https://github.com/omacom/omarchy/pull/12104
+- #12101: Cups-browsed migration: locale-safe empty queue and CUPS-down — https://github.com/omacom/omarchy/pull/12101
+- #12094: Point at the running update log when the lock is held — https://github.com/omacom/omarchy/pull/12094
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6193,11 +6159,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B179 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12258: Keep the screensaver up until it has been focused once — https://github.com/omacom/omarchy/pull/12258
-- #12257: fix(bar/tray): collapse the tray drawer's reserved space — https://github.com/omacom/omarchy/pull/12257
-- #12256: Probe Tailscale with omarchy-cmd-present instead of which — https://github.com/omacom/omarchy/pull/12256
-- #12254: Schedule logout with systemd-run like reboot and shutdown — https://github.com/omacom/omarchy/pull/12254
-- #12253: Require a mode before counting an external monitor as active — https://github.com/omacom/omarchy/pull/12253
+- #12098: Remember highlighted menu item after returning from submenus — https://github.com/omacom/omarchy/pull/12098
+- #12091: Do not use muted as a VS Code button fill — https://github.com/omacom/omarchy/pull/12091
+- #12081: Allow short version of omarchy commands — https://github.com/omacom/omarchy/pull/12081
+- #12072: Omit empty duplicate displays from the Display panel — https://github.com/omacom/omarchy/pull/12072
+- #12058: Round battery percentage to match the bar without tripping hold early — https://github.com/omacom/omarchy/pull/12058
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6215,11 +6181,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B180 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12251: Add Phantombot as a default agent option — https://github.com/omacom/omarchy/pull/12251
-- #12248: Show disk staging throughput and reuse the image index — https://github.com/omacom/omarchy/pull/12248
-- #12247: Theme: dark Yaru icons, bg/next/prev, themed Done logo, noprofile theme-set — https://github.com/omacom/omarchy/pull/12247
-- #12241: Keep bluetooth bar icon visible after adapter disappears — https://github.com/omacom/omarchy/pull/12241
-- #12234: fix(nvim): relink treesitter queries orphaned by retired lazyvim package — https://github.com/omacom/omarchy/pull/12234
+- #12042: Render every modifier Hyprland can bind in the keybindings menu — https://github.com/omacom/omarchy/pull/12042
+- #12040: Fill the logo from the bottom to show boot progress — https://github.com/omacom/omarchy/pull/12040
+- #12037: Add explicit preference sharing with recoverable local history — https://github.com/omacom/omarchy/pull/12037
+- #12036: Meter pro-audio sources in the audio panel — https://github.com/omacom/omarchy/pull/12036
+- #12032: Count only subscription-backed sessions as Codex usage — https://github.com/omacom/omarchy/pull/12032
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6237,11 +6203,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B181 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12232: Show weather wind speed in m/s where that is the local convention — https://github.com/omacom/omarchy/pull/12232
-- #12231: List local audio outputs before network ones in the audio panel — https://github.com/omacom/omarchy/pull/12231
-- #12223: fix(menu): rank installed apps above menu entries in search — https://github.com/omacom/omarchy/pull/12223
-- #12213: fix(shell): PanelToolTip renders long text on one unbounded line — https://github.com/omacom/omarchy/pull/12213
-- #12200: Document MacBookPro16,1 power tuning and validation — https://github.com/omacom/omarchy/pull/12200
+- #12034: Add a Local tab for self-hosted model usage — https://github.com/omacom/omarchy/pull/12034
+- #12021: Escalate webcam overlay cleanup to SIGKILL and sweep on stop — https://github.com/omacom/omarchy/pull/12021
+- #12016: Open a hidden workspace on the bar that was clicked — https://github.com/omacom/omarchy/pull/12016
+- #12020: Ignore bytecode and temp files in local plugin watcher — https://github.com/omacom/omarchy/pull/12020
+- #11998: fix: type image path when pasting clipboard images into terminals — https://github.com/omacom/omarchy/pull/11998
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6259,11 +6225,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B182 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12199: Apply theme accent to OpenRGB devices on theme switch — https://github.com/omacom/omarchy/pull/12199
-- #12189: Only reload local plugins when loadable sources change — https://github.com/omacom/omarchy/pull/12189
-- #12184: Fix bar reposition-drag on an empty desktop (#11915) — https://github.com/omacom/omarchy/pull/12184
-- #12646: Fix empty-desktop bar reposition by Top-only expand (#11915) — https://github.com/omacom/omarchy/pull/12646
-- #12183: Keep weather widget visible when wttr.in TLS fails (#11999) — https://github.com/omacom/omarchy/pull/12183
+- #11996: Add Granola to Install > AI — https://github.com/omacom/omarchy/pull/11996
+- #11981: Fix fullscreen Steam game window rules — https://github.com/omacom/omarchy/pull/11981
+- #11976: Highlight each monitor's own active workspace in the bar — https://github.com/omacom/omarchy/pull/11976
+- #13369: Show each monitor's own workspaces in the bar — https://github.com/omacom/omarchy/pull/13369
+- #11975: feat: choose a separate browser for web apps — https://github.com/omacom/omarchy/pull/11975
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6281,11 +6247,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B183 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12175: Move only application streams when switching the audio input — https://github.com/omacom/omarchy/pull/12175
-- #12174: Give the Mise PATH cleanup a collision-free migration id — https://github.com/omacom/omarchy/pull/12174
-- #12171: Sync explicit Kitty faces on font set — https://github.com/omacom/omarchy/pull/12171
-- #12172: Add qutebrowser, with ad blocking and ad-free YouTube — https://github.com/omacom/omarchy/pull/12172
-- #12168: Add Nextcloud to the install menu — https://github.com/omacom/omarchy/pull/12168
+- #12006: Add Ukrainian manual translation — https://github.com/omacom/omarchy/pull/12006
+- #11970: Wire serviceFor for installed third-party bar plugins (#11949) — https://github.com/omacom/omarchy/pull/11970
+- #11965: fix: use the current login shell for desktop app launches — https://github.com/omacom/omarchy/pull/11965
+- #11963: Draw a caret in the menu header, and let the query be edited — https://github.com/omacom/omarchy/pull/11963
+- #11962: Keep alias and id separators searchable in the menu — https://github.com/omacom/omarchy/pull/11962
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6303,11 +6269,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B184 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12166: Add Thunderbird to the install menu — https://github.com/omacom/omarchy/pull/12166
-- #12137: Give Brave and Zen their own brand glyphs — https://github.com/omacom/omarchy/pull/12137
-- #12138: Keep both coordinates when wttr.in auto-detects a location as lat,lon — https://github.com/omacom/omarchy/pull/12138
-- #12135: feat(transcode): quality tiers, size estimates, and actual size in the completion notification — https://github.com/omacom/omarchy/pull/12135
-- #12132: Add Helium as a supported browser — https://github.com/omacom/omarchy/pull/12132
+- #11959: Dismiss low-battery notification when charger is connected — https://github.com/omacom/omarchy/pull/11959
+- #11955: Keep the Dropbox panel polling until the account link completes — https://github.com/omacom/omarchy/pull/11955
+- #11951: Honor Hyprland rounding power across shell surfaces — https://github.com/omacom/omarchy/pull/11951
+- #11944: Add Godot to Install > Development — https://github.com/omacom/omarchy/pull/11944
+- #11937: Restart Bluetooth agent when BlueZ is replaced — https://github.com/omacom/omarchy/pull/11937
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6325,11 +6291,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B185 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12126: network: fall back to omarchy-network-status for wifi bar icon state — https://github.com/omacom/omarchy/pull/12126
-- #12133: Add color inversion for the desktop and the focused window — https://github.com/omacom/omarchy/pull/12133
-- #12118: Make scrolling Alt-Tab follow visual order — https://github.com/omacom/omarchy/pull/12118
-- #12104: Validate omarchy-hook names on run and install — https://github.com/omacom/omarchy/pull/12104
-- #12101: Cups-browsed migration: locale-safe empty queue and CUPS-down — https://github.com/omacom/omarchy/pull/12101
+- #11935: feat(hypr): opt-in per-monitor workspace keybinds — https://github.com/omacom/omarchy/pull/11935
+- #11933: Install Bitwarden desktop even when CLI conflicts with nodejs — https://github.com/omacom/omarchy/pull/11933
+- #12870: Install Bitwarden desktop without the conflicting CLI bundle — https://github.com/omacom/omarchy/pull/12870
+- #11925: fix(shell): keep __sourceDir on third-party plugin manifests — https://github.com/omacom/omarchy/pull/11925
+- #11930: Switch providers on and off from the agents panel — https://github.com/omacom/omarchy/pull/11930
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6347,11 +6313,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B186 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12094: Point at the running update log when the lock is held — https://github.com/omacom/omarchy/pull/12094
-- #12098: Remember highlighted menu item after returning from submenus — https://github.com/omacom/omarchy/pull/12098
-- #12091: Do not use muted as a VS Code button fill — https://github.com/omacom/omarchy/pull/12091
-- #12093: Paint wall-clock time as soon as the clock widget loads — https://github.com/omacom/omarchy/pull/12093
-- #12081: Allow short version of omarchy commands — https://github.com/omacom/omarchy/pull/12081
+- #11918: Back off fingerprint retries that fail immediately — https://github.com/omacom/omarchy/pull/11918
+- #11904: Add omarchy-diagnose-suspend-wake — https://github.com/omacom/omarchy/pull/11904
+- #11892: Mark the pace on agent limit meters — https://github.com/omacom/omarchy/pull/11892
+- #11888: fix(shell): propagate immediate barConfig upon plugin settings update — https://github.com/omacom/omarchy/pull/11888
+- #11896: feat(agents): support custom provider brand-marks via record paths and user assets — https://github.com/omacom/omarchy/pull/11896
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6369,11 +6335,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B187 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12072: Omit empty duplicate displays from the Display panel — https://github.com/omacom/omarchy/pull/12072
-- #12063: Only leave the alternate screen after a session that actually dropped — https://github.com/omacom/omarchy/pull/12063
-- #12058: Round battery percentage to match the bar without tripping hold early — https://github.com/omacom/omarchy/pull/12058
-- #12042: Render every modifier Hyprland can bind in the keybindings menu — https://github.com/omacom/omarchy/pull/12042
-- #12040: Fill the logo from the bottom to show boot progress — https://github.com/omacom/omarchy/pull/12040
+- #11887: Preserve bar space while the shell restarts — https://github.com/omacom/omarchy/pull/11887
+- #11882: Fix stale menu-image thumbnails after in-place overwrite (#11806) — https://github.com/omacom/omarchy/pull/11882
+- #11877: Keep the web app remover open so several can go in one visit — https://github.com/omacom/omarchy/pull/11877
+- #11872: Print a plugin's next-step note after enable — https://github.com/omacom/omarchy/pull/11872
+- #11863: Skip dwindle togglesplit on scrolling workspaces — https://github.com/omacom/omarchy/pull/11863
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6388,13 +6354,14 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B188
 
 ```
-You are reviewing Omarchy pre-release batch B188 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B188 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12037: Add explicit preference sharing with recoverable local history — https://github.com/omacom/omarchy/pull/12037
-- #12036: Meter pro-audio sources in the audio panel — https://github.com/omacom/omarchy/pull/12036
-- #12032: Count only subscription-backed sessions as Codex usage — https://github.com/omacom/omarchy/pull/12032
-- #12034: Add a Local tab for self-hosted model usage — https://github.com/omacom/omarchy/pull/12034
+- #11860: feat(capture-text): open clipboard manager when clicking the OCR notification — https://github.com/omacom/omarchy/pull/11860
+- #11855: feat(monitor-panel): per-display scale in the monitor panel, targeted at the hosting screen — https://github.com/omacom/omarchy/pull/11855
+- #11853: Cover omarchy debug dispatch in CLI tests — https://github.com/omacom/omarchy/pull/11853
+- #11854: feat(monitor-scaling): per-monitor scale targeting with layout-safe position recompute — https://github.com/omacom/omarchy/pull/11854
+- #11851: Dispatch Lua function keybindings from the menu — https://github.com/omacom/omarchy/pull/11851
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6412,11 +6379,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B189 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12024: Aggregate battery status across all packs — https://github.com/omacom/omarchy/pull/12024
-- #12445: fix(battery): aggregate all packs in battery status — https://github.com/omacom/omarchy/pull/12445
-- #12021: Escalate webcam overlay cleanup to SIGKILL and sweep on stop — https://github.com/omacom/omarchy/pull/12021
-- #12022: Fix inverted on/off semantics of toggle bar — https://github.com/omacom/omarchy/pull/12022
-- #12016: Open a hidden workspace on the bar that was clicked — https://github.com/omacom/omarchy/pull/12016
+- #11848: Add transcript download extension (Alt+Shift+S) to Chromium-based browsers — https://github.com/omacom/omarchy/pull/11848
+- #11842: Give a clear diagnosis when libfprint has no driver for the detected fingerprint reader — https://github.com/omacom/omarchy/pull/11842
+- #11838: Fix calendar and weather popup text colours — https://github.com/omacom/omarchy/pull/11838
+- #11835: fix: toggle every touchscreen digitizer — https://github.com/omacom/omarchy/pull/11835
+- #11836: Skip screen digitizers when detecting the touchpad — https://github.com/omacom/omarchy/pull/11836
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6431,13 +6398,14 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B190
 
 ```
-You are reviewing Omarchy pre-release batch B190 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B190 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12020: Ignore bytecode and temp files in local plugin watcher — https://github.com/omacom/omarchy/pull/12020
-- #11998: fix: type image path when pasting clipboard images into terminals — https://github.com/omacom/omarchy/pull/11998
-- #11996: Add Granola to Install > AI — https://github.com/omacom/omarchy/pull/11996
-- #11981: Fix fullscreen Steam game window rules — https://github.com/omacom/omarchy/pull/11981
+- #11826: Decouple AUR helper from yay, support paru as default — https://github.com/omacom/omarchy/pull/11826
+- #11792: Add battery charge-limit presets to the power panel — https://github.com/omacom/omarchy/pull/11792
+- #11803: Clarify omarchy-toggle-bar's on/off help text — https://github.com/omacom/omarchy/pull/11803
+- #11785: Serialize repeating volume adjustments — https://github.com/omacom/omarchy/pull/11785
+- #11758: Enable native Wayland rendering for Spotify — https://github.com/omacom/omarchy/pull/11758
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6455,11 +6423,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B191 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11976: Highlight each monitor's own active workspace in the bar — https://github.com/omacom/omarchy/pull/11976
-- #13369: Show each monitor's own workspaces in the bar — https://github.com/omacom/omarchy/pull/13369
-- #11975: feat: choose a separate browser for web apps — https://github.com/omacom/omarchy/pull/11975
-- #12006: Add Ukrainian manual translation — https://github.com/omacom/omarchy/pull/12006
-- #11973: Regenerate mise wrappers that still print mise's output on every run — https://github.com/omacom/omarchy/pull/11973
+- #11782: Group repeated crash toasts and let them expire after a minute — https://github.com/omacom/omarchy/pull/11782
+- #11756: Dim the workspace marker on unfocused monitors — https://github.com/omacom/omarchy/pull/11756
+- #11751: Unmap KeyboardPanel even when owner.close() throws — https://github.com/omacom/omarchy/pull/11751
+- #13648: Force-close KeyboardPanel when owner close() throws — https://github.com/omacom/omarchy/pull/13648
+- #11743: Add SHIFT+PRINT for clipboard-only screenshots — https://github.com/omacom/omarchy/pull/11743
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6477,11 +6445,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B192 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11970: Wire serviceFor for installed third-party bar plugins (#11949) — https://github.com/omacom/omarchy/pull/11970
-- #11965: fix: use the current login shell for desktop app launches — https://github.com/omacom/omarchy/pull/11965
-- #11963: Draw a caret in the menu header, and let the query be edited — https://github.com/omacom/omarchy/pull/11963
-- #11962: Keep alias and id separators searchable in the menu — https://github.com/omacom/omarchy/pull/11962
-- #11959: Dismiss low-battery notification when charger is connected — https://github.com/omacom/omarchy/pull/11959
+- #11747: Warn on pull requests targeting wrong branch — https://github.com/omacom/omarchy/pull/11747
+- #11742: Coerce omarchy-show-done exit code to numeric before arithmetic test — https://github.com/omacom/omarchy/pull/11742
+- #11733: Read keybindings from the running compositor instead of replaying configuration — https://github.com/omacom/omarchy/pull/11733
+- #11736: Guard qmk_hid calls with a timeout so a hung device can't stall theme switch — https://github.com/omacom/omarchy/pull/11736
+- #11734: Request libappindicator by current name in Dropbox install — https://github.com/omacom/omarchy/pull/11734
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6499,11 +6467,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B193 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11955: Keep the Dropbox panel polling until the account link completes — https://github.com/omacom/omarchy/pull/11955
-- #11952: Show fingerprint reader status in authentication dialogs — https://github.com/omacom/omarchy/pull/11952
-- #11951: Honor Hyprland rounding power across shell surfaces — https://github.com/omacom/omarchy/pull/11951
-- #11946: Fix calendar hero overflowing on narrow panels (MacBook M1 Pro) — https://github.com/omacom/omarchy/pull/11946
-- #11944: Add Godot to Install > Development — https://github.com/omacom/omarchy/pull/11944
+- #11732: Let the screensaver pin one ttfx effect via shell.json — https://github.com/omacom/omarchy/pull/11732
+- #11730: Rank an app above the menu actions that manage it — https://github.com/omacom/omarchy/pull/11730
+- #11724: Always focus the sending app when a notification toast is clicked — https://github.com/omacom/omarchy/pull/11724
+- #11715: Fix clipboard deadlock by removing aggressive Wayland image watcher — https://github.com/omacom/omarchy/pull/11715
+- #11708: Fix the speaker tuning service documentation link — https://github.com/omacom/omarchy/pull/11708
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6519,226 +6487,6 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 
 ```
 You are reviewing Omarchy pre-release batch B194 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11937: Restart Bluetooth agent when BlueZ is replaced — https://github.com/omacom/omarchy/pull/11937
-- #11935: feat(hypr): opt-in per-monitor workspace keybinds — https://github.com/omacom/omarchy/pull/11935
-- #11933: Install Bitwarden desktop even when CLI conflicts with nodejs — https://github.com/omacom/omarchy/pull/11933
-- #12870: Install Bitwarden desktop without the conflicting CLI bundle — https://github.com/omacom/omarchy/pull/12870
-- #11925: fix(shell): keep __sourceDir on third-party plugin manifests — https://github.com/omacom/omarchy/pull/11925
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B195
-
-```
-You are reviewing Omarchy pre-release batch B195 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11930: Switch providers on and off from the agents panel — https://github.com/omacom/omarchy/pull/11930
-- #11918: Back off fingerprint retries that fail immediately — https://github.com/omacom/omarchy/pull/11918
-- #11904: Add omarchy-diagnose-suspend-wake — https://github.com/omacom/omarchy/pull/11904
-- #11892: Mark the pace on agent limit meters — https://github.com/omacom/omarchy/pull/11892
-- #11893: fix(screenrecording): escalate webcam cleanup to SIGKILL and clear on stop-recording — https://github.com/omacom/omarchy/pull/11893
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B196
-
-```
-You are reviewing Omarchy pre-release batch B196 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11888: fix(shell): propagate immediate barConfig upon plugin settings update — https://github.com/omacom/omarchy/pull/11888
-- #11896: feat(agents): support custom provider brand-marks via record paths and user assets — https://github.com/omacom/omarchy/pull/11896
-- #11887: Preserve bar space while the shell restarts — https://github.com/omacom/omarchy/pull/11887
-- #11882: Fix stale menu-image thumbnails after in-place overwrite (#11806) — https://github.com/omacom/omarchy/pull/11882
-- #11877: Keep the web app remover open so several can go in one visit — https://github.com/omacom/omarchy/pull/11877
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B197
-
-```
-You are reviewing Omarchy pre-release batch B197 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11872: Print a plugin's next-step note after enable — https://github.com/omacom/omarchy/pull/11872
-- #11863: Skip dwindle togglesplit on scrolling workspaces — https://github.com/omacom/omarchy/pull/11863
-- #11860: feat(capture-text): open clipboard manager when clicking the OCR notification — https://github.com/omacom/omarchy/pull/11860
-- #11855: feat(monitor-panel): per-display scale in the monitor panel, targeted at the hosting screen — https://github.com/omacom/omarchy/pull/11855
-- #11853: Cover omarchy debug dispatch in CLI tests — https://github.com/omacom/omarchy/pull/11853
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B198
-
-```
-You are reviewing Omarchy pre-release batch B198 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11854: feat(monitor-scaling): per-monitor scale targeting with layout-safe position recompute — https://github.com/omacom/omarchy/pull/11854
-- #11851: Dispatch Lua function keybindings from the menu — https://github.com/omacom/omarchy/pull/11851
-- #11848: Add transcript download extension (Alt+Shift+S) to Chromium-based browsers — https://github.com/omacom/omarchy/pull/11848
-- #11847: Don't fail the locate test on non-UTF-8 files under bin/ — https://github.com/omacom/omarchy/pull/11847
-- #11842: Give a clear diagnosis when libfprint has no driver for the detected fingerprint reader — https://github.com/omacom/omarchy/pull/11842
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B199
-
-```
-You are reviewing Omarchy pre-release batch B199 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11838: Fix calendar and weather popup text colours — https://github.com/omacom/omarchy/pull/11838
-- #11837: audio: ensure volume and mute changes apply to bluetooth sinks — https://github.com/omacom/omarchy/pull/11837
-- #11835: fix: toggle every touchscreen digitizer — https://github.com/omacom/omarchy/pull/11835
-- #11836: Skip screen digitizers when detecting the touchpad — https://github.com/omacom/omarchy/pull/11836
-- #11826: Decouple AUR helper from yay, support paru as default — https://github.com/omacom/omarchy/pull/11826
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B200
-
-```
-You are reviewing Omarchy pre-release batch B200 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11792: Add battery charge-limit presets to the power panel — https://github.com/omacom/omarchy/pull/11792
-- #11803: Clarify omarchy-toggle-bar's on/off help text — https://github.com/omacom/omarchy/pull/11803
-- #11785: Serialize repeating volume adjustments — https://github.com/omacom/omarchy/pull/11785
-- #11758: Enable native Wayland rendering for Spotify — https://github.com/omacom/omarchy/pull/11758
-- #11782: Group repeated crash toasts and let them expire after a minute — https://github.com/omacom/omarchy/pull/11782
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B201
-
-```
-You are reviewing Omarchy pre-release batch B201 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11756: Dim the workspace marker on unfocused monitors — https://github.com/omacom/omarchy/pull/11756
-- #11751: Unmap KeyboardPanel even when owner.close() throws — https://github.com/omacom/omarchy/pull/11751
-- #13648: Force-close KeyboardPanel when owner close() throws — https://github.com/omacom/omarchy/pull/13648
-- #11743: Add SHIFT+PRINT for clipboard-only screenshots — https://github.com/omacom/omarchy/pull/11743
-- #11747: Warn on pull requests targeting wrong branch — https://github.com/omacom/omarchy/pull/11747
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B202
-
-```
-You are reviewing Omarchy pre-release batch B202 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11742: Coerce omarchy-show-done exit code to numeric before arithmetic test — https://github.com/omacom/omarchy/pull/11742
-- #11733: Read keybindings from the running compositor instead of replaying configuration — https://github.com/omacom/omarchy/pull/11733
-- #11736: Guard qmk_hid calls with a timeout so a hung device can't stall theme switch — https://github.com/omacom/omarchy/pull/11736
-- #11734: Request libappindicator by current name in Dropbox install — https://github.com/omacom/omarchy/pull/11734
-- #11732: Let the screensaver pin one ttfx effect via shell.json — https://github.com/omacom/omarchy/pull/11732
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B203
-
-```
-You are reviewing Omarchy pre-release batch B203 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #11730: Rank an app above the menu actions that manage it — https://github.com/omacom/omarchy/pull/11730
-- #11724: Always focus the sending app when a notification toast is clicked — https://github.com/omacom/omarchy/pull/11724
-- #11728: fix(browser): support wrapped Exec commands in browser and webapp launchers — https://github.com/omacom/omarchy/pull/11728
-- #11715: Fix clipboard deadlock by removing aggressive Wayland image watcher — https://github.com/omacom/omarchy/pull/11715
-- #11708: Fix the speaker tuning service documentation link — https://github.com/omacom/omarchy/pull/11708
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B204
-
-```
-You are reviewing Omarchy pre-release batch B204 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #11719: Add one-step Korean input setup — https://github.com/omacom/omarchy/pull/11719
@@ -6757,10 +6505,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B205
+### B195
 
 ```
-You are reviewing Omarchy pre-release batch B205 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B195 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #11691: Make the install entries work where the repo package is missing — https://github.com/omacom/omarchy/pull/11691
@@ -6779,10 +6527,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B206
+### B196
 
 ```
-You are reviewing Omarchy pre-release batch B206 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B196 (4 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #11679: Keep living scripts off their historic siblings in Chromium fallback — https://github.com/omacom/omarchy/pull/11679
@@ -6800,10 +6548,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B207
+### B197
 
 ```
-You are reviewing Omarchy pre-release batch B207 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B197 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #11669: Restore the keyboard backlight level after hibernation — https://github.com/omacom/omarchy/pull/11669
@@ -6822,10 +6570,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B208
+### B198
 
 ```
-You are reviewing Omarchy pre-release batch B208 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B198 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #11659: Indicators: load indicators provided by other plugins — https://github.com/omacom/omarchy/pull/11659
@@ -6844,10 +6592,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B209
+### B199
 
 ```
-You are reviewing Omarchy pre-release batch B209 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B199 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #11606: Stop a web app's generated .desktop id from leaking into app search — https://github.com/omacom/omarchy/pull/11606
@@ -6866,17 +6614,237 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
+### B200
+
+```
+You are reviewing Omarchy pre-release batch B200 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #11569: Skip Electron utility subprocess crashes in crash-watch — https://github.com/omacom/omarchy/pull/11569
+- #11558: Require GPU Screen Recorder 6.1.2 — https://github.com/omacom/omarchy/pull/11558
+- #11553: Enable automatic direct scanout for fullscreen games — https://github.com/omacom/omarchy/pull/11553
+- #11545: Disable tap-to-click by default — https://github.com/omacom/omarchy/pull/11545
+- #11534: Show portrait wallpaper twins on portrait screens — https://github.com/omacom/omarchy/pull/11534
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B201
+
+```
+You are reviewing Omarchy pre-release batch B201 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #11525: Skip lid suspend for working agents and on demand — https://github.com/omacom/omarchy/pull/11525
+- #11520: fix(capture): single-flight screen recording stop and skip empty (#11508) — https://github.com/omacom/omarchy/pull/11520
+- #11516: Ignore USB Touch Bar DRM when detecting external displays — https://github.com/omacom/omarchy/pull/11516
+- #11496: Size the weather bar icon like the other bar icons — https://github.com/omacom/omarchy/pull/11496
+- #11503: Add keyboard movement for floating windows — https://github.com/omacom/omarchy/pull/11503
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B202
+
+```
+You are reviewing Omarchy pre-release batch B202 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #11492: Own pending shell service loads across reloads — https://github.com/omacom/omarchy/pull/11492
+- #11493: applications: add Herdr desktop launcher entry — https://github.com/omacom/omarchy/pull/11493
+- #11488: Tell agents to reboot through omarchy system reboot — https://github.com/omacom/omarchy/pull/11488
+- #11491: fix: use the accent for menu and tooltip borders — https://github.com/omacom/omarchy/pull/11491
+- #11487: Keep terminal font size on this machine, not in the shared config — https://github.com/omacom/omarchy/pull/11487
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B203
+
+```
+You are reviewing Omarchy pre-release batch B203 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #11484: Preserve custom launchers when installing mise wrappers — https://github.com/omacom/omarchy/pull/11484
+- #11483: Extract crash cores on disk instead of tmpfs — https://github.com/omacom/omarchy/pull/11483
+- #11482: Preserve presentation command exit status — https://github.com/omacom/omarchy/pull/11482
+- #11480: Serialize package availability checks across callers — https://github.com/omacom/omarchy/pull/11480
+- #11475: Detach nightlight startup from captured command output — https://github.com/omacom/omarchy/pull/11475
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B204
+
+```
+You are reviewing Omarchy pre-release batch B204 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #11468: Show installation duration in About — https://github.com/omacom/omarchy/pull/11468
+- #11466: Tell the agent skill to use omarchy pkg and omarchy update, not pacman — https://github.com/omacom/omarchy/pull/11466
+- #11464: Add the 2017 iMac 5K to Mac support — https://github.com/omacom/omarchy/pull/11464
+- #11454: Feat/workspace default apps — https://github.com/omacom/omarchy/pull/11454
+- #11451: Support per-monitor background image variants — https://github.com/omacom/omarchy/pull/11451
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B205
+
+```
+You are reviewing Omarchy pre-release batch B205 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #11455: Skip browser help probe for non-private launches — https://github.com/omacom/omarchy/pull/11455
+- #11447: Ship fcitx5 wayland.conf so layouts are not pushed to the compositor — https://github.com/omacom/omarchy/pull/11447
+- #11441: Include windows from all visible displays in screenshot picker — https://github.com/omacom/omarchy/pull/11441
+- #11435: Stop mise from managing Python globally — https://github.com/omacom/omarchy/pull/11435
+- #11436: Allow Dropbox bar quota override via quotaGB — https://github.com/omacom/omarchy/pull/11436
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B206
+
+```
+You are reviewing Omarchy pre-release batch B206 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #11421: Fix stale city suggestions in weather location search — https://github.com/omacom/omarchy/pull/11421
+- #11415: Dismiss stale low battery warnings — https://github.com/omacom/omarchy/pull/11415
+- #11414: Fix monitor scaling widget coupling multiple monitors' scale — https://github.com/omacom/omarchy/pull/11414
+- #11408: Reload shell when local plugin QML changes — https://github.com/omacom/omarchy/pull/11408
+- #11404: fix(brightness): guard keyboard backlight state across lock and idle blanking — https://github.com/omacom/omarchy/pull/11404
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B207
+
+```
+You are reviewing Omarchy pre-release batch B207 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #11403: fix(shell): synchronize surface card border width with hyprland active border width — https://github.com/omacom/omarchy/pull/11403
+- #11393: Use a generic icon when webapp favicon lookup fails — https://github.com/omacom/omarchy/pull/11393
+- #11385: Kill the local plugin watcher with the shell via pdeathsig — https://github.com/omacom/omarchy/pull/11385
+- #11371: fix(foot): use foot-direct terminfo for 24-bit truecolor support — https://github.com/omacom/omarchy/pull/11371
+- #11378: file explorer: when focused, open new file explorers to the same dir — https://github.com/omacom/omarchy/pull/11378
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B208
+
+```
+You are reviewing Omarchy pre-release batch B208 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #11360: Fix debuginfod initialization in diagnose-crash skill — https://github.com/omacom/omarchy/pull/11360
+- #11344: Support both zed and zeditor editor binaries — https://github.com/omacom/omarchy/pull/11344
+- #11357: Add background switcher across all themes — https://github.com/omacom/omarchy/pull/11357
+- #11312: Software brightness fallback when DRM backlight is missing — https://github.com/omacom/omarchy/pull/11312
+- #11309: fix(bar): uniform ink-to-ink module gaps from painted widths — https://github.com/omacom/omarchy/pull/11309
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B209
+
+```
+You are reviewing Omarchy pre-release batch B209 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #11304: Add configurable notification font — https://github.com/omacom/omarchy/pull/11304
+- #11302: Fix network status and latency on IPv6-only links — https://github.com/omacom/omarchy/pull/11302
+- #11296: Document custom MacBook trackpad gestures — https://github.com/omacom/omarchy/pull/11296
+- #11295: Show applications in the microphone tooltip — https://github.com/omacom/omarchy/pull/11295
+- #11291: power: color battery indicator by charge state — https://github.com/omacom/omarchy/pull/11291
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
 ### B210
 
 ```
 You are reviewing Omarchy pre-release batch B210 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11569: Skip Electron utility subprocess crashes in crash-watch — https://github.com/omacom/omarchy/pull/11569
-- #11566: Pass themed icon and glyph in screenshot notification (#11506) — https://github.com/omacom/omarchy/pull/11566
-- #11558: Require GPU Screen Recorder 6.1.2 — https://github.com/omacom/omarchy/pull/11558
-- #11553: Enable automatic direct scanout for fullscreen games — https://github.com/omacom/omarchy/pull/11553
-- #11545: Disable tap-to-click by default — https://github.com/omacom/omarchy/pull/11545
+- #11290: Document accented letters on the CapsLock compose key — https://github.com/omacom/omarchy/pull/11290
+- #11288: Drop tzdata aliases from the timezone pickers — https://github.com/omacom/omarchy/pull/11288
+- #11287: Explain snapshot failures caused by regular directories — https://github.com/omacom/omarchy/pull/11287
+- #11267: Silence Claude auth nag when local API usage exists — https://github.com/omacom/omarchy/pull/11267
+- #11252: Fix Bluetooth tray icon and power switch when the radio is off — https://github.com/omacom/omarchy/pull/11252
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6894,11 +6862,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B211 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11534: Show portrait wallpaper twins on portrait screens — https://github.com/omacom/omarchy/pull/11534
-- #11525: Skip lid suspend for working agents and on demand — https://github.com/omacom/omarchy/pull/11525
-- #11520: fix(capture): single-flight screen recording stop and skip empty (#11508) — https://github.com/omacom/omarchy/pull/11520
-- #11516: Ignore USB Touch Bar DRM when detecting external displays — https://github.com/omacom/omarchy/pull/11516
-- #11496: Size the weather bar icon like the other bar icons — https://github.com/omacom/omarchy/pull/11496
+- #11244: Clamp the lock screen's password field to the screen width — https://github.com/omacom/omarchy/pull/11244
+- #11285: Give cloned menus their application library — https://github.com/omacom/omarchy/pull/11285
+- #11269: Fix DaVinci Resolve Download Manager focus lock — https://github.com/omacom/omarchy/pull/11269
+- #11284: Fix Bash learning link — https://github.com/omacom/omarchy/pull/11284
+- #11239: Close open bar panels while the screensaver is up — https://github.com/omacom/omarchy/pull/11239
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6916,11 +6884,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B212 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11503: Add keyboard movement for floating windows — https://github.com/omacom/omarchy/pull/11503
-- #11492: Own pending shell service loads across reloads — https://github.com/omacom/omarchy/pull/11492
-- #11493: applications: add Herdr desktop launcher entry — https://github.com/omacom/omarchy/pull/11493
-- #11488: Tell agents to reboot through omarchy system reboot — https://github.com/omacom/omarchy/pull/11488
-- #11491: fix: use the accent for menu and tooltip borders — https://github.com/omacom/omarchy/pull/11491
+- #11238: Fit the weather panel to narrow popups — https://github.com/omacom/omarchy/pull/11238
+- #11235: Stop speedtest workers when their parent is killed — https://github.com/omacom/omarchy/pull/11235
+- #11228: Document Dell XPS 13 silent speaker recovery — https://github.com/omacom/omarchy/pull/11228
+- #11210: Keep the arrow pointer over the terminal — https://github.com/omacom/omarchy/pull/11210
+- #11217: Exit cleanly when the update log is missing — https://github.com/omacom/omarchy/pull/11217
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6938,11 +6906,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B213 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11487: Keep terminal font size on this machine, not in the shared config — https://github.com/omacom/omarchy/pull/11487
-- #11484: Preserve custom launchers when installing mise wrappers — https://github.com/omacom/omarchy/pull/11484
-- #11483: Extract crash cores on disk instead of tmpfs — https://github.com/omacom/omarchy/pull/11483
-- #11482: Preserve presentation command exit status — https://github.com/omacom/omarchy/pull/11482
-- #11480: Serialize package availability checks across callers — https://github.com/omacom/omarchy/pull/11480
+- #11223: Refuse a theme with no palette instead of applying it — https://github.com/omacom/omarchy/pull/11223
+- #11209: Keep the arrow cursor over the bar — https://github.com/omacom/omarchy/pull/11209
+- #11205: Fix default tmux splits to preserve the current directory — https://github.com/omacom/omarchy/pull/11205
+- #11195: Prevent nightlight toggle race conditions and temperature oscillation (#11122) — https://github.com/omacom/omarchy/pull/11195
+- #11188: Support window titles for coding agent sessions and TUI launches — https://github.com/omacom/omarchy/pull/11188
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6960,11 +6928,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B214 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11475: Detach nightlight startup from captured command output — https://github.com/omacom/omarchy/pull/11475
-- #11468: Show installation duration in About — https://github.com/omacom/omarchy/pull/11468
-- #11466: Tell the agent skill to use omarchy pkg and omarchy update, not pacman — https://github.com/omacom/omarchy/pull/11466
-- #11464: Add the 2017 iMac 5K to Mac support — https://github.com/omacom/omarchy/pull/11464
-- #11454: Feat/workspace default apps — https://github.com/omacom/omarchy/pull/11454
+- #11181: fix(hypr): add missing keybinding to zoom out — https://github.com/omacom/omarchy/pull/11181
+- #11191: Add optional native Amiga screensaver — https://github.com/omacom/omarchy/pull/11191
+- #11179: Document what a theme does not control, and the hook for per-theme app settings — https://github.com/omacom/omarchy/pull/11179
+- #11178: screensaver: use Matrix digital rain as the default effect — https://github.com/omacom/omarchy/pull/11178
+- #11177: Show wind in m/s for Russian locales — https://github.com/omacom/omarchy/pull/11177
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -6982,11 +6950,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B215 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11451: Support per-monitor background image variants — https://github.com/omacom/omarchy/pull/11451
-- #11455: Skip browser help probe for non-private launches — https://github.com/omacom/omarchy/pull/11455
-- #11447: Ship fcitx5 wayland.conf so layouts are not pushed to the compositor — https://github.com/omacom/omarchy/pull/11447
-- #11441: Include windows from all visible displays in screenshot picker — https://github.com/omacom/omarchy/pull/11441
-- #11435: Stop mise from managing Python globally — https://github.com/omacom/omarchy/pull/11435
+- #11174: Show time taken to boot on every boot — https://github.com/omacom/omarchy/pull/11174
+- #11169: Match the en dash Google Meet uses in its PiP window title — https://github.com/omacom/omarchy/pull/11169
+- #11164: Recognize Ecosia as a Chromium-family browser in omarchy-launch-webapp — https://github.com/omacom/omarchy/pull/11164
+- #11162: Flash the lock screen fingerprint icon when a read is rejected — https://github.com/omacom/omarchy/pull/11162
+- #11160: Match Chinese app names by pinyin initials in menu search — https://github.com/omacom/omarchy/pull/11160
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7004,11 +6972,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B216 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11436: Allow Dropbox bar quota override via quotaGB — https://github.com/omacom/omarchy/pull/11436
-- #11421: Fix stale city suggestions in weather location search — https://github.com/omacom/omarchy/pull/11421
-- #11415: Dismiss stale low battery warnings — https://github.com/omacom/omarchy/pull/11415
-- #11414: Fix monitor scaling widget coupling multiple monitors' scale — https://github.com/omacom/omarchy/pull/11414
-- #11408: Reload shell when local plugin QML changes — https://github.com/omacom/omarchy/pull/11408
+- #11161: Warn on low battery even when line power is online — https://github.com/omacom/omarchy/pull/11161
+- #11156: Honour custom Memento Mori LIVE TO ages — https://github.com/omacom/omarchy/pull/11156
+- #11157: Treat Recordly's recording toolbar as a HUD — https://github.com/omacom/omarchy/pull/11157
+- #11155: Decode double-escaped notification entities — https://github.com/omacom/omarchy/pull/11155
+- #11154: Probe network latency over TCP before ICMP — https://github.com/omacom/omarchy/pull/11154
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7026,11 +6994,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B217 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11404: fix(brightness): guard keyboard backlight state across lock and idle blanking — https://github.com/omacom/omarchy/pull/11404
-- #11403: fix(shell): synchronize surface card border width with hyprland active border width — https://github.com/omacom/omarchy/pull/11403
-- #11393: Use a generic icon when webapp favicon lookup fails — https://github.com/omacom/omarchy/pull/11393
-- #11385: Kill the local plugin watcher with the shell via pdeathsig — https://github.com/omacom/omarchy/pull/11385
-- #11371: fix(foot): use foot-direct terminfo for 24-bit truecolor support — https://github.com/omacom/omarchy/pull/11371
+- #11151: Fall back when reboot has no session D-Bus — https://github.com/omacom/omarchy/pull/11151
+- #11146: Stop screensaver busy-loop when branding text is missing — https://github.com/omacom/omarchy/pull/11146
+- #11150: Add a doctrine command with a live terminal reader — https://github.com/omacom/omarchy/pull/11150
+- #11142: Place bar widgets on the bar when listed in plugins[] — https://github.com/omacom/omarchy/pull/11142
+- #11136: idle: clamp Timer intervals to avoid 32-bit overflow — https://github.com/omacom/omarchy/pull/11136
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7048,11 +7016,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B218 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11378: file explorer: when focused, open new file explorers to the same dir — https://github.com/omacom/omarchy/pull/11378
-- #11360: Fix debuginfod initialization in diagnose-crash skill — https://github.com/omacom/omarchy/pull/11360
-- #11344: Support both zed and zeditor editor binaries — https://github.com/omacom/omarchy/pull/11344
-- #11357: Add background switcher across all themes — https://github.com/omacom/omarchy/pull/11357
-- #11312: Software brightness fallback when DRM backlight is missing — https://github.com/omacom/omarchy/pull/11312
+- #11134: Reject disabling unknown plugin IDs in PluginRegistry — https://github.com/omacom/omarchy/pull/11134
+- #11129: Add Kilo AI — https://github.com/omacom/omarchy/pull/11129
+- #11131: Tint the Claude Code diff panel with the Omarchy theme — https://github.com/omacom/omarchy/pull/11131
+- #11125: Retry first-run when user finalization fails — https://github.com/omacom/omarchy/pull/11125
+- #11124: Add providerOrder to agents panel — https://github.com/omacom/omarchy/pull/11124
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7070,11 +7038,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B219 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11309: fix(bar): uniform ink-to-ink module gaps from painted widths — https://github.com/omacom/omarchy/pull/11309
-- #11304: Add configurable notification font — https://github.com/omacom/omarchy/pull/11304
-- #11302: Fix network status and latency on IPv6-only links — https://github.com/omacom/omarchy/pull/11302
-- #11296: Document custom MacBook trackpad gestures — https://github.com/omacom/omarchy/pull/11296
-- #11295: Show applications in the microphone tooltip — https://github.com/omacom/omarchy/pull/11295
+- #11120: Complete plugin IDs for enable and disable — https://github.com/omacom/omarchy/pull/11120
+- #11121: Show local agent API cost estimates with stable, responsive panels — https://github.com/omacom/omarchy/pull/11121
+- #11117: Make the closing plugin rescan best-effort — https://github.com/omacom/omarchy/pull/11117
+- #11116: feat(menu): add Afrikaans menu and localized menu support — https://github.com/omacom/omarchy/pull/11116
+- #11114: Add Empty Trash to the Omarchy Menu — https://github.com/omacom/omarchy/pull/11114
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7092,11 +7060,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B220 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11291: power: color battery indicator by charge state — https://github.com/omacom/omarchy/pull/11291
-- #11290: Document accented letters on the CapsLock compose key — https://github.com/omacom/omarchy/pull/11290
-- #11288: Drop tzdata aliases from the timezone pickers — https://github.com/omacom/omarchy/pull/11288
-- #11287: Explain snapshot failures caused by regular directories — https://github.com/omacom/omarchy/pull/11287
-- #11267: Silence Claude auth nag when local API usage exists — https://github.com/omacom/omarchy/pull/11267
+- #11118: Give the plugin commands an IPC budget that fits a reload — https://github.com/omacom/omarchy/pull/11118
+- #11109: Label a Claude Team seat by its subscription, not its rate-limit tier — https://github.com/omacom/omarchy/pull/11109
+- #11098: Show longer sibling routes in prefixed command help — https://github.com/omacom/omarchy/pull/11098
+- #11096: Prevent shell.json edits from replacing symlinked configs — https://github.com/omacom/omarchy/pull/11096
+- #11103: Allow derived bars to provide a passive background component — https://github.com/omacom/omarchy/pull/11103
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7114,11 +7082,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B221 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11252: Fix Bluetooth tray icon and power switch when the radio is off — https://github.com/omacom/omarchy/pull/11252
-- #11244: Clamp the lock screen's password field to the screen width — https://github.com/omacom/omarchy/pull/11244
-- #11285: Give cloned menus their application library — https://github.com/omacom/omarchy/pull/11285
-- #11269: Fix DaVinci Resolve Download Manager focus lock — https://github.com/omacom/omarchy/pull/11269
-- #11284: Fix Bash learning link — https://github.com/omacom/omarchy/pull/11284
+- #11092: Pin recording audio sample rate at 48 kHz — https://github.com/omacom/omarchy/pull/11092
+- #11089: Add out-of-band plugin rescue — https://github.com/omacom/omarchy/pull/11089
+- #11082: Let reminders use clock times and manage queued ones — https://github.com/omacom/omarchy/pull/11082
+- #11087: docs: add omarchy-nixos to the NixOS section — https://github.com/omacom/omarchy/pull/11087
+- #11079: Keep plugin shell facades alive and intact for live consumers — https://github.com/omacom/omarchy/pull/11079
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7136,11 +7104,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B222 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11239: Close open bar panels while the screensaver is up — https://github.com/omacom/omarchy/pull/11239
-- #11238: Fit the weather panel to narrow popups — https://github.com/omacom/omarchy/pull/11238
-- #11235: Stop speedtest workers when their parent is killed — https://github.com/omacom/omarchy/pull/11235
-- #11228: Document Dell XPS 13 silent speaker recovery — https://github.com/omacom/omarchy/pull/11228
-- #11210: Keep the arrow pointer over the terminal — https://github.com/omacom/omarchy/pull/11210
+- #11057: Let the plugin menu pick several plugins at once — https://github.com/omacom/omarchy/pull/11057
+- #11054: Fix orphaned speed test traffic when the overlay is dismissed mid-run — https://github.com/omacom/omarchy/pull/11054
+- #11055: Move setCenterHoverRevealSuppressed into Panel base to protect cloned plugins — https://github.com/omacom/omarchy/pull/11055
+- #11080: Fix PluginBarApi hover-reveal writes so cloned panels can close — https://github.com/omacom/omarchy/pull/11080
+- #11047: Name the cause when libfprint cannot drive the fingerprint reader — https://github.com/omacom/omarchy/pull/11047
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7158,11 +7126,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B223 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11217: Exit cleanly when the update log is missing — https://github.com/omacom/omarchy/pull/11217
-- #11223: Refuse a theme with no palette instead of applying it — https://github.com/omacom/omarchy/pull/11223
-- #11209: Keep the arrow cursor over the bar — https://github.com/omacom/omarchy/pull/11209
-- #11199: Support QVariantList in manifestHasKind for cloned menu plugins (#11190) — https://github.com/omacom/omarchy/pull/11199
-- #11205: Fix default tmux splits to preserve the current directory — https://github.com/omacom/omarchy/pull/11205
+- #11044: Allow web apps to open in the default browser — https://github.com/omacom/omarchy/pull/11044
+- #11045: Document ASUS Fn+Super Windows-key lock in troubleshooting — https://github.com/omacom/omarchy/pull/11045
+- #11042: Render media widget bar text with NativeRendering for consistency with other bar widgets — https://github.com/omacom/omarchy/pull/11042
+- #11035: Toggle keybindings with Super+K — https://github.com/omacom/omarchy/pull/11035
+- #11034: Clamp notification cards to the width their container has — https://github.com/omacom/omarchy/pull/11034
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7180,11 +7148,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B224 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11195: Prevent nightlight toggle race conditions and temperature oscillation (#11122) — https://github.com/omacom/omarchy/pull/11195
-- #11188: Support window titles for coding agent sessions and TUI launches — https://github.com/omacom/omarchy/pull/11188
-- #11181: fix(hypr): add missing keybinding to zoom out — https://github.com/omacom/omarchy/pull/11181
-- #11191: Add optional native Amiga screensaver — https://github.com/omacom/omarchy/pull/11191
-- #11179: Document what a theme does not control, and the hook for per-theme app settings — https://github.com/omacom/omarchy/pull/11179
+- #11026: Document that resize Super+Minus/Equal are physical AE11/AE12 — https://github.com/omacom/omarchy/pull/11026
+- #11022: Label LimitRow as used and keep collector (est.) — https://github.com/omacom/omarchy/pull/11022
+- #12955: fix: shell bar/tray/agents leftovers (#10989 #11021 #11022) — https://github.com/omacom/omarchy/pull/12955
+- #11021: Skip tray grab until the SNI menu has children — https://github.com/omacom/omarchy/pull/11021
+- #11014: Recover shell restarts when the replacement launch is rejected — https://github.com/omacom/omarchy/pull/11014
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7202,11 +7170,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B225 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11178: screensaver: use Matrix digital rain as the default effect — https://github.com/omacom/omarchy/pull/11178
-- #11177: Show wind in m/s for Russian locales — https://github.com/omacom/omarchy/pull/11177
-- #11174: Show time taken to boot on every boot — https://github.com/omacom/omarchy/pull/11174
-- #11169: Match the en dash Google Meet uses in its PiP window title — https://github.com/omacom/omarchy/pull/11169
-- #11164: Recognize Ecosia as a Chromium-family browser in omarchy-launch-webapp — https://github.com/omacom/omarchy/pull/11164
+- #11015: Fix the bar startup stall and the shell restart race — https://github.com/omacom/omarchy/pull/11015
+- #11012: Add default shortcut to delete to beginning of line — https://github.com/omacom/omarchy/pull/11012
+- #11009: Keep reminder notifications visible until dismissed — https://github.com/omacom/omarchy/pull/11009
+- #11008: Toggle the layout of an open scratchpad, not the workspace under it — https://github.com/omacom/omarchy/pull/11008
+- #10998: Remember the text size per display — https://github.com/omacom/omarchy/pull/10998
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7224,11 +7192,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B226 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11162: Flash the lock screen fingerprint icon when a read is rejected — https://github.com/omacom/omarchy/pull/11162
-- #11160: Match Chinese app names by pinyin initials in menu search — https://github.com/omacom/omarchy/pull/11160
-- #11161: Warn on low battery even when line power is online — https://github.com/omacom/omarchy/pull/11161
-- #11156: Honour custom Memento Mori LIVE TO ages — https://github.com/omacom/omarchy/pull/11156
-- #11157: Treat Recordly's recording toolbar as a HUD — https://github.com/omacom/omarchy/pull/11157
+- #11000: Recognize an existing Hermes Desktop install in the menu and launcher — https://github.com/omacom/omarchy/pull/11000
+- #10991: Expose the theme switcher's live selection — https://github.com/omacom/omarchy/pull/10991
+- #10984: Pin gcr-prompter so Unlock Keyring stays on the current workspace — https://github.com/omacom/omarchy/pull/10984
+- #10989: fix: keep 1.25x tooltip and scale-pill borders from dropping edges — https://github.com/omacom/omarchy/pull/10989
+- #10993: Show an OSD when the firmware changes the ACPI platform profile — https://github.com/omacom/omarchy/pull/10993
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7246,11 +7214,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B227 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11155: Decode double-escaped notification entities — https://github.com/omacom/omarchy/pull/11155
-- #11154: Probe network latency over TCP before ICMP — https://github.com/omacom/omarchy/pull/11154
-- #11151: Fall back when reboot has no session D-Bus — https://github.com/omacom/omarchy/pull/11151
-- #11146: Stop screensaver busy-loop when branding text is missing — https://github.com/omacom/omarchy/pull/11146
-- #11150: Add a doctrine command with a live terminal reader — https://github.com/omacom/omarchy/pull/11150
+- #10980: Enable mpris-proxy so when i take earbuds off the media pauses and vice versa (only to earbuds with this feature) — https://github.com/omacom/omarchy/pull/10980
+- #10958: Fix bar reordering for duplicate widgets — https://github.com/omacom/omarchy/pull/10958
+- #10951: Replace battery power-profile polling with Quickshell's native service — https://github.com/omacom/omarchy/pull/10951
+- #10942: Document pre-2012 Intel Mac support — https://github.com/omacom/omarchy/pull/10942
+- #10931: Preserve bar widgets when the layout changes — https://github.com/omacom/omarchy/pull/10931
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7268,11 +7236,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B228 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11142: Place bar widgets on the bar when listed in plugins[] — https://github.com/omacom/omarchy/pull/11142
-- #11136: idle: clamp Timer intervals to avoid 32-bit overflow — https://github.com/omacom/omarchy/pull/11136
-- #11134: Reject disabling unknown plugin IDs in PluginRegistry — https://github.com/omacom/omarchy/pull/11134
-- #11129: Add Kilo AI — https://github.com/omacom/omarchy/pull/11129
-- #11131: Tint the Claude Code diff panel with the Omarchy theme — https://github.com/omacom/omarchy/pull/11131
+- #10919: Let plugins contribute actions to the clipboard overlay — https://github.com/omacom/omarchy/pull/10919
+- #10917: Follow the active theme in Hunk — https://github.com/omacom/omarchy/pull/10917
+- #10915: Shell/UI: Expose PanelSlider corner radii as properties — https://github.com/omacom/omarchy/pull/10915
+- #10905: Validate GNOME icon themes before applying — https://github.com/omacom/omarchy/pull/10905
+- #10869: Prevent lock-screen wake loop during idle transition — https://github.com/omacom/omarchy/pull/10869
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7290,11 +7258,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B229 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11125: Retry first-run when user finalization fails — https://github.com/omacom/omarchy/pull/11125
-- #11124: Add providerOrder to agents panel — https://github.com/omacom/omarchy/pull/11124
-- #11120: Complete plugin IDs for enable and disable — https://github.com/omacom/omarchy/pull/11120
-- #11121: Show local agent API cost estimates with stable, responsive panels — https://github.com/omacom/omarchy/pull/11121
-- #11117: Make the closing plugin rescan best-effort — https://github.com/omacom/omarchy/pull/11117
+- #10872: Limit terminal cwd inheritance to terminal windows — https://github.com/omacom/omarchy/pull/10872
+- #10873: Disable idle handling when locking is disabled — https://github.com/omacom/omarchy/pull/10873
+- #10866: Clarify theme-scoped and global settings — https://github.com/omacom/omarchy/pull/10866
+- #10847: fix: clamp omarchy commands table to terminal width — https://github.com/omacom/omarchy/pull/10847
+- #10865: Consolidate post-update reboot prompts — https://github.com/omacom/omarchy/pull/10865
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7312,11 +7280,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B230 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11116: feat(menu): add Afrikaans menu and localized menu support — https://github.com/omacom/omarchy/pull/11116
-- #11114: Add Empty Trash to the Omarchy Menu — https://github.com/omacom/omarchy/pull/11114
-- #11118: Give the plugin commands an IPC budget that fits a reload — https://github.com/omacom/omarchy/pull/11118
-- #11109: Label a Claude Team seat by its subscription, not its rate-limit tier — https://github.com/omacom/omarchy/pull/11109
-- #11098: Show longer sibling routes in prefixed command help — https://github.com/omacom/omarchy/pull/11098
+- #10864: Restore Ghostty's default scroll speed for discrete mouse wheels — https://github.com/omacom/omarchy/pull/10864
+- #10844: Close Bluetooth panel after connecting — https://github.com/omacom/omarchy/pull/10844
+- #10845: Show API-equivalent agent usage cost — https://github.com/omacom/omarchy/pull/10845
+- #10841: fix(terminals): wezterm app_id — https://github.com/omacom/omarchy/pull/10841
+- #10831: Handle calendar files and webcal links with HEY by default — https://github.com/omacom/omarchy/pull/10831
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7334,11 +7302,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B231 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11096: Prevent shell.json edits from replacing symlinked configs — https://github.com/omacom/omarchy/pull/11096
-- #11103: Allow derived bars to provide a passive background component — https://github.com/omacom/omarchy/pull/11103
-- #11092: Pin recording audio sample rate at 48 kHz — https://github.com/omacom/omarchy/pull/11092
-- #11089: Add out-of-band plugin rescue — https://github.com/omacom/omarchy/pull/11089
-- #11082: Let reminders use clock times and manage queued ones — https://github.com/omacom/omarchy/pull/11082
+- #10838: Add Mistral Vibe as a supported coding agent — https://github.com/omacom/omarchy/pull/10838
+- #10823: Install Kujo by default — https://github.com/omacom/omarchy/pull/10823
+- #10828: Add Terraform as an installable development environment — https://github.com/omacom/omarchy/pull/10828
+- #10817: Open Teams meeting links in the Teams app — https://github.com/omacom/omarchy/pull/10817
+- #10805: Add a Wi-Fi launcher for the network panel — https://github.com/omacom/omarchy/pull/10805
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7353,13 +7321,14 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B232
 
 ```
-You are reviewing Omarchy pre-release batch B232 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B232 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11087: docs: add omarchy-nixos to the NixOS section — https://github.com/omacom/omarchy/pull/11087
-- #11079: Keep plugin shell facades alive and intact for live consumers — https://github.com/omacom/omarchy/pull/11079
-- #11057: Let the plugin menu pick several plugins at once — https://github.com/omacom/omarchy/pull/11057
-- #11054: Fix orphaned speed test traffic when the overlay is dismissed mid-run — https://github.com/omacom/omarchy/pull/11054
+- #10811: Look up the font family instead of dumping fc-list — https://github.com/omacom/omarchy/pull/10811
+- #10799: Warn when Caps Lock is on at the Plymouth password prompt — https://github.com/omacom/omarchy/pull/10799
+- #10783: docs: add 2020 iMac models to the T2 Mac list — https://github.com/omacom/omarchy/pull/10783
+- #10789: Keep the bar center pinned when centerAnchor's widget leaves the layout — https://github.com/omacom/omarchy/pull/10789
+- #13545: Carry the bar's center anchor when a widget is swapped for its clone — https://github.com/omacom/omarchy/pull/13545
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7377,11 +7346,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B233 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11055: Move setCenterHoverRevealSuppressed into Panel base to protect cloned plugins — https://github.com/omacom/omarchy/pull/11055
-- #11080: Fix PluginBarApi hover-reveal writes so cloned panels can close — https://github.com/omacom/omarchy/pull/11080
-- #11047: Name the cause when libfprint cannot drive the fingerprint reader — https://github.com/omacom/omarchy/pull/11047
-- #11044: Allow web apps to open in the default browser — https://github.com/omacom/omarchy/pull/11044
-- #11045: Document ASUS Fn+Super Windows-key lock in troubleshooting — https://github.com/omacom/omarchy/pull/11045
+- #10776: feat: add Simplified Chinese UI localization — https://github.com/omacom/omarchy/pull/10776
+- #10781: fix: keep network speedtest workers alive on flaky endpoints — https://github.com/omacom/omarchy/pull/10781
+- #10764: Add Slack web app with protocol link handling — https://github.com/omacom/omarchy/pull/10764
+- #10763: Open WhatsApp protocol links in the web app — https://github.com/omacom/omarchy/pull/10763
+- #10756: Add Ubuntu Cloud Agent environment for CLI and shell tests — https://github.com/omacom/omarchy/pull/10756
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7396,13 +7365,14 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B234
 
 ```
-You are reviewing Omarchy pre-release batch B234 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B234 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11042: Render media widget bar text with NativeRendering for consistency with other bar widgets — https://github.com/omacom/omarchy/pull/11042
-- #11035: Toggle keybindings with Super+K — https://github.com/omacom/omarchy/pull/11035
-- #11034: Clamp notification cards to the width their container has — https://github.com/omacom/omarchy/pull/11034
-- #11026: Document that resize Super+Minus/Equal are physical AE11/AE12 — https://github.com/omacom/omarchy/pull/11026
+- #10751: feat: theme the screensaver with 4-3-4-3-5 field bands — https://github.com/omacom/omarchy/pull/10751
+- #10749: Keep the Bluetooth bar icon visible when there's no adapter — https://github.com/omacom/omarchy/pull/10749
+- #10743: Fix Super+V in Codex's integrated terminal — https://github.com/omacom/omarchy/pull/10743
+- #10742: Warn about orphaned legacy Hyprland config — https://github.com/omacom/omarchy/pull/10742
+- #10731: Heal broken background symlink during theme refresh — https://github.com/omacom/omarchy/pull/10731
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7420,11 +7390,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B235 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11022: Label LimitRow as used and keep collector (est.) — https://github.com/omacom/omarchy/pull/11022
-- #12955: fix: shell bar/tray/agents leftovers (#10989 #11021 #11022) — https://github.com/omacom/omarchy/pull/12955
-- #11021: Skip tray grab until the SNI menu has children — https://github.com/omacom/omarchy/pull/11021
-- #11014: Recover shell restarts when the replacement launch is rejected — https://github.com/omacom/omarchy/pull/11014
-- #11015: Fix the bar startup stall and the shell restart race — https://github.com/omacom/omarchy/pull/11015
+- #10728: Open the default agent's web chat with SUPER + SHIFT + A — https://github.com/omacom/omarchy/pull/10728
+- #10724: feat(weather): show sunrise and sunset times in the panel — https://github.com/omacom/omarchy/pull/10724
+- #10721: Report theme hooks that fail instead of reporting a clean run — https://github.com/omacom/omarchy/pull/10721
+- #10716: Keep drive selector arguments on separate rows — https://github.com/omacom/omarchy/pull/10716
+- #10715: Stop package removal when the installed-package query fails — https://github.com/omacom/omarchy/pull/10715
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7442,11 +7412,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B236 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11012: Add default shortcut to delete to beginning of line — https://github.com/omacom/omarchy/pull/11012
-- #11009: Keep reminder notifications visible until dismissed — https://github.com/omacom/omarchy/pull/11009
-- #10998: Remember the text size per display — https://github.com/omacom/omarchy/pull/10998
-- #11000: Recognize an existing Hermes Desktop install in the menu and launcher — https://github.com/omacom/omarchy/pull/11000
-- #10991: Expose the theme switcher's live selection — https://github.com/omacom/omarchy/pull/10991
+- #10709: Keep supervising unexpected clean shell exits — https://github.com/omacom/omarchy/pull/10709
+- #10708: Document recovery from broken session environment files — https://github.com/omacom/omarchy/pull/10708
+- #10705: Coalesce plugin reloads and exclude .git from inotify — https://github.com/omacom/omarchy/pull/10705
+- #10697: Clamp degenerate-saturation chrome seeds for Chromium — https://github.com/omacom/omarchy/pull/10697
+- #10704: Prevent Super+C/V/X send_key_state from retriggering the bind — https://github.com/omacom/omarchy/pull/10704
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7464,11 +7434,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B237 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10984: Pin gcr-prompter so Unlock Keyring stays on the current workspace — https://github.com/omacom/omarchy/pull/10984
-- #10989: fix: keep 1.25x tooltip and scale-pill borders from dropping edges — https://github.com/omacom/omarchy/pull/10989
-- #10993: Show an OSD when the firmware changes the ACPI platform profile — https://github.com/omacom/omarchy/pull/10993
-- #10980: Enable mpris-proxy so when i take earbuds off the media pauses and vice versa (only to earbuds with this feature) — https://github.com/omacom/omarchy/pull/10980
-- #10958: Fix bar reordering for duplicate widgets — https://github.com/omacom/omarchy/pull/10958
+- #10693: Ignore missing group window indexes — https://github.com/omacom/omarchy/pull/10693
+- #10686: Reuse the sleep-lock failure notification — https://github.com/omacom/omarchy/pull/10686
+- #10679: Let reminders elapse during suspend — https://github.com/omacom/omarchy/pull/10679
+- #10680: Stop the crash watcher from reporting its own probe — https://github.com/omacom/omarchy/pull/10680
+- #10675: Recover gracefully when default agent setup or launch fails — https://github.com/omacom/omarchy/pull/10675
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7486,11 +7456,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B238 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10951: Replace battery power-profile polling with Quickshell's native service — https://github.com/omacom/omarchy/pull/10951
-- #10942: Document pre-2012 Intel Mac support — https://github.com/omacom/omarchy/pull/10942
-- #10931: Preserve bar widgets when the layout changes — https://github.com/omacom/omarchy/pull/10931
-- #10919: Let plugins contribute actions to the clipboard overlay — https://github.com/omacom/omarchy/pull/10919
-- #10917: Follow the active theme in Hunk — https://github.com/omacom/omarchy/pull/10917
+- #10667: Bind Ctrl+Shift+N to a new Alacritty window — https://github.com/omacom/omarchy/pull/10667
+- #10668: Reuse one Alacritty process for new windows — https://github.com/omacom/omarchy/pull/10668
+- #10664: Remember the internal monitor's position across clamshell recoveryFix clamshell remember internal position — https://github.com/omacom/omarchy/pull/10664
+- #10660: Background wipe animates on only one output — https://github.com/omacom/omarchy/pull/10660
+- #10657: Add configurable tray menu max height — https://github.com/omacom/omarchy/pull/10657
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7508,11 +7478,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B239 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10915: Shell/UI: Expose PanelSlider corner radii as properties — https://github.com/omacom/omarchy/pull/10915
-- #10905: Validate GNOME icon themes before applying — https://github.com/omacom/omarchy/pull/10905
-- #10869: Prevent lock-screen wake loop during idle transition — https://github.com/omacom/omarchy/pull/10869
-- #10872: Limit terminal cwd inheritance to terminal windows — https://github.com/omacom/omarchy/pull/10872
-- #10873: Disable idle handling when locking is disabled — https://github.com/omacom/omarchy/pull/10873
+- #10654: Add youtube tui (xytz) — https://github.com/omacom/omarchy/pull/10654
+- #10639: Let the workspaces widget show only its own monitor's workspaces — https://github.com/omacom/omarchy/pull/10639
+- #10634: Coalesce concurrent shell restarts — https://github.com/omacom/omarchy/pull/10634
+- #10633: Mark retained Claude limits as last-known after a failed probe — https://github.com/omacom/omarchy/pull/10633
+- #10631: Compute menu row height once per rebuild, not per append — https://github.com/omacom/omarchy/pull/10631
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7530,11 +7500,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B240 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10866: Clarify theme-scoped and global settings — https://github.com/omacom/omarchy/pull/10866
-- #10847: fix: clamp omarchy commands table to terminal width — https://github.com/omacom/omarchy/pull/10847
-- #10865: Consolidate post-update reboot prompts — https://github.com/omacom/omarchy/pull/10865
-- #10864: Restore Ghostty's default scroll speed for discrete mouse wheels — https://github.com/omacom/omarchy/pull/10864
-- #10844: Close Bluetooth panel after connecting — https://github.com/omacom/omarchy/pull/10844
+- #10632: Size ConfirmDialog buttons to their labels — https://github.com/omacom/omarchy/pull/10632
+- #10630: Fix stale Wi-Fi connection state in network bar — https://github.com/omacom/omarchy/pull/10630
+- #10629: Stop force-tiling chromium windows so tab tear-out can move — https://github.com/omacom/omarchy/pull/10629
+- #10628: Gate active-window title to the focused monitor — https://github.com/omacom/omarchy/pull/10628
+- #10627: Add SuperTux 2 to the gaming installers — https://github.com/omacom/omarchy/pull/10627
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7552,248 +7522,7 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B241 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10845: Show API-equivalent agent usage cost — https://github.com/omacom/omarchy/pull/10845
-- #10841: fix(terminals): wezterm app_id — https://github.com/omacom/omarchy/pull/10841
-- #10831: Handle calendar files and webcal links with HEY by default — https://github.com/omacom/omarchy/pull/10831
-- #10838: Add Mistral Vibe as a supported coding agent — https://github.com/omacom/omarchy/pull/10838
-- #10823: Install Kujo by default — https://github.com/omacom/omarchy/pull/10823
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B242
-
-```
-You are reviewing Omarchy pre-release batch B242 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10828: Add Terraform as an installable development environment — https://github.com/omacom/omarchy/pull/10828
-- #10817: Open Teams meeting links in the Teams app — https://github.com/omacom/omarchy/pull/10817
-- #10805: Add a Wi-Fi launcher for the network panel — https://github.com/omacom/omarchy/pull/10805
-- #10811: Look up the font family instead of dumping fc-list — https://github.com/omacom/omarchy/pull/10811
-- #10799: Warn when Caps Lock is on at the Plymouth password prompt — https://github.com/omacom/omarchy/pull/10799
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B243
-
-```
-You are reviewing Omarchy pre-release batch B243 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10783: docs: add 2020 iMac models to the T2 Mac list — https://github.com/omacom/omarchy/pull/10783
-- #10789: Keep the bar center pinned when centerAnchor's widget leaves the layout — https://github.com/omacom/omarchy/pull/10789
-- #13545: Carry the bar's center anchor when a widget is swapped for its clone — https://github.com/omacom/omarchy/pull/13545
-- #10776: feat: add Simplified Chinese UI localization — https://github.com/omacom/omarchy/pull/10776
-- #10781: fix: keep network speedtest workers alive on flaky endpoints — https://github.com/omacom/omarchy/pull/10781
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B244
-
-```
-You are reviewing Omarchy pre-release batch B244 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10764: Add Slack web app with protocol link handling — https://github.com/omacom/omarchy/pull/10764
-- #10763: Open WhatsApp protocol links in the web app — https://github.com/omacom/omarchy/pull/10763
-- #10756: Add Ubuntu Cloud Agent environment for CLI and shell tests — https://github.com/omacom/omarchy/pull/10756
-- #10751: feat: theme the screensaver with 4-3-4-3-5 field bands — https://github.com/omacom/omarchy/pull/10751
-- #10749: Keep the Bluetooth bar icon visible when there's no adapter — https://github.com/omacom/omarchy/pull/10749
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B245
-
-```
-You are reviewing Omarchy pre-release batch B245 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10743: Fix Super+V in Codex's integrated terminal — https://github.com/omacom/omarchy/pull/10743
-- #10742: Warn about orphaned legacy Hyprland config — https://github.com/omacom/omarchy/pull/10742
-- #10731: Heal broken background symlink during theme refresh — https://github.com/omacom/omarchy/pull/10731
-- #10728: Open the default agent's web chat with SUPER + SHIFT + A — https://github.com/omacom/omarchy/pull/10728
-- #10724: feat(weather): show sunrise and sunset times in the panel — https://github.com/omacom/omarchy/pull/10724
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B246
-
-```
-You are reviewing Omarchy pre-release batch B246 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10721: Report theme hooks that fail instead of reporting a clean run — https://github.com/omacom/omarchy/pull/10721
-- #10716: Keep drive selector arguments on separate rows — https://github.com/omacom/omarchy/pull/10716
-- #10715: Stop package removal when the installed-package query fails — https://github.com/omacom/omarchy/pull/10715
-- #10709: Keep supervising unexpected clean shell exits — https://github.com/omacom/omarchy/pull/10709
-- #10708: Document recovery from broken session environment files — https://github.com/omacom/omarchy/pull/10708
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B247
-
-```
-You are reviewing Omarchy pre-release batch B247 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10705: Coalesce plugin reloads and exclude .git from inotify — https://github.com/omacom/omarchy/pull/10705
-- #10697: Clamp degenerate-saturation chrome seeds for Chromium — https://github.com/omacom/omarchy/pull/10697
-- #10704: Prevent Super+C/V/X send_key_state from retriggering the bind — https://github.com/omacom/omarchy/pull/10704
-- #10693: Ignore missing group window indexes — https://github.com/omacom/omarchy/pull/10693
-- #10686: Reuse the sleep-lock failure notification — https://github.com/omacom/omarchy/pull/10686
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B248
-
-```
-You are reviewing Omarchy pre-release batch B248 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10679: Let reminders elapse during suspend — https://github.com/omacom/omarchy/pull/10679
-- #10680: Stop the crash watcher from reporting its own probe — https://github.com/omacom/omarchy/pull/10680
-- #10675: Recover gracefully when default agent setup or launch fails — https://github.com/omacom/omarchy/pull/10675
-- #10667: Bind Ctrl+Shift+N to a new Alacritty window — https://github.com/omacom/omarchy/pull/10667
-- #10668: Reuse one Alacritty process for new windows — https://github.com/omacom/omarchy/pull/10668
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B249
-
-```
-You are reviewing Omarchy pre-release batch B249 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10664: Remember the internal monitor's position across clamshell recoveryFix clamshell remember internal position — https://github.com/omacom/omarchy/pull/10664
-- #10665: Launch Kitty Terminal with --single-instance — https://github.com/omacom/omarchy/pull/10665
-- #10660: Background wipe animates on only one output — https://github.com/omacom/omarchy/pull/10660
-- #10657: Add configurable tray menu max height — https://github.com/omacom/omarchy/pull/10657
-- #10654: Add youtube tui (xytz) — https://github.com/omacom/omarchy/pull/10654
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B250
-
-```
-You are reviewing Omarchy pre-release batch B250 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10639: Let the workspaces widget show only its own monitor's workspaces — https://github.com/omacom/omarchy/pull/10639
-- #10634: Coalesce concurrent shell restarts — https://github.com/omacom/omarchy/pull/10634
-- #10633: Mark retained Claude limits as last-known after a failed probe — https://github.com/omacom/omarchy/pull/10633
-- #10631: Compute menu row height once per rebuild, not per append — https://github.com/omacom/omarchy/pull/10631
-- #10632: Size ConfirmDialog buttons to their labels — https://github.com/omacom/omarchy/pull/10632
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B251
-
-```
-You are reviewing Omarchy pre-release batch B251 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10630: Fix stale Wi-Fi connection state in network bar — https://github.com/omacom/omarchy/pull/10630
-- #10629: Stop force-tiling chromium windows so tab tear-out can move — https://github.com/omacom/omarchy/pull/10629
-- #10628: Gate active-window title to the focused monitor — https://github.com/omacom/omarchy/pull/10628
-- #10627: Add SuperTux 2 to the gaming installers — https://github.com/omacom/omarchy/pull/10627
 - #10614: Add omarchy dev theme-screenshot: stage and shoot a theme's terminals — https://github.com/omacom/omarchy/pull/10614
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B252
-
-```
-You are reviewing Omarchy pre-release batch B252 (4 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #10606: Count streamed Claude messages by their highest-output usage line — https://github.com/omacom/omarchy/pull/10606
 - #10599: Detach Windows installer progress browser from its terminal — https://github.com/omacom/omarchy/pull/10599
 - #10587: Dismiss screensaver on bare Ctrl while it is open — https://github.com/omacom/omarchy/pull/10587
@@ -7809,10 +7538,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B253
+### B242
 
 ```
-You are reviewing Omarchy pre-release batch B253 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B242 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10586: Ignore Hyprland FALLBACK in external-monitor checks — https://github.com/omacom/omarchy/pull/10586
@@ -7831,10 +7560,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B254
+### B243
 
 ```
-You are reviewing Omarchy pre-release batch B254 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B243 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10575: Fall back to foot for Ghostty screensaver on fractional scale — https://github.com/omacom/omarchy/pull/10575
@@ -7853,10 +7582,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B255
+### B244
 
 ```
-You are reviewing Omarchy pre-release batch B255 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B244 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10567: Match the class the standalone Battle.net install produces — https://github.com/omacom/omarchy/pull/10567
@@ -7875,10 +7604,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B256
+### B245
 
 ```
-You are reviewing Omarchy pre-release batch B256 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B245 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10553: Add monitor selection for notification popups — https://github.com/omacom/omarchy/pull/10553
@@ -7897,17 +7626,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B257
+### B246
 
 ```
-You are reviewing Omarchy pre-release batch B257 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B246 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10548: Use uname -n instead of hostname for the machine name — https://github.com/omacom/omarchy/pull/10548
 - #10549: Use Display P3 on Dell XPS OLED internal panels — https://github.com/omacom/omarchy/pull/10549
-- #10542: Add File Manager as a configurable Defaults category — https://github.com/omacom/omarchy/pull/10542
 - #10540: Constrain weather panel location label to prevent temperature overlap — https://github.com/omacom/omarchy/pull/10540
 - #10536: Paste clipboard files with Ctrl+V instead of Shift+Insert (#10526) — https://github.com/omacom/omarchy/pull/10536
+- #10538: Start Dropbox daemon under uwsm-app from the bar panel — https://github.com/omacom/omarchy/pull/10538
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7919,17 +7648,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B258
+### B247
 
 ```
-You are reviewing Omarchy pre-release batch B258 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B247 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10538: Start Dropbox daemon under uwsm-app from the bar panel — https://github.com/omacom/omarchy/pull/10538
 - #10530: Map keypad digits in the polkit dialog when Qt ignores NumLock — https://github.com/omacom/omarchy/pull/10530
 - #12667: Accept keypad digits on the lock screen while NumLock is desynced — https://github.com/omacom/omarchy/pull/12667
 - #10531: Skip unchanged native Codex token snapshots — https://github.com/omacom/omarchy/pull/10531
 - #10529: Bind the scrolling layout's column controls — https://github.com/omacom/omarchy/pull/10529
+- #10524: Avoid reboot prompts after identical Hyprland reinstalls — https://github.com/omacom/omarchy/pull/10524
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7941,17 +7670,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B259
+### B248
 
 ```
-You are reviewing Omarchy pre-release batch B259 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B248 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10524: Avoid reboot prompts after identical Hyprland reinstalls — https://github.com/omacom/omarchy/pull/10524
 - #10520: Let the theme switcher preview a theme's other wallpapers — https://github.com/omacom/omarchy/pull/10520
 - #10513: Drop browser codec preloads from yt-dlp host — https://github.com/omacom/omarchy/pull/10513
 - #10517: Add Forest Radio theme — https://github.com/omacom/omarchy/pull/10517
 - #10511: Tailscale panel: group machines into My/Tagged/Other and add "/" search — https://github.com/omacom/omarchy/pull/10511
+- #10510: Tailscale panel: label exit nodes with their MagicDNS name — https://github.com/omacom/omarchy/pull/10510
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7963,17 +7692,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B260
+### B249
 
 ```
-You are reviewing Omarchy pre-release batch B260 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B249 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10510: Tailscale panel: label exit nodes with their MagicDNS name — https://github.com/omacom/omarchy/pull/10510
 - #10501: Keep Bluetooth device actions on the panel adapter — https://github.com/omacom/omarchy/pull/10501
 - #10499: Point the plugin manual at plugins.omarchy.org — https://github.com/omacom/omarchy/pull/10499
 - #10494: Allow Hyprland binding switches in Lua diagnostics — https://github.com/omacom/omarchy/pull/10494
 - #10490: Scope 1Password floating geometry to main window — https://github.com/omacom/omarchy/pull/10490
+- #10483: Add idle.screensaverCommand to swap the screensaver launcher — https://github.com/omacom/omarchy/pull/10483
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -7985,17 +7714,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B261
+### B250
 
 ```
-You are reviewing Omarchy pre-release batch B261 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B250 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10483: Add idle.screensaverCommand to swap the screensaver launcher — https://github.com/omacom/omarchy/pull/10483
 - #10476: Build the calendar month grid in UTC — https://github.com/omacom/omarchy/pull/10476
 - #13186: Build the calendar grid in UTC — https://github.com/omacom/omarchy/pull/13186
 - #10475: Publish Hyprland toggle flags atomically and disbelieve empty ones — https://github.com/omacom/omarchy/pull/10475
 - #10472: [BUG FIX] Pick the Ollama package by GPU hardware, not by installed binaries — https://github.com/omacom/omarchy/pull/10472
+- #10470: Fix SDDM password field sometimes not getting focus on load — https://github.com/omacom/omarchy/pull/10470
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -8007,13 +7736,12 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B262
+### B251
 
 ```
-You are reviewing Omarchy pre-release batch B262 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B251 (4 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10470: Fix SDDM password field sometimes not getting focus on load — https://github.com/omacom/omarchy/pull/10470
 - #10468: Name keycode bindings after the layout the keyboard is using — https://github.com/omacom/omarchy/pull/10468
 - #10458: Enable speakers on Late 2015 21.5-inch iMacs — https://github.com/omacom/omarchy/pull/10458
 - #10457: Treat app word prefixes as label prefixes in menu search — https://github.com/omacom/omarchy/pull/10457
@@ -8029,10 +7757,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B263
+### B252
 
 ```
-You are reviewing Omarchy pre-release batch B263 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B252 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10430: Make night light temperature configurable — https://github.com/omacom/omarchy/pull/10430
@@ -8051,10 +7779,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B264
+### B253
 
 ```
-You are reviewing Omarchy pre-release batch B264 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B253 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10408: Stop the screensaver interrupting video playback — https://github.com/omacom/omarchy/pull/10408
@@ -8073,10 +7801,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B265
+### B254
 
 ```
-You are reviewing Omarchy pre-release batch B265 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B254 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10398: Add pre-update hook point to the update flow — https://github.com/omacom/omarchy/pull/10398
@@ -8095,10 +7823,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B266
+### B255
 
 ```
-You are reviewing Omarchy pre-release batch B266 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B255 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10383: Open tray menus on left-click when a menu is exposed — https://github.com/omacom/omarchy/pull/10383
@@ -8117,10 +7845,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B267
+### B256
 
 ```
-You are reviewing Omarchy pre-release batch B267 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B256 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10362: Resolve pkg-test paths from active dev link — https://github.com/omacom/omarchy/pull/10362
@@ -8139,10 +7867,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B268
+### B257
 
 ```
-You are reviewing Omarchy pre-release batch B268 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B257 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10345: Add dust drift to the Plymouth shutdown logo — https://github.com/omacom/omarchy/pull/10345
@@ -8161,10 +7889,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B269
+### B258
 
 ```
-You are reviewing Omarchy pre-release batch B269 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B258 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10326: Report git-managed plugins that are behind their origin — https://github.com/omacom/omarchy/pull/10326
@@ -8183,10 +7911,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B270
+### B259
 
 ```
-You are reviewing Omarchy pre-release batch B270 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B259 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10278: Make notification corner configurable — https://github.com/omacom/omarchy/pull/10278
@@ -8205,10 +7933,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B271
+### B260
 
 ```
-You are reviewing Omarchy pre-release batch B271 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B260 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10253: Bound network speed test runtime — https://github.com/omacom/omarchy/pull/10253
@@ -8227,10 +7955,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B272
+### B261
 
 ```
-You are reviewing Omarchy pre-release batch B272 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B261 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10237: Document readiness-aware health check hooks — https://github.com/omacom/omarchy/pull/10237
@@ -8249,10 +7977,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B273
+### B262
 
 ```
-You are reviewing Omarchy pre-release batch B273 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B262 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10229: Show the workspace name in the bar pips' hover tooltip — https://github.com/omacom/omarchy/pull/10229
@@ -8271,10 +7999,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B274
+### B263
 
 ```
-You are reviewing Omarchy pre-release batch B274 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B263 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10198: Disable ghost internal display connectors — https://github.com/omacom/omarchy/pull/10198
@@ -8293,10 +8021,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B275
+### B264
 
 ```
-You are reviewing Omarchy pre-release batch B275 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B264 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10182: Tag Waterfox as a Firefox-based browser — https://github.com/omacom/omarchy/pull/10182
@@ -8315,10 +8043,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B276
+### B265
 
 ```
-You are reviewing Omarchy pre-release batch B276 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B265 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10171: Add extensible agent harnesses — https://github.com/omacom/omarchy/pull/10171
@@ -8337,10 +8065,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B277
+### B266
 
 ```
-You are reviewing Omarchy pre-release batch B277 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B266 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10162: Keep Hyprland exec-rule brackets outside uwsm-app — https://github.com/omacom/omarchy/pull/10162
@@ -8359,10 +8087,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B278
+### B267
 
 ```
-You are reviewing Omarchy pre-release batch B278 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B267 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10144: Add Ctrl+R application renaming to the menu — https://github.com/omacom/omarchy/pull/10144
@@ -8381,10 +8109,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B279
+### B268
 
 ```
-You are reviewing Omarchy pre-release batch B279 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B268 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10125: Avoid Baffin GPU hangs during screen recording — https://github.com/omacom/omarchy/pull/10125
@@ -8403,10 +8131,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B280
+### B269
 
 ```
-You are reviewing Omarchy pre-release batch B280 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B269 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10095: Add live-screen fallback for capture tools — https://github.com/omacom/omarchy/pull/10095
@@ -8425,10 +8153,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B281
+### B270
 
 ```
-You are reviewing Omarchy pre-release batch B281 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B270 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10076: Prefer kernel charge registers for battery percentage — https://github.com/omacom/omarchy/pull/10076
@@ -8447,10 +8175,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B282
+### B271
 
 ```
-You are reviewing Omarchy pre-release batch B282 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B271 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10060: Let a free agent report savings where limits would go — https://github.com/omacom/omarchy/pull/10060
@@ -8469,10 +8197,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B283
+### B272
 
 ```
-You are reviewing Omarchy pre-release batch B283 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B272 (4 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10031: Option to hide empty workspaces — https://github.com/omacom/omarchy/pull/10031
@@ -8490,10 +8218,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B284
+### B273
 
 ```
-You are reviewing Omarchy pre-release batch B284 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B273 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10007: Preserve built-in fields in partial menu overrides — https://github.com/omacom/omarchy/pull/10007
@@ -8512,10 +8240,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B285
+### B274
 
 ```
-You are reviewing Omarchy pre-release batch B285 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B274 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #10002: Add drop-zone candidates for empty bar sections — https://github.com/omacom/omarchy/pull/10002
@@ -8534,10 +8262,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B286
+### B275
 
 ```
-You are reviewing Omarchy pre-release batch B286 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B275 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9984: Render bar tooltips as StyledText for rich plugin markup — https://github.com/omacom/omarchy/pull/9984
@@ -8556,17 +8284,258 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
+### B276
+
+```
+You are reviewing Omarchy pre-release batch B276 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9969: Add omarchy font cjk commands for locale-aware CJK fallback — https://github.com/omacom/omarchy/pull/9969
+- #9967: Resolve a live Hyprland signature before restarting the shell — https://github.com/omacom/omarchy/pull/9967
+- #9968: Keep floating and pop window states consistent — https://github.com/omacom/omarchy/pull/9968
+- #9962: Theme mpv with the active Omarchy palette — https://github.com/omacom/omarchy/pull/9962
+- #9956: Refresh Claude usage after the clock moves backwards — https://github.com/omacom/omarchy/pull/9956
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B277
+
+```
+You are reviewing Omarchy pre-release batch B277 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9945: feat(agents): add copilot usage — https://github.com/omacom/omarchy/pull/9945
+- #9942: Workspaces widget: middle-click pulls a tag onto the clicked monitor — https://github.com/omacom/omarchy/pull/9942
+- #9933: Let users disable the bar transparency double-click gesture — https://github.com/omacom/omarchy/pull/9933
+- #9930: Add draggable screenshot notifications — https://github.com/omacom/omarchy/pull/9930
+- #9929: Delegate bar transparency to the active plugin — https://github.com/omacom/omarchy/pull/9929
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B278
+
+```
+You are reviewing Omarchy pre-release batch B278 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9927: Avoid focusing Quickshell plugin windows — https://github.com/omacom/omarchy/pull/9927
+- #9921: Add SUPER+A universal select all keybinding — https://github.com/omacom/omarchy/pull/9921
+- #9928: Keep notification toasts on the focused monitor — https://github.com/omacom/omarchy/pull/9928
+- #9919: Hold fingerprint checks on the lock screen until resume — https://github.com/omacom/omarchy/pull/9919
+- #9917: Speed up Super+Return terminal launch — https://github.com/omacom/omarchy/pull/9917
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B279
+
+```
+You are reviewing Omarchy pre-release batch B279 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9908: Install AppImages as real apps, like web apps and TUIs — https://github.com/omacom/omarchy/pull/9908
+- #9906: Let the session see Flatpak's exported desktop entries — https://github.com/omacom/omarchy/pull/9906
+- #9903: Show useful app details in menu search — https://github.com/omacom/omarchy/pull/9903
+- #9898: Toggle full width when Super+workspace is pressed again — https://github.com/omacom/omarchy/pull/9898
+- #9900: Say why the console is empty, and let it run something other than an agent — https://github.com/omacom/omarchy/pull/9900
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B280
+
+```
+You are reviewing Omarchy pre-release batch B280 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9893: Explain low-space update failures from snapshots — https://github.com/omacom/omarchy/pull/9893
+- #9892: Preview hex colors in the clipboard picker — https://github.com/omacom/omarchy/pull/9892
+- #9891: Stop previewing received Taildrop images — https://github.com/omacom/omarchy/pull/9891
+- #9883: Keep low-battery latch across AC online flaps — https://github.com/omacom/omarchy/pull/9883
+- #9889: Load workspace layout saves from the layouts directory — https://github.com/omacom/omarchy/pull/9889
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B281
+
+```
+You are reviewing Omarchy pre-release batch B281 (4 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9882: Tag Chromium --app web apps as chromium-based browsers — https://github.com/omacom/omarchy/pull/9882
+- #9886: Add notification center bar widget — https://github.com/omacom/omarchy/pull/9886
+- #9881: Strip WhatsApp Slim extension flags when the web app is removed — https://github.com/omacom/omarchy/pull/9881
+- #9876: Fix nonfunctional brightness sliders on some DDC monitors — https://github.com/omacom/omarchy/pull/9876
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B282
+
+```
+You are reviewing Omarchy pre-release batch B282 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9871: Add Hermes usage collector for the agents panel — https://github.com/omacom/omarchy/pull/9871
+- #13505: Add Hermes model usage to the Agents panel — https://github.com/omacom/omarchy/pull/13505
+- #9869: Add OpenClaw as an AI agent option — https://github.com/omacom/omarchy/pull/9869
+- #9867: docs: add Windows time synchronization fix to dual boot manual — https://github.com/omacom/omarchy/pull/9867
+- #9864: Add Super + Shift + J for dwindle swapsplit — https://github.com/omacom/omarchy/pull/9864
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B283
+
+```
+You are reviewing Omarchy pre-release batch B283 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9848: Show per-window occupancy squares on the workspace indicator — https://github.com/omacom/omarchy/pull/9848
+- #9838: Confirm destructive power actions in the system menu — https://github.com/omacom/omarchy/pull/9838
+- #9829: Allow configuring workspace count in the workspaces bar widget — https://github.com/omacom/omarchy/pull/9829
+- #9819: Drive the launch OSD in-process so a lost close cannot strand it — https://github.com/omacom/omarchy/pull/9819
+- #9814: Fix GTK4 black window and hardware cursor lag on NVIDIA — https://github.com/omacom/omarchy/pull/9814
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B284
+
+```
+You are reviewing Omarchy pre-release batch B284 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9809: Report the highest-band link and MLO state in network band and status — https://github.com/omacom/omarchy/pull/9809
+- #9806: Support browser flags in web app bindings — https://github.com/omacom/omarchy/pull/9806
+- #9797: Add Do ordinal token to the clock format — https://github.com/omacom/omarchy/pull/9797
+- #9790: Let a critical toast's sender name its own window — https://github.com/omacom/omarchy/pull/9790
+- #9788: Show the theme Plymouth logo as the EFI splash — https://github.com/omacom/omarchy/pull/9788
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B285
+
+```
+You are reviewing Omarchy pre-release batch B285 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9780: Switch to a workspace on the focused monitor — https://github.com/omacom/omarchy/pull/9780
+- #9768: feat(audio): prevent idle sleep during active audio playback — https://github.com/omacom/omarchy/pull/9768
+- #9764: feat(menu): add in-order fuzzy search scoring to application launcher — https://github.com/omacom/omarchy/pull/9764
+- #9763: fix(power): handle PendingDischarge state and sanitize rate metrics for battery charge limits — https://github.com/omacom/omarchy/pull/9763
+- #9761: Shell: handle the standard Back key (XF86Back) — https://github.com/omacom/omarchy/pull/9761
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B286
+
+```
+You are reviewing Omarchy pre-release batch B286 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9758: Park a single tiled window on the left or right half — https://github.com/omacom/omarchy/pull/9758
+- #9760: List hybrid plugins as enabled when they live in plugins[] — https://github.com/omacom/omarchy/pull/9760
+- #9757: Let on-screen keyboards reach bar panels — https://github.com/omacom/omarchy/pull/9757
+- #9755: Refresh monitor brightness state every second — https://github.com/omacom/omarchy/pull/9755
+- #9752: Fix removal of nested desktop entries — https://github.com/omacom/omarchy/pull/9752
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
 ### B287
 
 ```
 You are reviewing Omarchy pre-release batch B287 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9969: Add omarchy font cjk commands for locale-aware CJK fallback — https://github.com/omacom/omarchy/pull/9969
-- #9968: Keep floating and pop window states consistent — https://github.com/omacom/omarchy/pull/9968
-- #9962: Theme mpv with the active Omarchy palette — https://github.com/omacom/omarchy/pull/9962
-- #9956: Refresh Claude usage after the clock moves backwards — https://github.com/omacom/omarchy/pull/9956
-- #9945: feat(agents): add copilot usage — https://github.com/omacom/omarchy/pull/9945
+- #9747: Add a native Window Vault for undoable closes — https://github.com/omacom/omarchy/pull/9747
+- #9741: Add Omarchy spelling correction to Voxtype — https://github.com/omacom/omarchy/pull/9741
+- #9742: Float Omawrite's file dialogs — https://github.com/omacom/omarchy/pull/9742
+- #9730: Expose image picker cursor control over IPC — https://github.com/omacom/omarchy/pull/9730
+- #9733: Label the Grok coding agent as Grok Build — https://github.com/omacom/omarchy/pull/9733
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -8584,11 +8553,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B288 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9942: Workspaces widget: middle-click pulls a tag onto the clicked monitor — https://github.com/omacom/omarchy/pull/9942
-- #9933: Let users disable the bar transparency double-click gesture — https://github.com/omacom/omarchy/pull/9933
-- #9930: Add draggable screenshot notifications — https://github.com/omacom/omarchy/pull/9930
-- #9929: Delegate bar transparency to the active plugin — https://github.com/omacom/omarchy/pull/9929
-- #9927: Avoid focusing Quickshell plugin windows — https://github.com/omacom/omarchy/pull/9927
+- #9725: Feature: Allow user to create floating bar by adding support for custom margin and bar radius. — https://github.com/omacom/omarchy/pull/9725
+- #9722: Manual: name the GRUB error Secure Boot causes, and the BIOS clock pitfall — https://github.com/omacom/omarchy/pull/9722
+- #9717: Render notification action buttons — https://github.com/omacom/omarchy/pull/9717
+- #9716: Disable WebKitGTK DMA-BUF renderer on NVIDIA — https://github.com/omacom/omarchy/pull/9716
+- #9697: Report unreadable Claude transcripts once per scan — https://github.com/omacom/omarchy/pull/9697
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -8606,11 +8575,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B289 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9921: Add SUPER+A universal select all keybinding — https://github.com/omacom/omarchy/pull/9921
-- #9928: Keep notification toasts on the focused monitor — https://github.com/omacom/omarchy/pull/9928
-- #9919: Hold fingerprint checks on the lock screen until resume — https://github.com/omacom/omarchy/pull/9919
-- #9917: Speed up Super+Return terminal launch — https://github.com/omacom/omarchy/pull/9917
-- #9908: Install AppImages as real apps, like web apps and TUIs — https://github.com/omacom/omarchy/pull/9908
+- #9703: Keep removed preinstalls removed when refreshing application launchers — https://github.com/omacom/omarchy/pull/9703
+- #9694: Add Dim and Kimi Code to the agent roster and Install > AI — https://github.com/omacom/omarchy/pull/9694
+- #9693: Pick the matching Noto CJK variant for language-tagged text — https://github.com/omacom/omarchy/pull/9693
+- #9691: Add neon Omarchy background to Hackerman — https://github.com/omacom/omarchy/pull/9691
+- #9690: Add secure declarative Neovim theming — https://github.com/omacom/omarchy/pull/9690
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -8628,11 +8597,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B290 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9906: Let the session see Flatpak's exported desktop entries — https://github.com/omacom/omarchy/pull/9906
-- #9903: Show useful app details in menu search — https://github.com/omacom/omarchy/pull/9903
-- #9898: Toggle full width when Super+workspace is pressed again — https://github.com/omacom/omarchy/pull/9898
-- #9900: Say why the console is empty, and let it run something other than an agent — https://github.com/omacom/omarchy/pull/9900
-- #9893: Explain low-space update failures from snapshots — https://github.com/omacom/omarchy/pull/9893
+- #9680: Add pnpm development environment option — https://github.com/omacom/omarchy/pull/9680
+- #9667: fix: idle-inhibit Steam games matching steam_app_* — https://github.com/omacom/omarchy/pull/9667
+- #9660: Let shell.json rewrite the urgency a notification sender declared — https://github.com/omacom/omarchy/pull/9660
+- #9662: Add favorites to clipboard history — https://github.com/omacom/omarchy/pull/9662
+- #9649: Deduplicate monitor outputs with matching EDIDs — https://github.com/omacom/omarchy/pull/9649
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -8647,13 +8616,14 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B291
 
 ```
-You are reviewing Omarchy pre-release batch B291 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B291 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9892: Preview hex colors in the clipboard picker — https://github.com/omacom/omarchy/pull/9892
-- #9891: Stop previewing received Taildrop images — https://github.com/omacom/omarchy/pull/9891
-- #9883: Keep low-battery latch across AC online flaps — https://github.com/omacom/omarchy/pull/9883
-- #9889: Load workspace layout saves from the layouts directory — https://github.com/omacom/omarchy/pull/9889
+- #9638: Switch Bluetooth headsets to HFP when selecting their input — https://github.com/omacom/omarchy/pull/9638
+- #9637: Restore brightness when the laptop lid opens — https://github.com/omacom/omarchy/pull/9637
+- #9634: Add one-step Japanese input setup — https://github.com/omacom/omarchy/pull/9634
+- #9629: Hide notifications during screensaver — https://github.com/omacom/omarchy/pull/9629
+- #9621: Set StartupWMClass on Chromium web app launchers — https://github.com/omacom/omarchy/pull/9621
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -8671,11 +8641,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B292 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9885: Notify when agent limits reset — https://github.com/omacom/omarchy/pull/9885
-- #12425: Notify on agent limit resets with provider and deadline reconciliation — https://github.com/omacom/omarchy/pull/12425
-- #9882: Tag Chromium --app web apps as chromium-based browsers — https://github.com/omacom/omarchy/pull/9882
-- #9886: Add notification center bar widget — https://github.com/omacom/omarchy/pull/9886
-- #9881: Strip WhatsApp Slim extension flags when the web app is removed — https://github.com/omacom/omarchy/pull/9881
+- #9614: omarchy #9544 launch-or-focus agent titles (fork PR) — https://github.com/omacom/omarchy/pull/9614
+- #9612: omarchy #9586 sysfs battery thresholds — https://github.com/omacom/omarchy/pull/9612
+- #9590: Clear stale graphical-session before uwsm so SDDM autologin is not a blank screen — https://github.com/omacom/omarchy/pull/9590
+- #9583: Exec mise wrappers by resolved path, not by name — https://github.com/omacom/omarchy/pull/9583
+- #9578: Use Quickshell OSD for Voxtype on Omarchy — https://github.com/omacom/omarchy/pull/9578
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -8693,11 +8663,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B293 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9876: Fix nonfunctional brightness sliders on some DDC monitors — https://github.com/omacom/omarchy/pull/9876
-- #9871: Add Hermes usage collector for the agents panel — https://github.com/omacom/omarchy/pull/9871
-- #13505: Add Hermes model usage to the Agents panel — https://github.com/omacom/omarchy/pull/13505
-- #9869: Add OpenClaw as an AI agent option — https://github.com/omacom/omarchy/pull/9869
-- #9867: docs: add Windows time synchronization fix to dual boot manual — https://github.com/omacom/omarchy/pull/9867
+- #9570: Rearm idle monitor after timeout changes — https://github.com/omacom/omarchy/pull/9570
+- #9568: Defer XCompose reloads from migrations — https://github.com/omacom/omarchy/pull/9568
+- #9565: Keep fcitx5 aligned with Hyprland keyboard layouts — https://github.com/omacom/omarchy/pull/9565
+- #9563: fix: keep XDG desktop out of home — https://github.com/omacom/omarchy/pull/9563
+- #9554: Add sunset-based night light scheduling — https://github.com/omacom/omarchy/pull/9554
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -8715,11 +8685,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B294 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9864: Add Super + Shift + J for dwindle swapsplit — https://github.com/omacom/omarchy/pull/9864
-- #9848: Show per-window occupancy squares on the workspace indicator — https://github.com/omacom/omarchy/pull/9848
-- #9838: Confirm destructive power actions in the system menu — https://github.com/omacom/omarchy/pull/9838
-- #9829: Allow configuring workspace count in the workspaces bar widget — https://github.com/omacom/omarchy/pull/9829
-- #9819: Drive the launch OSD in-process so a lost close cannot strand it — https://github.com/omacom/omarchy/pull/9819
+- #9553: Fix per-app stream sliders ignoring pointer input — https://github.com/omacom/omarchy/pull/9553
+- #9551: Detect fingerprint enrollment by the enrolled entries, not the word "finger" — https://github.com/omacom/omarchy/pull/9551
+- #9550: fix(polkit) Attribute polkit prompts to coding agents — https://github.com/omacom/omarchy/pull/9550
+- #9545: Add Keychron RGB handler to the theme keyboard pipeline — https://github.com/omacom/omarchy/pull/9545
+- #9546: Count omp and pi profile sessions in the agent usage collectors — https://github.com/omacom/omarchy/pull/9546
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -8737,11 +8707,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B295 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9814: Fix GTK4 black window and hardware cursor lag on NVIDIA — https://github.com/omacom/omarchy/pull/9814
-- #9809: Report the highest-band link and MLO state in network band and status — https://github.com/omacom/omarchy/pull/9809
-- #9806: Support browser flags in web app bindings — https://github.com/omacom/omarchy/pull/9806
-- #9797: Add Do ordinal token to the clock format — https://github.com/omacom/omarchy/pull/9797
-- #9790: Let a critical toast's sender name its own window — https://github.com/omacom/omarchy/pull/9790
+- #9542: Generate themes from wallpapers with Matugen — https://github.com/omacom/omarchy/pull/9542
+- #9535: Show browser shortcuts only when their extensions are enabled — https://github.com/omacom/omarchy/pull/9535
+- #9525: Publish agent usage snapshots from headless machines — https://github.com/omacom/omarchy/pull/9525
+- #9524: Detect Broadcom ControlVault 3 fingerprint readers — https://github.com/omacom/omarchy/pull/9524
+- #9522: Load nwg-displays workspace assignments — https://github.com/omacom/omarchy/pull/9522
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -8756,252 +8726,9 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B296
 
 ```
-You are reviewing Omarchy pre-release batch B296 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B296 (4 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9788: Show the theme Plymouth logo as the EFI splash — https://github.com/omacom/omarchy/pull/9788
-- #9780: Switch to a workspace on the focused monitor — https://github.com/omacom/omarchy/pull/9780
-- #9768: feat(audio): prevent idle sleep during active audio playback — https://github.com/omacom/omarchy/pull/9768
-- #9764: feat(menu): add in-order fuzzy search scoring to application launcher — https://github.com/omacom/omarchy/pull/9764
-- #9763: fix(power): handle PendingDischarge state and sanitize rate metrics for battery charge limits — https://github.com/omacom/omarchy/pull/9763
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B297
-
-```
-You are reviewing Omarchy pre-release batch B297 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9761: Shell: handle the standard Back key (XF86Back) — https://github.com/omacom/omarchy/pull/9761
-- #9758: Park a single tiled window on the left or right half — https://github.com/omacom/omarchy/pull/9758
-- #9760: List hybrid plugins as enabled when they live in plugins[] — https://github.com/omacom/omarchy/pull/9760
-- #9757: Let on-screen keyboards reach bar panels — https://github.com/omacom/omarchy/pull/9757
-- #9755: Refresh monitor brightness state every second — https://github.com/omacom/omarchy/pull/9755
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B298
-
-```
-You are reviewing Omarchy pre-release batch B298 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9752: Fix removal of nested desktop entries — https://github.com/omacom/omarchy/pull/9752
-- #9747: Add a native Window Vault for undoable closes — https://github.com/omacom/omarchy/pull/9747
-- #9741: Add Omarchy spelling correction to Voxtype — https://github.com/omacom/omarchy/pull/9741
-- #9742: Float Omawrite's file dialogs — https://github.com/omacom/omarchy/pull/9742
-- #9730: Expose image picker cursor control over IPC — https://github.com/omacom/omarchy/pull/9730
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B299
-
-```
-You are reviewing Omarchy pre-release batch B299 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9733: Label the Grok coding agent as Grok Build — https://github.com/omacom/omarchy/pull/9733
-- #9725: Feature: Allow user to create floating bar by adding support for custom margin and bar radius. — https://github.com/omacom/omarchy/pull/9725
-- #9722: Manual: name the GRUB error Secure Boot causes, and the BIOS clock pitfall — https://github.com/omacom/omarchy/pull/9722
-- #9717: Render notification action buttons — https://github.com/omacom/omarchy/pull/9717
-- #9716: Disable WebKitGTK DMA-BUF renderer on NVIDIA — https://github.com/omacom/omarchy/pull/9716
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B300
-
-```
-You are reviewing Omarchy pre-release batch B300 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9697: Report unreadable Claude transcripts once per scan — https://github.com/omacom/omarchy/pull/9697
-- #9703: Keep removed preinstalls removed when refreshing application launchers — https://github.com/omacom/omarchy/pull/9703
-- #9694: Add Dim and Kimi Code to the agent roster and Install > AI — https://github.com/omacom/omarchy/pull/9694
-- #9693: Pick the matching Noto CJK variant for language-tagged text — https://github.com/omacom/omarchy/pull/9693
-- #9691: Add neon Omarchy background to Hackerman — https://github.com/omacom/omarchy/pull/9691
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B301
-
-```
-You are reviewing Omarchy pre-release batch B301 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9690: Add secure declarative Neovim theming — https://github.com/omacom/omarchy/pull/9690
-- #9680: Add pnpm development environment option — https://github.com/omacom/omarchy/pull/9680
-- #9667: fix: idle-inhibit Steam games matching steam_app_* — https://github.com/omacom/omarchy/pull/9667
-- #9660: Let shell.json rewrite the urgency a notification sender declared — https://github.com/omacom/omarchy/pull/9660
-- #9662: Add favorites to clipboard history — https://github.com/omacom/omarchy/pull/9662
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B302
-
-```
-You are reviewing Omarchy pre-release batch B302 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9649: Deduplicate monitor outputs with matching EDIDs — https://github.com/omacom/omarchy/pull/9649
-- #9638: Switch Bluetooth headsets to HFP when selecting their input — https://github.com/omacom/omarchy/pull/9638
-- #9637: Restore brightness when the laptop lid opens — https://github.com/omacom/omarchy/pull/9637
-- #9634: Add one-step Japanese input setup — https://github.com/omacom/omarchy/pull/9634
-- #9629: Hide notifications during screensaver — https://github.com/omacom/omarchy/pull/9629
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B303
-
-```
-You are reviewing Omarchy pre-release batch B303 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9621: Set StartupWMClass on Chromium web app launchers — https://github.com/omacom/omarchy/pull/9621
-- #9614: omarchy #9544 launch-or-focus agent titles (fork PR) — https://github.com/omacom/omarchy/pull/9614
-- #9612: omarchy #9586 sysfs battery thresholds — https://github.com/omacom/omarchy/pull/9612
-- #9590: Clear stale graphical-session before uwsm so SDDM autologin is not a blank screen — https://github.com/omacom/omarchy/pull/9590
-- #9583: Exec mise wrappers by resolved path, not by name — https://github.com/omacom/omarchy/pull/9583
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B304
-
-```
-You are reviewing Omarchy pre-release batch B304 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9578: Use Quickshell OSD for Voxtype on Omarchy — https://github.com/omacom/omarchy/pull/9578
-- #9570: Rearm idle monitor after timeout changes — https://github.com/omacom/omarchy/pull/9570
-- #9568: Defer XCompose reloads from migrations — https://github.com/omacom/omarchy/pull/9568
-- #9565: Keep fcitx5 aligned with Hyprland keyboard layouts — https://github.com/omacom/omarchy/pull/9565
-- #9563: fix: keep XDG desktop out of home — https://github.com/omacom/omarchy/pull/9563
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B305
-
-```
-You are reviewing Omarchy pre-release batch B305 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9554: Add sunset-based night light scheduling — https://github.com/omacom/omarchy/pull/9554
-- #9553: Fix per-app stream sliders ignoring pointer input — https://github.com/omacom/omarchy/pull/9553
-- #9551: Detect fingerprint enrollment by the enrolled entries, not the word "finger" — https://github.com/omacom/omarchy/pull/9551
-- #9550: fix(polkit) Attribute polkit prompts to coding agents — https://github.com/omacom/omarchy/pull/9550
-- #9545: Add Keychron RGB handler to the theme keyboard pipeline — https://github.com/omacom/omarchy/pull/9545
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B306
-
-```
-You are reviewing Omarchy pre-release batch B306 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9546: Count omp and pi profile sessions in the agent usage collectors — https://github.com/omacom/omarchy/pull/9546
-- #9542: Generate themes from wallpapers with Matugen — https://github.com/omacom/omarchy/pull/9542
-- #9535: Show browser shortcuts only when their extensions are enabled — https://github.com/omacom/omarchy/pull/9535
-- #9525: Publish agent usage snapshots from headless machines — https://github.com/omacom/omarchy/pull/9525
-- #9524: Detect Broadcom ControlVault 3 fingerprint readers — https://github.com/omacom/omarchy/pull/9524
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B307
-
-```
-You are reviewing Omarchy pre-release batch B307 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9522: Load nwg-displays workspace assignments — https://github.com/omacom/omarchy/pull/9522
 - #9514: Delete the previous word with Ctrl+W in the shell's filter fields — https://github.com/omacom/omarchy/pull/9514
 - #9509: Refresh the bar clock on wake so it does not sit stale after suspend — https://github.com/omacom/omarchy/pull/9509
 - #9508: Simplify DaVinci Resolve window rules — https://github.com/omacom/omarchy/pull/9508
@@ -9017,10 +8744,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B308
+### B297
 
 ```
-You are reviewing Omarchy pre-release batch B308 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B297 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9490: Quote omarchy-launch-or-focus-tui and -webapp arguments like install-app — https://github.com/omacom/omarchy/pull/9490
@@ -9039,10 +8766,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B309
+### B298
 
 ```
-You are reviewing Omarchy pre-release batch B309 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B298 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9483: Only point the session at NVIDIA when NVIDIA is driving the screen — https://github.com/omacom/omarchy/pull/9483
@@ -9061,10 +8788,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B310
+### B299
 
 ```
-You are reviewing Omarchy pre-release batch B310 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B299 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9448: Let users review and suppress recurring crash types — https://github.com/omacom/omarchy/pull/9448
@@ -9083,10 +8810,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B311
+### B300
 
 ```
-You are reviewing Omarchy pre-release batch B311 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B300 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9425: Keep four commands from building a path that climbs out of its directory — https://github.com/omacom/omarchy/pull/9425
@@ -9105,10 +8832,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B312
+### B301
 
 ```
-You are reviewing Omarchy pre-release batch B312 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B301 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9409: Fail clearly when trackpad reset finds no supported driver — https://github.com/omacom/omarchy/pull/9409
@@ -9127,10 +8854,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B313
+### B302
 
 ```
-You are reviewing Omarchy pre-release batch B313 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B302 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9363: Improve Obsidian theme syncing with auto-activation, hot-reloading snippets, and contrast fixes — https://github.com/omacom/omarchy/pull/9363
@@ -9149,10 +8876,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B314
+### B303
 
 ```
-You are reviewing Omarchy pre-release batch B314 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B303 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #9350: Make the default agent directory configurable — https://github.com/omacom/omarchy/pull/9350
@@ -9171,17 +8898,258 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
+### B304
+
+```
+You are reviewing Omarchy pre-release batch B304 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9327: Read omarchy-version from the pacman local db — https://github.com/omacom/omarchy/pull/9327
+- #9296: Recover screen-recording indicator after stuck probes — https://github.com/omacom/omarchy/pull/9296
+- #9290: Route sibling-package omarchy-* commands via a /usr/bin fallback (fixes #7185) — https://github.com/omacom/omarchy/pull/9290
+- #9286: Skip tmux.conf migration when the file is not writable — https://github.com/omacom/omarchy/pull/9286
+- #9281: Fit the presentation terminal to its logo instead of a fixed 875x600 — https://github.com/omacom/omarchy/pull/9281
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B305
+
+```
+You are reviewing Omarchy pre-release batch B305 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9280: Dereference relative symlinks when staging user themes — https://github.com/omacom/omarchy/pull/9280
+- #9279: Tag Vivaldi's window class case-insensitively in browser.lua — https://github.com/omacom/omarchy/pull/9279
+- #9277: Send clipboard contents to a tailnet machine with Taildrop — https://github.com/omacom/omarchy/pull/9277
+- #9273: Include pahole in the offline ISO package set — https://github.com/omacom/omarchy/pull/9273
+- #9270: Fall back to color8 for a derived theme selection color — https://github.com/omacom/omarchy/pull/9270
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B306
+
+```
+You are reviewing Omarchy pre-release batch B306 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9265: Add a tile mode to the bundled YouTube web app — https://github.com/omacom/omarchy/pull/9265
+- #9260: Let status OSD messages use available screen width — https://github.com/omacom/omarchy/pull/9260
+- #9245: Fix context menus for Wine tray items — https://github.com/omacom/omarchy/pull/9245
+- #9238: Refuse hibernation setup on Apple T2 Macs by default — https://github.com/omacom/omarchy/pull/9238
+- #9233: List offline machines in the Tailscale panel — https://github.com/omacom/omarchy/pull/9233
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B307
+
+```
+You are reviewing Omarchy pre-release batch B307 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9234: Open the Tailscale admin console from the panel mark — https://github.com/omacom/omarchy/pull/9234
+- #9223: Add Hackers 1995 theme — https://github.com/omacom/omarchy/pull/9223
+- #9218: Detect Apple bcm5974 trackpads in omarchy-hw-touchpad — https://github.com/omacom/omarchy/pull/9218
+- #9217: Start the Herdr server with the graphical session — https://github.com/omacom/omarchy/pull/9217
+- #9212: Add region screenshot indicator — https://github.com/omacom/omarchy/pull/9212
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B308
+
+```
+You are reviewing Omarchy pre-release batch B308 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9211: Wake the lock screen on resume and keep wake keys out of the password — https://github.com/omacom/omarchy/pull/9211
+- #9206: Warn clearly when no Chromium browser can launch a web app — https://github.com/omacom/omarchy/pull/9206
+- #9203: Stop restoring a stale keyboard backlight on idle-cycle cancel — https://github.com/omacom/omarchy/pull/9203
+- #9209: Restore focus after the sole monitor round-trips through FALLBACK — https://github.com/omacom/omarchy/pull/9209
+- #9192: Add Yii3 development environment — https://github.com/omacom/omarchy/pull/9192
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B309
+
+```
+You are reviewing Omarchy pre-release batch B309 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9191: Dropbox widget: scan the team root, not the member folder — https://github.com/omacom/omarchy/pull/9191
+- #9186: Reapply clamshell disable after idle wake — https://github.com/omacom/omarchy/pull/9186
+- #9175: Stop mise wrappers from re-executing themselves (breaks Claude Code detection in T3 Code) — https://github.com/omacom/omarchy/pull/9175
+- #9168: fix(font): reset explicit kitty bold/italic font variants to auto on font set — https://github.com/omacom/omarchy/pull/9168
+- #9164: Default OMARCHY_PATH in channel-current and audio-tuning; add env-robustness test (#8769) — https://github.com/omacom/omarchy/pull/9164
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B310
+
+```
+You are reviewing Omarchy pre-release batch B310 (4 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9163: Change the tagline to "Beautiful, Fun & Opinionated" — https://github.com/omacom/omarchy/pull/9163
+- #9161: Discover and normalize web app icons — https://github.com/omacom/omarchy/pull/9161
+- #9160: GPD Pocket 4: screen rotation, autorotation, and boot orientation — https://github.com/omacom/omarchy/pull/9160
+- #9159: Rank menu search results by usage — https://github.com/omacom/omarchy/pull/9159
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B311
+
+```
+You are reviewing Omarchy pre-release batch B311 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9189: Keep the backlight off while the laptop panel is disabled — https://github.com/omacom/omarchy/pull/9189
+- #12423: Keep disabled display backlights off and preserve saved brightness — https://github.com/omacom/omarchy/pull/12423
+- #9155: Clock: optional locale setting for day and month names — https://github.com/omacom/omarchy/pull/9155
+- #9152: Leave a locked session's display to the lock screen — https://github.com/omacom/omarchy/pull/9152
+- #9132: Resolve native EasyEffects output chains — https://github.com/omacom/omarchy/pull/9132
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B312
+
+```
+You are reviewing Omarchy pre-release batch B312 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9133: Resolve keycodes with the active keyboard layout — https://github.com/omacom/omarchy/pull/9133
+- #9130: Send clipboard shortcuts using physical XKB keys — https://github.com/omacom/omarchy/pull/9130
+- #9129: Ignore vendor hotkey keyboard devices — https://github.com/omacom/omarchy/pull/9129
+- #9128: Detect browser families without launching them — https://github.com/omacom/omarchy/pull/9128
+- #9126: Copy terminal selections straight to the clipboard — https://github.com/omacom/omarchy/pull/9126
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B313
+
+```
+You are reviewing Omarchy pre-release batch B313 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9127: Add a notification for hyprpicker — https://github.com/omacom/omarchy/pull/9127
+- #12424: Notify after successful color selection — https://github.com/omacom/omarchy/pull/12424
+- #9121: Resolve bar clicks only against the slot's own surface — https://github.com/omacom/omarchy/pull/9121
+- #9113: Add Super + Shift + J to toggle a wide 2/3 - 1/3 window split — https://github.com/omacom/omarchy/pull/9113
+- #9110: fix(monitor): detect stranded outputs with no active scanout in omarchy-hyprland-monitor-modeless — https://github.com/omacom/omarchy/pull/9110
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B314
+
+```
+You are reviewing Omarchy pre-release batch B314 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9103: fix(theme): establish OMARCHY_PATH in entry points for non-interactive shells — https://github.com/omacom/omarchy/pull/9103
+- #9095: Tell contributors to search open PRs before writing a fix — https://github.com/omacom/omarchy/pull/9095
+- #9094: Make workspace clicks target the bar's monitor — https://github.com/omacom/omarchy/pull/9094
+- #9093: Show the focused app's keybindings on Super + K — https://github.com/omacom/omarchy/pull/9093
+- #9063: Warn on bad AQ_DRM_DEVICES in debug — https://github.com/omacom/omarchy/pull/9063
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
 ### B315
 
 ```
 You are reviewing Omarchy pre-release batch B315 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9313: Make built-in theme backgrounds responsive — https://github.com/omacom/omarchy/pull/9313
-- #9327: Read omarchy-version from the pacman local db — https://github.com/omacom/omarchy/pull/9327
-- #9296: Recover screen-recording indicator after stuck probes — https://github.com/omacom/omarchy/pull/9296
-- #9290: Route sibling-package omarchy-* commands via a /usr/bin fallback (fixes #7185) — https://github.com/omacom/omarchy/pull/9290
-- #9286: Skip tmux.conf migration when the file is not writable — https://github.com/omacom/omarchy/pull/9286
+- #9058: Add theme startup sounds — https://github.com/omacom/omarchy/pull/9058
+- #9062: docs(mac): fix T1 chip model identifiers and remove non-Touch Bar A1708 — https://github.com/omacom/omarchy/pull/9062
+- #9055: Add package-managed hook discovery — https://github.com/omacom/omarchy/pull/9055
+- #9050: Fix bar hand cursor never appearing until the slot's first click — https://github.com/omacom/omarchy/pull/9050
+- #9049: Give TUI windows a terminal-sized touchpad scroll rule — https://github.com/omacom/omarchy/pull/9049
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9199,11 +9167,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B316 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9281: Fit the presentation terminal to its logo instead of a fixed 875x600 — https://github.com/omacom/omarchy/pull/9281
-- #9280: Dereference relative symlinks when staging user themes — https://github.com/omacom/omarchy/pull/9280
-- #9279: Tag Vivaldi's window class case-insensitively in browser.lua — https://github.com/omacom/omarchy/pull/9279
-- #9277: Send clipboard contents to a tailnet machine with Taildrop — https://github.com/omacom/omarchy/pull/9277
-- #9273: Include pahole in the offline ISO package set — https://github.com/omacom/omarchy/pull/9273
+- #9040: Hand the presentation terminal Omarchy's BROWSER default — https://github.com/omacom/omarchy/pull/9040
+- #9039: Validate pane counts before creating layouts — https://github.com/omacom/omarchy/pull/9039
+- #9038: Stop ga after a failed worktree creation — https://github.com/omacom/omarchy/pull/9038
+- #9035: Add Messenger as a default web app — https://github.com/omacom/omarchy/pull/9035
+- #9025: hypr: add idle_inhibit rule for VLC media player — https://github.com/omacom/omarchy/pull/9025
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9221,11 +9189,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B317 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9270: Fall back to color8 for a derived theme selection color — https://github.com/omacom/omarchy/pull/9270
-- #9265: Add a tile mode to the bundled YouTube web app — https://github.com/omacom/omarchy/pull/9265
-- #9260: Let status OSD messages use available screen width — https://github.com/omacom/omarchy/pull/9260
-- #9245: Fix context menus for Wine tray items — https://github.com/omacom/omarchy/pull/9245
-- #9238: Refuse hibernation setup on Apple T2 Macs by default — https://github.com/omacom/omarchy/pull/9238
+- #9031: Stop menu commands waiting forever for an answer that never comes — https://github.com/omacom/omarchy/pull/9031
+- #9022: Complete bar and plugin ids on the omarchy CLI — https://github.com/omacom/omarchy/pull/9022
+- #9015: Make scrolling columns resizable at workspace edge — https://github.com/omacom/omarchy/pull/9015
+- #9000: Fix clipped left border on Display scale 1x pill — https://github.com/omacom/omarchy/pull/9000
+- #8992: Skip reboot prompts in unattended updates — https://github.com/omacom/omarchy/pull/8992
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9243,11 +9211,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B318 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9233: List offline machines in the Tailscale panel — https://github.com/omacom/omarchy/pull/9233
-- #9234: Open the Tailscale admin console from the panel mark — https://github.com/omacom/omarchy/pull/9234
-- #9223: Add Hackers 1995 theme — https://github.com/omacom/omarchy/pull/9223
-- #9218: Detect Apple bcm5974 trackpads in omarchy-hw-touchpad — https://github.com/omacom/omarchy/pull/9218
-- #9219: Never let bar and panel error diagnostics block their fallbacks — https://github.com/omacom/omarchy/pull/9219
+- #8982: Fix/monitor scale persistence named output — https://github.com/omacom/omarchy/pull/8982
+- #8987: Make the Omarchy menu search fuzzy — https://github.com/omacom/omarchy/pull/8987
+- #8980: fix(shell): keep notification dismiss button visible — https://github.com/omacom/omarchy/pull/8980
+- #8978: fix(shell): report failed desktop entry launches — https://github.com/omacom/omarchy/pull/8978
+- #8974: Fix typo in navigation manual: 'you to do' -> 'you can do' — https://github.com/omacom/omarchy/pull/8974
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9265,11 +9233,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B319 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9217: Start the Herdr server with the graphical session — https://github.com/omacom/omarchy/pull/9217
-- #9212: Add region screenshot indicator — https://github.com/omacom/omarchy/pull/9212
-- #9211: Wake the lock screen on resume and keep wake keys out of the password — https://github.com/omacom/omarchy/pull/9211
-- #9206: Warn clearly when no Chromium browser can launch a web app — https://github.com/omacom/omarchy/pull/9206
-- #9203: Stop restoring a stale keyboard backlight on idle-cycle cancel — https://github.com/omacom/omarchy/pull/9203
+- #8965: Count gamepad input and audio playback as idle activity — https://github.com/omacom/omarchy/pull/8965
+- #8968: Tag brave-origin windows as chromium-based browsers — https://github.com/omacom/omarchy/pull/8968
+- #8959: shell: add configurable mouse wheel scroll speed to menu lists — https://github.com/omacom/omarchy/pull/8959
+- #8958: feat: scratchpad agent with a dedicated Herdr session — https://github.com/omacom/omarchy/pull/8958
+- #8942: Anchor the clock and weather popups under their widgets — https://github.com/omacom/omarchy/pull/8942
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9287,11 +9255,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B320 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9209: Restore focus after the sole monitor round-trips through FALLBACK — https://github.com/omacom/omarchy/pull/9209
-- #9201: Fix media playPause resuming the wrong player after a stale stream — https://github.com/omacom/omarchy/pull/9201
-- #9192: Add Yii3 development environment — https://github.com/omacom/omarchy/pull/9192
-- #9191: Dropbox widget: scan the team root, not the member folder — https://github.com/omacom/omarchy/pull/9191
-- #9186: Reapply clamshell disable after idle wake — https://github.com/omacom/omarchy/pull/9186
+- #8932: Tile the Battle.net client instead of floating it — https://github.com/omacom/omarchy/pull/8932
+- #8941: Add omarchy-ascii so stable matches the published branding manual — https://github.com/omacom/omarchy/pull/8941
+- #8929: Feed bt-agent stdin so Bluetooth pairing authorization can be answered — https://github.com/omacom/omarchy/pull/8929
+- #8927: Anchor dip and lip matches on the ssh binary — https://github.com/omacom/omarchy/pull/8927
+- #8923: Let Install and Remove Preinstalls pick individual apps — https://github.com/omacom/omarchy/pull/8923
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9309,11 +9277,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B321 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9175: Stop mise wrappers from re-executing themselves (breaks Claude Code detection in T3 Code) — https://github.com/omacom/omarchy/pull/9175
-- #9169: fix(network): divide throughput samples by measured elapsed time interval in speedtest — https://github.com/omacom/omarchy/pull/9169
-- #9168: fix(font): reset explicit kitty bold/italic font variants to auto on font set — https://github.com/omacom/omarchy/pull/9168
-- #9164: Default OMARCHY_PATH in channel-current and audio-tuning; add env-robustness test (#8769) — https://github.com/omacom/omarchy/pull/9164
-- #9163: Change the tagline to "Beautiful, Fun & Opinionated" — https://github.com/omacom/omarchy/pull/9163
+- #8922: Keep the image selector fast when vips cannot read an image — https://github.com/omacom/omarchy/pull/8922
+- #8913: Add Omafox to Firefox and Zen Browser for theme syncing — https://github.com/omacom/omarchy/pull/8913
+- #8907: foot: render light themes into [colors-light] so foot reports the right color-theme mode — https://github.com/omacom/omarchy/pull/8907
+- #8904: Show individual batteries in power panel — https://github.com/omacom/omarchy/pull/8904
+- #8893: Make agent provider switching scale — https://github.com/omacom/omarchy/pull/8893
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9328,14 +9296,13 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B322
 
 ```
-You are reviewing Omarchy pre-release batch B322 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B322 (4 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9161: Discover and normalize web app icons — https://github.com/omacom/omarchy/pull/9161
-- #9160: GPD Pocket 4: screen rotation, autorotation, and boot orientation — https://github.com/omacom/omarchy/pull/9160
-- #9159: Rank menu search results by usage — https://github.com/omacom/omarchy/pull/9159
-- #9189: Keep the backlight off while the laptop panel is disabled — https://github.com/omacom/omarchy/pull/9189
-- #12423: Keep disabled display backlights off and preserve saved brightness — https://github.com/omacom/omarchy/pull/12423
+- #8886: Use mpv's gpu renderer for Asahi webcam overlays — https://github.com/omacom/omarchy/pull/8886
+- #8896: Debounce unforced lock wake calls immediately following display blanking — https://github.com/omacom/omarchy/pull/8896
+- #8885: Batch window pop dispatches — https://github.com/omacom/omarchy/pull/8885
+- #8876: Stop keybinding scans from looping on mocked APIs — https://github.com/omacom/omarchy/pull/8876
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9353,11 +9320,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B323 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9155: Clock: optional locale setting for day and month names — https://github.com/omacom/omarchy/pull/9155
-- #9152: Leave a locked session's display to the lock screen — https://github.com/omacom/omarchy/pull/9152
-- #9148: Fix omarchy-drive-info model loss on nested crypt/LVM (#7974) — https://github.com/omacom/omarchy/pull/9148
-- #9135: Let on-screen keyboards reach the menu — https://github.com/omacom/omarchy/pull/9135
-- #9132: Resolve native EasyEffects output chains — https://github.com/omacom/omarchy/pull/9132
+- #8872: fix(notification): bound omarchy-notification-wait by wall clock — https://github.com/omacom/omarchy/pull/8872
+- #8881: Bound omarchy-notification-wait by wall-clock timeout and log dropped… — https://github.com/omacom/omarchy/pull/8881
+- #8871: Raise maximum output volume to 125% — https://github.com/omacom/omarchy/pull/8871
+- #8873: feat(agents): add Antigravity and OpenCode collectors, context launcher, and strict window class focusing — https://github.com/omacom/omarchy/pull/8873
+- #8862: Agents panel: activity punchcard for records that carry usageByHour — https://github.com/omacom/omarchy/pull/8862
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9375,11 +9342,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B324 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9133: Resolve keycodes with the active keyboard layout — https://github.com/omacom/omarchy/pull/9133
-- #9131: Wait for Bluetooth before starting its agent — https://github.com/omacom/omarchy/pull/9131
-- #9130: Send clipboard shortcuts using physical XKB keys — https://github.com/omacom/omarchy/pull/9130
-- #9129: Ignore vendor hotkey keyboard devices — https://github.com/omacom/omarchy/pull/9129
-- #9128: Detect browser families without launching them — https://github.com/omacom/omarchy/pull/9128
+- #8860: Power panel: consumption attribution, system vitals and per-process memory — https://github.com/omacom/omarchy/pull/8860
+- #8857: Show "Reboot to Windows" in the system menu — https://github.com/omacom/omarchy/pull/8857
+- #8866: Fix network panel behind VPN policy routes — https://github.com/omacom/omarchy/pull/8866
+- #8846: List the Herdr PREFIX chord first in the learn guide — https://github.com/omacom/omarchy/pull/8846
+- #8841: Add opt-in toggle to scale X11 apps that ignore HiDPI hints — https://github.com/omacom/omarchy/pull/8841
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9397,11 +9364,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B325 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9126: Copy terminal selections straight to the clipboard — https://github.com/omacom/omarchy/pull/9126
-- #9127: Add a notification for hyprpicker — https://github.com/omacom/omarchy/pull/9127
-- #12424: Notify after successful color selection — https://github.com/omacom/omarchy/pull/12424
-- #9121: Resolve bar clicks only against the slot's own surface — https://github.com/omacom/omarchy/pull/9121
-- #9120: Reset media marquee label when the scroll animation stops — https://github.com/omacom/omarchy/pull/9120
+- #8830: Size bar icons by the ink they paint — https://github.com/omacom/omarchy/pull/8830
+- #8828: Report input devices holding a button down in omarchy-debug — https://github.com/omacom/omarchy/pull/8828
+- #8827: Take a screenshot with Super + Shift + S — https://github.com/omacom/omarchy/pull/8827
+- #8825: Add --no-gtk option to display text size command — https://github.com/omacom/omarchy/pull/8825
+- #8820: Show inactive audio card outputs in picker — https://github.com/omacom/omarchy/pull/8820
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9419,11 +9386,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B326 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9113: Add Super + Shift + J to toggle a wide 2/3 - 1/3 window split — https://github.com/omacom/omarchy/pull/9113
-- #9108: fix(brightness): pass target monitor to DPMS dispatch in omarchy-brightness-display — https://github.com/omacom/omarchy/pull/9108
-- #9110: fix(monitor): detect stranded outputs with no active scanout in omarchy-hyprland-monitor-modeless — https://github.com/omacom/omarchy/pull/9110
-- #9103: fix(theme): establish OMARCHY_PATH in entry points for non-interactive shells — https://github.com/omacom/omarchy/pull/9103
-- #9095: Tell contributors to search open PRs before writing a fix — https://github.com/omacom/omarchy/pull/9095
+- #8815: Distinguish plugged in but not charging in the bar battery icon — https://github.com/omacom/omarchy/pull/8815
+- #8809: Ask before normalizing screen recording audio that's unusually quiet or loud — https://github.com/omacom/omarchy/pull/8809
+- #8808: Monitor scaling: honour desc: and multi-line hl.monitor rules for the internal panel — https://github.com/omacom/omarchy/pull/8808
+- #8804: Let a workspace carry a name in the bar — https://github.com/omacom/omarchy/pull/8804
+- #8802: Show every Hyprland workspace in the bar, not only 1-10 — https://github.com/omacom/omarchy/pull/8802
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9439,358 +9406,6 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 
 ```
 You are reviewing Omarchy pre-release batch B327 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9094: Make workspace clicks target the bar's monitor — https://github.com/omacom/omarchy/pull/9094
-- #9093: Show the focused app's keybindings on Super + K — https://github.com/omacom/omarchy/pull/9093
-- #9063: Warn on bad AQ_DRM_DEVICES in debug — https://github.com/omacom/omarchy/pull/9063
-- #9058: Add theme startup sounds — https://github.com/omacom/omarchy/pull/9058
-- #9062: docs(mac): fix T1 chip model identifiers and remove non-Touch Bar A1708 — https://github.com/omacom/omarchy/pull/9062
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B328
-
-```
-You are reviewing Omarchy pre-release batch B328 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9056: Answer an abandoned menu request before starting the next one — https://github.com/omacom/omarchy/pull/9056
-- #9055: Add package-managed hook discovery — https://github.com/omacom/omarchy/pull/9055
-- #9050: Fix bar hand cursor never appearing until the slot's first click — https://github.com/omacom/omarchy/pull/9050
-- #9049: Give TUI windows a terminal-sized touchpad scroll rule — https://github.com/omacom/omarchy/pull/9049
-- #9042: Run the screensaver exit handler exactly once — https://github.com/omacom/omarchy/pull/9042
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B329
-
-```
-You are reviewing Omarchy pre-release batch B329 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9041: Bind KP_Enter alongside RETURN — https://github.com/omacom/omarchy/pull/9041
-- #9040: Hand the presentation terminal Omarchy's BROWSER default — https://github.com/omacom/omarchy/pull/9040
-- #9039: Validate pane counts before creating layouts — https://github.com/omacom/omarchy/pull/9039
-- #9038: Stop ga after a failed worktree creation — https://github.com/omacom/omarchy/pull/9038
-- #9035: Add Messenger as a default web app — https://github.com/omacom/omarchy/pull/9035
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B330
-
-```
-You are reviewing Omarchy pre-release batch B330 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9025: hypr: add idle_inhibit rule for VLC media player — https://github.com/omacom/omarchy/pull/9025
-- #9031: Stop menu commands waiting forever for an answer that never comes — https://github.com/omacom/omarchy/pull/9031
-- #9017: Answer org.gnome.Console activations so Nautilus can open a terminal — https://github.com/omacom/omarchy/pull/9017
-- #9022: Complete bar and plugin ids on the omarchy CLI — https://github.com/omacom/omarchy/pull/9022
-- #9015: Make scrolling columns resizable at workspace edge — https://github.com/omacom/omarchy/pull/9015
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B331
-
-```
-You are reviewing Omarchy pre-release batch B331 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9014: fix: quote shell comparison operands — https://github.com/omacom/omarchy/pull/9014
-- #9013: fix: address high-confidence shellcheck findings — https://github.com/omacom/omarchy/pull/9013
-- #9006: FIX: Deterministic false failures in the shell smoke test — https://github.com/omacom/omarchy/pull/9006
-- #9000: Fix clipped left border on Display scale 1x pill — https://github.com/omacom/omarchy/pull/9000
-- #8992: Skip reboot prompts in unattended updates — https://github.com/omacom/omarchy/pull/8992
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B332
-
-```
-You are reviewing Omarchy pre-release batch B332 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8982: Fix/monitor scale persistence named output — https://github.com/omacom/omarchy/pull/8982
-- #8987: Make the Omarchy menu search fuzzy — https://github.com/omacom/omarchy/pull/8987
-- #8980: fix(shell): keep notification dismiss button visible — https://github.com/omacom/omarchy/pull/8980
-- #8978: fix(shell): report failed desktop entry launches — https://github.com/omacom/omarchy/pull/8978
-- #8977: Fix Codex limits collector for CLI approval-policy churn — https://github.com/omacom/omarchy/pull/8977
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B333
-
-```
-You are reviewing Omarchy pre-release batch B333 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8974: Fix typo in navigation manual: 'you to do' -> 'you can do' — https://github.com/omacom/omarchy/pull/8974
-- #8965: Count gamepad input and audio playback as idle activity — https://github.com/omacom/omarchy/pull/8965
-- #8968: Tag brave-origin windows as chromium-based browsers — https://github.com/omacom/omarchy/pull/8968
-- #8959: shell: add configurable mouse wheel scroll speed to menu lists — https://github.com/omacom/omarchy/pull/8959
-- #8958: feat: scratchpad agent with a dedicated Herdr session — https://github.com/omacom/omarchy/pull/8958
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B334
-
-```
-You are reviewing Omarchy pre-release batch B334 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8947: Set GDK_GL=gles on NVIDIA so GTK3 video playback works — https://github.com/omacom/omarchy/pull/8947
-- #8942: Anchor the clock and weather popups under their widgets — https://github.com/omacom/omarchy/pull/8942
-- #8932: Tile the Battle.net client instead of floating it — https://github.com/omacom/omarchy/pull/8932
-- #8941: Add omarchy-ascii so stable matches the published branding manual — https://github.com/omacom/omarchy/pull/8941
-- #8929: Feed bt-agent stdin so Bluetooth pairing authorization can be answered — https://github.com/omacom/omarchy/pull/8929
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B335
-
-```
-You are reviewing Omarchy pre-release batch B335 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8927: Anchor dip and lip matches on the ssh binary — https://github.com/omacom/omarchy/pull/8927
-- #8923: Let Install and Remove Preinstalls pick individual apps — https://github.com/omacom/omarchy/pull/8923
-- #8922: Keep the image selector fast when vips cannot read an image — https://github.com/omacom/omarchy/pull/8922
-- #8913: Add Omafox to Firefox and Zen Browser for theme syncing — https://github.com/omacom/omarchy/pull/8913
-- #8907: foot: render light themes into [colors-light] so foot reports the right color-theme mode — https://github.com/omacom/omarchy/pull/8907
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B336
-
-```
-You are reviewing Omarchy pre-release batch B336 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8904: Show individual batteries in power panel — https://github.com/omacom/omarchy/pull/8904
-- #8893: Make agent provider switching scale — https://github.com/omacom/omarchy/pull/8893
-- #8886: Use mpv's gpu renderer for Asahi webcam overlays — https://github.com/omacom/omarchy/pull/8886
-- #8892: Clear stale agent login guidance after successful probes — https://github.com/omacom/omarchy/pull/8892
-- #8896: Debounce unforced lock wake calls immediately following display blanking — https://github.com/omacom/omarchy/pull/8896
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B337
-
-```
-You are reviewing Omarchy pre-release batch B337 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8885: Batch window pop dispatches — https://github.com/omacom/omarchy/pull/8885
-- #8884: Load the image thumbnail index once — https://github.com/omacom/omarchy/pull/8884
-- #13568: Read the thumbnail index once in the direct image scan — https://github.com/omacom/omarchy/pull/13568
-- #8877: Show the Codex CLI's error instead of "initialize" when the usage RPC fails — https://github.com/omacom/omarchy/pull/8877
-- #8880: Report the selected terminal font size — https://github.com/omacom/omarchy/pull/8880
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B338
-
-```
-You are reviewing Omarchy pre-release batch B338 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8876: Stop keybinding scans from looping on mocked APIs — https://github.com/omacom/omarchy/pull/8876
-- #8872: fix(notification): bound omarchy-notification-wait by wall clock — https://github.com/omacom/omarchy/pull/8872
-- #8881: Bound omarchy-notification-wait by wall-clock timeout and log dropped… — https://github.com/omacom/omarchy/pull/8881
-- #8871: Raise maximum output volume to 125% — https://github.com/omacom/omarchy/pull/8871
-- #8873: feat(agents): add Antigravity and OpenCode collectors, context launcher, and strict window class focusing — https://github.com/omacom/omarchy/pull/8873
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B339
-
-```
-You are reviewing Omarchy pre-release batch B339 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8865: Fix background cycling for glob characters in omarchy-theme-set — https://github.com/omacom/omarchy/pull/8865
-- #8862: Agents panel: activity punchcard for records that carry usageByHour — https://github.com/omacom/omarchy/pull/8862
-- #8860: Power panel: consumption attribution, system vitals and per-process memory — https://github.com/omacom/omarchy/pull/8860
-- #8857: Show "Reboot to Windows" in the system menu — https://github.com/omacom/omarchy/pull/8857
-- #8852: Fix SDDM greeter never auto-selecting the Omarchy session — https://github.com/omacom/omarchy/pull/8852
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B340
-
-```
-You are reviewing Omarchy pre-release batch B340 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8866: Fix network panel behind VPN policy routes — https://github.com/omacom/omarchy/pull/8866
-- #8846: List the Herdr PREFIX chord first in the learn guide — https://github.com/omacom/omarchy/pull/8846
-- #8841: Add opt-in toggle to scale X11 apps that ignore HiDPI hints — https://github.com/omacom/omarchy/pull/8841
-- #8830: Size bar icons by the ink they paint — https://github.com/omacom/omarchy/pull/8830
-- #8828: Report input devices holding a button down in omarchy-debug — https://github.com/omacom/omarchy/pull/8828
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B341
-
-```
-You are reviewing Omarchy pre-release batch B341 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8827: Take a screenshot with Super + Shift + S — https://github.com/omacom/omarchy/pull/8827
-- #8825: Add --no-gtk option to display text size command — https://github.com/omacom/omarchy/pull/8825
-- #8820: Show inactive audio card outputs in picker — https://github.com/omacom/omarchy/pull/8820
-- #8815: Distinguish plugged in but not charging in the bar battery icon — https://github.com/omacom/omarchy/pull/8815
-- #8809: Ask before normalizing screen recording audio that's unusually quiet or loud — https://github.com/omacom/omarchy/pull/8809
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B342
-
-```
-You are reviewing Omarchy pre-release batch B342 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8808: Monitor scaling: honour desc: and multi-line hl.monitor rules for the internal panel — https://github.com/omacom/omarchy/pull/8808
-- #8804: Let a workspace carry a name in the bar — https://github.com/omacom/omarchy/pull/8804
-- #8802: Show every Hyprland workspace in the bar, not only 1-10 — https://github.com/omacom/omarchy/pull/8802
-- #8794: Fix workspace indicator lag under rapid Super+number switching — https://github.com/omacom/omarchy/pull/8794
-- #8792: Fix webcam MJPEG negotiation for screen recordings — https://github.com/omacom/omarchy/pull/8792
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B343
-
-```
-You are reviewing Omarchy pre-release batch B343 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8787: Fix lopsided cursor highlight on network panel header actions — https://github.com/omacom/omarchy/pull/8787
@@ -9809,17 +9424,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B344
+### B328
 
 ```
-You are reviewing Omarchy pre-release batch B344 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B328 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8768: Give btop a float big enough for its 80x24 minimum — https://github.com/omacom/omarchy/pull/8768
 - #8766: Fix local plugin reloads — https://github.com/omacom/omarchy/pull/8766
 - #8765: Proposal for a localization framework: Add the I18n translation primitive — https://github.com/omacom/omarchy/pull/8765
 - #8761: Keep mailto parameters out of HEY's recipient — https://github.com/omacom/omarchy/pull/8761
 - #8759: Stop Neovim from previewing completions inline without an AI source — https://github.com/omacom/omarchy/pull/8759
+- #8755: Add FAM as an externally packaged coding agent — https://github.com/omacom/omarchy/pull/8755
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9831,17 +9446,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B345
+### B329
 
 ```
-You are reviewing Omarchy pre-release batch B345 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B329 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8755: Add FAM as an externally packaged coding agent — https://github.com/omacom/omarchy/pull/8755
 - #8743: Make the media bar widget label configurable — https://github.com/omacom/omarchy/pull/8743
 - #8739: Prevent undefined reference error on ErrorString — https://github.com/omacom/omarchy/pull/8739
 - #8741: Prevent network address values from overlapping labels — https://github.com/omacom/omarchy/pull/8741
 - #8737: Fuzzy-search the Wi-Fi list from the network panel — https://github.com/omacom/omarchy/pull/8737
+- #8734: Share Voxtype status across bar surfaces — https://github.com/omacom/omarchy/pull/8734
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9853,39 +9468,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B346
+### B330
 
 ```
-You are reviewing Omarchy pre-release batch B346 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B330 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8734: Share Voxtype status across bar surfaces — https://github.com/omacom/omarchy/pull/8734
-- #8724: Skip the reboot prompt when the flag predates the current boot — https://github.com/omacom/omarchy/pull/8724
-- #8732: Keep hyprsunset running after a restart — https://github.com/omacom/omarchy/pull/8732
 - #8720: Add declarative Hyprland and terminal theming — https://github.com/omacom/omarchy/pull/8720
 - #8713: Resolve through EasyEffects to its configured output device — https://github.com/omacom/omarchy/pull/8713
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B347
-
-```
-You are reviewing Omarchy pre-release batch B347 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8708: Restart crash-watch after updates — https://github.com/omacom/omarchy/pull/8708
 - #8712: Skip powerprofilesctl when daemon is down — https://github.com/omacom/omarchy/pull/8712
 - #8700: fix: use --disable-gpu in Obsidian user-flags.conf — https://github.com/omacom/omarchy/pull/8700
 - #8696: Wait on the menu done file instead of polling for it — https://github.com/omacom/omarchy/pull/8696
-- #8699: Document USB autosuspend and how to exempt a device — https://github.com/omacom/omarchy/pull/8699
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9897,17 +9490,16 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B348
+### B331
 
 ```
-You are reviewing Omarchy pre-release batch B348 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B331 (4 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8699: Document USB autosuspend and how to exempt a device — https://github.com/omacom/omarchy/pull/8699
 - #8692: Resolve mise wrapper binaries before execution — https://github.com/omacom/omarchy/pull/8692
 - #8695: Cap screensaver frame rate at the panel refresh rate — https://github.com/omacom/omarchy/pull/8695
 - #8688: Open Kitty links with Super-click — https://github.com/omacom/omarchy/pull/8688
-- #8685: Derive the Hyprland keyboard layout from the console keymap — https://github.com/omacom/omarchy/pull/8685
-- #11056: Point six installer keymaps at ones systemd can map — https://github.com/omacom/omarchy/pull/11056
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9919,17 +9511,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B349
+### B332
 
 ```
-You are reviewing Omarchy pre-release batch B349 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B332 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8685: Derive the Hyprland keyboard layout from the console keymap — https://github.com/omacom/omarchy/pull/8685
+- #11056: Point six installer keymaps at ones systemd can map — https://github.com/omacom/omarchy/pull/11056
 - #8683: Show IPv6 address and gateway in the network panel — https://github.com/omacom/omarchy/pull/8683
 - #8684: Sync Omarchy themes to OpenCode without interrupting it — https://github.com/omacom/omarchy/pull/8684
 - #8681: Hide Ghostty scrollbar in screensaver — https://github.com/omacom/omarchy/pull/8681
-- #8675: Honor never-expire notification timeouts — https://github.com/omacom/omarchy/pull/8675
-- #8664: fix(clipboard): render clipboard text and search filter as plain text — https://github.com/omacom/omarchy/pull/8664
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9941,17 +9533,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B350
+### B333
 
 ```
-You are reviewing Omarchy pre-release batch B350 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B333 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8675: Honor never-expire notification timeouts — https://github.com/omacom/omarchy/pull/8675
+- #8664: fix(clipboard): render clipboard text and search filter as plain text — https://github.com/omacom/omarchy/pull/8664
 - #8663: Keep the battery icon charging while UPower measures a fresh plug-in — https://github.com/omacom/omarchy/pull/8663
 - #8666: Add an opt-in showTemperature setting to the weather bar widget — https://github.com/omacom/omarchy/pull/8666
 - #8661: Focus Activity within the current workspace — https://github.com/omacom/omarchy/pull/8661
-- #8654: Elide the not found menu title when it overflows — https://github.com/omacom/omarchy/pull/8654
-- #8640: WhatsApp Slim: avatar-name tooltip and rail divider — https://github.com/omacom/omarchy/pull/8640
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9963,17 +9555,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B351
+### B334
 
 ```
-You are reviewing Omarchy pre-release batch B351 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B334 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8640: WhatsApp Slim: avatar-name tooltip and rail divider — https://github.com/omacom/omarchy/pull/8640
 - #8653: Calendar: move the year figure with the clock, not the date — https://github.com/omacom/omarchy/pull/8653
 - #8634: Open the apps menu on a right click on the bare desktop — https://github.com/omacom/omarchy/pull/8634
 - #8635: Answer arithmetic and unit conversions in the menu search — https://github.com/omacom/omarchy/pull/8635
 - #8633: Stop network speed tests when their launcher dies — https://github.com/omacom/omarchy/pull/8633
-- #8631: Route the Voxtype model picker to the install flow when voxtype is missing — https://github.com/omacom/omarchy/pull/8631
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -9985,39 +9577,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B352
+### B335
 
 ```
-You are reviewing Omarchy pre-release batch B352 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B335 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8631: Route the Voxtype model picker to the install flow when voxtype is missing — https://github.com/omacom/omarchy/pull/8631
 - #8625: Keep kitty font zoom when switching themes — https://github.com/omacom/omarchy/pull/8625
-- #8630: Wait longer for a restarted shell to become ready — https://github.com/omacom/omarchy/pull/8630
 - #8615: feat(bar): per-region adaptive text and icon contrast on transparent bar — https://github.com/omacom/omarchy/pull/8615
 - #8610: Logitech MX Keys (regular, S, Mini) support — https://github.com/omacom/omarchy/pull/8610
-- #8609: Tell contributors to check for duplicates and the right branch — https://github.com/omacom/omarchy/pull/8609
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B353
-
-```
-You are reviewing Omarchy pre-release batch B353 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8605: Cycle backgrounds through a symlinked backgrounds directory — https://github.com/omacom/omarchy/pull/8605
 - #8599: Add window-relayout command to recover stuck web app layouts — https://github.com/omacom/omarchy/pull/8599
-- #8602: Deduplicate Codex usage across Pi forked sessions — https://github.com/omacom/omarchy/pull/8602
-- #8597: Preserve alacritty font styles when changing font family — https://github.com/omacom/omarchy/pull/8597
-- #8595: Use separate idle timeouts on AC and battery — https://github.com/omacom/omarchy/pull/8595
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10029,17 +9599,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B354
+### B336
 
 ```
-You are reviewing Omarchy pre-release batch B354 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B336 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8602: Deduplicate Codex usage across Pi forked sessions — https://github.com/omacom/omarchy/pull/8602
+- #8595: Use separate idle timeouts on AC and battery — https://github.com/omacom/omarchy/pull/8595
 - #8581: Re-arm lock blank timer with backoff on screen changes — https://github.com/omacom/omarchy/pull/8581
 - #8585: Add the 2020 Intel MacBook Air to the T2 device list — https://github.com/omacom/omarchy/pull/8585
 - #8579: Add battery health controls to power panel — https://github.com/omacom/omarchy/pull/8579
-- #8576: Cycle backwards through every window with Alt + Shift + Tab — https://github.com/omacom/omarchy/pull/8576
-- #8575: Keep GNOME text scaling from clipping 1Password's fixed-size dialogs — https://github.com/omacom/omarchy/pull/8575
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10051,17 +9621,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B355
+### B337
 
 ```
-You are reviewing Omarchy pre-release batch B355 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B337 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8576: Cycle backwards through every window with Alt + Shift + Tab — https://github.com/omacom/omarchy/pull/8576
+- #8575: Keep GNOME text scaling from clipping 1Password's fixed-size dialogs — https://github.com/omacom/omarchy/pull/8575
 - #8569: Show hotkey chips on menu rows a keybinding also reaches — https://github.com/omacom/omarchy/pull/8569
 - #8573: Fix Emoji Picker for all apps with both keyboard and mouse — https://github.com/omacom/omarchy/pull/8573
 - #8570: Focus existing windows after no-op app launches — https://github.com/omacom/omarchy/pull/8570
-- #8561: Give the lock screen longer before it blanks the display — https://github.com/omacom/omarchy/pull/8561
-- #8560: Restore lock screen password focus lost on suspend — https://github.com/omacom/omarchy/pull/8560
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10073,17 +9643,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B356
+### B338
 
 ```
-You are reviewing Omarchy pre-release batch B356 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B338 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8561: Give the lock screen longer before it blanks the display — https://github.com/omacom/omarchy/pull/8561
+- #8560: Restore lock screen password focus lost on suspend — https://github.com/omacom/omarchy/pull/8560
 - #8559: fix(tray): stop drawer auto-closing on right-click, tighten panel mark — https://github.com/omacom/omarchy/pull/8559
 - #8556: Allow overriding terminal screensaver frame rate — https://github.com/omacom/omarchy/pull/8556
 - #8557: Add keybindings to send a floating window to the back or front — https://github.com/omacom/omarchy/pull/8557
-- #8525: Show a QR code for the clipboard from Trigger > Share — https://github.com/omacom/omarchy/pull/8525
-- #8533: fix(tailscale): isolate claim path argument — https://github.com/omacom/omarchy/pull/8533
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10095,39 +9665,39 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B357
+### B339
 
 ```
-You are reviewing Omarchy pre-release batch B357 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B339 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8525: Show a QR code for the clipboard from Trigger > Share — https://github.com/omacom/omarchy/pull/8525
+- #8533: fix(tailscale): isolate claim path argument — https://github.com/omacom/omarchy/pull/8533
 - #8522: Add "Copy Markdown Link" (Alt+Shift+M) to "Copy URL" Chromium extension — https://github.com/omacom/omarchy/pull/8522
 - #8524: Fix brightness lockout on displays with small max_brightness ranges — https://github.com/omacom/omarchy/pull/8524
 - #8519: fix: rework command construction around argv (complements #8416) — https://github.com/omacom/omarchy/pull/8519
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B340
+
+```
+You are reviewing Omarchy pre-release batch B340 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
 - #8517: Size popped-out windows for the active monitor — https://github.com/omacom/omarchy/pull/8517
 - #8500: Measure every rotated transform as rotated in the capture picker — https://github.com/omacom/omarchy/pull/8500
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B358
-
-```
-You are reviewing Omarchy pre-release batch B358 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #8499: Fix the Dropbox login button never opening the account link — https://github.com/omacom/omarchy/pull/8499
-- #8497: Stop the agents status card rendering as an empty box — https://github.com/omacom/omarchy/pull/8497
 - #8493: omarchy-hook: run executable hooks via their own shebang — https://github.com/omacom/omarchy/pull/8493
 - #8486: Detect Broadcom fingerprint readers by vendor ID — https://github.com/omacom/omarchy/pull/8486
-- #8479: Add Antigravity (agy) agent usage collector and test suite — https://github.com/omacom/omarchy/pull/8479
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10139,17 +9709,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B359
+### B341
 
 ```
-You are reviewing Omarchy pre-release batch B359 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B341 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8479: Add Antigravity (agy) agent usage collector and test suite — https://github.com/omacom/omarchy/pull/8479
 - #8466: Report Omarchy dev-link session state accurately — https://github.com/omacom/omarchy/pull/8466
 - #8450: Add Cursor to the default coding agent picker — https://github.com/omacom/omarchy/pull/8450
 - #8449: Stop a font choice capturing every family named *mono* — https://github.com/omacom/omarchy/pull/8449
 - #8448: agents: support spend limits for Claude Enterprise — https://github.com/omacom/omarchy/pull/8448
-- #8443: Let the weather panel switch forecast providers — https://github.com/omacom/omarchy/pull/8443
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10161,14 +9731,14 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B360
+### B342
 
 ```
-You are reviewing Omarchy pre-release batch B360 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B342 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8443: Let the weather panel switch forecast providers — https://github.com/omacom/omarchy/pull/8443
 - #8437: Hide Obsidian's window buttons in the Omarchy theme — https://github.com/omacom/omarchy/pull/8437
-- #8435: Show active workspace per monitor — https://github.com/omacom/omarchy/pull/8435
 - #8414: Detect Microarray MAFP fingerprint reader — https://github.com/omacom/omarchy/pull/8414
 - #8411: Fix out-of-range group window shortcuts — https://github.com/omacom/omarchy/pull/8411
 - #8407: Add terminal opacity to generated themes — https://github.com/omacom/omarchy/pull/8407
@@ -10183,10 +9753,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B361
+### B343
 
 ```
-You are reviewing Omarchy pre-release batch B361 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B343 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8406: Keep system binaries ahead of the mise shims in the uwsm session — https://github.com/omacom/omarchy/pull/8406
@@ -10205,10 +9775,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B362
+### B344
 
 ```
-You are reviewing Omarchy pre-release batch B362 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B344 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8391: Let a cloned bar plugin load, and report plugin load failures — https://github.com/omacom/omarchy/pull/8391
@@ -10227,10 +9797,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B363
+### B345
 
 ```
-You are reviewing Omarchy pre-release batch B363 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B345 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8344: Find hidden desktop entries in one awk pass instead of per line in bash — https://github.com/omacom/omarchy/pull/8344
@@ -10249,10 +9819,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B364
+### B346
 
 ```
-You are reviewing Omarchy pre-release batch B364 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B346 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8330: Record that the PTL backlight fix black-screens the GU405AR — https://github.com/omacom/omarchy/pull/8330
@@ -10271,10 +9841,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B365
+### B347
 
 ```
-You are reviewing Omarchy pre-release batch B365 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B347 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8313: Index Claude transcripts so the agents refresh reads only what was appended — https://github.com/omacom/omarchy/pull/8313
@@ -10293,10 +9863,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B366
+### B348
 
 ```
-You are reviewing Omarchy pre-release batch B366 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B348 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8284: Delay the first low-battery check until UPower settles — https://github.com/omacom/omarchy/pull/8284
@@ -10315,10 +9885,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B367
+### B349
 
 ```
-You are reviewing Omarchy pre-release batch B367 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B349 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8267: Discover agent usage collectors in ~/.local/bin — https://github.com/omacom/omarchy/pull/8267
@@ -10337,17 +9907,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B368
+### B350
 
 ```
-You are reviewing Omarchy pre-release batch B368 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B350 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8264: Add declarative OpenCode theme integration via colors-opencode.toml — https://github.com/omacom/omarchy/pull/8264
 - #8258: Fix Brave Origin refresh collision — https://github.com/omacom/omarchy/pull/8258
-- #8257: Warn the agent skill off pulling graphical-session.target — https://github.com/omacom/omarchy/pull/8257
 - #8254: Defeat mise's release cooldown when selecting the default agent — https://github.com/omacom/omarchy/pull/8254
 - #8229: Stop the keybindings cache key flipping on menu keyboard focus — https://github.com/omacom/omarchy/pull/8229
+- #8247: Enhance screensaver with media playback checks and DND management — https://github.com/omacom/omarchy/pull/8247
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10359,17 +9929,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B369
+### B351
 
 ```
-You are reviewing Omarchy pre-release batch B369 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B351 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8247: Enhance screensaver with media playback checks and DND management — https://github.com/omacom/omarchy/pull/8247
 - #8228: fix(windows-vm): replace TZ with LANGUAGE/REGION for proper timezone support — https://github.com/omacom/omarchy/pull/8228
 - #8227: feat(asus): follow GZ302 keyboard backlight on the chassis window LED — https://github.com/omacom/omarchy/pull/8227
 - #8214: Paint the pressed state on panel action buttons — https://github.com/omacom/omarchy/pull/8214
 - #8210: Let themes set Hyprland rounding and shadow through colors.toml — https://github.com/omacom/omarchy/pull/8210
+- #8205: Read actual gmux display brightness — https://github.com/omacom/omarchy/pull/8205
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10381,17 +9951,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B370
+### B352
 
 ```
-You are reviewing Omarchy pre-release batch B370 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B352 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8205: Read actual gmux display brightness — https://github.com/omacom/omarchy/pull/8205
 - #8182: Add native Zed theming — https://github.com/omacom/omarchy/pull/8182
 - #8179: Respect XDG_CONFIG_HOME for font and text sizing — https://github.com/omacom/omarchy/pull/8179
 - #8164: Supervise hyprsunset so night light survives a crash — https://github.com/omacom/omarchy/pull/8164
 - #8165: Give every silent test assertion a failure message — https://github.com/omacom/omarchy/pull/8165
+- #8163: Skip the Neovim clipboard provider when omarchy-nvim is not installed — https://github.com/omacom/omarchy/pull/8163
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10403,17 +9973,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B371
+### B353
 
 ```
-You are reviewing Omarchy pre-release batch B371 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B353 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8163: Skip the Neovim clipboard provider when omarchy-nvim is not installed — https://github.com/omacom/omarchy/pull/8163
 - #8153: Repair Copy URL after install-time migration stamping — https://github.com/omacom/omarchy/pull/8153
 - #8141: Fix install-and-launch done prompt race — https://github.com/omacom/omarchy/pull/8141
-- #8160: Make tray icons click targets so the bar dispatches to them — https://github.com/omacom/omarchy/pull/8160
 - #8135: Open the power panel without a battery for profile controls — https://github.com/omacom/omarchy/pull/8135
+- #8128: Fix empty array shell IPC transport — https://github.com/omacom/omarchy/pull/8128
+- #8121: Apply the current theme keyboard color to QMK/VIA keyboards — https://github.com/omacom/omarchy/pull/8121
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10425,17 +9995,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B372
+### B354
 
 ```
-You are reviewing Omarchy pre-release batch B372 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B354 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8128: Fix empty array shell IPC transport — https://github.com/omacom/omarchy/pull/8128
-- #8121: Apply the current theme keyboard color to QMK/VIA keyboards — https://github.com/omacom/omarchy/pull/8121
 - #8119: Fix keyboard backlight not restoring correctly after lock — https://github.com/omacom/omarchy/pull/8119
 - #8117: Add US International keyboard layout — https://github.com/omacom/omarchy/pull/8117
 - #8116: Add Swift development environment — https://github.com/omacom/omarchy/pull/8116
+- #8096: feat(audio): Accept an optional sink name for output volume — https://github.com/omacom/omarchy/pull/8096
+- #8101: Show power profile in bar and add graphics mode controls — https://github.com/omacom/omarchy/pull/8101
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10447,39 +10017,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B373
+### B355
 
 ```
-You are reviewing Omarchy pre-release batch B373 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B355 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8096: feat(audio): Accept an optional sink name for output volume — https://github.com/omacom/omarchy/pull/8096
-- #8101: Show power profile in bar and add graphics mode controls — https://github.com/omacom/omarchy/pull/8101
 - #8091: Keep provisioning inside the user's configured XDG directories — https://github.com/omacom/omarchy/pull/8091
 - #8084: Leave the alternate screen only when the connection dropped — https://github.com/omacom/omarchy/pull/8084
 - #8086: Re-arm idle monitor when timeouts change in shell.json (#8038) — https://github.com/omacom/omarchy/pull/8086
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B374
-
-```
-You are reviewing Omarchy pre-release batch B374 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #8081: Stop AUR daemons from keeping the omarchy-update lock — https://github.com/omacom/omarchy/pull/8081
 - #8078: Draw the screensaver from words you type — https://github.com/omacom/omarchy/pull/8078
-- #8069: Add fallback logic to resolve current user in SDDM greeter — https://github.com/omacom/omarchy/pull/8069
-- #8076: Stop the hybrid GPU test from failing without Omarchy installed — https://github.com/omacom/omarchy/pull/8076
-- #8073: fix: detect early Codex app-server exits — https://github.com/omacom/omarchy/pull/8073
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10491,17 +10039,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B375
+### B356
 
 ```
-You are reviewing Omarchy pre-release batch B375 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B356 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8069: Add fallback logic to resolve current user in SDDM greeter — https://github.com/omacom/omarchy/pull/8069
+- #8076: Stop the hybrid GPU test from failing without Omarchy installed — https://github.com/omacom/omarchy/pull/8076
 - #8064: Add a generated omarchy(1) man page — https://github.com/omacom/omarchy/pull/8064
 - #8059: Keep Hyprland helpers global — https://github.com/omacom/omarchy/pull/8059
 - #8051: Add Junie as a selectable default coding agent — https://github.com/omacom/omarchy/pull/8051
-- #8055: Select share regions in output relative coordinates — https://github.com/omacom/omarchy/pull/8055
-- #8042: Regenerate mise wrappers that still print mise's output to stdout (backport of #8041) — https://github.com/omacom/omarchy/pull/8042
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10513,17 +10061,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B376
+### B357
 
 ```
-You are reviewing Omarchy pre-release batch B376 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B357 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8055: Select share regions in output relative coordinates — https://github.com/omacom/omarchy/pull/8055
+- #8042: Regenerate mise wrappers that still print mise's output to stdout (backport of #8041) — https://github.com/omacom/omarchy/pull/8042
 - #8036: Turn the bar battery icon red and blinking when low — https://github.com/omacom/omarchy/pull/8036
 - #8048: Dismiss screensaver on pointer motion — https://github.com/omacom/omarchy/pull/8048
 - #8033: Keep Ghostty terminals in the active working directory — https://github.com/omacom/omarchy/pull/8033
-- #8034: Dev layouts fall back to the default coding agent — https://github.com/omacom/omarchy/pull/8034
-- #8017: Hibernate with shutdown mode on ThinkBook X IMH so the machine powers off — https://github.com/omacom/omarchy/pull/8017
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10535,17 +10083,38 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B377
+### B358
 
 ```
-You are reviewing Omarchy pre-release batch B377 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B358 (4 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8034: Dev layouts fall back to the default coding agent — https://github.com/omacom/omarchy/pull/8034
+- #8017: Hibernate with shutdown mode on ThinkBook X IMH so the machine powers off — https://github.com/omacom/omarchy/pull/8017
 - #8016: fix(notifications): render <br/> line breaks instead of literal tag — https://github.com/omacom/omarchy/pull/8016
 - #8011: Let themes carry a declarative Neovim integration — https://github.com/omacom/omarchy/pull/8011
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B359
+
+```
+You are reviewing Omarchy pre-release batch B359 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
 - #8005: Fix grammar in navigation manual — https://github.com/omacom/omarchy/pull/8005
 - #13233: Fix grammar in navigation manual — https://github.com/omacom/omarchy/pull/13233
 - #8006: Fix file manager shortcut in hotkeys manual — https://github.com/omacom/omarchy/pull/8006
+- #8004: Stop killing running opencode sessions when changing themes — https://github.com/omacom/omarchy/pull/8004
+- #7975: Make the tray the bar's organizer: drag any widget in, around, and out — https://github.com/omacom/omarchy/pull/7975
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10557,39 +10126,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B378
+### B360
 
 ```
-You are reviewing Omarchy pre-release batch B378 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B360 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8004: Stop killing running opencode sessions when changing themes — https://github.com/omacom/omarchy/pull/8004
-- #7975: Make the tray the bar's organizer: drag any widget in, around, and out — https://github.com/omacom/omarchy/pull/7975
 - #7954: Remember menu selection when navigating back — https://github.com/omacom/omarchy/pull/7954
 - #7948: Stop the DMI chassis fallback in omarchy-hw-laptop reading an empty string — https://github.com/omacom/omarchy/pull/7948
 - #7946: Allow plugins to add menu launchers — https://github.com/omacom/omarchy/pull/7946
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B379
-
-```
-You are reviewing Omarchy pre-release batch B379 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #7931: Change 'Spending coulombs' to 'Cascading coulombs' — https://github.com/omacom/omarchy/pull/7931
 - #7932: Stop one blocked address from reading as an internet outage — https://github.com/omacom/omarchy/pull/7932
-- #7938: Sync cliamp with Omarchy themes — https://github.com/omacom/omarchy/pull/7938
-- #7927: image-picker: navigate theme carousel with mouse wheel — https://github.com/omacom/omarchy/pull/7927
-- #7924: Fix Codex usage collector's stale --ask-for-approval value — https://github.com/omacom/omarchy/pull/7924
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10601,17 +10148,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B380
+### B361
 
 ```
-You are reviewing Omarchy pre-release batch B380 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B361 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7938: Sync cliamp with Omarchy themes — https://github.com/omacom/omarchy/pull/7938
+- #7927: image-picker: navigate theme carousel with mouse wheel — https://github.com/omacom/omarchy/pull/7927
 - #7915: Treat pending-charge as a hold only inside a real charge limit — https://github.com/omacom/omarchy/pull/7915
 - #7905: Dictation indicator toggles dictation on left click — https://github.com/omacom/omarchy/pull/7905
 - #7910: window-pop: don't tile an already-floating window — https://github.com/omacom/omarchy/pull/7910
-- #7899: Keep the cursor in place when switching workspaces — https://github.com/omacom/omarchy/pull/7899
-- #7898: Quote input device names before embedding them in Lua — https://github.com/omacom/omarchy/pull/7898
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10623,17 +10170,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B381
+### B362
 
 ```
-You are reviewing Omarchy pre-release batch B381 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B362 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7899: Keep the cursor in place when switching workspaces — https://github.com/omacom/omarchy/pull/7899
 - #7886: Detach 1Password from the installer terminal — https://github.com/omacom/omarchy/pull/7886
 - #7890: Reject Voxtype on CPUs without AVX2 — https://github.com/omacom/omarchy/pull/7890
 - #7880: Don't treat Bluetooth Trusted as a completed pairing — https://github.com/omacom/omarchy/pull/7880
 - #7877: Force Firefox's media wakelock onto the Wayland idle-inhibit protocol — https://github.com/omacom/omarchy/pull/7877
-- #7876: Keep the screensaver above pinned windows — https://github.com/omacom/omarchy/pull/7876
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10645,15 +10192,15 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B382
+### B363
 
 ```
-You are reviewing Omarchy pre-release batch B382 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B363 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7876: Keep the screensaver above pinned windows — https://github.com/omacom/omarchy/pull/7876
 - #7861: Sort agents by total usage — https://github.com/omacom/omarchy/pull/7861
 - #7863: Add optional idle.blank: power off the display without locking — https://github.com/omacom/omarchy/pull/7863
-- #7851: Don't force the NVIDIA VA-API driver on hybrid-GPU systems — https://github.com/omacom/omarchy/pull/7851
 - #7839: Swap SUPER+TAB and ALT+TAB defaults to match macOS Cmd+Tab — https://github.com/omacom/omarchy/pull/7839
 - #7837: Show the friendly name a Bluetooth device was given, and let it be changed — https://github.com/omacom/omarchy/pull/7837
 
@@ -10667,10 +10214,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B383
+### B364
 
 ```
-You are reviewing Omarchy pre-release batch B383 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B364 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #7836: Add wallpaper selector captions and filtering — https://github.com/omacom/omarchy/pull/7836
@@ -10689,17 +10236,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B384
+### B365
 
 ```
-You are reviewing Omarchy pre-release batch B384 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B365 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #7821: Set an explicit lazygit editor preset to avoid vim fallback — https://github.com/omacom/omarchy/pull/7821
 - #7816: Scroll down instead of sideways on portrait monitors — https://github.com/omacom/omarchy/pull/7816
 - #7819: Stand down the tailscale poll watchdog once its polls exit — https://github.com/omacom/omarchy/pull/7819
-- #7812: fix(shell): ensure audio volume and mute reliably update via wpctl — https://github.com/omacom/omarchy/pull/7812
 - #7808: Let a KeyboardPanel owner opt out of dismissal — https://github.com/omacom/omarchy/pull/7808
+- #7806: Drop key auto-repeat in the lock screen password field — https://github.com/omacom/omarchy/pull/7806
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10711,17 +10258,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B385
+### B366
 
 ```
-You are reviewing Omarchy pre-release batch B385 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B366 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7806: Drop key auto-repeat in the lock screen password field — https://github.com/omacom/omarchy/pull/7806
 - #7797: Add Remove > 1Password to the shell menu — https://github.com/omacom/omarchy/pull/7797
 - #7794: Step running foot windows to the new text size — https://github.com/omacom/omarchy/pull/7794
 - #7796: Drop stale group descriptions from CLI router — https://github.com/omacom/omarchy/pull/7796
 - #7792: docs(agents): add plugin UI safety baseline — https://github.com/omacom/omarchy/pull/7792
+- #7787: Document memory gating for plugin file reads — https://github.com/omacom/omarchy/pull/7787
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10733,17 +10280,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B386
+### B367
 
 ```
-You are reviewing Omarchy pre-release batch B386 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B367 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7787: Document memory gating for plugin file reads — https://github.com/omacom/omarchy/pull/7787
 - #7779: Hide Hibernate when the kernel will not accept the request — https://github.com/omacom/omarchy/pull/7779
 - #7783: Keep PwNode objects out of the audio panel's Repeater models — https://github.com/omacom/omarchy/pull/7783
 - #12658: Keep PwNode objects out of the audio panel's Repeater models — https://github.com/omacom/omarchy/pull/12658
 - #7778: Remove GeForce NOW launcher leftovers on uninstall — https://github.com/omacom/omarchy/pull/7778
+- #7771: Fix stale local plugin reloads and add scoped hot reload — https://github.com/omacom/omarchy/pull/7771
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10755,17 +10302,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B387
+### B368
 
 ```
-You are reviewing Omarchy pre-release batch B387 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B368 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7771: Fix stale local plugin reloads and add scoped hot reload — https://github.com/omacom/omarchy/pull/7771
 - #7766: Add FIGlet screensaver branding picker — https://github.com/omacom/omarchy/pull/7766
 - #7765: Add OpenCode Zen usage to the agents panel — https://github.com/omacom/omarchy/pull/7765
 - #7763: Add Quick Settings to Setup menu — https://github.com/omacom/omarchy/pull/7763
 - #7757: Read the tmux session list once per theme change — https://github.com/omacom/omarchy/pull/7757
+- #7756: Stop building a theme signature nothing reads — https://github.com/omacom/omarchy/pull/7756
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10777,17 +10324,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B388
+### B369
 
 ```
-You are reviewing Omarchy pre-release batch B388 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B369 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7756: Stop building a theme signature nothing reads — https://github.com/omacom/omarchy/pull/7756
 - #7754: Avoid full plugin reload when discovering new plugins — https://github.com/omacom/omarchy/pull/7754
 - #7748: Add gradient fills for menu surfaces — https://github.com/omacom/omarchy/pull/7748
 - #7746: Add themed Voxtype dictation OSD (On-Screen Display) — https://github.com/omacom/omarchy/pull/7746
 - #7745: Keep Spotify volume across track changes — https://github.com/omacom/omarchy/pull/7745
+- #7740: Use rocket icon for Antigravity in defaults menu — https://github.com/omacom/omarchy/pull/7740
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10799,17 +10346,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B389
+### B370
 
 ```
-You are reviewing Omarchy pre-release batch B389 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B370 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7740: Use rocket icon for Antigravity in defaults menu — https://github.com/omacom/omarchy/pull/7740
 - #7738: Notifications: clicking a toast focuses the exact sending window when focus_on_activate is off — https://github.com/omacom/omarchy/pull/7738
 - #7737: Make the menu's navigation keys configurable — https://github.com/omacom/omarchy/pull/7737
 - #7736: Match LocalSend's current Wayland app ID — https://github.com/omacom/omarchy/pull/7736
 - #7727: Add omarchy-hyprland-workspace-compact to collapse workspaces to the lowest numbers — https://github.com/omacom/omarchy/pull/7727
+- #7729: Add a Setup menu entry to switch the clock between 24-hour and 12-hour time — https://github.com/omacom/omarchy/pull/7729
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10821,17 +10368,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B390
+### B371
 
 ```
-You are reviewing Omarchy pre-release batch B390 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B371 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7729: Add a Setup menu entry to switch the clock between 24-hour and 12-hour time — https://github.com/omacom/omarchy/pull/7729
 - #7726: Detect fingerprint readers by USB interface name — https://github.com/omacom/omarchy/pull/7726
 - #7725: Codex collector: plan label and model-scoped limit windows — https://github.com/omacom/omarchy/pull/7725
 - #7723: Keep last good shell config when user shell.json fails to parse — https://github.com/omacom/omarchy/pull/7723
 - #7722: Display keybindings in menu on demand via "?" — https://github.com/omacom/omarchy/pull/7722
+- #7717: Widen the column for full width on scrolling workspaces — https://github.com/omacom/omarchy/pull/7717
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10843,17 +10390,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B391
+### B372
 
 ```
-You are reviewing Omarchy pre-release batch B391 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B372 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7717: Widen the column for full width on scrolling workspaces — https://github.com/omacom/omarchy/pull/7717
 - #7716: Gate calculator keybindings with preinstalls — https://github.com/omacom/omarchy/pull/7716
 - #7714: Add per-channel mute toggles to the audio panel — https://github.com/omacom/omarchy/pull/7714
 - #7713: Include dual-width fonts in font picker — https://github.com/omacom/omarchy/pull/7713
 - #7708: Show the weather status notification in the panel's unit — https://github.com/omacom/omarchy/pull/7708
+- #7694: Reconnect trusted Bluetooth keyboards and mice at login — https://github.com/omacom/omarchy/pull/7694
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10865,17 +10412,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B392
+### B373
 
 ```
-You are reviewing Omarchy pre-release batch B392 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B373 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7694: Reconnect trusted Bluetooth keyboards and mice at login — https://github.com/omacom/omarchy/pull/7694
 - #7692: Keep inline bar widget settings across a widget re-creation — https://github.com/omacom/omarchy/pull/7692
 - #7693: Add Kiro CLI as a supported agent — https://github.com/omacom/omarchy/pull/7693
 - #7690: Add Neovim interactive REPL documentation and menu keybinding search — https://github.com/omacom/omarchy/pull/7690
 - #7686: Window Codex OpenCode usage to last month and include v2 sessions — https://github.com/omacom/omarchy/pull/7686
+- #7681: Show hours since battery was plugged in — https://github.com/omacom/omarchy/pull/7681
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10887,17 +10434,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B393
+### B374
 
 ```
-You are reviewing Omarchy pre-release batch B393 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B374 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7681: Show hours since battery was plugged in — https://github.com/omacom/omarchy/pull/7681
 - #7661: fix(menu): rank apps above destructive actions — https://github.com/omacom/omarchy/pull/7661
 - #7660: fix(keybindings): print Lua-compatible combos — https://github.com/omacom/omarchy/pull/7660
 - #7659: fix(menu): accept plus in search input — https://github.com/omacom/omarchy/pull/7659
 - #8023: Accept numpad and AltGr input in the menu and image picker filters — https://github.com/omacom/omarchy/pull/8023
+- #7654: docs: how to customize the lock screen — https://github.com/omacom/omarchy/pull/7654
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10909,17 +10456,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B394
+### B375
 
 ```
-You are reviewing Omarchy pre-release batch B394 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B375 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7654: docs: how to customize the lock screen — https://github.com/omacom/omarchy/pull/7654
 - #7653: Keep menu empty-state text inside the card — https://github.com/omacom/omarchy/pull/7653
 - #7637: Fix positional hotkeys for multi-surface bar widgets — https://github.com/omacom/omarchy/pull/7637
 - #7631: docs: troubleshoot USB devices that stop working after suspend (AMD xHCI) — https://github.com/omacom/omarchy/pull/7631
 - #7623: tailscale: virtualize the machine list so huge tailnets don't melt the shell — https://github.com/omacom/omarchy/pull/7623
+- #7615: Restore global workspace layouts — https://github.com/omacom/omarchy/pull/7615
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10931,17 +10478,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B395
+### B376
 
 ```
-You are reviewing Omarchy pre-release batch B395 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B376 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7615: Restore global workspace layouts — https://github.com/omacom/omarchy/pull/7615
 - #7610: Add Alfred-style quick-select to the menu — https://github.com/omacom/omarchy/pull/7610
 - #7601: Document the ç override on the US International layout — https://github.com/omacom/omarchy/pull/7601
 - #7599: Convert downloaded web app icons to PNG — https://github.com/omacom/omarchy/pull/7599
-- #7592: Refocus the lock password field after resume — https://github.com/omacom/omarchy/pull/7592
+- #7579: Keep scratchpad separate from Quake console — https://github.com/omacom/omarchy/pull/7579
+- #7578: Clamp idle timeouts to the int32 millisecond timer ceiling — https://github.com/omacom/omarchy/pull/7578
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10953,39 +10500,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B396
+### B377
 
 ```
-You are reviewing Omarchy pre-release batch B396 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B377 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7579: Keep scratchpad separate from Quake console — https://github.com/omacom/omarchy/pull/7579
-- #7578: Clamp idle timeouts to the int32 millisecond timer ceiling — https://github.com/omacom/omarchy/pull/7578
 - #7570: Install > Gaming: Quake (on-demand via the omarchy-quake package) — https://github.com/omacom/omarchy/pull/7570
 - #7568: Add dynamic bar transparency mode — https://github.com/omacom/omarchy/pull/7568
 - #12446: Add conditional bar transparency option — https://github.com/omacom/omarchy/pull/12446
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B397
-
-```
-You are reviewing Omarchy pre-release batch B397 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #7564: Make the keybindings menu's Lua bind scan safe against load-time config reads — https://github.com/omacom/omarchy/pull/7564
 - #7563: Clear a stuck bar-move ghost when the gesture is interrupted — https://github.com/omacom/omarchy/pull/7563
-- #7560: Fix weather panel hero overlapping location at triple-digit temps — https://github.com/omacom/omarchy/pull/7560
-- #7551: Measure speedtest on the interface the transfer uses — https://github.com/omacom/omarchy/pull/7551
-- #7547: Make agent limit display configurable — https://github.com/omacom/omarchy/pull/7547
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -10997,17 +10522,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B398
+### B378
 
 ```
-You are reviewing Omarchy pre-release batch B398 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B378 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7551: Measure speedtest on the interface the transfer uses — https://github.com/omacom/omarchy/pull/7551
+- #7547: Make agent limit display configurable — https://github.com/omacom/omarchy/pull/7547
 - #7545: Add per-application notification controls — https://github.com/omacom/omarchy/pull/7545
 - #7543: Show all Codex usage pools — https://github.com/omacom/omarchy/pull/7543
 - #7541: Add source, state, and kinds filters to omarchy-plugin-list — https://github.com/omacom/omarchy/pull/7541
-- #7542: Apply the theme accent color to Zen — https://github.com/omacom/omarchy/pull/7542
-- #7536: Treat Ctrl+[ as panel escape — https://github.com/omacom/omarchy/pull/7536
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11019,17 +10544,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B399
+### B379
 
 ```
-You are reviewing Omarchy pre-release batch B399 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B379 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7542: Apply the theme accent color to Zen — https://github.com/omacom/omarchy/pull/7542
+- #7536: Treat Ctrl+[ as panel escape — https://github.com/omacom/omarchy/pull/7536
 - #7528: Dismiss the screensaver on touch and pointer input, bluetooth mice included — https://github.com/omacom/omarchy/pull/7528
 - #7517: Show today's high and low in the weather panel — https://github.com/omacom/omarchy/pull/7517
 - #7512: Fix frozen media marquee showing only leading characters — https://github.com/omacom/omarchy/pull/7512
-- #7497: Stop monitor scaling from persisting a scale the reload will undo — https://github.com/omacom/omarchy/pull/7497
-- #7495: Keep the monitor layout when changing scale — https://github.com/omacom/omarchy/pull/7495
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11041,17 +10566,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B400
+### B380
 
 ```
-You are reviewing Omarchy pre-release batch B400 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B380 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7497: Stop monitor scaling from persisting a scale the reload will undo — https://github.com/omacom/omarchy/pull/7497
+- #7495: Keep the monitor layout when changing scale — https://github.com/omacom/omarchy/pull/7495
 - #7494: Only follow an opened link when an argument is a URL — https://github.com/omacom/omarchy/pull/7494
 - #7493: Make the Display panel aware of orientation, with rotate lock and auto-rotation — https://github.com/omacom/omarchy/pull/7493
 - #7491: Show the hourglass while dictation is transcribing — https://github.com/omacom/omarchy/pull/7491
-- #7490: Show when Tailscale is routing through an exit node — https://github.com/omacom/omarchy/pull/7490
-- #7488: Detect Apple Silicon trackpads in omarchy-hw-touchpad — https://github.com/omacom/omarchy/pull/7488
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11063,17 +10588,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B401
+### B381
 
 ```
-You are reviewing Omarchy pre-release batch B401 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B381 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7490: Show when Tailscale is routing through an exit node — https://github.com/omacom/omarchy/pull/7490
 - #7475: Keep the Bluetooth device list where it was left while scanning — https://github.com/omacom/omarchy/pull/7475
 - #7473: Preserve XCompose customizations on setup rerun — https://github.com/omacom/omarchy/pull/7473
 - #7471: Wake the blanked lock screen from the keyboard — https://github.com/omacom/omarchy/pull/7471
 - #7468: Prime the Settings portal before changing color scheme — https://github.com/omacom/omarchy/pull/7468
-- #7465: Fix Obsidian focus pattern for its current app id — https://github.com/omacom/omarchy/pull/7465
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11085,17 +10610,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B402
+### B382
 
 ```
-You are reviewing Omarchy pre-release batch B402 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B382 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7465: Fix Obsidian focus pattern for its current app id — https://github.com/omacom/omarchy/pull/7465
 - #7460: Let the Lua assertions in shell tests fail — https://github.com/omacom/omarchy/pull/7460
 - #7459: Initialize the analog playback path for any ASUS ROG Realtek codec — https://github.com/omacom/omarchy/pull/7459
 - #7452: Clipboard manager: OCR search, configurable history and paste behavior — https://github.com/omacom/omarchy/pull/7452
 - #7451: menu: scale wheel events 3x for faster touchpad scrolling on long lists — https://github.com/omacom/omarchy/pull/7451
-- #7450: cliamp: ship desktop entry override with distinct app-id for window rule matching — https://github.com/omacom/omarchy/pull/7450
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11107,14 +10632,14 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B403
+### B383
 
 ```
-You are reviewing Omarchy pre-release batch B403 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B383 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7450: cliamp: ship desktop entry override with distinct app-id for window rule matching — https://github.com/omacom/omarchy/pull/7450
 - #7447: sleep-monitor: resolve dbus-monitor by absolute path to avoid PATH shadowing — https://github.com/omacom/omarchy/pull/7447
-- #7449: emoji-insert: persist clipboard instead of clearing it after 0.35s — https://github.com/omacom/omarchy/pull/7449
 - #7446: default-editor: sync XDG MIME defaults so Nautilus respects the menu selection — https://github.com/omacom/omarchy/pull/7446
 - #7445: shell: close menu-spawned panels on toggle re-press instead of re-running the action — https://github.com/omacom/omarchy/pull/7445
 - #7436: Read login_background/login_foreground from colors.toml with fallback — https://github.com/omacom/omarchy/pull/7436
@@ -11129,10 +10654,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B404
+### B384
 
 ```
-You are reviewing Omarchy pre-release batch B404 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B384 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #7434: Add shell translation catalogs — https://github.com/omacom/omarchy/pull/7434
@@ -11151,17 +10676,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B405
+### B385
 
 ```
-You are reviewing Omarchy pre-release batch B405 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B385 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #7431: Compare image paths as strings when caching lazy thumbnail rows — https://github.com/omacom/omarchy/pull/7431
-- #7408: Refactor monitor_rules for better rule processing — https://github.com/omacom/omarchy/pull/7408
 - #7406: Say when acceptance screenshots fail to capture — https://github.com/omacom/omarchy/pull/7406
 - #7402: Make stateful regression tests self-contained — https://github.com/omacom/omarchy/pull/7402
 - #7404: Accept theme-set display names in theme remove — https://github.com/omacom/omarchy/pull/7404
+- #7405: Fail shell and CLI tests when ripgrep is missing — https://github.com/omacom/omarchy/pull/7405
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11173,39 +10698,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B406
+### B386
 
 ```
-You are reviewing Omarchy pre-release batch B406 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B386 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7405: Fail shell and CLI tests when ripgrep is missing — https://github.com/omacom/omarchy/pull/7405
 - #7400: Prevent duplicate agents widget during migration — https://github.com/omacom/omarchy/pull/7400
 - #7398: Resolve package-backed OMARCHY_PATH symlinks — https://github.com/omacom/omarchy/pull/7398
 - #7387: plugin cli: force LC_ALL=C so plugin ids validate under any locale — https://github.com/omacom/omarchy/pull/7387
 - #7386: Make the lock screen blank delay configurable — https://github.com/omacom/omarchy/pull/7386
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B407
-
-```
-You are reviewing Omarchy pre-release batch B407 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #7385: Protect active Bluetooth audio from panel discovery — https://github.com/omacom/omarchy/pull/7385
-- #7381: fix: sanitize clipboard and notification HTML to prevent Qt6 StyledText crash — https://github.com/omacom/omarchy/pull/7381
-- #7373: update battery lookup — https://github.com/omacom/omarchy/pull/7373
-- #13029: Find system batteries not named BAT* — https://github.com/omacom/omarchy/pull/13029
-- #7372: Add searched menu selection event — https://github.com/omacom/omarchy/pull/7372
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11217,17 +10720,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B408
+### B387
 
 ```
-You are reviewing Omarchy pre-release batch B408 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B387 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7381: fix: sanitize clipboard and notification HTML to prevent Qt6 StyledText crash — https://github.com/omacom/omarchy/pull/7381
+- #7372: Add searched menu selection event — https://github.com/omacom/omarchy/pull/7372
 - #7366: Stop cloning plugins into the reserved omarchy.* namespace — https://github.com/omacom/omarchy/pull/7366
 - #7370: Fire the restart-terminal toast after a font change — https://github.com/omacom/omarchy/pull/7370
 - #7365: Stop advertising empty command groups in omarchy --help — https://github.com/omacom/omarchy/pull/7365
-- #7363: Add Open in Terminal to the Files context menu — https://github.com/omacom/omarchy/pull/7363
-- #7356: Detect the tailscale CLI without the which package — https://github.com/omacom/omarchy/pull/7356
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11239,17 +10742,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B409
+### B388
 
 ```
-You are reviewing Omarchy pre-release batch B409 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B388 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7363: Add Open in Terminal to the Files context menu — https://github.com/omacom/omarchy/pull/7363
 - #7345: Let users rebind the menu's navigation keys — https://github.com/omacom/omarchy/pull/7345
 - #7344: Add the task manager shell plugin — https://github.com/omacom/omarchy/pull/7344
 - #7340: Add per-display HDR and rotation to the Display panel — https://github.com/omacom/omarchy/pull/7340
 - #7338: Remove redundant tmux escape-time setting — https://github.com/omacom/omarchy/pull/7338
-- #7336: Re-detect Apple display when cached hiddev node stops responding — https://github.com/omacom/omarchy/pull/7336
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11261,17 +10764,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B410
+### B389
 
 ```
-You are reviewing Omarchy pre-release batch B410 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B389 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7336: Re-detect Apple display when cached hiddev node stops responding — https://github.com/omacom/omarchy/pull/7336
 - #7337: Sync the Omarchy theme to Mailspring — https://github.com/omacom/omarchy/pull/7337
 - #7332: Scroll the Tailscale machine list independently of the panel — https://github.com/omacom/omarchy/pull/7332
 - #7322: Require explicit approval for upstream agent work — https://github.com/omacom/omarchy/pull/7322
 - #7320: Give empty menu file searches real feedback instead of a usage error — https://github.com/omacom/omarchy/pull/7320
-- #7318: Warn about shrinking partitions during install — https://github.com/omacom/omarchy/pull/7318
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11283,17 +10786,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B411
+### B390
 
 ```
-You are reviewing Omarchy pre-release batch B411 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B390 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7318: Warn about shrinking partitions during install — https://github.com/omacom/omarchy/pull/7318
 - #7309: fix: always use sed -i --follow-symlinks to preserve symlinks — https://github.com/omacom/omarchy/pull/7309
 - #7308: Keep jack names on multi-port audio devices — https://github.com/omacom/omarchy/pull/7308
 - #7298: Stop the agents panel scrolling by a few pixels — https://github.com/omacom/omarchy/pull/7298
 - #7307: Fit screensaver art to the monitor scale — https://github.com/omacom/omarchy/pull/7307
-- #7302: Note that voxtype push-to-talk can't be rebound to a bare modifier key — https://github.com/omacom/omarchy/pull/7302
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11305,16 +10808,16 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B412
+### B391
 
 ```
-You are reviewing Omarchy pre-release batch B412 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B391 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7302: Note that voxtype push-to-talk can't be rebound to a bare modifier key — https://github.com/omacom/omarchy/pull/7302
 - #7296: feat: wrap the overflowing text in the menu — https://github.com/omacom/omarchy/pull/7296
 - #7290: Keep tray icons rendering when an icon switches symbolic state — https://github.com/omacom/omarchy/pull/7290
 - #7289: capture: exclude media-controller nodes from the webcam list — https://github.com/omacom/omarchy/pull/7289
-- #7283: Use layout-independent universal clipboard shortcuts — https://github.com/omacom/omarchy/pull/7283
 - #7282: feat: add numpad workspace bindings — https://github.com/omacom/omarchy/pull/7282
 
 Work through the batch methodically:
@@ -11327,10 +10830,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B413
+### B392
 
 ```
-You are reviewing Omarchy pre-release batch B413 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B392 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #7286: Prefer footclient when Foot is the default terminal — https://github.com/omacom/omarchy/pull/7286
@@ -11349,17 +10852,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B414
+### B393
 
 ```
-You are reviewing Omarchy pre-release batch B414 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B393 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #7254: Fix plugin bar loading and its silent failure — https://github.com/omacom/omarchy/pull/7254
 - #7251: Add optional pill containers for bar sections — https://github.com/omacom/omarchy/pull/7251
 - #7247: Install Grok through mise's first-party registry — https://github.com/omacom/omarchy/pull/7247
 - #7246: Make weather and clock panel anchoring configurable — https://github.com/omacom/omarchy/pull/7246
-- #7245: fix(shell): position bar widget panels relative to anchor widget — https://github.com/omacom/omarchy/pull/7245
+- #7243: Add monitorOnly option to workspaces bar widget — https://github.com/omacom/omarchy/pull/7243
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11371,17 +10874,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B415
+### B394
 
 ```
-You are reviewing Omarchy pre-release batch B415 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B394 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7243: Add monitorOnly option to workspaces bar widget — https://github.com/omacom/omarchy/pull/7243
 - #7241: Inset BorderSurface strokes a device pixel to survive clip edges — https://github.com/omacom/omarchy/pull/7241
 - #7240: Fix invisible VS Code list hover state — https://github.com/omacom/omarchy/pull/7240
-- #7239: Prepend the Omarchy bin dir in dev-link mode only — https://github.com/omacom/omarchy/pull/7239
 - #7231: Dispatch shell commands without a login shell — https://github.com/omacom/omarchy/pull/7231
+- #7235: Don't let a failed self-update abort a working mise-wrapped tool — https://github.com/omacom/omarchy/pull/7235
+- #7225: Label the Claude plan from the profile the CLI refreshes — https://github.com/omacom/omarchy/pull/7225
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11393,17 +10896,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B416
+### B395
 
 ```
-You are reviewing Omarchy pre-release batch B416 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B395 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7235: Don't let a failed self-update abort a working mise-wrapped tool — https://github.com/omacom/omarchy/pull/7235
-- #7225: Label the Claude plan from the profile the CLI refreshes — https://github.com/omacom/omarchy/pull/7225
 - #7219: Fix keyboard label and Wi-Fi scrollbar alignment — https://github.com/omacom/omarchy/pull/7219
 - #7216: Stub OSD calls in power tests — https://github.com/omacom/omarchy/pull/7216
 - #7207: Recover laptop display after external disconnect — https://github.com/omacom/omarchy/pull/7207
+- #7205: Fix audio panel selection for sinks with multiple ports — https://github.com/omacom/omarchy/pull/7205
+- #7197: Persist Tmux workspaces with resurrect — https://github.com/omacom/omarchy/pull/7197
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11415,17 +10918,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B417
+### B396
 
 ```
-You are reviewing Omarchy pre-release batch B417 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B396 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7205: Fix audio panel selection for sinks with multiple ports — https://github.com/omacom/omarchy/pull/7205
-- #7197: Persist Tmux workspaces with resurrect — https://github.com/omacom/omarchy/pull/7197
 - #7189: Report screen recordings that fail to start — https://github.com/omacom/omarchy/pull/7189
 - #7188: Honor OMARCHY_SCREENRECORD_USE_PORTAL when recording fullscreen — https://github.com/omacom/omarchy/pull/7188
 - #7186: Report combined dual-battery status in the power panel — https://github.com/omacom/omarchy/pull/7186
+- #7187: Fix image paste in Kitty and Ghostty — https://github.com/omacom/omarchy/pull/7187
+- #7173: Localize clock bar weekday/month names — https://github.com/omacom/omarchy/pull/7173
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11437,39 +10940,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B418
+### B397
 
 ```
-You are reviewing Omarchy pre-release batch B418 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B397 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7187: Fix image paste in Kitty and Ghostty — https://github.com/omacom/omarchy/pull/7187
-- #7173: Localize clock bar weekday/month names — https://github.com/omacom/omarchy/pull/7173
 - #7168: Add media controls to the audio panel — https://github.com/omacom/omarchy/pull/7168
 - #7164: Fix password field losing autofocus on lock screen — https://github.com/omacom/omarchy/pull/7164
 - #7163: Collapse bar widgets listed before the tray into the tray drawer — https://github.com/omacom/omarchy/pull/7163
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B419
-
-```
-You are reviewing Omarchy pre-release batch B419 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #7152: Add drag-to-arrange monitor layout in Display — https://github.com/omacom/omarchy/pull/7152
 - #7146: Disable the panel by overlay alone in clamshell recovery — https://github.com/omacom/omarchy/pull/7146
-- #7136: Update installed plugins with Omarchy — https://github.com/omacom/omarchy/pull/7136
-- #7131: Stop the idle service starting a cycle on top of the lock it just asked for — https://github.com/omacom/omarchy/pull/7131
-- #7144: Window VM start then stop, add retry mechanism for RDP connection — https://github.com/omacom/omarchy/pull/7144
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11481,17 +10962,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B420
+### B398
 
 ```
-You are reviewing Omarchy pre-release batch B420 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B398 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7136: Update installed plugins with Omarchy — https://github.com/omacom/omarchy/pull/7136
+- #7131: Stop the idle service starting a cycle on top of the lock it just asked for — https://github.com/omacom/omarchy/pull/7131
 - #7130: Skip the sleep lock repair when the unit is not installed — https://github.com/omacom/omarchy/pull/7130
 - #7102: Only treat lost focus as a dismissal once the screensaver has held focus — https://github.com/omacom/omarchy/pull/7102
 - #13637: Only treat lost focus as screensaver dismissal after it has held focus — https://github.com/omacom/omarchy/pull/13637
-- #7095: fix: Align webapp install hint with Apps menu wording — https://github.com/omacom/omarchy/pull/7095
-- #7088: Fix polkit password dots rendering as tiny specks — https://github.com/omacom/omarchy/pull/7088
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11503,17 +10984,38 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B421
+### B399
 
 ```
-You are reviewing Omarchy pre-release batch B421 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B399 (4 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #7095: fix: Align webapp install hint with Apps menu wording — https://github.com/omacom/omarchy/pull/7095
+- #7088: Fix polkit password dots rendering as tiny specks — https://github.com/omacom/omarchy/pull/7088
 - #7075: menu: add web search fallback for unmatched queries — https://github.com/omacom/omarchy/pull/7075
 - #8012: Add web search fallback to the menu — https://github.com/omacom/omarchy/pull/8012
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B400
+
+```
+You are reviewing Omarchy pre-release batch B400 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
 - #7074: Remember cursor position when navigating back in the root menu — https://github.com/omacom/omarchy/pull/7074
 - #12759: Preserve menu position and search state when navigating back — https://github.com/omacom/omarchy/pull/12759
 - #7065: fix: ensure bluetooth panel stays visible when adapter is soft-blocked — https://github.com/omacom/omarchy/pull/7065
+- #7063: Document NVIDIA/Realtek boot workarounds for the live ISO and installed system — https://github.com/omacom/omarchy/pull/7063
+- #7042: Add Ctrl-N and Ctrl-P menu navigation — https://github.com/omacom/omarchy/pull/7042
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11525,17 +11027,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B422
+### B401
 
 ```
-You are reviewing Omarchy pre-release batch B422 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B401 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7063: Document NVIDIA/Realtek boot workarounds for the live ISO and installed system — https://github.com/omacom/omarchy/pull/7063
-- #7042: Add Ctrl-N and Ctrl-P menu navigation — https://github.com/omacom/omarchy/pull/7042
 - #7039: Support Firefox as a web app browser — https://github.com/omacom/omarchy/pull/7039
 - #7037: Add per application output routing to the audio mixer — https://github.com/omacom/omarchy/pull/7037
 - #7036: Fix enabling and disabling a display doing nothing — https://github.com/omacom/omarchy/pull/7036
+- #7024: Fix cloned bar plugins failing to load (required properties) — https://github.com/omacom/omarchy/pull/7024
+- #7029: Show the new track on the media OSD instead of the player name — https://github.com/omacom/omarchy/pull/7029
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11547,17 +11049,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B423
+### B402
 
 ```
-You are reviewing Omarchy pre-release batch B423 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B402 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7024: Fix cloned bar plugins failing to load (required properties) — https://github.com/omacom/omarchy/pull/7024
-- #7029: Show the new track on the media OSD instead of the player name — https://github.com/omacom/omarchy/pull/7029
 - #7030: feat(webapp): install web apps as native Zen Taskbar Tabs — https://github.com/omacom/omarchy/pull/7030
 - #7023: Fix inverted on/off semantics in omarchy-toggle-bar — https://github.com/omacom/omarchy/pull/7023
 - #7020: Float Java AWT XWayland popups instead of tiling them — https://github.com/omacom/omarchy/pull/7020
+- #7017: Show recent emojis first in picker — https://github.com/omacom/omarchy/pull/7017
+- #7016: Added fuzzy search to menu — https://github.com/omacom/omarchy/pull/7016
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11569,17 +11071,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B424
+### B403
 
 ```
-You are reviewing Omarchy pre-release batch B424 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B403 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7017: Show recent emojis first in picker — https://github.com/omacom/omarchy/pull/7017
-- #7016: Added fuzzy search to menu — https://github.com/omacom/omarchy/pull/7016
 - #7011: Keep bar clicks out of login shells — https://github.com/omacom/omarchy/pull/7011
 - #7000: Make Omarchy's automatic monitor management toggleable — https://github.com/omacom/omarchy/pull/7000
 - #7002: Add omarchy-plugin-dev agent skill for authoring third-party plugins — https://github.com/omacom/omarchy/pull/7002
+- #6979: Share clipboard via LocalSend's native text argument — https://github.com/omacom/omarchy/pull/6979
+- #6967: Add Haskell development environment via mise — https://github.com/omacom/omarchy/pull/6967
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11591,17 +11093,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B425
+### B404
 
 ```
-You are reviewing Omarchy pre-release batch B425 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B404 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #6979: Share clipboard via LocalSend's native text argument — https://github.com/omacom/omarchy/pull/6979
-- #6967: Add Haskell development environment via mise — https://github.com/omacom/omarchy/pull/6967
 - #6966: Offer an explicit Tailscale DNS repair when nameservers are unreachable — https://github.com/omacom/omarchy/pull/6966
 - #6963: Remove unsafe Ghostty epoll workaround — https://github.com/omacom/omarchy/pull/6963
 - #6961: Bar widget group — https://github.com/omacom/omarchy/pull/6961
+- #6959: Require checking for duplicate issues and pending fixes before filing — https://github.com/omacom/omarchy/pull/6959
+- #6958: Preserve terminal font size when changing font family — https://github.com/omacom/omarchy/pull/6958
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11613,61 +11115,39 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B426
+### B405
 
 ```
-You are reviewing Omarchy pre-release batch B426 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B405 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #6959: Require checking for duplicate issues and pending fixes before filing — https://github.com/omacom/omarchy/pull/6959
-- #6958: Preserve terminal font size when changing font family — https://github.com/omacom/omarchy/pull/6958
 - #6954: Render bar label text with NativeRendering — https://github.com/omacom/omarchy/pull/6954
 - #6930: Prefer Tailscale machine names in the panel — https://github.com/omacom/omarchy/pull/6930
 - #6932: Fix Voxtype dictation click error for upgraded accounts — https://github.com/omacom/omarchy/pull/6932
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B427
-
-```
-You are reviewing Omarchy pre-release batch B427 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #6920: Preview fonts in the font menu — https://github.com/omacom/omarchy/pull/6920
 - #6972: Restore leftover app-menu icons after the Quattro upgrade — https://github.com/omacom/omarchy/pull/6972
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B406
+
+```
+You are reviewing Omarchy pre-release batch B406 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
 - #6924: Prevent togglesplit error in scrolling layout — https://github.com/omacom/omarchy/pull/6924
 - #12851: Prevent Super+J errors outside dwindle layouts — https://github.com/omacom/omarchy/pull/12851
-- #6918: Keep Wi-Fi indicator online when AP object is missing — https://github.com/omacom/omarchy/pull/6918
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B428
-
-```
-You are reviewing Omarchy pre-release batch B428 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #6916: Add a quick toggle for touchpad natural scroll — https://github.com/omacom/omarchy/pull/6916
-- #6907: Restore conventional copy/paste bindings in foot configs seeded by Omarchy 3 — https://github.com/omacom/omarchy/pull/6907
 - #6904: Dismiss an open shell panel with Super+W — https://github.com/omacom/omarchy/pull/6904
 - #6897: Follow PipeWire so the mute LEDs can't go stale — https://github.com/omacom/omarchy/pull/6897
-- #6884: fix: rewrite webapp desktop Icon= paths orphaned by quattro upgrade — https://github.com/omacom/omarchy/pull/6884
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11679,15 +11159,15 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B429
+### B407
 
 ```
-You are reviewing Omarchy pre-release batch B429 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B407 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #6884: fix: rewrite webapp desktop Icon= paths orphaned by quattro upgrade — https://github.com/omacom/omarchy/pull/6884
 - #6896: Apply the system keyboard layout to the SDDM greeter — https://github.com/omacom/omarchy/pull/6896
 - #6892: Fix emoji paste in Firefox — https://github.com/omacom/omarchy/pull/6892
-- #6856: Stop upgraded laptops reverting to performance mode on AC — https://github.com/omacom/omarchy/pull/6856
 - #6860: Default agents panel to selected agent — https://github.com/omacom/omarchy/pull/6860
 - #6871: Keep the menu populated across git swaps of its definition file — https://github.com/omacom/omarchy/pull/6871
 
@@ -11701,10 +11181,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B430
+### B408
 
 ```
-You are reviewing Omarchy pre-release batch B430 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B408 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #6872: Don't mistake a stale Chromium singleton lock for an open browser — https://github.com/omacom/omarchy/pull/6872
@@ -11723,10 +11203,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B431
+### B409
 
 ```
-You are reviewing Omarchy pre-release batch B431 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B409 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #6829: Show Bluetooth device kind on each row — https://github.com/omacom/omarchy/pull/6829
@@ -11745,10 +11225,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B432
+### B410
 
 ```
-You are reviewing Omarchy pre-release batch B432 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B410 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #6786: Add widgets to the bar from a searchable picker — https://github.com/omacom/omarchy/pull/6786
@@ -11767,10 +11247,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B433
+### B411
 
 ```
-You are reviewing Omarchy pre-release batch B433 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B411 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #6742: Open Spotify links in the native app instead of the browser — https://github.com/omacom/omarchy/pull/6742
@@ -11789,10 +11269,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B434
+### B412
 
 ```
-You are reviewing Omarchy pre-release batch B434 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B412 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #6698: Add folder transcoding — https://github.com/omacom/omarchy/pull/6698
@@ -11811,10 +11291,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B435
+### B413
 
 ```
-You are reviewing Omarchy pre-release batch B435 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B413 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #6587: Let [bar] in shell.toml set every token Style reads — https://github.com/omacom/omarchy/pull/6587
@@ -11833,17 +11313,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B436
+### B414
 
 ```
-You are reviewing Omarchy pre-release batch B436 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B414 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #6550: Add per-scope sliders to display widget — https://github.com/omacom/omarchy/pull/6550
-- #6548: Fix audio device labels and guard seamless output switching — https://github.com/omacom/omarchy/pull/6548
 - #6533: Make keyboard backlight steps consistent in both directions — https://github.com/omacom/omarchy/pull/6533
 - #6525: Fix menu JSONC parsing silently dropping trailing-line comments — https://github.com/omacom/omarchy/pull/6525
 - #6521: Map Omarchy light/dark to Grok built-in themes — https://github.com/omacom/omarchy/pull/6521
+- #6510: Keep a panel plugin enabled when its bar icon is removed — https://github.com/omacom/omarchy/pull/6510
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11855,39 +11335,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B437
+### B415
 
 ```
-You are reviewing Omarchy pre-release batch B437 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B415 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #6511: Reject theme names that could escape THEMES_DIR in theme remove — https://github.com/omacom/omarchy/pull/6511
-- #6510: Keep a panel plugin enabled when its bar icon is removed — https://github.com/omacom/omarchy/pull/6510
 - #6508: fix(shell): switch route when toggle requested for open menu & prevent XF86PowerOff key repeat — https://github.com/omacom/omarchy/pull/6508
 - #6507: fix(notifications): check file icon existence via Quickshell.iconPath before setting Image source — https://github.com/omacom/omarchy/pull/6507
-- #6506: fix(commons): check Process.running before triggering hyprctl & fc-match in Style.qml — https://github.com/omacom/omarchy/pull/6506
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B438
-
-```
-You are reviewing Omarchy pre-release batch B438 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #6496: Disable the laptop display while mirroring is on — https://github.com/omacom/omarchy/pull/6496
 - #6501: feat(bar): add bar.screens to restrict the bar to specific monitors — https://github.com/omacom/omarchy/pull/6501
 - #6505: fix(shell): remove login-shell overhead & queue in-flight icon index scans in AppLibrary — https://github.com/omacom/omarchy/pull/6505
-- #6489: Drop app bindings when their launcher entry is removed — https://github.com/omacom/omarchy/pull/6489
-- #6478: Attribute Codex sessions to their model from thread settings — https://github.com/omacom/omarchy/pull/6478
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11899,17 +11357,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B439
+### B416
 
 ```
-You are reviewing Omarchy pre-release batch B439 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B416 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #6489: Drop app bindings when their launcher entry is removed — https://github.com/omacom/omarchy/pull/6489
+- #6478: Attribute Codex sessions to their model from thread settings — https://github.com/omacom/omarchy/pull/6478
 - #6481: feat(btop): Change rounded corners setting to false — https://github.com/omacom/omarchy/pull/6481
 - #6471: Hide sharee nodes from the Tailscale machines list — https://github.com/omacom/omarchy/pull/6471
 - #6470: Add pause/resume support to screen recording — https://github.com/omacom/omarchy/pull/6470
-- #6467: fix(panel-slider): color-match muted knob to dimmed fill line — https://github.com/omacom/omarchy/pull/6467
-- #6451: fix add built in transparency theme options — https://github.com/omacom/omarchy/pull/6451
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11921,16 +11379,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B440
+### B417
 
 ```
-You are reviewing Omarchy pre-release batch B440 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B417 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #6467: fix(panel-slider): color-match muted knob to dimmed fill line — https://github.com/omacom/omarchy/pull/6467
+- #6451: fix add built in transparency theme options — https://github.com/omacom/omarchy/pull/6451
 - #6402: Add refresh-rate control to the display panel — https://github.com/omacom/omarchy/pull/6402
 - #6388: Fix ASUS ExpertBook B9406 touchpad quirk never being applied — https://github.com/omacom/omarchy/pull/6388
 - #6333: Prevent Chromium Vulkan crashes on Wayland — https://github.com/omacom/omarchy/pull/6333
-- #6122: fix: multi-monitor window highlighting in slurp capture — https://github.com/omacom/omarchy/pull/6122
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11942,17 +11401,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B441
+### B418
 
 ```
-You are reviewing Omarchy pre-release batch B441 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B418 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #6122: fix: multi-monitor window highlighting in slurp capture — https://github.com/omacom/omarchy/pull/6122
 - #6105: Make webapps profile-aware for Chromium-based browsers — https://github.com/omacom/omarchy/pull/6105
 - #9679: Add browser profile picker to web app setup — https://github.com/omacom/omarchy/pull/9679
 - #6104: Add Wezterm auto-theming support — https://github.com/omacom/omarchy/pull/6104
 - #6100: add user-defined keybindings extension for keybindings menu — https://github.com/omacom/omarchy/pull/6100
-- #6078: Add --browser flag to omarchy-launch-webapp — https://github.com/omacom/omarchy/pull/6078
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11964,17 +11423,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B442
+### B419
 
 ```
-You are reviewing Omarchy pre-release batch B442 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B419 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #6078: Add --browser flag to omarchy-launch-webapp — https://github.com/omacom/omarchy/pull/6078
 - #6058: Theme Zen Browser chrome — https://github.com/omacom/omarchy/pull/6058
 - #10867: Theme Zen Browser chrome (modernized for quattro) — https://github.com/omacom/omarchy/pull/10867
 - #6042: fix active terminal cwd finder logic — https://github.com/omacom/omarchy/pull/6042
 - #5999: feat(browser): add opt-in Google Chrome Beta support — https://github.com/omacom/omarchy/pull/5999
-- #5964: Drop orphan .desktop entries when their backing command is gone — https://github.com/omacom/omarchy/pull/5964
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -11986,17 +11445,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B443
+### B420
 
 ```
-You are reviewing Omarchy pre-release batch B443 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B420 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #5964: Drop orphan .desktop entries when their backing command is gone — https://github.com/omacom/omarchy/pull/5964
 - #5954: Add Antigravity editor support — https://github.com/omacom/omarchy/pull/5954
 - #5934: omarchy-webapp-install: set StartupWMClass so app switchers find the icon — https://github.com/omacom/omarchy/pull/5934
 - #5925: Remove redundant agent guidance in user customization skill — https://github.com/omacom/omarchy/pull/5925
 - #5902: Simplify omarchy-dev-add-migration and make it possible to override OMARCHY_PATH for dev — https://github.com/omacom/omarchy/pull/5902
-- #5884: fix: window-pop behavior — https://github.com/omacom/omarchy/pull/5884
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12008,17 +11467,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B444
+### B421
 
 ```
-You are reviewing Omarchy pre-release batch B444 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B421 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #5884: fix: window-pop behavior — https://github.com/omacom/omarchy/pull/5884
 - #5881: Account for keyboard layout variant for keybinding helper — https://github.com/omacom/omarchy/pull/5881
 - #5850: Fix Undercurl — https://github.com/omacom/omarchy/pull/5850
 - #5839: Fix keyboard backlight not restoring after suspend and lock — https://github.com/omacom/omarchy/pull/5839
 - #5818: Add Affinity Suite installer with DPI scaling for Hyprland — https://github.com/omacom/omarchy/pull/5818
-- #5830: Enable HDMI audio auto-profile for AMD controllers — https://github.com/omacom/omarchy/pull/5830
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12030,12 +11489,13 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B445
+### B422
 
 ```
-You are reviewing Omarchy pre-release batch B445 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B422 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #5830: Enable HDMI audio auto-profile for AMD controllers — https://github.com/omacom/omarchy/pull/5830
 - #5809: feat: Add Theme Scheduler with auto sunrise/sunset and fixed time modes — https://github.com/omacom/omarchy/pull/5809
 - #5796: Add floating terminal launcher without omarchy presentation wrapper — https://github.com/omacom/omarchy/pull/5796
 - #5716: Add TLP support for power profile management — https://github.com/omacom/omarchy/pull/5716
@@ -12051,10 +11511,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B446
+### B423
 
 ```
-You are reviewing Omarchy pre-release batch B446 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B423 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #5600: fix imv image navigation — https://github.com/omacom/omarchy/pull/5600
@@ -12073,17 +11533,521 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
+### B424
+
+```
+You are reviewing Omarchy pre-release batch B424 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #5567: Fix headphone audio on ASUS ROG Strix G16 (ALC285) — https://github.com/omacom/omarchy/pull/5567
+- #5564: Use color# naming in tmux config — https://github.com/omacom/omarchy/pull/5564
+- #5424: Set keyboard brightness to fixed values of 0, 1, 25 and 100. — https://github.com/omacom/omarchy/pull/5424
+- #5343: Install nautilus-open-any-terminal to open the default terminal from any Nautilus directory — https://github.com/omacom/omarchy/pull/5343
+- #5317: feat: gracefully swap ALSA hardware profiles on single-sink unified chips systems — https://github.com/omacom/omarchy/pull/5317
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B425
+
+```
+You are reviewing Omarchy pre-release batch B425 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #5403: Persist workspace layout toggles — https://github.com/omacom/omarchy/pull/5403
+- #5312: Fix Chromium EGL errors on hybrid NVIDIA + iGPU laptops — https://github.com/omacom/omarchy/pull/5312
+- #5309: Fix: Prevent malformed input on theme install by trimming whitespace from URL — https://github.com/omacom/omarchy/pull/5309
+- #5282: Add ddcutil fallback for brightness on desktops without backlight device — https://github.com/omacom/omarchy/pull/5282
+- #5195: Add viu for image previews in fzf for Alacritty and Ghostty — https://github.com/omacom/omarchy/pull/5195
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B426
+
+```
+You are reviewing Omarchy pre-release batch B426 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #5144: Add battery charging threshold to toggle menu — https://github.com/omacom/omarchy/pull/5144
+- #5031: add odin to installable development environments — https://github.com/omacom/omarchy/pull/5031
+- #5020: Add ASUS TUF laptop support for asusctl and keyboard RGB — https://github.com/omacom/omarchy/pull/5020
+- #5011: feat: add smart tmux session management — https://github.com/omacom/omarchy/pull/5011
+- #4985: Add Thorium to list of valid 'omarchy-launch-webapp' browsers that work with '--app' — https://github.com/omacom/omarchy/pull/4985
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B427
+
+```
+You are reviewing Omarchy pre-release batch B427 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #4962: Replace slashes in worktree path with dashes — https://github.com/omacom/omarchy/pull/4962
+- #4936: rename tmux pane to running command where possible — https://github.com/omacom/omarchy/pull/4936
+- #4928: Only match window class in omarchy-launch-or-focus — https://github.com/omacom/omarchy/pull/4928
+- #7700: Match Spotify and Signal launcher windows by class only — https://github.com/omacom/omarchy/pull/7700
+- #4890: Fix copy-url extension clipboard on recent Chromium/Brave — https://github.com/omacom/omarchy/pull/4890
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B428
+
+```
+You are reviewing Omarchy pre-release batch B428 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #4829: Add Calibre theme integration — https://github.com/omacom/omarchy/pull/4829
+- #4749: Add --isolate option for webapps to run in separate browser process — https://github.com/omacom/omarchy/pull/4749
+- #4750: Add media controls for the ASUS ROG key — https://github.com/omacom/omarchy/pull/4750
+- #12538: Treat idle timeout 0 as disabled, not immediate — https://github.com/omacom/omarchy/pull/12538
+- #13777: [FIX] Agent windows are missing an icon — https://github.com/omacom/omarchy/pull/13777
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B429
+
+```
+You are reviewing Omarchy pre-release batch B429 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13966: notifications dismissAll: archive cleared popups in one job, not one per popup — https://github.com/omacom/omarchy/pull/13966
+- #13965: omarchy-plugin-add: mv -T so a lost race fails instead of nesting — https://github.com/omacom/omarchy/pull/13965
+- #13969: Notification popups outlive their advertised lifetime across a suspend — https://github.com/omacom/omarchy/pull/13969
+- #13961: Remove notifications withdrawn by senders — https://github.com/omacom/omarchy/pull/13961
+- #13962: Fade the lock screen in and out over the live desktop — https://github.com/omacom/omarchy/pull/13962
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B430
+
+```
+You are reviewing Omarchy pre-release batch B430 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13955: Show Hyprland's background colour when a theme has no wallpaper — https://github.com/omacom/omarchy/pull/13955
+- #13963: Name apple-bcm-firmware-fetcher in the T2 package list — https://github.com/omacom/omarchy/pull/13963
+- #13957: Bind Super + Ctrl + Alt + K to kill a window by clicking it — https://github.com/omacom/omarchy/pull/13957
+- #13952: docs: add GrokBot triage report (2026-10-01) — https://github.com/omacom/omarchy/pull/13952
+- #13951: List commands moved into a group by metadata in fast-path group help — https://github.com/omacom/omarchy/pull/13951
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B431
+
+```
+You are reviewing Omarchy pre-release batch B431 (4 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13949: Recognize nvidia_wmi_ec_backlight/nvidia_0 in omarchy-hw-display — https://github.com/omacom/omarchy/pull/13949
+- #13946: Propagate widget placement errors without saving failed changes — https://github.com/omacom/omarchy/pull/13946
+- #11952: Show fingerprint reader status in authentication dialogs — https://github.com/omacom/omarchy/pull/11952
+- #13918: Show fingerprint reader state on the lock screen and in the polkit dialog — https://github.com/omacom/omarchy/pull/13918
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B432
+
+```
+You are reviewing Omarchy pre-release batch B432 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9885: Notify when agent limits reset — https://github.com/omacom/omarchy/pull/9885
+- #12425: Notify on agent limit resets per provider and account — https://github.com/omacom/omarchy/pull/12425
+- #10665: Launch Kitty Terminal with --single-instance — https://github.com/omacom/omarchy/pull/10665
+- #9042: Run the screensaver exit handler exactly once — https://github.com/omacom/omarchy/pull/9042
+- #8879: Use Sunshine's packaged systemd unit — https://github.com/omacom/omarchy/pull/8879
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B433
+
+```
+You are reviewing Omarchy pre-release batch B433 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #6918: Keep Wi-Fi indicator online when AP object is missing — https://github.com/omacom/omarchy/pull/6918
+- #8073: fix: detect early Codex app-server exits — https://github.com/omacom/omarchy/pull/8073
+- #8257: Warn the agent skill off pulling graphical-session.target — https://github.com/omacom/omarchy/pull/8257
+- #8497: Stop the agents status card rendering as an empty box — https://github.com/omacom/omarchy/pull/8497
+- #8597: Preserve alacritty font styles when changing font family — https://github.com/omacom/omarchy/pull/8597
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B434
+
+```
+You are reviewing Omarchy pre-release batch B434 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #8605: Cycle backgrounds through a symlinked backgrounds directory — https://github.com/omacom/omarchy/pull/8605
+- #8609: Tell contributors to check for duplicates and the right branch — https://github.com/omacom/omarchy/pull/8609
+- #8630: Wait longer for a restarted shell to become ready — https://github.com/omacom/omarchy/pull/8630
+- #8654: Elide the not found menu title when it overflows — https://github.com/omacom/omarchy/pull/8654
+- #8708: Restart crash-watch after updates — https://github.com/omacom/omarchy/pull/8708
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B435
+
+```
+You are reviewing Omarchy pre-release batch B435 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #8724: Skip the reboot prompt when the flag predates the current boot — https://github.com/omacom/omarchy/pull/8724
+- #8732: Keep hyprsunset running after a restart — https://github.com/omacom/omarchy/pull/8732
+- #8768: Give btop a float big enough for its 80x24 minimum — https://github.com/omacom/omarchy/pull/8768
+- #8792: Fix webcam MJPEG negotiation for screen recordings — https://github.com/omacom/omarchy/pull/8792
+- #8794: Fix workspace indicator lag under rapid Super+number switching — https://github.com/omacom/omarchy/pull/8794
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B436
+
+```
+You are reviewing Omarchy pre-release batch B436 (4 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #8852: Fix SDDM greeter never auto-selecting the Omarchy session — https://github.com/omacom/omarchy/pull/8852
+- #8865: Fix background cycling for glob characters in omarchy-theme-set — https://github.com/omacom/omarchy/pull/8865
+- #8877: Show the Codex CLI's error instead of "initialize" when the usage RPC fails — https://github.com/omacom/omarchy/pull/8877
+- #8880: Report the selected terminal font size — https://github.com/omacom/omarchy/pull/8880
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B437
+
+```
+You are reviewing Omarchy pre-release batch B437 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #8884: Load the image thumbnail index once — https://github.com/omacom/omarchy/pull/8884
+- #13568: Read the thumbnail index once in the direct image scan — https://github.com/omacom/omarchy/pull/13568
+- #8892: Clear stale agent login guidance after successful probes — https://github.com/omacom/omarchy/pull/8892
+- #8947: Set GDK_GL=gles on NVIDIA so GTK3 video playback works — https://github.com/omacom/omarchy/pull/8947
+- #8977: Fix Codex limits collector for CLI approval-policy churn — https://github.com/omacom/omarchy/pull/8977
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B438
+
+```
+You are reviewing Omarchy pre-release batch B438 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9006: FIX: Deterministic false failures in the shell smoke test — https://github.com/omacom/omarchy/pull/9006
+- #9013: fix: address high-confidence shellcheck findings — https://github.com/omacom/omarchy/pull/9013
+- #9014: fix: quote shell comparison operands — https://github.com/omacom/omarchy/pull/9014
+- #9017: Answer org.gnome.Console activations so Nautilus can open a terminal — https://github.com/omacom/omarchy/pull/9017
+- #9041: Bind KP_Enter alongside RETURN — https://github.com/omacom/omarchy/pull/9041
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B439
+
+```
+You are reviewing Omarchy pre-release batch B439 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9056: Answer an abandoned menu request before starting the next one — https://github.com/omacom/omarchy/pull/9056
+- #9108: fix(brightness): pass target monitor to DPMS dispatch in omarchy-brightness-display — https://github.com/omacom/omarchy/pull/9108
+- #9120: Reset media marquee label when the scroll animation stops — https://github.com/omacom/omarchy/pull/9120
+- #9131: Wait for Bluetooth before starting its agent — https://github.com/omacom/omarchy/pull/9131
+- #9135: Let on-screen keyboards reach the menu — https://github.com/omacom/omarchy/pull/9135
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B440
+
+```
+You are reviewing Omarchy pre-release batch B440 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9148: Fix omarchy-drive-info model loss on nested crypt/LVM (#7974) — https://github.com/omacom/omarchy/pull/9148
+- #9169: fix(network): divide throughput samples by measured elapsed time interval in speedtest — https://github.com/omacom/omarchy/pull/9169
+- #9201: Fix media playPause resuming the wrong player after a stale stream — https://github.com/omacom/omarchy/pull/9201
+- #9219: Never let bar and panel error diagnostics block their fallbacks — https://github.com/omacom/omarchy/pull/9219
+- #9313: Make built-in theme backgrounds responsive — https://github.com/omacom/omarchy/pull/9313
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B441
+
+```
+You are reviewing Omarchy pre-release batch B441 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #10542: Add File Manager as a configurable Defaults category — https://github.com/omacom/omarchy/pull/10542
+- #12258: Keep the screensaver up until it has been focused once — https://github.com/omacom/omarchy/pull/12258
+- #12259: Trust battery device state over UPower.onBattery — https://github.com/omacom/omarchy/pull/12259
+- #12357: Give omacalc a centered floating size — https://github.com/omacom/omarchy/pull/12357
+- #12360: Toggle a touchpad's mouse-emulation sibling with it — https://github.com/omacom/omarchy/pull/12360
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B442
+
+```
+You are reviewing Omarchy pre-release batch B442 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #12362: Pin the keybindings row order to one collation — https://github.com/omacom/omarchy/pull/12362
+- #12557: Give binds a stable id to key on — https://github.com/omacom/omarchy/pull/12557
+- #12568: Make the Bluetooth device list navigable while a scan is running — https://github.com/omacom/omarchy/pull/12568
+- #12572: Make the Wi-Fi network list navigable while a scan is running — https://github.com/omacom/omarchy/pull/12572
+- #12577: docs(skills): correct rescanPlugins guidance in plugins.md — https://github.com/omacom/omarchy/pull/12577
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B443
+
+```
+You are reviewing Omarchy pre-release batch B443 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #12595: Read only the session files that changed since the last scan — https://github.com/omacom/omarchy/pull/12595
+- #12600: font-set: actually show the terminal restart notification — https://github.com/omacom/omarchy/pull/12600
+- #13851: Fix clock widget rendering weekday/month names in English regardless of locale — https://github.com/omacom/omarchy/pull/13851
+- #13879: Launch web apps in an installed Chromium-based browser — https://github.com/omacom/omarchy/pull/13879
+- #13921: Cap idle timeouts to the largest Qt Timer interval — https://github.com/omacom/omarchy/pull/13921
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B444
+
+```
+You are reviewing Omarchy pre-release batch B444 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13923: Warn when a bind's id lands where nothing reads it — https://github.com/omacom/omarchy/pull/13923
+- #13936: update-lock: refuse symlinked / non-regular lock entries — https://github.com/omacom/omarchy/pull/13936
+- #13938: provision-first-run: stop swallowing user-provision failures — https://github.com/omacom/omarchy/pull/13938
+- #13934: theme-set-herdr-machines: lock in the per-user runtime dir — https://github.com/omacom/omarchy/pull/13934
+- #13933: theme-set: keep the serialization lock out of /tmp — https://github.com/omacom/omarchy/pull/13933
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B445
+
+```
+You are reviewing Omarchy pre-release batch B445 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13925: fix: enable Sunshine by canonical user unit, not Alias — https://github.com/omacom/omarchy/pull/13925
+- #13908: Skip empty resume device in hibernation setup — https://github.com/omacom/omarchy/pull/13908
+- #13861: Add a reboot to firmware option to the System menu — https://github.com/omacom/omarchy/pull/13861
+- #13819: Bound fingerprint retry attempts with exponential backoff (#13748) — https://github.com/omacom/omarchy/pull/13819
+- #13781: Restore missing mise stubs from the canonical install list — https://github.com/omacom/omarchy/pull/13781
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B446
+
+```
+You are reviewing Omarchy pre-release batch B446 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #13778: Preserve docked lid policy across logout and DPMS — https://github.com/omacom/omarchy/pull/13778
+- #13768: Keep hibernation resume offset in sync with the swapfile — https://github.com/omacom/omarchy/pull/13768
+- #13762: iMac 12,2 - Disable Chromium GPU compositing on legacy radeon GPUs — https://github.com/omacom/omarchy/pull/13762
+- #13728: Stop mistaking the T2 chip for an Apple GPU in Vulkan detection — https://github.com/omacom/omarchy/pull/13728
+- #13671: Exclude Intel Bluetooth from TLP USB autosuspend — https://github.com/omacom/omarchy/pull/13671
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
 ### B447
 
 ```
 You are reviewing Omarchy pre-release batch B447 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #5567: Fix headphone audio on ASUS ROG Strix G16 (ALC285) — https://github.com/omacom/omarchy/pull/5567
-- #5564: Use color# naming in tmux config — https://github.com/omacom/omarchy/pull/5564
-- #5514: Fix screenshot cancel cleaning stale hyprpicker — https://github.com/omacom/omarchy/pull/5514
-- #5424: Set keyboard brightness to fixed values of 0, 1, 25 and 100. — https://github.com/omacom/omarchy/pull/5424
-- #5343: Install nautilus-open-any-terminal to open the default terminal from any Nautilus directory — https://github.com/omacom/omarchy/pull/5343
+- #13667: Remember Bluetooth power and restore it after login — https://github.com/omacom/omarchy/pull/13667
+- #13651: Prune stale Quickshell instance logs on shell launch — https://github.com/omacom/omarchy/pull/13651
+- #13644: Derive en_GB locale from UK keyboard or Europe/London — https://github.com/omacom/omarchy/pull/13644
+- #13601: Quarantine unowned file conflicts for any package — https://github.com/omacom/omarchy/pull/13601
+- #13588: adding virt-manager + quemu installator and remover — https://github.com/omacom/omarchy/pull/13588
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12101,11 +12065,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B448 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #5317: feat: gracefully swap ALSA hardware profiles on single-sink unified chips systems — https://github.com/omacom/omarchy/pull/5317
-- #5403: Persist workspace layout toggles — https://github.com/omacom/omarchy/pull/5403
-- #5312: Fix Chromium EGL errors on hybrid NVIDIA + iGPU laptops — https://github.com/omacom/omarchy/pull/5312
-- #5309: Fix: Prevent malformed input on theme install by trimming whitespace from URL — https://github.com/omacom/omarchy/pull/5309
-- #5282: Add ddcutil fallback for brightness on desktops without backlight device — https://github.com/omacom/omarchy/pull/5282
+- #13584: Remove resume kernel parameters when removing hibernation — https://github.com/omacom/omarchy/pull/13584
+- #13552: Route fcitx5 D-Bus activation through omarchy-fcitx5.service — https://github.com/omacom/omarchy/pull/13552
+- #13540: Hibernate laptops on critical battery once hibernation is set up — https://github.com/omacom/omarchy/pull/13540
+- #13610: Hibernate on critical battery when hibernation is set up — https://github.com/omacom/omarchy/pull/13610
+- #13539: Reset elan_i2c touchpads in omarchy restart trackpad — https://github.com/omacom/omarchy/pull/13539
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12123,11 +12087,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B449 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #5195: Add viu for image previews in fzf for Alacritty and Ghostty — https://github.com/omacom/omarchy/pull/5195
-- #5144: Add battery charging threshold to toggle menu — https://github.com/omacom/omarchy/pull/5144
-- #5099: Fix layout toggle script for special workspaces — https://github.com/omacom/omarchy/pull/5099
-- #11008: Toggle the layout of an open scratchpad, not the workspace under it — https://github.com/omacom/omarchy/pull/11008
-- #5031: add odin to installable development environments — https://github.com/omacom/omarchy/pull/5031
+- #13526: Activate zram swap after package updates — https://github.com/omacom/omarchy/pull/13526
+- #13508: Switch dictation to Vulkan when a GPU is present — https://github.com/omacom/omarchy/pull/13508
+- #13490: Keep the shell supervisor attached after a locked Hyprland restart — https://github.com/omacom/omarchy/pull/13490
+- #13462: Preflight the ESP free space before an update — https://github.com/omacom/omarchy/pull/13462
+- #13602: Check ESP free space before updating — https://github.com/omacom/omarchy/pull/13602
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12145,11 +12109,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B450 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #5020: Add ASUS TUF laptop support for asusctl and keyboard RGB — https://github.com/omacom/omarchy/pull/5020
-- #5011: feat: add smart tmux session management — https://github.com/omacom/omarchy/pull/5011
-- #4985: Add Thorium to list of valid 'omarchy-launch-webapp' browsers that work with '--app' — https://github.com/omacom/omarchy/pull/4985
-- #4962: Replace slashes in worktree path with dashes — https://github.com/omacom/omarchy/pull/4962
-- #4936: rename tmux pane to running command where possible — https://github.com/omacom/omarchy/pull/4936
+- #13460: Guard panel close against throwing plugin implementations — https://github.com/omacom/omarchy/pull/13460
+- #13444: Keep the reboot offer after a channel switch — https://github.com/omacom/omarchy/pull/13444
+- #13544: Offer the reboot after a channel switch — https://github.com/omacom/omarchy/pull/13544
+- #13426: Boot the DGX Spark without a UKI until Limine is fixed — https://github.com/omacom/omarchy/pull/13426
+- #13397: Fix failure when switching channel from edge/dev back to stable/rc — https://github.com/omacom/omarchy/pull/13397
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12167,11 +12131,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B451 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #4928: Only match window class in omarchy-launch-or-focus — https://github.com/omacom/omarchy/pull/4928
-- #7700: Match Spotify and Signal launcher windows by class only — https://github.com/omacom/omarchy/pull/7700
-- #4890: Fix copy-url extension clipboard on recent Chromium/Brave — https://github.com/omacom/omarchy/pull/4890
-- #4829: Add Calibre theme integration — https://github.com/omacom/omarchy/pull/4829
-- #4749: Add --isolate option for webapps to run in separate browser process — https://github.com/omacom/omarchy/pull/4749
+- #13371: Honor unattended mode in orphan package review — https://github.com/omacom/omarchy/pull/13371
+- #13352: Force C locale when classifying stay-awake parent dirs — https://github.com/omacom/omarchy/pull/13352
+- #13262: Install disktree, the disk space treemap, by default — https://github.com/omacom/omarchy/pull/13262
+- #13260: Disable system sleep on the DGX Spark — https://github.com/omacom/omarchy/pull/13260
+- #13243: Stop mise-install from clobbering a user's own wrapper — https://github.com/omacom/omarchy/pull/13243
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12186,13 +12150,14 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B452
 
 ```
-You are reviewing Omarchy pre-release batch B452 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B452 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #4750: Add media controls for the ASUS ROG key — https://github.com/omacom/omarchy/pull/4750
-- #12538: Treat idle timeout 0 as disabled, not immediate — https://github.com/omacom/omarchy/pull/12538
-- #13946: Propagate widget placement errors without saving failed changes — https://github.com/omacom/omarchy/pull/13946
-- #13777: [FIX] Agent windows are missing an icon — https://github.com/omacom/omarchy/pull/13777
+- #13148: Turn the keyboard backlight on in the dark using the ambient light sensor — https://github.com/omacom/omarchy/pull/13148
+- #13115: Lock instead of suspending on the IdeaPad Slim 3 15AMN8 — https://github.com/omacom/omarchy/pull/13115
+- #13076: Prevent lid closure from interrupting shutdown — https://github.com/omacom/omarchy/pull/13076
+- #13005: fix(system): restore keyboard layout and backlight after suspend (#12994) — https://github.com/omacom/omarchy/pull/13005
+- #12977: Keep speakersafetyd retrying after 96 kHz panics and toast if amps stay locked — https://github.com/omacom/omarchy/pull/12977
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12210,11 +12175,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B453 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9967: Resolve a live Hyprland signature before restarting the shell — https://github.com/omacom/omarchy/pull/9967
-- #13945: Check Hyprland before restarting the shell — https://github.com/omacom/omarchy/pull/13945
-- #12568: Make the Bluetooth device list navigable while a scan is running — https://github.com/omacom/omarchy/pull/12568
-- #12572: Make the Wi-Fi network list navigable while a scan is running — https://github.com/omacom/omarchy/pull/12572
-- #12577: docs(skills): correct rescanPlugins guidance in plugins.md — https://github.com/omacom/omarchy/pull/12577
+- #12936: Detect Microarray MAFP fingerprint readers (3274:8012) — https://github.com/omacom/omarchy/pull/12936
+- #12923: Add support for single-label DNS resolution configuration — https://github.com/omacom/omarchy/pull/12923
+- #12913: Preserve active themes when staging or publication fails — https://github.com/omacom/omarchy/pull/12913
+- #12906: Serialize concurrent migration runs — https://github.com/omacom/omarchy/pull/12906
+- #12905: Propagate AUR update failures — https://github.com/omacom/omarchy/pull/12905
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12232,11 +12197,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B454 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12595: Read only the session files that changed since the last scan — https://github.com/omacom/omarchy/pull/12595
-- #12600: font-set: actually show the terminal restart notification — https://github.com/omacom/omarchy/pull/12600
-- #13936: update-lock: refuse symlinked / non-regular lock entries — https://github.com/omacom/omarchy/pull/13936
-- #13938: provision-first-run: stop swallowing user-provision failures — https://github.com/omacom/omarchy/pull/13938
-- #13934: theme-set-herdr-machines: lock in the per-user runtime dir — https://github.com/omacom/omarchy/pull/13934
+- #12871: Simplify the Elsewhen migration — https://github.com/omacom/omarchy/pull/12871
+- #12816: Install Learn Omarchy by default and invite the first login to it — https://github.com/omacom/omarchy/pull/12816
+- #12723: Set up installed NVIDIA applications — https://github.com/omacom/omarchy/pull/12723
+- #12722: Keep installed ARM recovery packages during orphan cleanup — https://github.com/omacom/omarchy/pull/12722
+- #12636: Set up the Intel IPU6 camera the way IPU7 already is — https://github.com/omacom/omarchy/pull/12636
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12251,14 +12216,13 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B455
 
 ```
-You are reviewing Omarchy pre-release batch B455 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B455 (4 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13933: theme-set: keep the serialization lock out of /tmp — https://github.com/omacom/omarchy/pull/13933
-- #13925: fix: enable Sunshine by canonical user unit, not Alias — https://github.com/omacom/omarchy/pull/13925
-- #13908: Skip empty resume device in hibernation setup — https://github.com/omacom/omarchy/pull/13908
-- #13889: Install Grok through mise's first-party package — https://github.com/omacom/omarchy/pull/13889
-- #13861: Add a reboot to firmware option to the System menu — https://github.com/omacom/omarchy/pull/13861
+- #12545: Reject usernames that collide with system groups — https://github.com/omacom/omarchy/pull/12545
+- #12535: Stop fetching the deleted master branch — https://github.com/omacom/omarchy/pull/12535
+- #12524: feat: opt-in HW acceleration for 2020 5K iMacs (Navi 14) — https://github.com/omacom/omarchy/pull/12524
+- #12510: Prompt about unauthorized Thunderbolt devices — https://github.com/omacom/omarchy/pull/12510
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12276,11 +12240,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B456 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13867: fix(bluetooth): allow Chromium to power on for phone passkeys — https://github.com/omacom/omarchy/pull/13867
-- #13819: Bound fingerprint retry attempts with exponential backoff (#13748) — https://github.com/omacom/omarchy/pull/13819
-- #13781: Restore missing mise stubs from the canonical install list — https://github.com/omacom/omarchy/pull/13781
-- #13778: Preserve docked lid policy across logout and DPMS — https://github.com/omacom/omarchy/pull/13778
-- #13768: Keep hibernation resume offset in sync with the swapfile — https://github.com/omacom/omarchy/pull/13768
+- #12505: Enable Sunshine by its real systemd user unit name — https://github.com/omacom/omarchy/pull/12505
+- #13331: Enable Sunshine by its real unit name — https://github.com/omacom/omarchy/pull/13331
+- #12461: Stop the lock fingerprint retry loop instead of slowing it — https://github.com/omacom/omarchy/pull/12461
+- #12428: Install rtkit so PipeWire gets realtime priority — https://github.com/omacom/omarchy/pull/12428
+- #12421: Route Chromium notifications through the system center without joining flags — https://github.com/omacom/omarchy/pull/12421
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12298,11 +12262,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B457 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13762: iMac 12,2 - Disable Chromium GPU compositing on legacy radeon GPUs — https://github.com/omacom/omarchy/pull/13762
-- #13728: Stop mistaking the T2 chip for an Apple GPU in Vulkan detection — https://github.com/omacom/omarchy/pull/13728
-- #13671: Exclude Intel Bluetooth from TLP USB autosuspend — https://github.com/omacom/omarchy/pull/13671
-- #13667: Remember Bluetooth power and restore it after login — https://github.com/omacom/omarchy/pull/13667
-- #13651: Prune stale Quickshell instance logs on shell launch — https://github.com/omacom/omarchy/pull/13651
+- #12420: lock: stop fingerprint scans while the display is blanked — https://github.com/omacom/omarchy/pull/12420
+- #12419: fix(update): block lid switch during updates — https://github.com/omacom/omarchy/pull/12419
+- #12358: Start Sunshine only through the user unit — https://github.com/omacom/omarchy/pull/12358
+- #12328: Keep every Intel Mac on its kernel in the linux-omarchy migration — https://github.com/omacom/omarchy/pull/12328
+- #12291: Pulse the fingerprint glyph and flag a rejected scan — https://github.com/omacom/omarchy/pull/12291
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12320,11 +12284,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B458 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13644: Derive en_GB locale from UK keyboard or Europe/London — https://github.com/omacom/omarchy/pull/13644
-- #13601: Quarantine unowned file conflicts for any package — https://github.com/omacom/omarchy/pull/13601
-- #13588: adding virt-manager + quemu installator and remover — https://github.com/omacom/omarchy/pull/13588
-- #13584: Remove resume kernel parameters when removing hibernation — https://github.com/omacom/omarchy/pull/13584
-- #13552: Route fcitx5 D-Bus activation through omarchy-fcitx5.service — https://github.com/omacom/omarchy/pull/13552
+- #12277: Catch the bar clock up when the machine wakes from suspend — https://github.com/omacom/omarchy/pull/12277
+- #12263: Monitor: report Hyprland scale and persist named outputs — https://github.com/omacom/omarchy/pull/12263
+- #12252: Fix capture selection ties and VMware software cursor setup — https://github.com/omacom/omarchy/pull/12252
+- #12250: Preserve shell.json and config migration file modes — https://github.com/omacom/omarchy/pull/12250
+- #12245: Report sleep-monitor and lock-helper failures to systemd — https://github.com/omacom/omarchy/pull/12245
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12342,11 +12306,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B459 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13540: Hibernate laptops on critical battery once hibernation is set up — https://github.com/omacom/omarchy/pull/13540
-- #13610: Hibernate on critical battery when hibernation is set up — https://github.com/omacom/omarchy/pull/13610
-- #13539: Reset elan_i2c touchpads in omarchy restart trackpad — https://github.com/omacom/omarchy/pull/13539
-- #13526: Activate zram swap after package updates — https://github.com/omacom/omarchy/pull/13526
-- #13508: Switch dictation to Vulkan when a GPU is present — https://github.com/omacom/omarchy/pull/13508
+- #12220: Fix SNI tray icons disappearing on shell restart — https://github.com/omacom/omarchy/pull/12220
+- #12216: Fix microphone and speakers on ASUS ProArt PX13 HN7306 (Strix Halo) — https://github.com/omacom/omarchy/pull/12216
+- #12211: Keep T1 MacBook Pros in S3 instead of an Alpine Ridge wake loop — https://github.com/omacom/omarchy/pull/12211
+- #12210: Debounce lid-close suspend so a quick reopen does not sleep in the dark — https://github.com/omacom/omarchy/pull/12210
+- #12203: Keep EFI framebuffer on 2020 5K iMacs with Navi 14 — https://github.com/omacom/omarchy/pull/12203
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12361,13 +12325,14 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 ### B460
 
 ```
-You are reviewing Omarchy pre-release batch B460 (4 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B460 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13490: Keep the shell supervisor attached after a locked Hyprland restart — https://github.com/omacom/omarchy/pull/13490
-- #13462: Preflight the ESP free space before an update — https://github.com/omacom/omarchy/pull/13462
-- #13602: Check ESP free space before updating — https://github.com/omacom/omarchy/pull/13602
-- #13460: Guard panel close against throwing plugin implementations — https://github.com/omacom/omarchy/pull/13460
+- #12186: Point direct boot at the kernel Limine boots first — https://github.com/omacom/omarchy/pull/12186
+- #12148: Point Zen's policy at the directory the package uses — https://github.com/omacom/omarchy/pull/12148
+- #12125: feat(sleep): dynamic lid-close — battery suspend-then-hibernate, AC suspend, docked ignore — https://github.com/omacom/omarchy/pull/12125
+- #12106: Stop broken TPM PCR units from forcibly rebooting — https://github.com/omacom/omarchy/pull/12106
+- #12076: Detect BCM43xx, T2, Vulkan, and NVIDIA via sysfs helpers — https://github.com/omacom/omarchy/pull/12076
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12385,11 +12350,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B461 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13444: Keep the reboot offer after a channel switch — https://github.com/omacom/omarchy/pull/13444
-- #13544: Offer the reboot after a channel switch — https://github.com/omacom/omarchy/pull/13544
-- #13426: Boot the DGX Spark without a UKI until Limine is fixed — https://github.com/omacom/omarchy/pull/13426
-- #13397: Fix failure when switching channel from edge/dev back to stable/rc — https://github.com/omacom/omarchy/pull/13397
-- #13371: Honor unattended mode in orphan package review — https://github.com/omacom/omarchy/pull/13371
+- #12071: Show physical network behind TUN routes — https://github.com/omacom/omarchy/pull/12071
+- #12056: Keep first-run retryable and tolerate a missing DMI probe — https://github.com/omacom/omarchy/pull/12056
+- #12023: Resolve Taildrop directory via xdg-user-dir — https://github.com/omacom/omarchy/pull/12023
+- #11978: Add Taildrop receiver toggle to Tailscale panel — https://github.com/omacom/omarchy/pull/11978
+- #12004: Remove Herdr with preinstalls — https://github.com/omacom/omarchy/pull/12004
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12407,11 +12372,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B462 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13352: Force C locale when classifying stay-awake parent dirs — https://github.com/omacom/omarchy/pull/13352
-- #13262: Install disktree, the disk space treemap, by default — https://github.com/omacom/omarchy/pull/13262
-- #13260: Disable system sleep on the DGX Spark — https://github.com/omacom/omarchy/pull/13260
-- #13243: Stop mise-install from clobbering a user's own wrapper — https://github.com/omacom/omarchy/pull/13243
-- #13148: Turn the keyboard backlight on in the dark using the ambient light sensor — https://github.com/omacom/omarchy/pull/13148
+- #11953: Select iso2sd drives by removability, not by /dev/sd name — https://github.com/omacom/omarchy/pull/11953
+- #11920: Bound clipboard history bytes and keep large copies as files — https://github.com/omacom/omarchy/pull/11920
+- #11912: Pin VMware guest outputs to the host monitor layout — https://github.com/omacom/omarchy/pull/11912
+- #11880: Pin Hyprland to the NVIDIA card when it is the only GPU beside a firmware framebuffer — https://github.com/omacom/omarchy/pull/11880
+- #11870: Offer Hybrid recovery from Vfio mode in toggle-hybrid-gpu — https://github.com/omacom/omarchy/pull/11870
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12429,11 +12394,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B463 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #13115: Lock instead of suspending on the IdeaPad Slim 3 15AMN8 — https://github.com/omacom/omarchy/pull/13115
-- #13076: Prevent lid closure from interrupting shutdown — https://github.com/omacom/omarchy/pull/13076
-- #13005: fix(system): restore keyboard layout and backlight after suspend (#12994) — https://github.com/omacom/omarchy/pull/13005
-- #12977: Keep speakersafetyd retrying after 96 kHz panics and toast if amps stay locked — https://github.com/omacom/omarchy/pull/12977
-- #12936: Detect Microarray MAFP fingerprint readers (3274:8012) — https://github.com/omacom/omarchy/pull/12936
+- #11843: fix(gpu): recover a machine left in Vfio mode — https://github.com/omacom/omarchy/pull/11843
+- #11840: Preserve alternate fingerprint client stacks — https://github.com/omacom/omarchy/pull/11840
+- #11827: Keep supervising the shell through a slow compositor resume — https://github.com/omacom/omarchy/pull/11827
+- #11831: Disable PSR2 selective fetch on the Dell Latitude 9440 2-in-1 — https://github.com/omacom/omarchy/pull/11831
+- #11624: Scope the MacBook NVMe suspend fix to Apple's NVMe controller — https://github.com/omacom/omarchy/pull/11624
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12451,11 +12416,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B464 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12923: Add support for single-label DNS resolution configuration — https://github.com/omacom/omarchy/pull/12923
-- #12913: Preserve active themes when staging or publication fails — https://github.com/omacom/omarchy/pull/12913
-- #12906: Serialize concurrent migration runs — https://github.com/omacom/omarchy/pull/12906
-- #12905: Propagate AUR update failures — https://github.com/omacom/omarchy/pull/12905
-- #12871: Simplify the Elsewhen migration — https://github.com/omacom/omarchy/pull/12871
+- #11571: Enable two-finger swipe back/forward in Nautilus — https://github.com/omacom/omarchy/pull/11571
+- #11554: Set DefaultTimeoutStopSec=5s for systemd user session manager — https://github.com/omacom/omarchy/pull/11554
+- #11538: Mount Btrfs subvolumes with noatime to avoid unnecessary write amplification — https://github.com/omacom/omarchy/pull/11538
+- #11523: Enable paccache.timer to prune the pacman cache weekly — https://github.com/omacom/omarchy/pull/11523
+- #11481: Keep Voxtype on CPU for Intel Haswell GPUs — https://github.com/omacom/omarchy/pull/11481
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12473,11 +12438,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B465 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12834: Stop web app launches from disabling TLS for the whole browser session — https://github.com/omacom/omarchy/pull/12834
-- #12816: Install Learn Omarchy by default and invite the first login to it — https://github.com/omacom/omarchy/pull/12816
-- #12723: Set up installed NVIDIA applications — https://github.com/omacom/omarchy/pull/12723
-- #12722: Keep installed ARM recovery packages during orphan cleanup — https://github.com/omacom/omarchy/pull/12722
-- #12636: Set up the Intel IPU6 camera the way IPU7 already is — https://github.com/omacom/omarchy/pull/12636
+- #11478: Detect damaged package records before updating — https://github.com/omacom/omarchy/pull/11478
+- #11477: Reconcile hibernation resume parameters with the swapfile — https://github.com/omacom/omarchy/pull/11477
+- #11432: Make power profiles change the CPU on Intel machines without HWP — https://github.com/omacom/omarchy/pull/11432
+- #11420: add flight mode bar widget next 2 bluetooth icon — https://github.com/omacom/omarchy/pull/11420
+- #11418: Fix keyboard layout persistence after first-boot setup — https://github.com/omacom/omarchy/pull/11418
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12495,11 +12460,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B466 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12616: Stop counting Hyprland virtual outputs as external monitors — https://github.com/omacom/omarchy/pull/12616
-- #12545: Reject usernames that collide with system groups — https://github.com/omacom/omarchy/pull/12545
-- #12532: Skip Elsewhen migration on unpackaged Omarchy installs — https://github.com/omacom/omarchy/pull/12532
-- #12535: Stop fetching the deleted master branch — https://github.com/omacom/omarchy/pull/12535
-- #12524: feat: opt-in HW acceleration for 2020 5K iMacs (Navi 14) — https://github.com/omacom/omarchy/pull/12524
+- #11387: Detect FocalTech match-on-chip fingerprint readers — https://github.com/omacom/omarchy/pull/11387
+- #11364: Keep existing wine when installing Lutris — https://github.com/omacom/omarchy/pull/11364
+- #11315: Make nouveau software-cursor fix reliable at install time — https://github.com/omacom/omarchy/pull/11315
+- #11286: Configure persistent Wi-Fi Direct PC identity — https://github.com/omacom/omarchy/pull/11286
+- #11260: Pause Bluetooth discovery during pairing — https://github.com/omacom/omarchy/pull/11260
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12517,11 +12482,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B467 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12510: Prompt about unauthorized Thunderbolt devices — https://github.com/omacom/omarchy/pull/12510
-- #12505: Enable Sunshine by its real systemd user unit name — https://github.com/omacom/omarchy/pull/12505
-- #13331: Enable Sunshine by its real unit name — https://github.com/omacom/omarchy/pull/13331
-- #12461: Stop the lock fingerprint retry loop instead of slowing it — https://github.com/omacom/omarchy/pull/12461
-- #12428: Install rtkit so PipeWire gets realtime priority — https://github.com/omacom/omarchy/pull/12428
+- #11259: Avoid lspci in favor of sysfs — https://github.com/omacom/omarchy/pull/11259
+- #11250: Add Ghost to Install > AI — https://github.com/omacom/omarchy/pull/11250
+- #11273: Lock screen: keep fingerprint idle while the display is blanked — https://github.com/omacom/omarchy/pull/11273
+- #11240: Allow restarting shell when desktop locked — https://github.com/omacom/omarchy/pull/11240
+- #11222: Stop the bootstrap migration truncating a customized hyprland.lua — https://github.com/omacom/omarchy/pull/11222
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12539,11 +12504,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B468 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12421: Route Chromium notifications through the system center without joining flags — https://github.com/omacom/omarchy/pull/12421
-- #12420: lock: stop fingerprint scans while the display is blanked — https://github.com/omacom/omarchy/pull/12420
-- #12419: fix(update): block lid switch during updates — https://github.com/omacom/omarchy/pull/12419
-- #12358: Start Sunshine only through the user unit — https://github.com/omacom/omarchy/pull/12358
-- #12328: Keep every Intel Mac on its kernel in the linux-omarchy migration — https://github.com/omacom/omarchy/pull/12328
+- #11207: Fail migrations when a pacman transaction outlasts the wait — https://github.com/omacom/omarchy/pull/11207
+- #11053: Share cameras between apps through PipeWire and name whatever still locks one — https://github.com/omacom/omarchy/pull/11053
+- #10949: Ask for a language at setup, and offer one in the menu — https://github.com/omacom/omarchy/pull/10949
+- #10926: fix(systemd): rebind ASUS touchpad after s2idle resume — https://github.com/omacom/omarchy/pull/10926
+- #10911: Remove agent usage records left behind when their collector goes away — https://github.com/omacom/omarchy/pull/10911
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12561,11 +12526,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B469 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12291: Pulse the fingerprint glyph and flag a rejected scan — https://github.com/omacom/omarchy/pull/12291
-- #12277: Catch the bar clock up when the machine wakes from suspend — https://github.com/omacom/omarchy/pull/12277
-- #12263: Monitor: report Hyprland scale and persist named outputs — https://github.com/omacom/omarchy/pull/12263
-- #12252: Fix capture selection ties and VMware software cursor setup — https://github.com/omacom/omarchy/pull/12252
-- #12250: Preserve shell.json and config migration file modes — https://github.com/omacom/omarchy/pull/12250
+- #10886: Repair T1 Mac PCIe hotplug defaults — https://github.com/omacom/omarchy/pull/10886
+- #10884: Add browser theme sync with CSS and JavaScript APIs — https://github.com/omacom/omarchy/pull/10884
+- #10878: Converge ISO Node pins on normal updates — https://github.com/omacom/omarchy/pull/10878
+- #10877: Target the actual NVMe controller in Apple suspend fix — https://github.com/omacom/omarchy/pull/10877
+- #10812: Ask before taking the pre-update snapshot — https://github.com/omacom/omarchy/pull/10812
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12583,11 +12548,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B470 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12245: Report sleep-monitor and lock-helper failures to systemd — https://github.com/omacom/omarchy/pull/12245
-- #12220: Fix SNI tray icons disappearing on shell restart — https://github.com/omacom/omarchy/pull/12220
-- #12216: Fix microphone and speakers on ASUS ProArt PX13 HN7306 (Strix Halo) — https://github.com/omacom/omarchy/pull/12216
-- #12211: Keep T1 MacBook Pros in S3 instead of an Alpine Ridge wake loop — https://github.com/omacom/omarchy/pull/12211
-- #12210: Debounce lid-close suspend so a quick reopen does not sleep in the dark — https://github.com/omacom/omarchy/pull/12210
+- #10752: Fix NVIDIA package selection on ARM — https://github.com/omacom/omarchy/pull/10752
+- #10722: Show LTE/WWAN cellular connections in the network panel — https://github.com/omacom/omarchy/pull/10722
+- #10719: Stage theme replacements and preserve the previous copy — https://github.com/omacom/omarchy/pull/10719
+- #10713: Use active external displays for the lid-close lock decision — https://github.com/omacom/omarchy/pull/10713
+- #10711: Validate plugin updates before changing installed checkouts — https://github.com/omacom/omarchy/pull/10711
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12605,11 +12570,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B471 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12203: Keep EFI framebuffer on 2020 5K iMacs with Navi 14 — https://github.com/omacom/omarchy/pull/12203
-- #12186: Point direct boot at the kernel Limine boots first — https://github.com/omacom/omarchy/pull/12186
-- #12185: Stop network panel height loops from forcing Wi-Fi reconnects (#11099) — https://github.com/omacom/omarchy/pull/12185
-- #12148: Point Zen's policy at the directory the package uses — https://github.com/omacom/omarchy/pull/12148
-- #12139: Enable Wayland input methods in Chromium-based browsers — https://github.com/omacom/omarchy/pull/12139
+- #10710: Preserve existing shell settings during quattro upgrade — https://github.com/omacom/omarchy/pull/10710
+- #10707: Install guest tools on VMware systems — https://github.com/omacom/omarchy/pull/10707
+- #10663: Repair existing SDDM Qt5 theme selections with missing greeter libraries — https://github.com/omacom/omarchy/pull/10663
+- #10653: Fix lock screen black screen and fingerprint sensor lockout — https://github.com/omacom/omarchy/pull/10653
+- #10594: Add optional Agent Desktops app for background agent work — https://github.com/omacom/omarchy/pull/10594
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12627,11 +12592,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B472 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12125: feat(sleep): dynamic lid-close — battery suspend-then-hibernate, AC suspend, docked ignore — https://github.com/omacom/omarchy/pull/12125
-- #12106: Stop broken TPM PCR units from forcibly rebooting — https://github.com/omacom/omarchy/pull/12106
-- #12076: Detect BCM43xx, T2, Vulkan, and NVIDIA via sysfs helpers — https://github.com/omacom/omarchy/pull/12076
-- #12071: Show physical network behind TUN routes — https://github.com/omacom/omarchy/pull/12071
-- #12056: Keep first-run retryable and tolerate a missing DMI probe — https://github.com/omacom/omarchy/pull/12056
+- #10592: Enable nvidia-powerd so laptop GPUs get Dynamic Boost — https://github.com/omacom/omarchy/pull/10592
+- #10573: Install qt5-wayland with Google Chrome on Wayland — https://github.com/omacom/omarchy/pull/10573
+- #10519: Fix Acer Aspire Go 15 internal keyboard dropout — https://github.com/omacom/omarchy/pull/10519
+- #10498: Avoid idle headphone pops on ASUS GU605CX — https://github.com/omacom/omarchy/pull/10498
+- #10497: Restore GVfs mounts after system resume — https://github.com/omacom/omarchy/pull/10497
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12649,11 +12614,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B473 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #12023: Resolve Taildrop directory via xdg-user-dir — https://github.com/omacom/omarchy/pull/12023
-- #11978: Add Taildrop receiver toggle to Tailscale panel — https://github.com/omacom/omarchy/pull/11978
-- #12004: Remove Herdr with preinstalls — https://github.com/omacom/omarchy/pull/12004
-- #11953: Select iso2sd drives by removability, not by /dev/sd name — https://github.com/omacom/omarchy/pull/11953
-- #11920: Bound clipboard history bytes and keep large copies as files — https://github.com/omacom/omarchy/pull/11920
+- #10485: Send Broadcom's ACL-priority command to fix Bluetooth A2DP stutter on T2 Macs — https://github.com/omacom/omarchy/pull/10485
+- #10463: Fix display backlight on Lenovo Yoga Pro 7 15IPH11 — https://github.com/omacom/omarchy/pull/10463
+- #10920: Fix display backlight on Dell XPS OLED Panther Lake laptops — https://github.com/omacom/omarchy/pull/10920
+- #10446: Make Brave Origin the default browser for new installs — https://github.com/omacom/omarchy/pull/10446
+- #10370: Install ffmpeg 4.4 with Spotify so Local Files can play — https://github.com/omacom/omarchy/pull/10370
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12671,11 +12636,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B474 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11912: Pin VMware guest outputs to the host monitor layout — https://github.com/omacom/omarchy/pull/11912
-- #11880: Pin Hyprland to the NVIDIA card when it is the only GPU beside a firmware framebuffer — https://github.com/omacom/omarchy/pull/11880
-- #11870: Offer Hybrid recovery from Vfio mode in toggle-hybrid-gpu — https://github.com/omacom/omarchy/pull/11870
-- #11843: fix(gpu): recover a machine left in Vfio mode — https://github.com/omacom/omarchy/pull/11843
-- #11840: Preserve alternate fingerprint client stacks — https://github.com/omacom/omarchy/pull/11840
+- #10314: Disable MacBook10,1 BCM4350 wakeup through S3 — https://github.com/omacom/omarchy/pull/10314
+- #10320: Drop a Bluetooth power change that lands mid-transition — https://github.com/omacom/omarchy/pull/10320
+- #10313: Cap MacBook10,1 RAPL at 4.5W/7W and CPU turbo at 3GHz — https://github.com/omacom/omarchy/pull/10313
+- #10301: Keep the running kernel when enabling direct boot — https://github.com/omacom/omarchy/pull/10301
+- #10293: Support selecting installed Linux kernel in direct boot setup — https://github.com/omacom/omarchy/pull/10293
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12693,11 +12658,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B475 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11827: Keep supervising the shell through a slow compositor resume — https://github.com/omacom/omarchy/pull/11827
-- #11831: Disable PSR2 selective fetch on the Dell Latitude 9440 2-in-1 — https://github.com/omacom/omarchy/pull/11831
-- #11805: Keep mouse movement from cancelling Limine autoboot — https://github.com/omacom/omarchy/pull/11805
-- #11624: Scope the MacBook NVMe suspend fix to Apple's NVMe controller — https://github.com/omacom/omarchy/pull/11624
-- #11592: Fix legacy Intel VA-API driver detection — https://github.com/omacom/omarchy/pull/11592
+- #10236: fix(launcher): remove plugin when desktop belongs to a shell plugin — https://github.com/omacom/omarchy/pull/10236
+- #10235: fix(fingerprint): retry verify after enroll settles reader — https://github.com/omacom/omarchy/pull/10235
+- #10165: Drop the unused fred=on kernel command line — https://github.com/omacom/omarchy/pull/10165
+- #10166: Remove stock linux even when linux-headers is absent — https://github.com/omacom/omarchy/pull/10166
+- #10111: bluetooth: register pairing agent and discover before pair/connect; fix usbcore autosuspend cmdline — https://github.com/omacom/omarchy/pull/10111
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12715,11 +12680,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B476 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11571: Enable two-finger swipe back/forward in Nautilus — https://github.com/omacom/omarchy/pull/11571
-- #11554: Set DefaultTimeoutStopSec=5s for systemd user session manager — https://github.com/omacom/omarchy/pull/11554
-- #11538: Mount Btrfs subvolumes with noatime to avoid unnecessary write amplification — https://github.com/omacom/omarchy/pull/11538
-- #11528: Update limine tooling before upgrading packages on older CPUs — https://github.com/omacom/omarchy/pull/11528
-- #11523: Enable paccache.timer to prune the pacman cache weekly — https://github.com/omacom/omarchy/pull/11523
+- #10083: Runtime i18n: self-translating Ui kit with system gettext catalogs as the default source — https://github.com/omacom/omarchy/pull/10083
+- #10079: Add AFK as a default coding agent — https://github.com/omacom/omarchy/pull/10079
+- #10058: Add an Ethernet toggle to the network panel — https://github.com/omacom/omarchy/pull/10058
+- #10015: Close three ways past the installed-theme denylist — https://github.com/omacom/omarchy/pull/10015
+- #9880: Stop installing the obsolete SPI keyboard DKMS package — https://github.com/omacom/omarchy/pull/9880
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12737,11 +12702,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B477 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11481: Keep Voxtype on CPU for Intel Haswell GPUs — https://github.com/omacom/omarchy/pull/11481
-- #11478: Detect damaged package records before updating — https://github.com/omacom/omarchy/pull/11478
-- #11477: Reconcile hibernation resume parameters with the swapfile — https://github.com/omacom/omarchy/pull/11477
-- #11432: Make power profiles change the CPU on Intel machines without HWP — https://github.com/omacom/omarchy/pull/11432
-- #11420: add flight mode bar widget next 2 bluetooth icon — https://github.com/omacom/omarchy/pull/11420
+- #9850: Drop the Shokz dongle phantom power key with a libinput quirk — https://github.com/omacom/omarchy/pull/9850
+- #9847: Keep Quickshell logs from exhausting the user runtime dir — https://github.com/omacom/omarchy/pull/9847
+- #9824: Install Intel VA-API drivers by device, not by marketing name — https://github.com/omacom/omarchy/pull/9824
+- #9807: Fix uwsm-app deadlock that stops all app launches — https://github.com/omacom/omarchy/pull/9807
+- #9796: Stop the Apple Studio Display flickering at 5K on T2 Macs — https://github.com/omacom/omarchy/pull/9796
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12759,11 +12724,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B478 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11418: Fix keyboard layout persistence after first-boot setup — https://github.com/omacom/omarchy/pull/11418
-- #11387: Detect FocalTech match-on-chip fingerprint readers — https://github.com/omacom/omarchy/pull/11387
-- #11364: Keep existing wine when installing Lutris — https://github.com/omacom/omarchy/pull/11364
-- #12089: Keep an existing wine package when installing Lutris — https://github.com/omacom/omarchy/pull/12089
-- #11315: Make nouveau software-cursor fix reliable at install time — https://github.com/omacom/omarchy/pull/11315
+- #9686: Skip the encrypt hook on verified plain roots — https://github.com/omacom/omarchy/pull/9686
+- #9633: Preserve existing Snapper configs when normalizing root — https://github.com/omacom/omarchy/pull/9633
+- #9632: Keep idle lock handoff concealed — https://github.com/omacom/omarchy/pull/9632
+- #9575: Lock directly from the idle service — https://github.com/omacom/omarchy/pull/9575
+- #9523: Refocus lock screen when session secures — https://github.com/omacom/omarchy/pull/9523
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12781,11 +12746,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B479 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11286: Configure persistent Wi-Fi Direct PC identity — https://github.com/omacom/omarchy/pull/11286
-- #11260: Pause Bluetooth discovery during pairing — https://github.com/omacom/omarchy/pull/11260
-- #11259: Avoid lspci in favor of sysfs — https://github.com/omacom/omarchy/pull/11259
-- #11250: Add Ghost to Install > AI — https://github.com/omacom/omarchy/pull/11250
-- #11273: Lock screen: keep fingerprint idle while the display is blanked — https://github.com/omacom/omarchy/pull/11273
+- #9520: Wait for apps to flush state before powering off or rebooting — https://github.com/omacom/omarchy/pull/9520
+- #9503: Keep the sudo editor on one that blocks — https://github.com/omacom/omarchy/pull/9503
+- #9493: Add screensaver plugin kind selected by idle.screensaverId — https://github.com/omacom/omarchy/pull/9493
+- #9472: [codex] OM-SEC-17: Allowlist update restart markers and commands — https://github.com/omacom/omarchy/pull/9472
+- #9445: Keep the GETAC V110G3 touchpad alive across S3 — https://github.com/omacom/omarchy/pull/9445
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12803,11 +12768,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B480 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11240: Allow restarting shell when desktop locked — https://github.com/omacom/omarchy/pull/11240
-- #11222: Stop the bootstrap migration truncating a customized hyprland.lua — https://github.com/omacom/omarchy/pull/11222
-- #11207: Fail migrations when a pacman transaction outlasts the wait — https://github.com/omacom/omarchy/pull/11207
-- #11053: Share cameras between apps through PipeWire and name whatever still locks one — https://github.com/omacom/omarchy/pull/11053
-- #10949: Ask for a language at setup, and offer one in the menu — https://github.com/omacom/omarchy/pull/10949
+- #9436: Keep clipboard contents alive when applications close — https://github.com/omacom/omarchy/pull/9436
+- #9429: Verify the session is secure before system lock succeeds — https://github.com/omacom/omarchy/pull/9429
+- #13756: Preserve the screensaver when a lock request fails — https://github.com/omacom/omarchy/pull/13756
+- #9358: Offer Thai as an install-time keyboard choice — https://github.com/omacom/omarchy/pull/9358
+- #9299: Offer Korean as an install-time keyboard choice — https://github.com/omacom/omarchy/pull/9299
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12825,11 +12790,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B481 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10926: fix(systemd): rebind ASUS touchpad after s2idle resume — https://github.com/omacom/omarchy/pull/10926
-- #10911: Remove agent usage records left behind when their collector goes away — https://github.com/omacom/omarchy/pull/10911
-- #10886: Repair T1 Mac PCIe hotplug defaults — https://github.com/omacom/omarchy/pull/10886
-- #10884: Add browser theme sync with CSS and JavaScript APIs — https://github.com/omacom/omarchy/pull/10884
-- #10878: Converge ISO Node pins on normal updates — https://github.com/omacom/omarchy/pull/10878
+- #9282: Point XCompose at a home-local table for sandboxed apps — https://github.com/omacom/omarchy/pull/9282
+- #9244: Install playerctl alongside voxtype so pause_media actually works — https://github.com/omacom/omarchy/pull/9244
+- #9230: Add Wi-Fi disconnect and forget actions that match Bluetooth — https://github.com/omacom/omarchy/pull/9230
+- #9228: Snapshot every package operation with snap-pac and keep ten — https://github.com/omacom/omarchy/pull/9228
+- #9210: Stop T2 Mac resume from waiting on the Thunderbolt controllers — https://github.com/omacom/omarchy/pull/9210
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12847,11 +12812,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B482 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10877: Target the actual NVMe controller in Apple suspend fix — https://github.com/omacom/omarchy/pull/10877
-- #10812: Ask before taking the pre-update snapshot — https://github.com/omacom/omarchy/pull/10812
-- #10752: Fix NVIDIA package selection on ARM — https://github.com/omacom/omarchy/pull/10752
-- #10722: Show LTE/WWAN cellular connections in the network panel — https://github.com/omacom/omarchy/pull/10722
-- #10719: Stage theme replacements and preserve the previous copy — https://github.com/omacom/omarchy/pull/10719
+- #9195: Keep T2 Mac USB-C ports awake after suspend — https://github.com/omacom/omarchy/pull/9195
+- #9170: Let idle screensaver and lock timings be disabled — https://github.com/omacom/omarchy/pull/9170
+- #9124: Service install scripts fail silently — https://github.com/omacom/omarchy/pull/9124
+- #9033: Move screenrecording state files out of predictable /tmp paths — https://github.com/omacom/omarchy/pull/9033
+- #9001: fix: wrap WlSessionLockSurface in Component for per-screen instantiation — https://github.com/omacom/omarchy/pull/9001
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12869,11 +12834,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B483 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10713: Use active external displays for the lid-close lock decision — https://github.com/omacom/omarchy/pull/10713
-- #10711: Validate plugin updates before changing installed checkouts — https://github.com/omacom/omarchy/pull/10711
-- #10710: Preserve existing shell settings during quattro upgrade — https://github.com/omacom/omarchy/pull/10710
-- #10707: Install guest tools on VMware systems — https://github.com/omacom/omarchy/pull/10707
-- #10663: Repair existing SDDM Qt5 theme selections with missing greeter libraries — https://github.com/omacom/omarchy/pull/10663
+- #8940: Support ELAN match-on-chip v2 fingerprint readers — https://github.com/omacom/omarchy/pull/8940
+- #8875: Install lib32 GPU drivers before Steam — https://github.com/omacom/omarchy/pull/8875
+- #12569: Install lib32 graphics drivers before Steam — https://github.com/omacom/omarchy/pull/12569
+- #8854: Add `omarchy reboot-windows` for dual-boot machines — https://github.com/omacom/omarchy/pull/8854
+- #8824: Skip orphan prompt during unattended updates — https://github.com/omacom/omarchy/pull/8824
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -12889,314 +12854,6 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 
 ```
 You are reviewing Omarchy pre-release batch B484 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10653: Fix lock screen black screen and fingerprint sensor lockout — https://github.com/omacom/omarchy/pull/10653
-- #10594: Add optional Agent Desktops app for background agent work — https://github.com/omacom/omarchy/pull/10594
-- #10592: Enable nvidia-powerd so laptop GPUs get Dynamic Boost — https://github.com/omacom/omarchy/pull/10592
-- #10573: Install qt5-wayland with Google Chrome on Wayland — https://github.com/omacom/omarchy/pull/10573
-- #10519: Fix Acer Aspire Go 15 internal keyboard dropout — https://github.com/omacom/omarchy/pull/10519
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B485
-
-```
-You are reviewing Omarchy pre-release batch B485 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10498: Avoid idle headphone pops on ASUS GU605CX — https://github.com/omacom/omarchy/pull/10498
-- #10497: Restore GVfs mounts after system resume — https://github.com/omacom/omarchy/pull/10497
-- #10485: Send Broadcom's ACL-priority command to fix Bluetooth A2DP stutter on T2 Macs — https://github.com/omacom/omarchy/pull/10485
-- #10463: Fix display backlight on Lenovo Yoga Pro 7 15IPH11 — https://github.com/omacom/omarchy/pull/10463
-- #10920: Fix display backlight on Dell XPS OLED Panther Lake laptops — https://github.com/omacom/omarchy/pull/10920
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B486
-
-```
-You are reviewing Omarchy pre-release batch B486 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10446: Make Brave Origin the default browser for new installs — https://github.com/omacom/omarchy/pull/10446
-- #10370: Install ffmpeg 4.4 with Spotify so Local Files can play — https://github.com/omacom/omarchy/pull/10370
-- #10314: Disable MacBook10,1 BCM4350 wakeup through S3 — https://github.com/omacom/omarchy/pull/10314
-- #10320: Drop a Bluetooth power change that lands mid-transition — https://github.com/omacom/omarchy/pull/10320
-- #10313: Cap MacBook10,1 RAPL at 4.5W/7W and CPU turbo at 3GHz — https://github.com/omacom/omarchy/pull/10313
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B487
-
-```
-You are reviewing Omarchy pre-release batch B487 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10301: Keep the running kernel when enabling direct boot — https://github.com/omacom/omarchy/pull/10301
-- #10293: Support selecting installed Linux kernel in direct boot setup — https://github.com/omacom/omarchy/pull/10293
-- #10236: fix(launcher): remove plugin when desktop belongs to a shell plugin — https://github.com/omacom/omarchy/pull/10236
-- #10235: fix(fingerprint): retry verify after enroll settles reader — https://github.com/omacom/omarchy/pull/10235
-- #10165: Drop the unused fred=on kernel command line — https://github.com/omacom/omarchy/pull/10165
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B488
-
-```
-You are reviewing Omarchy pre-release batch B488 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10166: Remove stock linux even when linux-headers is absent — https://github.com/omacom/omarchy/pull/10166
-- #10111: bluetooth: register pairing agent and discover before pair/connect; fix usbcore autosuspend cmdline — https://github.com/omacom/omarchy/pull/10111
-- #10083: Runtime i18n: self-translating Ui kit with system gettext catalogs as the default source — https://github.com/omacom/omarchy/pull/10083
-- #10079: Add AFK as a default coding agent — https://github.com/omacom/omarchy/pull/10079
-- #10058: Add an Ethernet toggle to the network panel — https://github.com/omacom/omarchy/pull/10058
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B489
-
-```
-You are reviewing Omarchy pre-release batch B489 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #10015: Close three ways past the installed-theme denylist — https://github.com/omacom/omarchy/pull/10015
-- #9880: Stop installing the obsolete SPI keyboard DKMS package — https://github.com/omacom/omarchy/pull/9880
-- #9850: Drop the Shokz dongle phantom power key with a libinput quirk — https://github.com/omacom/omarchy/pull/9850
-- #9847: Keep Quickshell logs from exhausting the user runtime dir — https://github.com/omacom/omarchy/pull/9847
-- #9824: Install Intel VA-API drivers by device, not by marketing name — https://github.com/omacom/omarchy/pull/9824
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B490
-
-```
-You are reviewing Omarchy pre-release batch B490 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9807: Fix uwsm-app deadlock that stops all app launches — https://github.com/omacom/omarchy/pull/9807
-- #9796: Stop the Apple Studio Display flickering at 5K on T2 Macs — https://github.com/omacom/omarchy/pull/9796
-- #9686: Skip the encrypt hook on verified plain roots — https://github.com/omacom/omarchy/pull/9686
-- #9633: Preserve existing Snapper configs when normalizing root — https://github.com/omacom/omarchy/pull/9633
-- #9632: Keep idle lock handoff concealed — https://github.com/omacom/omarchy/pull/9632
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B491
-
-```
-You are reviewing Omarchy pre-release batch B491 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9575: Lock directly from the idle service — https://github.com/omacom/omarchy/pull/9575
-- #9523: Refocus lock screen when session secures — https://github.com/omacom/omarchy/pull/9523
-- #9520: Wait for apps to flush state before powering off or rebooting — https://github.com/omacom/omarchy/pull/9520
-- #9503: Keep the sudo editor on one that blocks — https://github.com/omacom/omarchy/pull/9503
-- #9493: Add screensaver plugin kind selected by idle.screensaverId — https://github.com/omacom/omarchy/pull/9493
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B492
-
-```
-You are reviewing Omarchy pre-release batch B492 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9472: [codex] OM-SEC-17: Allowlist update restart markers and commands — https://github.com/omacom/omarchy/pull/9472
-- #9445: Keep the GETAC V110G3 touchpad alive across S3 — https://github.com/omacom/omarchy/pull/9445
-- #9436: Keep clipboard contents alive when applications close — https://github.com/omacom/omarchy/pull/9436
-- #9429: Verify the session is secure before system lock succeeds — https://github.com/omacom/omarchy/pull/9429
-- #13756: Preserve the screensaver when a lock request fails — https://github.com/omacom/omarchy/pull/13756
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B493
-
-```
-You are reviewing Omarchy pre-release batch B493 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9358: Offer Thai as an install-time keyboard choice — https://github.com/omacom/omarchy/pull/9358
-- #9299: Offer Korean as an install-time keyboard choice — https://github.com/omacom/omarchy/pull/9299
-- #9312: Add responsive theme background support — https://github.com/omacom/omarchy/pull/9312
-- #9282: Point XCompose at a home-local table for sandboxed apps — https://github.com/omacom/omarchy/pull/9282
-- #9244: Install playerctl alongside voxtype so pause_media actually works — https://github.com/omacom/omarchy/pull/9244
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B494
-
-```
-You are reviewing Omarchy pre-release batch B494 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9230: Add Wi-Fi disconnect and forget actions that match Bluetooth — https://github.com/omacom/omarchy/pull/9230
-- #9228: Snapshot every package operation with snap-pac and keep ten — https://github.com/omacom/omarchy/pull/9228
-- #9210: Stop T2 Mac resume from waiting on the Thunderbolt controllers — https://github.com/omacom/omarchy/pull/9210
-- #9195: Keep T2 Mac USB-C ports awake after suspend — https://github.com/omacom/omarchy/pull/9195
-- #9170: Let idle screensaver and lock timings be disabled — https://github.com/omacom/omarchy/pull/9170
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B495
-
-```
-You are reviewing Omarchy pre-release batch B495 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9150: Harden tui launcher install and removal — https://github.com/omacom/omarchy/pull/9150
-- #9139: Preserve keyboard settings during Quattro upgrade — https://github.com/omacom/omarchy/pull/9139
-- #9124: Service install scripts fail silently — https://github.com/omacom/omarchy/pull/9124
-- #9105: Use s2idle on T2 Macs with a discrete GPU — https://github.com/omacom/omarchy/pull/9105
-- #9037: Clean up 1Password integrations on removal — https://github.com/omacom/omarchy/pull/9037
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B496
-
-```
-You are reviewing Omarchy pre-release batch B496 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #9033: Move screenrecording state files out of predictable /tmp paths — https://github.com/omacom/omarchy/pull/9033
-- #9011: Default Nvidia users to KMS capture in Sunshine — https://github.com/omacom/omarchy/pull/9011
-- #9001: fix: wrap WlSessionLockSurface in Component for per-screen instantiation — https://github.com/omacom/omarchy/pull/9001
-- #8940: Support ELAN match-on-chip v2 fingerprint readers — https://github.com/omacom/omarchy/pull/8940
-- #8879: Use Sunshine's packaged systemd unit — https://github.com/omacom/omarchy/pull/8879
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B497
-
-```
-You are reviewing Omarchy pre-release batch B497 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #8875: Install lib32 GPU drivers before Steam — https://github.com/omacom/omarchy/pull/8875
-- #12569: Install lib32 graphics drivers before Steam — https://github.com/omacom/omarchy/pull/12569
-- #8874: Make the Dropbox and Tailscale service removers executable — https://github.com/omacom/omarchy/pull/8874
-- #8854: Add `omarchy reboot-windows` for dual-boot machines — https://github.com/omacom/omarchy/pull/8854
-- #8824: Skip orphan prompt during unattended updates — https://github.com/omacom/omarchy/pull/8824
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B498
-
-```
-You are reviewing Omarchy pre-release batch B498 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #8821: Put the OLED Zephyrus G14 MUX back to hybrid on install — https://github.com/omacom/omarchy/pull/8821
@@ -13215,17 +12872,325 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
+### B485
+
+```
+You are reviewing Omarchy pre-release batch B485 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #8682: Use German console keymap with umlauts — https://github.com/omacom/omarchy/pull/8682
+- #8670: Own cargo on PATH and install Rust without modifying shell profiles — https://github.com/omacom/omarchy/pull/8670
+- #8644: Let an explicit name mean the launcher it has always meant — https://github.com/omacom/omarchy/pull/8644
+- #8590: Handle unset OMARCHY_PATH in update-dev — https://github.com/omacom/omarchy/pull/8590
+- #8514: Install Intel VAAPI by PCI generation on hybrid GPUs — https://github.com/omacom/omarchy/pull/8514
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B486
+
+```
+You are reviewing Omarchy pre-release batch B486 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #8476: Add a Wi-Fi adapter selector to the network panel — https://github.com/omacom/omarchy/pull/8476
+- #8464: Add opt-in fix for stuck tablet-mode sensor on 2019 HP Spectre x360 (13-ap0xxx) — https://github.com/omacom/omarchy/pull/8464
+- #8442: Fix SPICE clipboard sharing in Wayland guests — https://github.com/omacom/omarchy/pull/8442
+- #8430: [Security] Give the Battle.net installer log an unpredictable private path — https://github.com/omacom/omarchy/pull/8430
+- #8426: Fix missing HDMI/DP audio on Intel Kabylake HDMI + Conexant systems — https://github.com/omacom/omarchy/pull/8426
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B487
+
+```
+You are reviewing Omarchy pre-release batch B487 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #8385: Fix Latitude 7490 i915 hibernation resume — https://github.com/omacom/omarchy/pull/8385
+- #8371: Save Apple GMUX backlight brightness across reboot — https://github.com/omacom/omarchy/pull/8371
+- #8221: Reference count the Wi-Fi scanner so a closed panel cannot scan — https://github.com/omacom/omarchy/pull/8221
+- #8186: Add keyd as an optional Install > Service for low-level key remapping — https://github.com/omacom/omarchy/pull/8186
+- #8124: Add Devin CLI as a default agent option — https://github.com/omacom/omarchy/pull/8124
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B488
+
+```
+You are reviewing Omarchy pre-release batch B488 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #8087: network: self-heal the bar icon after a NetworkManager restart — https://github.com/omacom/omarchy/pull/8087
+- #8025: Add automatic display brightness — https://github.com/omacom/omarchy/pull/8025
+- #7998: Timestamp the limine and pacman refresh backups — https://github.com/omacom/omarchy/pull/7998
+- #7992: Stop refresh-config overwriting a config it could not back up — https://github.com/omacom/omarchy/pull/7992
+- #7951: Read the lid from logind so clamshell works without an ACPI lid button — https://github.com/omacom/omarchy/pull/7951
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B489
+
+```
+You are reviewing Omarchy pre-release batch B489 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #7773: Gate the IPU7 camera stack on the controller, not the sensor — https://github.com/omacom/omarchy/pull/7773
+- #7715: Add Llama.cpp to the Install > AI menu — https://github.com/omacom/omarchy/pull/7715
+- #7673: Stop a wedged blank or wake child from silently disabling the lock screen's display control — https://github.com/omacom/omarchy/pull/7673
+- #7667: Hint at the ELAN 04f3:0c4b generic-driver matching bug in fingerprint setup — https://github.com/omacom/omarchy/pull/7667
+- #7651: Give session.slice CPU weight over app.slice so builds cannot stall input — https://github.com/omacom/omarchy/pull/7651
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B490
+
+```
+You are reviewing Omarchy pre-release batch B490 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #7609: Suppress keyring "reinstalling" warning in any locale — https://github.com/omacom/omarchy/pull/7609
+- #7594: Prevent idle hard-freeze on 2011 MacBook Airs (intel_idle.max_cstate=1) — https://github.com/omacom/omarchy/pull/7594
+- #7486: Add wallpaper portal backend so Files' Set as Background works — https://github.com/omacom/omarchy/pull/7486
+- #7474: Repair fcitx5 restart loops from user autostarts — https://github.com/omacom/omarchy/pull/7474
+- #7444: zen: write preferences to the path Zen reads and merge with package policies — https://github.com/omacom/omarchy/pull/7444
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B491
+
+```
+You are reviewing Omarchy pre-release batch B491 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #7396: Protect qt6-wayland from orphan cleanup — https://github.com/omacom/omarchy/pull/7396
+- #7353: Add per-network auto-connect switch — https://github.com/omacom/omarchy/pull/7353
+- #7348: Install PipeWire ALSA support on T2 Macs — https://github.com/omacom/omarchy/pull/7348
+- #7329: Re-detect external displays that no hotplug brought back after resume — https://github.com/omacom/omarchy/pull/7329
+- #7256: Ensure shift:both_capslock_cancel in kb_options during Quattro migration — https://github.com/omacom/omarchy/pull/7256
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B492
+
+```
+You are reviewing Omarchy pre-release batch B492 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #7196: Lock the lid and idle the Radeon on 15-inch 2016–2017 MacBook Pros — https://github.com/omacom/omarchy/pull/7196
+- #7193: Replace terminal screensaver with native Wayland client — https://github.com/omacom/omarchy/pull/7193
+- #7155: Perf: Reduce the crash watcher's memory  footprint by ~90% — https://github.com/omacom/omarchy/pull/7155
+- #7044: Keep Thunderbolt USB-C xHCI awake on Intel MacBooks — https://github.com/omacom/omarchy/pull/7044
+- #6982: Link agent skills only where they are actually read — https://github.com/omacom/omarchy/pull/6982
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B493
+
+```
+You are reviewing Omarchy pre-release batch B493 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #6951: Pin root= before the packages that can drop it — https://github.com/omacom/omarchy/pull/6951
+- #12548: Pin Limine root= when omarchy-defaults swallows cmdline fallback — https://github.com/omacom/omarchy/pull/12548
+- #6928: Enable palm rejection on T2 MacBooks — https://github.com/omacom/omarchy/pull/6928
+- #6906: Refuse to remove a browser that is still running — https://github.com/omacom/omarchy/pull/6906
+- #6865: Keep custom unlock theme through updates — https://github.com/omacom/omarchy/pull/6865
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B494
+
+```
+You are reviewing Omarchy pre-release batch B494 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #6849: Fix jittery scrolling on Dell XPS 13 Wildcat Lake by disabling PSR and Panel Replay — https://github.com/omacom/omarchy/pull/6849
+- #6840: Repair stale boot images before restart — https://github.com/omacom/omarchy/pull/6840
+- #6813: Stop screensavers through their supervisors — https://github.com/omacom/omarchy/pull/6813
+- #6753: Make forced hibernation setup rebuild the UKI — https://github.com/omacom/omarchy/pull/6753
+- #6730: Keep Snapper off non-Btrfs roots — https://github.com/omacom/omarchy/pull/6730
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B495
+
+```
+You are reviewing Omarchy pre-release batch B495 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #6553: fix: enable cache trimming and metadata balancing to prevent allocation lockups — https://github.com/omacom/omarchy/pull/6553
+- #6494: Keep app.slice loadable with private procfs — https://github.com/omacom/omarchy/pull/6494
+- #6454: Add selective sync to the Dropbox panel — https://github.com/omacom/omarchy/pull/6454
+- #6403: Generate theme unlock art, and pre-build the menu caches during install — https://github.com/omacom/omarchy/pull/6403
+- #6149: Fix intermittent suspend hang on T2 MacBooks (force synchronous device suspend) — https://github.com/omacom/omarchy/pull/6149
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B496
+
+```
+You are reviewing Omarchy pre-release batch B496 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #6019: Expand Nautilus into usage as file picker in Open/Save dialog (provides space to preview) — https://github.com/omacom/omarchy/pull/6019
+- #7945: Route file chooser portal requests to Nautilus — https://github.com/omacom/omarchy/pull/7945
+- #5890: Add Julia installer — https://github.com/omacom/omarchy/pull/5890
+- #5866: fix: filter stderr noise from snapper config list parsing — https://github.com/omacom/omarchy/pull/5866
+- #5686: Add speech-dispatcher and espeak-ng for text-to-speech accessibility support — https://github.com/omacom/omarchy/pull/5686
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B497
+
+```
+You are reviewing Omarchy pre-release batch B497 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #5553: Complete native support for Helium browser — https://github.com/omacom/omarchy/pull/5553
+- #5453: Rebind hid-multitouch on resume to recover Razer Blade AMD trackpad click — https://github.com/omacom/omarchy/pull/5453
+- #5445: Add support for updating the RGB color of Razer devices — https://github.com/omacom/omarchy/pull/5445
+- #5335: Fix headphone jack hotplug on MSI X370 ALC892 boards — https://github.com/omacom/omarchy/pull/5335
+- #5241: Add `UseDNS=no` for DHCPv6 — https://github.com/omacom/omarchy/pull/5241
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B498
+
+```
+You are reviewing Omarchy pre-release batch B498 (5 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #5209: feat(omarchy-setup-dns): add live "Current DNS" display + quit option — https://github.com/omacom/omarchy/pull/5209
+- #5193: fix(hardware): add Alienware Area-51 iwd boot-delay workaround — https://github.com/omacom/omarchy/pull/5193
+- #5148: Support Google Chrome theme color — https://github.com/omacom/omarchy/pull/5148
+- #5130: Fix Goodix fingerprint reader disconnecting when USB-C devices are plugged in or on suspend/resume — https://github.com/omacom/omarchy/pull/5130
+- #4793: Fix dedicated GPU from enabling after sleep when in integrated mode — https://github.com/omacom/omarchy/pull/4793
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
 ### B499
 
 ```
 You are reviewing Omarchy pre-release batch B499 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8733: Clean up stale SDDM pacsave and legacy hyprland.conf — https://github.com/omacom/omarchy/pull/8733
-- #8704: Enable docker.service for Docker DBs — https://github.com/omacom/omarchy/pull/8704
-- #8682: Use German console keymap with umlauts — https://github.com/omacom/omarchy/pull/8682
-- #8670: Own cargo on PATH and install Rust without modifying shell profiles — https://github.com/omacom/omarchy/pull/8670
-- #8644: Let an explicit name mean the launcher it has always meant — https://github.com/omacom/omarchy/pull/8644
+- #4593: Add Framework Desktop ARGB fan RGB theme syncing — https://github.com/omacom/omarchy/pull/4593
+- #13967: Add graceful low-battery shutdown protection — https://github.com/omacom/omarchy/pull/13967
+- #13964: parseExecArgv accepts NUL, so the argv validated is not the argv executed — https://github.com/omacom/omarchy/pull/13964
+- #13945: Check Hyprland before restarting the shell — https://github.com/omacom/omarchy/pull/13945
+- #12598: Preserve existing Snapper retention policy — https://github.com/omacom/omarchy/pull/12598
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13243,11 +13208,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B500 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8590: Handle unset OMARCHY_PATH in update-dev — https://github.com/omacom/omarchy/pull/8590
-- #8588: Install system-sleep hooks executable — https://github.com/omacom/omarchy/pull/8588
-- #8531: Keep fingerprint unlock working across suspend — https://github.com/omacom/omarchy/pull/8531
-- #8514: Install Intel VAAPI by PCI generation on hybrid GPUs — https://github.com/omacom/omarchy/pull/8514
-- #8476: Add a Wi-Fi adapter selector to the network panel — https://github.com/omacom/omarchy/pull/8476
+- #11805: Keep mouse movement from cancelling Limine autoboot — https://github.com/omacom/omarchy/pull/11805
+- #8704: Enable docker.service for Docker DBs — https://github.com/omacom/omarchy/pull/8704
+- #8733: Clean up stale SDDM pacsave and legacy hyprland.conf — https://github.com/omacom/omarchy/pull/8733
+- #8874: Make the Dropbox and Tailscale service removers executable — https://github.com/omacom/omarchy/pull/8874
+- #9011: Default Nvidia users to KMS capture in Sunshine — https://github.com/omacom/omarchy/pull/9011
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13265,11 +13230,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B501 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8464: Add opt-in fix for stuck tablet-mode sensor on 2019 HP Spectre x360 (13-ap0xxx) — https://github.com/omacom/omarchy/pull/8464
-- #8442: Fix SPICE clipboard sharing in Wayland guests — https://github.com/omacom/omarchy/pull/8442
-- #8430: [Security] Give the Battle.net installer log an unpredictable private path — https://github.com/omacom/omarchy/pull/8430
-- #8426: Fix missing HDMI/DP audio on Intel Kabylake HDMI + Conexant systems — https://github.com/omacom/omarchy/pull/8426
-- #8408: Theme GTK4 apps with Omarchy colors — https://github.com/omacom/omarchy/pull/8408
+- #9037: Clean up 1Password integrations on removal — https://github.com/omacom/omarchy/pull/9037
+- #9105: Use s2idle on T2 Macs with a discrete GPU — https://github.com/omacom/omarchy/pull/9105
+- #9139: Preserve keyboard settings during Quattro upgrade — https://github.com/omacom/omarchy/pull/9139
+- #9150: Harden tui launcher install and removal — https://github.com/omacom/omarchy/pull/9150
+- #9312: Add responsive theme background support — https://github.com/omacom/omarchy/pull/9312
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13287,11 +13252,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B502 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8385: Fix Latitude 7490 i915 hibernation resume — https://github.com/omacom/omarchy/pull/8385
-- #8371: Save Apple GMUX backlight brightness across reboot — https://github.com/omacom/omarchy/pull/8371
-- #8316: Offer a source-build fallback when Voxtype's binary needs AVX2 — https://github.com/omacom/omarchy/pull/8316
-- #8221: Reference count the Wi-Fi scanner so a closed panel cannot scan — https://github.com/omacom/omarchy/pull/8221
-- #8186: Add keyd as an optional Install > Service for low-level key remapping — https://github.com/omacom/omarchy/pull/8186
+- #12139: Enable Wayland input methods in Chromium-based browsers — https://github.com/omacom/omarchy/pull/12139
+- #12590: Restore t2fanrd fan control after suspend/resume on T2 Macs — https://github.com/omacom/omarchy/pull/12590
+- #12616: Stop counting Hyprland virtual outputs as external monitors — https://github.com/omacom/omarchy/pull/12616
+- #12834: Stop web app launches from disabling TLS for the whole browser session — https://github.com/omacom/omarchy/pull/12834
+- #13867: fix(bluetooth): allow Chromium to power on for phone passkeys — https://github.com/omacom/omarchy/pull/13867
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13309,11 +13274,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B503 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #8124: Add Devin CLI as a default agent option — https://github.com/omacom/omarchy/pull/8124
-- #8087: network: self-heal the bar icon after a NetworkManager restart — https://github.com/omacom/omarchy/pull/8087
-- #8025: Add automatic display brightness — https://github.com/omacom/omarchy/pull/8025
-- #7998: Timestamp the limine and pacman refresh backups — https://github.com/omacom/omarchy/pull/7998
-- #7992: Stop refresh-config overwriting a config it could not back up — https://github.com/omacom/omarchy/pull/7992
+- #13889: Install Grok through mise's first-party package — https://github.com/omacom/omarchy/pull/13889
+- #13820: Add ASUS Zenbook A16 UX3607OA board support — https://github.com/omacom/omarchy/pull/13820
+- #13675: Restore LIFEBOOK P727 keyboard at disk unlock — https://github.com/omacom/omarchy/pull/13675
+- #13672: Enable early i915 KMS on Apple Intel Macs — https://github.com/omacom/omarchy/pull/13672
+- #13663: Drop kms for AMD-only hibernation resume — https://github.com/omacom/omarchy/pull/13663
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13331,11 +13296,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B504 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7951: Read the lid from logind so clamshell works without an ACPI lid button — https://github.com/omacom/omarchy/pull/7951
-- #7773: Gate the IPU7 camera stack on the controller, not the sensor — https://github.com/omacom/omarchy/pull/7773
-- #7715: Add Llama.cpp to the Install > AI menu — https://github.com/omacom/omarchy/pull/7715
-- #7673: Stop a wedged blank or wake child from silently disabling the lock screen's display control — https://github.com/omacom/omarchy/pull/7673
-- #7667: Hint at the ELAN 04f3:0c4b generic-driver matching bug in fingerprint setup — https://github.com/omacom/omarchy/pull/7667
+- #13623: Drop kms when an idle iGPU has no connected display — https://github.com/omacom/omarchy/pull/13623
+- #13615: Unmask ThinkPad Bluetooth F10 via thinkpad_acpi bit 20 — https://github.com/omacom/omarchy/pull/13615
+- #13532: Skip broadcom-wl on MacBookAir4,1 with BCM4331 — https://github.com/omacom/omarchy/pull/13532
+- #13311: Disable unprivileged TTY line-discipline autoload — https://github.com/omacom/omarchy/pull/13311
+- #13298: Fix BCM4350 Bluetooth coexistence on MacBookPro14,1 — https://github.com/omacom/omarchy/pull/13298
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13353,11 +13318,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B505 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7651: Give session.slice CPU weight over app.slice so builds cannot stall input — https://github.com/omacom/omarchy/pull/7651
-- #7609: Suppress keyring "reinstalling" warning in any locale — https://github.com/omacom/omarchy/pull/7609
-- #7594: Prevent idle hard-freeze on 2011 MacBook Airs (intel_idle.max_cstate=1) — https://github.com/omacom/omarchy/pull/7594
-- #7486: Add wallpaper portal backend so Files' Set as Background works — https://github.com/omacom/omarchy/pull/7486
-- #7474: Repair fcitx5 restart loops from user autostarts — https://github.com/omacom/omarchy/pull/7474
+- #13238: Step one raw value up on +5% from zero brightness — https://github.com/omacom/omarchy/pull/13238
+- #13192: fix: enable FaceTime HD cameras on Intel Macs — https://github.com/omacom/omarchy/pull/13192
+- #13129: Enable amdgpu HDMI HPD debounce so displays that drop HPD in power save stop relighting the locked screen — https://github.com/omacom/omarchy/pull/13129
+- #13082: Fix display backlight on ASUS ROG Zephyrus G16 GU605MY — https://github.com/omacom/omarchy/pull/13082
+- #12909: Fail loudly when systemd-resolved will not start after networkd retirement — https://github.com/omacom/omarchy/pull/12909
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13375,11 +13340,11 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 You are reviewing Omarchy pre-release batch B506 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #7444: zen: write preferences to the path Zen reads and merge with package policies — https://github.com/omacom/omarchy/pull/7444
-- #7396: Protect qt6-wayland from orphan cleanup — https://github.com/omacom/omarchy/pull/7396
-- #7353: Add per-network auto-connect switch — https://github.com/omacom/omarchy/pull/7353
-- #7348: Install PipeWire ALSA support on T2 Macs — https://github.com/omacom/omarchy/pull/7348
-- #7329: Re-detect external displays that no hotplug brought back after resume — https://github.com/omacom/omarchy/pull/7329
+- #12833: Keep a TOD-provided libfprint when enabling fingerprint auth — https://github.com/omacom/omarchy/pull/12833
+- #12314: apple: rebind brcmfmac across suspend — https://github.com/omacom/omarchy/pull/12314
+- #12176: fix(hibernate): create top-level @swap subvolume so btrfs hibernation works — https://github.com/omacom/omarchy/pull/12176
+- #12109: Keep update/runtime/diagnostics out of world-writable /tmp — https://github.com/omacom/omarchy/pull/12109
+- #12067: Install the FaceTime HD camera driver on Intel Macs that have one — https://github.com/omacom/omarchy/pull/12067
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13395,270 +13360,6 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 
 ```
 You are reviewing Omarchy pre-release batch B507 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #7256: Ensure shift:both_capslock_cancel in kb_options during Quattro migration — https://github.com/omacom/omarchy/pull/7256
-- #7196: Lock the lid and idle the Radeon on 15-inch 2016–2017 MacBook Pros — https://github.com/omacom/omarchy/pull/7196
-- #7193: Replace terminal screensaver with native Wayland client — https://github.com/omacom/omarchy/pull/7193
-- #7177: Mark the T2 Mac internal trackpad as internal — https://github.com/omacom/omarchy/pull/7177
-- #7155: Perf: Reduce the crash watcher's memory  footprint by ~90% — https://github.com/omacom/omarchy/pull/7155
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B508
-
-```
-You are reviewing Omarchy pre-release batch B508 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #7044: Keep Thunderbolt USB-C xHCI awake on Intel MacBooks — https://github.com/omacom/omarchy/pull/7044
-- #6982: Link agent skills only where they are actually read — https://github.com/omacom/omarchy/pull/6982
-- #6951: Pin root= before the packages that can drop it — https://github.com/omacom/omarchy/pull/6951
-- #12548: Pin Limine root= when omarchy-defaults swallows cmdline fallback — https://github.com/omacom/omarchy/pull/12548
-- #6928: Enable palm rejection on T2 MacBooks — https://github.com/omacom/omarchy/pull/6928
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B509
-
-```
-You are reviewing Omarchy pre-release batch B509 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #6906: Refuse to remove a browser that is still running — https://github.com/omacom/omarchy/pull/6906
-- #6865: Keep custom unlock theme through updates — https://github.com/omacom/omarchy/pull/6865
-- #6849: Fix jittery scrolling on Dell XPS 13 Wildcat Lake by disabling PSR and Panel Replay — https://github.com/omacom/omarchy/pull/6849
-- #6840: Repair stale boot images before restart — https://github.com/omacom/omarchy/pull/6840
-- #6813: Stop screensavers through their supervisors — https://github.com/omacom/omarchy/pull/6813
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B510
-
-```
-You are reviewing Omarchy pre-release batch B510 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #6753: Make forced hibernation setup rebuild the UKI — https://github.com/omacom/omarchy/pull/6753
-- #6730: Keep Snapper off non-Btrfs roots — https://github.com/omacom/omarchy/pull/6730
-- #6553: fix: enable cache trimming and metadata balancing to prevent allocation lockups — https://github.com/omacom/omarchy/pull/6553
-- #6494: Keep app.slice loadable with private procfs — https://github.com/omacom/omarchy/pull/6494
-- #6454: Add selective sync to the Dropbox panel — https://github.com/omacom/omarchy/pull/6454
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B511
-
-```
-You are reviewing Omarchy pre-release batch B511 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #6403: Generate theme unlock art, and pre-build the menu caches during install — https://github.com/omacom/omarchy/pull/6403
-- #6149: Fix intermittent suspend hang on T2 MacBooks (force synchronous device suspend) — https://github.com/omacom/omarchy/pull/6149
-- #6019: Expand Nautilus into usage as file picker in Open/Save dialog (provides space to preview) — https://github.com/omacom/omarchy/pull/6019
-- #7945: Route file chooser portal requests to Nautilus — https://github.com/omacom/omarchy/pull/7945
-- #5890: Add Julia installer — https://github.com/omacom/omarchy/pull/5890
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B512
-
-```
-You are reviewing Omarchy pre-release batch B512 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #5866: fix: filter stderr noise from snapper config list parsing — https://github.com/omacom/omarchy/pull/5866
-- #5686: Add speech-dispatcher and espeak-ng for text-to-speech accessibility support — https://github.com/omacom/omarchy/pull/5686
-- #5553: Complete native support for Helium browser — https://github.com/omacom/omarchy/pull/5553
-- #5453: Rebind hid-multitouch on resume to recover Razer Blade AMD trackpad click — https://github.com/omacom/omarchy/pull/5453
-- #5445: Add support for updating the RGB color of Razer devices — https://github.com/omacom/omarchy/pull/5445
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B513
-
-```
-You are reviewing Omarchy pre-release batch B513 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #5335: Fix headphone jack hotplug on MSI X370 ALC892 boards — https://github.com/omacom/omarchy/pull/5335
-- #5241: Add `UseDNS=no` for DHCPv6 — https://github.com/omacom/omarchy/pull/5241
-- #5209: feat(omarchy-setup-dns): add live "Current DNS" display + quit option — https://github.com/omacom/omarchy/pull/5209
-- #5193: fix(hardware): add Alienware Area-51 iwd boot-delay workaround — https://github.com/omacom/omarchy/pull/5193
-- #5148: Support Google Chrome theme color — https://github.com/omacom/omarchy/pull/5148
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B514
-
-```
-You are reviewing Omarchy pre-release batch B514 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #5130: Fix Goodix fingerprint reader disconnecting when USB-C devices are plugged in or on suspend/resume — https://github.com/omacom/omarchy/pull/5130
-- #4793: Fix dedicated GPU from enabling after sleep when in integrated mode — https://github.com/omacom/omarchy/pull/4793
-- #4593: Add Framework Desktop ARGB fan RGB theme syncing — https://github.com/omacom/omarchy/pull/4593
-- #12590: Restore t2fanrd fan control after suspend/resume on T2 Macs — https://github.com/omacom/omarchy/pull/12590
-- #12598: Preserve existing Snapper retention policy — https://github.com/omacom/omarchy/pull/12598
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B515
-
-```
-You are reviewing Omarchy pre-release batch B515 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #13820: Add ASUS Zenbook A16 UX3607OA board support — https://github.com/omacom/omarchy/pull/13820
-- #13675: Restore LIFEBOOK P727 keyboard at disk unlock — https://github.com/omacom/omarchy/pull/13675
-- #13672: Enable early i915 KMS on Apple Intel Macs — https://github.com/omacom/omarchy/pull/13672
-- #13663: Drop kms for AMD-only hibernation resume — https://github.com/omacom/omarchy/pull/13663
-- #13623: Drop kms when an idle iGPU has no connected display — https://github.com/omacom/omarchy/pull/13623
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B516
-
-```
-You are reviewing Omarchy pre-release batch B516 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #13615: Unmask ThinkPad Bluetooth F10 via thinkpad_acpi bit 20 — https://github.com/omacom/omarchy/pull/13615
-- #13532: Skip broadcom-wl on MacBookAir4,1 with BCM4331 — https://github.com/omacom/omarchy/pull/13532
-- #13311: Disable unprivileged TTY line-discipline autoload — https://github.com/omacom/omarchy/pull/13311
-- #13298: Fix BCM4350 Bluetooth coexistence on MacBookPro14,1 — https://github.com/omacom/omarchy/pull/13298
-- #13238: Step one raw value up on +5% from zero brightness — https://github.com/omacom/omarchy/pull/13238
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B517
-
-```
-You are reviewing Omarchy pre-release batch B517 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #13192: fix: enable FaceTime HD cameras on Intel Macs — https://github.com/omacom/omarchy/pull/13192
-- #13129: Enable amdgpu HDMI HPD debounce so displays that drop HPD in power save stop relighting the locked screen — https://github.com/omacom/omarchy/pull/13129
-- #13082: Fix display backlight on ASUS ROG Zephyrus G16 GU605MY — https://github.com/omacom/omarchy/pull/13082
-- #12909: Fail loudly when systemd-resolved will not start after networkd retirement — https://github.com/omacom/omarchy/pull/12909
-- #12833: Keep a TOD-provided libfprint when enabling fingerprint auth — https://github.com/omacom/omarchy/pull/12833
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B518
-
-```
-You are reviewing Omarchy pre-release batch B518 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
-- #12314: apple: rebind brcmfmac across suspend — https://github.com/omacom/omarchy/pull/12314
-- #12286: Fix silent speakers on 12-inch MacBook (CS4208) — https://github.com/omacom/omarchy/pull/12286
-- #12176: fix(hibernate): create top-level @swap subvolume so btrfs hibernation works — https://github.com/omacom/omarchy/pull/12176
-- #12109: Keep update/runtime/diagnostics out of world-writable /tmp — https://github.com/omacom/omarchy/pull/12109
-- #12067: Install the FaceTime HD camera driver on Intel Macs that have one — https://github.com/omacom/omarchy/pull/12067
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B519
-
-```
-You are reviewing Omarchy pre-release batch B519 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #12046: Fix Windows VM stop/launch cycle breaking on btrfs due to stale bind anchors and setgid bits — https://github.com/omacom/omarchy/pull/12046
@@ -13677,17 +13378,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B520
+### B508
 
 ```
-You are reviewing Omarchy pre-release batch B520 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B508 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #11759: Blacklist vxlan until the FDB-flush UAF kernel fix ships — https://github.com/omacom/omarchy/pull/11759
 - #11748: Set the boot Wi-Fi country on BCM4350/BCM43602 Macs — https://github.com/omacom/omarchy/pull/11748
 - #11746: Dismiss screensaver on seat input and conceal idle lock handoff — https://github.com/omacom/omarchy/pull/11746
 - #11655: Support Broadcom BCM4352 Wi-Fi during installation — https://github.com/omacom/omarchy/pull/11655
-- #11616: Fix weak WiFi signal on BCM43602 (MacBook Pro 2015-2017) — https://github.com/omacom/omarchy/pull/11616
+- #11570: Suspend on 2016-2017 MacBook Pros: keep Wi-Fi and USB-C working across S3 (two systemd-sleep hooks) — https://github.com/omacom/omarchy/pull/11570
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13699,17 +13400,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B521
+### B509
 
 ```
-You are reviewing Omarchy pre-release batch B521 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B509 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11570: Suspend on 2016-2017 MacBook Pros: keep Wi-Fi and USB-C working across S3 (two systemd-sleep hooks) — https://github.com/omacom/omarchy/pull/11570
 - #11548: Arbitrate MacBookPro11,5 dGPU to radeon — https://github.com/omacom/omarchy/pull/11548
-- #11536: Fix BCM4377 Bluetooth hang and D3 suspend abort on T2 Macs — https://github.com/omacom/omarchy/pull/11536
 - #11476: Keep DNS changes running past unsupported profiles — https://github.com/omacom/omarchy/pull/11476
 - #11401: set private per-user tmpdir — https://github.com/omacom/omarchy/pull/11401
+- #11311: Install b43-firmware for BCM4322 Wi-Fi (older MacBooks) — https://github.com/omacom/omarchy/pull/11311
+- #11076: Disable broken eDP Panel Replay on Dell XPS Panther Lake — https://github.com/omacom/omarchy/pull/11076
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13721,17 +13422,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B522
+### B510
 
 ```
-You are reviewing Omarchy pre-release batch B522 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B510 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #11311: Install b43-firmware for BCM4322 Wi-Fi (older MacBooks) — https://github.com/omacom/omarchy/pull/11311
-- #11076: Disable broken eDP Panel Replay on Dell XPS Panther Lake — https://github.com/omacom/omarchy/pull/11076
 - #11064: Add pre-T2 MacBook Cirrus CS8409 speaker fix — https://github.com/omacom/omarchy/pull/11064
 - #11033: Make the Intel IPU6 camera work out of the box — https://github.com/omacom/omarchy/pull/11033
 - #11652: Make the Intel IPU6 webcam behind an IVSC work — https://github.com/omacom/omarchy/pull/11652
+- #10936: Support pre-GCN AMD GPUs and BCM4321 wireless — https://github.com/omacom/omarchy/pull/10936
+- #10910: fix(bcm43xx): add BCM43224 detection and blacklist conflicting drivers — https://github.com/omacom/omarchy/pull/10910
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13743,17 +13444,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B523
+### B511
 
 ```
-You are reviewing Omarchy pre-release batch B523 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B511 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10936: Support pre-GCN AMD GPUs and BCM4321 wireless — https://github.com/omacom/omarchy/pull/10936
-- #10910: fix(bcm43xx): add BCM43224 detection and blacklist conflicting drivers — https://github.com/omacom/omarchy/pull/10910
 - #10758: Fix Thunderbolt suspend on the MacBookPro14,1 — https://github.com/omacom/omarchy/pull/10758
 - #10332: Fix Wi-Fi dying after suspend on BCM43602 MacBooks — https://github.com/omacom/omarchy/pull/10332
 - #10306: Install Apple Broadcom Wi-Fi firmware on every Mac brcmfmac drives, not just T2 — https://github.com/omacom/omarchy/pull/10306
+- #10184: Fix Framework 13 AI 300 microphone input — https://github.com/omacom/omarchy/pull/10184
+- #10169: Fix iMac20,2 AMDGPU startup race — https://github.com/omacom/omarchy/pull/10169
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13765,17 +13466,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B524
+### B512
 
 ```
-You are reviewing Omarchy pre-release batch B524 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B512 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #10184: Fix Framework 13 AI 300 microphone input — https://github.com/omacom/omarchy/pull/10184
-- #10169: Fix iMac20,2 AMDGPU startup race — https://github.com/omacom/omarchy/pull/10169
 - #10139: Keep the Apple USB SD card reader alive after suspend — https://github.com/omacom/omarchy/pull/10139
 - #10065: Hibernation: keep native GPU drivers out of the initramfs so resume runs before any GPU driver touches the hardware — https://github.com/omacom/omarchy/pull/10065
 - #9899: fix(hardware): prevent ~130s sleep wake stall on MacBook Pro 2016-2017 — https://github.com/omacom/omarchy/pull/9899
+- #9830: Fix T2 Mac suspend: s2idle, d3cold, and brcmfmac — https://github.com/omacom/omarchy/pull/9830
+- #9816: Refine ASUS suspend fixes: RTC ACPI alarm, DDR5 spd5118 blacklist, and conditional S3 — https://github.com/omacom/omarchy/pull/9816
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13787,39 +13488,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B525
+### B513
 
 ```
-You are reviewing Omarchy pre-release batch B525 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B513 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
-- #9830: Fix T2 Mac suspend: s2idle, d3cold, and brcmfmac — https://github.com/omacom/omarchy/pull/9830
-- #9816: Refine ASUS suspend fixes: RTC ACPI alarm, DDR5 spd5118 blacklist, and conditional S3 — https://github.com/omacom/omarchy/pull/9816
 - #9815: Tag hotplugged USB dock/hub input devices for seat and enable wakeup — https://github.com/omacom/omarchy/pull/9815
 - #9692: Use DKMS for Broadcom wl across kernel updates — https://github.com/omacom/omarchy/pull/9692
 - #9332: Migrate hybrid GPU switching from supergfxctl to cardwire — https://github.com/omacom/omarchy/pull/9332
-
-Work through the batch methodically:
-1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
-2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
-3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
-4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
-5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
-
-Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
-```
-
-### B526
-
-```
-You are reviewing Omarchy pre-release batch B526 (5 PRs to be merged together as one tranche).
-
-Pull requests in this batch:
 - #9285: Clear unowned running-kernel modules leftovers during update — https://github.com/omacom/omarchy/pull/9285
 - #9276: Make Apple Magic Trackpad pointer feel closer to macOS — https://github.com/omacom/omarchy/pull/9276
-- #9202: Stop a stuck PROCHOT from pinning T2 Macs at 800 MHz — https://github.com/omacom/omarchy/pull/9202
-- #9070: Make package ownership the Quattro update boundary — https://github.com/omacom/omarchy/pull/9070
-- #8994: Isolate /var/lib/docker on a top-level Btrfs subvolume — https://github.com/omacom/omarchy/pull/8994
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13831,17 +13510,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B527
+### B514
 
 ```
-You are reviewing Omarchy pre-release batch B527 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B514 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #9070: Make package ownership the Quattro update boundary — https://github.com/omacom/omarchy/pull/9070
+- #8994: Isolate /var/lib/docker on a top-level Btrfs subvolume — https://github.com/omacom/omarchy/pull/8994
 - #8812: Fix legacy Broadcom wl conflict on BCM4350 Macs upgrading to Quattro — https://github.com/omacom/omarchy/pull/8812
 - #8756: Seed polkit fingerprint config from vendor default, route fallback through system-auth — https://github.com/omacom/omarchy/pull/8756
 - #8546: Enable NVIDIA S0ix power management on s2idle systems — https://github.com/omacom/omarchy/pull/8546
-- #8489: Keep wired Xbox controllers working with xpadneo — https://github.com/omacom/omarchy/pull/8489
-- #8295: Reset iwlwifi across sleep to prevent Intel BE200/BE211 PCIe link hang — https://github.com/omacom/omarchy/pull/8295
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13853,17 +13532,17 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B528
+### B515
 
 ```
-You are reviewing Omarchy pre-release batch B528 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B515 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8489: Keep wired Xbox controllers working with xpadneo — https://github.com/omacom/omarchy/pull/8489
+- #8295: Reset iwlwifi across sleep to prevent Intel BE200/BE211 PCIe link hang — https://github.com/omacom/omarchy/pull/8295
 - #8285: Enable speakers on pre-T2 MacBooks with the Cirrus CS8409 bridge — https://github.com/omacom/omarchy/pull/8285
 - #8263: Stop early-loading the NVIDIA driver on hybrid GPU machines so hibernation can resume — https://github.com/omacom/omarchy/pull/8263
 - #8199: Stop hibernation remove from leaving resume= on the UKI — https://github.com/omacom/omarchy/pull/8199
-- #8187: Load uinput at boot for Steam Input — https://github.com/omacom/omarchy/pull/8187
-- #8175: Point ~/.XCompose and the power udev rules at the packaged tree after the quattro upgrade — https://github.com/omacom/omarchy/pull/8175
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -13875,14 +13554,14 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B529
+### B516
 
 ```
-You are reviewing Omarchy pre-release batch B529 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B516 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
+- #8187: Load uinput at boot for Steam Input — https://github.com/omacom/omarchy/pull/8187
 - #8151: Preserve existing initramfs modules on Surface devices — https://github.com/omacom/omarchy/pull/8151
-- #8127: Enable the NVIDIA suspend services on 580xx installs — https://github.com/omacom/omarchy/pull/8127
 - #8090: Keep RTL8852BE Wi-Fi alive across suspend — https://github.com/omacom/omarchy/pull/8090
 - #8022: Recover Intel Bluetooth when an rfkill block interrupts the firmware load — https://github.com/omacom/omarchy/pull/8022
 - #7993: Route Goodix 53xc fingerprint readers to Dell's proprietary TOD driver — https://github.com/omacom/omarchy/pull/7993
@@ -13897,10 +13576,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B530
+### B517
 
 ```
-You are reviewing Omarchy pre-release batch B530 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B517 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #7950: Rebind the T1 Touch Bar's display sub-device so it doesn't stay dark — https://github.com/omacom/omarchy/pull/7950
@@ -13919,10 +13598,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B531
+### B518
 
 ```
-You are reviewing Omarchy pre-release batch B531 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B518 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #7572: Spare the session-lock owner in every service teardown until it unlocks — https://github.com/omacom/omarchy/pull/7572
@@ -13941,10 +13620,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B532
+### B519
 
 ```
-You are reviewing Omarchy pre-release batch B532 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B519 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #7064: Add T1 Touch Bar firmware handoff and apple-ib-tb wiring — https://github.com/omacom/omarchy/pull/7064
@@ -13963,10 +13642,10 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B533
+### B520
 
 ```
-You are reviewing Omarchy pre-release batch B533 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B520 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #6596: Add HP EliteBook X G2i hardware support — https://github.com/omacom/omarchy/pull/6596
@@ -13985,17 +13664,35 @@ Work through the batch methodically:
 Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
 ```
 
-### B534
+### B521
 
 ```
-You are reviewing Omarchy pre-release batch B534 (5 PRs to be merged together as one tranche).
+You are reviewing Omarchy pre-release batch B521 (5 PRs to be merged together as one tranche).
 
 Pull requests in this batch:
 - #5332: Enable SSD TRIM for LUKS-encrypted drives — https://github.com/omacom/omarchy/pull/5332
 - #13055: Allow TRIM through dm-crypt on encrypted installs — https://github.com/omacom/omarchy/pull/13055
 - #5194: fix(hardware): add Alienware Area-51 Realtek/SOF audio quirk workaround — https://github.com/omacom/omarchy/pull/5194
-- #5140: Add WiFi resume hook for T2 MacBooks — https://github.com/omacom/omarchy/pull/5140
 - #12055: Run the ThinkPad T14 Gen 2a (AMD) touchpad over RMI4/SMBus — https://github.com/omacom/omarchy/pull/12055
+- #11536: Fix BCM4377 Bluetooth hang and D3 suspend abort on T2 Macs — https://github.com/omacom/omarchy/pull/11536
+
+Work through the batch methodically:
+1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
+2. Map dependencies between the PRs (shared files, ordering constraints, conflicts) and check each PR's CI status.
+3. Produce ONE unified proposal for the batch: what merges, in which order, what gets squashed or dropped, and why — as a single coherent plan, not per-PR verdicts.
+4. Verify the plan: does the combined result still build and pass tests? Any PR that cannot be verified stays out — say so explicitly.
+5. Deliver: (a) the unified proposal, (b) a step-by-step merge plan with exact commands, (c) risks with mitigations, (d) an explicit list of anything excluded and why.
+
+Facts over plausibility: base every claim on the actual diffs and CI state, never on titles alone. You are proposing — the human decides.
+```
+
+### B522
+
+```
+You are reviewing Omarchy pre-release batch B522 (1 PRs to be merged together as one tranche).
+
+Pull requests in this batch:
+- #9202: Stop a stuck PROCHOT from pinning T2 Macs at 800 MHz — https://github.com/omacom/omarchy/pull/9202
 
 Work through the batch methodically:
 1. Read every PR fully — description, diff, and review comments. For PRs Jev flagged as the same change, verify they truly overlap and identify the strongest implementation of each.
@@ -14009,12 +13706,12 @@ Facts over plausibility: base every claim on the actual diffs and CI state, neve
 
 # Parked before batching (issue #8)
 
-192 PRs are parked: drafts, PRs without finished form, PRs without a
+193 PRs are parked: drafts, PRs without finished form, PRs without a
 current judgment, and same_change groups holding for a parked member. Park is a
 **hold with a named unblock path, never a close** — re-entry is automatic when the
 reason clears and the next refresh re-packs. No batch lists a parked PR.
 
-Reasons: draft 104 · finished_form 96 · unjudged_or_stale 0 · same_change_hold 19.
+Reasons: draft 105 · finished_form 96 · unjudged_or_stale 0 · same_change_hold 19.
 
 | PR | Reasons | Unblocked by |
 |---|---|---|
@@ -14043,7 +13740,6 @@ Reasons: draft 104 · finished_form 96 · unjudged_or_stale 0 · same_change_hol
 | #6980 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #7040 | draft, same_change_hold | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. Held with its same_change group: atomic units are never split, so the group re-enters together when every member clears its own park reason. |
 | #7092 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
-| #7129 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #7161 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #7170 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #7179 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
@@ -14062,6 +13758,7 @@ Reasons: draft 104 · finished_form 96 · unjudged_or_stale 0 · same_change_hol
 | #8255 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
 | #8354 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
 | #8396 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
+| #8408 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #8421 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #8472 | draft, finished_form | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #8481 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
@@ -14125,6 +13822,7 @@ Reasons: draft 104 · finished_form 96 · unjudged_or_stale 0 · same_change_hol
 | #11579 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
 | #11580 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #11612 | same_change_hold | Held with its same_change group: atomic units are never split, so the group re-enters together when every member clears its own park reason. |
+| #11858 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
 | #11906 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
 | #11945 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #11991 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
@@ -14201,7 +13899,6 @@ Reasons: draft 104 · finished_form 96 · unjudged_or_stale 0 · same_change_hol
 | #13608 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #13609 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #13624 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
-| #13770 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 | #13789 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
 | #13834 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
 | #13838 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
@@ -14210,6 +13907,7 @@ Reasons: draft 104 · finished_form 96 · unjudged_or_stale 0 · same_change_hol
 | #13872 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
 | #13874 | draft | Author marks the pull request ready for review; the next fetch recaptures it and the next batches run re-packs it. |
 | #13930 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
+| #13970 | finished_form | Author adds the missing description or QA evidence; judge --resume re-binds the judgment and the PR re-enters on the next refresh. |
 
 Parked does not remove a security-flagged PR from the security meta-category;
 it only removes it from merge batches. Full record: out/parked.json.
