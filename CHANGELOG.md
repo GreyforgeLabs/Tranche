@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.6.0](https://github.com/blackopsrepl/Tranche/compare/v0.5.0...v0.6.0) (2026-10-01)
+
+### Features
+
+* **page:** include parked coverage in the render summary ([e264d6c](https://github.com/blackopsrepl/Tranche/commit/e264d6c10217f4d843fd8ac2f84a2d1a8b156df3))
+* **refresh:** report parked accounting in the refresh summary ([f10151a](https://github.com/blackopsrepl/Tranche/commit/f10151a37558f4f6ec293fc64bc97c3dc8acd054))
+
 ## [0.5.0](https://github.com/blackopsrepl/Tranche/compare/v0.4.0...v0.5.0) (2026-10-01)
 
 ### Features
