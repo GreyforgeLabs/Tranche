@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.3](https://github.com/blackopsrepl/Tranche/compare/v0.3.2...v0.3.3) (2026-10-01)
+
+
+### Bug Fixes
+
+* **mcp:** enforce each tool's advertised argument schema ([099c50c](https://github.com/blackopsrepl/Tranche/commit/099c50c10064842c7e5595a878d522d529905350))
+
 ## [0.3.2](https://github.com/blackopsrepl/Tranche/compare/v0.3.1...v0.3.2) (2026-10-01)
 
 ## [0.3.1](https://github.com/blackopsrepl/Tranche/compare/v0.3.0...v0.3.1) (2026-10-01)
