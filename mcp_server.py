@@ -334,12 +334,87 @@ def error_response(code, message, request_id):
     return {"jsonrpc": "2.0", "id": request_id, "error": {"code": code, "message": message}}
 
 
+def _type_matches(value, expected):
+    """JSON types, not Python's: ``bool`` is not a number, and ``None`` is null."""
+    if expected == "null":
+        return value is None
+    if expected == "boolean":
+        return isinstance(value, bool)
+    if expected == "integer":
+        return isinstance(value, int) and not isinstance(value, bool)
+    if expected == "number":
+        return isinstance(value, (int, float)) and not isinstance(value, bool)
+    if expected == "string":
+        return isinstance(value, str)
+    if expected == "array":
+        return isinstance(value, list)
+    if expected == "object":
+        return isinstance(value, dict)
+    return True
+
+
+def _check_schema(value, schema, where):
+    """Validate against the subset of JSON Schema these tools advertise.
+    Returns an error string, or None. ``where`` names the property for the message."""
+    if "anyOf" in schema:
+        if not any(_check_schema(value, option, where) is None for option in schema["anyOf"]):
+            return f"'{where}' does not match any accepted form"
+        return None
+    for expected in schema.get("type", []) if isinstance(schema.get("type"), list) else [schema.get("type")]:
+        if expected is not None and _type_matches(value, expected):
+            break
+    else:
+        kinds = schema.get("type")
+        kinds = "/".join(kinds) if isinstance(kinds, list) else kinds
+        return f"'{where}' must be {kinds}"
+    if value is None:
+        return None
+    if "enum" in schema and value not in schema["enum"]:
+        return f"'{where}' must be one of: {', '.join(str(item) for item in schema['enum'] if item is not None)}"
+    if "minimum" in schema and value < schema["minimum"]:
+        return f"'{where}' must be >= {schema['minimum']}"
+    if "maximum" in schema and value > schema["maximum"]:
+        return f"'{where}' must be <= {schema['maximum']}"
+    if "maxLength" in schema and len(value) > schema["maxLength"]:
+        return f"'{where}' must be at most {schema['maxLength']} characters"
+    if "pattern" in schema and re.fullmatch(schema["pattern"], value) is None:
+        return f"'{where}' does not match {schema['pattern']}"
+    return None
+
+
+def validate_arguments(name, arguments):
+    """Enforce the tool's advertised inputSchema; returns a message or None.
+
+    Clients are not required to validate — the spec puts the obligation on the
+    server — so an argument that reaches here unchecked must still be refused in
+    the tool's own terms rather than by a Python call-signature error.
+    """
+    schema = next(tool["inputSchema"] for tool in TOOLS if tool["name"] == name)
+    if not isinstance(arguments, dict):
+        return "Arguments must be a JSON object"
+    unknown = [key for key in arguments if key not in schema["properties"]]
+    if unknown and schema.get("additionalProperties") is False:
+        return f"Unknown argument(s): {', '.join(sorted(unknown))}"
+    missing = [key for key in schema["required"] if key not in arguments]
+    if missing:
+        return f"Missing required argument(s): {', '.join(missing)}"
+    for key, value in arguments.items():
+        spec = schema["properties"].get(key)
+        if spec is None:
+            continue
+        problem = _check_schema(value, spec, key)
+        if problem:
+            return problem
+    return None
+
+
 def call_tool(name, arguments):
-    """Invoke one tool; the reports' own validators are the argument contract."""
+    """Invoke one tool after enforcing its advertised schema."""
     if name not in TOOL_NAMES:
         raise ReportError(f"Unknown tool: {name}")
-    if not isinstance(arguments, dict):
-        raise ReportError("Tool arguments must be an object")
+    problem = validate_arguments(name, arguments)
+    if problem:
+        raise ReportError(problem)
     return result_text(getattr(Reports(), name)(**arguments))
 
 
