@@ -50,13 +50,16 @@ python3 tranche.py all --resume     # judge --resume + dupes + cluster + batches
 Agents can inspect the same local reports and retrieve batch reviewer prompts over
 stdio without a browser or copy/paste. The server implements the standard MCP
 stdio transport directly with the standard library: no SDK, no third-party runtime
-dependency, nothing to install or pin. `requirements-mcp.txt` is gone.
+dependency, nothing to install or pin. It is harness-agnostic — any MCP client that
+speaks the protocol can drive it, and none is named or required here.
 
 ```bash
 python3 mcp_server.py --root /absolute/path/to/Tranche
 ```
 
-Configure an MCP-capable client with an absolute script path and any Python 3.10+:
+Point your client at that command. Every client expresses the same two fields —
+the executable to launch and its arguments — under whatever name its own config
+file uses, so the shape below is a reference, not a supported-client list:
 
 ```json
 {
@@ -75,6 +78,13 @@ Tools advertise JSON Schema input schemas and the standard `readOnlyHint`,
 `destructiveHint`, `idempotentHint` and `openWorldHint` annotations. Unknown tools
 return protocol error -32602; invalid arguments and stale reports return tool results
 with `isError: true`, so a model can correct itself.
+
+The server is a single self-contained script: no packaging, no build step, no
+service. Its `--root` may point at any Tranche report directory. Everything else
+runs through one interpreter — `make print-interpreter` shows which, and setting
+`PYTHON` overrides it everywhere (Makefile targets, tests, and your client
+config). If your client cannot launch the interpreter by name, use its absolute
+path.
 
 The root defaults to the directory containing `tranche.py`, not the client's
 working directory. It must contain the captured PR snapshot (or legacy pages),
