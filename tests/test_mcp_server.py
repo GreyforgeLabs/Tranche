@@ -44,6 +44,9 @@ class MCPTests(unittest.TestCase):
         self.assertEqual(result["repo"], tranche.REPO)
         self.assertEqual(result["summary"]["prs_in_corpus"], 2)
         self.assertEqual(result["summary"]["judged"], 2)
+        self.assertEqual(result["activity"]["head_moved"], 0)
+        self.assertEqual(result["activity"]["idle_since_known"], 2)
+        self.assertIn("idle_30d", result["activity"])
         summary_path = self.out / "summary.json"
         summary = json.loads(summary_path.read_text())
         summary.update(prs_in_corpus=999999, judged=999999)
@@ -115,6 +118,22 @@ class MCPTests(unittest.TestCase):
             with self.assertRaisesRegex(core.ReportError, "limit"):
                 core.Reports().surface()
 
+    def test_user_experience_category_is_derived_and_filterable(self):
+        self.reports()
+        records = [json.loads(line) for line in tranche.JUDGMENTS_PATH.read_text().splitlines()]
+        records[0]["answers"]["category"] = {"choice": "user-experience"}
+        tranche.JUDGMENTS_PATH.write_text("".join(json.dumps(r) + "\n" for r in records))
+        self.cluster()
+        (self.out / "batches.json").unlink()
+        server = self.core().Reports()
+        surface = server.surface()
+        self.assertEqual(surface["category_counts"],
+                         {"user-experience": 1, fixtures.answers()["category"]["choice"]: 1})
+        self.assertIn("user-experience", surface["filters"]["categories"])
+        result = server.query(category="user-experience")
+        self.assertEqual(result["total"], 1)
+        self.assertEqual(result["items"][0]["number"], 1)
+
     def test_query_paginates_security_first_preserving_unknowns_and_provenance(self):
         self.reports()
         prs = tranche.load_prs()
@@ -173,6 +192,8 @@ class MCPTests(unittest.TestCase):
         picked = server.pick("B001")
         self.assertEqual(picked["batch"], expected)
         self.assertEqual({p["number"] for p in picked["prs"]}, set(expected["members"]))
+        self.assertEqual(set(picked["activity"]), {str(n) for n in expected["members"]})
+        self.assertEqual(server.next_prompt()["activity"], picked["activity"])
         self.assertEqual(server.query(batch="B001")["total"], expected["count"])
         self.assertEqual(server.next_prompt()["batch"], expected)
         self.assertIsNone(server.next_prompt(after=1)["batch"])

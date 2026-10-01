@@ -45,10 +45,10 @@
   // Batch membership is browsed through the Batches view, not a queue.
   // Issue #8: parked is a queue whose field is a reason array, so queue
   // membership is non-emptiness — an empty array must never match.
-  const queues = {security: 'security_priority', all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', parked: 'parked', related: 'related'};
+  const queues = {security: 'security_priority', all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', parked: 'parked', related: 'related', revised: 'head_moved'};
   const queueMatch = (pr, field) => {
     if (!field) return true;
-    const value = pr[field];
+    const value = field === 'head_moved' ? pr.activity?.head_moved : pr[field];
     return Array.isArray(value) ? value.length > 0 : Boolean(value);
   };
   const PAGE_SIZE = 30;
@@ -62,13 +62,14 @@
       matches(pr, state.q || '', indexes?.get(pr.number), wordCache));
     filtered.sort((a, b) => {
       const riskSort = state.sort === 'risk';
-      const av = riskSort ? a.risk : Date.parse(a.created);
-      const bv = riskSort ? b.risk : Date.parse(b.created);
+      const idleSort = state.sort === 'idle';
+      const av = riskSort ? a.risk : Date.parse(idleSort ? a.activity?.idle_since : a.created);
+      const bv = riskSort ? b.risk : Date.parse(idleSort ? b.activity?.idle_since : b.created);
       const ak = typeof av === 'number' && Number.isFinite(av);
       const bk = typeof bv === 'number' && Number.isFinite(bv);
       if (ak !== bk) return ak ? -1 : 1;
       if (!ak) return a.number - b.number;
-      return (state.sort === 'oldest' ? av - bv : bv - av) || a.number - b.number;
+      return (state.sort === 'oldest' || idleSort ? av - bv : bv - av) || a.number - b.number;
     });
     const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
     const page = Math.max(1, Math.min(pages, Number.isSafeInteger(state.page) ? state.page : 1));
@@ -84,7 +85,7 @@
     const sort = params.get('sort');
     return {q: params.get('q') || '', queue: Object.hasOwn(queues, queue) ? queue : 'all',
       category: categories.includes(category) ? category : 'all',
-      sort: ['newest', 'oldest', 'risk'].includes(sort) ? sort : 'newest',
+      sort: ['newest', 'oldest', 'risk', 'idle'].includes(sort) ? sort : 'newest',
       page: positiveInteger(params.get('page')) || 1, pr: positiveInteger(params.get('pr')),
       batch: params.get('batch') || null};
   }
@@ -105,9 +106,22 @@
   if (typeof document !== 'undefined') boot();
 
   function boot() {
-    const dataElement = document.getElementById('workbench-data');
-    if (!dataElement) return;
-    const data = JSON.parse(dataElement.textContent);
+    // The payload lives at data/workbench.json beside this page (docs/data/ on
+    // Pages). Only a same-origin read over http(s) is accepted: file:// and
+    // other origins are not the report, and fetch would refuse them anyway.
+    if (location.protocol === 'file:' || location.protocol === 'about:') { fail(); return; }
+    fetch('data/workbench.json', {credentials: 'same-origin'})
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(start, fail);
+  }
+  function fail() {
+    const failed = document.getElementById('load-failure');
+    if (failed) failed.hidden = false;
+  }
+  function start(data) {
     const rows = data.prs;
     const byNumber = new Map(rows.map(pr => [pr.number, pr]));
     const parkedByNumber = new Map(((data.parked || {}).members || []).map(m => [m.number, m]));
@@ -215,6 +229,8 @@
       const fields = [
         ['Author', `@${pr.author}`], ['Category', categoryLabel(pr.category)],
         ['Status', pr.draft ? 'Draft' : 'Not draft'], ['Created', pr.created || 'Unknown'],
+        ['Head activity', pr.activity?.head_moved ? 'Head revised since last judgment; review waits for a new bound judgment' : pr.activity?.idle_basis === 'judgment' ? `Head unchanged since at least ${pr.activity.idle_since}` : pr.activity?.idle_basis === 'creation' ? `No head baseline; opened ${pr.created || 'unknown'}` : 'Unknown'],
+        ['Thread updated', pr.activity?.thread_updated ? `${pr.activity.thread_updated} (may be bot activity; not used for priority)` : 'Unknown'],
         ['Model evidence', pr.freshness === 'current' ? 'Bound judgment · title and description only' : pr.freshness === 'unbound' ? 'Unbound legacy judgment · revisions not checked' : 'Unjudged or stale'],
         ['Model risk', metric(pr.risk, 4)], ['Security probability', metric(pr.security, null, true)],
         ['Finished form', metric(pr.finished, 3)], ['Review effort', metric(pr.effort, 3)],
@@ -333,6 +349,7 @@
             node('span', pr.created ? pr.created.slice(0, 10) : 'Date unknown'));
           if (pr.draft) meta.append(node('span', 'Draft', 'tag draft'));
           if (pr.security_priority) meta.append(node('span', 'Security first', 'tag security'));
+          if (pr.activity?.head_moved) meta.append(node('span', 'Head revised', 'tag revised'));
           if (pr.related) meta.append(node('span', 'Related', 'tag'));
           for (const batch of pr.batches || []) {
             meta.append(node('span', `${batch.id} · batch of ${batch.count}`, 'tag batch'));

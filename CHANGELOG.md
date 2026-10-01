@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.8.1](https://github.com/blackopsrepl/Tranche/compare/v0.8.0...v0.8.1) (2026-10-01)
+
+### Bug Fixes
+
+* **docs:** human-facing README with quick start, MCP maintenance guide and FAQ ([a24cb3e](https://github.com/blackopsrepl/Tranche/commit/a24cb3eca5e48a8892bb2ac8907e4ef1de14ce5b))
+
+## [0.8.0](https://github.com/blackopsrepl/Tranche/compare/v0.7.0...v0.8.0) (2026-10-01)
+
+### Features
+
+* add a user-experience category reserved for DHH ([c8a1206](https://github.com/blackopsrepl/Tranche/commit/c8a12061504206850f9735b4d604aa97e2087f3d)), closes [#14](https://github.com/blackopsrepl/Tranche/issues/14)
+
+### Bug Fixes
+
+* retire the pre-binding compatibility fallback in resume reuse ([9195fc1](https://github.com/blackopsrepl/Tranche/commit/9195fc12f026c9e7b3f43fedf14decec18e08533)), references [#15](https://github.com/blackopsrepl/Tranche/issues/15)
+
+## [0.7.0](https://github.com/blackopsrepl/Tranche/compare/v0.6.0...v0.7.0) (2026-10-01)
+
+### Features
+
+* **batches:** stale-first ordering from evidenced head activity ([d06bb17](https://github.com/blackopsrepl/Tranche/commit/d06bb17ea79e68e3be4567cc89eae44e1fb6a59e)), references [#11](https://github.com/blackopsrepl/Tranche/issues/11)
+
 ## [0.6.0](https://github.com/blackopsrepl/Tranche/compare/v0.5.0...v0.6.0) (2026-10-01)
 
 ### Features

@@ -240,6 +240,16 @@ class NativeBindingTests(unittest.TestCase):
                              "head_sha": prs[n]["head_sha"], "updated_at": prs[n]["updated"]}
                             for n in picked["batch"]["members"]]}
 
+    def test_partial_and_resumed_fixtures_match_current_native_bindings(self):
+        selection = self.selection()
+        partial, resumed = fixture("partial"), fixture("resumed")
+        contract.validate(partial, selection)
+        contract.validate(resumed, selection)
+        self.assertEqual(partial, make_packet(selection))
+        expected = make_packet(selection, True)
+        expected["capture"]["observed_at"] = "2026-01-03T00:01:00Z"
+        self.assertEqual(resumed, contract.seal(expected))
+
     def test_revision_drift_fixture_matches_changed_native_bindings(self):
         selection = self.selection(revision_drift=True)
         drift, partial = fixture("revision-drift"), fixture("partial")

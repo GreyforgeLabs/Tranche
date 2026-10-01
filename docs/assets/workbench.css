@@ -97,6 +97,7 @@ select {background: var(--surface); border: 1px solid var(--line); padding: 10px
 .tag.security {color: var(--red); border-color: #f7768e55; font-weight: 700;}
 .tag.batch {color: var(--blue); border-color: #7aa2f755;}
 .tag.parked {color: #e0af68; border-color: #e0af6855;} /* amber: held, not refused */
+.tag.revised {color: var(--blue); border-color: #7aa2f755;}
 .draft {color: #e0af68; border-color: #e0af6833;}
 .risk {font: 11px var(--mono); text-align: right; white-space: nowrap;}
 .risk.known {color: var(--sage);}
@@ -110,6 +111,9 @@ select {background: var(--surface); border: 1px solid var(--line); padding: 10px
 .pagination button {font-size: 12px;}
 footer {display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding-top: 18px; border-top: 1px solid var(--line); font: 10px/1.5 var(--mono); color: var(--muted);}
 footer a {color: var(--muted);}
+.load-failure {border: 1px solid var(--red); border-left-width: 4px; background: var(--surface); padding: 14px 16px; margin: 0 0 18px; color: var(--red);}
+.load-failure p {margin: 0;}
+.load-failure a {color: var(--ink); text-decoration: underline;}
 dialog {width: min(780px, calc(100% - 32px)); max-height: calc(100dvh - 48px); padding: 0; border: 1px solid #65708e; background: var(--surface); color: var(--ink); box-shadow: 0 24px 100px #0009; overflow-y: auto; overscroll-behavior: contain;}
 dialog::backdrop {background: #090b14cc;}
 body:has(dialog[open]) {overflow: hidden;}

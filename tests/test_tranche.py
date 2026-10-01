@@ -4,7 +4,6 @@ import argparse
 import copy
 import io
 import json
-import re
 import shutil
 import subprocess
 import sys
@@ -124,8 +123,10 @@ class WorkflowTests(unittest.TestCase):
         )
 
     def render(self):
-        for name in ("tranche.py", "gen_page.py"):
-            shutil.copy(Path(tranche.__file__).parent / name, self.root / name)
+        for name in ("tranche.py", "gen_page.py", "page/template.html"):
+            target = self.root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(Path(tranche.__file__).parent / name, target)
         return subprocess.run(
             [sys.executable, str(self.root / "gen_page.py")],
             cwd=self.root,
@@ -190,6 +191,44 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(record["resolved_model"], "fixture-model")
         self.assertIn("judged_at", record)
         self.assertEqual(len(tranche.current_judgments(tranche.load_prs())), 1)
+
+    def test_judgment_bound_to_previous_questions_is_never_reused(self):
+        prs = self.inputs([pr(1)])
+        old_questions = copy.deepcopy(tranche.judge_questions())
+        del old_questions["category"]["criteria"]["user-experience"]
+        stale = {"number": 1, "answers": copy.deepcopy(answers()), "usage": {},
+                 "binding": tranche.digest({"version": tranche.BINDING_VERSION,
+                                            "repo": tranche.REPO,
+                                            "source": prs[1]["evidence_digest"],
+                                            "state": tranche.pr_state(prs[1]),
+                                            "questions": old_questions,
+                                            "model": tranche.MODEL}),
+                 "input": tranche.pr_state(prs[1]), "requested_model": tranche.MODEL}
+        tranche.JUDGMENTS_PATH.write_text(json.dumps(stale) + "\n")
+        self.assertEqual(tranche.current_judgments(prs), {})
+        self.key.side_effect = None
+        self.key.return_value = "synthetic-key"
+        self.model.side_effect = None
+        self.model.return_value = {"answers": answers()}
+        tranche.cmd_judge(argparse.Namespace(resume=True, limit=None))
+        self.model.assert_called_once()
+        self.assertEqual(tranche.load_done()[1]["binding"], tranche.judgment_binding(prs[1]))
+
+    def test_pair_verdict_bound_to_previous_questions_is_never_reused(self):
+        prs = self.inputs([pr(1), pr(2)])
+        old_questions = copy.deepcopy(tranche.pair_questions())
+        old_questions["sameness"]["instructions"]["question"] += " (older wording)"
+        stale = {"a": 1, "b": 2, "verdict": "same_change",
+                 "probabilities": {"same_change": 0.9},
+                 "binding": tranche.digest({"version": tranche.BINDING_VERSION,
+                                            "repo": tranche.REPO, "model": tranche.MODEL,
+                                            "sources": [prs[1]["evidence_digest"], prs[2]["evidence_digest"]],
+                                            "state": [tranche.brief(prs[1]), tranche.brief(prs[2])],
+                                            "questions": old_questions}),
+                 "input": {"pr_a": tranche.brief(prs[1]), "pr_b": tranche.brief(prs[2])},
+                 "requested_model": tranche.MODEL}
+        tranche.PAIRS_PATH.write_text(json.dumps(stale) + "\n")
+        self.assertEqual(tranche.current_pairs(prs, self.judgments(prs)), [])
 
     def test_legacy_judgment_is_not_resume_hit(self):
         prs = self.inputs([pr(1)])
@@ -344,7 +383,8 @@ class WorkflowTests(unittest.TestCase):
                 self.assertIn(classification, (self.out / "tranches.md").read_text())
                 result = self.render()
                 self.assertEqual(result.returncode, 0, result.stderr)
-                self.assertIn(classification, (self.root / "docs" / "index.html").read_text())
+                self.assertIn(classification,
+                              (self.root / "docs" / "data" / "workbench.json").read_text())
                 self.pairs(prs, [(1, 2, "same_change", 0.9),
                     (2, 3, "same_change", 0.9), (1, 3, verdict, probability)])
                 _, dupes = self.cluster()
@@ -645,6 +685,20 @@ class WorkflowTests(unittest.TestCase):
             with self.assertRaises(tranche.TrancheFatal):
                 tranche.load_prs()
 
+    def test_user_experience_category_is_judge_selectable_and_labeled(self):
+        self.assertIn("user-experience", tranche.judge_questions()["category"]["criteria"])
+        prs = self.inputs([pr(1)])
+        self.judgments(prs, custom=dict(answers(), category={"choice": "user-experience"}))
+        self.assertEqual(
+            tranche.category(tranche.current_judgments(prs)[1]), "user-experience")
+        self.cluster()
+        result = self.render()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        payload = json.loads((self.root / "docs" / "data" / "workbench.json").read_text())
+        self.assertEqual(payload["prs"][0]["category"], "user-experience")
+        self.assertEqual(payload["categories"]["user-experience"], "User Experience")
+        self.assertIn('value="user-experience"', (self.root / "docs" / "index.html").read_text())
+
     def test_html_render_matches_cli_coverage_and_escapes_source_text(self):
         prs = self.inputs([pr(1, title="Fix <script>alert(1)</script>"), pr(2)])
         self.judgments({1: prs[1]})
@@ -653,14 +707,15 @@ class WorkflowTests(unittest.TestCase):
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
         page = (self.root / "docs" / "index.html").read_text()
-        import re
-        payload = re.search(r'<script id="workbench-data" type="application/json">(.*?)</script>', page, re.S)
-        self.assertIsNotNone(payload, "Workbench must include all captured PRs")
-        rows = json.loads(payload.group(1))["prs"]
+        json_text = (self.root / "docs" / "data" / "workbench.json").read_text()
+        rows = json.loads(json_text)["prs"]
         self.assertEqual([row["number"] for row in rows], [1, 2])
         self.assertEqual(rows[0]["title"], "Fix <script>alert(1)</script>")
+        self.assertNotIn("<script>alert(1)</script>", json_text)
         self.assertNotIn("<script>alert(1)</script>", page)
-        self.assertIn(r"\u003cscript\u003e", payload.group(1))
+        self.assertIn(r"\u003cscript\u003e", json_text)
+        self.assertNotIn('id="workbench-data"', page, "payload must not return inline")
+        self.assertIn('id="load-failure"', page)
         self.assertTrue(rows[0]["candidate"])
         self.assertFalse(rows[1]["candidate"])
         self.assertIsNone(rows[1]["risk"])
@@ -680,7 +735,8 @@ class WorkflowTests(unittest.TestCase):
         self.cluster()
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("conflicting_pairs", (self.root / "docs" / "index.html").read_text())
+        self.assertIn("conflicting_pairs",
+                      (self.root / "docs" / "data" / "workbench.json").read_text())
 
     def test_html_refuses_stale_inputs_or_mixed_outputs_before_overwrite(self):
         prs = self.inputs([pr(1)])
@@ -715,35 +771,32 @@ class WorkflowTests(unittest.TestCase):
                      'assets/omarchy-title.png', 'assets/tranche-mascot.png'):
             self.assertIn(text, page)
         self.assertLess(page.index('data-queue="security"'), page.index('data-queue="all"'))
-        payload = json.loads(re.search(
-            r'<script id="workbench-data" type="application/json">(.*?)</script>',
-            page, re.S).group(1))
+        payload = json.loads((self.root / "docs" / "data" / "workbench.json").read_text())
         self.assertTrue(payload["prs"][0]["security_priority"])
         self.assertEqual(payload["batches_available"], False)
         for text in ('Observation:', 'requested jev', 'fresh runs:', '<blockquote>',
                      '<b>Method.</b>', 'fetch → judge', '<img src=x onerror=alert(1)>'):
             self.assertNotIn(text, page)
-        self.assertIn(r'\u003c/script\u003e', page)
-        self.assertIn(r'\u0026', page)
+        json_text = (self.root / "docs" / "data" / "workbench.json").read_text()
+        self.assertIn(r'\u003c/script\u003e', json_text)
+        self.assertIn(r'\u0026', json_text)
 
     def test_render_embeds_batches_and_refuses_stale_batch_file(self):
         self.merge_setup()
         tranche.cmd_batches(argparse.Namespace())
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
-        page = (self.root / "docs" / "index.html").read_text()
-        payload = json.loads(re.search(
-            r'<script id="workbench-data" type="application/json">(.*?)</script>',
-            page, re.S).group(1))
+        json_text = (self.root / "docs" / "data" / "workbench.json").read_text()
+        payload = json.loads(json_text)
         self.assertTrue(payload["batches_available"])
         batched = [row for row in payload["prs"] if row["batches"]]
         self.assertEqual(len(batched), 9, "nine batchable PRs across two batches")
         by_number = {row["number"]: row["batches"] for row in payload["prs"]}
         self.assertEqual(by_number[1][0]["id"], "B001")
         self.assertEqual(by_number[12][0]["id"], "B002")
-        self.assertIn("B001", page)
-        self.assertIn("review_prompt", page)
-        self.assertIn("unified proposal", page)
+        self.assertIn("B001", json_text)
+        self.assertIn("review_prompt", json_text)
+        self.assertIn("unified proposal", json_text)
         # A batches file bound to a different dupe run must never render.
         dupes = json.loads((self.out / "dupes.json").read_text())
         dupes["confirmed_groups"] = []
@@ -860,6 +913,58 @@ class WorkflowTests(unittest.TestCase):
                          (3, 5, "unrelated", 0.1)])
         return prs, self.cluster()[0]
 
+    def test_activity_uses_bound_head_and_never_thread_update(self):
+        observed = {"head_sha": "new", "created": "2026-01-01T00:00:00Z",
+                    "updated": "2026-10-01T00:00:00Z"}
+        old = {"head_sha": "old", "judged_at": "2026-02-01T00:00:00Z"}
+        self.assertEqual(tranche.pr_activity(observed, old),
+                         {"head_moved": True, "idle_since": None, "idle_basis": "unknown",
+                          "thread_updated": observed["updated"]})
+        current = dict(old, head_sha="new")
+        self.assertEqual(tranche.pr_activity(observed, current)["idle_since"], old["judged_at"])
+        self.assertFalse(tranche.pr_activity(observed, current)["head_moved"])
+        self.assertEqual(tranche.pr_activity(observed, {})["idle_since"], observed["created"])
+        self.assertFalse(tranche.pr_activity(observed, {})["head_moved"])
+
+    def test_idle_first_within_risk_band_preserves_security_and_park(self):
+        prs = {n: dict(pr(n), created="2026-01-01T00:00:00Z", head_sha=f"sha{n}",
+                       url=f"https://github.com/omacom/omarchy/pull/{n}")
+               for n in range(1, 8)}
+        judgments = {n: {"answers": answers(), "head_sha": f"sha{n}",
+                         "judged_at": "2026-01-10T00:00:00Z" if n == 2 else
+                                      "2026-03-01T00:00:00Z"} for n in range(1, 8)}
+        judgments[3]["answers"] = dict(answers(), security_flag={"noul": 0.9})
+        judgments[4]["answers"] = dict(answers(), finished_form={"score": 1})
+        judgments[5]["head_sha"] = "old-head"
+        judgments[6]["answers"] = dict(answers(), risk={"score": 3})
+        dupes = {"confirmed_groups": [], "review_groups": []}
+        result = tranche.merge_batches(dupes, judgments, prs, "digest")
+        order = [n for batch in result["batches"] for n in batch["members"]]
+        self.assertEqual(order[0], 3)
+        self.assertLess(order.index(2), order.index(1))
+        self.assertLess(order.index(1), order.index(5))
+        self.assertNotIn(4, order)
+
+    def test_render_exposes_head_revision_and_idle_lower_bound(self):
+        prs = self.inputs([pr(1), pr(2)])
+        self.judgments(prs)
+        records = [json.loads(line) for line in tranche.JUDGMENTS_PATH.read_text().splitlines()]
+        for record in records:
+            record.update(head_sha=prs[record["number"]]["head_sha"],
+                          judged_at="2026-01-02T00:00:00+00:00")
+        tranche.JUDGMENTS_PATH.write_text("".join(json.dumps(r) + "\n" for r in records))
+        self.inputs([pr(1, head={"sha": "revised"}), pr(2)])
+        self.cluster()
+        result = self.render()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        rows = {r["number"]: r for r in json.loads(
+            (self.root / "docs" / "data" / "workbench.json").read_text())["prs"]}
+        self.assertTrue(rows[1]["activity"]["head_moved"])
+        self.assertIsNone(rows[1]["activity"]["idle_since"])
+        self.assertFalse(rows[2]["activity"]["head_moved"])
+        self.assertTrue(rows[2]["activity"]["idle_since"])
+        self.assertEqual(rows[1]["activity"]["thread_updated"], prs[1]["updated"])
+
     def test_park_set_reads_only_pipeline_legible_facts(self):
         prs = {1: pr(1), 2: pr(2, draft=True), 3: pr(3), 4: pr(4)}
         judgments = {1: {"answers": answers()}, 2: {"answers": answers()},
@@ -932,9 +1037,8 @@ class WorkflowTests(unittest.TestCase):
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
         page = (self.root / "docs" / "index.html").read_text()
-        payload = json.loads(re.search(
-            r'<script id="workbench-data" type="application/json">(.*?)</script>',
-            page, re.S).group(1))
+        payload = json.loads(
+            (self.root / "docs" / "data" / "workbench.json").read_text())
         self.assertEqual(payload["parked"]["parked"], 3)
         self.assertEqual(sorted(m["number"] for m in payload["parked"]["members"]), [7, 8, 9])
         by_number = {row["number"]: row for row in payload["prs"]}
