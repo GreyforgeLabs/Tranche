@@ -1,0 +1,2 @@
+# Optional official MCP Python SDK; metadata registration is version-pinned.
+mcp==1.30.0
