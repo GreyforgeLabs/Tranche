@@ -45,6 +45,76 @@ python3 tranche.py batches          # classify candidates into out/batches.json 
 python3 tranche.py all --resume     # judge --resume + dupes + cluster + batches
 ```
 
+## Read-only MCP access
+
+Agents can inspect the same local reports and retrieve batch reviewer prompts over
+stdio without a browser or copy/paste. The optional server uses the official MCP
+Python SDK, pinned in `requirements-mcp.txt`; the pipeline and offline core tests
+still need no third-party runtime dependency.
+
+```bash
+python3 -m venv .venv-mcp
+.venv-mcp/bin/python -m pip install -r requirements-mcp.txt
+.venv-mcp/bin/python mcp_server.py --root /absolute/path/to/Tranche
+```
+
+Configure an MCP-capable client with an absolute interpreter and script path:
+
+```json
+{
+  "mcpServers": {
+    "tranche": {
+      "command": "/absolute/path/to/Tranche/.venv-mcp/bin/python",
+      "args": ["/absolute/path/to/Tranche/mcp_server.py", "--root", "/absolute/path/to/Tranche"]
+    }
+  }
+}
+```
+
+The root defaults to the directory containing `tranche.py`, not the client's
+working directory. It must contain the captured PR snapshot (or legacy pages),
+judgment/pair JSONL caches and matching `out/` reports. Run `cluster` and `batches`
+with the pipeline before serving them. The server never acquires missing evidence,
+regenerates reports, calls Jev, claims work, or writes to GitHub.
+
+| Tool | Contract |
+| --- | --- |
+| `surface()` | Computed corpus coverage, category counts, priority queue membership, batch ordinals and available filters. |
+| `query(...)` | Text, category, risk band, security, exact finished-form score, batch and queue filters; security-first ordering; bounded pagination. |
+| `pick(batch_id)` | The batch and member source/head bindings, with the exact workbench `review_prompt`. |
+| `next_prompt(after)` | The next ordinal after an integer or batch ID; omitted cursor starts at the first batch. Exhaustion returns `batch: null`. Stateless: no reservation or completed-work tracking. |
+| `related(number)` | Proposed group edges and explicit uncertain/contradictory/malformed diagnostics, with verdict and P(same) where available. |
+| `digests()` | Report binding, output digests and SHA-256 hashes of the input/report bytes read. |
+
+Every result carries the repository, provenance, digests and metadata-only evidence
+warning. Unknown values remain null/unknown. Related does not mean verified duplicate;
+prompts are review instructions, not executable authorization. Digests establish local
+consistency, not source authenticity or current GitHub state. Recheck revisions before
+acting on a PR.
+
+Every call revalidates report bindings, output digests and exact batch recomputation;
+changed/mixed reports and files changed during reading fail with MCP tool errors.
+Historical stale/unbound cache rows are excluded exactly as in the producer, not
+served as claims. Missing `batches.json` permits inventory/query/related tools but
+prompt tools fail; a present invalid batch file fails all tools. `--allow-unbound`
+reports are refused. Repair inputs with the pipeline rather than bypassing this gate.
+
+Query and related results default to 25 items (maximum 100), with `next_offset` for
+pagination. Queries accept at most 512 text characters. Inputs are limited to
+128 MiB per file, 256 MiB total and at most 512 paths; response JSON text to 1 MiB.
+Arguments reject coercion, unexpected fields and invalid
+ranges. The client launches the server process; protocol stdout stays free of banners.
+
+For an explicit real SDK/client subprocess check against the unchanged local corpus:
+
+```bash
+make mcp-check MCP_PYTHON=.venv-mcp/bin/python
+```
+
+This opt-in check discovers all tools, reads a real batch/prompt, rejects malformed
+arguments and refuses altered batches in a disposable copy. Normal `make check`
+exercises the SDK-independent core with synthetic inputs and skips this integration.
+
 ## What Jev is asked (one batched call per PR)
 
 | Question      | Type   | Meaning                                             |

@@ -26,7 +26,7 @@ JUDGED := $(shell test -f out/judgments.jsonl && wc -l < out/judgments.jsonl || 
 PAIRED := $(shell test -f out/pair_verdicts.jsonl && wc -l < out/pair_verdicts.jsonl || echo 0)
 
 # ============== Phony Targets ==============
-.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments test check release-check release-dry-run release
+.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments test check mcp-check release-check release-dry-run release
 
 # ============== Default Target ==============
 .DEFAULT_GOAL := help
@@ -140,8 +140,13 @@ test:
 check: test
 	@if command -v node >/dev/null 2>&1; then node --test tests/workbench.test.cjs; else printf 'Node unavailable; optional frontend tests skipped.\n'; fi
 	@ruff check .
-	@python3 -m compileall -q tranche.py gen_page.py tests tools
+	@python3 -m compileall -q tranche.py gen_page.py mcp_server.py tests tools
 	@git diff --check
+
+# Optional SDK plus current local corpus; deliberately separate from offline gates.
+MCP_PYTHON ?= python3
+mcp-check:
+	@TRANCHE_MCP_INTEGRATION=1 $(MCP_PYTHON) -m unittest tests.test_mcp_stdio -v
 
 release-check: check
 	@node --check .versionrc.js
