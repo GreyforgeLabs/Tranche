@@ -259,6 +259,45 @@ def validate_pr(item):
         raise TrancheFatal("Invalid captured PR labels; fetch again")
 
 
+# Issue #10 — literal body references, repository-qualified (adapted from
+# Reposition's `relations.py`). A mention selects a comparison candidate only
+# when it names a pull request of the repository under review: a bare `#N` can
+# only mean this repository, while a GitHub link or `owner/repo#N` names its own
+# repository and must not be read as ours. Scanning order makes the reading
+# explicit and non-overlapping — links first, then qualified tokens, then bare
+# numbers that no earlier token already covers — so the `#123` inside
+# `other/repo#123` or inside a pasted URL is never re-read on its own.
+LINK_REFERENCE = re.compile(
+    r"https?://(?:www\.)?github\.com/(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)"
+    r"/(?:issues|pull)/(?P<number>\d+)"
+)
+QUALIFIED_REFERENCE = re.compile(r"(?P<repo>[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+)#(?P<number>\d+)")
+BARE_REFERENCE = re.compile(r"(?<![\w#])#(?P<number>\d+)\b")
+
+
+def reference_numbers(raw_body: str, repository: str = REPO, own_number: int | None = None) -> list[int]:
+    """PR numbers of `repository` literally mentioned in a description.
+
+    Cross-repository mentions are dropped, never rewritten as bare numbers, and
+    the PR's own number is discarded so a description can never pair a PR with
+    itself.
+    """
+    spans: list[tuple[int, int]] = []
+    numbers: set[int] = set()
+    for pattern in (LINK_REFERENCE, QUALIFIED_REFERENCE):
+        for match in pattern.finditer(raw_body):
+            spans.append(match.span())
+            if match["repo"].lower() == repository.lower():
+                numbers.add(int(match["number"]))
+    for match in BARE_REFERENCE.finditer(raw_body):
+        if any(start <= match.start() < end for start, end in spans):
+            continue
+        numbers.add(int(match["number"]))
+    if own_number is not None:
+        numbers.discard(own_number)
+    return sorted(numbers)
+
+
 def load_prs() -> dict[int, dict]:
     prs: dict[int, dict] = {}
     snapshot = PAGES_DIR / "snapshot.json"
@@ -280,7 +319,7 @@ def load_prs() -> dict[int, dict]:
             if p["number"] in prs:
                 raise TrancheFatal("Repeated PR in captured membership; fetch again")
             raw_body = p.get("body") or ""
-            refs = sorted({int(x) for x in re.findall(r"#(\d{2,6})", raw_body)})
+            refs = reference_numbers(raw_body, REPO, p["number"])
             body = re.sub(r"<!--.*?-->", "", raw_body, flags=re.S)
             body = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", body)  # images
             body = re.sub(r"https?://\S+", "", body)          # bare links

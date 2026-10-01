@@ -244,6 +244,52 @@ class WorkflowTests(unittest.TestCase):
         self.model.assert_called_once()
         self.assertEqual(len(tranche.current_pairs(changed, new_judgments)), 1)
 
+    def test_body_references_accept_bare_link_and_qualified_forms(self):
+        cases = {
+            "bare number": ("This replaces #123.", None, [123]),
+            "pasted pull link": ("This replaces https://github.com/omacom/omarchy/pull/123.", None, [123]),
+            "pasted issue link": ("Blocks https://github.com/omacom/omarchy/issues/123.", None, [123]),
+            "markdown link": ("See [#123](https://github.com/omacom/omarchy/pull/123).", None, [123]),
+            "www and http forms": ("Refs http://www.github.com/omacom/omarchy/pull/123", None, [123]),
+            "qualified own repository": ("Replaces omacom/omarchy#123.", None, [123]),
+            "all three forms at once": ("#123 then omacom/omarchy#123 then "
+                                        "https://github.com/omacom/omarchy/pull/123", None, [123]),
+            "cross-repository link": ("Companion to https://github.com/omacom/omarchy-pkgs/pull/123.", None, []),
+            "cross-repository qualified token": ("Companion to omacom/omarchy-pkgs#123.", None, []),
+            "qualified token with trailing sentence": ("Superseded by omacom/omarchy#123.", None, [123]),
+            "no reference": ("Polish the battery icon.", None, []),
+            "url fragment is not a reference": ("See https://example.com/changelog#123.", None, []),
+            "own number is never a reference": ("Supersedes itself: #123.", 123, []),
+            "own number in every form": ("#123 omacom/omarchy#123 "
+                                         "https://github.com/omacom/omarchy/pull/123", 123, []),
+        }
+        for name, (raw_body, own, expected) in cases.items():
+            with self.subTest(case=name):
+                self.assertEqual(tranche.reference_numbers(raw_body, tranche.REPO, own), expected)
+
+    def test_references_select_pairs_across_repositories_and_never_self_compare(self):
+        """Issue #10: only the repository under review is a comparison candidate."""
+        prs = self.inputs([
+            pr(1, title="Restore suspend resume for thinkpad audio"),
+            pr(2, title="Add wallpaper picker shortcut",
+               body="Companion to https://github.com/omacom/omarchy-pkgs/pull/1."),
+            pr(3, title="Bump starship prompt config",
+               body="Replaces https://github.com/omacom/omarchy/pull/1."),
+            pr(4, title="Improve waybar battery icon",
+               body="Same area as omacom/omarchy#1."),
+            pr(5, title="Teach walker to fuzzy match window titles",
+               body="Supersedes #5."),
+        ])
+        # The cross-repository mention names this repository's PR #1, which is
+        # exactly the mistake the reading must not make.
+        self.assertEqual(prs[2]["refs"], [])
+        self.assertEqual(prs[3]["refs"], [1])
+        self.assertEqual(prs[4]["refs"], [1])
+        self.assertEqual(prs[5]["refs"], [])
+        judgments = self.judgments(prs)
+        self.assertEqual(sorted(tranche.lexical_pairs(prs, judgments)),
+                         [(1.0, 1, 3), (1.0, 1, 4)])
+
     def test_closed_members_do_not_reenter_pairs_or_reports(self):
         prs = self.inputs([pr(1), pr(2)])
         self.judgments(prs)

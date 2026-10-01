@@ -157,7 +157,14 @@ are explicitly **unknown**, never zero. Enriched legacy pages can provide real
 counts, but neither input path verifies patch contents.
 
 Title similarity (SequenceMatcher ≥ 0.72 or Jaccard ≥ 0.62) within a model category,
-plus body references, proposes pairs. `same_change` with P(same) ≥ 0.65 proposes a
+plus body references, proposes pairs. Body references are read literally and
+repository-qualified (issue #10): `#123`, `omacom/omarchy#123` and a pasted
+`github.com/omacom/omarchy/pull/123` link all name the same PR of the reviewed
+repository, while `omacom/omarchy-pkgs#123` or a link to any other repository is
+dropped instead of being re-read as a bare number — it is never mistaken for
+Omarchy's own #123. A PR's own number is never a reference, so a description
+cannot pair a PR with itself. A reference only selects a PR for comparison; it is
+not evidence of duplication. `same_change` with P(same) ≥ 0.65 proposes a
 connection. A connected group is only model-consistent when **all** its internal
 pairs were tested and agree. Contradictory, uncertain, untested or unbound internal
 relationships go to `review_groups` with their diagnostics. The shared pair classifier
