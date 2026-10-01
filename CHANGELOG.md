@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.7.0](https://github.com/blackopsrepl/Tranche/compare/v0.6.0...v0.7.0) (2026-10-01)
+
+### Features
+
+* **batches:** stale-first ordering from evidenced head activity ([d06bb17](https://github.com/blackopsrepl/Tranche/commit/d06bb17ea79e68e3be4567cc89eae44e1fb6a59e)), references [#11](https://github.com/blackopsrepl/Tranche/issues/11)
+
 ## [0.6.0](https://github.com/blackopsrepl/Tranche/compare/v0.5.0...v0.6.0) (2026-10-01)
 
 ### Features
