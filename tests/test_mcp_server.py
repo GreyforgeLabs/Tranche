@@ -2,8 +2,10 @@
 import importlib.util
 import json
 from pathlib import Path
+import sys
 import unittest
 
+import hostpython
 import tranche
 from tests import test_tranche as fixtures
 
@@ -205,6 +207,23 @@ class MCPTests(unittest.TestCase):
         self.assertEqual(core.Reports().digests()["digests"]["report_binding"],
                          result["digests"]["report_binding"])
 
+    def test_server_runs_on_a_single_resolved_interpreter(self):
+        """Every launch path resolves the same absolute interpreter."""
+        import subprocess
+        core = self.core()
+        resolved = hostpython.host_interpreter()
+        self.assertIsNotNone(resolved, "No qualifying Python interpreter on this host")
+        self.assertTrue(Path(resolved or "").is_absolute(), resolved)
+        self.assertGreaterEqual(sys.version_info[:2], hostpython.MINIMUM)
+        request = ('{"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": '
+                   '{"protocolVersion": "2025-11-25", "capabilities": {}, '
+                   '"clientInfo": {"name": "interpreter-check", "version": "1"}}}\n')
+        result = subprocess.run(
+            [resolved, str(Path(core.__file__)), "--root", str(Path(core.__file__).parent)],
+            input=request, capture_output=True, text=True, timeout=30)
+        self.assertEqual(result.stderr, "", result.stderr)
+        self.assertEqual(json.loads(result.stdout)["result"]["serverInfo"]["name"], "tranche")
+
     def test_start_without_sdk_explains_optional_dependency_on_stderr(self):
         import subprocess
         import sys
@@ -215,8 +234,6 @@ class MCPTests(unittest.TestCase):
                   "import mcp_server; mcp_server.main([])")
         result = subprocess.run([sys.executable, "-c", script], capture_output=True,
                                 text=True, timeout=10, input="")
-        # A hand-rolled server must run with no MCP SDK at all: a closed stdin
-        # ends the stream.
         self.assertEqual(result.returncode, 0)
         self.assertEqual(result.stdout, "")
 
@@ -236,8 +253,6 @@ class MCPTests(unittest.TestCase):
         self.assertEqual({tool["name"] for tool in listing},
                          {"surface", "query", "pick", "next_prompt", "related", "digests"})
         for tool in listing:
-            # The standard camelCase annotation names; a client reading the spec
-            # must find them without any SDK-specific translation.
             self.assertEqual(tool["annotations"], {"readOnlyHint": True, "destructiveHint": False,
                                                    "idempotentHint": True, "openWorldHint": False})
             self.assertEqual(tool["inputSchema"]["additionalProperties"], False)

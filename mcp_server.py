@@ -77,8 +77,7 @@ class Reports:
                 if line.strip() and not isinstance(json.loads(line), dict):
                     raise ReportError("Malformed judgment record")
         judgments = tranche.current_judgments(prs)
-        # The producer excludes stale/unbound cache history. Serve only that
-        # projection and require the report to bind it, not the entire cache.
+        # Only the producer's current projection, which the report must bind.
         pairs = tranche.current_pairs(prs, judgments)
         if tranche.PAIRS_PATH.exists():
             for line in tranche.PAIRS_PATH.read_text().splitlines():
@@ -252,8 +251,7 @@ class Reports:
                              "senior": "senior", "followup": "followup"}.items():
             members = [row["number"] for row in rows if field is None or row[field]]
             queues[queue] = {"count": len(members), "members": members}
-        # Summary coverage is not part of output_digests. Derive the public
-        # counts from validated inputs instead of endorsing unchecked claims.
+        # summary.json coverage is outside output_digests; derive it from inputs.
         coverage = {"prs_in_corpus": len(self.prs), "judged": len(self.judgments),
                     "unjudged": len(self.prs) - len(self.judgments)}
         return self._envelope(summary=coverage, batches_available=self.batches is not None,
@@ -353,7 +351,7 @@ def dispatch(message):
     request_id = message.get("id")
     if not isinstance(method, str):
         return error_response(-32600, "Invalid Request", request_id)
-    if request_id is None:  # notification: no reply, whatever the method
+    if request_id is None:  # notification
         return None
     if method == "initialize":
         requested = (message.get("params") or {}).get("protocolVersion")
@@ -370,11 +368,10 @@ def dispatch(message):
     if method == "tools/call":
         params = message.get("params") or {}
         if params.get("name") not in TOOL_NAMES:
-            # Unknown tools are protocol errors, not tool execution errors.
             return error_response(-32602, f"Unknown tool: {params.get('name')}", request_id)
         try:
             text = call_tool(params.get("name"), params.get("arguments") or {})
-        except Exception as exc:  # argument/execution errors travel as isError, per the spec
+        except Exception as exc:  # execution errors are results with isError
             return {"jsonrpc": "2.0", "id": request_id, "result": {
                 "content": [{"type": "text", "text": str(exc)}], "isError": True}}
         return {"jsonrpc": "2.0", "id": request_id, "result": {

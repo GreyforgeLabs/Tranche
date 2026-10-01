@@ -44,8 +44,7 @@ class StdioTests(unittest.TestCase):
         from mcp import ClientSession, StdioServerParameters
         from mcp.client.stdio import stdio_client
 
-        # The server is SDK-free: the MCP package is blocked in its process, so
-        # nothing can be passing because the server borrowed the client's SDK.
+        # The MCP package is blocked in the server process.
         bootstrap = (
             "import builtins, runpy, sys\n"
             "blocked = 'mcp'\n"
@@ -57,13 +56,11 @@ class StdioTests(unittest.TestCase):
             "builtins.__import__ = guard\n"
             "sys.argv = [sys.argv[1], *sys.argv[2:]]\n"
             "runpy.run_path(sys.argv[0], run_name='__main__')\n")
-        self.assertIsNotNone(importlib.util.find_spec("mcp"),
-                             "The client SDK must be installed to prove the server ignores it")
+        self.assertIsNotNone(importlib.util.find_spec("mcp"))
 
         root = Path(tranche.__file__).parent
         expected = json.loads((root / "out" / "batches.json").read_text())["batches"][0]
-        # Exercise the actual local observation unchanged. Historical cache rows
-        # excluded by the producer must not require a separate cleaned data copy.
+        # The actual local observation, unchanged.
         observed = root
 
         def params_for(target):
@@ -107,7 +104,7 @@ class StdioTests(unittest.TestCase):
                                       {"security": "true"}, {"unknown": 1}):
                         invalid = await session.call_tool("query", arguments)
                         self.assertTrue(invalid.isError, arguments)
-            # Modify a disposable copy only; never touch the real observation.
+            # A disposable copy; the real observation is never modified.
             with tempfile.TemporaryDirectory() as directory:
                 copy = Path(directory)
                 shutil.copytree(observed / "out", copy / "out", ignore=shutil.ignore_patterns("*.md"))

@@ -22,11 +22,20 @@ SCALE := ⚖️
 # ============== Project Metadata ==============
 REPO := blackopsrepl/Tranche
 LIVE_URL := https://vdistefano.studio/Tranche/
+# One interpreter for every target. `PYTHON` (env or command line) wins;
+# otherwise hostpython.py resolves it.
+PYTHON_CMD ?= python3
+ifeq ($(strip $(PYTHON)),)
+PYTHON := $(shell $(PYTHON_CMD) hostpython.py 2>/dev/null)
+endif
+ifeq ($(strip $(PYTHON)),)
+$(error No usable Python interpreter: '$(PYTHON_CMD) hostpython.py' failed)
+endif
 JUDGED := $(shell test -f out/judgments.jsonl && wc -l < out/judgments.jsonl || echo 0)
 PAIRED := $(shell test -f out/pair_verdicts.jsonl && wc -l < out/pair_verdicts.jsonl || echo 0)
 
 # ============== Phony Targets ==============
-.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments test check mcp-check release-check release-dry-run release
+.PHONY: banner help fetch judge judge-full dupes cluster page gif all publish verify info clean-judgments test check mcp-check print-interpreter release-check release-dry-run release
 
 # ============== Default Target ==============
 .DEFAULT_GOAL := help
@@ -46,7 +55,7 @@ fetch: banner
 	@printf "$(CYAN)$(BOLD)╔══════════════════════════════════════╗$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)║        Fetching Open PRs             ║$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n\n"
-	@python3 tranche.py fetch --transport curl
+	@$(PYTHON) tranche.py fetch --transport curl
 
 # ============== Jev Pipeline ==============
 
@@ -55,7 +64,7 @@ judge: banner
 	@printf "$(CYAN)$(BOLD)║        Jev Judgment Pass             ║$(RESET)\n"
 	@printf "$(CYAN)$(BOLD)╚══════════════════════════════════════╝$(RESET)\n\n"
 	@printf "$(ARROW) $(BOLD)Judging PRs (7 typed questions, one batched call each)...$(RESET)\n"
-	@python3 tranche.py judge --resume && \
+	@$(PYTHON) tranche.py judge --resume && \
 		printf "$(GREEN)$(CHECK) Judgments saved to out/judgments.jsonl$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) Judge pass failed$(RESET)\n\n" && exit 1)
 
@@ -63,29 +72,29 @@ judge-full: banner
 	@printf "$(RED)$(BOLD)WARNING: fresh pass over all PRs — ~5M input tokens on Jev$(RESET)\n"
 	@printf "$(YELLOW)Press Ctrl+C to abort, or Enter to continue...$(RESET)\n"
 	@read dummy
-	@python3 tranche.py judge
+	@$(PYTHON) tranche.py judge
 
 dupes: banner
 	@printf "$(ARROW) $(BOLD)Comparing candidate pairs with Jev sameness judgments...$(RESET)\n"
-	@python3 tranche.py dupes && \
+	@$(PYTHON) tranche.py dupes && \
 		printf "$(GREEN)$(CHECK) Pair verdicts in out/pair_verdicts.jsonl$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) Dupe pass failed$(RESET)\n\n" && exit 1)
 
 cluster: banner
 	@printf "$(ARROW) $(BOLD)Clustering tranches, dupes, escalation lists...$(RESET)\n"
-	@python3 tranche.py cluster
+	@$(PYTHON) tranche.py cluster
 
 # ============== Output ==============
 
 page: banner
 	@printf "$(ARROW) $(BOLD)Rendering GitHub Pages report from out/ data...$(RESET)\n"
-	@python3 gen_page.py && \
+	@$(PYTHON) gen_page.py && \
 		printf "$(GREEN)$(CHECK) docs/index.html written$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) Page generation failed$(RESET)\n\n" && exit 1)
 
 gif: banner
 	@printf "$(ARROW) $(BOLD)Rendering title GIF with glyphfx (capture → rasterize)...$(RESET)\n"
-	@python3 tools/make_title_gif.py && \
+	@$(PYTHON) tools/make_title_gif.py && \
 		printf "$(GREEN)$(CHECK) docs/assets/tranche.gif written$(RESET)\n\n" || \
 		(printf "$(RED)$(CROSS) GIF generation failed$(RESET)\n\n" && exit 1)
 
@@ -122,7 +131,7 @@ verify: banner
 		(printf "$(RED)$(CROSS) Live check failed (HTTP $$code)$(RESET)\n\n" && exit 1)
 
 info: banner
-	@python3 -c "import json; s=json.load(open('out/summary.json')); [print(f'  $(CYAN){k:>22}$(RESET)  {v}') for k,v in s.items()]"
+	@$(PYTHON) -c "import json; s=json.load(open('out/summary.json')); [print(f'  $(CYAN){k:>22}$(RESET)  {v}') for k,v in s.items()]"
 	@printf "\n"
 
 # ============== Danger Zone ==============
@@ -135,18 +144,23 @@ clean-judgments: banner
 		printf "$(GREEN)$(CHECK) Judgment cache cleared$(RESET)\n\n"
 
 test:
-	@python3 -m unittest discover -s tests -v
+	@$(PYTHON) -m unittest discover -s tests -v
 
 check: test
 	@if command -v node >/dev/null 2>&1; then node --test tests/workbench.test.cjs; else printf 'Node unavailable; optional frontend tests skipped.\n'; fi
 	@ruff check .
-	@python3 -m compileall -q tranche.py gen_page.py mcp_server.py tests tools
+	@$(PYTHON) -m compileall -q tranche.py gen_page.py hostpython.py mcp_server.py tests tools
 	@git diff --check
 
-# Optional SDK plus current local corpus; deliberately separate from offline gates.
-MCP_PYTHON ?= python3
+# Real-client subprocess check against the current local corpus, separate from
+# the offline gates. MCP_PYTHON supplies the MCP client SDK; the server imports
+# nothing, so it defaults to the same interpreter.
+MCP_PYTHON ?= $(PYTHON)
 mcp-check:
 	@TRANCHE_MCP_INTEGRATION=1 $(MCP_PYTHON) -m unittest tests.test_mcp_stdio -v
+
+print-interpreter:
+	@printf '%s\n' '$(PYTHON)'
 
 release-check: check
 	@node --check .versionrc.js
