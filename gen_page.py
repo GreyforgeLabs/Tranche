@@ -175,4 +175,5 @@ DOCS.mkdir(exist_ok=True)
 (DOCS / "index.html").write_text(page)
 print(f"wrote docs/index.html ({len(page)//1024} KB); {len(rows)} captured PRs")
 print(f"candidates: {sum(r['candidate'] for r in rows)}, senior: {sum(r['senior'] for r in rows)}, "
-      f"follow-up: {sum(r['followup'] for r in rows)}, related: {sum(r['related'] for r in rows)}")
+      f"follow-up: {sum(r['followup'] for r in rows)}, parked: {len(parked_by_number)}, "
+      f"related: {sum(r['related'] for r in rows)}")
