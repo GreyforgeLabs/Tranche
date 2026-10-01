@@ -124,8 +124,10 @@ class WorkflowTests(unittest.TestCase):
         )
 
     def render(self):
-        for name in ("tranche.py", "gen_page.py"):
-            shutil.copy(Path(tranche.__file__).parent / name, self.root / name)
+        for name in ("tranche.py", "gen_page.py", "page/template.html"):
+            target = self.root / name
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy(Path(tranche.__file__).parent / name, target)
         return subprocess.run(
             [sys.executable, str(self.root / "gen_page.py")],
             cwd=self.root,

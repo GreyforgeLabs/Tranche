@@ -15,8 +15,8 @@ class BrandingTests(unittest.TestCase):
                                 capture_output=True, text=True, timeout=15)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertIn("Tranche", result.stdout)
-        for name in ("README.md", "Makefile", "gen_page.py", "docs/index.html",
-                     "tools/make_title_gif.py"):
+        for name in ("README.md", "Makefile", "gen_page.py", "page/template.html",
+                     "docs/index.html", "tools/make_title_gif.py"):
             with self.subTest(path=name):
                 text = (ROOT / name).read_text()
                 self.assertNotIn("omarchy-pr-jev-triage", text)
@@ -26,9 +26,9 @@ class BrandingTests(unittest.TestCase):
         self.assertTrue((ROOT / "tools/omarchy-wordmark.svg").is_file())
         generator = (ROOT / "tools/make_title_gif.py").read_text()
         self.assertIn('TAGLINE = "TRIAGE with Tranche (powered by Jev)"', generator)
-        page = (ROOT / "gen_page.py").read_text()
-        self.assertIn('assets/tranche-mascot.png', page)
-        self.assertIn('OMARCHY — TRIAGE with Tranche (powered by Jev)', page)
+        shell = (ROOT / "page/template.html").read_text()
+        self.assertIn('assets/tranche-mascot.png', shell)
+        self.assertIn('OMARCHY — TRIAGE with Tranche (powered by Jev)', shell)
 
     def test_offline_check_runs_optional_node_frontend_tests(self):
         makefile = (ROOT / "Makefile").read_text()

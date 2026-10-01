@@ -10,6 +10,7 @@ import tranche
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "out"
 DOCS = ROOT / "docs"
+TEMPLATE = ROOT / "page" / "template.html"
 
 summary = json.loads((OUT / "summary.json").read_text())
 dupes = json.loads((OUT / "dupes.json").read_text())
@@ -105,72 +106,14 @@ payload = json.dumps({"prs": rows, "categories": CAT_LABELS, "groups": dupes,
                       "parked": parked},
                      ensure_ascii=True, allow_nan=False, separators=(",", ":"))
 payload = payload.replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
+# The shell is HTML in page/template.html: {{options}}, {{payload}}, {{count}}
+# and {{count_commas}} are filled by literal replacement - the same cheap,
+# deterministic fill the f-string gave, with HTML out of the Python source.
 options = ''.join(f'<option value="{cat}">{html.escape(label)}</option>' for cat, label in CAT_LABELS.items())
-page = f"""<!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="dark">
-<title>OMARCHY — TRIAGE with Tranche (powered by Jev)</title>
-<link rel="stylesheet" href="assets/workbench.css">
-<script src="assets/workbench.js" defer></script>
-</head><body>
-<a class="skip-link" href="#search">Skip to PR search</a>
-<div class="shell">
-<header class="masthead">
-<div class="report-brand">
-<h1><picture class="wordmark"><source media="(max-width:600px) and (prefers-reduced-motion: reduce)" srcset="assets/omarchy-title.png"><source media="(max-width:600px)" srcset="assets/omarchy.gif"><source media="(prefers-reduced-motion: reduce)" srcset="assets/tranche-title.png"><img src="assets/tranche.gif" alt="OMARCHY — TRIAGE with Tranche (powered by Jev)" width="1560" height="473"></picture></h1>
-<div class="mobile-signoff">TRIAGE with <span class="tranche-motion">Tranche</span> <small>(powered by Jev)</small></div>
-<figure class="keeper"><img src="assets/tranche-mascot.png" alt="Tranche, the backlog keeper, holding three pull-request cards" width="564" height="800"></figure>
-</div>
-<div class="masthead-context"><span class="eyebrow">PULL REQUEST WORKBENCH</span><a href="https://github.com/omacom/omarchy">omacom/omarchy ↗</a><p>{len(prs):,} captured PRs</p></div>
-</header>
-<div class="workbench">
-<aside aria-label="PR categories" class="sidebar">
-<div class="sidebar-heading"><span class="eyebrow">CATEGORIES</span><span class="small">PRs</span></div>
-<div id="category-buttons"></div>
-<label class="mobile-category" for="category">Category<select id="category"><option value="all">All categories</option>{options}</select></label>
-<div class="sidebar-foot"><span class="status-dot"></span> Review deliberately<p>Built for the Omarchy triage team.</p><a href="https://github.com/blackopsrepl/Tranche">Tranche source ↗</a></div>
-</aside>
-<main id="main">
-<div class="queue-heading"><h2>Pull requests</h2><span class="small">FIND · INSPECT · REVIEW</span></div>
-<p class="product-note">AI-assisted priorities; review code and tests before merging.</p>
-<nav id="queues" class="queues" aria-label="Review queues">
-<button type="button" data-queue="security" aria-pressed="false">Security first <span></span></button>
-<button type="button" data-queue="all" aria-pressed="true">All <span></span></button>
-<button type="button" data-queue="candidates" aria-pressed="false">Review candidates <span></span></button>
-<button type="button" data-queue="senior" aria-pressed="false">Senior review <span></span></button>
-<button type="button" data-queue="followup" aria-pressed="false">Author follow-up <span></span></button>
-<button type="button" data-queue="parked" aria-pressed="false">Parked <span></span></button>
-<button type="button" data-queue="related" aria-pressed="false">Related PRs <span></span></button>
-<button type="button" id="batches-view" aria-pressed="false">Batches <span></span></button>
-</nav>
-<section id="batch-overview" class="batch-overview" aria-label="Pre-release merge batches" hidden>
-<h3 class="overview-heading">Suggested merge batches</h3>
-<p class="small">Each batch is a Jev-determined group of PRs to merge into ONE pull request. Ordered security-first, then average model risk. Model-suggested — never a merge approval. Open a batch to inspect its PRs.</p>
-<div id="batch-list"></div>
-</section>
-<div class="toolbar">
-<div class="search-field"><label for="search" class="sr-only">Search PR title, number, author or description</label><input type="search" id="search" placeholder="Search title, #number, @author, description…" autocomplete="off" spellcheck="false" aria-describedby="search-help"><kbd aria-hidden="true">/</kbd></div>
-<label class="sort-field" for="sort">Sort<select id="sort"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="risk">Model risk: high first</option></select></label>
-</div>
-<div class="result-summary"><p id="result-count" role="status" aria-live="polite" aria-atomic="true"></p><button id="reset" type="button">Reset filters</button></div>
-<p id="search-help" class="search-help">Typo-tolerant search · combine terms · exact #number / @author <span>Ctrl+K to search</span></p>
-<div class="column-head" aria-hidden="true"><span>PR / TITLE</span><span>MODEL RISK</span></div>
-<ol id="results" class="results" aria-label="Pull requests"></ol>
-<div id="empty" class="empty" hidden><span class="eyebrow">NO MATCHES</span><h3>No pull requests found.</h3><p>Try fewer terms or a different queue or category.</p><button id="empty-reset" type="button">Show all pull requests</button></div>
-<nav class="pagination" aria-label="Results pages"><button id="prev" type="button">← Previous</button><span id="page-label"></span><button id="next" type="button">Next →</button></nav>
-<noscript><p>Enable JavaScript to search and inspect {len(prs)} captured PRs. <a href="https://github.com/omacom/omarchy/pulls">Browse on GitHub</a>.</p></noscript>
-<footer><a href="https://github.com/blackopsrepl/Tranche">Tranche</a><span>{len(prs)} captured PRs · <a href="https://github.com/omacom/omarchy/pulls">Open GitHub ↗</a></span></footer>
-</main>
-</div>
-</div>
-<dialog id="pr-dialog" aria-labelledby="detail-title">
-<div class="dialog-toolbar"><span class="eyebrow" id="detail-number"></span><button id="close-detail" type="button" autofocus aria-label="Close PR details">Close <kbd>Esc</kbd></button></div>
-<div id="detail-content"></div>
-</dialog>
-<script id="workbench-data" type="application/json">{payload}</script>
-</body></html>
-"""
+page = TEMPLATE.read_text()
+page = page.replace("{{options}}", options)
+page = page.replace("{{payload}}", payload)
+page = page.replace("{{count_commas}}", f"{len(prs):,}").replace("{{count}}", str(len(prs)))
 DOCS.mkdir(exist_ok=True)
 (DOCS / "index.html").write_text(page)
 print(f"wrote docs/index.html ({len(page)//1024} KB); {len(rows)} captured PRs")
