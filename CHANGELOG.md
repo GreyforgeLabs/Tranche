@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.2.2](https://github.com/blackopsrepl/Tranche/compare/v0.2.1...v0.2.2) (2026-10-01)
+
+
+### Features
+
+* **mcp:** expose bound triage reports over read-only stdio ([cb64874](https://github.com/blackopsrepl/Tranche/commit/cb6487486765fe88312416c765c1cc96d0e0355c)), closes [#6](https://github.com/blackopsrepl/Tranche/issues/6)
+
 ## [0.2.1](https://github.com/blackopsrepl/Tranche/compare/v0.2.0...v0.2.1) (2026-09-30)
 
 
