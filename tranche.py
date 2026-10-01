@@ -1084,6 +1084,72 @@ def security_priority(judgment):
 
 BATCH_SIZE = 5
 
+# Issue #8: park is a hold with a named unblock path, never a close. A parked
+# PR re-enters automatically: the author pushes, the judgment re-binds, the
+# next refresh re-packs. Closing remains a maintainer decision.
+PARK_UNBLOCK = {
+    "draft": "Author marks the pull request ready for review; the next fetch "
+             "recaptures it and the next batches run re-packs it.",
+    "finished_form": "Author adds the missing description or QA evidence; "
+                     "judge --resume re-binds the judgment and the PR re-enters "
+                     "on the next refresh.",
+    "unjudged_or_stale": "Run judge --resume (or refresh) to restore a current "
+                         "judgment; the PR re-enters on the next batches run.",
+    "same_change_hold": "Held with its same_change group: atomic units are never "
+                        "split, so the group re-enters together when every member "
+                        "clears its own park reason.",
+}
+
+
+def park_set(prs, judgments):
+    """Issue #8: pipeline-legible park decisions, keyed by PR number.
+
+    Reasons come only from facts the pipeline already holds — the draft bit,
+    the finished-form score, the judgment's freshness. One predicate serves
+    every consumer (batches, parked.json, workbench, MCP). A finished form
+    just above 1 is not parked; a missing judgment parks under its own reason.
+    """
+    parks = {}
+    for n, item in sorted(prs.items()):
+        reasons = []
+        if item.get("draft"):
+            reasons.append("draft")
+        judgment = judgments.get(n)
+        if judgment is None:
+            reasons.append("unjudged_or_stale")
+        else:
+            finished = metric(judgment, "finished_form")
+            if finished is not None and finished <= 1:
+                reasons.append("finished_form")
+        if reasons:
+            parks[n] = reasons
+    return parks
+
+
+def parked_payload(parks, prs, judgments, dupes_digest):
+    """First-class park record: the security meta-category's discipline, second
+    instance. Membership never replaces the PR's own category."""
+    members = []
+    for n in sorted(parks):
+        item = prs.get(n, {})
+        members.append({
+            "number": n, "title": item.get("title", ""), "author": item.get("author", ""),
+            "reasons": list(parks[n]),
+            "unblock": " ".join(PARK_UNBLOCK[reason] for reason in parks[n]),
+            "head_sha": item.get("head_sha"), "url": item.get("url"),
+            "created": item.get("created", ""),
+            "security_flag": metric(judgments.get(n, {}), "security_flag", "noul"),
+        })
+    return {
+        "format_version": 1, "repo": REPO, "dupes_digest": dupes_digest,
+        "parked": len(members),
+        "meaning": "Parked before batching (issue #8): drafts, PRs without finished "
+                   "form, PRs without a current judgment, and same_change groups "
+                   "holding for a parked member. A hold with a named unblock path, "
+                   "never a close; re-entry is automatic when the reason clears.",
+        "members": members,
+    }
+
 
 def batch_review_prompt(members, batch_id, prs):
     """Reviewer agent prompt: point it at every PR of the batch and demand a
@@ -1111,8 +1177,29 @@ def batch_review_prompt(members, batch_id, prs):
     )
 
 
+def park_state(dupes, judgments, prs):
+    """One park predicate for every consumer: own reasons plus same_change_hold
+    for every member of a confirmed group that waits for a parked member.
+    Atomic units are never split — pulling one member out would leave the rest
+    of the group claimed twice or held entirely."""
+    parks = park_set(prs, judgments)
+    for members in dupes["confirmed_groups"]:
+        if any(m in parks for m in members):
+            for m in members:
+                entry = parks.setdefault(m, [])
+                if "same_change_hold" not in entry:
+                    entry.append("same_change_hold")
+    return parks
+
+
 def merge_batches(dupes, judgments, prs, dupes_digest):
-    """Pack PRs into security-first batches of five, Jev-determined."""
+    """Pack PRs into security-first batches of five, Jev-determined.
+
+    Issue #8: parked PRs never enter a batch. A batch prompt claims exactly one
+    thing — these PRs merge together — so a draft, a PR without finished form,
+    or a PR without a current judgment must not appear in it."""
+    parks = park_state(dupes, judgments, prs)
+
     def security_count(members):
         return sum(1 for n in members
                    if (metric(judgments.get(n, {}), "security_flag", "noul") or 0) >= SECURITY_PRIORITY)
@@ -1125,15 +1212,18 @@ def merge_batches(dupes, judgments, prs, dupes_digest):
 
     grouped, units = set(), []
     for members in dupes["confirmed_groups"]:
+        if any(m in parks for m in members):
+            grouped.update(members)
+            continue  # the whole atomic unit waits; it re-enters together
+        grouped.update(members)
         security, average_risk, created = unit_stats(members)
         units.append({"members": list(members), "same_change": True, "security": security,
                       "risk": average_risk, "created": created})
-        grouped.update(members)
     excluded = set()
     for group in dupes["review_groups"]:
         excluded.update(group["members"])
     for n in sorted(prs):
-        if n not in grouped and n not in excluded:
+        if n not in grouped and n not in excluded and n not in parks:
             security, average_risk, created = unit_stats([n])
             units.append({"members": [n], "same_change": False, "security": security,
                           "risk": average_risk, "created": created})
@@ -1148,6 +1238,8 @@ def merge_batches(dupes, judgments, prs, dupes_digest):
         current.extend(unit["members"])
     if current:
         packed.append(current)
+    if {n for members in packed for n in members} & set(parks):
+        raise TrancheFatal("internal error: a parked PR entered a batch (issue #8 gate failed)")
     batches = []
     for ordinal, members in enumerate(packed, 1):
         security, average_risk, created = unit_stats(members)
@@ -1166,11 +1258,13 @@ def merge_batches(dupes, judgments, prs, dupes_digest):
         "meaning": "A batch is 5 PRs merged together as one tranche (issue #4). Jev determines the "
                    "composition: same_change groups are atomic and combine into ONE pull request "
                    "inside their batch. Batches are disjoint: every PR belongs to at most one batch. "
-                   "Ordered security-first. Model-suggested, not verified safe to merge.",
+                   "Ordered security-first. Parked PRs are excluded before packing (issue #8). "
+                   "Model-suggested, not verified safe to merge.",
         "batches": batches,
         "security_batches": sum(1 for b in batches if b["security_members"] > 0),
         "same_change_groups": sum(b["same_change_groups"] for b in batches),
         "excluded_review_prs": len(excluded),
+        "parked_prs": len(parks),
     }
 
 
@@ -1189,12 +1283,17 @@ def cmd_batches(args) -> None:
     prs = load_prs()
     judgments = current_judgments(prs)
     batches = merge_batches(dupes, judgments, prs, digests["dupes.json"])
+    parks = park_state(dupes, judgments, prs)
     atomic_json(OUT_DIR / "batches.json", batches)
+    atomic_json(OUT_DIR / "parked.json", parked_payload(parks, prs, judgments, digests["dupes.json"]))
     append_batch_plan(batches)
+    if parks:
+        append_park_section(parks, prs)
     print(f"{len(batches['batches'])} batches of ≤ {batches['batch_size']} PRs "
           f"({batches['security_batches']} security-first, {batches['same_change_groups']} "
-          f"same-change groups, {batches['excluded_review_prs']} review-group PRs excluded)")
-    print(f"wrote {OUT_DIR}/batches.json")
+          f"same-change groups, {batches['excluded_review_prs']} review-group PRs excluded, "
+          f"{batches['parked_prs']} parked)")
+    print(f"wrote {OUT_DIR}/batches.json, {OUT_DIR}/parked.json")
 
 
 def append_batch_plan(batches) -> None:
@@ -1226,6 +1325,33 @@ def append_batch_plan(batches) -> None:
                   "produces one unified proposal + merge plan for the batch.", ""]
         for batch in batches["batches"]:
             lines += [f"### {batch['id']}", "", "```", batch["review_prompt"], "```", ""]
+    text = "\n".join(lines).rstrip("\n") + "\n"
+    with path.open("a", encoding="utf-8") as stream:
+        stream.write(text)
+
+
+def append_park_section(parks, prs) -> None:
+    """Append the park record (issue #8) to the published tranches.md.
+    Batches append; cluster owns the file."""
+    path = OUT_DIR / "tranches.md"
+    if not path.exists():
+        return
+    lines = ["", "# Parked before batching (issue #8)", "",
+             f"{len(parks)} PRs are parked: drafts, PRs without finished form, PRs without a",
+             "current judgment, and same_change groups holding for a parked member. Park is a",
+             "**hold with a named unblock path, never a close** — re-entry is automatic when the",
+             "reason clears and the next refresh re-packs. No batch lists a parked PR.",
+             "",
+             f"Reasons: draft {sum('draft' in r for r in parks.values())} · "
+             f"finished_form {sum('finished_form' in r for r in parks.values())} · "
+             f"unjudged_or_stale {sum('unjudged_or_stale' in r for r in parks.values())} · "
+             f"same_change_hold {sum('same_change_hold' in r for r in parks.values())}.", "",
+             "| PR | Reasons | Unblocked by |", "|---|---|---|"]
+    for n, reasons in sorted(parks.items()):
+        unblock = " ".join(PARK_UNBLOCK[reason] for reason in reasons)
+        lines.append(f"| #{n} | {', '.join(reasons)} | {unblock} |")
+    lines += ["", "Parked does not remove a security-flagged PR from the security meta-category;",
+              "it only removes it from merge batches. Full record: out/parked.json.", ""]
     text = "\n".join(lines).rstrip("\n") + "\n"
     with path.open("a", encoding="utf-8") as stream:
         stream.write(text)

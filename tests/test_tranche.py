@@ -830,6 +830,102 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("Reviewer agent prompts", markdown)
         self.assertIn("Copy-paste a prompt", markdown)
 
+    # ------------------------------------------------------------------
+    # Issue #8: parked PRs never enter a batch. Park is a pre-pack gate:
+    # draft, finished_form <= 1, or no current judgment. A same_change
+    # group with a parked member holds whole — atomic units are never
+    # split. Park is a hold with a named unblock path, never a close.
+    # ------------------------------------------------------------------
+
+    def park_setup(self):
+        """merge_setup plus park coverage: 7 draft (security-flagged),
+        8 finished_form 1, 9 unjudged."""
+        prs = self.inputs([pr(7, draft=True) if n == 7 else pr(n) for n in range(1, 13)])
+        records = {}
+        for n in range(1, 13):
+            data = answers()
+            if n == 1:
+                data["security_flag"] = {"noul": 0.9}
+            if n == 7:
+                data["security_flag"] = {"noul": 0.8}
+            if n == 8:
+                data["finished_form"] = {"score": 1}
+            records[n] = data
+        tranche.JUDGMENTS_PATH.write_text("".join(
+            json.dumps({"number": n, "answers": records[n],
+                        "binding": tranche.judgment_binding(prs[n])}) + "\n"
+            for n in sorted(prs) if n != 9))
+        self.pairs(prs, [(1, 2, "same_change", 0.9),
+                         (3, 4, "same_change", 0.9), (4, 5, "same_change", 0.9),
+                         (3, 5, "unrelated", 0.1)])
+        return prs, self.cluster()[0]
+
+    def test_park_set_reads_only_pipeline_legible_facts(self):
+        prs = {1: pr(1), 2: pr(2, draft=True), 3: pr(3), 4: pr(4)}
+        judgments = {1: {"answers": answers()}, 2: {"answers": answers()},
+                     3: {"answers": dict(answers(), finished_form={"score": 1})}}
+        self.assertEqual(tranche.park_set(prs, judgments),
+                         {2: ["draft"], 3: ["finished_form"], 4: ["unjudged_or_stale"]})
+        # A judgment just above the threshold is not parked.
+        judgments[1] = {"answers": dict(answers(), finished_form={"score": 1.01})}
+        self.assertNotIn(1, tranche.park_set(prs, judgments))
+        # Reasons accumulate: a draft whose judgment went stale parks for both.
+        self.assertEqual(tranche.park_set({5: pr(5, draft=True)}, {}),
+                         {5: ["draft", "unjudged_or_stale"]})
+
+    def test_parked_prs_never_enter_a_batch_and_ship_as_first_class_output(self):
+        prs, _ = self.park_setup()
+        tranche.cmd_batches(argparse.Namespace())
+        payload = json.loads((self.out / "batches.json").read_text())
+        packed = [n for batch in payload["batches"] for n in batch["members"]]
+        self.assertEqual(sorted(packed), [1, 2, 6, 10, 11, 12])
+        self.assertEqual([batch["count"] for batch in payload["batches"]], [5, 1])
+        self.assertEqual(payload["parked_prs"], 3)
+        parked = json.loads((self.out / "parked.json").read_text())
+        self.assertEqual(parked["format_version"], 1)
+        self.assertEqual(parked["dupes_digest"], payload["dupes_digest"])
+        self.assertEqual(parked["parked"], 3)
+        by_number = {row["number"]: row for row in parked["members"]}
+        self.assertEqual(by_number[7]["reasons"], ["draft"])
+        self.assertEqual(by_number[8]["reasons"], ["finished_form"])
+        self.assertEqual(by_number[9]["reasons"], ["unjudged_or_stale"])
+        for row in parked["members"]:
+            self.assertTrue(row["unblock"])
+            self.assertEqual(row["head_sha"], prs[row["number"]]["head_sha"])
+        # Security routing survives parking: the draft security PR stays in
+        # the meta-category even though no batch may claim it.
+        clusters = json.loads((self.out / "clusters.json").read_text())
+        self.assertIn(7, [row["number"] for row in clusters["security-review"]])
+
+    def test_same_change_group_with_a_parked_member_holds_whole(self):
+        prs = self.inputs([pr(1), pr(2, draft=True)] + [pr(n) for n in range(3, 7)])
+        tranche.JUDGMENTS_PATH.write_text("".join(
+            json.dumps({"number": n, "answers": answers(),
+                        "binding": tranche.judgment_binding(prs[n])}) + "\n"
+            for n in sorted(prs)))
+        self.pairs(prs, [(1, 2, "same_change", 0.9)])
+        self.cluster()
+        tranche.cmd_batches(argparse.Namespace())
+        payload = json.loads((self.out / "batches.json").read_text())
+        packed = [n for batch in payload["batches"] for n in batch["members"]]
+        self.assertEqual(sorted(packed), [3, 4, 5, 6])
+        parked = {row["number"]: row["reasons"] for row in json.loads(
+            (self.out / "parked.json").read_text())["members"]}
+        self.assertEqual(parked[2], ["draft", "same_change_hold"])
+        self.assertEqual(parked[1], ["same_change_hold"])
+
+    def test_batch_prompts_never_mention_parked_prs(self):
+        prs, _ = self.park_setup()
+        tranche.cmd_batches(argparse.Namespace())
+        payload = json.loads((self.out / "batches.json").read_text())
+        for batch in payload["batches"]:
+            for n in (7, 8, 9):
+                self.assertNotIn(f"#{n}", batch["review_prompt"])
+            self.assertNotIn("parked", batch["review_prompt"].lower())
+        markdown = (self.out / "tranches.md").read_text()
+        self.assertIn("Parked before batching", markdown)
+        self.assertIn("unjudged_or_stale", markdown)
+
     def test_batches_refuse_outputs_that_drifted_from_the_summary(self):
         self.merge_setup()
         tranche.cmd_batches(argparse.Namespace())
