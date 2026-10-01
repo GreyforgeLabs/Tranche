@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.4.0](https://github.com/blackopsrepl/Tranche/compare/v0.3.4...v0.4.0) (2026-10-01)
+
+### Bug Fixes
+
+* **refresh:** bind judgments to PR evidence, not the churning envelope ([c57bb6c](https://github.com/blackopsrepl/Tranche/commit/c57bb6c431f67bf74383be22d9cb2da2612c097e))
+
 ## [0.3.4](https://github.com/blackopsrepl/Tranche/compare/v0.3.3...v0.3.4) (2026-10-01)
 
 
