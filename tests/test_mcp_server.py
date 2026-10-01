@@ -214,9 +214,9 @@ class MCPTests(unittest.TestCase):
                   "if name.startswith('mcp.') else original(name,*a,**k); "
                   "import mcp_server; mcp_server.main([])")
         result = subprocess.run([sys.executable, "-c", script], capture_output=True,
-                                text=True, timeout=10)
-        # A hand-rolled server must run with no MCP SDK at all: an empty stdin
-        # just ends the stream.
+                                text=True, timeout=10, input="")
+        # A hand-rolled server must run with no MCP SDK at all: a closed stdin
+        # ends the stream.
         self.assertEqual(result.returncode, 0)
         self.assertEqual(result.stdout, "")
 
