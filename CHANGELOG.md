@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.5.0](https://github.com/blackopsrepl/Tranche/compare/v0.4.0...v0.5.0) (2026-10-01)
+
+### Features
+
+* **batches:** park ineligible PRs before packing ([71fb86b](https://github.com/blackopsrepl/Tranche/commit/71fb86bbb5118e675042c3e892d09effd98d070d))
+* **mcp:** serve parked state bound to the producer predicate ([0c60b51](https://github.com/blackopsrepl/Tranche/commit/0c60b5109b0a31301774e017b8a5480d6073d8a5))
+* **workbench:** park as a first-class queue with reasons and unblock paths ([3b3351d](https://github.com/blackopsrepl/Tranche/commit/3b3351d9cc7019b706b8eb42f248b9553072aa68))
+
 ## [0.4.0](https://github.com/blackopsrepl/Tranche/compare/v0.3.4...v0.4.0) (2026-10-01)
 
 ### Bug Fixes
