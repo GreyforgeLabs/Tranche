@@ -5,6 +5,9 @@
 **Tranche, the backlog keeper.** Spots duplicates and gathers fixes into reviewable
 batches. Jev supplies the judgments; humans make the merge call.
 
+MIT licensed (see [LICENSE](LICENSE)); Tranche reads public repositories only and
+never includes credentials in its reports.
+
 Model-assisted discovery and review prioritization for the Omarchy PR backlog, built for the triage team DHH stood up
 on 2026-09-12 ([x.com/dhh/status/2098755120540393908](https://x.com/dhh/status/2098755120540393908)):
 
@@ -36,7 +39,9 @@ echo "apikey_..." > ~/Documents/jevapi.txt     # or: export TYPESAFE_API_KEY=...
 ## Usage
 
 ```bash
-python3 tranche.py fetch            # atomically replace data/pages/snapshot.json (open PRs, unauthenticated GH)
+python3 tranche.py refresh          # whole pipeline, incremental, deterministic — the normal way
+python3 tranche.py refresh --dry-run # report what a refresh would re-run; writes nothing
+python3 tranche.py fetch            # atomically replace data/pages/snapshot.json (authenticated via gh)
 python3 tranche.py judge            # Jev pass over all PRs  (~7 questions, one call per PR)
 python3 tranche.py judge --resume   # reuse only matching input/question/model bindings
 python3 tranche.py dupes            # compare candidate pairs using shortened descriptions
@@ -44,6 +49,21 @@ python3 tranche.py cluster          # build out/{clusters.json,dupes.json,tranch
 python3 tranche.py batches          # classify candidates into out/batches.json + report batch plan
 python3 tranche.py all --resume     # judge --resume + dupes + cluster + batches
 ```
+
+`refresh` is the whole pipeline in the fixed order
+`fetch → judge --resume → dupes → cluster → batches → page`, and it is
+**incremental**: every stage reuses what its cache can still support. A PR is
+re-judged only when the evidence a judgment was based on actually changed, and a
+pair verdict is re-run only when one of its PRs did. A refresh with nothing new
+spends no model calls. `--max-pairs N` caps the pair comparisons per pass
+(default 400).
+
+The evidence binding is what makes that safe: judgments and pair verdicts bind
+the captured fields a judgment depends on — title, description, head SHA, labels,
+draft state, diffstat, timestamps — not the whole GitHub pull-list envelope.
+Repository-wide counters that ride along in every response (`stargazers`,
+`forks`, `open_issues`, `pushed_at`) change on unrelated events and would
+otherwise invalidate the entire corpus on every fetch.
 
 ## Read-only MCP access
 
@@ -234,15 +254,25 @@ unbatched.
 
 `fetch` commits exact observed membership in one atomic local snapshot, including
 empty results and page-boundary endings. Failed pagination leaves the previous
-snapshot untouched. GitHub pagination is not a point-in-time snapshot: PRs can
+snapshot untouched. Captures run through `gh api`, which is already
+authenticated — unauthenticated GitHub allows 60 requests an hour and one
+capture of this backlog costs about 29 — and the credential stays inside `gh`
+rather than being passed on a command line where `ps` would expose it.
+`--transport curl|urllib` remain for hosts that need the original unauthenticated
+paths. `make refresh` runs the incremental pipeline; `make all` still runs the
+stages in order. GitHub pagination is not a point-in-time snapshot: PRs can
 change during acquisition, and this tool does not certify that a captured item is
-still open when read later. `make fetch` uses the same code with `--transport curl`
-for the original host's urllib/IPv6 workaround; `make all` runs stages in order.
+still open when read later.
 
-Each new judgment binds the repository, full captured PR JSON digest (including
-head SHA/updated time when provided), actual projected model input, questions,
-requested model and binding version. Pair records bind both source inputs and the
-pair questions. Resume reuses only matching records; closed, changed or differently
+Each new judgment binds the repository, the captured PR evidence digest, actual
+projected model input, questions, requested model and binding version — where the
+evidence digest covers the fields a judgment depends on and deliberately excludes
+the repository-wide counters that change on unrelated events. Pair records bind
+both PRs' evidence and the pair questions. A record whose binding no longer
+matches is still reusable when its own stored projection is byte-identical today
+and the model alias is unchanged, which is how judgments taken before evidence
+digests existed keep verifying exactly as they were judged. Resume reuses only
+matching records; closed, changed or differently
 configured inputs are excluded from reports. Matching but malformed responses remain
 reportable as unknown values with `normalization_errors`; they are not resume hits.
 Required category, risk, finished-form, effort, fix and security answers must be valid
