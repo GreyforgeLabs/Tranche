@@ -954,6 +954,21 @@ class WorkflowTests(unittest.TestCase):
         (self.out / "parked.json").write_text(json.dumps(parked))
         self.assertNotEqual(self.render().returncode, 0)
 
+    def test_refresh_reports_parked_accounting(self):
+        self.park_setup()
+        tranche.cmd_batches(argparse.Namespace())
+        for name in ("cmd_fetch", "cmd_judge", "cmd_dupes", "cmd_cluster",
+                     "cmd_batches", "render_page"):
+            patcher = patch.object(tranche, name)
+            patcher.start()
+            self.addCleanup(patcher.stop)
+        capture = io.StringIO()
+        with redirect_stdout(capture):
+            tranche.cmd_refresh(argparse.Namespace(dry_run=False, no_page=False, max_pairs=0))
+        output = capture.getvalue()
+        self.assertIn("parked", output)
+        self.assertIn("3", output.split("parked", 1)[1][:20])
+
     def test_batches_refuse_outputs_that_drifted_from_the_summary(self):
         self.merge_setup()
         tranche.cmd_batches(argparse.Namespace())

@@ -1521,6 +1521,13 @@ def cmd_refresh(args) -> None:
             before = json.loads(summary_path.read_text())
         except json.JSONDecodeError:
             before = None
+    batches_path = OUT_DIR / "batches.json"
+    before_batches = None
+    if batches_path.exists():
+        try:
+            before_batches = json.loads(batches_path.read_text())
+        except json.JSONDecodeError:
+            before_batches = None
 
     if args.dry_run:
         prs = load_prs()
@@ -1550,12 +1557,16 @@ def cmd_refresh(args) -> None:
             render_page()
 
     after = json.loads(summary_path.read_text()) if summary_path.exists() else {}
+    after_batches = json.loads(batches_path.read_text()) if batches_path.exists() else {}
     print("\nrefresh complete")
     for key in ("prs_in_corpus", "judged", "dupe_groups", "review_groups",
                 "uncertain_pairs", "ready_prs", "escalate_review", "security_priority"):
         old, new = (before or {}).get(key), after.get(key)
         marker = "" if old == new else f"   (was {old})"
         print(f"  {key:<22} {new}{marker}")
+    old, new = (before_batches or {}).get("parked_prs"), after_batches.get("parked_prs")
+    marker = "" if old == new else f"   (was {old})"
+    print(f"  {'parked_prs':<22} {new}{marker}")
 
 
 def render_page() -> None:
