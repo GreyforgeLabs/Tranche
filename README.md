@@ -212,7 +212,8 @@ no member is automatically marked superseded.
   output digests. Historical `ready_*` keys now count **review candidates**;
   `superseded` is zero and `superseded_by` is null. `security_priority` counts
   the security meta-category.
-- `python3 gen_page.py` — render the matching report to `docs/index.html`. Refuses
+- `python3 gen_page.py` — render the matching report to `docs/index.html` plus the
+  workbench payload `docs/data/workbench.json` (fetched by the page at boot). Refuses
   legacy, changed or mixed report inputs until `cluster` is rerun.
 
 Review-candidate thresholds remain risk ≤ 1.5, finished_form ≥ 1.8, is_fix ≥ 0.6,

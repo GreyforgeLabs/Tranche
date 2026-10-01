@@ -105,9 +105,22 @@
   if (typeof document !== 'undefined') boot();
 
   function boot() {
-    const dataElement = document.getElementById('workbench-data');
-    if (!dataElement) return;
-    const data = JSON.parse(dataElement.textContent);
+    // The payload lives at data/workbench.json beside this page (docs/data/ on
+    // Pages). Only a same-origin read over http(s) is accepted: file:// and
+    // other origins are not the report, and fetch would refuse them anyway.
+    if (location.protocol === 'file:' || location.protocol === 'about:') { fail(); return; }
+    fetch('data/workbench.json', {credentials: 'same-origin'})
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(start, fail);
+  }
+  function fail() {
+    const failed = document.getElementById('load-failure');
+    if (failed) failed.hidden = false;
+  }
+  function start(data) {
     const rows = data.prs;
     const byNumber = new Map(rows.map(pr => [pr.number, pr]));
     const parkedByNumber = new Map(((data.parked || {}).members || []).map(m => [m.number, m]));

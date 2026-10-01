@@ -4,7 +4,6 @@ import argparse
 import copy
 import io
 import json
-import re
 import shutil
 import subprocess
 import sys
@@ -346,7 +345,8 @@ class WorkflowTests(unittest.TestCase):
                 self.assertIn(classification, (self.out / "tranches.md").read_text())
                 result = self.render()
                 self.assertEqual(result.returncode, 0, result.stderr)
-                self.assertIn(classification, (self.root / "docs" / "index.html").read_text())
+                self.assertIn(classification,
+                              (self.root / "docs" / "data" / "workbench.json").read_text())
                 self.pairs(prs, [(1, 2, "same_change", 0.9),
                     (2, 3, "same_change", 0.9), (1, 3, verdict, probability)])
                 _, dupes = self.cluster()
@@ -655,14 +655,15 @@ class WorkflowTests(unittest.TestCase):
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
         page = (self.root / "docs" / "index.html").read_text()
-        import re
-        payload = re.search(r'<script id="workbench-data" type="application/json">(.*?)</script>', page, re.S)
-        self.assertIsNotNone(payload, "Workbench must include all captured PRs")
-        rows = json.loads(payload.group(1))["prs"]
+        json_text = (self.root / "docs" / "data" / "workbench.json").read_text()
+        rows = json.loads(json_text)["prs"]
         self.assertEqual([row["number"] for row in rows], [1, 2])
         self.assertEqual(rows[0]["title"], "Fix <script>alert(1)</script>")
+        self.assertNotIn("<script>alert(1)</script>", json_text)
         self.assertNotIn("<script>alert(1)</script>", page)
-        self.assertIn(r"\u003cscript\u003e", payload.group(1))
+        self.assertIn(r"\u003cscript\u003e", json_text)
+        self.assertNotIn('id="workbench-data"', page, "payload must not return inline")
+        self.assertIn('id="load-failure"', page)
         self.assertTrue(rows[0]["candidate"])
         self.assertFalse(rows[1]["candidate"])
         self.assertIsNone(rows[1]["risk"])
@@ -682,7 +683,8 @@ class WorkflowTests(unittest.TestCase):
         self.cluster()
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("conflicting_pairs", (self.root / "docs" / "index.html").read_text())
+        self.assertIn("conflicting_pairs",
+                      (self.root / "docs" / "data" / "workbench.json").read_text())
 
     def test_html_refuses_stale_inputs_or_mixed_outputs_before_overwrite(self):
         prs = self.inputs([pr(1)])
@@ -717,35 +719,32 @@ class WorkflowTests(unittest.TestCase):
                      'assets/omarchy-title.png', 'assets/tranche-mascot.png'):
             self.assertIn(text, page)
         self.assertLess(page.index('data-queue="security"'), page.index('data-queue="all"'))
-        payload = json.loads(re.search(
-            r'<script id="workbench-data" type="application/json">(.*?)</script>',
-            page, re.S).group(1))
+        payload = json.loads((self.root / "docs" / "data" / "workbench.json").read_text())
         self.assertTrue(payload["prs"][0]["security_priority"])
         self.assertEqual(payload["batches_available"], False)
         for text in ('Observation:', 'requested jev', 'fresh runs:', '<blockquote>',
                      '<b>Method.</b>', 'fetch → judge', '<img src=x onerror=alert(1)>'):
             self.assertNotIn(text, page)
-        self.assertIn(r'\u003c/script\u003e', page)
-        self.assertIn(r'\u0026', page)
+        json_text = (self.root / "docs" / "data" / "workbench.json").read_text()
+        self.assertIn(r'\u003c/script\u003e', json_text)
+        self.assertIn(r'\u0026', json_text)
 
     def test_render_embeds_batches_and_refuses_stale_batch_file(self):
         self.merge_setup()
         tranche.cmd_batches(argparse.Namespace())
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
-        page = (self.root / "docs" / "index.html").read_text()
-        payload = json.loads(re.search(
-            r'<script id="workbench-data" type="application/json">(.*?)</script>',
-            page, re.S).group(1))
+        json_text = (self.root / "docs" / "data" / "workbench.json").read_text()
+        payload = json.loads(json_text)
         self.assertTrue(payload["batches_available"])
         batched = [row for row in payload["prs"] if row["batches"]]
         self.assertEqual(len(batched), 9, "nine batchable PRs across two batches")
         by_number = {row["number"]: row["batches"] for row in payload["prs"]}
         self.assertEqual(by_number[1][0]["id"], "B001")
         self.assertEqual(by_number[12][0]["id"], "B002")
-        self.assertIn("B001", page)
-        self.assertIn("review_prompt", page)
-        self.assertIn("unified proposal", page)
+        self.assertIn("B001", json_text)
+        self.assertIn("review_prompt", json_text)
+        self.assertIn("unified proposal", json_text)
         # A batches file bound to a different dupe run must never render.
         dupes = json.loads((self.out / "dupes.json").read_text())
         dupes["confirmed_groups"] = []
@@ -934,9 +933,8 @@ class WorkflowTests(unittest.TestCase):
         result = self.render()
         self.assertEqual(result.returncode, 0, result.stderr)
         page = (self.root / "docs" / "index.html").read_text()
-        payload = json.loads(re.search(
-            r'<script id="workbench-data" type="application/json">(.*?)</script>',
-            page, re.S).group(1))
+        payload = json.loads(
+            (self.root / "docs" / "data" / "workbench.json").read_text())
         self.assertEqual(payload["parked"]["parked"], 3)
         self.assertEqual(sorted(m["number"] for m in payload["parked"]["members"]), [7, 8, 9])
         by_number = {row["number"]: row for row in payload["prs"]}

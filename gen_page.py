@@ -3,9 +3,27 @@
 
 import html
 import json
+import os
+import tempfile
 from pathlib import Path
 
 import tranche
+
+
+def atomic_text(path: Path, text: str) -> None:
+    """Replace path with text atomically; a failed render never truncates it."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    fd, temporary = tempfile.mkstemp(prefix=".pending-", dir=path.parent)
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as stream:
+            stream.write(text)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
+
 
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT / "out"
@@ -99,24 +117,28 @@ for n, pr in sorted(prs.items()):
         "parked": parked_by_number.get(n, {}).get("reasons", []),
         "batches": batch_of.get(n, []),
     })
-# JSON remains data, never HTML: escape HTML delimiters and JS separators.
+# The workbench data ships as docs/data/workbench.json and is fetched at boot:
+# the HTML shell parses immediately and the payload is cacheable across
+# refreshes. Same strict escaping discipline as the former inline payload;
+# the JSON bytes are unchanged, only the transport moved.
 payload = json.dumps({"prs": rows, "categories": CAT_LABELS, "groups": dupes,
                       "batches": merge_batches,
                       "batches_available": batches is not None,
                       "parked": parked},
                      ensure_ascii=True, allow_nan=False, separators=(",", ":"))
 payload = payload.replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
-# The shell is HTML in page/template.html: {{options}}, {{payload}}, {{count}}
-# and {{count_commas}} are filled by literal replacement - the same cheap,
+# The shell is HTML in page/template.html: {{options}}, {{count}} and
+# {{count_commas}} are filled by literal replacement - the same cheap,
 # deterministic fill the f-string gave, with HTML out of the Python source.
 options = ''.join(f'<option value="{cat}">{html.escape(label)}</option>' for cat, label in CAT_LABELS.items())
 page = TEMPLATE.read_text()
 page = page.replace("{{options}}", options)
-page = page.replace("{{payload}}", payload)
 page = page.replace("{{count_commas}}", f"{len(prs):,}").replace("{{count}}", str(len(prs)))
 DOCS.mkdir(exist_ok=True)
+atomic_text(DOCS / "data" / "workbench.json", payload)
 (DOCS / "index.html").write_text(page)
-print(f"wrote docs/index.html ({len(page)//1024} KB); {len(rows)} captured PRs")
+print(f"wrote docs/index.html ({len(page)//1024} KB) and docs/data/workbench.json "
+      f"({len(payload)//1024} KB); {len(rows)} captured PRs")
 print(f"candidates: {sum(r['candidate'] for r in rows)}, senior: {sum(r['senior'] for r in rows)}, "
       f"follow-up: {sum(r['followup'] for r in rows)}, parked: {len(parked_by_number)}, "
       f"related: {sum(r['related'] for r in rows)}")

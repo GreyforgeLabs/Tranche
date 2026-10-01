@@ -4,14 +4,28 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const source = path.join(__dirname, '../docs/assets/workbench.js');
+const payloadPath = path.join(__dirname, '../docs/data/workbench.json');
 const api = fs.existsSync(source) ? require(source) : {};
-const {execFileSync} = require('node:child_process');
+const {execFileSync, execFile} = require('node:child_process');
+const http = require('node:http');
 const os = require('node:os');
 
 // Dependency-free, offline DOM integration on the same Chromium as browser QA.
 let chromium;
 try { chromium = execFileSync('which', ['chromium'], {encoding: 'utf8'}).trim(); } catch {}
-test('browser workbench renders safe text, inspects PRs, restores focus and URL state', {skip: !chromium}, () => {
+// The shipped workbench data must parse and keep the renderer's HTML-safety
+// escapes: it is a strict subset of JSON-in-HTML, so it can return inline.
+test('shipped workbench.json parses and keeps HTML delimiters escaped', {skip: !fs.existsSync(payloadPath)}, () => {
+  const raw = fs.readFileSync(payloadPath, 'utf8');
+  const data = JSON.parse(raw);
+  assert.ok(Array.isArray(data.prs) && data.prs.length > 0, 'captured PRs present');
+  assert.equal(Object.hasOwn(data, 'groups'), true, 'dupe groups ship with the payload');
+  for (const token of ['<script', '<img ', '&amp;']) {
+    assert.equal(raw.toLowerCase().includes(token), false, `unescaped ${token} in payload`);
+  }
+});
+
+test('browser workbench renders safe text, inspects PRs, restores focus and URL state', {skip: !chromium}, async () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'tranche-browser-'));
   try {
     const pagePath = path.join(directory, 'probe.html');
@@ -25,6 +39,10 @@ test('browser workbench renders safe text, inspects PRs, restores focus and URL 
       const check = (v, message) => {if (!v) throw new Error(message)};
       const wait = () => new Promise(r => setTimeout(r, 80));
       try {
+        // Data loads by fetch now; wait for the workbench to render its rows.
+        const rowsReady = () => document.querySelectorAll('.pr-row').length > 0;
+        for (let i = 0; i < 100 && !rowsReady(); i++) await new Promise(r => setTimeout(r, 20));
+        check(rowsReady(), 'workbench data loaded and rows rendered');
         check(getComputedStyle(document.body).backgroundColor === 'rgb(22, 22, 30)', 'Tokyo Night stylesheet loaded');
         check(getComputedStyle(document.querySelector('.pr-open')).borderRadius === '0px', 'square interface');
         check(document.documentElement.scrollWidth <= innerWidth, 'no horizontal page overflow');
@@ -88,13 +106,39 @@ test('browser workbench renders safe text, inspects PRs, restores focus and URL 
         report.textContent = 'BROWSER_PASS';
       } catch (error) {report.textContent = 'BROWSER_FAIL: ' + error.message}
     });</script>`;
-    const modified = page.replace('<head>', `<head><base href="file://${path.resolve(__dirname, '../docs')}/">`)
-      .replace(/<script id="workbench-data" type="application\/json">[\s\S]*?<\/script>/, () => `<script id="workbench-data" type="application/json">${payload}</script>`)
-      .replace('</body>', probe + '</body>');
-    fs.writeFileSync(pagePath, modified);
-    const output = execFileSync(chromium, ['--headless', '--no-sandbox', '--disable-gpu', '--force-prefers-reduced-motion', '--allow-file-access-from-files', `--user-data-dir=${directory}/profile`, '--virtual-time-budget=5000', '--dump-dom', `file://${pagePath}`], {encoding: 'utf8', timeout: 20000, maxBuffer: 4 * 1024 * 1024, stdio: ['ignore', 'pipe', 'ignore']});
-    const result = output.match(/<pre id="probe-result">([^<]*)<\/pre>/)?.[1];
-    assert.equal(result, 'BROWSER_PASS');
+    const modified = page.replace('</body>', probe + '</body>');
+    // The real page fetches data/workbench.json, so the probe serves the report
+    // over loopback HTTP exactly as Pages does: shell, JSON payload, assets.
+    const docsRoot = path.resolve(__dirname, '../docs');
+    const server = http.createServer((req, res) => {
+      try {
+        const url = new URL(req.url, 'http://127.0.0.1');
+        if (url.pathname === '/data/workbench.json') {
+          res.setHeader('Content-Type', 'application/json');
+          res.end(payload);
+        } else if (url.pathname.startsWith('/assets/')) {
+          const asset = path.resolve(docsRoot, `.${url.pathname}`);
+          if (!asset.startsWith(path.join(docsRoot, 'assets') + path.sep)) throw new Error('forbidden');
+          const type = asset.endsWith('.css') ? 'text/css' : asset.endsWith('.js') ? 'text/javascript'
+            : asset.endsWith('.gif') ? 'image/gif' : asset.endsWith('.png') ? 'image/png' : 'application/octet-stream';
+          res.setHeader('Content-Type', type);
+          res.end(fs.readFileSync(asset));
+        } else {
+          res.setHeader('Content-Type', 'text/html; charset=utf-8');
+          res.end(modified);
+        }
+      } catch { res.statusCode = 404; res.end('not found'); }
+    });
+    server.listen(0, '127.0.0.1');
+    const port = await new Promise((resolve, reject) => {
+      server.once('listening', () => resolve(server.address().port));
+      server.once('error', reject);
+    });
+    try {
+      const output = await new Promise((resolve, reject) => execFile(chromium, ['--headless', '--no-sandbox', '--disable-gpu', '--force-prefers-reduced-motion', '--virtual-time-budget=8000', '--dump-dom', `http://127.0.0.1:${port}/`], {encoding: 'utf8', timeout: 30000, maxBuffer: 4 * 1024 * 1024}, (error, stdout) => error ? reject(error) : resolve(stdout)));
+      const result = output.match(/<pre id="probe-result">([^<]*)<\/pre>/)?.[1];
+      assert.equal(result, 'BROWSER_PASS');
+    } finally { server.close(); }
   } finally {fs.rmSync(directory, {recursive: true, force: true});}
 });
 

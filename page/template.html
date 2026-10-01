@@ -52,6 +52,7 @@
 <div id="empty" class="empty" hidden><span class="eyebrow">NO MATCHES</span><h3>No pull requests found.</h3><p>Try fewer terms or a different queue or category.</p><button id="empty-reset" type="button">Show all pull requests</button></div>
 <nav class="pagination" aria-label="Results pages"><button id="prev" type="button">← Previous</button><span id="page-label"></span><button id="next" type="button">Next →</button></nav>
 <noscript><p>Enable JavaScript to search and inspect {{count}} captured PRs. <a href="https://github.com/omacom/omarchy/pulls">Browse on GitHub</a>.</p></noscript>
+<div id="load-failure" class="load-failure" hidden><p>The workbench data failed to load. <a href="https://github.com/omacom/omarchy/pulls">Browse the pull requests on GitHub</a>, then reload this page.</p></div>
 <footer><a href="https://github.com/blackopsrepl/Tranche">Tranche</a><span>{{count}} captured PRs · <a href="https://github.com/omacom/omarchy/pulls">Open GitHub ↗</a></span></footer>
 </main>
 </div>
@@ -60,5 +61,4 @@
 <div class="dialog-toolbar"><span class="eyebrow" id="detail-number"></span><button id="close-detail" type="button" autofocus aria-label="Close PR details">Close <kbd>Esc</kbd></button></div>
 <div id="detail-content"></div>
 </dialog>
-<script id="workbench-data" type="application/json">{{payload}}</script>
 </body></html>
