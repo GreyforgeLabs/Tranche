@@ -10,6 +10,7 @@ import tranche
 from tests import test_tranche as fixtures
 
 pr = fixtures.pr
+answers = fixtures.answers
 
 
 class MCPTests(unittest.TestCase):
@@ -25,8 +26,11 @@ class MCPTests(unittest.TestCase):
         self.pairs(prs, [])
         self.cluster()
         dupes = json.loads((self.out / "dupes.json").read_text())
+        judgments = tranche.current_judgments(prs)
         tranche.atomic_json(self.out / "batches.json", tranche.merge_batches(
-            dupes, tranche.current_judgments(prs), prs, tranche.digest(dupes)))
+            dupes, judgments, prs, tranche.digest(dupes)))
+        tranche.atomic_json(self.out / "parked.json", tranche.parked_payload(
+            tranche.park_state(dupes, judgments, prs), prs, judgments, tranche.digest(dupes)))
         return prs
 
     def core(self):
@@ -192,7 +196,8 @@ class MCPTests(unittest.TestCase):
         prs = self.reports()
         self.pairs(prs, [(1, 2, "related_but_different", 0.8)])
         self.cluster()
-        (self.out / "batches.json").unlink()
+        (self.out / "batches.json").unlink(missing_ok=True)
+        (self.out / "parked.json").unlink(missing_ok=True)
         core = self.core()
         result = core.Reports().related(1)
         pair = result["items"][0]
@@ -339,7 +344,8 @@ class MCPTests(unittest.TestCase):
         records[0]["binding"] = "stale"
         tranche.JUDGMENTS_PATH.write_text("".join(json.dumps(r) + "\n" for r in records))
         self.cluster()
-        (self.out / "batches.json").unlink()
+        (self.out / "batches.json").unlink(missing_ok=True)
+        (self.out / "parked.json").unlink(missing_ok=True)
         result = core.Reports().query(text="#1")
         self.assertEqual(result["items"][0]["freshness"], "unjudged")
         self.assertIsNone(result["items"][0]["risk"])
@@ -350,7 +356,8 @@ class MCPTests(unittest.TestCase):
         record["binding"] = "stale"
         tranche.PAIRS_PATH.write_text(json.dumps(record) + "\n")
         self.cluster()
-        (self.out / "batches.json").unlink()
+        (self.out / "batches.json").unlink(missing_ok=True)
+        (self.out / "parked.json").unlink(missing_ok=True)
         self.assertEqual(core.Reports().related(1)["items"], [])
 
     def test_legacy_self_pairs_are_ignored_like_cli_policy(self):
@@ -369,6 +376,53 @@ class MCPTests(unittest.TestCase):
         self.reports()
         with self.assertRaises(core.ReportError):
             core.Reports().query(finished_form=10 ** 1000)
+
+    def test_park_serves_from_the_producer_predicate_and_refuses_drift(self):
+        prs = self.inputs([pr(1), pr(2, draft=True), pr(3)])
+        tranche.JUDGMENTS_PATH.write_text("".join(
+            json.dumps({"number": n, "answers": answers(),
+                        "binding": tranche.judgment_binding(prs[n])}) + "\n"
+            for n in sorted(prs)))
+        self.pairs(prs, [])
+        self.cluster()
+        dupes = json.loads((self.out / "dupes.json").read_text())
+        judgments = tranche.current_judgments(prs)
+        tranche.atomic_json(self.out / "batches.json", tranche.merge_batches(
+            dupes, judgments, prs, tranche.digest(dupes)))
+        tranche.atomic_json(self.out / "parked.json", tranche.parked_payload(
+            tranche.park_state(dupes, judgments, prs), prs, judgments, tranche.digest(dupes)))
+        core = self.core()
+        server = core.Reports()
+        surface = server.surface()
+        self.assertEqual(surface["queues"]["parked"]["members"], [2])
+        self.assertEqual(surface["parked"]["count"], 1)
+        self.assertEqual(surface["parked"]["members"], [2])
+        self.assertIn("parked", surface["filters"]["queues"])
+        result = server.query(queue="parked")
+        self.assertEqual(result["total"], 1)
+        self.assertEqual(result["items"][0]["number"], 2)
+        by_number = {row["number"]: row for row in server.query()["items"]}
+        self.assertEqual(by_number[2]["parked"], ["draft"])
+        self.assertEqual(by_number[1]["parked"], [])
+        # A parked.json that no longer matches the corpus refuses every read...
+        parked = json.loads((self.out / "parked.json").read_text())
+        parked["members"][0]["reasons"] = ["mutated"]
+        (self.out / "parked.json").write_text(json.dumps(parked))
+        with self.assertRaises(core.ReportError):
+            core.Reports().surface()
+        with self.assertRaises(core.ReportError):
+            core.Reports().query(queue="parked")
+        # ...and a batches run without its park record is incomplete evidence.
+        tranche.atomic_json(self.out / "parked.json", tranche.parked_payload(
+            tranche.park_state(dupes, judgments, prs), prs, judgments, tranche.digest(dupes)))
+        (self.out / "parked.json").unlink()
+        with self.assertRaises(core.ReportError):
+            core.Reports().surface()
+        # The park record participates in the served identity digests.
+        self.reports()
+        digests = self.core().Reports().digests()["digests"]
+        self.assertEqual(digests["parked.json"],
+                         tranche.digest(json.loads((self.out / "parked.json").read_text())))
 
     def test_surface_lists_filter_values_and_batch_overview(self):
         self.reports()

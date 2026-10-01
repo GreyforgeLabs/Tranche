@@ -94,11 +94,22 @@ class Reports:
         if batches is not None and tranche.digest(batches) != tranche.digest(tranche.merge_batches(
                 dupes, judgments, prs, expected["dupes.json"])):
             raise ReportError("batches.json is stale or modified; rerun batches")
-        self.batches = batches
+        # Issue #8: the park record is part of the same observation as the
+        # batches it gated. It must match the producer predicate byte for byte
+        # whenever batches parked PRs, and is otherwise refused as modified.
+        parked_path = tranche.OUT_DIR / "parked.json"
+        parked = json.loads(parked_path.read_text()) if parked_path.exists() else None
+        if parked is not None and tranche.digest(parked) != tranche.digest(tranche.parked_payload(
+                tranche.park_state(dupes, judgments, prs), prs, judgments, expected["dupes.json"])):
+            raise ReportError("parked.json is stale or modified; rerun batches")
+        if (batches or {}).get("parked_prs") and parked is None:
+            raise ReportError("batches.json parked PRs but parked.json is missing; rerun batches")
+        self.batches, self.parked = batches, parked
         self.summary, self.clusters, self.dupes = summary, clusters, dupes
         self.prs, self.judgments, self.pairs = prs, judgments, pairs
         self.identity = {"report_binding": summary["report_binding"],
                          "batches.json": tranche.digest(batches) if batches is not None else None,
+                         "parked.json": tranche.digest(parked) if parked is not None else None,
                          **summary["output_digests"]}
 
     def _envelope(self, **data):
@@ -111,6 +122,7 @@ class Reports:
         grouped = {n for group in self.dupes["confirmed_groups"] for n in group}
         grouped |= {n for group in self.dupes["review_groups"] for n in group["members"]}
         related = grouped | {n for pair in self.dupes["uncertain_pairs"] for n in (pair["a"], pair["b"])}
+        parked = {m["number"]: m["reasons"] for m in (self.parked or {}).get("members", [])}
         rows = []
         for number, pr in self.prs.items():
             judgment = self.judgments.get(number, {})
@@ -128,7 +140,8 @@ class Reports:
                        candidate=bool(judgment) and tranche.review_candidate(pr, judgment, grouped),
                        senior=tranche.escalated(judgment),
                        followup=finished is not None and finished <= 1 and number not in grouped,
-                       related=number in related)
+                       related=number in related,
+                       parked=list(parked.get(number, [])))
             rows.append(row)
         rows.sort(key=lambda row: (not row["security_priority"],
                                   row["risk"] if row["risk"] is not None else 99,
@@ -149,7 +162,7 @@ class Reports:
                 or security is not None and type(security) is not bool
                 or finished_form is not None and (type(finished_form) not in (int, float)
                     or not 0 <= finished_form <= 3 or not math.isfinite(finished_form))
-                or queue not in ("all", "security", "candidates", "senior", "followup", "related")
+                or queue not in ("all", "security", "candidates", "senior", "followup", "parked", "related")
                 or batch is not None and (not isinstance(batch, str) or
                     re.fullmatch(r"B[0-9]{3,6}", batch) is None)):
             raise ReportError("Invalid query arguments; limit 1..100, offset 0..100000")
@@ -170,9 +183,12 @@ class Reports:
                     or members is not None and row["number"] not in members
                     or queue != "all" and not row[{
                         "security": "security_priority", "candidates": "candidate",
-                        "senior": "senior", "followup": "followup", "related": "related"}[queue]]):
+                        "senior": "senior", "followup": "followup", "related": "related",
+                        "parked": "parked"}[queue]]):
                 continue
             rows.append(row)
+        if queue == "parked":  # issue #8: an empty reason array never parks.
+            rows = [row for row in rows if row["parked"]]
         end = offset + limit
         return self._envelope(items=rows[offset:end], total=len(rows), offset=offset,
                               next_offset=end if end < len(rows) else None)
@@ -249,18 +265,28 @@ class Reports:
         queues = {}
         for queue, field in {"all": None, "security": "security_priority",
                              "candidates": "candidate", "related": "related",
-                             "senior": "senior", "followup": "followup"}.items():
-            members = [row["number"] for row in rows if field is None or row[field]]
+                             "senior": "senior", "followup": "followup",
+                             "parked": "parked"}.items():
+            if queue == "parked":
+                members = [row["number"] for row in rows if row["parked"]]
+            else:
+                members = [row["number"] for row in rows if field is None or row[field]]
             queues[queue] = {"count": len(members), "members": members}
+        parked_members = queues["parked"]["members"]
+        parked_block = {"count": len(parked_members), "members": parked_members}
+        if self.parked is not None:
+            parked_block["unblock"] = {m["number"]: m["unblock"]
+                                       for m in self.parked.get("members", [])}
         # summary.json coverage is outside output_digests; derive it from inputs.
         coverage = {"prs_in_corpus": len(self.prs), "judged": len(self.judgments),
                     "unjudged": len(self.prs) - len(self.judgments)}
         return self._envelope(summary=coverage, batches_available=self.batches is not None,
                               category_counts=category_counts, queues=queues,
+                              parked=parked_block,
                               batches=overview, filters={
                                   "categories": ["security-review", *tranche.judge_questions()["category"]["criteria"], "unknown"],
                                   "risk_bands": ["low", "core", "danger", "unknown"],
-                                  "queues": ["security", "all", "candidates", "senior", "followup", "related"],
+                                  "queues": ["security", "all", "candidates", "senior", "followup", "parked", "related"],
                               })
 
 
@@ -306,7 +332,7 @@ def _tool_definitions():
             "batch": {"type": ["string", "null"], "pattern": batch_id["pattern"],
                       "default": None},
             "queue": {"type": "string", "default": "all", "enum":
-                      ["all", "security", "candidates", "senior", "followup", "related"]},
+                      ["all", "security", "candidates", "senior", "followup", "parked", "related"]},
             **pagination,
         },
         "pick": {"batch_id": batch_id},
