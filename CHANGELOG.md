@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.0](https://github.com/blackopsrepl/Tranche/compare/v0.2.2...v0.3.0) (2026-10-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **mcp:** requirements-mcp.txt is removed and mcp_server.py no longer
+imports mcp; install nothing to serve.
+
+### Features
+
+* **mcp:** serve standard MCP over stdio without the SDK ([ddc36ea](https://github.com/blackopsrepl/Tranche/commit/ddc36ea623b4a792ff5a3a0fed7413aa488eb945))
+
 ## [0.2.2](https://github.com/blackopsrepl/Tranche/compare/v0.2.1...v0.2.2) (2026-10-01)
 
 
