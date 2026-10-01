@@ -48,28 +48,33 @@ python3 tranche.py all --resume     # judge --resume + dupes + cluster + batches
 ## Read-only MCP access
 
 Agents can inspect the same local reports and retrieve batch reviewer prompts over
-stdio without a browser or copy/paste. The optional server uses the official MCP
-Python SDK, pinned in `requirements-mcp.txt`; the pipeline and offline core tests
-still need no third-party runtime dependency.
+stdio without a browser or copy/paste. The server implements the standard MCP
+stdio transport directly with the standard library: no SDK, no third-party runtime
+dependency, nothing to install or pin. `requirements-mcp.txt` is gone.
 
 ```bash
-python3 -m venv .venv-mcp
-.venv-mcp/bin/python -m pip install -r requirements-mcp.txt
-.venv-mcp/bin/python mcp_server.py --root /absolute/path/to/Tranche
+python3 mcp_server.py --root /absolute/path/to/Tranche
 ```
 
-Configure an MCP-capable client with an absolute interpreter and script path:
+Configure an MCP-capable client with an absolute script path and any Python 3.10+:
 
 ```json
 {
   "mcpServers": {
     "tranche": {
-      "command": "/absolute/path/to/Tranche/.venv-mcp/bin/python",
+      "command": "python3",
       "args": ["/absolute/path/to/Tranche/mcp_server.py", "--root", "/absolute/path/to/Tranche"]
     }
   }
 }
 ```
+
+Protocol: JSON-RPC 2.0 over newline-delimited stdio (`initialize`, `tools/list`,
+`tools/call`, `ping`), negotiating protocol versions 2024-11-05 through 2025-11-25.
+Tools advertise JSON Schema input schemas and the standard `readOnlyHint`,
+`destructiveHint`, `idempotentHint` and `openWorldHint` annotations. Unknown tools
+return protocol error -32602; invalid arguments and stale reports return tool results
+with `isError: true`, so a model can correct itself.
 
 The root defaults to the directory containing `tranche.py`, not the client's
 working directory. It must contain the captured PR snapshot (or legacy pages),
@@ -102,13 +107,14 @@ reports are refused. Repair inputs with the pipeline rather than bypassing this 
 Query and related results default to 25 items (maximum 100), with `next_offset` for
 pagination. Queries accept at most 512 text characters. Inputs are limited to
 128 MiB per file, 256 MiB total and at most 512 paths; response JSON text to 1 MiB.
-Arguments reject coercion, unexpected fields and invalid
-ranges. The client launches the server process; protocol stdout stays free of banners.
+Arguments reject coercion, unexpected fields and invalid ranges. The client launches
+the server process; protocol stdout stays free of banners.
 
-For an explicit real SDK/client subprocess check against the unchanged local corpus:
+For an explicit real-client subprocess check against the unchanged local corpus
+(the MCP package is blocked inside the server process, proving it is not borrowed):
 
 ```bash
-make mcp-check MCP_PYTHON=.venv-mcp/bin/python
+make mcp-check MCP_PYTHON=/path/to/python-with-mcp-sdk
 ```
 
 This opt-in check discovers all tools, reads a real batch/prompt, rejects malformed
