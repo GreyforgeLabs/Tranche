@@ -46,7 +46,7 @@ python3 tranche.py judge            # Jev pass over all PRs  (~7 questions, one 
 python3 tranche.py judge --resume   # reuse only matching input/question/model bindings
 python3 tranche.py dupes            # compare candidate pairs using shortened descriptions
 python3 tranche.py cluster          # build out/{clusters.json,dupes.json,tranches.md,summary.json}
-python3 tranche.py batches          # classify candidates into out/batches.json + report batch plan
+python3 tranche.py batches          # batch candidates into out/batches.json, park the rest (issue #8)
 python3 tranche.py all --resume     # judge --resume + dupes + cluster + batches
 ```
 
@@ -114,7 +114,7 @@ regenerates reports, calls Jev, claims work, or writes to GitHub.
 
 | Tool | Contract |
 | --- | --- |
-| `surface()` | Computed corpus coverage, category counts, priority queue membership, batch ordinals and available filters. |
+| `surface()` | Computed corpus coverage, category counts, priority queue membership, batch ordinals, parked state with unblock paths and available filters. |
 | `query(...)` | Text, category, risk band, security, exact finished-form score, batch and queue filters; security-first ordering; bounded pagination. |
 | `pick(batch_id)` | The batch and member source/head bindings, with the exact workbench `review_prompt`. |
 | `next_prompt(after)` | The next ordinal after an integer or batch ID; omitted cursor starts at the first batch. Exhaustion returns `batch: null`. Stateless: no reservation or completed-work tracking. |

@@ -66,6 +66,9 @@ membership digest + exact head revisions (the #9 packet contract), never to an o
 
 ## Effect on the current corpus
 
-533 batches (520 full), 2,650 PRs packed, 184 held — every batch park-free by
-construction. Batch count shifts are the documented cost of every refresh; the change
-makes every future batch mean exactly what its prompt says.
+Shipped in v0.5.0: 533 batches (520 full), 2,650 PRs packed, **192 parked** — 104
+drafts, 96 without finished form, and 19 members of 9 same_change groups holding
+whole for a parked member. 36 parked PRs are security-flagged and stay in the
+security meta-category. Every batch park-free by construction. Batch count shifts
+are the documented cost of every refresh; the change makes every future batch mean
+exactly what its prompt says.
