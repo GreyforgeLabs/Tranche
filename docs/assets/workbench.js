@@ -43,8 +43,14 @@
   }
   // Issue #3: security is the top-priority meta-category; its queue leads the nav.
   // Batch membership is browsed through the Batches view, not a queue.
-  const queues = {security: 'security_priority', all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', related: 'related'};
-  const queueMatch = (pr, field) => !field || pr[field];
+  // Issue #8: parked is a queue whose field is a reason array, so queue
+  // membership is non-emptiness — an empty array must never match.
+  const queues = {security: 'security_priority', all: null, candidates: 'candidate', senior: 'senior', followup: 'followup', parked: 'parked', related: 'related'};
+  const queueMatch = (pr, field) => {
+    if (!field) return true;
+    const value = pr[field];
+    return Array.isArray(value) ? value.length > 0 : Boolean(value);
+  };
   const PAGE_SIZE = 30;
   function select(rows, state = {}, indexes) {
     const field = queues[state.queue || 'all'];
@@ -104,6 +110,7 @@
     const data = JSON.parse(dataElement.textContent);
     const rows = data.prs;
     const byNumber = new Map(rows.map(pr => [pr.number, pr]));
+    const parkedByNumber = new Map(((data.parked || {}).members || []).map(m => [m.number, m]));
     const indexes = new Map(rows.map(pr => [pr.number, index(pr)]));
     const batchById = new Map((data.batches || []).map(batch => [batch.id, batch]));
     const categories = ['all', ...Object.keys(data.categories)];
@@ -233,6 +240,17 @@
         content.append(list);
         content.append(node('p', 'Model-suggested batching for the final cumulative PRs; ordering is not a merge approval.', 'small'));
       }
+      const parkedEntry = parkedByNumber.get(pr.number);
+      if (parkedEntry) {
+        content.append(node('h3', 'Parked before batching'));
+        const list = node('ul', undefined, 'diagnostics');
+        const item = node('li', undefined, 'pair-diagnostic');
+        item.append(node('span', parkedEntry.reasons.map(reason => reason.replaceAll('_', ' ')).join(' · '), 'batch-name'));
+        item.append(node('p', parkedEntry.unblock, 'small'));
+        list.append(item);
+        content.append(list);
+        content.append(node('p', 'A hold with a named unblock path, never a close: the PR re-enters batches automatically when the reason clears. Park does not remove a security-flagged PR from the security queue; closing stays a maintainer decision.', 'small'));
+      }
       relationships(pr, content);
     }
     function copyPrompt(batchId) {
@@ -320,6 +338,7 @@
             meta.append(node('span', `${batch.id} · batch of ${batch.count}`, 'tag batch'));
           }
           if (pr.freshness !== 'current') meta.append(node('span', pr.freshness === 'unbound' ? 'Unbound evidence' : 'Unjudged / stale', 'tag'));
+          if ((pr.parked || []).length) meta.append(node('span', 'Parked', 'tag parked'));
           const info = node('span', undefined, 'pr-info'); info.append(heading, meta);
           const risk = node('span', metric(pr.risk, 4), `risk ${pr.risk == null ? 'unknown' : pr.risk >= 3 ? 'high' : 'known'}`);
           risk.setAttribute('aria-label', `Model risk ${metric(pr.risk, 4)}`);

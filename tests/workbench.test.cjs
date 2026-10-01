@@ -128,6 +128,18 @@ test('queues and categories filter independently; page totals include all result
   assert.deepEqual(empty.items, []);
 });
 
+test('parked queue matches non-empty reason arrays only (issue 8)', () => {
+  const rows = [
+    {number: 1, parked: ['draft'], title: 'Draft fix', body: '', author: 'river', category: 'fix-misc'},
+    {number: 2, parked: [], title: 'Clean fix', body: '', author: 'river', category: 'fix-misc'},
+    {number: 3, title: 'No field', body: '', author: 'river', category: 'fix-misc'},
+    {number: 4, parked: ['same_change_hold'], title: 'Held', body: '', author: 'river', category: 'fix-misc'},
+  ];
+  assert.equal(api.select(rows, {queue: 'parked'}).total, 2);
+  assert.deepEqual(api.select(rows, {queue: 'parked'}).items.map(pr => pr.number), [1, 4]);
+  assert.equal(api.select(rows, {queue: 'all'}).total, 4, 'empty array and missing field never park');
+});
+
 test('security meta-category queue selects only flagged PRs; sorts stay unbiased', () => {
   const rows = [
     {number: 1, created: '2026-01-01', risk: 0, security: 0.2, security_priority: false},

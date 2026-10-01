@@ -34,6 +34,19 @@ if batches_path.exists():
     if (batches.get("format_version") != 3 or batches.get("repo") != tranche.REPO
             or batches.get("dupes_digest") != summary["output_digests"]["dupes.json"]):
         raise tranche.TrancheFatal("batches.json is stale or foreign; rerun 'tranche.py batches' before rendering")
+# Issue #8: the park record renders beside the batches it gated. A batches
+# run that parked PRs without its park record - or against a mutated one -
+# must never render, same discipline as gen_page's other bound inputs.
+parked = None
+parked_path = OUT / "parked.json"
+if parked_path.exists():
+    parked = json.loads(parked_path.read_text())
+    expected_parked = tranche.parked_payload(
+        tranche.park_state(dupes, judgments, prs), prs, judgments, summary["output_digests"]["dupes.json"])
+    if parked != expected_parked:
+        raise tranche.TrancheFatal("parked.json is stale, foreign or modified; rerun 'tranche.py batches' before rendering")
+if (batches or {}).get("parked_prs") and parked is None:
+    raise tranche.TrancheFatal("batches.json parked PRs but parked.json is missing; rerun 'tranche.py batches'")
 batch_of = {}
 for batch in (batches or {}).get("batches", []):
     tag = {"id": batch["id"], "count": batch["count"]}
@@ -59,6 +72,7 @@ CAT_LABELS = {
 # Eligibility stays in the CLI policy; this renderer never reclassifies a judgment.
 in_dupe = {n for g in dupes["confirmed_groups"] for n in g} | {n for g in dupes["review_groups"] for n in g["members"]}
 related = in_dupe | {n for pair in dupes["uncertain_pairs"] for n in (pair["a"], pair["b"])}
+parked_by_number = {m["number"]: m for m in (parked or {}).get("members", [])}
 rows = []
 for n, pr in sorted(prs.items()):
     judgment = judgments.get(n, {})
@@ -81,12 +95,14 @@ for n, pr in sorted(prs.items()):
         "senior": tranche.escalated(judgment),
         "followup": finished is not None and finished <= 1 and n not in in_dupe,
         "related": n in related,
+        "parked": parked_by_number.get(n, {}).get("reasons", []),
         "batches": batch_of.get(n, []),
     })
 # JSON remains data, never HTML: escape HTML delimiters and JS separators.
 payload = json.dumps({"prs": rows, "categories": CAT_LABELS, "groups": dupes,
                       "batches": merge_batches,
-                      "batches_available": batches is not None},
+                      "batches_available": batches is not None,
+                      "parked": parked},
                      ensure_ascii=True, allow_nan=False, separators=(",", ":"))
 payload = payload.replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
 options = ''.join(f'<option value="{cat}">{html.escape(label)}</option>' for cat, label in CAT_LABELS.items())
@@ -124,6 +140,7 @@ page = f"""<!doctype html>
 <button type="button" data-queue="candidates" aria-pressed="false">Review candidates <span></span></button>
 <button type="button" data-queue="senior" aria-pressed="false">Senior review <span></span></button>
 <button type="button" data-queue="followup" aria-pressed="false">Author follow-up <span></span></button>
+<button type="button" data-queue="parked" aria-pressed="false">Parked <span></span></button>
 <button type="button" data-queue="related" aria-pressed="false">Related PRs <span></span></button>
 <button type="button" id="batches-view" aria-pressed="false">Batches <span></span></button>
 </nav>

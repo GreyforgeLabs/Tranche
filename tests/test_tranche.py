@@ -926,6 +926,34 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("Parked before batching", markdown)
         self.assertIn("unjudged_or_stale", markdown)
 
+    def test_render_embeds_park_record_and_refuses_stale_park_file(self):
+        prs, _ = self.park_setup()
+        tranche.cmd_batches(argparse.Namespace())
+        result = self.render()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        page = (self.root / "docs" / "index.html").read_text()
+        payload = json.loads(re.search(
+            r'<script id="workbench-data" type="application/json">(.*?)</script>',
+            page, re.S).group(1))
+        self.assertEqual(payload["parked"]["parked"], 3)
+        self.assertEqual(sorted(m["number"] for m in payload["parked"]["members"]), [7, 8, 9])
+        by_number = {row["number"]: row for row in payload["prs"]}
+        self.assertEqual(by_number[7]["parked"], ["draft"])
+        self.assertEqual(by_number[8]["parked"], ["finished_form"])
+        self.assertEqual(by_number[9]["parked"], ["unjudged_or_stale"])
+        self.assertEqual(by_number[1]["parked"], [])
+        self.assertIn('data-queue="parked"', page)
+        self.assertIn("Parked", page)
+        # A batches run that parked PRs must never render without its park record...
+        (self.out / "parked.json").unlink()
+        self.assertNotEqual(self.render().returncode, 0)
+        # ...nor with a park record that no longer matches the corpus and dupes run.
+        tranche.cmd_batches(argparse.Namespace())
+        parked = json.loads((self.out / "parked.json").read_text())
+        parked["members"][0]["reasons"] = ["mutated"]
+        (self.out / "parked.json").write_text(json.dumps(parked))
+        self.assertNotEqual(self.render().returncode, 0)
+
     def test_batches_refuse_outputs_that_drifted_from_the_summary(self):
         self.merge_setup()
         tranche.cmd_batches(argparse.Namespace())
