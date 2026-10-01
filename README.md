@@ -306,6 +306,11 @@ python3 -m unittest discover -s tests -v  # or make test
 Tests use synthetic inputs and mocked transports/model responses. They make no
 network calls, require no credentials and do not modify the published reports.
 
+The [proposed portable evidence packet](docs/EVIDENCE_PACKET.md) for issue #9
+includes offline conformance cases and synthetic partial/resume/drift fixtures.
+It is a draft contract for future native CLI, workbench and MCP evidence access;
+capture commands are not implemented by this proposal.
+
 ## Versioned releases
 
 Release tooling requires Node and `commit-and-tag-version` (install with
