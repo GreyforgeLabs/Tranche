@@ -264,6 +264,59 @@ class MCPTests(unittest.TestCase):
         self.assertEqual(unknown["error"]["code"], -32602)
         self.assertEqual(core.dispatch({"jsonrpc": "2.0", "method": "notifications/initialized"}), None)
 
+    def test_every_tool_enforces_its_advertised_schema(self):
+        """The advertised inputSchema is the contract, and the server enforces it.
+
+        A client that skips its own validation must get the same refusal as one
+        that does it, described in plain terms — never a Python call-signature
+        error leaking class and method names.
+        """
+        self.reports()
+        core = self.core()
+        valid = {"surface": {}, "query": {}, "pick": {"batch_id": "B001"},
+                 "next_prompt": {}, "related": {"number": 1}, "digests": {}}
+        internals = ("Traceback", "unexpected keyword argument", "positional argument",
+                     "Reports", "mcp_server", "self.", "TypeError")
+        for tool in core.TOOLS:
+            name, schema = tool["name"], tool["inputSchema"]
+            cases = [("additional property", {**valid[name], "__nope__": 1})]
+            if schema["required"]:
+                cases.append(("missing required property", {}))
+            for prop, spec in schema["properties"].items():
+                if prop in schema.get("required", []) or prop in valid[name]:
+                    continue
+                if "enum" in spec:
+                    cases.append((f"{prop} outside enum", {**valid[name], prop: "__not_in_enum__"}))
+                elif "minimum" in spec:
+                    cases.append((f"{prop} below minimum", {**valid[name], prop: spec["minimum"] - 1}))
+                elif spec.get("type") in ("integer", "number"):
+                    cases.append((f"{prop} not numeric", {**valid[name], prop: "not-a-number"}))
+                elif spec.get("type") == "boolean":
+                    cases.append((f"{prop} not boolean", {**valid[name], prop: "yes"}))
+            for label, arguments in cases:
+                with self.subTest(tool=name, case=label):
+                    response = core.dispatch({"jsonrpc": "2.0", "id": 1, "method": "tools/call",
+                                              "params": {"name": name, "arguments": arguments}})
+                    result = response["result"]
+                    self.assertTrue(result["isError"], f"{name}: accepted {label}")
+                    message = result["content"][0]["text"]
+                    for leak in internals:
+                        self.assertNotIn(leak, message, f"{name}: leaked internals for {label}: {message}")
+            accepted = core.dispatch({"jsonrpc": "2.0", "id": 2, "method": "tools/call",
+                                      "params": {"name": name, "arguments": valid[name]}})["result"]
+            self.assertFalse(accepted["isError"], f"{name}: rejected valid arguments")
+
+    def test_schema_types_reject_booleans_where_numbers_are_advertised(self):
+        """JSON booleans are not JSON numbers, however Python's isinstance sees them."""
+        self.reports()
+        core = self.core()
+        for name, arguments in (("query", {"limit": True}), ("query", {"offset": False}),
+                                ("related", {"number": True}), ("query", {"finished_form": True})):
+            with self.subTest(tool=name, arguments=arguments):
+                result = core.dispatch({"jsonrpc": "2.0", "id": 1, "method": "tools/call",
+                                        "params": {"name": name, "arguments": arguments}})["result"]
+                self.assertTrue(result["isError"], f"{name}: accepted {arguments}")
+
     def test_modified_batch_types_and_response_size_are_refused(self):
         from unittest.mock import patch
         self.reports()
