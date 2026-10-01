@@ -1,3 +1,7 @@
 data/pages/
 *.log
 __pycache__/
+
+# Vendored agent-harness skill trees; Tranche does not read them.
+.claude/
+skills-lock.json
