@@ -1,6 +1,7 @@
 """Offline MCP core tests; importing the core never requires the SDK."""
 import importlib.util
 import json
+from pathlib import Path
 import unittest
 
 import tranche
@@ -214,9 +215,39 @@ class MCPTests(unittest.TestCase):
                   "import mcp_server; mcp_server.main([])")
         result = subprocess.run([sys.executable, "-c", script], capture_output=True,
                                 text=True, timeout=10)
-        self.assertEqual(result.returncode, 2)
+        # A hand-rolled server must run with no MCP SDK at all: an empty stdin
+        # just ends the stream.
+        self.assertEqual(result.returncode, 0)
         self.assertEqual(result.stdout, "")
-        self.assertIn("requirements-mcp.txt", result.stderr)
+
+    def test_protocol_surface_is_standard_sdk_free_mcp(self):
+        import subprocess
+        import sys
+        core = self.core()
+        script = ("import builtins; original=builtins.__import__; "
+                  "builtins.__import__=lambda name,*a,**k: "
+                  "(_ for _ in ()).throw(ModuleNotFoundError(name)) "
+                  "if name == 'mcp' or name.startswith('mcp.') else original(name,*a,**k); "
+                  "import json, sys; sys.path.insert(0, sys.argv[1]); "
+                  "import mcp_server; print(json.dumps(mcp_server.TOOLS))")
+        listing = json.loads(subprocess.run(
+            [sys.executable, "-c", script, str(Path(core.__file__).parent)],
+            capture_output=True, text=True, timeout=10).stdout)
+        self.assertEqual({tool["name"] for tool in listing},
+                         {"surface", "query", "pick", "next_prompt", "related", "digests"})
+        for tool in listing:
+            # The standard camelCase annotation names; a client reading the spec
+            # must find them without any SDK-specific translation.
+            self.assertEqual(tool["annotations"], {"readOnlyHint": True, "destructiveHint": False,
+                                                   "idempotentHint": True, "openWorldHint": False})
+            self.assertEqual(tool["inputSchema"]["additionalProperties"], False)
+            self.assertEqual(tool["inputSchema"]["type"], "object")
+        self.assertEqual(core.dispatch({"jsonrpc": "2.0", "id": 1, "method": "tools/list"})["result"]["tools"],
+                         listing)
+        unknown = core.dispatch({"jsonrpc": "2.0", "id": 2, "method": "tools/call",
+                                 "params": {"name": "nope", "arguments": {}}})
+        self.assertEqual(unknown["error"]["code"], -32602)
+        self.assertEqual(core.dispatch({"jsonrpc": "2.0", "method": "notifications/initialized"}), None)
 
     def test_modified_batch_types_and_response_size_are_refused(self):
         from unittest.mock import patch

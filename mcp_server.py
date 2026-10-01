@@ -265,35 +265,20 @@ class Reports:
                               })
 
 
-def main(argv=None):
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--root", type=Path, default=tranche.ROOT,
-                        help="Local Tranche report root (data/pages and out); no acquisition")
-    args = parser.parse_args(argv)
+PROTOCOL_VERSIONS = ("2025-11-25", "2025-06-18", "2025-03-26", "2024-11-05")
+PROTOCOL_VERSION = PROTOCOL_VERSIONS[0]
+
+
+def _version():
+    """Repository VERSION when present, so serverInfo tracks the checkout."""
     try:
-        from mcp.server.fastmcp import FastMCP
-    except ImportError:
-        print("Optional MCP SDK missing or incompatible; install requirements-mcp.txt "
-              "in your environment before starting this server.", file=sys.stderr)
-        raise SystemExit(2) from None
-    root = args.root.resolve()
-    tranche.ROOT = root
-    tranche.PAGES_DIR = root / "data" / "pages"
-    tranche.OUT_DIR = root / "out"
-    tranche.JUDGMENTS_PATH = tranche.OUT_DIR / "judgments.jsonl"
-    tranche.PAIRS_PATH = tranche.OUT_DIR / "pair_verdicts.jsonl"
-    from functools import wraps
-    from typing import Annotated, Literal
-    from pydantic import Field, create_model
-    from mcp.types import ToolAnnotations
-    from mcp.server.fastmcp.utilities.func_metadata import FuncMetadata
+        return (Path(__file__).resolve().parent / "VERSION").read_text().strip() or "0"
+    except OSError:
+        return "0"
 
-    class StrictMetadata(FuncMetadata):
-        def pre_parse_json(self, data):
-            # MCP arguments are already JSON; never silently reinterpret strings.
-            return data
 
-    server = FastMCP("Tranche", instructions=DISCLAIMER)
+def _tool_definitions():
+    """Standard MCP tool definitions: JSON Schema in, `readOnlyHint` annotations out."""
     descriptions = {
         "surface": "Inspect bound report coverage; model suggestions, never merge approval.",
         "query": "Security-first PR search. Exact filters, finished_form score; offset/limit pagination.",
@@ -302,56 +287,131 @@ def main(argv=None):
         "related": "Inspect model relationship evidence, conflicts and missing pairs; no survivor selected.",
         "digests": "Read current report binding, output checksums and before/after checked input byte digests.",
     }
+    pagination = {
+        "offset": {"type": "integer", "minimum": 0, "maximum": 100000, "default": 0},
+        "limit": {"type": "integer", "minimum": 1, "maximum": 100, "default": 25},
+    }
+    batch_id = {"type": "string", "pattern": r"^B[0-9]{3,6}$"}
+    properties = {
+        "surface": {},
+        "query": {
+            "text": {"type": "string", "maxLength": 512, "default": ""},
+            "category": {"type": ["string", "null"], "default": None,
+                         "enum": [*tranche.judge_questions()["category"]["criteria"],
+                                  "security-review", "unknown", None]},
+            "risk_band": {"type": ["string", "null"], "default": None,
+                          "enum": ["low", "core", "danger", "unknown", None]},
+            "security": {"type": ["boolean", "null"], "default": None},
+            "finished_form": {"type": ["number", "null"], "minimum": 0,
+                              "maximum": 3, "default": None},
+            "batch": {"type": ["string", "null"], "pattern": batch_id["pattern"],
+                      "default": None},
+            "queue": {"type": "string", "default": "all", "enum":
+                      ["all", "security", "candidates", "senior", "followup", "related"]},
+            **pagination,
+        },
+        "pick": {"batch_id": batch_id},
+        "next_prompt": {"after": {"anyOf": [
+            {"type": "integer", "minimum": 0}, batch_id, {"type": "null"}],
+            "default": None}},
+        "related": {"number": {"type": "integer", "minimum": 1}, **pagination},
+        "digests": {},
+    }
+    required = {"pick": ["batch_id"], "related": ["number"]}
+    return [{
+        "name": name,
+        "description": description,
+        "inputSchema": {"type": "object", "properties": properties[name],
+                        "additionalProperties": False, "required": required.get(name, [])},
+        "annotations": {"readOnlyHint": True, "destructiveHint": False,
+                        "idempotentHint": True, "openWorldHint": False},
+    } for name, description in descriptions.items()]
 
-    def register(name):
-        method = getattr(Reports(), name)
 
-        @wraps(method)
-        def call(**kwargs):
-            # Returning text preserves the already measured serialization.
-            return result_text(getattr(Reports(), name)(**kwargs))
+TOOLS = _tool_definitions()
+TOOL_NAMES = {tool["name"] for tool in TOOLS}
 
-        server.tool(name=name, description=descriptions[name], annotations=ToolAnnotations(
-            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False),
-            structured_output=False)(call)
-        # SDK 1.30.0 defaults to coercion/ignored extras. Own both the strict
-        # runtime model and advertised schema so discovery tells the truth.
-        tool = server._tool_manager.get_tool(name)
-        base = tool.fn_metadata.arg_model
-        base.model_config.update(strict=True, extra="forbid")
-        fields = {}
-        for key, info in base.model_fields.items():
-            annotation, constraints = info.annotation, {}
-            if key == "limit":
-                constraints = {"ge": 1, "le": 100}
-            elif key == "offset":
-                constraints = {"ge": 0, "le": 100000}
-            elif key == "number":
-                constraints = {"ge": 1}
-            elif key == "text":
-                constraints = {"max_length": 512}
-            elif key in ("batch", "batch_id"):
-                constraints = {"pattern": r"^B[0-9]{3,6}$"}
-            elif key == "finished_form":
-                constraints = {"ge": 0, "le": 3, "allow_inf_nan": False}
-            elif key == "after":
-                annotation = (Annotated[int, Field(ge=0)] |
-                              Annotated[str, Field(pattern=r"^B[0-9]{3,6}$")] | None)
-            elif key == "category":
-                annotation = Literal[tuple([*tranche.judge_questions()["category"]["criteria"],
-                                            "security-review", "unknown"])] | None
-            elif key == "risk_band":
-                annotation = Literal["low", "core", "danger", "unknown"] | None
-            elif key == "queue":
-                annotation = Literal["all", "security", "candidates", "senior", "followup", "related"]
-            fields[key] = (annotation, Field(default=info.default, **constraints))
-        model = create_model(f"{name}Arguments", __base__=base, **fields)
-        tool.fn_metadata = StrictMetadata(arg_model=model)
-        tool.parameters = model.model_json_schema()
 
-    for name in descriptions:
-        register(name)
-    server.run(transport="stdio")
+def error_response(code, message, request_id):
+    return {"jsonrpc": "2.0", "id": request_id, "error": {"code": code, "message": message}}
+
+
+def call_tool(name, arguments):
+    """Invoke one tool; the reports' own validators are the argument contract."""
+    if name not in TOOL_NAMES:
+        raise ReportError(f"Unknown tool: {name}")
+    if not isinstance(arguments, dict):
+        raise ReportError("Tool arguments must be an object")
+    return result_text(getattr(Reports(), name)(**arguments))
+
+
+def dispatch(message):
+    """Handle one JSON-RPC message. Returns the response, or None for a notification."""
+    if not isinstance(message, dict) or message.get("jsonrpc") != "2.0":
+        return error_response(-32600, "Invalid Request", message.get("id") if isinstance(message, dict) else None)
+    method = message.get("method")
+    request_id = message.get("id")
+    if not isinstance(method, str):
+        return error_response(-32600, "Invalid Request", request_id)
+    if request_id is None:  # notification: no reply, whatever the method
+        return None
+    if method == "initialize":
+        requested = (message.get("params") or {}).get("protocolVersion")
+        version = requested if requested in PROTOCOL_VERSIONS else PROTOCOL_VERSION
+        return {"jsonrpc": "2.0", "id": request_id, "result": {
+            "protocolVersion": version,
+            "capabilities": {"tools": {"listChanged": False}},
+            "serverInfo": {"name": "tranche", "version": _version()},
+            "instructions": DISCLAIMER}}
+    if method == "ping":
+        return {"jsonrpc": "2.0", "id": request_id, "result": {}}
+    if method == "tools/list":
+        return {"jsonrpc": "2.0", "id": request_id, "result": {"tools": TOOLS}}
+    if method == "tools/call":
+        params = message.get("params") or {}
+        if params.get("name") not in TOOL_NAMES:
+            # Unknown tools are protocol errors, not tool execution errors.
+            return error_response(-32602, f"Unknown tool: {params.get('name')}", request_id)
+        try:
+            text = call_tool(params.get("name"), params.get("arguments") or {})
+        except Exception as exc:  # argument/execution errors travel as isError, per the spec
+            return {"jsonrpc": "2.0", "id": request_id, "result": {
+                "content": [{"type": "text", "text": str(exc)}], "isError": True}}
+        return {"jsonrpc": "2.0", "id": request_id, "result": {
+            "content": [{"type": "text", "text": text}], "isError": False}}
+    return error_response(-32601, f"Method not found: {method}", request_id)
+
+
+def serve(stdin=None, stdout=None):
+    """Newline-delimited JSON-RPC over stdio; the standard MCP stdio transport."""
+    stdin = stdin or sys.stdin
+    stdout = stdout or sys.stdout
+    for line in stdin:
+        if not line.strip():
+            continue
+        try:
+            message = json.loads(line)
+        except ValueError:
+            response = error_response(-32700, "Parse error", None)
+        else:
+            response = dispatch(message)
+        if response is not None:
+            stdout.write(json.dumps(response, ensure_ascii=False, allow_nan=False) + "\n")
+            stdout.flush()
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path, default=tranche.ROOT,
+                        help="Local Tranche report root (data/pages and out); no acquisition")
+    args = parser.parse_args(argv)
+    root = args.root.resolve()
+    tranche.ROOT = root
+    tranche.PAGES_DIR = root / "data" / "pages"
+    tranche.OUT_DIR = root / "out"
+    tranche.JUDGMENTS_PATH = tranche.OUT_DIR / "judgments.jsonl"
+    tranche.PAIRS_PATH = tranche.OUT_DIR / "pair_verdicts.jsonl"
+    serve()
 
 
 if __name__ == "__main__":

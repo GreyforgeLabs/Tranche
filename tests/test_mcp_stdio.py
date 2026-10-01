@@ -1,5 +1,6 @@
 """Opt-in real SDK/client test: TRANCHE_MCP_INTEGRATION=1 python -m unittest tests.test_mcp_stdio."""
 import asyncio
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -15,18 +16,23 @@ import tranche
 class StdioTests(unittest.TestCase):
     def test_sdk_preserves_bounded_text_at_serialization_boundary(self):
         from unittest.mock import patch
-        from mcp.server.fastmcp.utilities.func_metadata import func_metadata
         import mcp_server
 
-        metadata = func_metadata(lambda: None, structured_output=False)
         payload = {"items": [[0] for _ in range(120000)]}
-        # Negative control: letting the SDK format a dict breaches the cap.
-        expanded = metadata.convert_result(payload)[0].text
+        # Negative control: pretty-printing the payload breaches the cap.
+        expanded = json.dumps(payload, indent=2)
         self.assertGreater(len(expanded.encode()), mcp_server.MAX_RESULT_BYTES)
         text = mcp_server.result_text(payload)
-        transmitted = metadata.convert_result(text)[0].text
+        request = {"jsonrpc": "2.0", "id": 1, "method": "tools/call",
+                   "params": {"name": "surface", "arguments": {}}}
+        with patch.object(mcp_server.Reports, "surface", return_value=payload):
+            response = mcp_server.dispatch(request)
+        self.assertFalse(response["result"]["isError"])
+        transmitted = response["result"]["content"][0]["text"]
         self.assertEqual(transmitted, text)
         self.assertLessEqual(len(transmitted.encode()), mcp_server.MAX_RESULT_BYTES)
+        self.assertLessEqual(len(json.dumps(response).encode()),
+                             mcp_server.MAX_RESULT_BYTES + 1024)
         with patch.object(mcp_server, "MAX_RESULT_BYTES", len(text.encode())):
             self.assertEqual(mcp_server.result_text(payload), text)
         with patch.object(mcp_server, "MAX_RESULT_BYTES", len(text.encode()) - 1):
@@ -38,15 +44,35 @@ class StdioTests(unittest.TestCase):
         from mcp import ClientSession, StdioServerParameters
         from mcp.client.stdio import stdio_client
 
+        # The server is SDK-free: the MCP package is blocked in its process, so
+        # nothing can be passing because the server borrowed the client's SDK.
+        bootstrap = (
+            "import builtins, runpy, sys\n"
+            "blocked = 'mcp'\n"
+            "original = builtins.__import__\n"
+            "def guard(name, *args, **kwargs):\n"
+            "    if name == blocked or name.startswith(blocked + '.'):\n"
+            "        raise ModuleNotFoundError(name)\n"
+            "    return original(name, *args, **kwargs)\n"
+            "builtins.__import__ = guard\n"
+            "sys.argv = [sys.argv[1], *sys.argv[2:]]\n"
+            "runpy.run_path(sys.argv[0], run_name='__main__')\n")
+        self.assertIsNotNone(importlib.util.find_spec("mcp"),
+                             "The client SDK must be installed to prove the server ignores it")
+
         root = Path(tranche.__file__).parent
         expected = json.loads((root / "out" / "batches.json").read_text())["batches"][0]
         # Exercise the actual local observation unchanged. Historical cache rows
         # excluded by the producer must not require a separate cleaned data copy.
         observed = root
 
+        def params_for(target):
+            return StdioServerParameters(
+                command=sys.executable,
+                args=["-c", bootstrap, str(root / "mcp_server.py"), "--root", str(target)])
+
         async def exercise():
-            params = StdioServerParameters(command=sys.executable,
-                args=[str(root / "mcp_server.py"), "--root", str(observed)])
+            params = params_for(observed)
             async with stdio_client(params) as (read, write):
                 async with ClientSession(read, write) as session:
                     await session.initialize()
@@ -87,8 +113,7 @@ class StdioTests(unittest.TestCase):
                 shutil.copytree(observed / "out", copy / "out", ignore=shutil.ignore_patterns("*.md"))
                 (copy / "data" / "pages").mkdir(parents=True)
                 shutil.copy(root / "data" / "pages" / "snapshot.json", copy / "data" / "pages")
-                params = StdioServerParameters(command=sys.executable,
-                    args=[str(root / "mcp_server.py"), "--root", str(copy)])
+                params = params_for(copy)
                 async with stdio_client(params) as (read, write):
                     async with ClientSession(read, write) as session:
                         await session.initialize()
