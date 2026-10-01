@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.3.4](https://github.com/blackopsrepl/Tranche/compare/v0.3.3...v0.3.4) (2026-10-01)
+
+
+### Bug Fixes
+
+* **refs:** read repository-qualified body references as pair candidates ([de8df19](https://github.com/blackopsrepl/Tranche/commit/de8df196b2120d1bb3988813e6e2dca77b63ae62))
+
 ## [0.3.3](https://github.com/blackopsrepl/Tranche/compare/v0.3.2...v0.3.3) (2026-10-01)
 
 
