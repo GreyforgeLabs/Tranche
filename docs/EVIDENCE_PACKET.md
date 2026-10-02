@@ -10,7 +10,7 @@ maintained here and shipped as Tranche, with the CLI, workbench and read-only MC
 sharing the same evidence.
 
 Users will be able to complete that workflow in Tranche without another
-application. External tools, including Trio, may optionally consume exported
+application. External tools may optionally consume exported
 packets.
 
 This PR covers the proposed contract, offline executable specification and

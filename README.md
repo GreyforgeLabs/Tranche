@@ -319,7 +319,7 @@ source material, inspect citations, resume a partial capture and export a packet
 The capture implementation, native state and packet format will be maintained
 in this repository and shipped as Tranche, with the CLI, workbench and MCP
 sharing the same evidence. Users will be able to complete the workflow in Tranche
-without another application; external tools, including Trio, may consume exports.
+without another application; external tools may consume exports.
 This PR covers the contract and fixtures. The native implementation will follow
 in a separate PR here; the full evidence workflow is not shipped yet.
 
