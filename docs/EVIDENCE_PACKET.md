@@ -2,9 +2,20 @@
 
 Draft for [issue #9](https://github.com/blackopsrepl/Tranche/issues/9), following
 [Vittorio's requested first contribution](https://github.com/blackopsrepl/Tranche/issues/9#issuecomment-5929341489).
-This proposes one format for a future native evidence CLI, the static workbench,
-and read-only MCP. It adds an offline executable specification and synthetic
-fixtures; it does not add capture commands or change those existing interfaces.
+This proposes the packet format for the native Tranche evidence workflow being
+built in this repository. Tranche will let users select a batch, capture its
+source material, inspect citations, resume a partial capture and export the
+packet. The capture implementation, native state and packet format will be
+maintained here and shipped as Tranche, with the CLI, workbench and read-only MCP
+sharing the same evidence.
+
+Users will be able to complete that workflow in Tranche without another
+application. External tools, including Trio, may optionally consume exported
+packets.
+
+This PR covers the proposed contract, offline executable specification and
+synthetic fixtures. The native implementation will follow in a separate PR in
+this repository; the full evidence workflow is not shipped by this proposal.
 
 ## Envelope and identity
 
@@ -68,7 +79,7 @@ The packet need not contain the whole discovery corpus or model cache. Opaque
 native report digests are anchors to an independently validated report, not
 enough to reconstruct or authenticate it offline. Source evidence for the
 selected batch is carried in full. Any future provider/report schema work is
-separate from this proposal; there is no upstream dependency on Trio.
+separate from this proposal.
 
 ## Digest and source-byte rules
 

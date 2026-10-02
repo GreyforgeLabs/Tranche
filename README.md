@@ -313,9 +313,15 @@ make mcp-check MCP_PYTHON=/path/to/venv-python   # opt-in real-client MCP integr
 ```
 
 The [proposed portable evidence packet](docs/EVIDENCE_PACKET.md) for issue #9
-includes offline conformance cases and synthetic partial/resume/drift fixtures.
-It is a draft contract for future native CLI, workbench and MCP evidence access;
-capture commands are not implemented by this proposal.
+includes a contract, offline conformance cases and synthetic partial/resume/drift
+fixtures for Tranche's planned native evidence workflow: select a batch, capture
+source material, inspect citations, resume a partial capture and export a packet.
+The capture implementation, native state and packet format will be maintained
+in this repository and shipped as Tranche, with the CLI, workbench and MCP
+sharing the same evidence. Users will be able to complete the workflow in Tranche
+without another application; external tools, including Trio, may consume exports.
+This PR covers the contract and fixtures. The native implementation will follow
+in a separate PR here; the full evidence workflow is not shipped yet.
 
 ## Versioned releases
 
