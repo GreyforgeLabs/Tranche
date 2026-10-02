@@ -312,16 +312,23 @@ make check         # tests + lint + optional real-browser workbench probe
 make mcp-check MCP_PYTHON=/path/to/venv-python   # opt-in real-client MCP integration
 ```
 
-The [proposed portable evidence packet](docs/EVIDENCE_PACKET.md) for issue #9
-includes a contract, offline conformance cases and synthetic partial/resume/drift
-fixtures for Tranche's planned native evidence workflow: select a batch, capture
-source material, inspect citations, resume a partial capture and export a packet.
-The capture implementation, native state and packet format will be maintained
-in this repository and shipped as Tranche, with the CLI, workbench and MCP
-sharing the same evidence. Users will be able to complete the workflow in Tranche
-without another application; external tools may consume exports.
-This PR covers the contract and fixtures. The native implementation will follow
-in a separate PR here; the full evidence workflow is not shipped yet.
+The [native evidence CLI](docs/EVIDENCE_PACKET.md) for issue #9 lets a user select
+a batch, capture its public source material, inspect citations, resume a partial
+capture and export a packet — all inside Tranche. The capture implementation,
+native state and packet format are maintained in this repository and shipped as
+Tranche, with the CLI, workbench and MCP reading the same evidence; users never
+need another application, and external tools may consume exports.
+
+```bash
+python3 tranche.py evidence capture --batch B001 --request-budget 100
+python3 tranche.py evidence show    --batch B001
+python3 tranche.py evidence export  --batch B001 --output review-packet.json
+```
+
+Evidence is optional, read-only toward GitHub and model-free. Design:
+[docs/decisions/native-evidence-cli.md](docs/decisions/native-evidence-cli.md);
+implemented behaviour: [docs/EVIDENCE_CLI.md](docs/EVIDENCE_CLI.md). Publication
+to the workbench and MCP retrieval are follow-up work on the same service.
 
 ## Versioned releases
 
@@ -331,10 +338,10 @@ One coherent iteration produces one release tag. `VERSION` and
 `commit-and-tag-version` and Ruff — no runtime Python dependencies.
 
 ```bash
-git pull --ff-only origin main
-make release-dry-run        # offline checks, clean-main gate, preview; no writes
+git pull --ff-only origin master
+make release-dry-run        # offline checks, clean-master gate, preview; no writes
 npx commit-and-tag-version --release-as minor   # or plain for the computed bump
-git push --follow-tags origin main
+git push --follow-tags origin master
 ```
 
 The pushed `v*` tag triggers the `release` workflow
@@ -344,7 +351,7 @@ changelog. A tag that predates the workflow (or any existing tag) can be
 published retroactively through the same path:
 
 ```bash
-gh workflow run release --ref main -f tag=v0.8.1
+gh workflow run release --ref master -f tag=v0.8.1
 ```
 
 Verify afterwards with `gh release list` — the releases page, not the tag
