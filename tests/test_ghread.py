@@ -259,3 +259,30 @@ class InvokeIntegrationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class MutationRefusalTests(unittest.TestCase):
+    """The GraphQL seam must refuse anything that is not a read-only query."""
+
+    def test_mutations_and_subscriptions_are_refused_before_any_request(self):
+        recorded = []
+
+        def fake_run(argv, **kwargs):
+            recorded.append(argv)
+            return ghread.RawResult(0, b'HTTP/2.0 200 OK\r\n\r\n{"data":{}}', b"")
+
+        for document in ("mutation { deleteIssue(input:{}) { clientMutationId } }",
+                         "query { repository(owner:\"o\",name:\"r\") { id } } "
+                         "mutation { deleteThing }",
+                         "subscription { issues { number } }",
+                         "{ repository(owner:\"o\",name:\"r\") { id } }"):
+            with self.subTest(document=document[:24]):
+                with patch.object(ghread, "run_gh", side_effect=fake_run):
+                    if "mutation" in document or "subscription" in document:
+                        with self.assertRaises(ghread.ReadError):
+                            ghread.graphql(document)
+                    else:
+                        ghread.graphql(document)
+        # Exactly the one legal query reached a subprocess; every mutation,
+        # subscription and mixed document was refused before any request.
+        self.assertEqual(len(recorded), 1)

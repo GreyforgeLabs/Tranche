@@ -724,6 +724,13 @@ class StorageTests(EvidenceTests):
         self.assertLessEqual(manifest["capture"]["requests_used"] + 0, used + len(gh2.calls))
 
     def test_path_confinement_refuses_traversal_symlinks_and_links(self):
+        """Traversal, symlinks and hard links are all refused.
+
+        The final resolved-path check in `confined_file` is deliberately kept as
+        defence in depth against a component being swapped for a symlink between
+        the walk and the resolve; no deterministic test isolates it, because the
+        `..` rejection and the symlink walk already catch every non-racing input.
+        """
         root = evidence.root()
         root.mkdir(parents=True, exist_ok=True)
         victim = root / "victim.txt"
@@ -759,3 +766,65 @@ class StorageTests(EvidenceTests):
         forced = evidence.Lock(capture_id)
         forced.acquire(break_lock=True)
         forced.release()
+
+
+class GuardTests(EvidenceTests):
+    """Each of these fails if its guard is removed; verified by negative control."""
+
+    def test_ci_from_the_wrong_repository_is_refused(self):
+        """A repository-prefix URL check is not proof: the answer must name it too.
+
+        Removing the identity comparison in `verify_ci_scope` makes this test
+        pass with foreign CI recorded, so it is the guard's own test.
+        """
+        self.build_report()
+        gh = FakeGh()
+        member = self.routes(gh)
+        for group, path in (("check_runs", "check-runs"), ("statuses", "status")):
+            gh.on(f"/repos/{BASE_NAME}/commits/{member['head_sha']}/{path}", None,
+                  repository={"id": 999999, "full_name": "someone/else"}, sha=member["head_sha"])
+        capture_id, manifest, _ = self.capture(gh)
+        entry = next(e for e in manifest["components"]
+                     if e["component"] == "checks" and e["number"] == member["number"])
+        for group in entry["groups"]:
+            if group["group"] in ("check_runs", "statuses"):
+                self.assertEqual(group["status"], "blocked")
+                self.assertIn("someone/else", group["reason"])
+
+    def test_a_ci_answer_for_another_revision_is_refused(self):
+        self.build_report()
+        gh = FakeGh()
+        member = self.routes(gh)
+        gh.on(f"/repos/{BASE_NAME}/commits/{member['head_sha']}/check-runs",
+              {"total_count": 1, "check_runs": [{"id": 1, "head_sha": "d" * 40,
+                                                 "name": "job"}]})
+        capture_id, manifest, _ = self.capture(gh)
+        entry = next(e for e in manifest["components"]
+                     if e["component"] == "checks" and e["number"] == member["number"])
+        group = next(g for g in entry["groups"] if g["group"] == "check_runs")
+        self.assertEqual(group["status"], "blocked")
+        self.assertIn("revision", group["reason"])
+
+    def test_a_foreign_closing_issues_answer_is_refused(self):
+        self.build_report()
+        gh = FakeGh()
+        member = self.routes(gh)
+        gh.on("graphql", closing_payload(member["number"], repo="someone/else"),
+              graphql_number=member["number"])
+        capture_id, manifest, _ = self.capture(gh)
+        entry = next(e for e in manifest["components"]
+                     if e["component"] == "closing_issues" and e["number"] == member["number"])
+        self.assertEqual(entry["status"], "blocked")
+        self.assertIn("someone/else", entry["reason"])
+
+    def test_a_closing_issues_graphql_error_is_refused_not_recorded_as_empty(self):
+        self.build_report()
+        gh = FakeGh()
+        member = self.routes(gh)
+        gh.on("graphql", {"errors": [{"message": "rate limited"}], "data": None},
+              graphql_number=member["number"])
+        capture_id, manifest, _ = self.capture(gh)
+        entry = next(e for e in manifest["components"]
+                     if e["component"] == "closing_issues" and e["number"] == member["number"])
+        self.assertEqual(entry["status"], "blocked")
+        self.assertIn("errors", entry["reason"])
